@@ -6,3 +6,4 @@ dev-team-1-cie-app-in-flutter
 
 For help getting started with Flutter, view our online
 [documentation](https://flutter.io/).
+
