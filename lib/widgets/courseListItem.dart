@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
 
 class CourseListItem extends StatefulWidget {
@@ -22,32 +23,60 @@ class CourseListItemState extends State<CourseListItem> {
 
   @override
   Widget build(BuildContext context) {
-    return new ListTile(
-        leading: new Icon(
+    Icon availabilityIcon;
+    //Todo: Maybe responsive calculation should be added later
+    double iconSize = 40.0;
+
+    switch (courseListPresenter.getAvailability(id)) {
+      case 0:
+        availabilityIcon = new Icon(
           const IconData(0xe86c, fontFamily: 'MaterialIcons'),
+          size: iconSize,
+          color: Color.fromRGBO(111, 207, 151, 1.0),
+        );
+        break;
+      case 1:
+        availabilityIcon = new Icon(
+          const IconData(0xe8fd, fontFamily: 'MaterialIcons'),
+          size: iconSize,
+          color: Color.fromRGBO(242, 201, 76, 1.0),
+        );
+        break;
+      case 2:
+        availabilityIcon = new Icon(
+          const IconData(0xe888, fontFamily: 'MaterialIcons'),
+
+          size: iconSize,
+          color: Color.fromRGBO(235, 87, 87, 1.0),
+        );
+        break;
+    };
+
+
+    return new ListTile(
+      leading: availabilityIcon,
+      title: new Text("Title of course", style: CiEStyle.getCoursesTitleStyle(),),
+      subtitle: new Row(
+        children: <Widget>[
+          new Padding (
+            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+            child: new Text("FK " + courseListPresenter.getFaculty(id), style: CiEStyle.getCoursesListFacultyStyle(),),
+          ),
+          new Text("Time: " + courseListPresenter.getLectureTime(id), style: CiEStyle.getCoursesListTimeStyle(),),
+        ],
+      ),
+      trailing: new IconButton(
+        icon: new Icon(
+          (courseListPresenter.getFavourite(id)
+              ? const IconData(0xe87d, fontFamily: 'MaterialIcons')
+              : const IconData(0xe87e, fontFamily: 'MaterialIcons')
+          ),
           //Todo: Maybe responsive calculation should be added later
           size: 40.0,
-          color: Color.fromRGBO(111, 207, 151, 1.0),
+          color: Color.fromRGBO(235, 87, 87, 1.0),
         ),
-        title: new Text("Title of course"),
-        subtitle: new Row(
-          children: <Widget>[
-            new Text("FK 07"),
-            new Text("Time: Mo 13:30-14:15"),
-          ],
-        ),
-        trailing: new IconButton(
-          icon: new Icon(
-            (courseListPresenter.getFavourite(id)
-                ? const IconData(0xe87d, fontFamily: 'MaterialIcons')
-                : const IconData(0xe87e, fontFamily: 'MaterialIcons')
-            ),
-            //Todo: Maybe responsive calculation should be added later
-            size: 40.0,
-            color: Color.fromRGBO(235, 87, 87, 1.0),
-          ),
-          onPressed: _toggleFavourite,
-        ),
+        onPressed: _toggleFavourite,
+      ),
       onTap: _toggleDescription,
     );
   }

@@ -34,4 +34,16 @@ class CourseListPresenter {
   List<Course> getCourses() {
     return _courses.getCourses();
   }
+
+  int getAvailability(int id) {
+    return _courses.getCourses()[id].availability;
+  }
+
+  String getFaculty(int id) {
+    return _courses.getCourses()[id].faculty.toString();
+  }
+
+  String getLectureTime(int id) {
+    return _courses.getCourses()[id].lectureTime.toString();
+  }
 }
