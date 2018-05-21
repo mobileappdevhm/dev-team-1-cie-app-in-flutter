@@ -46,4 +46,8 @@ class CourseListPresenter {
   String getLectureTime(int id) {
     return _courses.getCourses()[id].lectureTime.toString();
   }
+
+  String getTitle(int id) {
+    return _courses.getCourses()[id].name;
+  }
 }

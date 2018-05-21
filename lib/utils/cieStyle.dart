@@ -19,4 +19,8 @@ class CiEStyle {
       fontSize: 18.0,
     );
   }
+
+  static double getCoursesListIconSize() {
+    return 40.0;
+  }
 }

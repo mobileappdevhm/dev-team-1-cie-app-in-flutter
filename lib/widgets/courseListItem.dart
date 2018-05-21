@@ -24,8 +24,7 @@ class CourseListItemState extends State<CourseListItem> {
   @override
   Widget build(BuildContext context) {
     Icon availabilityIcon;
-    //Todo: Maybe responsive calculation should be added later
-    double iconSize = 40.0;
+    double iconSize = CiEStyle.getCoursesListIconSize();
 
     switch (courseListPresenter.getAvailability(id)) {
       case 0:
@@ -55,14 +54,17 @@ class CourseListItemState extends State<CourseListItem> {
 
     return new ListTile(
       leading: availabilityIcon,
-      title: new Text("Title of course", style: CiEStyle.getCoursesTitleStyle(),),
+      title: new Text(courseListPresenter.getTitle(id),
+        style: CiEStyle.getCoursesTitleStyle(),),
       subtitle: new Row(
         children: <Widget>[
           new Padding (
             padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-            child: new Text("FK " + courseListPresenter.getFaculty(id), style: CiEStyle.getCoursesListFacultyStyle(),),
+            child: new Text("FK " + courseListPresenter.getFaculty(id),
+              style: CiEStyle.getCoursesListFacultyStyle(),),
           ),
-          new Text("Time: " + courseListPresenter.getLectureTime(id), style: CiEStyle.getCoursesListTimeStyle(),),
+          new Text("Time: " + courseListPresenter.getLectureTime(id),
+            style: CiEStyle.getCoursesListTimeStyle(),),
         ],
       ),
       trailing: new IconButton(
@@ -71,8 +73,7 @@ class CourseListItemState extends State<CourseListItem> {
               ? const IconData(0xe87d, fontFamily: 'MaterialIcons')
               : const IconData(0xe87e, fontFamily: 'MaterialIcons')
           ),
-          //Todo: Maybe responsive calculation should be added later
-          size: 40.0,
+          size: iconSize,
           color: Color.fromRGBO(235, 87, 87, 1.0),
         ),
         onPressed: _toggleFavourite,
