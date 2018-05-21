@@ -1,9 +1,6 @@
-# cie_team1
+[![Build Status](https://travis-ci.org/mobileappdevhm/dev-team-1-cie-app-in-flutter.svg?branch=master)](https://travis-ci.org/mobileappdevhm/dev-team-1-cie-app-in-flutter)
 
-dev-team-1-cie-app-in-flutter 
+# CIE - Team 01
 
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+Development of the CIE-App in [Flutter](https://flutter.io/).
 
