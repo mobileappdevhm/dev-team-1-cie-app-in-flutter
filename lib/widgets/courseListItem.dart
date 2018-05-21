@@ -47,13 +47,20 @@ class CourseListItemState extends State<CourseListItem> {
             color: Color.fromRGBO(235, 87, 87, 1.0),
           ),
           onPressed: _toggleFavourite,
-        )
+        ),
+      onTap: _toggleDescription,
     );
   }
 
   void _toggleFavourite() {
     setState(() {
       courseListPresenter.toggleFavourite(id);
+    });
+  }
+
+  void _toggleDescription() {
+    setState(() {
+      courseListPresenter.toggleShowCourseDescription(id);
     });
   }
 }

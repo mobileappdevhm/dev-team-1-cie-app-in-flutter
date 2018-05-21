@@ -1,3 +1,6 @@
+import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/widgets/courseList.dart';
+import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -9,7 +12,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'CiE',
       theme: new ThemeData(
-        
+
         primarySwatch: Colors.red,
       ),
       home: new MyHomePage(title: 'CiE'),
@@ -42,14 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
       ),
       body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(
-              'Dummy Text',
-            ),
-          ],
-        ),
+        child: new CourseList(new CourseListPresenter()),
       ),
     );
   }

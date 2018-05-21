@@ -1,47 +1,37 @@
-import 'package:cie_team1/model/course.dart';
+import 'package:cie_team1/di/courses_di.dart';
+import 'package:cie_team1/model/course/course.dart';
+import 'package:cie_team1/model/course/courses.dart';
+
+abstract class CourseListViewContract {
+  //Todo: Needed in future
+}
 
 class CourseListPresenter {
-  List<Course> courses = [];
+  //List<Course> courses = [];
+  Courses _courses;
   
   CourseListPresenter() {
-    courses.add(new Course("Operating Systems", 07, "Mo 10:00-11:30", "Some description",
-        1, 1, "test@test.de", "Test",
-        1, false));
-    courses.add(new Course("Operating Systems", 07, "Mo 10:00-11:30", "Some description",
-        1, 1, "test@test.de", "Test",
-        1, false));
-    courses.add(new Course("Operating Systems", 07, "Mo 10:00-11:30", "Some description",
-        1, 1, "test@test.de", "Test",
-        1, false));
-    courses.add(new Course("Operating Systems", 07, "Mo 10:00-11:30", "Some description",
-        1, 1, "test@test.de", "Test",
-        1, false));
-    courses.add(new Course("Operating Systems", 07, "Mo 10:00-11:30", "Some description",
-        1, 1, "test@test.de", "Test",
-        1, false));
-    courses.add(new Course("Operating Systems", 07, "Mo 10:00-11:30", "Some description",
-        1, 1, "test@test.de", "Test",
-        1, false));
-    courses.add(new Course("Operating Systems", 07, "Mo 10:00-11:30", "Some description",
-        1, 1, "test@test.de", "Test",
-        1, false));
-    courses.add(new Course("Operating Systems", 07, "Mo 10:00-11:30", "Some description",
-        1, 1, "test@test.de", "Test",
-        1, false));
-    courses.add(new Course("Operating Systems", 07, "Mo 10:00-11:30", "Some description",
-        1, 1, "test@test.de", "Test",
-        1, false));
+    CourseInjector.configure(Flavor.MOCK);
+    _courses = new CourseInjector().courses;
   }
   
   void toggleFavourite(int id) {
-    if (courses[id].isFavourite) {
-      courses[id].isFavourite = false;
+    if (_courses.getCourses()[id].isFavourite) {
+      _courses.getCourses()[id].isFavourite = false;
     } else {
-      courses[id].isFavourite = true;
+      _courses.getCourses()[id].isFavourite = true;
     }
   }
 
   bool getFavourite(int id) {
-    return courses[id].isFavourite;
+    return _courses.getCourses()[id].isFavourite;
+  }
+
+  void toggleShowCourseDescription(int id) {
+    //Todo: Implementation needed. See Issue #12
+  }
+
+  List<Course> getCourses() {
+    return _courses.getCourses();
   }
 }

@@ -1,4 +1,4 @@
-import 'package:cie_team1/model/course.dart';
+import 'package:cie_team1/di/courses_di.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class CourseListState extends State<CourseList> {
       return new ListView.builder(
         itemBuilder: (BuildContext context, int index) =>
         new CourseListItem(courseListPresenter, index),
-        itemCount: courseListPresenter.courses.length,
+        itemCount: courseListPresenter.getCourses().length,
       );
     } catch (e) {
       print("CourseList.dart: " + e.toString());
