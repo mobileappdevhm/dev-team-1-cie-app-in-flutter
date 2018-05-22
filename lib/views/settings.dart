@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/widgets/prevCourseListItem.dart';
 import 'package:cie_team1/widgets/prevCourseList.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 
@@ -18,8 +17,9 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   /* Get these two from somewhere */
-  final credits = 13;
-  final engCredits = 6;
+  static CurrentUserPresenter currentUserPresenter = new CurrentUserPresenter();
+  int credits = currentUserPresenter.getTotalCredits();
+  int engCredits = currentUserPresenter.getDep3Credits();
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class _SettingsState extends State<Settings> {
                     children: <Widget>[
                       new Expanded(child: new Text("International Engineering Certificate",  style: CiEStyle.getSettingsStyle())),
                       new Text( "$engCredits /15",  style: CiEStyle.getSettingsStyle()),
-                      // Calculate max (ECTS of each engineering departments (mechanical, automotive, aeroautical))/15 with at least 2 ects from dep. 13
+                      // Calculate ECTS of department 3 /15 with at least 2 ects from dep. 13
                     ]
 
                 ),
@@ -130,13 +130,11 @@ class _SettingsState extends State<Settings> {
 
               ),
               new Expanded(
-                child: new PrevCourseList(new CurrentUserPresenter()),
+                child: new PrevCourseList(currentUserPresenter),
 
               ),
 
 
-
-              /* Get a List of courses enrolled.*/
 
 
 

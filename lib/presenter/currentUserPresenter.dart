@@ -31,6 +31,26 @@ class CurrentUserPresenter {
     return _currentUser.getCurrentUser().currentCourses;
   }
 
+  int getTotalCredits() {
+    var sum = 0;
+
+    _currentUser.getCurrentUser().prevCourses.forEach((course) {
+      sum = sum + course.ects;
+    });
+    return sum;
+  }
+
+  int getDep3Credits() {
+    var sum = 0;
+    _currentUser.getCurrentUser().prevCourses.forEach((course) {
+      if(course.faculty == "3"){
+        sum = sum + course.ects;
+      }
+
+    });
+    return sum;
+  }
+
 /* Duplicated methods */
 /* I'll try to find a proper way for these presenters to work together but this is what work for now */
 
@@ -41,6 +61,7 @@ class CurrentUserPresenter {
   int getCredits(int id) {
     return _currentUser.getCurrentUser().prevCourses[id].ects;
   }
+
 
   String getFaculty(int id) {
     return _currentUser.getCurrentUser().prevCourses[id].faculty.toString();
