@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:async';
 
 class MapPage extends StatefulWidget {
-  final String apiKey;
+  final String apiKey = 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us';
   final Map<String, double> currentLocation;
 
-  MapPage(this.apiKey, {this.currentLocation});
+  MapPage();
+  //MapPage(this.apiKey, {this.currentLocation});
 
   @override
   _MapPageState createState() => new _MapPageState();
@@ -130,7 +130,39 @@ class _MapPageState extends State<MapPage> {
   }
 
 
-_launchMaps() async {
+_launchMaps_Loth() async {
+  String googleUrl =
+    'comgooglemaps://?center=${defaultLocation['latitude']},${defaultLocation['longitude']}';
+  String appleUrl =
+    'https://maps.apple.com/?sll=${defaultLocation['latitude']},${defaultLocation['longitude']}';
+  if (await canLaunch("comgooglemaps://")) {
+    print('launching com googleUrl');
+    await launch(googleUrl);
+  } else if (await canLaunch(appleUrl)) {
+    print('launching apple url');
+    await launch(appleUrl);
+  } else {
+    throw 'Could not launch url';
+  }
+}
+
+_launchMaps_Pasing() async {
+  String googleUrl =
+    'comgooglemaps://?center=${pasingLocation['latitude']},${pasingLocation['longitude']}';
+  String appleUrl =
+    'https://maps.apple.com/?sll=${pasingLocation['latitude']},${pasingLocation['longitude']}';
+  if (await canLaunch("comgooglemaps://")) {
+    print('launching com googleUrl');
+    await launch(googleUrl);
+  } else if (await canLaunch(appleUrl)) {
+    print('launching apple url');
+    await launch(appleUrl);
+  } else {
+    throw 'Could not launch url';
+  }
+}
+
+_launchMaps_Karl() async {
   String googleUrl =
     'comgooglemaps://?center=${karlLocation['latitude']},${karlLocation['longitude']}';
   String appleUrl =
@@ -152,13 +184,6 @@ _launchMaps() async {
     _buildUrl('l');
     _buildUrl('p');
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Maps',
-              style: new TextStyle(
-                  color: const Color.fromRGBO(235, 87, 87, 1.0),
-                  letterSpacing: 2.0)),
-          backgroundColor: const Color.fromRGBO(224, 224, 224, 1.0),
-        ),
         body: new Container(
             color: Colors.white30,
             alignment: Alignment.topCenter,
@@ -168,17 +193,18 @@ _launchMaps() async {
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     new RaisedButton(
-                      onPressed: _launchMaps,
+                      onPressed: _launchMaps_Loth,
+                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                       child: new Text('Lothstrasse',
                           style: new TextStyle(color: Colors.white)),
                       color: const Color.fromRGBO(235, 87, 87, 1.0),
                     ),
                     new RaisedButton(
-                      onPressed: _launchMaps,
+                      onPressed: _launchMaps_Pasing,
+                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                       child: new Text('Pasing',
                           style: new TextStyle(color: Colors.white)),
                       color: const Color.fromRGBO(235, 87, 87, 1.0),
@@ -206,23 +232,33 @@ _launchMaps() async {
                 ),
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     new RaisedButton(
-                      onPressed: _launchMaps,
+                      onPressed: _launchMaps_Karl,
+                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                       child: new Text('Karlstrasse',
                           style: new TextStyle(color: Colors.white)),
                       color: const Color.fromRGBO(235, 87, 87, 1.0),
                     ),
-                    new RaisedButton(
-                      onPressed: _launchMaps,
-                      child: new Text('Go to Google Maps',
-                          style: new TextStyle(color: Colors.white)),
-                      color: const Color.fromRGBO(235, 87, 87, 1.0),
-                    )
                   ],
                 ),
               ],
             )));
   }
 }
+
+/*
+  Location _location = new Location();
+  dynamic deviceLocation;
+  Future<Null> findUserLocation() async {
+    Map<String, double> location;
+    try {
+      location = await _location.getLocation;
+      setState(() {
+        deviceLocation = location;
+      });
+    } catch (e) {
+      location = null;
+    }
+  }
+*/
