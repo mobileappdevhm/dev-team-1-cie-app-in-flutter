@@ -41,14 +41,13 @@ class CiEStyle {
 
   static TextStyle getSettingsStyle() {
     return new TextStyle(
-      fontSize: 18.0,
+      fontSize: 16.0,
     );
   }
 
-
-  static TextStyle getSettingsUserNameStyle() {
+  static TextStyle getSettingsInfoStyle() {
     return new TextStyle(
-      fontSize: 18.0,
+      fontSize: 16.0,
       fontWeight: FontWeight.bold,
     );
   }
@@ -61,7 +60,7 @@ class CiEStyle {
 
   static TextStyle getPrevCoursesTitleStyle() {
     return new TextStyle(
-      fontSize: 18.0,
+      fontSize: 16.0,
     );
   }
 

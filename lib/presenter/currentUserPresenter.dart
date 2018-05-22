@@ -19,6 +19,18 @@ class CurrentUserPresenter {
     return _currentUser.getCurrentUser();
   }
 
+  String getCurrentUserFaculty() {
+    return _currentUser.getCurrentUser().department;
+  }
+
+  String getCurrentUserStatus() {
+    return _currentUser.getCurrentUser().status;
+  }
+
+  String getFullName() {
+    return _currentUser.getCurrentUser().firstName + " " +  _currentUser.getCurrentUser().lastName ;
+  }
+
   String getCurrentUserName() {
     return _currentUser.getCurrentUser().firstName + " " + _currentUser.getCurrentUser().lastName;
   }

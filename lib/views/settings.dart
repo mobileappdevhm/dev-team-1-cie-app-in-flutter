@@ -47,8 +47,8 @@ class _SettingsState extends State<Settings> {
                                 style: CiEStyle.getSettingsStyle(),
                               ),
                               new Text(
-                                ' Jane Doe',
-                                style: CiEStyle.getSettingsUserNameStyle(),
+                                " " + currentUserPresenter.getFullName(),
+                                style: CiEStyle.getSettingsInfoStyle(),
                               ),
                             ],
                           )
@@ -66,6 +66,30 @@ class _SettingsState extends State<Settings> {
                     )
                   ],
                 ),
+              new Container(
+                  padding: const EdgeInsets.only(top:16.0),
+                  child: new Column(
+                    children: <Widget>[
+                      new Container(
+                          padding: const EdgeInsets.only(bottom:10.0),
+                        child: new Row(
+                          children: <Widget>[
+                            new Text("Status: ", style: CiEStyle.getSettingsStyle(),),
+                            new Text(" " + currentUserPresenter.getCurrentUserStatus() + " student", style: CiEStyle.getSettingsInfoStyle(),)
+                          ],
+                        ),
+                      ),
+
+                      new Row(
+                        children: <Widget>[
+                          new Text("Department: ", style: CiEStyle.getSettingsStyle(),),
+                          new Text(" " + currentUserPresenter.getCurrentUserFaculty(), style: CiEStyle.getSettingsInfoStyle(),),
+                        ],
+                      ),
+                      new Divider(),
+                    ],
+                  )
+              ),
 
 
 
@@ -99,7 +123,9 @@ class _SettingsState extends State<Settings> {
 
                 ),
               ),
-              new LinearProgressIndicator(value: credits/15),
+              new LinearProgressIndicator(
+                  value: credits/15,
+              ),
 
 
               new Container(
@@ -115,8 +141,8 @@ class _SettingsState extends State<Settings> {
               ),
               new LinearProgressIndicator(value: engCredits /15),
 
-
-              new Container(
+              /* This causes overload on horizontal screen */
+              new Padding(
                 padding: const EdgeInsets.only(top:32.0,bottom: 16.0),
                 child: new Row(
                   children: <Widget>[
@@ -129,9 +155,8 @@ class _SettingsState extends State<Settings> {
 
 
               ),
-              new Expanded(
+              new Flexible(
                 child: new PrevCourseList(currentUserPresenter),
-
               ),
 
 
