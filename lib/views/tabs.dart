@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,7 +49,7 @@ class TabsState extends State<Tabs> {
             new Container(color: Colors.red),
             new Container(color: Colors.blue),
             new Container(color: Colors.grey),
-            new Container(color: Colors.black)
+            new Settings(),
           ],
         ),
         bottomNavigationBar: new BottomNavigationBar(
