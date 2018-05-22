@@ -1,3 +1,4 @@
+import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/views/start.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +9,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'CiE',
-      theme: new ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: new WelcomePage(),
-    );
+        title: 'CiE',
+        theme: new ThemeData(
+          primarySwatch: Colors.red,
+        ),
+        home: new WelcomePage(),
+        routes: Routes.getRoutes());
   }
 }

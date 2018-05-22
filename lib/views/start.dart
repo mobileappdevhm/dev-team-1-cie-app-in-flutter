@@ -1,3 +1,4 @@
+import 'package:cie_team1/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -19,7 +20,7 @@ class WelcomePage extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             alignment: Alignment.center,
             child: new FlatButton(
-              onPressed: () => {},
+              onPressed: () => Navigator.pushReplacementNamed(context, Routes.TabPages),
               color: Colors.red,
               padding: EdgeInsets.all(10.0),
               child: new Text(
