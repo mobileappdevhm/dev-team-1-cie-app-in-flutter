@@ -20,7 +20,7 @@ class WelcomePage extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             alignment: Alignment.center,
             child: new FlatButton(
-              onPressed: () => Navigator.pushReplacementNamed(context, Routes.TabPages),
+              onPressed: () => Navigator.pushReplacementNamed(context, Routes.Login),
               color: Colors.red,
               padding: EdgeInsets.all(10.0),
               child: new Text(
