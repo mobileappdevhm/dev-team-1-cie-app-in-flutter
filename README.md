@@ -7,13 +7,18 @@ This is a very basic implementation of the Map feature of out CiE App,
 At the moment it's static.
 
 ### Dependencies:
-`location: "^1.2.0"`
+`location: "^1.2.0"`  
+`url_launcher: "^3.0.1"`  
 
 ### Other adjustments
 * In ios/Runner: Addition to `info.plist` file:
     ```xml
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>The app would like to use your location</string>
+    <array>
+    	<string>googlechromes</string>
+    	<string>comgooglemaps</string>
+	</array>
     ```
 
 * In android/src/main: Addition to `AndroidManifest.xml` file:
@@ -22,13 +27,16 @@ At the moment it's static.
     ```
 
 ### What it does:
-* Show a map of the Lothstrasse Campus on Google Maps with a click of a button. The coordinates of Lothstrasse are hard-coded at the moment.
-* Show your current location in the map by actually getting your device location. 
+* Show a map of the three Hochschule Muenchen campuses
+* Show your current location in the map by actually getting your device location (not anymore a.t.m.). 
 
 ### Next steps:
-* Make it full screen or at least nicer
-* Put a pin on own and HM location
-* (If possible) put a link in the map to open the native Google Maps App
+* Make it full screen or at least nicer => almost done, buttons still off
+* Put a pin on the map
+* (If possible) put a link in the map to open the native Google Maps App => possible, not working yet
+
+### Screenshots of Version 0.2
+![Better looking Map](misc/cie_map_improved.jpeg)
 
 ### Screenshots of Version 0.1
 #### Current location  
