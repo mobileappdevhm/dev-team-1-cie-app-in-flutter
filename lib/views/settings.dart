@@ -23,6 +23,9 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    var assetsImage = new AssetImage(currentUserPresenter.getCurrentUserProfileDir());
+    var profile = new Image(image: assetsImage, width: 100.0, height: 100.0,);
+
     return new Scaffold(
       body: new Center(
         child: new Padding(
@@ -34,7 +37,15 @@ class _SettingsState extends State<Settings> {
               new Row(
                   children: <Widget>[
                     new Expanded(
-                      child: new Text("-Pic here-"),
+                      child: new Row(
+                        children: <Widget>[
+                          new Padding(
+                              padding:EdgeInsets.only(left: 0.0),
+//                            child: new Icon(Icons.person_outline, size: 60.0)
+                          child: profile,
+                          )
+                        ],
+                      )
                     ),
                     new Column(
                       children: <Widget>[

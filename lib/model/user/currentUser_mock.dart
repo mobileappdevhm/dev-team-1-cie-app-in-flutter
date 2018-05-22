@@ -73,7 +73,7 @@ class CurrentUserMock implements CurrentUser {
 //        1, 1, "test@test.de", "Test",
 //        1, false, 0));
 
-    testUser = new User(1, "Jane1","Jane","Doe", "07", "Local" , currentCourses,prevCourses);
+    testUser = new User(1, "Jane1","Jane","Doe", "07",  "Local", "assets/profiles/01.png" , currentCourses,prevCourses);
   }
   @override
   User getCurrentUser() {
