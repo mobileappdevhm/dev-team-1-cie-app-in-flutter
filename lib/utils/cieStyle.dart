@@ -59,6 +59,20 @@ class CiEStyle {
     );
   }
 
+  static TextStyle getPrevCoursesTitleStyle() {
+    return new TextStyle(
+      fontSize: 18.0,
+    );
+  }
+
+  static TextStyle getPrevCoursesCreditsStyle() {
+    return new TextStyle(
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
+      color: new Color.fromRGBO(235, 87, 87, 1.0)
+    );
+  }
+
 
 
   static BorderRadius getButtonBorderRadius(){

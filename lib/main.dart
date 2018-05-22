@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cie_team1/views/tabs.dart';
 
 void main() => runApp(new MyApp());
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
         
         primarySwatch: Colors.red,
       ),
-      home: new MyHomePage(title: 'CiE'),
+      home: new Tabs(),
     );
   }
 }

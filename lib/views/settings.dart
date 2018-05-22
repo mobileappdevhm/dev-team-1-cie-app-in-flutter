@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/widgets/prevCourseListItem.dart';
+import 'package:cie_team1/widgets/prevCourseList.dart';
+import 'package:cie_team1/presenter/currentUserPresenter.dart';
 
 
 
@@ -118,12 +121,20 @@ class _SettingsState extends State<Settings> {
                 child: new Row(
                   children: <Widget>[
                     new Expanded(child:  new Text("Taken Courses", style: CiEStyle.getSettingsStyle() )),
-                    new Icon(Icons.arrow_drop_down),
+//                    new Icon(Icons.arrow_drop_down),
+
                    
                   ],
                 ),
 
-              )
+
+              ),
+              new Expanded(
+                child: new PrevCourseList(new CurrentUserPresenter()),
+
+              ),
+
+
 
               /* Get a List of courses enrolled.*/
 
@@ -139,6 +150,7 @@ class _SettingsState extends State<Settings> {
         ),
 
       ),
+
     );
 
 
