@@ -4,15 +4,16 @@ import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Tabs extends StatefulWidget {
+class TabsPage extends StatefulWidget {
   @override
-  TabsState createState() => new TabsState();
+  TabsPageState createState() => new TabsPageState();
 }
 
-class TabsState extends State<Tabs> {
+class TabsPageState extends State<TabsPage> {
   PageController _tabController;
 
   var _appTitle = '';
+
   //TODO enable possibility to change default tab
   int _tab = 0;
 
@@ -92,3 +93,4 @@ const List<TabItem> TabItems = const <TabItem>[
   const TabItem(title: 'Favorites', icon: Icons.favorite_border),
   const TabItem(title: 'Settings', icon: Icons.settings),
 ];
+
