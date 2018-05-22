@@ -4,6 +4,12 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
     <string>The app would like to use your location</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+    	<string>googlechromes</string>
+    	<string>comgooglemaps</string>
+	</array>
+	
     <key>NSLocationAlwaysUsageDescription</key>
     <string>The app would like to use your location</string>
 	<key>CFBundleDevelopmentRegion</key>

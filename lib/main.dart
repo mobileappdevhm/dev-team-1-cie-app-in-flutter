@@ -31,7 +31,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Location _location = new Location();
   dynamic deviceLocation;
-
   Future<Null> findUserLocation() async {
     Map<String, double> location;
     try {
@@ -44,46 +43,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-
   final String apiKey = 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us';
     @override
     Widget build(BuildContext context) {
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text(widget.title),
-        ),
-        body: new Container(
-          child: new Column(
-            children: <Widget>[
-              new MapPage(apiKey, currentLocation:deviceLocation),
-              new Container(
-                // Some extra Layout
-                margin: const EdgeInsets.only(top: 5.0),
-                child: new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    new RaisedButton(
-                      onPressed: findUserLocation,
-                      child: new Text('Get My current Location'),
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    new RaisedButton(
-                      onPressed: resetMap,
-                      child: new Text('Lothstrasse'),
-                      color: Theme.of(context).primaryColor,
-                    )
-                  ],
-                ),
-              ),
-            ],
-          )
-        )
+      return new Scaffold(body: new MapPage(apiKey, currentLocation: deviceLocation),
       );
     }
 
-    void resetMap() {
-      setState(() {
-        deviceLocation = null;
-      });
-    }
+
 }
