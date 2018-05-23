@@ -29,7 +29,26 @@ void main() {
         if (counter == 0) {
           expect(widget.data, 'Courses in English');
           counter++;
+        }else if(counter == 1){
+          expect(widget.data, 'E-mail');
+          counter++;
+        }else if(counter == 2){
+          expect(widget.data, 'Password');
+          counter++;
+        }else if(counter == 3){
+          expect(widget.data, 'Login');
+          counter++;
+        }else if(counter == 4){
+          expect(widget.data, 'Don\'t have an Account?');
+          counter++;
+        }else if(counter == 5){
+          expect(widget.data, 'Sign up!');
+          counter++;
+        }else if(counter == 6){
+          expect(widget.data, 'Forgot your password?');
+          counter++;
         }
+
       }
     }
 
