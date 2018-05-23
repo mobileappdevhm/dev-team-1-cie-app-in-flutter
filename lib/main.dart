@@ -9,11 +9,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        title: 'CiE',
-        theme: new ThemeData(
-          primarySwatch: Colors.red,
-        ),
-        home: new WelcomePage(),
-        routes: Routes.getRoutes());
+      title: 'CiE',
+      theme: new ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      home: new WelcomePage(),
+      routes: Routes.getRoutes());
   }
 }
+
+

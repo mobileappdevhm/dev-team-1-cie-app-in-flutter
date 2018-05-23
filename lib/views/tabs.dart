@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,6 +40,7 @@ class TabsPageState extends State<TabsPage> {
             style: CiEStyle.getAppBarTitleStyle(context),
           ),
           elevation: CiEStyle.getAppBarElevation(context),
+          backgroundColor: const Color.fromRGBO(224, 224, 224, 1.0),
         ),
         body: new PageView(
           controller: _tabController,
@@ -46,7 +48,7 @@ class TabsPageState extends State<TabsPage> {
           children: <Widget>[
             new CourseList(new CourseListPresenter()),
             //TODO please replace the container with your view
-            new Container(color: Colors.red),
+            new MapPage(),
             new Container(color: Colors.blue),
             new Container(color: Colors.grey),
             new Container(color: Colors.black)

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CiEStyle {
   static TextStyle getCoursesListFacultyStyle() {
     return new TextStyle(
-      color: Colors.blue,
+      color: const Color.fromRGBO(0, 160, 210, 1.0),
       fontWeight: FontWeight.bold,
     );
   }
@@ -11,11 +11,13 @@ class CiEStyle {
   static TextStyle getCoursesListTimeStyle() {
     return new TextStyle(
       fontWeight: FontWeight.bold,
+      color: const Color.fromRGBO(79, 79, 79, 1.0),
     );
   }
 
   static TextStyle getCoursesTitleStyle() {
     return new TextStyle(
+      color: const Color.fromRGBO(79, 79, 79, 1.0),
       fontSize: 18.0,
     );
   }
@@ -27,6 +29,8 @@ class CiEStyle {
   static TextStyle getAppBarTitleStyle(BuildContext context){
     return new TextStyle(
       fontSize: Theme.of(context).platform == TargetPlatform.iOS ? 17.0 : 20.0,
+      color: const Color.fromRGBO(235, 87, 87, 1.0),
+      letterSpacing: 2.0
     );
   }
   static double getAppBarElevation(BuildContext context){
