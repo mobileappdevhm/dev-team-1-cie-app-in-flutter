@@ -17,6 +17,7 @@ class TabsPageState extends State<TabsPage> {
 
   //TODO enable possibility to change default tab
   int _tab = 0;
+  bool _shouldFilter = false;
 
   @override
   void initState() {
@@ -33,6 +34,7 @@ class TabsPageState extends State<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
+    CourseList courseList = new CourseList(new CourseListPresenter(), _shouldFilter);
     return new Scaffold(
         appBar: new AppBar(
           title: new Text(
@@ -46,11 +48,11 @@ class TabsPageState extends State<TabsPage> {
           controller: _tabController,
           onPageChanged: _onPageChanged,
           children: <Widget>[
-            new CourseList(new CourseListPresenter()),
+            courseList, // Behaves as Courses Page
             //TODO please replace the container with your view
             new MapPage(),
             new Container(color: Colors.blue),
-            new Container(color: Colors.grey),
+            courseList, // Behaves as Favorites Page
             new Container(color: Colors.black)
           ],
         ),
@@ -74,8 +76,12 @@ class TabsPageState extends State<TabsPage> {
   }
 
   void _onPageChanged(int tab) {
+    if (tab == 0 || tab ==3) {
+      //courseList.toggleFilter();
+    }
     setState(() {
       this._tab = tab;
+      this._shouldFilter = !this._shouldFilter;
     });
     this._appTitle = TabItems[tab].title;
   }

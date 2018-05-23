@@ -3,7 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MapPage extends StatefulWidget {
   final String apiKey = 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us';
-  final Map<String, double> currentLocation;
+  final Map<String, double> currentLocation = null;
 
   MapPage();
   //MapPage(this.apiKey, {this.currentLocation});
