@@ -1,3 +1,5 @@
+import 'package:cie_team1/utils/routes.dart';
+import 'package:cie_team1/views/start.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/views/tabs.dart';
 
@@ -10,48 +12,11 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'CiE',
       theme: new ThemeData(
-        
         primarySwatch: Colors.red,
       ),
-      home: new MyHomePage(title: 'CiE'),
-    );
+      home: new WelcomePage(),
+      routes: Routes.getRoutes());
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
 
-  final String title;
-
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
-      ),
-      body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(
-              'Dummy Text',
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

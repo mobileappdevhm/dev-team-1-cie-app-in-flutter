@@ -1,19 +1,21 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/views/settings.dart';
+import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Tabs extends StatefulWidget {
+class TabsPage extends StatefulWidget {
   @override
-  TabsState createState() => new TabsState();
+  TabsPageState createState() => new TabsPageState();
 }
 
-class TabsState extends State<Tabs> {
+class TabsPageState extends State<TabsPage> {
   PageController _tabController;
 
   var _appTitle = '';
+
   //TODO enable possibility to change default tab
   int _tab = 0;
 
@@ -39,6 +41,7 @@ class TabsState extends State<Tabs> {
             style: CiEStyle.getAppBarTitleStyle(context),
           ),
           elevation: CiEStyle.getAppBarElevation(context),
+          backgroundColor: const Color.fromRGBO(224, 224, 224, 1.0),
         ),
         body: new PageView(
           controller: _tabController,
@@ -46,7 +49,7 @@ class TabsState extends State<Tabs> {
           children: <Widget>[
             new CourseList(new CourseListPresenter()),
             //TODO please replace the container with your view
-            new Container(color: Colors.red),
+            new MapPage(),
             new Container(color: Colors.blue),
             new Container(color: Colors.grey),
             new Settings(),
@@ -93,3 +96,4 @@ const List<TabItem> TabItems = const <TabItem>[
   const TabItem(title: 'Favorites', icon: Icons.favorite_border),
   const TabItem(title: 'Settings', icon: Icons.settings),
 ];
+
