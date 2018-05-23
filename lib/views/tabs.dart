@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseList.dart';
@@ -53,7 +54,7 @@ class TabsPageState extends State<TabsPage> {
             new MapPage(),
             new Container(color: Colors.blue),
             courseList, // Behaves as Favorites Page
-            new Container(color: Colors.black)
+            new Settings(),
           ],
         ),
         bottomNavigationBar: new BottomNavigationBar(
