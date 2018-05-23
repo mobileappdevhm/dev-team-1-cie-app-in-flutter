@@ -6,20 +6,23 @@ class CourseListItem extends StatefulWidget {
   // Stateful because we can mark items as favourite
   final CourseListPresenter courseListPresenter;
   final int id;
+  final bool shouldFilter;
 
-  CourseListItem(this.courseListPresenter, this.id);
+  CourseListItem(this.courseListPresenter, this.id, this.shouldFilter);
 
   @override
   State<StatefulWidget> createState() {
-    return new CourseListItemState(courseListPresenter, id);
+    return new CourseListItemState(courseListPresenter, id, shouldFilter);
   }
 }
 
 class CourseListItemState extends State<CourseListItem> {
   final int id;
   final CourseListPresenter courseListPresenter;
+  final bool shouldFilter;
+  String temp = "";
 
-  CourseListItemState(this.courseListPresenter, this.id);
+  CourseListItemState(this.courseListPresenter, this.id, this.shouldFilter);
 
   @override
   Widget build(BuildContext context) {
@@ -51,35 +54,41 @@ class CourseListItemState extends State<CourseListItem> {
         break;
     };
 
-
-    return new ListTile(
-      leading: availabilityIcon,
-      title: new Text(courseListPresenter.getTitle(id),
-        style: CiEStyle.getCoursesTitleStyle(),),
-      subtitle: new Row(
-        children: <Widget>[
-          new Padding (
-            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-            child: new Text("FK " + courseListPresenter.getFaculty(id),
-              style: CiEStyle.getCoursesListFacultyStyle(),),
-          ),
-          new Text("Time: " + courseListPresenter.getLectureTime(id),
-            style: CiEStyle.getCoursesListTimeStyle(),),
-        ],
-      ),
-      trailing: new IconButton(
-        icon: new Icon(
-          (courseListPresenter.getFavourite(id)
-              ? const IconData(0xe87d, fontFamily: 'MaterialIcons')
-              : const IconData(0xe87e, fontFamily: 'MaterialIcons')
-          ),
-          size: iconSize,
-          color: Color.fromRGBO(235, 87, 87, 1.0),
+    if (shouldFilter == false || courseListPresenter.getFavourite(id)) {
+      return new ListTile(
+        leading: availabilityIcon,
+        title: new Text(courseListPresenter.getTitle(id),
+          style: CiEStyle.getCoursesTitleStyle(),),
+        subtitle: new Row(
+          children: <Widget>[
+            new Padding (
+              padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+              child: new Text("FK " + courseListPresenter.getFaculty(id),
+                style: CiEStyle.getCoursesListFacultyStyle(),),
+            ),
+            new Text("Time: " + courseListPresenter.getLectureTime(id),
+              style: CiEStyle.getCoursesListTimeStyle(),),
+          ],
         ),
-        onPressed: _toggleFavourite,
-      ),
-      onTap: _toggleDescription,
-    );
+        trailing: new IconButton(
+          icon: new Icon(
+            (courseListPresenter.getFavourite(id)
+                ? const IconData(0xe87d, fontFamily: 'MaterialIcons')
+                : const IconData(0xe87e, fontFamily: 'MaterialIcons')
+            ),
+            size: iconSize,
+            color: Color.fromRGBO(235, 87, 87, 1.0),
+          ),
+          onPressed: _toggleFavourite,
+        ),
+        onTap: _toggleDescription,
+      );
+    }
+    // Build functions must never return null. To return an empty space that
+    // causes the building widget to fill available room, return
+    // "new Container()". To return an empty space that takes as little room as
+    //possible, return "new Container(width: 0.0, height: 0.0)".
+    return new Container(width: 0.0, height: 0.0);
   }
 
   void _toggleFavourite() {
