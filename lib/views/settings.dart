@@ -65,6 +65,8 @@ class _SettingsState extends State<Settings> {
                           )
                         ),
 
+                        //Todo: Implement logout 
+
                         new RaisedButton(
                           onPressed: null,
                           shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
@@ -111,6 +113,7 @@ class _SettingsState extends State<Settings> {
                     new Row(
                       children: <Widget>[
                         new Icon(Icons.mail_outline),
+                        //Todo: Implement deep link
                         new Text(" Contact International Office", style: CiEStyle.getSettingsContactStyle(),),
                       ],
                     ),
