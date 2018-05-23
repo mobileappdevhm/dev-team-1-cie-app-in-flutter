@@ -9,3 +9,8 @@ build/
 ios/.generated/
 packages
 .flutter-plugins
+
+#Ignore IOS specific files
+ios/Podfile
+ios/Podfile.lock
+ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
