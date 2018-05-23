@@ -40,10 +40,6 @@ class CourseListPresenter {
   List<Course> getPrevCourses(CurrentUser currentUser) {
     return currentUser.getCurrentUser().prevCourses;
   }
-//
-//  List<Course> getCurrentCourses() {
-//    return _courses.getCourses();
-//  }
 
   int getAvailability(int id) {
     return _courses.getCourses()[id].availability;

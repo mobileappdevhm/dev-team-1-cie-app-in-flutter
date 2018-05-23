@@ -30,7 +30,6 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
         children: <Widget>[
           new Row(
             children: <Widget>[
-
               new Expanded(
                 child: new Text("FK " + currentUserPresenter.getFaculty(id),
                   style: CiEStyle.getCoursesListFacultyStyle(),),
@@ -39,7 +38,6 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
                 currentUserPresenter.getCredits(id).toString() + " ECTS",
                 style: CiEStyle.getPrevCoursesCreditsStyle(),
               ),
-
             ],
           ),
           new Divider(),

@@ -3,20 +3,15 @@ import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/prevCourseList.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 
-
-
-
 class Settings extends StatefulWidget {
   Settings({Key key, this.title}) : super(key: key);
   final String title;
-
 
   @override
   _SettingsState createState() => new _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
-  /* Get these two from somewhere */
   static CurrentUserPresenter currentUserPresenter = new CurrentUserPresenter();
   int credits = currentUserPresenter.getTotalCredits();
   int engCredits = currentUserPresenter.getDep3Credits();
@@ -41,7 +36,6 @@ class _SettingsState extends State<Settings> {
                         children: <Widget>[
                           new Padding(
                               padding:EdgeInsets.only(left: 0.0),
-//                            child: new Icon(Icons.person_outline, size: 60.0)
                           child: profile,
                           )
                         ],
@@ -65,16 +59,14 @@ class _SettingsState extends State<Settings> {
                           )
                         ),
 
-                        //Todo: Implement logout 
+                        //Todo: Implement logout
 
                         new RaisedButton(
                           onPressed: null,
                           shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEStyle.getLogoutButtonColor() ,
                           child: new Text("Log out", style: CiEStyle.getSettingsLogoutStyle(),),
-
                         ),
-
                       ],
                     )
                   ],
@@ -104,8 +96,6 @@ class _SettingsState extends State<Settings> {
                   )
               ),
 
-
-
               new Container(
                 padding: const EdgeInsets.only(top:16.0),
                 child: new Column(
@@ -122,25 +112,19 @@ class _SettingsState extends State<Settings> {
                   )
                 ),
 
-
-
-
-
               new Container(
                 padding: const EdgeInsets.only(top:16.0,bottom: 16.0),
                 child: new Row(
                     children: <Widget>[
                       new Expanded(child: new Text("Courses in English Certificate", style: CiEStyle.getSettingsStyle(),)),
                       new Text( "$credits /15" ,  style: CiEStyle.getSettingsStyle()),
-                      // Calculate ECTS/15 !! but one of the courses need to be from department 13
+                      // Calculate ECTS/15 but one of the courses need to be from department 13
                     ]
-
                 ),
               ),
               new LinearProgressIndicator(
                   value: credits/15,
               ),
-
 
               new Container(
                 padding: const EdgeInsets.only(top:20.0,bottom: 16.0),
@@ -150,46 +134,26 @@ class _SettingsState extends State<Settings> {
                       new Text( "$engCredits /15",  style: CiEStyle.getSettingsStyle()),
                       // Calculate ECTS of department 3 /15 with at least 2 ects from dep. 13
                     ]
-
                 ),
               ),
               new LinearProgressIndicator(value: engCredits /15),
-
               /* This causes overload on horizontal screen */
               new Padding(
                 padding: const EdgeInsets.only(top:32.0,bottom: 16.0),
                 child: new Row(
                   children: <Widget>[
                     new Expanded(child:  new Text("Taken Courses", style: CiEStyle.getSettingsStyle() )),
-//                    new Icon(Icons.arrow_drop_down),
-
-                   
                   ],
                 ),
-
-
               ),
+
               new Flexible(
                 child: new PrevCourseList(currentUserPresenter),
               ),
-
-
-
-
-
-
-
-
-
-
             ],
           ),
         ),
-
       ),
-
     );
-
-
   }
 }
