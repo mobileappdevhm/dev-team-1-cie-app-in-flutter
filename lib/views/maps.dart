@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 
 class MapPage extends StatefulWidget {
   final String apiKey = 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us';
@@ -17,13 +18,9 @@ class _MapPageState extends State<MapPage> {
   Uri renderURL;
   static const int defaultWidth = 600;
   static const int defaultHeight = 400;
-  static const String message = "The three campuses for MUAS are in different locations. Make sure to go to the right one for class!";
   static const String RESOURCE_KARLSTRASSE ='images/karlstrasse.png';
   static const String RESOURCE_LOTHSTRASSE ='images/lothstrasse.png';
   static const String RESOURCE_PASING  ='images/pasing.png';
-  static const String KARLSTRASSE ='Karlstrasse Campus';
-  static const String LOTHSTRASSE ='Lothstrasse Campus';
-  static const String PASING  ='Pasing Campus';
   Map<String, String> lothLocation = {
     "latitude": '48.1549123',
     "longitude": '11.5535108'
@@ -64,11 +61,11 @@ class _MapPageState extends State<MapPage> {
 
   _getCoordinates(String campus) {
     switch (campus) {
-      case KARLSTRASSE:
+      case StaticVariables.KARLSTRASSE:
         return karlLocation;
-      case LOTHSTRASSE:
+      case StaticVariables.LOTHSTRASSE:
         return lothLocation;
-      case PASING:
+      case StaticVariables.PASING:
         return pasingLocation;
       default:
         // TODO: Decide if it makes sense to default to this
@@ -120,18 +117,18 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    _buildUri(KARLSTRASSE);
-    _buildUri(LOTHSTRASSE);
-    _buildUri(PASING);
+    _buildUri(StaticVariables.KARLSTRASSE);
+    _buildUri(StaticVariables.LOTHSTRASSE);
+    _buildUri(StaticVariables.PASING);
     return new ListView(
       children: <Widget>[
         new Container(
           padding: new EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
-          child: new Text(message, textAlign: TextAlign.left, style: CiEStyle.getMapsDescriptionStyle()),
+          child: new Text(StaticVariables.message, textAlign: TextAlign.left, style: CiEStyle.getMapsDescriptionStyle()),
       ),
-        buildMapItem(RESOURCE_LOTHSTRASSE, LOTHSTRASSE),
-        buildMapItem(RESOURCE_PASING, PASING),
-        buildMapItem(RESOURCE_KARLSTRASSE, KARLSTRASSE),
+        buildMapItem(RESOURCE_LOTHSTRASSE, StaticVariables.LOTHSTRASSE),
+        buildMapItem(RESOURCE_PASING, StaticVariables.PASING),
+        buildMapItem(RESOURCE_KARLSTRASSE, StaticVariables.KARLSTRASSE),
     ],
     );
   }
