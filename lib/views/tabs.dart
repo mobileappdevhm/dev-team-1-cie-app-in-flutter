@@ -76,11 +76,19 @@ class TabsPageState extends State<TabsPage> {
   }
 
   void _onPageChanged(int tab) {
+    _updateCourseListFilter(tab);
     setState(() {
       this._tab = tab;
-      this._shouldFilter = !this._shouldFilter;
     });
     this._appTitle = TabItems[tab].title;
+  }
+
+  void _updateCourseListFilter(int tab) {
+    if (tab==0) {
+      this._shouldFilter = false;
+    } else if (tab==3) {
+      this._shouldFilter = true;
+    }
   }
 }
 
