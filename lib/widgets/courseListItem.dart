@@ -20,7 +20,6 @@ class CourseListItemState extends State<CourseListItem> {
   final int id;
   final CourseListPresenter courseListPresenter;
   final bool shouldFilter;
-  String temp = "";
 
   CourseListItemState(this.courseListPresenter, this.id, this.shouldFilter);
 

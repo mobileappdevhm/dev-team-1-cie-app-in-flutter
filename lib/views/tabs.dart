@@ -13,7 +13,7 @@ class TabsPage extends StatefulWidget {
 
 class TabsPageState extends State<TabsPage> {
   PageController _tabController;
-
+  CourseListPresenter courseListPresenter;
   var _appTitle = '';
 
   //TODO enable possibility to change default tab
@@ -24,6 +24,7 @@ class TabsPageState extends State<TabsPage> {
   void initState() {
     super.initState();
     _tabController = new PageController();
+    courseListPresenter = new CourseListPresenter();
     this._appTitle = TabItems[_tab].title;
   }
 
@@ -35,7 +36,7 @@ class TabsPageState extends State<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
-    CourseList courseList = new CourseList(new CourseListPresenter(), _shouldFilter);
+    CourseList courseList = new CourseList(courseListPresenter, _shouldFilter);
     return new Scaffold(
         appBar: new AppBar(
           title: new Text(
@@ -77,8 +78,8 @@ class TabsPageState extends State<TabsPage> {
   }
 
   void _onPageChanged(int tab) {
-    _updateCourseListFilter(tab);
     setState(() {
+      _updateCourseListFilter(tab);
       this._tab = tab;
     });
     this._appTitle = TabItems[tab].title;

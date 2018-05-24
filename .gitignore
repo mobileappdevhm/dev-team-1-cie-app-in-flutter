@@ -13,5 +13,4 @@ packages
 ios/Podfile
 ios/Podfile.lock
 ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-ios/Runner.xcodeproj/project.pbxproj
 ios/.generated/
