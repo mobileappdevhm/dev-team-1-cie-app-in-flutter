@@ -5,11 +5,11 @@ import 'package:cie_team1/model/user/currentUser.dart';
 
 
 
-class CurrentUserPresenter {
+class TimeTablePresenter {
   //List<Course> courses = [];
   CurrentUser _currentUser;
 
-  CurrentUserPresenter() {
+  TimeTablePresenter() {
     UserInjector.configure(Flavor.MOCK);
     _currentUser = new UserInjector().currentUser;
   }
