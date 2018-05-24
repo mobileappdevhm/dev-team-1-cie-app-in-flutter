@@ -20,8 +20,8 @@ class _MapPageState extends State<MapPage> {
   static const int defaultWidth = 600;
   static const int defaultHeight = 400;
   static const String RESOURCE_KARLSTRASSE ='images/karlstrasse.png';
-  static const String RESOURCE_LOTHSTRASSE ='images/karlstrasse.png';
-  static const String RESOURCE_PASING  ='images/karlstrasse.png';
+  static const String RESOURCE_LOTHSTRASSE ='images/lothstrasse.png';
+  static const String RESOURCE_PASING  ='images/pasing.png';
   //child: new Image.asset('images/karlstrasse.png', fit: BoxFit.cover),
   Map<String, String> defaultLocation = {
     "latitude": '48.1549123',
