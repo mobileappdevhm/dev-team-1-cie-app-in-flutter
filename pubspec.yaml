@@ -34,6 +34,9 @@ flutter:
   assets:
     - assets/profiles/01.png
     - images/hm_logo.png
+    - images/karlstrasse.png
+    - images/lothstrasse.png
+    - images/pasing.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

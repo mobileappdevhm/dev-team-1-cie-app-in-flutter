@@ -3,7 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MapPage extends StatefulWidget {
   final String apiKey = 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us';
-  final Map<String, double> currentLocation;
+  final Map<String, double> currentLocation = null;
 
   MapPage();
   //MapPage(this.apiKey, {this.currentLocation});
@@ -19,6 +19,10 @@ class _MapPageState extends State<MapPage> {
   Uri renderURL_karl;
   static const int defaultWidth = 600;
   static const int defaultHeight = 400;
+  static const String RESOURCE_KARLSTRASSE ='images/karlstrasse.png';
+  static const String RESOURCE_LOTHSTRASSE ='images/karlstrasse.png';
+  static const String RESOURCE_PASING  ='images/karlstrasse.png';
+  //child: new Image.asset('images/karlstrasse.png', fit: BoxFit.cover),
   Map<String, String> defaultLocation = {
     "latitude": '48.1549123',
     "longitude": '11.5535108'
@@ -221,12 +225,12 @@ _launchMaps_Karl() async {
                       mainAxisSpacing: 20.0,
                       crossAxisSpacing: 20.0,
                       children: <String>[
-                        renderURL_loth.toString(),
-                        renderURL_pasing.toString(),
-                        renderURL_karl.toString(),
-                      ].map((String url) {
+                        RESOURCE_LOTHSTRASSE,
+                        RESOURCE_PASING,
+                        RESOURCE_KARLSTRASSE,
+                      ].map((String resource) {
                         return new GridTile(
-                          child: new Image.network(url, fit: BoxFit.cover),
+                          child: new Image.asset(resource, fit: BoxFit.cover),
                         );
                       }).toList()),
                 ),
