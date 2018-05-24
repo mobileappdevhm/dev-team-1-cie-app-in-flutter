@@ -22,6 +22,21 @@ class CiEStyle {
     );
   }
 
+  static TextStyle getMapsDescriptionStyle() {
+    return new TextStyle(
+      color: const Color.fromRGBO(79, 79, 79, 1.0),
+      fontSize: 18.0,
+    );
+  }
+
+  static TextStyle getMapsTitleStyle() {
+    return new TextStyle(
+      color: const Color.fromRGBO(79, 79, 79, 1.0),
+      fontWeight: FontWeight.w900,
+      fontSize: 26.0,
+    );
+  }
+
   static double getCoursesListIconSize() {
     return 40.0;
   }
