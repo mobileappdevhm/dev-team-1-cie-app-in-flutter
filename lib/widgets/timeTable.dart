@@ -2,7 +2,6 @@ import 'package:cie_team1/presenter/timetablePresenter.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 
-
 class TimeTable extends StatefulWidget {
   final TimeTablePresenter timeTablePresenter;
 
@@ -23,8 +22,10 @@ class TimeTableState extends State<TimeTable> {
   Widget build(BuildContext context) {
     try {
       return new ListView.builder(
-        itemBuilder: (BuildContext context, int index) => new TimeTableItem(timeTablePresenter, index),
-        itemCount: timeTablePresenter.getCurrentCourses().length,
+        itemBuilder: (BuildContext context,int index) => new TimeTableItem(timeTablePresenter,index),
+        //itemCount: timeTablePresenter.getCurrentCourses().length,
+        itemCount:  timeTablePresenter.getCoursesByDay(today).length,
+        //itemCount:  timeTablePresenter.getCoursesByDay().length,
       );
     } catch (e) {
       print("CourseList.dart: " + e.toString());

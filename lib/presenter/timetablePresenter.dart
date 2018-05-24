@@ -5,8 +5,8 @@ import 'package:cie_team1/model/user/currentUser.dart';
 
 
 
+
 class TimeTablePresenter {
-  List<String> days = ["Mo","Di","Mi","Do","Fr","Sa"];
 
   CurrentUser _currentUser;
 
@@ -14,7 +14,6 @@ class TimeTablePresenter {
     UserInjector.configure(Flavor.MOCK);
     _currentUser = new UserInjector().currentUser;
   }
-
 
   User getCurrentUser() {
     return _currentUser.getCurrentUser();
@@ -49,13 +48,16 @@ class TimeTablePresenter {
     return _currentUser.getCurrentUser().currentCourses[id].endTime.toString();
   }
 
+  //List<String> days = ["Mo","Di","Mi","Do","Fr","Sa"];
+
   List<Course> getCoursesByDay(String day){
-    List<Course> newList;
+  //List<Course> getCoursesByDay(){
+    List<Course> newList =[];
     _currentUser.getCurrentUser().currentCourses.forEach((course) {
       if(course.date == day){
         newList.add(course);
       }
-      newList.sort((a,b) => a.startTime.compareTo(b.startTime));
+      //newList.sort((a,b) => a.date.compareTo(b.date));
     });
     return newList;
   }
