@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
+  //not working because exception if page is building.
 /*
   testWidgets('1 widgetTest for map', (WidgetTester tester) async {
     // Tells the tester to build a UI based on the widget tree passed to it

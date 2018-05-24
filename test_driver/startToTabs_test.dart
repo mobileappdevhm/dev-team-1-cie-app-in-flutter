@@ -3,6 +3,9 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
+
+// there is an instruction for starting this test in startToTabs.dart
+
 void main() {
   group('pressing startbutton test', () {
     FlutterDriver driver;
@@ -20,16 +23,16 @@ void main() {
     });
 
     test('press Button', () async {
-      // Record the performance timeline of things that happen inside the closure
-      Timeline timeline = await driver.traceAction(() async {
+        // Record the performance timeline of things that happen inside the closure
+        final Timeline timeline = await driver.traceAction(() async {
         // Find the scrollable user list
-        SerializableFinder button = find.text('Start');
+        final SerializableFinder button = find.text('Start');
 
-        await driver.tap(button);
+        await driver.tap(button); //testing button press.
 
+        final SerializableFinder button2 = find.text('Login');
 
-        //....
-
+        await driver.tap(button2); //testing button press.
       });
 
 
