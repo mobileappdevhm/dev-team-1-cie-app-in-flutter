@@ -5,6 +5,8 @@ import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cie_team1/widgets/timeTable.dart';
+import 'package:cie_team1/presenter/timetablePresenter.dart';
 
 class TabsPage extends StatefulWidget {
   @override
@@ -53,7 +55,7 @@ class TabsPageState extends State<TabsPage> {
             courseList, // Behaves as Courses Page
             //TODO please replace the container with your view
             new MapPage(),
-            new Container(color: Colors.blue),
+            new TimeTable(new TimeTablePresenter()),
             courseList, // Behaves as Favorites Page
             new Settings(),
           ],

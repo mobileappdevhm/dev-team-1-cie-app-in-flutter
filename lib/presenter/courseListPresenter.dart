@@ -49,8 +49,16 @@ class CourseListPresenter {
     return _courses.getCourses()[id].faculty.toString();
   }
 
-  String getLectureTime(int id) {
-    return _courses.getCourses()[id].lectureTime.toString();
+  String getDate(int id) {
+    return _courses.getCourses()[id].date.toString();
+  }
+
+  String getStartTime(int id) {
+    return _courses.getCourses()[id].startTime.toString();
+  }
+
+  String getEndTime(int id) {
+    return _courses.getCourses()[id].endTime.toString();
   }
 
   String getTitle(int id) {
