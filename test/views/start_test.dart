@@ -37,8 +37,6 @@ void main() {
       }
     }
 
-    await tester.tap(find.text('Courses in English'));
-
   });
 
 }
