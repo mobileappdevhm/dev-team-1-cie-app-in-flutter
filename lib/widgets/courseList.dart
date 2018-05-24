@@ -5,30 +5,51 @@ import 'package:flutter/material.dart';
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
   final CourseListPresenter courseListPresenter;
+  bool shouldFilter = false;
 
-  CourseList(this.courseListPresenter);
+  CourseList(this.courseListPresenter, this.shouldFilter);
 
   @override
   State<StatefulWidget> createState() {
-    return new CourseListState(courseListPresenter);
+    return new CourseListState(courseListPresenter, shouldFilter);
   }
+  void toggleFilter() { shouldFilter = !shouldFilter; }
 }
 
 class CourseListState extends State<CourseList> {
   final CourseListPresenter courseListPresenter;
+  final bool shouldFilter;
 
-  CourseListState(this.courseListPresenter);
+  CourseListState(this.courseListPresenter, this.shouldFilter);
 
   @override
   Widget build(BuildContext context) {
-    try {
-      return new ListView.builder(
-        itemBuilder: (BuildContext context, int index) => new CourseListItem(courseListPresenter, index),
-        itemCount: courseListPresenter.getCourses().length,
-      );
-    } catch (e) {
-      print("CourseList.dart: " + e.toString());
-      return new Text("No Courses found!");
+    int itemCount = courseListPresenter.getCourses().length;
+    List<Widget> widgets = new List<Widget>();
+
+    for (int i=0; i< courseListPresenter.getCourses().length; i++) {
+      widgets.add(new CourseListItem(courseListPresenter, i, shouldFilter));
     }
+    if (shouldFilter == true) {
+      widgets.add(
+        new Container(
+          margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
+          child: new RaisedButton(
+              color: Colors.red,
+              onPressed: () => voidFunction,
+              child: new Container(
+                margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
+                child:new Text("Register Favorited Courses"),
+              ),
+          ),
+        )
+      );
+
+    }
+    return itemCount > 0 ? new ListView(children:widgets):
+      new Text("No Courses found!");
   }
+
+  // TODO: Push Data for TimeTable Here
+  void voidFunction() { }
 }

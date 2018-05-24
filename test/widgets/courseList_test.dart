@@ -46,7 +46,7 @@ void main() {
           return new MaterialApp(
             home: new Material(
               child: new Center(
-                child: new CourseList(new CourseListPresenter())
+                child: new CourseList(new CourseListPresenter(), false)
               ),
             ),
           );

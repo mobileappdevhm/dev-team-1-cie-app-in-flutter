@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseList.dart';
@@ -12,16 +13,18 @@ class TabsPage extends StatefulWidget {
 
 class TabsPageState extends State<TabsPage> {
   PageController _tabController;
-
+  CourseListPresenter courseListPresenter;
   var _appTitle = '';
 
   //TODO enable possibility to change default tab
   int _tab = 0;
+  bool _shouldFilter = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = new PageController();
+    courseListPresenter = new CourseListPresenter();
     this._appTitle = TabItems[_tab].title;
   }
 
@@ -33,6 +36,7 @@ class TabsPageState extends State<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
+    CourseList courseList = new CourseList(courseListPresenter, _shouldFilter);
     return new Scaffold(
         appBar: new AppBar(
           title: new Text(
@@ -46,12 +50,12 @@ class TabsPageState extends State<TabsPage> {
           controller: _tabController,
           onPageChanged: _onPageChanged,
           children: <Widget>[
-            new CourseList(new CourseListPresenter()),
+            courseList, // Behaves as Courses Page
             //TODO please replace the container with your view
             new MapPage(),
             new Container(color: Colors.blue),
-            new Container(color: Colors.grey),
-            new Container(color: Colors.black)
+            courseList, // Behaves as Favorites Page
+            new Settings(),
           ],
         ),
         bottomNavigationBar: new BottomNavigationBar(
@@ -75,9 +79,18 @@ class TabsPageState extends State<TabsPage> {
 
   void _onPageChanged(int tab) {
     setState(() {
+      _updateCourseListFilter(tab);
       this._tab = tab;
     });
     this._appTitle = TabItems[tab].title;
+  }
+
+  void _updateCourseListFilter(int tab) {
+    if (tab==0) {
+      this._shouldFilter = false;
+    } else if (tab==3) {
+      this._shouldFilter = true;
+    }
   }
 }
 
