@@ -11,7 +11,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -28,7 +30,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -44,7 +48,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -54,13 +60,15 @@ void main(){
           false,
           5);
 
-      expect(sut.lectureTime, "2-3");
+      expect(sut.startTime, "2");
     });
     test('4', () {
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -76,7 +84,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -92,7 +102,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -109,7 +121,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -126,7 +140,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -143,7 +159,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -160,7 +178,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
@@ -177,7 +197,9 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          "Mo",
+          "2",
+          "3",
           "boring",
           2,
           2,
