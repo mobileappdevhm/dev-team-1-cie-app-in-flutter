@@ -24,7 +24,7 @@ class TimeTableState extends State<TimeTable> {
     try {
       return new ListView.builder(
         itemBuilder: (BuildContext context, int index) => new TimeTableItem(timeTablePresenter, index),
-        itemCount: timeTablePresenter.getCoursesByDay(today).length,
+        itemCount: timeTablePresenter.getCurrentCourses().length,
       );
     } catch (e) {
       print("CourseList.dart: " + e.toString());

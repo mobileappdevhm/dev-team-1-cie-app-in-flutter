@@ -1,8 +1,6 @@
 import 'package:cie_team1/di/courses_di.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
-import 'package:cie_team1/model/user/currentUser.dart';
-
 
 abstract class CourseListViewContract {
   //Todo: Needed in future
@@ -37,10 +35,6 @@ class CourseListPresenter {
     return _courses.getCourses();
   }
 
-  List<Course> getPrevCourses(CurrentUser currentUser) {
-    return currentUser.getCurrentUser().prevCourses;
-  }
-
   int getAvailability(int id) {
     return _courses.getCourses()[id].availability;
   }
@@ -49,8 +43,16 @@ class CourseListPresenter {
     return _courses.getCourses()[id].faculty.toString();
   }
 
-  String getLectureTime(int id) {
-    return _courses.getCourses()[id].lectureTime.toString();
+  String getDate(int id) {
+    return _courses.getCourses()[id].date.toString();
+  }
+
+  String getStartTime(int id) {
+    return _courses.getCourses()[id].startTime.toString();
+  }
+
+  String getEndTime(int id) {
+    return _courses.getCourses()[id].endTime.toString();
   }
 
   String getTitle(int id) {
