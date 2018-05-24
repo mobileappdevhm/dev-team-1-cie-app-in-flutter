@@ -211,7 +211,6 @@ void main(){
 
       expect(sut.availability, 5);
     });
-  });
 
   test('12', () {
     final Course sut = new Course(
@@ -230,6 +229,7 @@ void main(){
         5);
 
     expect(sut.date, "Mo");
+  });
     test('3', () {
       final Course sut = new Course(
           "Blaba",
@@ -247,5 +247,8 @@ void main(){
           5);
 
       expect(sut.endTime, "3");
+    });
+  )
+  }
 }
 
