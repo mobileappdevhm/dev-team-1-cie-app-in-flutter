@@ -57,21 +57,21 @@ class CurrentUserMock implements CurrentUser {
         1,
         true,
         0));
-//    courses.add(new Course("Title of Course 5", "07", "Do 10:00-11:30", "Some description 5",
-//        1, 1, "test@test.de", "Test",
-//        1, false, 0));
-//    courses.add(new Course("Title of Course 6", "07", "Mo 10:00-11:30", "Some description 6",
-//        1, 1, "test@test.de", "Test",
-//        1, false, 1));
-//    courses.add(new Course("Title of Course 7", "07", "Fr 10:00-11:30", "Some description 7",
-//        1, 1, "test@test.de", "Test",
-//        1, true, 1));
-//    courses.add(new Course("Title of Course 8", "07", "Mo 10:00-11:30", "Some description 8",
-//        1, 1, "test@test.de", "Test",
-//        1, false, 2));
-//    courses.add(new Course("Title of Course 9", "07", "Mo 10:00-11:30", "Some description 9",
-//        1, 1, "test@test.de", "Test",
-//        1, false, 0));
+    currentCourses.add(new Course("Title of Course 5", "07", "Do 10:00-11:30", "Some description 5",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    currentCourses.add(new Course("Title of Course 6", "07", "Mo 10:00-11:30", "Some description 6",
+        1, 1, "test@test.de", "Test",
+        1, false, 1));
+    currentCourses.add(new Course("Title of Course 7", "07", "Fr 10:00-11:30", "Some description 7",
+        1, 1, "test@test.de", "Test",
+        1, true, 1));
+    currentCourses.add(new Course("Title of Course 8", "07", "Mo 10:00-11:30", "Some description 8",
+        1, 1, "test@test.de", "Test",
+        1, false, 2));
+    currentCourses.add(new Course("Title of Course 9", "07", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
 
     testUser = new User(1, "Jane1","Jane","Doe", "07",  "Local", "assets/profiles/01.png" , currentCourses,prevCourses);
   }
