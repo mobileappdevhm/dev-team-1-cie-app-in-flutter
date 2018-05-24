@@ -76,14 +76,31 @@ class CiEStyle {
     );
   }
 
-
-
   static BorderRadius getButtonBorderRadius(){
     return new BorderRadius.circular(30.0);
   }
 
   static Color getLogoutButtonColor(){
     return new Color.fromRGBO(235, 87, 87, 1.0);
+  }
+
+  static TextStyle getCourseDescriptionTitleStyle() {
+    return new TextStyle(
+      color: const Color.fromRGBO(79, 79, 79, 1.0),
+      fontSize: 23.0,
+    );
+  }
+
+  static TextStyle getCourseDescriptionFacultyStyle() {
+    return new TextStyle(
+      color: const Color.fromRGBO(0, 160, 210, 1.0),
+      fontSize: 15.0,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  static double getCourseDescriptionIconSize() {
+    return 50.0;
   }
 
 }

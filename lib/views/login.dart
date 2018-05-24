@@ -90,7 +90,7 @@ class LoginFormState extends State<LoginForm> {
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new TextFormField(
                     decoration: const InputDecoration(
-                      fillColor: Color.fromRGBO(224, 224, 224, 1.0),
+                      fillColor: const Color.fromRGBO(224, 224, 224, 1.0),
                       filled: true,
                       border: InputBorder.none,
                       labelText: 'E-mail',
@@ -106,7 +106,7 @@ class LoginFormState extends State<LoginForm> {
                   new TextFormField(
                     key: _passwordFieldKey,
                     decoration: const InputDecoration(
-                      fillColor: Color.fromRGBO(224, 224, 224, 1.0),
+                      fillColor: const Color.fromRGBO(224, 224, 224, 1.0),
                       filled: true,
                       border: InputBorder.none,
                       labelText: 'Password',

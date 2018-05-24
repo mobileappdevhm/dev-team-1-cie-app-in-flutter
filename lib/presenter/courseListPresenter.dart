@@ -3,7 +3,6 @@ import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 
-
 abstract class CourseListViewContract {
   //Todo: Needed in future
 }

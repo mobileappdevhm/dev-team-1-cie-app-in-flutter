@@ -22,7 +22,7 @@ class WelcomePage extends StatelessWidget {
             child: new FlatButton(
               onPressed: () => Navigator.pushReplacementNamed(context, Routes.Login),
               color: Colors.red,
-              padding: EdgeInsets.all(10.0),
+              padding: new EdgeInsets.all(10.0),
               child: new Text(
                 "Start",
                 style: new TextStyle(color: Colors.white),

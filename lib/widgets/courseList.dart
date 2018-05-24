@@ -51,5 +51,5 @@ class CourseListState extends State<CourseList> {
   }
 
   // TODO: Push Data for TimeTable Here
-  void voidFunction() { }
+  void voidFunction() {}
 }
