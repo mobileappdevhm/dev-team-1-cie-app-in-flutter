@@ -17,4 +17,3 @@ class Course {
       this.hoursPerWeak, this.ects, this.professorEmail, this.professorName,
       this.availableForStudent, this.isFavourite, this.availability);
 }
-
