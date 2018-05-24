@@ -6,7 +6,8 @@ import 'package:cie_team1/model/user/currentUser.dart';
 
 
 class TimeTablePresenter {
-  //List<Course> courses = [];
+  List<String> days = ["Mo","Di","Mi","Do","Fr","Sa"];
+
   CurrentUser _currentUser;
 
   TimeTablePresenter() {
@@ -23,10 +24,6 @@ class TimeTablePresenter {
   List<Course> getCurrentCourses(){
     return _currentUser.getCurrentUser().currentCourses;
   }
-
-
-/* Duplicated methods */
-/* I'll try to find a proper way for these presenters to work together but this is what work for now */
 
   String getTitle(int id) {
     return _currentUser.getCurrentUser().currentCourses[id].name;
@@ -52,4 +49,14 @@ class TimeTablePresenter {
     return _currentUser.getCurrentUser().currentCourses[id].endTime.toString();
   }
 
+  List<Course> getCoursesByDay(String day){
+    List<Course> newList;
+    _currentUser.getCurrentUser().currentCourses.forEach((course) {
+      if(course.date == day){
+        newList.add(course);
+      }
+      newList.sort((a,b) => a.startTime.compareTo(b.startTime));
+    });
+    return newList;
+  }
 }
