@@ -1,6 +1,7 @@
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/views/start.dart';
 import 'package:flutter/material.dart';
+import 'package:cie_team1/views/tabs.dart';
 
 void main() => runApp(new MyApp());
 

@@ -3,6 +3,7 @@ import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:test/test.dart';
 
 
+@Timeout(const Duration(seconds: 20))
 void main() {
 
   CoursesMock sut;
