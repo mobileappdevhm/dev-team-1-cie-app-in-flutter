@@ -91,9 +91,5 @@ class CourseListState extends State<CourseList> {
   }
 
   // TODO: Push Data for TimeTable Here
-<<<<<<< HEAD
   void voidFunction() {}
-=======
-  voidFunction() { }
->>>>>>> d4ba380... Add dropdown search feature to course list page
 }
