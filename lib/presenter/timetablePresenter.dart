@@ -39,7 +39,17 @@ class TimeTablePresenter {
 
   String getFaculty(int id) {
     return _currentUser.getCurrentUser().currentCourses[id].faculty.toString();
+      }
+  String getDate(int id) {
+    return _currentUser.getCurrentUser().currentCourses[id].date.toString();
   }
 
+  String getStartTime(int id) {
+    return _currentUser.getCurrentUser().currentCourses[id].startTime.toString();
+  }
+
+  String getEndTime(int id) {
+    return _currentUser.getCurrentUser().currentCourses[id].endTime.toString();
+  }
 
 }
