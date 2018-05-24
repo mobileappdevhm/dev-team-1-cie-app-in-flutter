@@ -213,6 +213,39 @@ void main(){
     });
   });
 
+  test('12', () {
+    final Course sut = new Course(
+        "Blaba",
+        "7",
+        "Mo",
+        "2",
+        "3",
+        "boring",
+        2,
+        2,
+        "example@hm.edu",
+        "Max Mustermann",
+        1,
+        false,
+        5);
 
+    expect(sut.date, "Mo");
+    test('3', () {
+      final Course sut = new Course(
+          "Blaba",
+          "7",
+          "Mo",
+          "2",
+          "3",
+          "boring",
+          2,
+          2,
+          "example@hm.edu",
+          "Max Mustermann",
+          1,
+          false,
+          5);
+
+      expect(sut.endTime, "3");
 }
 
