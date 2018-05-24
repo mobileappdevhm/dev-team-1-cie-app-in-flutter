@@ -22,9 +22,10 @@ class TimeTableState extends State<TimeTable> {
   Widget build(BuildContext context) {
     try {
       return new ListView.builder(
-        itemBuilder: (BuildContext context,int index) => new TimeTableItem(timeTablePresenter,index),
-        //itemCount: timeTablePresenter.getCurrentCourses().length,
-        itemCount:  timeTablePresenter.getCoursesByDay(today).length,
+        //itemBuilder: (context, index){return new ListTile(title: new Text('${timeTablePresenter.getCoursesByDay(today)[index]}'),);},
+        itemBuilder: (BuildContext context, index) => new TimeTableItem(timeTablePresenter,index),
+        itemCount: timeTablePresenter.getCurrentCourses().length,
+        //itemCount:  timeTablePresenter.getCoursesByDay(today).length,
         //itemCount:  timeTablePresenter.getCoursesByDay().length,
       );
     } catch (e) {

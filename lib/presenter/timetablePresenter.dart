@@ -61,4 +61,5 @@ class TimeTablePresenter {
     });
     return newList;
   }
+
 }
