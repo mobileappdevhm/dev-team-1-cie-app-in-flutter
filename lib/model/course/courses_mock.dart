@@ -32,6 +32,72 @@ class CoursesMock implements Courses {
     courses.add(new Course("Title of Course 9", "07", "Mo 10:00-11:30", "Some description 9",
         1, 1, "test@test.de", "Test",
         1, false, 0));
+    courses.add(new Course("Title of Course 10", "08", "Mo 10:00-11:30", "Some description 8",
+        1, 1, "test@test.de", "Test",
+        1, false, 2));
+    courses.add(new Course("Title of Course 11", "08", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 12", "01", "Mo 10:00-11:30", "Some description 8",
+        1, 1, "test@test.de", "Test",
+        1, false, 2));
+    courses.add(new Course("Title of Course 13", "01", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 14", "01", "Mo 10:00-11:30", "Some description 8",
+        1, 1, "test@test.de", "Test",
+        1, false, 2));
+    courses.add(new Course("Title of Course 15", "02", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 16", "03", "Mo 10:00-11:30", "Some description 8",
+        1, 1, "test@test.de", "Test",
+        1, false, 2));
+    courses.add(new Course("Title of Course 17", "03", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 18", "04", "Mo 10:00-11:30", "Some description 8",
+        1, 1, "test@test.de", "Test",
+        1, false, 2));
+    courses.add(new Course("Title of Course 19", "04", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 20", "05", "Mo 10:00-11:30", "Some description 8",
+        1, 1, "test@test.de", "Test",
+        1, false, 2));
+    courses.add(new Course("Title of Course 21", "06", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 22", "06", "Mo 10:00-11:30", "Some description 8",
+        1, 1, "test@test.de", "Test",
+        1, false, 2));
+    courses.add(new Course("Title of Course 23", "06", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 24", "01", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 25", "01", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 26", "01", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 27", "01", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 28", "01", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 29", "01", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 30", "01", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
+    courses.add(new Course("Title of Course 31", "01", "Mo 10:00-11:30", "Some description 9",
+        1, 1, "test@test.de", "Test",
+        1, false, 0));
   }
 
   @override

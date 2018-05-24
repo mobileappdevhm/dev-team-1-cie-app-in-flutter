@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CiEStyle {
+  static TextStyle getDropdownTitleStyle() {
+    return new TextStyle(
+      //fontWeight: FontWeight.bold,
+      fontSize: 16.0,
+    );
+  }
+
   static TextStyle getCoursesListFacultyStyle() {
     return new TextStyle(
       color: const Color.fromRGBO(0, 160, 210, 1.0),

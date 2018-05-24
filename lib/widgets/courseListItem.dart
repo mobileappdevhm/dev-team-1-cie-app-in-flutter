@@ -7,22 +7,22 @@ class CourseListItem extends StatefulWidget {
   // Stateful because we can mark items as favourite
   final CourseListPresenter courseListPresenter;
   final int id;
-  final bool shouldFilter;
+  final bool shouldFilterByFavorites;
 
-  CourseListItem(this.courseListPresenter, this.id, this.shouldFilter);
+  CourseListItem(this.courseListPresenter, this.id, this.shouldFilterByFavorites);
 
   @override
   State<StatefulWidget> createState() {
-    return new CourseListItemState(courseListPresenter, id, shouldFilter);
+    return new CourseListItemState(courseListPresenter, id, shouldFilterByFavorites);
   }
 }
 
 class CourseListItemState extends State<CourseListItem> {
   final int id;
   final CourseListPresenter courseListPresenter;
-  final bool shouldFilter;
+  final bool shouldFilterByFavorites;
 
-  CourseListItemState(this.courseListPresenter, this.id, this.shouldFilter);
+  CourseListItemState(this.courseListPresenter, this.id, this.shouldFilterByFavorites);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class CourseListItemState extends State<CourseListItem> {
         break;
     };
 
-    if (shouldFilter == false || courseListPresenter.getFavourite(id)) {
+    if (shouldFilterByFavorites == false || courseListPresenter.getFavourite(id)) {
       return new ListTile(
         leading: availabilityIcon,
         title: new Text(courseListPresenter.getTitle(id),
