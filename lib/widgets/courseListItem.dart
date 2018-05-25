@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseDetails.dart';
 import 'package:flutter/material.dart';
@@ -34,14 +35,14 @@ class CourseListItemState extends State<CourseListItem> {
         availabilityIcon = new Icon(
           const IconData(0xe86c, fontFamily: 'MaterialIcons'),
           size: iconSize,
-          color: const Color.fromRGBO(111, 207, 151, 1.0),
+          color: CiEColor.green,
         );
         break;
       case 1:
         availabilityIcon = new Icon(
           const IconData(0xe8fd, fontFamily: 'MaterialIcons'),
           size: iconSize,
-          color: const Color.fromRGBO(242, 201, 76, 1.0),
+          color: CiEColor.yellow,
         );
         break;
       case 2:
@@ -49,7 +50,7 @@ class CourseListItemState extends State<CourseListItem> {
           const IconData(0xe888, fontFamily: 'MaterialIcons'),
 
           size: iconSize,
-          color: const Color.fromRGBO(235, 87, 87, 1.0),
+          color: CiEColor.red,
         );
         break;
     };
@@ -77,7 +78,7 @@ class CourseListItemState extends State<CourseListItem> {
                 : const IconData(0xe87e, fontFamily: 'MaterialIcons')
             ),
             size: iconSize,
-            color: const Color.fromRGBO(235, 87, 87, 1.0),
+            color: CiEColor.red,
           ),
           onPressed: _toggleFavourite,
         ),
