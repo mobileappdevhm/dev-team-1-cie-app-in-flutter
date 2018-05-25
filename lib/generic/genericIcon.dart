@@ -9,20 +9,25 @@ class GenericIcon {
   static const String fontFamily = 'MaterialIcons';
   static Icon buildGenericAvailabilityIcon(int availability) {
     IconData iconData;
+    Color color;
     switch (availability) {
       case CourseDefinitions.AVAILABILITY_AVAILABLE:
         iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
+        color = const Color.fromRGBO(111, 207, 151, 1.0);
         break;
       case CourseDefinitions.AVAILABILITY_PENDING:
-        iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
-        break;
+        iconData = const IconData(memStoragePending, fontFamily: fontFamily);
+        color = const Color.fromRGBO(242, 201, 76, 1.0);
+
+    break;
       case CourseDefinitions.AVAILABILITY_UNAVAILABLE:
-        iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
+        iconData = const IconData(memStorageUnavailable, fontFamily: fontFamily);
+        color = const Color.fromRGBO(235, 87, 87, 1.0);
         break;
     }
     return new Icon(iconData,
       size: CiEStyle.getCoursesListIconSize(),
-      color: const Color.fromRGBO(111, 207, 151, 1.0),
+      color: color,
     );
   }
 
