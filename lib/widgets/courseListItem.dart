@@ -2,6 +2,7 @@ import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseDetails.dart';
+import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:flutter/material.dart';
 
 class CourseListItem extends StatefulWidget {
@@ -27,37 +28,10 @@ class CourseListItemState extends State<CourseListItem> {
 
   @override
   Widget build(BuildContext context) {
-    Icon availabilityIcon;
     double iconSize = CiEStyle.getCoursesListIconSize();
-
-    switch (courseListPresenter.getAvailability(id)) {
-      case 0:
-        availabilityIcon = new Icon(
-          const IconData(0xe86c, fontFamily: 'MaterialIcons'),
-          size: iconSize,
-          color: CiEColor.green,
-        );
-        break;
-      case 1:
-        availabilityIcon = new Icon(
-          const IconData(0xe8fd, fontFamily: 'MaterialIcons'),
-          size: iconSize,
-          color: CiEColor.yellow,
-        );
-        break;
-      case 2:
-        availabilityIcon = new Icon(
-          const IconData(0xe888, fontFamily: 'MaterialIcons'),
-
-          size: iconSize,
-          color: CiEColor.red,
-        );
-        break;
-    };
-
-    if (shouldFilter == false || courseListPresenter.getFavourite(id)) {
       return new ListTile(
-        leading: availabilityIcon,
+        leading: GenericIcon.buildGenericAvailabilityIcon(
+            courseListPresenter.getAvailability(id)),
         title: new Text(courseListPresenter.getTitle(id),
           style: CiEStyle.getCoursesTitleStyle(),),
         subtitle: new Row(
@@ -72,25 +46,13 @@ class CourseListItemState extends State<CourseListItem> {
           ],
         ),
         trailing: new IconButton(
-          icon: new Icon(
-            (courseListPresenter.getFavourite(id)
-                ? const IconData(0xe87d, fontFamily: 'MaterialIcons')
-                : const IconData(0xe87e, fontFamily: 'MaterialIcons')
-            ),
-            size: iconSize,
-            color: CiEColor.red,
-          ),
+          icon: GenericIcon.buildGenericFavoriteIcon(
+              courseListPresenter.getFavourite(id)),
           onPressed: _toggleFavourite,
         ),
         onTap: _toggleDescription,
       );
     }
-    // Build functions must never return null. To return an empty space that
-    // causes the building widget to fill available room, return
-    // "new Container()". To return an empty space that takes as little room as
-    //possible, return "new Container(width: 0.0, height: 0.0)".
-    return new Container(width: 0.0, height: 0.0);
-  }
 
   void _toggleFavourite() {
     setState(() {
@@ -99,10 +61,6 @@ class CourseListItemState extends State<CourseListItem> {
   }
 
   void _toggleDescription() {
-    //setState(() {
-    //  courseListPresenter.toggleShowCourseDescription(id);
-    //});
-
     Navigator.push(
         context,
         new MaterialPageRoute(builder: (context) => new CourseDetails()));
