@@ -1,3 +1,4 @@
+import 'package:cie_team1/utils/cieColor.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 
@@ -21,7 +22,7 @@ class _CourseDetailsState extends State<CourseDetails> {
           style: CiEStyle.getAppBarTitleStyle(context),
         ),
         elevation: CiEStyle.getAppBarElevation(context),
-        backgroundColor: const Color.fromRGBO(224, 224, 224, 1.0),
+        backgroundColor: CiEColor.lightGray,
       ),
       body: new Center(
         child: new Padding(
@@ -55,7 +56,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                           icon: new Icon(
                             const IconData(0xe87e, fontFamily: 'MaterialIcons'),
                             size: iconSize,
-                            color: const Color.fromRGBO(235, 87, 87, 1.0),
+                            color: CiEColor.red,
                           ),
                         ),
                       ),
@@ -139,14 +140,13 @@ class _CourseDetailsState extends State<CourseDetails> {
                                 const IconData(0xe86c,
                                     fontFamily: 'MaterialIcons'),
                                 size: 30.0,
-                                color: const Color.fromRGBO(111, 207, 151, 1.0),
+                                color: CiEColor.green,
                               ),
                               new Text(
                                 "Available",
                                 style: new TextStyle(
                                   fontSize: 17.0,
-                                  color:
-                                      const Color.fromRGBO(111, 207, 151, 1.0),
+                                  color: CiEColor.green,
                                 ),
                               ),
                             ],
