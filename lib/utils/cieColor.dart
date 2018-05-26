@@ -8,6 +8,9 @@ class CiEColor {
   //Gray = #4F4F4F rgb(79,79,79)
   static const Color gray = const Color.fromRGBO(79,79,79,1.0);
 
+  //Gray (medium) = #969696 rgb(150, 150, 150)
+  static const Color mediumGray = const Color.fromRGBO(150, 150, 150, 1.0);
+
   //Gray (light) = #E0E0E0 rgb(224,224,224)
   static const Color lightGray = const Color.fromRGBO(224,224,224,1.0);
 
