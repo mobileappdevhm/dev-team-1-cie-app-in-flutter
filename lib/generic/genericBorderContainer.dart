@@ -1,4 +1,3 @@
-import 'package:cie_team1/utils/cieColor.dart';
 import 'package:flutter/material.dart';
 
 class GenericBorderContainer {
@@ -7,7 +6,7 @@ class GenericBorderContainer {
         decoration: new BoxDecoration(
           border: new Border(
               bottom: new BorderSide(
-                  color: CiEColor.mediumGray,
+                  color: Color.fromRGBO(150, 150, 150, 1.0),
                   width: 2.0)),
         ),
         child: child
