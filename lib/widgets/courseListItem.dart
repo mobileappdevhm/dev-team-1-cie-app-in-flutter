@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseDetails.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
@@ -28,7 +29,6 @@ class CourseListItemState extends State<CourseListItem> {
   @override
   Widget build(BuildContext context) {
     double iconSize = CiEStyle.getCoursesListIconSize();
-
       return new ListTile(
         leading: GenericIcon.buildGenericAvailabilityIcon(
             courseListPresenter.getAvailability(id)),
