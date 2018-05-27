@@ -7,16 +7,16 @@ class GenericIcon {
   static const int memStoragePending = 0xe8fd;
   static const int memStorageUnavailable = 0xe888;
   static const String fontFamily = 'MaterialIcons';
-  static Icon buildGenericAvailabilityIcon(int availability) {
+  static Icon buildGenericAvailabilityIcon(CourseAvailability availability) {
     IconData iconData;
     switch (availability) {
-      case CourseDefinitions.AVAILABILITY_AVAILABLE:
+      case CourseAvailability.AVAILABLE:
         iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
         break;
-      case CourseDefinitions.AVAILABILITY_PENDING:
+      case CourseAvailability.PENDING:
         iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
         break;
-      case CourseDefinitions.AVAILABILITY_UNAVAILABLE:
+      case CourseAvailability.UNAVAILABLE:
         iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
         break;
     }

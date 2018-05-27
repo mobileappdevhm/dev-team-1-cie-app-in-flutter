@@ -11,7 +11,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -19,7 +19,7 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
       expect(sut.name, "Blaba");
     });
@@ -28,7 +28,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -36,7 +36,7 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
       expect(sut.faculty, "7");
     });
@@ -44,7 +44,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -52,15 +52,15 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
-      expect(sut.lectureTime, "2-3");
+      expect(sut.lecturesPerWeak, [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))]);
     });
     test('4', () {
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -68,7 +68,7 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
       expect(sut.description, "boring");
     });
@@ -76,7 +76,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -84,7 +84,7 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
       expect(sut.hoursPerWeak, 2);
     });
@@ -92,7 +92,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -100,7 +100,7 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
       expect(sut.ects, 2);
     });
@@ -109,7 +109,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -117,7 +117,7 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
       expect(sut.professorEmail, "example@hm.edu");
     });
@@ -126,7 +126,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -134,7 +134,7 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
       expect(sut.professorName, "Max Mustermann");
     });
@@ -143,7 +143,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -151,7 +151,7 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
       expect(sut.availableForStudent, 1);
     });
@@ -160,7 +160,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -168,7 +168,7 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
       expect(sut.isFavourite, false);
     });
@@ -177,7 +177,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          "2-3",
+          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -185,9 +185,9 @@ void main(){
           "Max Mustermann",
           1,
           false,
-          5);
+          CourseAvailability.AVAILABLE);
 
-      expect(sut.availability, 5);
+      expect(sut.availability, CourseAvailability.AVAILABLE);
     });
   });
 

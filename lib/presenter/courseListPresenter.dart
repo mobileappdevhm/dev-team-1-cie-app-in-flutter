@@ -40,7 +40,7 @@ class CourseListPresenter {
     return currentUser.getCurrentUser().prevCourses;
   }
 
-  int getAvailability(int id) {
+  CourseAvailability getAvailability(int id) {
     return _courses.getCourses()[id].availability;
   }
 
@@ -48,11 +48,24 @@ class CourseListPresenter {
     return _courses.getCourses()[id].faculty.toString();
   }
 
-  String getLectureTime(int id) {
-    return _courses.getCourses()[id].lectureTime.toString();
-  }
-
   String getTitle(int id) {
     return _courses.getCourses()[id].name;
+  }
+
+  List<Lecture> getLectureTimes(int id) {
+    return _courses.getCourses()[id].lecturesPerWeak;
+  }
+
+  String getLectureTimesBeautiful(int id) {
+    List<Lecture> lectures = _courses.getCourses()[id].lecturesPerWeak;
+    String result = "";
+    for (var i = 0; i < lectures.length; i++) {
+      if (i == 0)
+        result += lectures[i].toString();
+      else
+        result += '\n' + lectures[i].toString();
+    }
+
+    return result;
   }
 }

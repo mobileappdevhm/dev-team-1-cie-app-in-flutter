@@ -1,7 +1,7 @@
 class Course {
   final String name;
   final String faculty;
-  final String lectureTime;
+  final List<Lecture> lecturesPerWeak;
   final String description;
   final int hoursPerWeak;
   final int ects;
@@ -9,15 +9,33 @@ class Course {
   final String professorName;
   final int availableForStudent;
   bool isFavourite;
-  final int availability;
+  final CourseAvailability availability;
 
-  Course(this.name, this.faculty, this.lectureTime, this.description,
+  Course(this.name, this.faculty, this.lecturesPerWeak, this.description,
       this.hoursPerWeak, this.ects, this.professorEmail, this.professorName,
       this.availableForStudent, this.isFavourite, this.availability);
 }
 
-class CourseDefinitions {
-  static const int AVAILABILITY_AVAILABLE = 0;
-  static const int AVAILABILITY_PENDING = 1;
-  static const int AVAILABILITY_UNAVAILABLE = 2;
+class Lecture {
+  final Weekday weekday;
+  final DayTime startDayTime;
+  final DayTime endDayTime;
+
+  Lecture(this.weekday, this.startDayTime, this.endDayTime);
+
+  @override
+  String toString() {
+    return weekday.toString() + ":" + startDayTime.toString() + "-" + endDayTime.toString();
+  }
 }
+
+class DayTime {
+  final int hour;
+  final int minute;
+
+  DayTime(this.hour, this.minute);
+}
+
+enum Weekday {Mon, Tue, Wed, The, Fri, Sat, Sun}
+
+enum CourseAvailability {AVAILABLE, PENDING, UNAVAILABLE}

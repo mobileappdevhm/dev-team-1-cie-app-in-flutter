@@ -28,7 +28,6 @@ class CourseListItemState extends State<CourseListItem> {
 
   @override
   Widget build(BuildContext context) {
-    double iconSize = CiEStyle.getCoursesListIconSize();
       return new ListTile(
         leading: GenericIcon.buildGenericAvailabilityIcon(
             courseListPresenter.getAvailability(id)),
@@ -41,7 +40,7 @@ class CourseListItemState extends State<CourseListItem> {
               child: new Text("FK " + courseListPresenter.getFaculty(id),
                 style: CiEStyle.getCoursesListFacultyStyle(),),
             ),
-            new Text("Time: " + courseListPresenter.getLectureTime(id),
+            new Text("Time: " + courseListPresenter.getLectureTimesBeautiful(id),
               style: CiEStyle.getCoursesListTimeStyle(),),
           ],
         ),
