@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -46,7 +47,7 @@ class TabsPageState extends State<TabsPage> {
             style: CiEStyle.getAppBarTitleStyle(context),
           ),
           elevation: CiEStyle.getAppBarElevation(context),
-          backgroundColor: const Color.fromRGBO(224, 224, 224, 1.0),
+          backgroundColor: CiEColor.lightGray,
         ),
         body: new PageView(
           controller: _tabController,

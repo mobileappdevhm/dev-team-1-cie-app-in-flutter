@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 
 class CiEStyle {
   static TextStyle getCoursesListFacultyStyle() {
     return new TextStyle(
-      color: const Color.fromRGBO(0, 160, 210, 1.0),
+      color: CiEColor.turquoise,
       fontWeight: FontWeight.bold,
     );
   }
@@ -11,14 +12,29 @@ class CiEStyle {
   static TextStyle getCoursesListTimeStyle() {
     return new TextStyle(
       fontWeight: FontWeight.bold,
-      color: const Color.fromRGBO(79, 79, 79, 1.0),
+      color: CiEColor.gray,
     );
   }
 
   static TextStyle getCoursesTitleStyle() {
     return new TextStyle(
-      color: const Color.fromRGBO(79, 79, 79, 1.0),
+      color: CiEColor.gray,
       fontSize: 18.0,
+    );
+  }
+
+  static TextStyle getMapsDescriptionStyle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 18.0,
+    );
+  }
+
+  static TextStyle getMapsTitleStyle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontWeight: FontWeight.w900,
+      fontSize: 26.0,
     );
   }
 
@@ -29,7 +45,7 @@ class CiEStyle {
   static TextStyle getAppBarTitleStyle(BuildContext context){
     return new TextStyle(
       fontSize: Theme.of(context).platform == TargetPlatform.iOS ? 17.0 : 20.0,
-      color: const Color.fromRGBO(235, 87, 87, 1.0),
+      color: CiEColor.red,
       letterSpacing: 2.0
     );
   }
@@ -72,18 +88,36 @@ class CiEStyle {
     return new TextStyle(
       fontSize: 20.0,
       fontWeight: FontWeight.bold,
-      color: new Color.fromRGBO(235, 87, 87, 1.0)
+      color: CiEColor.red
     );
   }
-
-
 
   static BorderRadius getButtonBorderRadius(){
     return new BorderRadius.circular(30.0);
   }
 
+  //TODO Maybe this function should be removed and the color directly implemented
   static Color getLogoutButtonColor(){
-    return new Color.fromRGBO(235, 87, 87, 1.0);
+    return CiEColor.red;
+  }
+
+  static TextStyle getCourseDescriptionTitleStyle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 23.0,
+    );
+  }
+
+  static TextStyle getCourseDescriptionFacultyStyle() {
+    return new TextStyle(
+      color: CiEColor.turquoise,
+      fontSize: 15.0,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  static double getCourseDescriptionIconSize() {
+    return 50.0;
   }
 
 }

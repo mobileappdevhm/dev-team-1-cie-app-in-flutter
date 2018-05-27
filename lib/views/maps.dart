@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 
 class MapPage extends StatefulWidget {
   final String apiKey = 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us';
@@ -14,16 +16,12 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   Uri renderURL;
-  Uri renderURL_loth;
-  Uri renderURL_pasing;
-  Uri renderURL_karl;
   static const int defaultWidth = 600;
   static const int defaultHeight = 400;
   static const String RESOURCE_KARLSTRASSE ='images/karlstrasse.png';
   static const String RESOURCE_LOTHSTRASSE ='images/lothstrasse.png';
   static const String RESOURCE_PASING  ='images/pasing.png';
-  //child: new Image.asset('images/karlstrasse.png', fit: BoxFit.cover),
-  Map<String, String> defaultLocation = {
+  Map<String, String> lothLocation = {
     "latitude": '48.1549123',
     "longitude": '11.5535108'
   };
@@ -36,8 +34,7 @@ class _MapPageState extends State<MapPage> {
     "longitude": '11.568344'
   };
 
-  _buildUrl(String campus) {
-    if (campus == 'l') {
+  _buildUri(String campus) {
       var baseUri = new Uri(
           scheme: 'https',
           host: 'maps.googleapis.com',
@@ -46,12 +43,11 @@ class _MapPageState extends State<MapPage> {
           queryParameters: {
             'size': '${defaultWidth}x$defaultHeight',
             'center':
-                '${defaultLocation['latitude']},${defaultLocation['longitude']}',
+                '${_getCoordinates(campus)['latitude']},${_getCoordinates(campus)['longitude']}',
             'zoom': '18',
             '${widget.apiKey}': ''
           });
       var finalUrl = baseUri;
-
       if (widget.currentLocation != null) {
         finalUrl = baseUri.replace(queryParameters: {
           'center':
@@ -61,193 +57,80 @@ class _MapPageState extends State<MapPage> {
           'size': '${defaultWidth}x$defaultHeight',
         });
       }
+  }
 
-      setState(() {
-        renderURL_loth = finalUrl;
-      });
-    } else if (campus == 'p') {
-      var baseUri = new Uri(
-          scheme: 'https',
-          host: 'maps.googleapis.com',
-          port: 443,
-          path: '/maps/api/staticmap',
-          queryParameters: {
-            'size': '${defaultWidth}x$defaultHeight',
-            'center':
-                '${pasingLocation['latitude']},${pasingLocation['longitude']}',
-            'zoom': '18',
-            '${widget.apiKey}': ''
-          });
-      var finalUrl = baseUri;
-
-      if (widget.currentLocation != null) {
-        finalUrl = baseUri.replace(queryParameters: {
-          'center':
-              '${widget.currentLocation['latitude']},${widget.currentLocation['longitude']}',
-          'zoom': '19',
-          '${widget.apiKey}': '',
-          'size': '${defaultWidth}x$defaultHeight',
-        });
-      }
-
-      setState(() {
-        renderURL_pasing = finalUrl;
-      });
-
-    } else if (campus == 'k') {
-      var baseUri = new Uri(
-          scheme: 'https',
-          host: 'maps.googleapis.com',
-          port: 443,
-          path: '/maps/api/staticmap',
-          queryParameters: {
-            'size': '${defaultWidth}x$defaultHeight',
-            'center':
-                '${karlLocation['latitude']},${karlLocation['longitude']}',
-            'zoom': '18',
-            '${widget.apiKey}': ''
-          });
-      var finalUrl = baseUri;
-
-      if (widget.currentLocation != null) {
-        finalUrl = baseUri.replace(queryParameters: {
-          'center':
-              '${widget.currentLocation['latitude']},${widget.currentLocation['longitude']}',
-          'zoom': '19',
-          '${widget.apiKey}': '',
-          'size': '${defaultWidth}x$defaultHeight',
-        });
-      }
-
-      setState(() {
-        renderURL_karl = finalUrl;
-      });
-    } else {
-      setState(() {
-        renderURL = new Uri(
-            scheme: 'https',
-            host: 'w3-mediapool.hm.edu',
-            path:
-                'mediapool/media/fk07/fk07_lokal/kontakt_4/anfahrt_lageplan/Lageplan_2009_Lothstr.jpg');
-      });
+  _getCoordinates(String campus) {
+    switch (campus) {
+      case StaticVariables.KARLSTRASSE:
+        return karlLocation;
+      case StaticVariables.LOTHSTRASSE:
+        return lothLocation;
+      case StaticVariables.PASING:
+        return pasingLocation;
+      default:
+        // TODO: Decide if it makes sense to default to this
+        return lothLocation;
     }
   }
 
-
-_launchMaps_Loth() async {
-  String googleUrl =
-    'comgooglemaps://?center=${defaultLocation['latitude']},${defaultLocation['longitude']}';
-  String appleUrl =
-    'https://maps.apple.com/?sll=${defaultLocation['latitude']},${defaultLocation['longitude']}';
-  if (await canLaunch("comgooglemaps://")) {
-    print('launching com googleUrl');
-    await launch(googleUrl);
-  } else if (await canLaunch(appleUrl)) {
-    print('launching apple url');
-    await launch(appleUrl);
-  } else {
-    throw 'Could not launch url';
+  _launchMaps(String campus) async {
+    String googleUrl =
+    'comgooglemaps://?center=${_getCoordinates(campus)['latitude']},${_getCoordinates(campus)['longitude']}';
+    String appleUrl =
+      'https://maps.apple.com/?sll=${_getCoordinates(campus)['latitude']},${_getCoordinates(campus)['longitude']}';
+    if (await canLaunch("comgooglemaps://")) {
+      print('launching com googleUrl');
+      await launch(googleUrl);
+    } else if (await canLaunch(appleUrl)) {
+      print('launching apple url');
+      await launch(appleUrl);
+    } else {
+      throw 'Could not launch url';
+    }
   }
-}
 
-_launchMaps_Pasing() async {
-  String googleUrl =
-    'comgooglemaps://?center=${pasingLocation['latitude']},${pasingLocation['longitude']}';
-  String appleUrl =
-    'https://maps.apple.com/?sll=${pasingLocation['latitude']},${pasingLocation['longitude']}';
-  if (await canLaunch("comgooglemaps://")) {
-    print('launching com googleUrl');
-    await launch(googleUrl);
-  } else if (await canLaunch(appleUrl)) {
-    print('launching apple url');
-    await launch(appleUrl);
-  } else {
-    throw 'Could not launch url';
+  Widget buildMapItem(String resource, String campus) {
+    return new GestureDetector(
+        onTap: (){
+          _launchMaps(campus);
+        },
+    child: new Container(
+      decoration: new BoxDecoration(
+          image: new DecorationImage(
+            image: new AssetImage(resource),
+            fit: BoxFit.cover,
+          ),
+          //image: new Image.asset(resource, fit: BoxFit.cover),
+          border: new Border(
+              top: new BorderSide(color: Colors.grey, width: 1.0),
+              right: new BorderSide(color: Colors.grey, width: 1.0),
+              bottom: new BorderSide(color: Colors.grey,  width: 1.0),
+              left: new BorderSide(color: Colors.grey, width: 1.0)),
+      ),
+      margin: new EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
+      height: 125.0,
+      alignment: Alignment.center,
+      child: new Text(campus, style: CiEStyle.getMapsTitleStyle()),
+    ),
+    );
   }
-}
-
-_launchMaps_Karl() async {
-  String googleUrl =
-    'comgooglemaps://?center=${karlLocation['latitude']},${karlLocation['longitude']}';
-  String appleUrl =
-    'https://maps.apple.com/?sll=${karlLocation['latitude']},${karlLocation['longitude']}';
-  if (await canLaunch("comgooglemaps://")) {
-    print('launching com googleUrl');
-    await launch(googleUrl);
-  } else if (await canLaunch(appleUrl)) {
-    print('launching apple url');
-    await launch(appleUrl);
-  } else {
-    throw 'Could not launch url';
-  }
-}
 
   @override
   Widget build(BuildContext context) {
-    _buildUrl('k');
-    _buildUrl('l');
-    _buildUrl('p');
-    return new Scaffold(
-        body: new Container(
-            color: Colors.white30,
-            alignment: Alignment.topCenter,
-            margin: const EdgeInsets.all(10.0),
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    new RaisedButton(
-                      onPressed: _launchMaps_Loth,
-                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                      child: new Text('Lothstrasse',
-                          style: new TextStyle(color: Colors.white)),
-                      color: const Color.fromRGBO(235, 87, 87, 1.0),
-                    ),
-                    new RaisedButton(
-                      onPressed: _launchMaps_Pasing,
-                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                      child: new Text('Pasing',
-                          style: new TextStyle(color: Colors.white)),
-                      color: const Color.fromRGBO(235, 87, 87, 1.0),
-                    )
-                  ],
-                ),
-                new Container(
-                  padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
-                  child: new GridView.count(
-                      primary: true,
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.0,
-                      shrinkWrap: true,
-                      mainAxisSpacing: 20.0,
-                      crossAxisSpacing: 20.0,
-                      children: <String>[
-                        RESOURCE_LOTHSTRASSE,
-                        RESOURCE_PASING,
-                        RESOURCE_KARLSTRASSE,
-                      ].map((String resource) {
-                        return new GridTile(
-                          child: new Image.asset(resource, fit: BoxFit.cover),
-                        );
-                      }).toList()),
-                ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new RaisedButton(
-                      onPressed: _launchMaps_Karl,
-                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                      child: new Text('Karlstrasse',
-                          style: new TextStyle(color: Colors.white)),
-                      color: const Color.fromRGBO(235, 87, 87, 1.0),
-                    ),
-                  ],
-                ),
-              ],
-            )));
+    _buildUri(StaticVariables.KARLSTRASSE);
+    _buildUri(StaticVariables.LOTHSTRASSE);
+    _buildUri(StaticVariables.PASING);
+    return new ListView(
+      children: <Widget>[
+        new Container(
+          padding: new EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
+          child: new Text(StaticVariables.message, textAlign: TextAlign.left, style: CiEStyle.getMapsDescriptionStyle()),
+      ),
+        buildMapItem(RESOURCE_LOTHSTRASSE, StaticVariables.LOTHSTRASSE),
+        buildMapItem(RESOURCE_PASING, StaticVariables.PASING),
+        buildMapItem(RESOURCE_KARLSTRASSE, StaticVariables.KARLSTRASSE),
+    ],
+    );
   }
 }
 

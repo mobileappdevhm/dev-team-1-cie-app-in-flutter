@@ -1,4 +1,5 @@
 import 'package:cie_team1/model/login/loginData.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -90,7 +91,7 @@ class LoginFormState extends State<LoginForm> {
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new TextFormField(
                     decoration: const InputDecoration(
-                      fillColor: Color.fromRGBO(224, 224, 224, 1.0),
+                      fillColor: CiEColor.lightGray,
                       filled: true,
                       border: InputBorder.none,
                       labelText: 'E-mail',
@@ -106,7 +107,7 @@ class LoginFormState extends State<LoginForm> {
                   new TextFormField(
                     key: _passwordFieldKey,
                     decoration: const InputDecoration(
-                      fillColor: Color.fromRGBO(224, 224, 224, 1.0),
+                      fillColor: CiEColor.lightGray,
                       filled: true,
                       border: InputBorder.none,
                       labelText: 'Password',

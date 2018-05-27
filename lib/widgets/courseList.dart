@@ -1,5 +1,6 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
+import 'package:cie_team1/generic/genericBorderContainer.dart';
 import 'package:flutter/material.dart';
 
 class CourseList extends StatefulWidget {
@@ -28,7 +29,14 @@ class CourseListState extends State<CourseList> {
     List<Widget> widgets = new List<Widget>();
 
     for (int i=0; i< courseListPresenter.getCourses().length; i++) {
-      widgets.add(new CourseListItem(courseListPresenter, i, shouldFilter));
+      if (shouldFilter == false || courseListPresenter.getFavourite(i)) {
+        widgets.add(
+            GenericBorderContainer.buildGenericBorderedElement(
+                new CourseListItem(courseListPresenter, i, shouldFilter)
+            )
+        );
+        widgets.add(GenericBorderContainer.buildGenericBlurredLine());
+      }
     }
     if (shouldFilter == true) {
       widgets.add(
@@ -51,5 +59,5 @@ class CourseListState extends State<CourseList> {
   }
 
   // TODO: Push Data for TimeTable Here
-  void voidFunction() { }
+  void voidFunction() {}
 }

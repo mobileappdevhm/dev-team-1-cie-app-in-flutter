@@ -17,3 +17,9 @@ class Course {
       this.hoursPerWeak, this.ects, this.professorEmail, this.professorName,
       this.availableForStudent, this.isFavourite, this.availability);
 }
+
+class CourseDefinitions {
+  static const int AVAILABILITY_AVAILABLE = 0;
+  static const int AVAILABILITY_PENDING = 1;
+  static const int AVAILABILITY_UNAVAILABLE = 2;
+}
