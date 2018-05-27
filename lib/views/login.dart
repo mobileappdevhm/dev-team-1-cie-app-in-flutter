@@ -1,6 +1,7 @@
 import 'package:cie_team1/model/login/loginData.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/routes.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
@@ -81,7 +82,7 @@ class LoginFormState extends State<LoginForm> {
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 25.0),
                 children: <Widget>[
-                  new Image.asset('images/hm_logo.png'),
+                  new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new Text(
                     "Courses in English",

@@ -1,4 +1,5 @@
 import 'package:cie_team1/utils/routes.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -8,7 +9,7 @@ class WelcomePage extends StatelessWidget {
       body: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          new Image.asset('images/hm_logo.png'),
+          new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
           new Padding(
             padding: new EdgeInsets.fromLTRB(0.0, 150.0, 0.0, 0.0),
           ),

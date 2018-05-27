@@ -36,14 +36,14 @@ At the moment it's static.
 * (If possible) put a link in the map to open the native Google Maps App => working
 
 ### Screenshots of Version 0.2
-![Better looking Map](misc/cie_map_improved.jpeg)
+![Better looking Map](images/cie_map_improved.jpeg)
 
 ### Screenshots of Version 0.1
 #### Current location  
 
-![Current location](misc/cie_map_current_loc.jpeg)
+![Current location](images/cie_map_current_loc.jpeg)
 
 #### HM Lothstrasse location
-![HM Lothstrasse location](misc/cie_map_lothstrasse.jpeg)
+![HM Lothstrasse location](images/cie_map_lothstrasse.jpeg)
 
 The tutorial I used to code this can be found [here](https://ericwindmill.com/zero-to-one-with-flutter-google-maps-app-pt-1/)
