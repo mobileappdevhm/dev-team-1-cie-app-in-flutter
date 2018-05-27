@@ -1,11 +1,70 @@
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/views/maps.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
-  //not working because exception if page is building.
-/*
+
+  group('location test', (){
+
+    MapPage sut;
+
+    setUp((){
+      sut = new MapPage();
+    });
+
+
+    test('lothstrasse', (){
+
+      expect(sut.createState().lothLocation.length,2);
+
+    });
+
+    test('lothcord', (){
+
+      expect(sut.createState().lothLocation.containsKey("latitude"),true);
+      expect(sut.createState().lothLocation.entries.elementAt(0).value,"48.1549123");
+      expect(sut.createState().lothLocation.containsKey("longitude"),true);
+      expect(sut.createState().lothLocation.entries.elementAt(1).value,'11.5535108');
+
+    });
+
+    test('karlstrasse', (){
+
+      expect(sut.createState().karlLocation.length,2);
+
+    });
+
+    test('karlcord', (){
+
+      expect(sut.createState().karlLocation.containsKey("latitude"),true);
+      expect(sut.createState().karlLocation.entries.elementAt(0).value,'48.1428538');
+      expect(sut.createState().karlLocation.containsKey("longitude"),true);
+      expect(sut.createState().karlLocation.entries.elementAt(1).value,'11.568344');
+
+    });
+
+
+    test('pasing', (){
+
+      expect(sut.createState().pasingLocation.length,2);
+
+    });
+
+    test('pasingcord', (){
+
+      expect(sut.createState().pasingLocation.containsKey("latitude"),true);
+      expect(sut.createState().pasingLocation.entries.elementAt(0).value,'48.1415132');
+      expect(sut.createState().pasingLocation.containsKey("longitude"),true);
+      expect(sut.createState().pasingLocation.entries.elementAt(1).value,'11.4507926');
+
+    });
+
+
+
+  });
+
   testWidgets('1 widgetTest for map', (WidgetTester tester) async {
     // Tells the tester to build a UI based on the widget tree passed to it
     await tester.pumpWidget(
@@ -28,18 +87,21 @@ void main() {
     for (Widget widget in listOfWidgets) {
       if (widget is Text) {
         if (counter == 0) {
-          expect(widget.data, 'Lothstrasse');
+          expect(widget.data, StaticVariables.message);
           counter++;
         } else if (counter == 1) {
-          expect(widget.data, 'Pasing');
+          expect(widget.data, StaticVariables.LOTHSTRASSE);
           counter++;
-        } else if (counter == 1) {
-        expect(widget.data, 'Karlstrasse');
+        } else if (counter == 2) {
+          expect(widget.data, StaticVariables.PASING);
+          counter++;
+        } else if (counter == 3) {
+        expect(widget.data, StaticVariables.KARLSTRASSE);
         counter++;
         }
       }
     }
 
   });
-*/
+
 }
