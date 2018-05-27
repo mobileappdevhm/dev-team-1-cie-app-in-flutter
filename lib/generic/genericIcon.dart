@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 
 class GenericIcon {
   static const int memStorageAvailable = 0xe86c;
@@ -13,15 +14,15 @@ class GenericIcon {
     switch (availability) {
       case CourseDefinitions.AVAILABILITY_AVAILABLE:
         iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
-        color = const Color.fromRGBO(111, 207, 151, 1.0);
+        color = CiEColor.green;
         break;
       case CourseDefinitions.AVAILABILITY_PENDING:
         iconData = const IconData(memStoragePending, fontFamily: fontFamily);
-        color = const Color.fromRGBO(242, 201, 76, 1.0);
+        color = CiEColor.yellow;
     break;
       case CourseDefinitions.AVAILABILITY_UNAVAILABLE:
         iconData = const IconData(memStorageUnavailable, fontFamily: fontFamily);
-        color = const Color.fromRGBO(235, 87, 87, 1.0);
+        color = CiEColor.red;
         break;
     }
     return new Icon(iconData,
