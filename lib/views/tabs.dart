@@ -1,8 +1,8 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/views/settings.dart';
-import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/views/maps.dart';
+import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +17,13 @@ class TabsPageState extends State<TabsPage> {
   CourseListPresenter courseListPresenter;
   var _appTitle = '';
 
-  //TODO enable possibility to change default tab
-  int _tab = 0;
+  int _tab = 2; //change this to the default tab page value
   bool _shouldFilter = false;
 
   @override
   void initState() {
     super.initState();
-    _tabController = new PageController();
+    _tabController = new PageController(initialPage: _tab);
     courseListPresenter = new CourseListPresenter();
     this._appTitle = TabItems[_tab].title;
   }
@@ -39,39 +38,40 @@ class TabsPageState extends State<TabsPage> {
   Widget build(BuildContext context) {
     CourseList courseList = new CourseList(courseListPresenter, _shouldFilter);
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text(
-            _appTitle,
-            style: CiEStyle.getAppBarTitleStyle(context),
-          ),
-          elevation: CiEStyle.getAppBarElevation(context),
-          backgroundColor: CiEColor.lightGray,
+      appBar: new AppBar(
+        title: new Text(
+          _appTitle,
+          style: CiEStyle.getAppBarTitleStyle(context),
         ),
-        body: new PageView(
-          controller: _tabController,
-          onPageChanged: _onPageChanged,
-          children: <Widget>[
-            courseList, // Behaves as Courses Page
-            //TODO please replace the container with your view
-            new MapPage(),
-            new Container(color: Colors.blue),
-            courseList, // Behaves as Favorites Page
-            new Settings(),
-          ],
-        ),
-        bottomNavigationBar: new BottomNavigationBar(
-          currentIndex: _tab,
-          onTap: _onTap,
-          type: BottomNavigationBarType.fixed,
-          items: TabItems.map((tabItem) {
-            return new BottomNavigationBarItem(
-              title: new Text(
-                tabItem.title,
-              ),
-              icon: new Icon(tabItem.icon),
-            );
-          }).toList(),
-        ));
+        elevation: CiEStyle.getAppBarElevation(context),
+        backgroundColor: CiEColor.lightGray,
+      ),
+      body: new PageView(
+        controller: _tabController,
+        onPageChanged: _onPageChanged,
+        children: <Widget>[
+          courseList, // Behaves as Courses Page
+          //TODO please replace the container with your view
+          new MapPage(),
+          new Container(color: Colors.blue),
+          courseList, // Behaves as Favorites Page
+          new Settings(),
+        ],
+      ),
+      bottomNavigationBar: new BottomNavigationBar(
+        currentIndex: _tab,
+        onTap: _onTap,
+        type: BottomNavigationBarType.fixed,
+        items: TabItems.map((tabItem) {
+          return new BottomNavigationBarItem(
+            title: new Text(
+              tabItem.title,
+            ),
+            icon: new Icon(tabItem.icon),
+          );
+        }).toList(),
+      ),
+    );
   }
 
   void _onTap(int tab) {
@@ -87,9 +87,9 @@ class TabsPageState extends State<TabsPage> {
   }
 
   void _updateCourseListFilter(int tab) {
-    if (tab==0) {
+    if (tab == 0) {
       this._shouldFilter = false;
-    } else if (tab==3) {
+    } else if (tab == 3) {
       this._shouldFilter = true;
     }
   }
@@ -109,4 +109,3 @@ const List<TabItem> TabItems = const <TabItem>[
   const TabItem(title: 'Favorites', icon: Icons.favorite_border),
   const TabItem(title: 'Settings', icon: Icons.settings),
 ];
-
