@@ -4,6 +4,7 @@ import 'package:cie_team1/generic/genericBorderContainer.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/model/course/course.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class CourseList extends StatefulWidget {
@@ -84,7 +85,8 @@ class CourseListState extends State<CourseList> {
     }
 
     for (int i=0; i< courseListPresenter.getCourses().length; i++) {
-      if (shouldFilterByFavorites == false && courseListPresenter.getFaculty(i)==filter || (shouldFilterByFavorites == true && courseListPresenter.getFavourite(i))) {
+      if (shouldFilterByFavorites == false && courseListPresenter.getFaculty(i)==filter
+          || (shouldFilterByFavorites == true && courseListPresenter.getFavourite(i))) {
         if (shouldSearch== false || (courseListPresenter.getTitle(i).contains(searchValue))) {
           widgets.add(
               GenericBorderContainer.buildGenericBorderedElement(
@@ -104,7 +106,7 @@ class CourseListState extends State<CourseList> {
               onPressed: () => voidFunction,
               child: new Container(
                 margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
-                child:new Text("Register Favorited Courses"),
+                child:new Text(StaticVariables.FAVORITES_REGISTRATION_BUTTON),
               ),
           ),
         )
@@ -115,7 +117,9 @@ class CourseListState extends State<CourseList> {
 
   Widget favoriteIcon(int id) {
     return new IconButton(
-      icon: GenericIcon.buildGenericFavoriteIcon(courseListPresenter.getFavourite(id)),
+      icon: GenericIcon.buildGenericFavoriteIcon(
+          courseListPresenter.getFavourite(id)
+      ),
       onPressed: ()=>_toggleFavourite(id),
     );
   }
