@@ -192,5 +192,26 @@ void main(){
   });
 
 
+  group('static stuff', (){
+    
+    test('available', (){
+
+      expect(CourseDefinitions.AVAILABILITY_AVAILABLE,0);
+    });
+
+    test('available', (){
+
+      expect(CourseDefinitions.AVAILABILITY_PENDING,1);
+    });
+
+    test('available', (){
+
+      expect(CourseDefinitions.AVAILABILITY_UNAVAILABLE,2);
+    });
+    
+    
+  });
+
+
 }
 

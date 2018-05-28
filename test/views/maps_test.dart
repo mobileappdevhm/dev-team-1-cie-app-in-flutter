@@ -61,8 +61,22 @@ void main() {
 
     });
 
+    test('current location', (){
+
+      expect(sut.currentLocation,null);
+
+    });
 
 
+
+  });
+
+  group('apikey',(){
+
+    test('apikey',(){
+
+      expect(new MapPage().apiKey,'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us');
+    });
   });
 
   testWidgets('1 widgetTest for map', (WidgetTester tester) async {
