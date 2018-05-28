@@ -54,7 +54,9 @@ void main(){
           false,
           CourseAvailability.AVAILABLE);
 
-      expect(sut.lecturesPerWeak, [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))]);
+      expect(sut.lecturesPerWeak[0].weekday, Weekday.Mon);
+      expect(sut.lecturesPerWeak[0].startDayTime.toString(), new DayTime(10, 00).toString());
+      expect(sut.lecturesPerWeak[0].endDayTime.toString(), new DayTime(11, 30).toString());
     });
     test('4', () {
       final Course sut = new Course(

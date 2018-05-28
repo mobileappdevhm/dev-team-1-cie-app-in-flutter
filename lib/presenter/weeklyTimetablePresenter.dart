@@ -4,11 +4,11 @@ import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 
 
-class TimeTablePresenter {
+class WeeklyTimeTablePresenter {
 
   CurrentUser _currentUser;
 
-  TimeTablePresenter() {
+  WeeklyTimeTablePresenter() {
     UserInjector.configure(Flavor.MOCK);
     _currentUser = new UserInjector().currentUser;
   }
