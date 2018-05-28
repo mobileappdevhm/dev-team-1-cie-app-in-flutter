@@ -86,7 +86,7 @@ void main(){
           false,
           5);
 
-      expect(sut.hoursPerWeak, 2);
+      expect(sut.hoursPerWeek, 2);
     });
     test('6', () {
       final Course sut = new Course(

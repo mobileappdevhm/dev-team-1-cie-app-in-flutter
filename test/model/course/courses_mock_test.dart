@@ -8,20 +8,15 @@ void main() {
 
   CoursesMock sut;
   List<String> courses;
+  List<String> validDepartments;
 
   setUp((){
     sut = new CoursesMock();
-    courses = [
-    "Title of Course 1",
-    "Title of Course 2",
-    "Title of Course 3",
-    "Title of Course 4",
-    "Title of Course 5",
-    "Title of Course 6",
-    "Title of Course 7",
-    "Title of Course 8",
-    "Title of Course 9"
-    ];
+    courses = new List<String>();
+    for (int i=1; i<=100; i++) {
+      courses.add("Title of Course " + i.toString());
+    }
+    validDepartments = CourseDefinitions.DEPARTMENTS;
   });
 
   test('1 name', () {
@@ -40,7 +35,7 @@ void main() {
     final Iterator<Course> itera = sut.getCourses().iterator;
 
     while(itera.moveNext()) {
-      expect(itera.current.faculty, "07");
+      expect(validDepartments.contains(itera.current.faculty), true);
     }
   });
 
