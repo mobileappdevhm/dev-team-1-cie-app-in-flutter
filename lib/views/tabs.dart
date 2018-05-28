@@ -1,9 +1,11 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/presenter/timetablePresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/widgets/courseList.dart';
+import 'package:cie_team1/widgets/timeTable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,7 @@ class TabsPage extends StatefulWidget {
 class TabsPageState extends State<TabsPage> {
   PageController _tabController;
   CourseListPresenter courseListPresenter;
+  TimeTablePresenter timeTablePresenter;
   var _appTitle = '';
 
   int _tab = 2; //change this to the default tab page value
@@ -25,6 +28,7 @@ class TabsPageState extends State<TabsPage> {
     super.initState();
     _tabController = new PageController(initialPage: _tab);
     courseListPresenter = new CourseListPresenter();
+    timeTablePresenter = new TimeTablePresenter();
     this._appTitle = TabItems[_tab].title;
   }
 
@@ -37,6 +41,7 @@ class TabsPageState extends State<TabsPage> {
   @override
   Widget build(BuildContext context) {
     CourseList courseList = new CourseList(courseListPresenter, _shouldFilter);
+    TimeTable timeTable = new TimeTable(timeTablePresenter);
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
@@ -51,9 +56,8 @@ class TabsPageState extends State<TabsPage> {
         onPageChanged: _onPageChanged,
         children: <Widget>[
           courseList, // Behaves as Courses Page
-          //TODO please replace the container with your view
           new MapPage(),
-          new Container(color: Colors.blue),
+          timeTable,
           courseList, // Behaves as Favorites Page
           new Settings(),
         ],
