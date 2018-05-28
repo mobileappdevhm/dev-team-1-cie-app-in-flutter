@@ -20,11 +20,11 @@ class GenericIcon {
         color = CiEColor.green;
         break;
       case CourseAvailability.PENDING:
-        iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
+        iconData = const IconData(memStoragePending, fontFamily: fontFamily);
         color = CiEColor.yellow;
         break;
       case CourseAvailability.UNAVAILABLE:
-        iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
+        iconData = const IconData(memStorageUnavailable, fontFamily: fontFamily);
         color = CiEColor.red;
         break;
     }
