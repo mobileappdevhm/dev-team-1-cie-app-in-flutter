@@ -2,6 +2,7 @@ import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 
 class CurrentUserMock implements CurrentUser {
   List<Course> prevCourses = [];
@@ -13,7 +14,7 @@ class CurrentUserMock implements CurrentUser {
     prevCourses.add(CoursesMock.staticGetCourses()[1]);
     prevCourses.add(CoursesMock.staticGetCourses()[2]);
 
-    testUser = new User(1, "Jane1","Jane","Doe", "07",  "Local", "assets/profiles/01.png" , currentCourses,prevCourses);
+    testUser = new User(1, "Jane1","Jane","Doe", "07",  "Local", StaticVariables.IMAGE_PATH + "profile.png" , currentCourses,prevCourses);
   }
   @override
   User getCurrentUser() {

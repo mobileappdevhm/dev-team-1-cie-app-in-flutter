@@ -18,9 +18,9 @@ class _MapPageState extends State<MapPage> {
   Uri renderURL;
   static const int defaultWidth = 600;
   static const int defaultHeight = 400;
-  static const String RESOURCE_KARLSTRASSE ='images/karlstrasse.png';
-  static const String RESOURCE_LOTHSTRASSE ='images/lothstrasse.png';
-  static const String RESOURCE_PASING  ='images/pasing.png';
+  static const String RESOURCE_KARLSTRASSE = StaticVariables.IMAGE_PATH + 'karlstrasse.png';
+  static const String RESOURCE_LOTHSTRASSE = StaticVariables.IMAGE_PATH + 'lothstrasse.png';
+  static const String RESOURCE_PASING  = StaticVariables.IMAGE_PATH + 'pasing.png';
   Map<String, String> lothLocation = {
     "latitude": '48.1549123',
     "longitude": '11.5535108'
@@ -68,7 +68,6 @@ class _MapPageState extends State<MapPage> {
       case StaticVariables.PASING:
         return pasingLocation;
       default:
-        // TODO: Decide if it makes sense to default to this
         return lothLocation;
     }
   }
