@@ -22,12 +22,6 @@ class Lecture {
   final DayTime endDayTime;
 
   Lecture(this.weekday, this.startDayTime, this.endDayTime);
-
-  @override
-  String toString() {
-    return weekday.toString() + ":" + startDayTime.toString() + "-" +
-        endDayTime.toString();
-  }
 }
 
 class DayTime {
@@ -35,8 +29,45 @@ class DayTime {
   final int minute;
 
   DayTime(this.hour, this.minute);
+
+  @override
+  String toString() {
+    String hourString = hour.toString();
+    if (hour <= 9)
+      hourString = "0" + hourString;
+
+    String minuteString = minute.toString();
+    if (minute <= 9)
+      minuteString = "0" + minuteString;
+
+    return '$hourString:$minuteString';
+  }
 }
 
 enum Weekday { Mon, Tue, Wed, The, Fri, Sat, Sun }
+
+//This is not beautiful but there are no enums with assigned values since yet
+class WeekdayUtility {
+  static String getWeekdayAsString(Weekday day){
+    switch (day) {
+      case Weekday.Mon:
+        return "Mon";
+      case Weekday.Tue:
+        return "Tue";
+      case Weekday.Wed:
+        return "Wed";
+      case Weekday.The:
+        return "The";
+      case Weekday.Fri:
+        return "Fri";
+      case Weekday.Sat:
+        return "Sat";
+      case Weekday.Sun:
+        return "Sun";
+    }
+    // Not reachable.
+    return "";
+  }
+}
 
 enum CourseAvailability { AVAILABLE, PENDING, UNAVAILABLE }

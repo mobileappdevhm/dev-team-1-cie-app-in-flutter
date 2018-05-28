@@ -10,12 +10,12 @@ abstract class CourseListViewContract {
 class CourseListPresenter {
   //List<Course> courses = [];
   Courses _courses;
-  
+
   CourseListPresenter() {
     CourseInjector.configure(Flavor.MOCK);
     _courses = new CourseInjector().courses;
   }
-  
+
   void toggleFavourite(int id) {
     if (_courses.getCourses()[id].isFavourite) {
       _courses.getCourses()[id].isFavourite = false;
@@ -37,7 +37,9 @@ class CourseListPresenter {
   }
 
   List<Course> getPrevCourses(CurrentUser currentUser) {
-    return currentUser.getCurrentUser().prevCourses;
+    return currentUser
+        .getCurrentUser()
+        .prevCourses;
   }
 
   CourseAvailability getAvailability(int id) {
@@ -60,10 +62,11 @@ class CourseListPresenter {
     List<Lecture> lectures = _courses.getCourses()[id].lecturesPerWeak;
     String result = "";
     for (var i = 0; i < lectures.length; i++) {
-      if (i == 0)
-        result += lectures[i].toString();
-      else
-        result += '\n' + lectures[i].toString();
+      if (i != 0)
+        result += '\n';
+      result += WeekdayUtility.getWeekdayAsString(lectures[i].weekday) + ' ' +
+          lectures[i].startDayTime.toString() + '-' +
+          lectures[i].endDayTime.toString();
     }
 
     return result;

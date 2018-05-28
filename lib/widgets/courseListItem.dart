@@ -35,13 +35,19 @@ class CourseListItemState extends State<CourseListItem> {
         style: CiEStyle.getCoursesTitleStyle(),),
       subtitle: new Row(
         children: <Widget>[
-          new Padding (
-            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-            child: new Text("FK " + courseListPresenter.getFaculty(id),
-              style: CiEStyle.getCoursesListFacultyStyle(),),
+          new Container(
+            child: new Padding (
+              padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+              child: new Text("FK " + courseListPresenter.getFaculty(id),
+                style: CiEStyle.getCoursesListFacultyStyle(),
+                textAlign: TextAlign.start,
+              ),
+            ),
           ),
           new Text("Time: " + courseListPresenter.getLectureTimesBeautiful(id),
-            style: CiEStyle.getCoursesListTimeStyle(),),
+            style: CiEStyle.getCoursesListTimeStyle(),
+            textAlign: TextAlign.right,
+          ),
         ],
       ),
       trailing: new IconButton(
