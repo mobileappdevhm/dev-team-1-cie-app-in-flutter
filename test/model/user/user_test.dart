@@ -1,0 +1,77 @@
+import 'package:cie_team1/model/course/course.dart';
+import 'package:cie_team1/model/user/user.dart';
+import 'package:test/test.dart';
+
+@Timeout(const Duration(seconds: 10))
+
+void main(){
+
+  group("simpleUserTest", ()
+  {
+    User sut;
+    List<Course> courses;
+
+    setUp(() {
+      courses = [new Course(
+          "Blaba",
+          "7",
+          "2-3",
+          "boring",
+          2,
+          2,
+          "example@hm.edu",
+          "Max Mustermann",
+          1,
+          false,
+          5)
+      ];
+
+      sut = new User(
+          42,
+          'Max42',
+          'Max',
+          'Mustermann',
+          '7',
+          'sleeping',
+          'C:42',
+          courses,
+          courses);
+    });
+
+    test('1', () {
+      expect(sut.id, 42);
+    });
+
+    test('2', () {
+      expect(sut.currentCourses, courses);
+    });
+
+    test('2', () {
+      expect(sut.department, '7');
+    });
+
+    test('3', () {
+      expect(sut.firstName, 'Max');
+    });
+
+    test('4', () {
+      expect(sut.lastName, 'Mustermann');
+    });
+
+    test('5', () {
+      expect(sut.prevCourses, courses);
+    });
+
+    test('6', () {
+      expect(sut.status, 'sleeping');
+    });
+
+    test('7', () {
+      expect(sut.username, 'Max42');
+    });
+
+
+
+  });
+
+}
