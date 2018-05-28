@@ -6,7 +6,7 @@ import 'package:cie_team1/widgets/courseList.dart';
 
 void main() {
 
-  // Expected widget within created widgets
+  /*// Expected widget within created widgets
   final List<String> expectedTexts = [
     "Title of Course 1" ,
     "FK 07" ,
@@ -46,7 +46,7 @@ void main() {
           return new MaterialApp(
             home: new Material(
               child: new Center(
-                child: new CourseList(new CourseListPresenter(), false)
+                  child: new CourseList(new CourseListPresenter(), false)
               ),
             ),
           );
@@ -73,5 +73,5 @@ void checkIfTextsCreatedCorrectly(Iterable<Widget> listOfWidgets, List<String> e
       expect(widget.data, expectedTexts[textWidgetPosition]);
       textWidgetPosition++;
     }
-  }
+  }*/
 }

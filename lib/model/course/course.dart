@@ -25,7 +25,8 @@ class Lecture {
 
   @override
   String toString() {
-    return weekday.toString() + ":" + startDayTime.toString() + "-" + endDayTime.toString();
+    return weekday.toString() + ":" + startDayTime.toString() + "-" +
+        endDayTime.toString();
   }
 }
 
@@ -36,6 +37,6 @@ class DayTime {
   DayTime(this.hour, this.minute);
 }
 
-enum Weekday {Mon, Tue, Wed, The, Fri, Sat, Sun}
+enum Weekday { Mon, Tue, Wed, The, Fri, Sat, Sun }
 
-enum CourseAvailability {AVAILABLE, PENDING, UNAVAILABLE}
+enum CourseAvailability { AVAILABLE, PENDING, UNAVAILABLE }

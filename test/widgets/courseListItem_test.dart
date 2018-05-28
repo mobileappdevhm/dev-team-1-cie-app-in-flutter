@@ -5,8 +5,7 @@ import 'package:cie_team1/widgets/courseList.dart';
 
 
 void main() {
-/*
-  testWidgets('1 widgetTest', (WidgetTester tester) async {
+/*  testWidgets('1 widgetTest', (WidgetTester tester) async {
 
     // You can use keys to locate the widget you need to test
     var sliderKey = new UniqueKey();
@@ -32,7 +31,6 @@ void main() {
     // Taps on the widget found by key
     await tester.tap(find.byKey(sliderKey));
 
-  });
+  });*/
 
-*/
 }
