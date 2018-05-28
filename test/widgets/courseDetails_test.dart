@@ -31,7 +31,7 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (counter == 0) {
-            expect(widget.data, 'Course Details');
+            expect(widget.data, 'Title of course');
             counter++;
           } else if (counter == 1) {
             expect(widget.data, 'FK 07');
