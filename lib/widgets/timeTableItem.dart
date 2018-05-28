@@ -1,10 +1,10 @@
-import 'package:cie_team1/presenter/weeklyTimetablePresenter.dart';
+import 'package:cie_team1/presenter/timeTablePresenter.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
 
 class TimeTableItem extends StatefulWidget {
 
-  final WeeklyTimeTablePresenter timeTablePresenter;
+  final TimeTablePresenter timeTablePresenter;
   final int id;
 
   TimeTableItem.ScheduleItem(this.timeTablePresenter, this.id);
@@ -17,7 +17,7 @@ class TimeTableItem extends StatefulWidget {
 
 class TimeTableItemState extends State<TimeTableItem> {
   final int id;
-  final WeeklyTimeTablePresenter timeTablePresenter;
+  final TimeTablePresenter timeTablePresenter;
 
   TimeTableItemState(this.timeTablePresenter, this.id);
 

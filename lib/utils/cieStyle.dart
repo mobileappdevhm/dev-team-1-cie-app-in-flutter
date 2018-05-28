@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 
 class CiEStyle {
+  static TextStyle getTimeTableSectionHeadingStyle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 18.0,
+    );
+  }
+
   static TextStyle getCoursesListFacultyStyle() {
     return new TextStyle(
       color: CiEColor.turquoise,

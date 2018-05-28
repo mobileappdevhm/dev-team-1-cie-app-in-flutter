@@ -1,5 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:cie_team1/presenter/weeklyTimetablePresenter.dart';
+import 'package:cie_team1/presenter/timeTableImplementations/weeklyTimetablePresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/views/maps.dart';

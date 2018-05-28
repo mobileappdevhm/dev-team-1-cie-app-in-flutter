@@ -3,12 +3,10 @@ import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 
-
-class WeeklyTimeTablePresenter {
-
+abstract class TimeTablePresenter {
   CurrentUser _currentUser;
 
-  WeeklyTimeTablePresenter() {
+  TimeTablePresenter() {
     UserInjector.configure(Flavor.MOCK);
     _currentUser = new UserInjector().currentUser;
   }
@@ -17,8 +15,7 @@ class WeeklyTimeTablePresenter {
     return _currentUser.getCurrentUser();
   }
 
-
-  List<Course> getCurrentCourses() {
+  List<Course> getCourses() {
     return _currentUser
         .getCurrentUser()
         .currentCourses;
@@ -36,18 +33,9 @@ class WeeklyTimeTablePresenter {
         .currentCourses[id].ects;
   }
 
-
   String getFaculty(int id) {
     return _currentUser
         .getCurrentUser()
         .currentCourses[id].faculty.toString();
   }
-
-
-  //List<String> days = ["Mo","Di","Mi","Do","Fr","Sa"];
-
-  List<Course> getCoursesByDay(String day) {
-    return null;
-  }
-
 }

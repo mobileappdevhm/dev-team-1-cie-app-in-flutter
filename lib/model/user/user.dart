@@ -12,5 +12,4 @@ class User {
   List<Course> prevCourses;
 
   User(this.id, this.username, this.firstName, this.lastName, this.department, this.status, this.profileDir,this.currentCourses, this.prevCourses);
-
 }

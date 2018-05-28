@@ -14,6 +14,11 @@ class Course {
   Course(this.name, this.faculty, this.lecturesPerWeak, this.description,
       this.hoursPerWeak, this.ects, this.professorEmail, this.professorName,
       this.availableForStudent, this.isFavourite, this.availability);
+
+  bool occursOnDay(Weekday weekDay) {
+    //Is there a lecture on searched day
+    return lecturesPerWeak.any((lecture) => lecture.weekday == weekDay);
+  }
 }
 
 class Lecture {
