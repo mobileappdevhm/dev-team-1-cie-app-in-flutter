@@ -3,6 +3,7 @@ import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:cie_team1/generic/genericBorderContainer.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
@@ -61,11 +62,12 @@ class CourseListState extends State<CourseList> {
             )
           ),
           new Container(
-            padding: pad,
-            child: new RaisedButton(
-                color: CiEColor.red,
-                child: new Icon(Icons.search),
-                onPressed: toggleSearch),
+            padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
+            child: new IconButton(
+                color: CiEColor.mediumGray,
+                icon: new Icon(Icons.search),
+                onPressed: toggleSearch
+                ),
           )
         ])
       );
@@ -73,10 +75,15 @@ class CourseListState extends State<CourseList> {
       if (shouldSearch) {
         widgets.add(
           new Container(
+            padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
             alignment: Alignment.center,
             child: new TextField(
               controller: c1,
-              decoration: new InputDecoration(hintText: "Search by Course Name"),
+              decoration: const InputDecoration(
+                hintText: "Search by Course Name",
+                contentPadding: const EdgeInsets.all(10.0),
+                border: OutlineInputBorder(),
+                ),
               onChanged: (String val)=>updateSearch(val),
             ),
           )
@@ -102,11 +109,13 @@ class CourseListState extends State<CourseList> {
         new Container(
           margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
           child: new RaisedButton(
-              color: Colors.red,
+              color: CiEColor.red,
+              shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
               onPressed: () => voidFunction,
               child: new Container(
                 margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
-                child:new Text(StaticVariables.FAVORITES_REGISTRATION_BUTTON),
+                child:new Text(StaticVariables.FAVORITES_REGISTRATION_BUTTON,
+                style: new TextStyle(color: Colors.white)),
               ),
           ),
         )

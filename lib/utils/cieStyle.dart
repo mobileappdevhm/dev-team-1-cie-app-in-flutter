@@ -11,8 +11,9 @@ class CiEStyle {
 
   static TextStyle getCoursesListTimeStyle() {
     return new TextStyle(
-      fontWeight: FontWeight.bold,
-      color: CiEColor.gray,
+      //fontWeight: FontWeight.bold,
+      color: CiEColor.mediumGray,
+      fontSize: 11.0,
     );
   }
 
@@ -39,7 +40,7 @@ class CiEStyle {
   }
 
   static double getCoursesListIconSize() {
-    return 40.0;
+    return 30.0;
   }
 
   static TextStyle getAppBarTitleStyle(BuildContext context){
