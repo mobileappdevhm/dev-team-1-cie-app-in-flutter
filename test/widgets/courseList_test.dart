@@ -17,7 +17,7 @@ void main() {
     for (int i=1; i< 100; i++) {
       expectedTexts.add("Department #"+CoursesMock.generateMockDepartment(i));
       expectedTexts.add(CoursesMock.generateMockCourseTitle(i));
-      expectedTexts.add("FK "+CoursesMock.generateMockDepartment(i));
+      expectedTexts.add("DP "+CoursesMock.generateMockDepartment(i));
       expectedTexts.add("Time: " + CoursesMock.generateMockTime(i));
     }
     favoritesPageAnomalies.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON);
