@@ -3,39 +3,19 @@ import 'package:cie_team1/model/user/user.dart';
 import 'package:test/test.dart';
 
 @Timeout(const Duration(seconds: 10))
-
-void main(){
-
-  group("simpleUserTest", ()
-  {
+void main() {
+  group("simpleUserTest", () {
     User sut;
     List<Course> courses;
 
     setUp(() {
-      courses = [new Course(
-          "Blaba",
-          "7",
-          "2-3",
-          "boring",
-          2,
-          2,
-          "example@hm.edu",
-          "Max Mustermann",
-          1,
-          false,
-          5)
+      courses = [
+        new Course("Blaba", "7", "2-3", "boring", 2, 2, "example@hm.edu",
+            "Max Mustermann", 1, false, 5)
       ];
 
       sut = new User(
-          42,
-          'Max42',
-          'Max',
-          'Mustermann',
-          '7',
-          'sleeping',
-          'C:42',
-          courses,
-          courses);
+          42, 'Max42', 'Max', 'Mustermann', '7', 'sleeping', courses, courses);
     });
 
     test('1', () {
@@ -69,9 +49,5 @@ void main(){
     test('7', () {
       expect(sut.username, 'Max42');
     });
-
-
-
   });
-
 }
