@@ -24,9 +24,9 @@ void main() {
     test('lothcord', (){
 
       expect(sut.createState().lothLocation.containsKey("latitude"),true);
-      expect(sut.createState().lothLocation.entries.elementAt(0).value,"48.1549123");
+      expect(sut.createState().lothLocation.entries.elementAt(0).value,"48.1542593");
       expect(sut.createState().lothLocation.containsKey("longitude"),true);
-      expect(sut.createState().lothLocation.entries.elementAt(1).value,'11.5535108');
+      expect(sut.createState().lothLocation.entries.elementAt(1).value,'11.5539808');
 
     });
 
@@ -39,9 +39,9 @@ void main() {
     test('karlcord', (){
 
       expect(sut.createState().karlLocation.containsKey("latitude"),true);
-      expect(sut.createState().karlLocation.entries.elementAt(0).value,'48.1428538');
+      expect(sut.createState().karlLocation.entries.elementAt(0).value,'48.1429336');
       expect(sut.createState().karlLocation.containsKey("longitude"),true);
-      expect(sut.createState().karlLocation.entries.elementAt(1).value,'11.568344');
+      expect(sut.createState().karlLocation.entries.elementAt(1).value,'11.5677428');
 
     });
 
@@ -55,19 +55,11 @@ void main() {
     test('pasingcord', (){
 
       expect(sut.createState().pasingLocation.containsKey("latitude"),true);
-      expect(sut.createState().pasingLocation.entries.elementAt(0).value,'48.1415132');
+      expect(sut.createState().pasingLocation.entries.elementAt(0).value,'48.1415925');
       expect(sut.createState().pasingLocation.containsKey("longitude"),true);
-      expect(sut.createState().pasingLocation.entries.elementAt(1).value,'11.4507926');
+      expect(sut.createState().pasingLocation.entries.elementAt(1).value,'11.4501612');
 
     });
-
-    test('current location', (){
-
-      expect(sut.currentLocation,null);
-
-    });
-
-
 
   });
 
@@ -101,18 +93,15 @@ void main() {
     for (Widget widget in listOfWidgets) {
       if (widget is Text) {
         if (counter == 0) {
-          expect(widget.data, StaticVariables.message);
-          counter++;
-        } else if (counter == 1) {
           expect(widget.data, StaticVariables.LOTHSTRASSE);
           counter++;
         } else if (counter == 2) {
           expect(widget.data, StaticVariables.PASING);
           counter++;
-        } else if (counter == 3) {
-        expect(widget.data, StaticVariables.KARLSTRASSE);
-        counter++;
-        }
+        } else if (counter == 4) {
+         expect(widget.data, StaticVariables.KARLSTRASSE);
+          counter++;
+        } 
       }
     }
 

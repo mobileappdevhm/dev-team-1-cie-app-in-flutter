@@ -26,16 +26,17 @@ class CiEStyle {
 
   static TextStyle getMapsDescriptionStyle() {
     return new TextStyle(
-      color: CiEColor.gray,
-      fontSize: 18.0,
+      color: CiEColor.mediumGray,
+      fontSize: 14.0,
     );
   }
 
   static TextStyle getMapsTitleStyle() {
     return new TextStyle(
       color: CiEColor.gray,
-      fontWeight: FontWeight.w900,
-      fontSize: 26.0,
+      
+      letterSpacing: 2.0,
+      fontSize: 25.0,
     );
   }
 
