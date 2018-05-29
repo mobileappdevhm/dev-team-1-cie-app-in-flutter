@@ -44,7 +44,7 @@ class CiEStyle {
 
   static TextStyle getAppBarTitleStyle(BuildContext context){
     return new TextStyle(
-      fontSize: Theme.of(context).platform == TargetPlatform.iOS ? 17.0 : 20.0,
+      fontSize: Theme.of(context).platform == TargetPlatform.iOS ? 20.0 : 20.0,
       color: CiEColor.red,
       letterSpacing: 2.0
     );
