@@ -35,10 +35,6 @@ class CurrentUserPresenter {
     return _currentUser.getCurrentUser().firstName + " " + _currentUser.getCurrentUser().lastName;
   }
 
-  String getCurrentUserProfileDir() {
-    return _currentUser.getCurrentUser().profileDir;
-  }
-
   List<Course> getPrevCourses(){
     return _currentUser.getCurrentUser().prevCourses;
   }
