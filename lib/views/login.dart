@@ -87,15 +87,12 @@ class LoginFormState extends State<LoginForm> {
                   new Padding(padding: const EdgeInsets.only(top: 35.0)),
                   new Text(
                     "Courses in English",
-                    //style: new TextStyle(color: Colors.red, fontSize: 30.0),
                     style: CiEStyle.getAppBarTitleStyle(context),
                     textAlign: TextAlign.center,
                   ),
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new TextFormField(
                     decoration: const InputDecoration(
-                      //fillColor: CiEColor.lightGray,
-                      //filled: true,
                       border: OutlineInputBorder(),
                       labelText: 'E-Mail',
                     ),
@@ -103,15 +100,12 @@ class LoginFormState extends State<LoginForm> {
                     onSaved: (String value) {
                       loginData.email = value;
                     },
-                    //initialValue: Storage.getEmail(),
                     validator: _validateMail,
                   ),
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new TextFormField(
                     key: _passwordFieldKey,
                     decoration: const InputDecoration(
-                      //fillColor: CiEColor.lightGray,
-                      //filled: true,
                       border: OutlineInputBorder(),
                       labelText: 'Password',
                     ),
@@ -119,7 +113,6 @@ class LoginFormState extends State<LoginForm> {
                     onSaved: (String value) {
                       loginData.password = value;
                     },
-                    //initialValue: Storage.getPassword(),
                     validator: _validatePassword,
                   ),
                   new Container(
