@@ -96,11 +96,12 @@ class CourseListState extends State<CourseList> {
           || (shouldFilterByFavorites == true && courseListPresenter.getFavourite(i))) {
         if (shouldSearch== false || (courseListPresenter.getTitle(i).contains(searchValue))) {
           widgets.add(
-              GenericBorderContainer.buildGenericBorderedElement(
+              //GenericBorderContainer.buildGenericBorderedElement(
                   new CourseListItem(courseListPresenter, i, favoriteIcon(i))
-              )
+              //)
           );
-          widgets.add(GenericBorderContainer.buildGenericBlurredLine());
+          //widgets.add(GenericBorderContainer.buildGenericBlurredLine());
+          widgets.add(new Divider());
         }
       }
     }
