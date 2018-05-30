@@ -22,7 +22,7 @@ class CourseListItem extends StatelessWidget {
           children: <Widget>[
             new Padding (
               padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-              child: new Text("FK " + courseListPresenter.getFaculty(id),
+              child: new Text("DP " + courseListPresenter.getFaculty(id),
                 style: CiEStyle.getCoursesListFacultyStyle(),),
             ),
             new Text("Time: " + courseListPresenter.getLectureTime(id),

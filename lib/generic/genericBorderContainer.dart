@@ -7,8 +7,8 @@ class GenericBorderContainer {
         decoration: new BoxDecoration(
           border: new Border(
               bottom: new BorderSide(
-                  color: CiEColor.mediumGray,
-                  width: 2.0)),
+                  color: CiEColor.lightGray,
+                  width: 1.0)),
         ),
         child: child
     );
@@ -16,7 +16,7 @@ class GenericBorderContainer {
 
   static Widget buildGenericBlurredLine() {
     return new Container(
-        height: 1.0,
+        height: 0.5,
         decoration: new BoxDecoration(
           boxShadow: [
             new BoxShadow(

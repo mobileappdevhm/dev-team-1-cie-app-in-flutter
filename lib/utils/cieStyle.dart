@@ -11,8 +11,8 @@ class CiEStyle {
 
   static TextStyle getCoursesListTimeStyle() {
     return new TextStyle(
-      fontWeight: FontWeight.bold,
-      color: CiEColor.gray,
+      color: CiEColor.mediumGray,
+      fontSize: 11.0,
     );
   }
 
@@ -25,26 +25,26 @@ class CiEStyle {
 
   static TextStyle getMapsDescriptionStyle() {
     return new TextStyle(
-      color: CiEColor.gray,
-      fontSize: 18.0,
+      color: CiEColor.mediumGray,
+      fontSize: 14.0,
     );
   }
 
   static TextStyle getMapsTitleStyle() {
     return new TextStyle(
       color: CiEColor.gray,
-      fontWeight: FontWeight.w900,
-      fontSize: 26.0,
+      letterSpacing: 2.0,
+      fontSize: 25.0,
     );
   }
 
   static double getCoursesListIconSize() {
-    return 40.0;
+    return 30.0;
   }
 
   static TextStyle getAppBarTitleStyle(BuildContext context){
     return new TextStyle(
-      fontSize: Theme.of(context).platform == TargetPlatform.iOS ? 17.0 : 20.0,
+      fontSize: 20.0,
       color: CiEColor.red,
       letterSpacing: 2.0
     );
