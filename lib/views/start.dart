@@ -1,7 +1,6 @@
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/widgets/CiEAnimation.dart';
 
@@ -43,7 +42,6 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new AnimatedLogo(animation: animation),
-          //new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
           new Padding(
             padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
           ),

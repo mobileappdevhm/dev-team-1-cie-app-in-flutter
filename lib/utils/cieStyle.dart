@@ -11,7 +11,6 @@ class CiEStyle {
 
   static TextStyle getCoursesListTimeStyle() {
     return new TextStyle(
-      //fontWeight: FontWeight.bold,
       color: CiEColor.mediumGray,
       fontSize: 11.0,
     );
@@ -34,7 +33,6 @@ class CiEStyle {
   static TextStyle getMapsTitleStyle() {
     return new TextStyle(
       color: CiEColor.gray,
-      
       letterSpacing: 2.0,
       fontSize: 25.0,
     );
@@ -46,7 +44,7 @@ class CiEStyle {
 
   static TextStyle getAppBarTitleStyle(BuildContext context){
     return new TextStyle(
-      fontSize: Theme.of(context).platform == TargetPlatform.iOS ? 20.0 : 20.0,
+      fontSize: 20.0,
       color: CiEColor.red,
       letterSpacing: 2.0
     );

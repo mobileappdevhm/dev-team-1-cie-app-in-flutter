@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 
 class AnimatedLogo extends AnimatedWidget {
-  // Make the Tweens static because they don't change.
   static final _opacityTween = new Tween<double>(begin: 0.1, end: 1.0);
   static final _sizeTween = new Tween<double>(begin: 0.0, end: 300.0);
 

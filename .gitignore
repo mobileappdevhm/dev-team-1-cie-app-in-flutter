@@ -3,7 +3,6 @@
 *.iws         // IntelliJ
 .idea/        // IntelliJ
 .DS_Store     // Mac
-.pbxproj // Xcode Mac
 .symlinks //ios
 *.dart.js
 *.info.json      # Produced by the --dump-info flag.
