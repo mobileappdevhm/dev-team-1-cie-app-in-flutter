@@ -55,7 +55,7 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
           new Container(
             padding: const EdgeInsets.all(25.0),
             child: new FlatButton(
-              color: CiEStyle.getLogoutButtonColor(),
+              color: CiEColor.red,
               shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
               onPressed: () => Navigator.pushReplacementNamed(context, Routes.Login),
               child: new Text(

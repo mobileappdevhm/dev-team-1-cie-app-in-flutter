@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/prevCourseList.dart';
@@ -67,7 +68,7 @@ class _SettingsState extends State<Settings> {
                         onPressed: () => _logout(context),
                         shape: new RoundedRectangleBorder(
                             borderRadius: CiEStyle.getButtonBorderRadius()),
-                        color: CiEStyle.getLogoutButtonColor(),
+                        color: CiEColor.red,
                         child: new Text(
                           StaticVariables.LOGOUT_BUTTON,
                           style: CiEStyle.getSettingsLogoutStyle(),
@@ -91,8 +92,7 @@ class _SettingsState extends State<Settings> {
                             ),
                             new Text(
                               " " +
-                                  currentUserPresenter.getCurrentUserStatus()
-                                  ,
+                                  currentUserPresenter.getCurrentUserStatus(),
                               style: CiEStyle.getSettingsInfoStyle(),
                             )
                           ],
@@ -168,12 +168,13 @@ class _SettingsState extends State<Settings> {
                     new Expanded(
                         child: new Text(StaticVariables.TAKEN_COURSES,
                             style: CiEStyle.getSettingsStyle())),
+                    new Icon(Icons.keyboard_arrow_right, )
                   ],
                 ),
               ),
-              new Flexible(
-                child: new PrevCourseList(currentUserPresenter),
-              ),
+//              new Flexible(
+//                child: new PrevCourseList(currentUserPresenter),
+//              ),
             ],
           ),
         ),
