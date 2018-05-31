@@ -17,6 +17,7 @@ class TakenCourses extends StatefulWidget {
 
 class _TakenCoursesState extends State<TakenCourses> {
   static CurrentUserPresenter currentUserPresenter = new CurrentUserPresenter();
+  int credits = currentUserPresenter.getTotalCredits();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,27 @@ class _TakenCoursesState extends State<TakenCourses> {
           backgroundColor: CiEColor.lightGray,
         ),
         body: new Center(
-          child: new PrevCourseList(currentUserPresenter),
+          child: new Column(
+            children: <Widget>[
+              new Row(
+                children: <Widget>[
+                  new Padding(
+                    padding: const EdgeInsets.only(
+                        top: 32.0, bottom: 8.0, left: 16.0),
+                    child: new Text(
+                        StaticVariables.TOTAL_OF +
+                            " " +
+                            credits.toString() +
+                            " " +
+                            StaticVariables.ECTS,
+                        style: CiEStyle.getSettingsStyle()),
+                  )
+                ],
+              ),
+              new Divider(),
+              new Expanded(child: new PrevCourseList(currentUserPresenter))
+            ],
+          ),
         ));
   }
 }
