@@ -7,6 +7,7 @@ import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/prevCourseList.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 
 class Settings extends StatefulWidget {
   Settings({Key key, this.title}) : super(key: key);
@@ -53,7 +54,7 @@ class _SettingsState extends State<Settings> {
                           child: new Row(
                             children: <Widget>[
                               new Text(
-                                'Logged in as ',
+                                StaticVariables.LOGGED_IN_AS,
                                 style: CiEStyle.getSettingsStyle(),
                               ),
                               new Text(
@@ -68,7 +69,7 @@ class _SettingsState extends State<Settings> {
                             borderRadius: CiEStyle.getButtonBorderRadius()),
                         color: CiEStyle.getLogoutButtonColor(),
                         child: new Text(
-                          "Log out",
+                          StaticVariables.LOGOUT_BUTTON,
                           style: CiEStyle.getSettingsLogoutStyle(),
                         ),
                       ),
@@ -85,13 +86,13 @@ class _SettingsState extends State<Settings> {
                         child: new Row(
                           children: <Widget>[
                             new Text(
-                              "Status: ",
+                              StaticVariables.STATUS,
                               style: CiEStyle.getSettingsStyle(),
                             ),
                             new Text(
                               " " +
-                                  currentUserPresenter.getCurrentUserStatus() +
-                                  " student",
+                                  currentUserPresenter.getCurrentUserStatus()
+                                  ,
                               style: CiEStyle.getSettingsInfoStyle(),
                             )
                           ],
@@ -100,7 +101,7 @@ class _SettingsState extends State<Settings> {
                       new Row(
                         children: <Widget>[
                           new Text(
-                            "Department: ",
+                            StaticVariables.DEPARTMENT,
                             style: CiEStyle.getSettingsStyle(),
                           ),
                           new Text(
@@ -122,7 +123,7 @@ class _SettingsState extends State<Settings> {
                           //Todo: Implement deep link
                           new FlatButton(
                             child: new Text(
-                              " Contact International Office",
+                              StaticVariables.CONTACT_OFFICE,
                               style: CiEStyle.getSettingsContactStyle(),
                             ),
                             onPressed: _onContactInternationalOffice,
@@ -137,7 +138,7 @@ class _SettingsState extends State<Settings> {
                 child: new Row(children: <Widget>[
                   new Expanded(
                       child: new Text(
-                    "Courses in English Certificate",
+                    StaticVariables.CIE_CERTIFICATE,
                     style: CiEStyle.getSettingsStyle(),
                   )),
                   new Text("$credits /15", style: CiEStyle.getSettingsStyle()),
@@ -151,7 +152,7 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.only(top: 20.0, bottom: 16.0),
                 child: new Row(children: <Widget>[
                   new Expanded(
-                      child: new Text("International Engineering Certificate",
+                      child: new Text(StaticVariables.IE_CERTIFICATE,
                           style: CiEStyle.getSettingsStyle())),
                   new Text("$engCredits /15",
                       style: CiEStyle.getSettingsStyle()),
@@ -165,7 +166,7 @@ class _SettingsState extends State<Settings> {
                 child: new Row(
                   children: <Widget>[
                     new Expanded(
-                        child: new Text("Taken Courses",
+                        child: new Text(StaticVariables.TAKEN_COURSES,
                             style: CiEStyle.getSettingsStyle())),
                   ],
                 ),
