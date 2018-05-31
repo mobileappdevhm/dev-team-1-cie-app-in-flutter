@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
+import 'package:cie_team1/views/takenCourses.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/widgets/prevCourseList.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
 
 class Settings extends StatefulWidget {
   Settings({Key key, this.title}) : super(key: key);
@@ -91,8 +90,7 @@ class _SettingsState extends State<Settings> {
                               style: CiEStyle.getSettingsStyle(),
                             ),
                             new Text(
-                              " " +
-                                  currentUserPresenter.getCurrentUserStatus(),
+                              " " + currentUserPresenter.getCurrentUserStatus(),
                               style: CiEStyle.getSettingsInfoStyle(),
                             )
                           ],
@@ -114,25 +112,23 @@ class _SettingsState extends State<Settings> {
                     ],
                   )),
               new Container(
-                  padding: const EdgeInsets.only(top: 16.0),
                   child: new Column(
+                children: <Widget>[
+                  new Row(
                     children: <Widget>[
-                      new Row(
-                        children: <Widget>[
-                          new Icon(Icons.mail_outline),
-                          //Todo: Implement deep link
-                          new FlatButton(
-                            child: new Text(
-                              StaticVariables.CONTACT_OFFICE,
-                              style: CiEStyle.getSettingsContactStyle(),
-                            ),
-                            onPressed: _onContactInternationalOffice,
-                          ),
-                        ],
+                      new Icon(Icons.mail_outline),
+                      new FlatButton(
+                        child: new Text(
+                          StaticVariables.CONTACT_OFFICE,
+                          style: CiEStyle.getSettingsContactStyle(),
+                        ),
+                        onPressed: _onContactInternationalOffice,
                       ),
-                      new Divider(),
                     ],
-                  )),
+                  ),
+                  new Divider(),
+                ],
+              )),
               new Container(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                 child: new Row(children: <Widget>[
@@ -161,20 +157,29 @@ class _SettingsState extends State<Settings> {
               ),
               new LinearProgressIndicator(value: engCredits / 15),
               /* This causes overload on horizontal screen */
-              new Padding(
-                padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
-                child: new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        child: new Text(StaticVariables.TAKEN_COURSES,
-                            style: CiEStyle.getSettingsStyle())),
-                    new Icon(Icons.keyboard_arrow_right, )
-                  ],
+
+              new GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new TakenCourses()));
+                },
+                child: new Padding(
+                  padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
+                  child: new Row(
+                    children: <Widget>[
+                      new Expanded(
+                          child: new Text(StaticVariables.TAKEN_COURSES,
+                              style: CiEStyle.getSettingsStyle())),
+                      new Icon(
+                        Icons.keyboard_arrow_right,
+                        color: CiEColor.gray,
+                      )
+                    ],
+                  ),
                 ),
               ),
-//              new Flexible(
-//                child: new PrevCourseList(currentUserPresenter),
-//              ),
             ],
           ),
         ),
