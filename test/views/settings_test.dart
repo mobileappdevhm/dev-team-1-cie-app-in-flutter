@@ -45,7 +45,7 @@ void main() {
             counter++;
           }else if (counter == 4) {
             expect(widget.data, " " +
-                new CurrentUserPresenter().getCurrentUserStatus() + " student");
+                new CurrentUserPresenter().getCurrentUserStatus());
             counter++;
           }else if (counter == 5) {
             expect(widget.data, 'Department: ');
