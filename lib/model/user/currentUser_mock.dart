@@ -14,6 +14,9 @@ class CurrentUserMock implements CurrentUser {
     prevCourses.add(CoursesMock.staticGetCourses()[1]);
     prevCourses.add(CoursesMock.staticGetCourses()[2]);
 
+    currentCourses.add(CoursesMock.staticGetCourses()[0]);
+    currentCourses.add(CoursesMock.staticGetCourses()[1]);
+    currentCourses.add(CoursesMock.staticGetCourses()[2]);
     currentCourses.add(CoursesMock.staticGetCourses()[3]);
     currentCourses.add(CoursesMock.staticGetCourses()[4]);
     currentCourses.add(CoursesMock.staticGetCourses()[5]);
