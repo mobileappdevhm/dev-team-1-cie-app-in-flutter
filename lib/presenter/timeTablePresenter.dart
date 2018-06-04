@@ -41,6 +41,50 @@ abstract class TimeTablePresenter {
         .currentCourses[id].faculty.toString();
   }
 
+  List<Lecture> getLectureTimes(int id) {
+    return _currentUser
+        .getCurrentUser()
+        .currentCourses[id].lecturesPerWeak;
+  }
+
+  String getDayTimeTable(int id) {
+    List<Lecture> lectures = _currentUser
+        .getCurrentUser()
+        .currentCourses[id].lecturesPerWeak;
+    String result = "";
+    for (var i = 0; i < lectures.length; i++) {
+      if (i != 0)
+        result += '\n';
+      result = WeekdayUtility.getWeekdayAsString(lectures[i].weekday);
+    }
+
+    return result;
+  }
+
+  String getTimeTimeTable(int id) {
+    List<Lecture> lectures = _currentUser
+        .getCurrentUser()
+        .currentCourses[id].lecturesPerWeak;
+    String result = "";
+    for (var i = 0; i < lectures.length; i++) {
+      if (i != 0)
+        result += '\n ';
+      result +=
+          lectures[i].startDayTime.toString() + '-' +
+          lectures[i].endDayTime.toString();
+    }
+
+    return result;
+  }
+
+  String getProfessorName(int id){
+    return _currentUser
+        .getCurrentUser()
+        .currentCourses[id].professorName;
+  }
+
+
+
   @override
   List<Widget> getTimeTableItems() {
     List<Widget> result = <Widget>[];

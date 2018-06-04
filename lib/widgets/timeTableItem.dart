@@ -16,6 +16,7 @@ class TimeTableItem extends StatefulWidget {
 }
 
 class TimeTableItemState extends State<TimeTableItem> {
+  Icon availabilityIcon;
   final int id;
   final TimeTablePresenter timeTablePresenter;
 
@@ -24,29 +25,82 @@ class TimeTableItemState extends State<TimeTableItem> {
 
   @override
   Widget build(BuildContext context) {
-    Icon availabilityIcon;
     double iconSize = CiEStyle.getCoursesListIconSize();
 
-      return new ListTile(
-        leading: availabilityIcon,
-        title: new Text(timeTablePresenter.getTitle(id),
-          style: CiEStyle.getCoursesTitleStyle(),),
-        //subtitle: new Row(
-        //  children: <Widget>[
-        //    new Padding (
-        //      padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-        //      child: new Text("FK " + timeTablePresenter.getFaculty(id),
-        //        style: CiEStyle.getCoursesListFacultyStyle(),),
-        //    ),
-        //    new Text(timeTablePresenter.getStartTime(id),
-        //      style: CiEStyle.getCoursesListTimeStyle(),),
-        //    new Text("-" + timeTablePresenter.getEndTime(id),
-        //      style: CiEStyle.getCoursesListTimeStyle(),),
-        //  ],
-        //),
-      );
+    return new ListTile(
+      leading: availabilityIcon,
+      title: new Row (
+          children: <Widget>[
+            new Text(
+              timeTablePresenter.getTitle(id),
+              style: CiEStyle.getCoursesTitleStyle(),
+            ),
+            new Text(
+              " - " + timeTablePresenter.getProfessorName(id),
+              style: CiEStyle.getTimeTableListMediumGray(),
+            )
+          ]
+      ),
+      subtitle:   new Container(
+        child: new Column(
+          children: <Widget>[
+            new Row(
+              children: <Widget>[
+                new Container(
+                  padding: new EdgeInsets.fromLTRB(0.0, 0.0, 100.0, 0.0),
+                  child: new Row(
+                    children: <Widget>[
+                      new Text(
+                        "Location: ",
+                        style: CiEStyle.getTimeTableListMediumGray(),
+                      ),
+                      new Text(
+                        " ...",
+                        style: CiEStyle.getTimeTableListVariable(),
+                      ),
+                    ],
+                  ),
+                ),
+                new Text("Time: ",
+                  style: CiEStyle.getTimeTableListMediumGray(),
+                  textAlign: TextAlign.start,
+                ),new Text(" " + timeTablePresenter.getTimeTimeTable(id),
+                  style: CiEStyle.getTimeTableListVariable(),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+            new Row(
+              children: <Widget>[
+                new Container(
+                  padding: new EdgeInsets.fromLTRB(0.0, 0.0, 117.0, 0.0),
+                  child: new Row(
+                    children: <Widget>[
+                      new Text(
+                        "Day: ",
+                        style: CiEStyle.getTimeTableListMediumGray(),
+                      ),
+                      new Text(
+                        " " + timeTablePresenter.getDayTimeTable(id),
+                        style: CiEStyle.getTimeTableListVariable(),
+                      ),
+                    ],
+                  ),
+                ),
+                new Text("Room: ",
+                  style: CiEStyle.getTimeTableListMediumGray(),
+                  textAlign: TextAlign.start,
+                ),new Text(" ...",
+                  style: CiEStyle.getTimeTableListVariable(),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+
+    );
   }
 }
-
-
 

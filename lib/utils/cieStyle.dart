@@ -126,7 +126,27 @@ class CiEStyle {
   static double getCourseDescriptionIconSize() {
     return 50.0;
   }
+  static TextStyle getTimeTableListMediumGray() {
+    return new TextStyle(
+      color: CiEColor.mediumGray,
+      fontSize: 15.0,
+    );
+  }
+  static TextStyle getTimeTableListVariable() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 15.0,
+      fontWeight: FontWeight.bold,
+    );
+  }
 
+  static TextStyle getTimeTableCourseTitle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
+    );
+  }
 }
 
 
