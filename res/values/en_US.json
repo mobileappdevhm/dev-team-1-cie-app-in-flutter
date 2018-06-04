@@ -1,4 +1,49 @@
 {
-  "hello_world": "Hello world!",
-  "app_title": "CiE"
+  "app_title": "CiE",
+
+  "start_headline": "Courses in English",
+  "start_button_start": "Start",
+
+  "welcome_headline": "Courses in English",
+  "welcome_email_hint": "E-Mail",
+  "welcome_password_hint": "Password",
+  "welcome_button_login": "LOGIN",
+  "welcome_text_noAccount": "Don't have an account?",
+  "welcome_button_loginAsGuest": "Login as Guest",
+  "welcome_text_forgetPassword": "Forgot your password?",
+
+  "tabs_courses": "Courses",
+  "tabs_map": "Map",
+  "tabs_timetable": "Timetable",
+  "tabs_favorites": "Favorites",
+  "tabs_settings": "Settings",
+
+  "courses_title": "Courses",
+  "courses_filter_department": "Department",
+  "courses_search_hint": "Search by Course Name",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "Time",
+
+  "map_title": "Map",
+  "map_campus_lothstrasse": "Lothstrasse Campus",
+  "map_campus_pasing": "Pasing Campus",
+  "map_campus_karlstrasse": "Karlstrasse Campus",
+  "map_openMapDescription": "Click on the map to get directions.",
+
+  "timetable_title": "Timetable",
+
+  "favorites_title": "Favorites",
+  "favorites_button_register": "Register Favorited Courses",
+
+  "settings_title": "Settings",
+  "settings_status_label": "Status:",
+  "settings_status_local": "Local student",
+  "settings_status_exchange": "Exchange student",
+  "settings_department_label": "Department:",
+  "settings_loggedInAs_label": "Logged in as",
+  "settings_button_logout": "Log out",
+  "settings_contactInternationalOffice": "Contact International Office",
+  "settings_cieCertificate": "Courses in English Certificate",
+  "settings_ieCertificate": "International Engineering Certificate",
+  "settings_takenCourses_label": "Taken Courses"
 }
