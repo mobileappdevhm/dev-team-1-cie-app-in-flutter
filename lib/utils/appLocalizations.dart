@@ -16,31 +16,38 @@ class AppLocalizations {
 
   Map<String, dynamic> _sentences;
 
-  Future<bool> load() async {
+  Future myLoadAsset(String path) async {
     String data;
     try {
-      data = await rootBundle
-          .loadString('res/values/${this.locale.languageCode}_${this.locale
-          .countryCode}.json');
-    } catch (Exception) {
-      print('res/values/${this.locale.languageCode}_${this.locale
-          .countryCode}.json could not be found');
-      try {
-        data = await rootBundle
-            .loadString('res/values/${this.locale.languageCode}.json');
-      } catch (Exception) {
-        print('res/values/${this.locale.languageCode}.json could not be found');
-        data = await rootBundle.loadString(
-            'res/values/${this.defaultLocale.languageCode}_${this.defaultLocale
-                .countryCode}.json');
-        this.locale = defaultLocale;
+      data = await rootBundle.loadString(path);
+    } catch (_) {
+      data = null;
+    }
+
+    if(data != null) {
+      print("Load $path");
+      this._sentences = json.decode(data);
+    }
+  }
+
+  Future<bool> load() async {
+    var assetPaths = [
+      '${this.locale.languageCode}_${this.locale.countryCode}',
+      this.locale.languageCode.toString(),
+      '${this.defaultLocale.languageCode}_${this.defaultLocale.countryCode}'
+    ];
+
+    for (var assetPath in assetPaths) {
+      await myLoadAsset('res/values/' + assetPath + '.json');
+      if (_sentences != null) {
+        break;
       }
     }
 
-    this._sentences = json.decode(data);
-
-    print("Load ${locale.languageCode} ${locale.countryCode}");
-
+    if (_sentences == null) {
+      throw "Asset and fallback assets couldn't be loaded";
+    }
+    
     return true;
   }
 
