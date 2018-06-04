@@ -13,7 +13,11 @@ class Course {
 
   Course(this.name, this.faculty, this.lecturesPerWeak, this.description,
       this.hoursPerWeak, this.ects, this.professorEmail, this.professorName,
-      this.availableForStudent, this.isFavourite, this.availability);
+      this.availableForStudent, this.isFavourite, this.availability) {
+    //Set this course as parent of every lectures contained
+    //Required for timetable
+    lecturesPerWeak.forEach((l) => l.course = this);
+  }
 
   bool occursOnDay(Weekday weekDay) {
     //Is there a lecture on searched day
@@ -25,8 +29,16 @@ class Lecture {
   final Weekday weekday;
   final DayTime startDayTime;
   final DayTime endDayTime;
+  Course course;
 
   Lecture(this.weekday, this.startDayTime, this.endDayTime);
+
+  //Return int which helps to get the order of lectures in week correct
+  int sortValue() {
+    // result looks like: whhmm
+    return WeekdayUtility.getWeekdayAsInt(weekday) * 10000 +
+        startDayTime.hour * 100 + startDayTime.minute;
+  }
 }
 
 class DayTime {
@@ -53,7 +65,7 @@ enum Weekday { Mon, Tue, Wed, The, Fri, Sat, Sun }
 
 //This is not beautiful but there are no enums with assigned values since yet
 class WeekdayUtility {
-  static String getWeekdayAsString(Weekday day){
+  static String getWeekdayAsString(Weekday day) {
     switch (day) {
       case Weekday.Mon:
         return "Mon";
@@ -72,6 +84,27 @@ class WeekdayUtility {
     }
     // Not reachable.
     return "";
+  }
+
+  static int getWeekdayAsInt(Weekday day) {
+    switch (day) {
+      case Weekday.Mon:
+        return 1;
+      case Weekday.Tue:
+        return 2;
+      case Weekday.Wed:
+        return 3;
+      case Weekday.The:
+        return 4;
+      case Weekday.Fri:
+        return 5;
+      case Weekday.Sat:
+        return 6;
+      case Weekday.Sun:
+        return 7;
+    }
+    // Not reachable.
+    return 0;
   }
 }
 

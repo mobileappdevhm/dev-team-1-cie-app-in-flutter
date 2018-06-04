@@ -17,79 +17,60 @@ abstract class TimeTablePresenter {
     return _currentUser.getCurrentUser();
   }
 
+  //Get courses of user
   List<Course> getCourses() {
     return _currentUser
         .getCurrentUser()
         .currentCourses;
   }
 
+  //Get every lectures of users courses
+  List<Lecture> getLectures() {
+    List<Lecture> lectures = [];
+    //Add all lectures to lectures list
+    getCourses().forEach((c) =>
+        c.lecturesPerWeak.forEach((l) => lectures.add(l)));
+    return _sortLectures(lectures);
+  }
+
+  //Sort lectures. Monday first
+  List<Lecture> _sortLectures(List<Lecture> lectures) {
+    lectures.sort((a, b) => a.sortValue() - b.sortValue());
+    return lectures;
+  }
+
+  //Todo: We might need to change this. Every time a setter is called every thing is calculated.
   String getTitle(int id) {
-    return _currentUser
-        .getCurrentUser()
-        .currentCourses[id].name;
+    return getLectures()[id].course.name;
   }
 
   int getCredits(int id) {
-    return _currentUser
-        .getCurrentUser()
-        .currentCourses[id].ects;
+    return getLectures()[id].course.ects;
   }
 
   String getFaculty(int id) {
-    return _currentUser
-        .getCurrentUser()
-        .currentCourses[id].faculty.toString();
+    return getLectures()[id].course.faculty;
   }
 
-  List<Lecture> getLectureTimes(int id) {
-    return _currentUser
-        .getCurrentUser()
-        .currentCourses[id].lecturesPerWeak;
+  String getProfessorName(int id) {
+    return getLectures()[id].course.professorName;
   }
 
-  String getDayTimeTable(int id) {
-    List<Lecture> lectures = _currentUser
-        .getCurrentUser()
-        .currentCourses[id].lecturesPerWeak;
-    String result = "";
-    for (var i = 0; i < lectures.length; i++) {
-      if (i != 0)
-        result += '\n';
-      result = WeekdayUtility.getWeekdayAsString(lectures[i].weekday);
-    }
-
-    return result;
+  String getTime(int id) {
+    return getLectures()[id].startDayTime.toString() + "-" +
+        getLectures()[id].endDayTime.toString();
   }
 
-  String getTimeTimeTable(int id) {
-    List<Lecture> lectures = _currentUser
-        .getCurrentUser()
-        .currentCourses[id].lecturesPerWeak;
-    String result = "";
-    for (var i = 0; i < lectures.length; i++) {
-      if (i != 0)
-        result += '\n ';
-      result +=
-          lectures[i].startDayTime.toString() + '-' +
-          lectures[i].endDayTime.toString();
-    }
-
-    return result;
+  String getWeekday(int id) {
+    return WeekdayUtility.getWeekdayAsString(getLectures()[id].weekday);
   }
-
-  String getProfessorName(int id){
-    return _currentUser
-        .getCurrentUser()
-        .currentCourses[id].professorName;
-  }
-
-
 
   @override
   List<Widget> getTimeTableItems() {
     List<Widget> result = <Widget>[];
 
-    for (int i = 0; i < getCourses().length; i++) {
+    //for (int i = 0; i < getCourses().length; i++) {
+    for (int i = 0; i < getLectures().length; i++) {
       result.add(new TimeTableItem.ScheduleItem(this, i));
     }
 

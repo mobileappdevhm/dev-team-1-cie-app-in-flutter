@@ -25,8 +25,6 @@ class TimeTableItemState extends State<TimeTableItem> {
 
   @override
   Widget build(BuildContext context) {
-    double iconSize = CiEStyle.getCoursesListIconSize();
-
     return new ListTile(
       leading: availabilityIcon,
       title: new Row (
@@ -64,7 +62,7 @@ class TimeTableItemState extends State<TimeTableItem> {
                 new Text("Time: ",
                   style: CiEStyle.getTimeTableListMediumGray(),
                   textAlign: TextAlign.start,
-                ),new Text(" " + timeTablePresenter.getTimeTimeTable(id),
+                ),new Text(" " + timeTablePresenter.getTime(id),
                   style: CiEStyle.getTimeTableListVariable(),
                   textAlign: TextAlign.start,
                 ),
@@ -81,7 +79,7 @@ class TimeTableItemState extends State<TimeTableItem> {
                         style: CiEStyle.getTimeTableListMediumGray(),
                       ),
                       new Text(
-                        " " + timeTablePresenter.getDayTimeTable(id),
+                        " " + timeTablePresenter.getWeekday(id),
                         style: CiEStyle.getTimeTableListVariable(),
                       ),
                     ],
