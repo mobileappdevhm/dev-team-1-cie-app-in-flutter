@@ -138,7 +138,7 @@ class LoginFormState extends State<LoginForm> {
                   new Container(
                     padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
                   child: new FlatButton(
-                    color: CiEStyle.getLogoutButtonColor(),
+                    color: CiEColor.red,
                     shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
                     onPressed: _handleSubmitted,
                     child: new Text(
