@@ -77,16 +77,6 @@ class TimeTableEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    new MaterialApp(
-      title: title,
-      theme: new ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.lightBlue[800],
-        accentColor: Colors.cyan[600],
-
-      ),
-    );
-
     return _buildTile(children, weekday);
   }
 }
