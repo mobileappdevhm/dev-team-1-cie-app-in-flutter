@@ -35,6 +35,16 @@ void main() {
     test('6', () {
       expect(sut.getFullName(), new UserInjector().currentUser.getCurrentUser().firstName + " " + new UserInjector().currentUser.getCurrentUser().lastName);
     });
+
+    test('7', () {
+      expect(sut.getPrevCourses().length, new UserInjector().currentUser.getCurrentUser().prevCourses.length);
+    });
+
+    test('8', () {
+      expect(sut.getCurrentCourses().length, new UserInjector().currentUser.getCurrentUser().currentCourses.length);
+    });
+
+
   });
 
   group("facultycheck", (){
