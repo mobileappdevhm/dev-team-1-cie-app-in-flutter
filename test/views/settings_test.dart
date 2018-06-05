@@ -6,11 +6,7 @@ import 'package:flutter/material.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
-
-
-
-  group('settingspagewidget', ()
-  {
+  group('settingspagewidget', () {
     testWidgets('1 widgetTest for settings', (WidgetTester tester) async {
 // Tells the tester to build a UI based on the widget tree passed to it
       await tester.pumpWidget(
@@ -18,9 +14,7 @@ void main() {
           builder: (BuildContext context, StateSetter setState) {
             return new MaterialApp(
               home: new Material(
-                child: new Center(
-                    child: new Settings()
-                ),
+                child: new Center(child: new Settings()),
               ),
             );
           },
@@ -44,49 +38,38 @@ void main() {
           } else if (counter == 3) {
             expect(widget.data, StaticVariables.STATUS + " : ");
             counter++;
-          }else if (counter == 4) {
-            expect(widget.data, " " +
-                new CurrentUserPresenter().getCurrentUserStatus());
+          } else if (counter == 4) {
+            expect(widget.data,
+                " " + new CurrentUserPresenter().getCurrentUserStatus());
             counter++;
-          }else if (counter == 5) {
-            expect(widget.data, StaticVariables.DEPARTMENT+ " : ");
+          } else if (counter == 5) {
+            expect(widget.data, StaticVariables.DEPARTMENT + " : ");
             counter++;
-          }else if (counter == 6) {
-            expect(widget.data, " " +
-                new CurrentUserPresenter().getCurrentUserFaculty());
+          } else if (counter == 6) {
+            expect(widget.data,
+                " " + new CurrentUserPresenter().getCurrentUserFaculty());
             counter++;
-          }else if (counter == 7) {
+          } else if (counter == 7) {
             expect(widget.data, StaticVariables.CONTACT_OFFICE);
             counter++;
-          }else if (counter == 8) {
+          } else if (counter == 8) {
             expect(widget.data, StaticVariables.CIE_CERTIFICATE);
             counter++;
-          }else if (counter == 9) {
-            expect(widget.data.isEmpty,false);
+          } else if (counter == 9) {
+            expect(widget.data.isEmpty, false);
             counter++;
-          }else if (counter == 10) {
+          } else if (counter == 10) {
             expect(widget.data, StaticVariables.IE_CERTIFICATE);
             counter++;
-          }else if (counter == 11) {
-            expect(widget.data.isEmpty,false);
+          } else if (counter == 11) {
+            expect(widget.data.isEmpty, false);
             counter++;
-          }else if (counter == 12) {
+          } else if (counter == 12) {
             expect(widget.data, StaticVariables.TAKEN_COURSES);
             counter++;
           }
-
         }
       }
     });
-
-
-
-
-
   });
-
-
-
 }
-
-

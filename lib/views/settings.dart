@@ -99,7 +99,7 @@ class _SettingsState extends State<Settings> {
                       new Row(
                         children: <Widget>[
                           new Text(
-                            StaticVariables.DEPARTMENT+ " : ",
+                            StaticVariables.DEPARTMENT + " : ",
                             style: CiEStyle.getSettingsStyle(),
                           ),
                           new Text(

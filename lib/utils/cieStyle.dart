@@ -92,6 +92,10 @@ class CiEStyle {
     );
   }
 
+  static Color getLogoutButtonColor(){
+    return CiEColor.red;
+  }
+
   static BorderRadius getButtonBorderRadius(){
     return new BorderRadius.circular(30.0);
   }
