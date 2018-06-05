@@ -1,12 +1,10 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:cie_team1/presenter/timeTableImplementations/weeklyTimetablePresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/views/schedule.dart';
 import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/widgets/courseList.dart';
-import 'package:cie_team1/widgets/timeTable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

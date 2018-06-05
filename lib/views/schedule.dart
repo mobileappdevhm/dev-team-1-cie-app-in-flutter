@@ -1,142 +1,68 @@
-import 'package:cie_team1/presenter/timeTableImplementations/todayTimetablePresenter.dart';
-import 'package:cie_team1/presenter/timeTableImplementations/weeklyTimetablePresenter.dart';
+import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/timeTablePresenter.dart';
-import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-import 'dart:math';
 
 class Schedule extends StatelessWidget {
-
-
-  //@override
-  //void initState() {
-  //  weeklyTimeTablePresenter = new WeeklyTimeTablePresenter();
-  //  todayTimeTablePresenter = new TodayTimeTablePresenter();
-  //}
+  TimeTablePresenter timeTablePresenter = new TimeTablePresenter();
 
   @override
   Widget build(BuildContext context) {
-    TimeTablePresenter weeklyTimeTablePresenter = new WeeklyTimeTablePresenter();
-    TimeTablePresenter todayTimeTablePresenter = new TodayTimeTablePresenter();
-
-    SliverPersistentHeader todayHeader = new SliverPersistentHeader(
-      delegate: new _SliverAppBarDelegate(
-        "Today",
-        collapsedHeight: 70.0,
-        expandedHeight: 100.0,
-      ),
-      pinned: true,
-    );
-
-    SliverPersistentHeader weeklyHeader = new SliverPersistentHeader(
-      delegate: new _SliverAppBarDelegate(
-        "Weekly",
-        collapsedHeight: 70.0,
-        expandedHeight: 100.0,
-      ),
-      pinned: true,
-    );
-
-    return new Scaffold(
-        body: new CustomScrollView(
-          slivers: <Widget>[
-            todayHeader,
-            new SliverList(
-                delegate: new SliverChildListDelegate(
-                    todayTimeTablePresenter.getTimeTableItems()
-                )
-            ),
-            weeklyHeader,
-            new SliverList(
-                delegate: new SliverChildListDelegate(
-                    weeklyTimeTablePresenter.getTimeTableItems()
-                )
-            ),
-          ],
-        )
+    return new ListView.builder(
+      itemBuilder: (BuildContext context, int index) =>
+          _getTimeTableSpecificDay(WeekdayUtility.intToWeekday(index)),
+      itemCount: 5,
     );
   }
+
+  Widget _getTimeTableSpecificDay(Weekday weekday) {
+    // Get lectures at day an receive timeTableEntry for day
+    List<Lecture> lectureList = timeTablePresenter.getLecturesOfWeekday(
+        weekday);
+    return new TimeTableEntry(lectureList, weekday);
+  }
+
 }
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this.text,{
-    @required this.collapsedHeight,
-    @required this.expandedHeight,});
+// Displays one Entry. If the entry has children then it's displayed
+// with an ExpansionTile.
+class TimeTableEntryItem extends StatelessWidget {
+  final Lecture lecture;
 
-  final double expandedHeight;
-  final double collapsedHeight;
-  final String text;
+  TimeTableEntryItem(this.lecture);
 
-  @override double get minExtent => collapsedHeight;
-
-  @override double get maxExtent => [expandedHeight, minExtent].reduce(max);
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset,
-      bool overlapsContent) {
-    return new Container(
-      color: Colors.white,
-      child: new ScheduleDivider(text),
-    );
+  Widget _buildTile(Lecture lecture) {
+    return new TimeTableItem(lecture);
   }
-
-  @override
-  bool shouldRebuild(@checked _SliverAppBarDelegate oldDelegate) {
-    return expandedHeight != oldDelegate.expandedHeight
-        || collapsedHeight != oldDelegate.collapsedHeight;
-  }
-}
-
-
-class ScheduleDivider extends StatelessWidget {
-  final String _heading;
-
-  const ScheduleDivider(this._heading);
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      children: <Widget>[
-        new Padding(padding: new EdgeInsets.fromLTRB(0.0, 35.0, 0.0, 0.0)),
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            _getSpacing(new EdgeInsets.fromLTRB(5.0, 0.0, 15.0, 0.0)),
-            new Container(
-              child: new Padding(
-                  padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                  child: new Text(_heading,
-                      style: CiEStyle.getTimeTableSectionHeadingStyle())
-              ),
-            ),
-            _getSpacing(new EdgeInsets.fromLTRB(5.0, 0.0, 15.0, 0.0)),
-          ],
-        )
-      ],
-    );
-  }
-
-  Widget _getSpacing(EdgeInsets padding) {
-    return new Expanded(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            new Container(
-              child: new Padding(
-                padding: padding,
-                child: new Container(
-                  decoration: new BoxDecoration(
-                      border: new Border.all(color: CiEColor.gray)
-                  ),
-                ),
-              ),
-            )
-          ],
-        )
-    );
+    return _buildTile(lecture);
   }
 }
 
+// Split Lectures into weekdays. One expandable tile per weekday
+class TimeTableEntry extends StatelessWidget {
+  final List<Lecture> children;
+  final Weekday weekday;
 
+  TimeTableEntry(this.children, this.weekday);
+
+  Widget _buildTile(List<Lecture> children, Weekday weekday) {
+    List<Widget> childrenWidgets = new List<Widget>();
+
+    // Add a new item vor each child lecture
+    children.forEach((c) => childrenWidgets.add(new TimeTableEntryItem(c)));
+
+    return new ExpansionTile(
+      initiallyExpanded: true,
+      title: new Text(WeekdayUtility.getWeekdayAsString(weekday)),
+      children: childrenWidgets,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildTile(children, weekday);
+  }
+}

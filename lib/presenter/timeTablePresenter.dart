@@ -5,7 +5,7 @@ import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 
-abstract class TimeTablePresenter {
+class TimeTablePresenter {
   CurrentUser _currentUser;
 
   TimeTablePresenter() {
@@ -39,6 +39,14 @@ abstract class TimeTablePresenter {
     return lectures;
   }
 
+  List<Lecture> getLecturesOfWeekday(Weekday searchedWeekday) {
+    List<Lecture> lectures = [];
+    //Add all lectures to lectures list
+    getCourses().forEach((c) =>
+        c.lecturesPerWeak.where((l) => l.weekday == searchedWeekday).forEach((l) => lectures.add(l)));
+    return _sortLectures(lectures);
+  }
+
   //Todo: We might need to change this. Every time a setter is called every thing is calculated.
   String getTitle(int id) {
     return getLectures()[id].course.name;
@@ -65,15 +73,17 @@ abstract class TimeTablePresenter {
     return WeekdayUtility.getWeekdayAsString(getLectures()[id].weekday);
   }
 
-  @override
-  List<Widget> getTimeTableItems() {
-    List<Widget> result = <Widget>[];
 
-    //for (int i = 0; i < getCourses().length; i++) {
-    for (int i = 0; i < getLectures().length; i++) {
-      result.add(new TimeTableItem.ScheduleItem(this, i));
-    }
 
-    return result;
-  }
+  //@override
+  //List<Widget> getTimeTableItems() {
+  //  List<Widget> result = <Widget>[];
+//
+  //  //for (int i = 0; i < getCourses().length; i++) {
+  //  for (int i = 0; i < getLectures().length; i++) {
+  //    result.add(new TimeTableItem.ScheduleItem(this, i));
+  //  }
+//
+  //  return result;
+  //}
 }

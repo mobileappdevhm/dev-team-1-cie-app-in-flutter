@@ -89,22 +89,43 @@ class WeekdayUtility {
   static int getWeekdayAsInt(Weekday day) {
     switch (day) {
       case Weekday.Mon:
-        return 1;
+        return 0;
       case Weekday.Tue:
-        return 2;
+        return 1;
       case Weekday.Wed:
-        return 3;
+        return 2;
       case Weekday.The:
-        return 4;
+        return 3;
       case Weekday.Fri:
-        return 5;
+        return 4;
       case Weekday.Sat:
-        return 6;
+        return 5;
       case Weekday.Sun:
-        return 7;
+        return 6;
     }
     // Not reachable.
     return 0;
+  }
+
+  static Weekday intToWeekday(int day) {
+    switch (day) {
+      case 0:
+        return Weekday.Mon;
+      case 1:
+        return Weekday.Tue;
+      case 2:
+        return Weekday.Wed;
+      case 3:
+        return Weekday.The;
+      case 4:
+        return Weekday.Fri;
+      case 5:
+        return Weekday.Sat;
+      case 6:
+        return Weekday.Sun;
+    }
+    // Not reachable.
+    return Weekday.Sun;
   }
 }
 

@@ -1,40 +1,23 @@
-import 'package:cie_team1/presenter/timeTablePresenter.dart';
+import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
 
-class TimeTableItem extends StatefulWidget {
+class TimeTableItem extends StatelessWidget {
+  final Lecture lecture;
 
-  final TimeTablePresenter timeTablePresenter;
-  final int id;
-
-  TimeTableItem.ScheduleItem(this.timeTablePresenter, this.id);
-
-  @override
-  State<StatefulWidget> createState() {
-    return new TimeTableItemState(timeTablePresenter, id);
-  }
-}
-
-class TimeTableItemState extends State<TimeTableItem> {
-  Icon availabilityIcon;
-  final int id;
-  final TimeTablePresenter timeTablePresenter;
-
-  TimeTableItemState(this.timeTablePresenter, this.id);
-
+  TimeTableItem(this.lecture);
 
   @override
   Widget build(BuildContext context) {
     return new ListTile(
-      leading: availabilityIcon,
       title: new Row (
           children: <Widget>[
             new Text(
-              timeTablePresenter.getTitle(id),
+              lecture.course.name,
               style: CiEStyle.getCoursesTitleStyle(),
             ),
             new Text(
-              " - " + timeTablePresenter.getProfessorName(id),
+              " - " + lecture.course.professorName,
               style: CiEStyle.getTimeTableListMediumGray(),
             )
           ]
@@ -49,7 +32,7 @@ class TimeTableItemState extends State<TimeTableItem> {
                   child: new Row(
                     children: <Widget>[
                       new Text(
-                        "Location: ",
+                        "Campus: ",
                         style: CiEStyle.getTimeTableListMediumGray(),
                       ),
                       new Text(
@@ -62,7 +45,7 @@ class TimeTableItemState extends State<TimeTableItem> {
                 new Text("Time: ",
                   style: CiEStyle.getTimeTableListMediumGray(),
                   textAlign: TextAlign.start,
-                ),new Text(" " + timeTablePresenter.getTime(id),
+                ),new Text(" " + lecture.startDayTime.toString() + "-" + lecture.endDayTime.toString(),
                   style: CiEStyle.getTimeTableListVariable(),
                   textAlign: TextAlign.start,
                 ),
@@ -79,7 +62,7 @@ class TimeTableItemState extends State<TimeTableItem> {
                         style: CiEStyle.getTimeTableListMediumGray(),
                       ),
                       new Text(
-                        " " + timeTablePresenter.getWeekday(id),
+                        " " + WeekdayUtility.getWeekdayAsString(lecture.weekday),
                         style: CiEStyle.getTimeTableListVariable(),
                       ),
                     ],
@@ -100,5 +83,5 @@ class TimeTableItemState extends State<TimeTableItem> {
 
     );
   }
-}
 
+}
