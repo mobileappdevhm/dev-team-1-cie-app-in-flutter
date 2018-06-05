@@ -23,7 +23,8 @@ class PrevCourseListState extends State<PrevCourseList> {
   Widget build(BuildContext context) {
     try {
       return new ListView.builder(
-        itemBuilder: (BuildContext context, int index) => new PrevCourseListItem(currentUserPresenter, index),
+        itemBuilder: (BuildContext context, int index) =>
+            new PrevCourseListItem(currentUserPresenter, index),
         itemCount: currentUserPresenter.getPrevCourses().length,
       );
     } catch (e) {

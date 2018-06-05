@@ -92,13 +92,12 @@ class CiEStyle {
     );
   }
 
-  static BorderRadius getButtonBorderRadius(){
-    return new BorderRadius.circular(30.0);
-  }
-
-  //TODO Maybe this function should be removed and the color directly implemented
   static Color getLogoutButtonColor(){
     return CiEColor.red;
+  }
+
+  static BorderRadius getButtonBorderRadius(){
+    return new BorderRadius.circular(30.0);
   }
 
   static TextStyle getCourseDescriptionTitleStyle() {
