@@ -1,5 +1,6 @@
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/timeTablePresenter.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 
@@ -8,10 +9,19 @@ class Schedule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new ListView.builder(
-      itemBuilder: (BuildContext context, int index) =>
-          _getTimeTableSpecificDay(WeekdayUtility.intToWeekday(index)),
-      itemCount: 5,
+    List<Widget> children = new List<Widget>();
+
+    children.add(new ScheduleDivider("Today"));
+    children.add(_getTimeTableSpecificDay(WeekdayUtility.getCurrentWeekday()));
+
+    children.add(new ScheduleDivider("Weekly"));
+    // monday -> friday
+    for (int i = 0; i <= 4; i++){
+      children.add(_getTimeTableSpecificDay(WeekdayUtility.intToWeekday(i)));
+    }
+    
+    return new ListView(
+      children: children,
     );
   }
 
@@ -23,6 +33,8 @@ class Schedule extends StatelessWidget {
   }
 
 }
+
+
 
 // Displays one Entry. If the entry has children then it's displayed
 // with an ExpansionTile.
@@ -40,6 +52,8 @@ class TimeTableEntryItem extends StatelessWidget {
     return _buildTile(lecture);
   }
 }
+
+
 
 // Split Lectures into weekdays. One expandable tile per weekday
 class TimeTableEntry extends StatelessWidget {
@@ -63,6 +77,71 @@ class TimeTableEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    new MaterialApp(
+      title: title,
+      theme: new ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.lightBlue[800],
+        accentColor: Colors.cyan[600],
+
+      ),
+    );
+
     return _buildTile(children, weekday);
+  }
+}
+
+
+
+// divider for lectures (weekly / today)
+class ScheduleDivider extends StatelessWidget {
+  final String _heading;
+
+  const ScheduleDivider(this._heading);
+
+  @override
+  Widget build(BuildContext context) {
+    return new ListTile(
+      title: new Column(
+        children: <Widget>[
+          new Padding(padding: new EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0)),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              _getSpacing(new EdgeInsets.fromLTRB(5.0, 0.0, 15.0, 0.0)),
+              new Container(
+                child: new Padding(
+                    padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                    child: new Text(_heading)
+                ),
+              ),
+              _getSpacing(new EdgeInsets.fromLTRB(5.0, 0.0, 15.0, 0.0)),
+            ],
+          ),
+          new Padding(padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0)),
+        ],
+      ),
+    );
+  }
+
+  //Draws a line
+  Widget _getSpacing(EdgeInsets padding) {
+    return new Expanded(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            new Container(
+              child: new Padding(
+                padding: padding,
+                child: new Container(
+                  decoration: new BoxDecoration(
+                      border: new Border.all(color: CiEColor.gray)
+                  ),
+                ),
+              ),
+            )
+          ],
+        )
+    );
   }
 }

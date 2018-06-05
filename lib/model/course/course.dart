@@ -127,6 +127,11 @@ class WeekdayUtility {
     // Not reachable.
     return Weekday.Sun;
   }
+
+  static Weekday getCurrentWeekday() {
+    var now = new DateTime.now();
+    return intToWeekday(now.weekday-1);
+  }
 }
 
 enum CourseAvailability { AVAILABLE, PENDING, UNAVAILABLE }
