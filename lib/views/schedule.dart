@@ -3,6 +3,9 @@ import 'package:cie_team1/presenter/timeTablePresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_team1/utils/schedulingUtility.dart';
+import 'package:cie_team1/generic/genericIcon.dart';
 
 class Schedule extends StatelessWidget {
   TimeTablePresenter timeTablePresenter = new TimeTablePresenter();
@@ -34,8 +37,6 @@ class Schedule extends StatelessWidget {
 
 }
 
-
-
 // Displays one Entry. If the entry has children then it's displayed
 // with an ExpansionTile.
 class TimeTableEntryItem extends StatelessWidget {
@@ -53,8 +54,6 @@ class TimeTableEntryItem extends StatelessWidget {
   }
 }
 
-
-
 // Split Lectures into weekdays. One expandable tile per weekday
 class TimeTableEntry extends StatelessWidget {
   final List<Lecture> children;
@@ -65,8 +64,24 @@ class TimeTableEntry extends StatelessWidget {
   Widget _buildTile(List<Lecture> children, Weekday weekday) {
     List<Widget> childrenWidgets = new List<Widget>();
 
-    // Add a new item vor each child lecture
-    children.forEach((c) => childrenWidgets.add(new TimeTableEntryItem(c)));
+    // Add a new item for each child lecture
+    for (int i=0; i<children.length; i++) {
+      childrenWidgets.add(new TimeTableEntryItem(children.elementAt(i)));
+      // If there exists another lecture in the list, determine if there is
+      // enough time to commute to the specified campus location
+      if (i+1 < children.length) {
+        Lecture lectureOne = children.elementAt(i);
+        Lecture lectureTwo = children.elementAt(i+1);
+        if (SchedulingUtility.isCloseTime(lectureOne.endDayTime, lectureTwo.startDayTime)
+            && SchedulingUtility.isFarCampus(lectureOne.campus, lectureTwo.campus)) {
+          childrenWidgets.add(
+              GenericIcon.buildGenericConflictIcon(
+                  StaticVariables.TIME_CONFLICT_MESSAGE
+              )
+          );
+        }
+      }
+    }
 
     return new ExpansionTile(
       initiallyExpanded: true,

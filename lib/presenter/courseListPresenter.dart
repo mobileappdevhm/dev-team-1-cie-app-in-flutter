@@ -55,11 +55,11 @@ class CourseListPresenter {
   }
 
   List<Lecture> getLectureTimes(int id) {
-    return _courses.getCourses()[id].lecturesPerWeak;
+    return _courses.getCourses()[id].lecturesPerWeek;
   }
 
   String getLectureTimesBeautiful(int id) {
-    List<Lecture> lectures = _courses.getCourses()[id].lecturesPerWeak;
+    List<Lecture> lectures = _courses.getCourses()[id].lecturesPerWeek;
     String result = "";
     for (var i = 0; i < lectures.length; i++) {
       if (i != 0)

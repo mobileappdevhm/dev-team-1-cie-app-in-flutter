@@ -43,4 +43,20 @@ class GenericIcon {
       color: CiEColor.red,
     );
   }
+
+  static Widget buildGenericConflictIcon(String message) {
+    return new Container(
+        padding: new EdgeInsets.all(15.0),
+        alignment: Alignment.center,
+        child: new Chip(
+          backgroundColor: Colors.redAccent,
+          avatar: new CircleAvatar(
+            backgroundColor: Colors.white,
+            child: new Text('!'),
+          ),
+          label: new Text(message, style: new TextStyle(color: Colors.white),),
+        )
+    );
+  }
+
 }

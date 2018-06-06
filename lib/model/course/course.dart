@@ -1,9 +1,9 @@
 class Course {
   final String name;
   final String faculty;
-  final List<Lecture> lecturesPerWeak;
+  final List<Lecture> lecturesPerWeek;
   final String description;
-  final int hoursPerWeak;
+  final int hoursPerWeek;
   final int ects;
   final String professorEmail;
   final String professorName;
@@ -11,27 +11,28 @@ class Course {
   bool isFavourite;
   final CourseAvailability availability;
 
-  Course(this.name, this.faculty, this.lecturesPerWeak, this.description,
-      this.hoursPerWeak, this.ects, this.professorEmail, this.professorName,
+  Course(this.name, this.faculty, this.lecturesPerWeek, this.description,
+      this.hoursPerWeek, this.ects, this.professorEmail, this.professorName,
       this.availableForStudent, this.isFavourite, this.availability) {
     //Set this course as parent of every lectures contained
     //Required for timetable
-    lecturesPerWeak.forEach((l) => l.course = this);
+    lecturesPerWeek.forEach((l) => l.course = this);
   }
 
   bool occursOnDay(Weekday weekDay) {
     //Is there a lecture on searched day
-    return lecturesPerWeak.any((lecture) => lecture.weekday == weekDay);
+    return lecturesPerWeek.any((lecture) => lecture.weekday == weekDay);
   }
 }
 
 class Lecture {
+  final Campus campus;
   final Weekday weekday;
   final DayTime startDayTime;
   final DayTime endDayTime;
   Course course;
 
-  Lecture(this.weekday, this.startDayTime, this.endDayTime);
+  Lecture(this.campus, this.weekday, this.startDayTime, this.endDayTime);
 
   //Return int which helps to get the order of lectures in week correct
   int sortValue() {
@@ -62,6 +63,21 @@ class DayTime {
 }
 
 enum Weekday { Mon, Tue, Wed, The, Fri, Sat, Sun }
+enum Campus { KARLSTRASSE, LOTHSTRASSE, PASING }
+
+class CampusUtility {
+  static String getCampusAsString(Campus campus) {
+    switch (campus) {
+      case Campus.KARLSTRASSE:
+        return "Karl.";
+      case Campus.LOTHSTRASSE:
+        return "Loth.";
+      case Campus.PASING:
+        return "Pasing";
+    }
+    return "";
+  }
+}
 
 //This is not beautiful but there are no enums with assigned values since yet
 class WeekdayUtility {

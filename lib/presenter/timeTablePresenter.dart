@@ -29,7 +29,7 @@ class TimeTablePresenter {
     List<Lecture> lectures = [];
     //Add all lectures to lectures list
     getCourses().forEach((c) =>
-        c.lecturesPerWeak.forEach((l) => lectures.add(l)));
+        c.lecturesPerWeek.forEach((l) => lectures.add(l)));
     return _sortLectures(lectures);
   }
 
@@ -43,7 +43,7 @@ class TimeTablePresenter {
     List<Lecture> lectures = [];
     //Add all lectures to lectures list
     getCourses().forEach((c) =>
-        c.lecturesPerWeak.where((l) => l.weekday == searchedWeekday).forEach((l) => lectures.add(l)));
+        c.lecturesPerWeek.where((l) => l.weekday == searchedWeekday).forEach((l) => lectures.add(l)));
     return _sortLectures(lectures);
   }
 

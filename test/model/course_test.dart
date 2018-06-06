@@ -11,7 +11,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -28,7 +28,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -44,7 +44,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -54,15 +54,15 @@ void main(){
           false,
           CourseAvailability.AVAILABLE);
 
-      expect(sut.lecturesPerWeak[0].weekday, Weekday.Mon);
-      expect(sut.lecturesPerWeak[0].startDayTime.toString(), new DayTime(10, 00).toString());
-      expect(sut.lecturesPerWeak[0].endDayTime.toString(), new DayTime(11, 30).toString());
+      expect(sut.lecturesPerWeek[0].weekday, Weekday.Mon);
+      expect(sut.lecturesPerWeek[0].startDayTime.toString(), new DayTime(10, 00).toString());
+      expect(sut.lecturesPerWeek[0].endDayTime.toString(), new DayTime(11, 30).toString());
     });
     test('4', () {
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -78,7 +78,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -88,13 +88,13 @@ void main(){
           false,
           CourseAvailability.AVAILABLE);
 
-      expect(sut.hoursPerWeak, 2);
+      expect(sut.hoursPerWeek, 2);
     });
     test('6', () {
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -111,7 +111,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -128,7 +128,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -145,7 +145,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -162,7 +162,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
@@ -179,7 +179,7 @@ void main(){
       final Course sut = new Course(
           "Blaba",
           "7",
-          [new Lecture(Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00), new DayTime(11, 30))],
           "boring",
           2,
           2,
