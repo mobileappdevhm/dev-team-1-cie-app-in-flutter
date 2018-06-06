@@ -6,71 +6,114 @@ import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 
 void main() {
-  // Expected widget within created widgets. Generated using our mock's behavior
-  List<String> expectedTexts;
-  // Texts that are unique to the favorites page
-  List<String> favoritesPageAnomalies;
 
-  setUp((){
-    expectedTexts = new List<String>();
-    favoritesPageAnomalies = new List<String>();
-    for (int i=1; i< 100; i++) {
-      expectedTexts.add("Department #"+CoursesMock.generateMockDepartment(i));
-      expectedTexts.add(CoursesMock.generateMockCourseTitle(i));
-      expectedTexts.add("DP "+CoursesMock.generateMockDepartment(i));
-      expectedTexts.add("Time: " + CoursesMock.generateMockTime(i));
-    }
-    favoritesPageAnomalies.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON);
+  group("1",(){
+    // Expected widget within created widgets. Generated using our mock's behavior
+    List<String> expectedTexts;
+    // Texts that are unique to the favorites page
+    List<String> favoritesPageAnomalies;
+
+    setUp(() {
+      expectedTexts = new List<String>();
+      favoritesPageAnomalies = new List<String>();
+      for (int i = 1; i < 100; i++) {
+        expectedTexts.add(
+            "Department #" + CoursesMock.generateMockDepartment(i));
+        expectedTexts.add(CoursesMock.generateMockCourseTitle(i));
+        expectedTexts.add("DP " + CoursesMock.generateMockDepartment(i));
+        expectedTexts.add("Time: " + CoursesMock.generateMockTime(i));
+      }
+      favoritesPageAnomalies.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON);
+    });
+
+    testWidgets('basic courses page', (WidgetTester tester) async {
+      final bool isFavoritesPage = false;
+      // This widget tree builds the widgets found on the Courses Page
+      await tester.pumpWidget(
+        new StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return new MaterialApp(
+              home: new Material(
+                child: new Center(
+                    child: new CourseList(
+                        new CourseListPresenter(), isFavoritesPage)
+                ),
+              ),
+            );
+          },
+        ),
+      );
+      final Iterable<Widget> listOfWidgets = tester.allWidgets;
+
+      checkForDuplicateWidgets(listOfWidgets, expectedTexts);
+      checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies,
+          isFavoritesPage);
+      checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies,
+          isFavoritesPage);
+    });
+
+    testWidgets('basic favorites page', (WidgetTester tester) async {
+      final bool isFavoritesPage = true;
+      // This widget tree builds the widgets found on the Courses Page
+      await tester.pumpWidget(
+        new StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return new MaterialApp(
+              home: new Material(
+                child: new Center(
+                    child: new CourseList(
+                        new CourseListPresenter(), isFavoritesPage)
+                ),
+              ),
+            );
+          },
+        ),
+      );
+      final Iterable<Widget> listOfWidgets = tester.allWidgets;
+
+      checkForDuplicateWidgets(listOfWidgets, expectedTexts);
+      checkIfTextsCreatedCorrectly(listOfWidgets, expectedTexts,
+          favoritesPageAnomalies);
+      checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies,
+          isFavoritesPage);
+    });
   });
 
-  testWidgets('basic courses page', (WidgetTester tester) async {
-    final bool isFavoritesPage = false;
-    // This widget tree builds the widgets found on the Courses Page
-    await tester.pumpWidget(
-      new StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
-          return new MaterialApp(
-            home: new Material(
-              child: new Center(
-                child: new CourseList(new CourseListPresenter(), isFavoritesPage)
+
+  group('2',(){
+
+    setUp((){
+
+    });
+
+    testWidgets('course_description', (WidgetTester tester) async {
+
+      final bool isFavoritesPage = false;
+
+      await tester.pumpWidget(
+        new StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return new MaterialApp(
+              home: new Material(
+                child: new Center(
+                    child: new CourseList(
+                        new CourseListPresenter(), isFavoritesPage)
+                ),
               ),
-            ),
-          );
-        },
-      ),
-    );
-    final Iterable<Widget> listOfWidgets = tester.allWidgets;
+            );
+          },
+        ),
+      );
+      final Iterable<Widget> listOfWidgets = tester.allWidgets;
 
-    checkForDuplicateWidgets(listOfWidgets, expectedTexts);
-    checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies,
-        isFavoritesPage);
-    checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies,
-        isFavoritesPage);
-  });
+      for (Widget widget in listOfWidgets){
+        //await tester.tap();
+        //tester.pump();
+      }
 
-  testWidgets('basic favorites page', (WidgetTester tester) async {
-    final bool isFavoritesPage = true;
-    // This widget tree builds the widgets found on the Courses Page
-    await tester.pumpWidget(
-      new StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
-          return new MaterialApp(
-            home: new Material(
-              child: new Center(
-                child: new CourseList(new CourseListPresenter(), isFavoritesPage)
-              ),
-            ),
-          );
-        },
-      ),
-    );
-    final Iterable<Widget> listOfWidgets = tester.allWidgets;
 
-    checkForDuplicateWidgets(listOfWidgets, expectedTexts);
-    checkIfTextsCreatedCorrectly(listOfWidgets, expectedTexts,
-        favoritesPageAnomalies);
-    checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies,
-        isFavoritesPage);
+    });
+
   });
 }
 

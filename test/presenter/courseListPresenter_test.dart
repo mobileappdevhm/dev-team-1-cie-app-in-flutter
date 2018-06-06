@@ -1,3 +1,4 @@
+import 'package:cie_team1/di/currentUser_di.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:test/test.dart';
 import 'package:cie_team1/model/course/courses_mock.dart';
@@ -50,5 +51,24 @@ void main() {
       }
     });
   });
+
+  group("favorite", (){
+    test('1', () {
+
+      final bool testValue = sut.getFavourite(0);
+      sut.toggleFavourite(0);
+      expect(sut.getFavourite(0), !testValue);
+
+    });
+
+    test('2', () {
+
+      final bool testValue = sut.getFavourite(1);
+      sut.toggleFavourite(1);
+      expect(sut.getFavourite(1), !testValue);
+
+    });
+  });
+
 
 }
