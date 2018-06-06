@@ -28,7 +28,6 @@ class TimeTableItem extends StatelessWidget {
             new Row(
               children: <Widget>[
                 new Container(
-                  padding: new EdgeInsets.fromLTRB(0.0, 0.0, 100.0, 0.0),
                   child: new Row(
                     children: <Widget>[
                       new Text(
@@ -36,7 +35,7 @@ class TimeTableItem extends StatelessWidget {
                         style: CiEStyle.getTimeTableListMediumGray(),
                       ),
                       new Text(
-                        " ...",
+                        CampusUtility.getCampusAsString(lecture.campus),
                         style: CiEStyle.getTimeTableListVariable(),
                       ),
                     ],
@@ -54,7 +53,6 @@ class TimeTableItem extends StatelessWidget {
             new Row(
               children: <Widget>[
                 new Container(
-                  padding: new EdgeInsets.fromLTRB(0.0, 0.0, 117.0, 0.0),
                   child: new Row(
                     children: <Widget>[
                       new Text(
@@ -71,7 +69,7 @@ class TimeTableItem extends StatelessWidget {
                 new Text("Room: ",
                   style: CiEStyle.getTimeTableListMediumGray(),
                   textAlign: TextAlign.start,
-                ),new Text(" ...",
+                ),new Text(lecture.room,
                   style: CiEStyle.getTimeTableListVariable(),
                   textAlign: TextAlign.start,
                 ),

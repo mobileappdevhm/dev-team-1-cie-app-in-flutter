@@ -30,9 +30,10 @@ class Lecture {
   final Weekday weekday;
   final DayTime startDayTime;
   final DayTime endDayTime;
+  final String room;
   Course course;
 
-  Lecture(this.campus, this.weekday, this.startDayTime, this.endDayTime);
+  Lecture(this.campus, this.weekday, this.startDayTime, this.endDayTime, this.room);
 
   //Return int which helps to get the order of lectures in week correct
   int sortValue() {
