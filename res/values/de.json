@@ -1,0 +1,48 @@
+{
+  "app_title": "CiE",
+
+  "start_headline": "Kurse in Englisch",
+  "start_button_start": "Start",
+
+  "welcome_headline": "Kurse in Englisch",
+  "welcome_email_hint": "E-Mail",
+  "welcome_password_hint": "Passwort",
+  "welcome_button_login": "ANMELDEN",
+  "welcome_text_noAccount": "Noch keinen Account?",
+  "welcome_button_loginAsGuest": "Als Gast anmelden",
+
+  "tabs_courses": "Kurse",
+  "tabs_map": "Karte",
+  "tabs_timetable": "Stundenplan",
+  "tabs_favorites": "Favoriten",
+  "tabs_settings": "Einstellungen",
+
+  "courses_title": "Kurse",
+  "courses_filter_department": "Fakultät",
+  "courses_search_hint": "Suche nach Kursnamen",
+  "courses_list_department_short": "FK",
+  "courses_list_time": "Uhrzeit",
+
+  "map_title": "Karte",
+  "map_campus_lothstrasse": "Campus Lothstraße",
+  "map_campus_pasing": "Campus Pasing",
+  "map_campus_karlstrasse": "Campus Karlstraße",
+  "map_openMapDescription": "Klicke auf die Karte um die Route angezeigt zu bekommen.",
+
+  "timetable_title": "Stundenplan",
+
+  "favorites_title": "Favoriten",
+  "favorites_button_register": "Registere favorisierte Kurse",
+
+  "settings_title": "Einstellungen",
+  "settings_status_label": "Status:",
+  "settings_status_local": "Lokaler Student",
+  "settings_status_exchange": "Austauschstudent",
+  "settings_department_label": "Fakultät:",
+  "settings_loggedInAs_label": "Angemeldet als",
+  "settings_button_logout": "Abmelden",
+  "settings_contactInternationalOffice": "Kontaktiere das International Office",
+  "settings_cieCertificate": "Courses in English Zertifikat",
+  "settings_ieCertificate": "International Engineering Zertifikat",
+  "settings_takenCourses_label": "Belegte Kurse"
+}
