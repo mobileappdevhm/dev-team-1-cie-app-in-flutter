@@ -16,6 +16,9 @@ class StaticVariables {
 
   static const String TIME_CONFLICT_MESSAGE = "Possible Scheduling Conflict";
 
+  static const String FAVORITES_REGISTRATION_BUTTON = "Register Favorited Courses";
+  static const String FAVORITES_REGISTRATION_BUTTON_INACTIVE = "Courses Already Submitted";
+
   /* Settings Page */
   static const String GUEST_NAME ='Guest';
   static const String LOGGED_IN_AS ='Logged in as';
@@ -31,4 +34,9 @@ class StaticVariables {
   /* Settings/Taken Courses Page */
   static const String TOTAL_OF = 'Total of';
   static const String ECTS = 'ECTS';
+
+  /* Alert Strings */
+  static const String ALERT_YES = "COMPLETE";
+  static const String ALERT_NO = "CANCEL";
+  static const String ALERT_REGISTRATION_SUBMISSION= "Complete Registration?";
 }
