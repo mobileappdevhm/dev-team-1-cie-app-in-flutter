@@ -4,12 +4,12 @@
   "start_headline": "Kurse in Englisch",
   "start_button_start": "Start",
 
-  "welcome_headline": "Kurse in Englisch",
-  "welcome_email_hint": "E-Mail",
-  "welcome_password_hint": "Passwort",
-  "welcome_button_login": "ANMELDEN",
-  "welcome_text_noAccount": "Noch keinen Account?",
-  "welcome_button_loginAsGuest": "Als Gast anmelden",
+  "login_headline": "Kurse in Englisch",
+  "login_email_hint": "E-Mail",
+  "login_password_hint": "Passwort",
+  "login_button_login": "ANMELDEN",
+  "login_text_noAccount": "Noch keinen Account?",
+  "login_button_loginAsGuest": "Als Gast anmelden",
 
   "tabs_courses": "Kurse",
   "tabs_map": "Karte",

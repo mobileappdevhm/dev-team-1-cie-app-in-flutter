@@ -29,6 +29,13 @@ class S implements WidgetsLocalizations {
   String get courses_title => "Courses";
   String get favorites_button_register => "Register Favorited Courses";
   String get favorites_title => "Favorites";
+  String get login_button_login => "LOGIN";
+  String get login_button_loginAsGuest => "Login as Guest";
+  String get login_email_hint => "E-Mail";
+  String get login_headline => "Courses in English";
+  String get login_password_hint => "Password";
+  String get login_text_forgetPassword => "Forgot your password?";
+  String get login_text_noAccount => "Don't have an account?";
   String get map_campus_karlstrasse => "Karlstrasse Campus";
   String get map_campus_lothstrasse => "Lothstrasse Campus";
   String get map_campus_pasing => "Pasing Campus";
@@ -53,13 +60,6 @@ class S implements WidgetsLocalizations {
   String get tabs_settings => "Settings";
   String get tabs_timetable => "Timetable";
   String get timetable_title => "Timetable";
-  String get welcome_button_login => "LOGIN";
-  String get welcome_button_loginAsGuest => "Login as Guest";
-  String get welcome_email_hint => "E-Mail";
-  String get welcome_headline => "Courses in English";
-  String get welcome_password_hint => "Password";
-  String get welcome_text_forgetPassword => "Forgot your password?";
-  String get welcome_text_noAccount => "Don't have an account?";
 }
 
 class de extends S {
@@ -69,9 +69,9 @@ class de extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get welcome_button_login => "ANMELDEN";
+  String get login_button_loginAsGuest => "Als Gast anmelden";
   @override
-  String get welcome_password_hint => "Passwort";
+  String get login_button_login => "ANMELDEN";
   @override
   String get timetable_title => "Stundenplan";
   @override
@@ -82,6 +82,10 @@ class de extends S {
   String get settings_title => "Einstellungen";
   @override
   String get settings_ieCertificate => "International Engineering Zertifikat";
+  @override
+  String get login_email_hint => "E-Mail";
+  @override
+  String get login_headline => "Kurse in Englisch";
   @override
   String get tabs_timetable => "Stundenplan";
   @override
@@ -103,6 +107,8 @@ class de extends S {
   @override
   String get courses_search_hint => "Suche nach Kursnamen";
   @override
+  String get login_password_hint => "Passwort";
+  @override
   String get tabs_courses => "Kurse";
   @override
   String get settings_contactInternationalOffice => "Kontaktiere das International Office";
@@ -121,7 +127,7 @@ class de extends S {
   @override
   String get map_title => "Karte";
   @override
-  String get map_openMapDescription => "Klicke auf die Karte um die Route angezeigt zu bekommen.";
+  String get map_openMapDescription => "Klicken Sie auf die Karte, um eine Wegbeschreibung zu erhalten.";
   @override
   String get tabs_favorites => "Favoriten";
   @override
@@ -129,25 +135,539 @@ class de extends S {
   @override
   String get settings_department_label => "Fakultät:";
   @override
-  String get welcome_email_hint => "E-Mail";
-  @override
   String get start_button_start => "Start";
   @override
   String get courses_list_time => "Uhrzeit";
   @override
   String get favorites_button_register => "Registere favorisierte Kurse";
   @override
-  String get welcome_headline => "Kurse in Englisch";
-  @override
-  String get welcome_text_noAccount => "Noch keinen Account?";
+  String get login_text_noAccount => "Noch keinen Account?";
   @override
   String get favorites_title => "Favoriten";
+}
+
+class fi extends S {
+  const fi();
+
+   @override
+  TextDirection get textDirection => TextDirection.ltr;
+
   @override
-  String get welcome_button_loginAsGuest => "Als Gast anmelden";
+  String get login_button_loginAsGuest => "Kirjaudu sisään vierailijaksi";
+  @override
+  String get login_button_login => "LOGIN";
+  @override
+  String get start_headline => "Kurssit englanniksi";
+  @override
+  String get courses_title => "Kurssit";
+  @override
+  String get settings_title => "Asetukset";
+  @override
+  String get settings_ieCertificate => "International Engineering Certificate";
+  @override
+  String get login_email_hint => "Sähköposti";
+  @override
+  String get login_headline => "Kurssit englanniksi";
+  @override
+  String get tabs_timetable => "Aikataulu";
+  @override
+  String get courses_list_department_short => "DP";
+  @override
+  String get settings_status_label => "Tila:";
+  @override
+  String get map_campus_lothstrasse => "Lothstrasse Campus";
+  @override
+  String get map_campus_pasing => "Pasing Campus";
+  @override
+  String get settings_button_logout => "Kirjaudu ulos";
+  @override
+  String get settings_cieCertificate => "Courses in English Certificate";
+  @override
+  String get settings_takenCourses_label => "Kurssit";
+  @override
+  String get tabs_map => "Kartta";
+  @override
+  String get courses_search_hint => "Haku kurssien nimestä";
+  @override
+  String get login_password_hint => "Salasana";
+  @override
+  String get login_text_forgetPassword => "Unohditko salasanasi?";
+  @override
+  String get tabs_courses => "Kurssit";
+  @override
+  String get settings_contactInternationalOffice => "Ota yhteys kansainväliseen toimistoon";
+  @override
+  String get map_campus_karlstrasse => "Karlstrasse Campus";
+  @override
+  String get tabs_settings => "Asetukset";
+  @override
+  String get app_title => "CiE";
+  @override
+  String get settings_status_local => "Paikallinen opiskelija";
+  @override
+  String get settings_status_exchange => "Vaihto-opiskelija";
+  @override
+  String get settings_loggedInAs_label => "Kirjautunut sisään";
+  @override
+  String get map_title => "Kartta";
+  @override
+  String get map_openMapDescription => "Napsauta karttaa saadaksesi reittiohjeet.";
+  @override
+  String get tabs_favorites => "Suosikit";
+  @override
+  String get courses_filter_department => "osasto";
+  @override
+  String get settings_department_label => "Osasto:";
+  @override
+  String get start_button_start => "Käynnistä";
+  @override
+  String get courses_list_time => "Time";
+  @override
+  String get favorites_button_register => "Rekisteröidy suosikki kursseja";
+  @override
+  String get login_text_noAccount => "Sinulla ei ole tiliä?";
+  @override
+  String get favorites_title => "Suosikit";
+}
+
+class sv extends S {
+  const sv();
+
+   @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get login_button_loginAsGuest => "Logga in som gäst";
+  @override
+  String get login_button_login => "LOGIN";
+  @override
+  String get timetable_title => "Timetable";
+  @override
+  String get start_headline => "Kurser på engelska";
+  @override
+  String get courses_title => "Kurser";
+  @override
+  String get settings_title => "Inställningar";
+  @override
+  String get settings_ieCertificate => "International Engineering Certificate";
+  @override
+  String get login_email_hint => "E-post";
+  @override
+  String get login_headline => "Kurser på engelska";
+  @override
+  String get tabs_timetable => "Timetable";
+  @override
+  String get courses_list_department_short => "DP";
+  @override
+  String get settings_status_label => "Status:";
+  @override
+  String get map_campus_lothstrasse => "Lothstrasse Campus";
+  @override
+  String get map_campus_pasing => "Pasing Campus";
+  @override
+  String get settings_button_logout => "Logga ut";
+  @override
+  String get settings_cieCertificate => "Kurser i engelska certifikat";
+  @override
+  String get settings_takenCourses_label => "Taken Courses";
+  @override
+  String get tabs_map => "Map";
+  @override
+  String get courses_search_hint => "Sök efter kursnamn";
+  @override
+  String get login_password_hint => "Lösenord";
+  @override
+  String get login_text_forgetPassword => "Glömt ditt lösenord?";
+  @override
+  String get tabs_courses => "Kurser";
+  @override
+  String get settings_contactInternationalOffice => "Kontakta International Office";
+  @override
+  String get map_campus_karlstrasse => "Karlstrasse Campus";
+  @override
+  String get tabs_settings => "Inställningar";
+  @override
+  String get app_title => "CiE";
+  @override
+  String get settings_status_local => "Lokal student";
+  @override
+  String get settings_status_exchange => "Exchange student";
+  @override
+  String get settings_loggedInAs_label => "Inloggad som";
+  @override
+  String get map_title => "Map";
+  @override
+  String get map_openMapDescription => "Klicka på kartan för att få vägbeskrivning.";
+  @override
+  String get tabs_favorites => "Favoriter";
+  @override
+  String get courses_filter_department => "Department";
+  @override
+  String get settings_department_label => "Avdelning:";
+  @override
+  String get start_button_start => "Start";
+  @override
+  String get courses_list_time => "Time";
+  @override
+  String get favorites_button_register => "Registrera favoriterade kurser";
+  @override
+  String get login_text_noAccount => "Har du inte ett konto?";
+  @override
+  String get favorites_title => "Favoriter";
+}
+
+class pt extends S {
+  const pt();
+
+   @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get login_button_loginAsGuest => "Login como convidado";
+  @override
+  String get login_button_login => "LOGIN";
+  @override
+  String get timetable_title => "Horário";
+  @override
+  String get start_headline => "Cursos em inglês";
+  @override
+  String get courses_title => "Cursos";
+  @override
+  String get settings_title => "Configurações";
+  @override
+  String get settings_ieCertificate => "International Engineering Certificate";
+  @override
+  String get login_email_hint => "E-Mail";
+  @override
+  String get login_headline => "Cursos em inglês";
+  @override
+  String get tabs_timetable => "Horário";
+  @override
+  String get courses_list_department_short => "DP";
+  @override
+  String get settings_status_label => "Status:";
+  @override
+  String get map_campus_lothstrasse => "Lothstrasse Campus";
+  @override
+  String get map_campus_pasing => "Pasing Campus";
+  @override
+  String get settings_button_logout => "Sair";
+  @override
+  String get settings_cieCertificate => "Cursos em certificado de inglês";
+  @override
+  String get settings_takenCourses_label => "Cursos realizados";
+  @override
+  String get tabs_map => "Mapa";
+  @override
+  String get courses_search_hint => "Pesquisar por nome do curso";
+  @override
+  String get login_password_hint => "Senha";
+  @override
+  String get login_text_forgetPassword => "Esqueceu sua senha?";
+  @override
+  String get tabs_courses => "Cursos";
+  @override
+  String get settings_contactInternationalOffice => "Contact International Office";
+  @override
+  String get map_campus_karlstrasse => "Karlstrasse Campus";
+  @override
+  String get tabs_settings => "Configurações";
+  @override
+  String get app_title => "CiE";
+  @override
+  String get settings_status_local => "estudante local";
+  @override
+  String get settings_status_exchange => "estudante do Exchange";
+  @override
+  String get settings_loggedInAs_label => "Conectado como";
+  @override
+  String get map_title => "Mapa";
+  @override
+  String get map_openMapDescription => "Clique no mapa para obter direcções.";
+  @override
+  String get tabs_favorites => "Favoritos";
+  @override
+  String get courses_filter_department => "Departamento";
+  @override
+  String get settings_department_label => "Departamento:";
+  @override
+  String get start_button_start => "Iniciar";
+  @override
+  String get courses_list_time => "Tempo";
+  @override
+  String get favorites_button_register => "Registre cursos favoritos";
+  @override
+  String get login_text_noAccount => "Não tem uma conta?";
+  @override
+  String get favorites_title => "Favoritos";
+}
+
+class th extends S {
+  const th();
+
+   @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get login_button_loginAsGuest => "เข้าสู่ระบบด้วย Guest";
+  @override
+  String get login_button_login => "LOGIN";
+  @override
+  String get timetable_title => "ตารางเวลา";
+  @override
+  String get start_headline => "หลักสูตรภาษาอังกฤษ";
+  @override
+  String get courses_title => "หลักสูตร";
+  @override
+  String get settings_title => "การตั้งค่า";
+  @override
+  String get settings_ieCertificate => "ใบรับรองวิศวกรรมนานาชาติ";
+  @override
+  String get login_email_hint => "E-Mail";
+  @override
+  String get login_headline => "หลักสูตรภาษาอังกฤษ";
+  @override
+  String get tabs_timetable => "ตารางเวลา";
+  @override
+  String get courses_list_department_short => "DP";
+  @override
+  String get settings_status_label => "สถานะ:";
+  @override
+  String get map_campus_lothstrasse => "Lothstrasse Campus";
+  @override
+  String get map_campus_pasing => "Pasing Campus";
+  @override
+  String get settings_button_logout => "ออกจากระบบ";
+  @override
+  String get settings_cieCertificate => "หลักสูตรภาษาอังกฤษ";
+  @override
+  String get settings_takenCourses_label => "หลักสูตรที่เอามา";
+  @override
+  String get tabs_map => "แผนที่";
+  @override
+  String get courses_search_hint => "ค้นหาตามชื่อหลักสูตร";
+  @override
+  String get login_password_hint => "รหัสผ่าน";
+  @override
+  String get login_text_forgetPassword => "ลืมรหัสผ่านของคุณ?";
+  @override
+  String get tabs_courses => "หลักสูตร";
+  @override
+  String get settings_contactInternationalOffice => "ติดต่อสำนักงานระหว่างประเทศ";
+  @override
+  String get map_campus_karlstrasse => "วิทยาเขต Karlstrasse";
+  @override
+  String get tabs_settings => "การตั้งค่า";
+  @override
+  String get app_title => "CiE";
+  @override
+  String get settings_status_local => "นักเรียนท้องถิ่น";
+  @override
+  String get settings_status_exchange => "แลกเปลี่ยนนักเรียน";
+  @override
+  String get settings_loggedInAs_label => "เข้าสู่ระบบด้วย";
+  @override
+  String get map_title => "แผนที่";
+  @override
+  String get map_openMapDescription => "คลิกที่แผนที่เพื่อขอเส้นทาง";
+  @override
+  String get tabs_favorites => "รายการโปรด";
+  @override
+  String get courses_filter_department => "ภาควิชา";
+  @override
+  String get settings_department_label => "ภาควิชา:";
+  @override
+  String get start_button_start => "Start";
+  @override
+  String get courses_list_time => "เวลา";
+  @override
+  String get favorites_button_register => "ลงทะเบียนหลักสูตรที่ชื่นชอบ";
+  @override
+  String get login_text_noAccount => "ไม่มีบัญชีหรือ?";
+  @override
+  String get favorites_title => "รายการโปรด";
 }
 
 class en extends S {
   const en();
+}
+
+class it extends S {
+  const it();
+
+   @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get login_button_loginAsGuest => "Accedi come ospite";
+  @override
+  String get login_button_login => "LOGIN";
+  @override
+  String get timetable_title => "Orario";
+  @override
+  String get start_headline => "Corsi in inglese";
+  @override
+  String get courses_title => "Corsi";
+  @override
+  String get settings_title => "Impostazioni";
+  @override
+  String get settings_ieCertificate => "Certificato di ingegneria internazionale";
+  @override
+  String get login_email_hint => "E-mail";
+  @override
+  String get login_headline => "Corsi in inglese";
+  @override
+  String get tabs_timetable => "Orario";
+  @override
+  String get courses_list_department_short => "DP";
+  @override
+  String get settings_status_label => "Stato:";
+  @override
+  String get map_campus_lothstrasse => "Lothstrasse Campus";
+  @override
+  String get map_campus_pasing => "Pasing Campus";
+  @override
+  String get settings_button_logout => "Esci";
+  @override
+  String get settings_cieCertificate => "Corsi in inglese certificato";
+  @override
+  String get settings_takenCourses_label => "Corsi presi";
+  @override
+  String get tabs_map => "Mappa";
+  @override
+  String get courses_search_hint => "Cerca per nome del corso";
+  @override
+  String get login_password_hint => "Password";
+  @override
+  String get login_text_forgetPassword => "Hai dimenticato la password?";
+  @override
+  String get tabs_courses => "Corsi";
+  @override
+  String get settings_contactInternationalOffice => "Contatta l'ufficio internazionale";
+  @override
+  String get map_campus_karlstrasse => "Campus di Karlstrasse";
+  @override
+  String get tabs_settings => "Impostazioni";
+  @override
+  String get app_title => "CiE";
+  @override
+  String get settings_status_local => "Studente locale";
+  @override
+  String get settings_status_exchange => "Scambia studenti";
+  @override
+  String get settings_loggedInAs_label => "Connesso come";
+  @override
+  String get map_title => "Mappa";
+  @override
+  String get map_openMapDescription => "Fai clic sulla mappa per ottenere indicazioni stradali.";
+  @override
+  String get tabs_favorites => "Preferiti";
+  @override
+  String get courses_filter_department => "Dipartimento";
+  @override
+  String get settings_department_label => "Dipartimento:";
+  @override
+  String get start_button_start => "Start";
+  @override
+  String get courses_list_time => "Time";
+  @override
+  String get favorites_button_register => "Registra i corsi preferiti";
+  @override
+  String get login_text_noAccount => "Non hai un account?";
+  @override
+  String get favorites_title => "Preferiti";
+}
+
+class fr extends S {
+  const fr();
+
+   @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get login_button_loginAsGuest => "Se connecter en tant qu'invité";
+  @override
+  String get login_button_login => "CONNEXION";
+  @override
+  String get start_headline => "Cours en anglais";
+  @override
+  String get courses_title => "Cours";
+  @override
+  String get settings_title => "Paramètres";
+  @override
+  String get settings_ieCertificate => "Certificat d'ingénierie international";
+  @override
+  String get login_email_hint => "E-Mail";
+  @override
+  String get login_headline => "Cours en anglais";
+  @override
+  String get tabs_timetable => "Calendrier";
+  @override
+  String get courses_list_department_short => "DP";
+  @override
+  String get settings_status_label => "Statut:";
+  @override
+  String get map_campus_lothstrasse => "Lothstrasse Campus";
+  @override
+  String get map_campus_pasing => "Pasing Campus";
+  @override
+  String get settings_button_logout => "Déconnexion";
+  @override
+  String get settings_cieCertificate => "Cours en anglais";
+  @override
+  String get settings_takenCourses_label => "Cours suivis";
+  @override
+  String get tabs_map => "Carte";
+  @override
+  String get courses_search_hint => "Recherche par nom de cours";
+  @override
+  String get login_password_hint => "Mot de passe";
+  @override
+  String get login_text_forgetPassword => "Mot de passe oublié?";
+  @override
+  String get tabs_courses => "Cours";
+  @override
+  String get settings_contactInternationalOffice => "Contacter le bureau international";
+  @override
+  String get map_campus_karlstrasse => "Karlstrasse Campus";
+  @override
+  String get tabs_settings => "Paramètres";
+  @override
+  String get app_title => "CiE";
+  @override
+  String get settings_status_local => "Étudiant local";
+  @override
+  String get settings_status_exchange => "Echange d'étudiants";
+  @override
+  String get settings_loggedInAs_label => "Connecté en tant que";
+  @override
+  String get map_title => "Carte";
+  @override
+  String get map_openMapDescription => "Cliquer sur la carte pour obtenir l'itinéraire.";
+  @override
+  String get tabs_favorites => "Favoris";
+  @override
+  String get courses_filter_department => "Département";
+  @override
+  String get settings_department_label => "Département:";
+  @override
+  String get start_button_start => "Démarrer";
+  @override
+  String get courses_list_time => "Heure";
+  @override
+  String get favorites_button_register => "Enregistrer les cours favoris";
+  @override
+  String get login_text_noAccount => "Vous n'avez pas de compte?";
+  @override
+  String get favorites_title => "Favoris";
+}
+
+class es extends S {
+  const es();
+
+   @override
+  TextDirection get textDirection => TextDirection.ltr;
+
 }
 
 
@@ -158,7 +678,14 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
     return const <Locale>[
 
       const Locale("de", ""),
+      const Locale("fi", ""),
+      const Locale("sv", ""),
+      const Locale("pt", ""),
+      const Locale("th", ""),
       const Locale("en", ""),
+      const Locale("it", ""),
+      const Locale("fr", ""),
+      const Locale("es", ""),
 
     ];
   }
@@ -184,8 +711,22 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
 
       case "de":
         return new SynchronousFuture<WidgetsLocalizations>(const de());
+      case "fi":
+        return new SynchronousFuture<WidgetsLocalizations>(const fi());
+      case "sv":
+        return new SynchronousFuture<WidgetsLocalizations>(const sv());
+      case "pt":
+        return new SynchronousFuture<WidgetsLocalizations>(const pt());
+      case "th":
+        return new SynchronousFuture<WidgetsLocalizations>(const th());
       case "en":
         return new SynchronousFuture<WidgetsLocalizations>(const en());
+      case "it":
+        return new SynchronousFuture<WidgetsLocalizations>(const it());
+      case "fr":
+        return new SynchronousFuture<WidgetsLocalizations>(const fr());
+      case "es":
+        return new SynchronousFuture<WidgetsLocalizations>(const es());
 
       default:
         return new SynchronousFuture<WidgetsLocalizations>(const S());
