@@ -30,10 +30,10 @@ void main() {
             expect(widget.data, StaticVariables.LOGGED_IN_AS);
             counter++;
           } else if (counter == 1) {
-            expect(widget.data, " " + new CurrentUserPresenter().getFullName());
+            expect(widget.data, " " + StaticVariables.GUEST_NAME);
             counter++;
           } else if (counter == 2) {
-            expect(widget.data, StaticVariables.LOGOUT_BUTTON);
+            expect(widget.data, StaticVariables.LOGIN_BUTTON);
             counter++;
           } else if (counter == 3) {
             expect(widget.data, StaticVariables.STATUS + " : ");

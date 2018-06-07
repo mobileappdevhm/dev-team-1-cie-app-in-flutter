@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/views/takenCourses.dart';
@@ -8,6 +9,7 @@ import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cie_team1/utils/fileStore.dart';
 
 class Settings extends StatefulWidget {
   Settings({Key key, this.title}) : super(key: key);
@@ -21,6 +23,13 @@ class _SettingsState extends State<Settings> {
   static CurrentUserPresenter currentUserPresenter = new CurrentUserPresenter();
   int credits = currentUserPresenter.getTotalCredits();
   int engCredits = currentUserPresenter.getDep3Credits();
+  bool _loggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateLoggedInState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +67,7 @@ class _SettingsState extends State<Settings> {
                                 style: CiEStyle.getSettingsStyle(),
                               ),
                               new Text(
-                                " " + currentUserPresenter.getFullName(),
+                                " " + (_loggedIn ? currentUserPresenter.getFullName() : StaticVariables.GUEST_NAME),
                                 style: CiEStyle.getSettingsInfoStyle(),
                               ),
                             ],
@@ -69,7 +78,7 @@ class _SettingsState extends State<Settings> {
                             borderRadius: CiEStyle.getButtonBorderRadius()),
                         color: CiEColor.red,
                         child: new Text(
-                          StaticVariables.LOGOUT_BUTTON,
+                          _loggedIn ? StaticVariables.LOGOUT_BUTTON : StaticVariables.LOGIN_BUTTON,
                           style: CiEStyle.getSettingsLogoutStyle(),
                         ),
                       ),
@@ -195,7 +204,22 @@ class _SettingsState extends State<Settings> {
     }
   }
 
+  void _updateLoggedInState() {
+    FileStore.readFileAsString(FileStore.LOGIN).then((String value) {
+      setState(() {
+        _loggedIn = value == "true" ? true : false;
+      });
+    });
+  }
+
   void _logout(BuildContext context) {
+    // If logged in, log out. If user hasn't signed in, set to logged in
+    // Not necessary to change state since we are navigating to a different page
+    FileStore.readFileAsString(FileStore.LOGIN).then((String value) {
+      FileStore.getFile(FileStore.LOGIN).then((File file) {
+        file.writeAsString(value == "true" ? "false" : "true");
+      });
+    });
     //TODO maybe some more things are required here later
     Navigator.pushReplacementNamed(context, Routes.Login);
   }

@@ -97,7 +97,7 @@ class _MapPageState extends State<MapPage> {
                 children: <Widget>[
                   Text(campus, style: CiEStyle.getMapsTitleStyle(),),
                   SizedBox(height: 8.0),
-                  new Text('Click on the map to get directions.', style: CiEStyle.getMapsDescriptionStyle())
+                  new Text('Click on the map for directions.', style: CiEStyle.getMapsDescriptionStyle())
               ],
             )
             ),
