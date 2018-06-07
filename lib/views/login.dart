@@ -3,7 +3,9 @@ import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_team1/utils/fileStore.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -30,7 +32,25 @@ class LoginFormState extends State<LoginForm> {
   final GlobalKey<FormFieldState<String>> _passwordFieldKey =
       new GlobalKey<FormFieldState<String>>();
 
-  void _handleSubmitted() async {
+  void _initLoginFile() {
+    FileStore.getFile(FileStore.LOGIN);
+    FileStore.readFileAsString(FileStore.LOGIN).then((String value) {
+      if (value == null) {
+        FileStore.getFile(FileStore.LOGIN).then((File file) {
+          file.writeAsString("false");
+        });
+      }
+    });
+  }
+
+  void _handleSubmitted(bool isUsingGuestMode) async {
+    FileStore.getFile(FileStore.LOGIN).then((File file) {
+      file.writeAsString((!isUsingGuestMode).toString());
+    });
+    setState(() {
+      _loggedIn = !isUsingGuestMode;
+    });
+
     //TODO remove the line below and use the comments to activate form validation
     Navigator.of(context).pushReplacementNamed(Routes.TabPages);
     //
@@ -70,95 +90,100 @@ class LoginFormState extends State<LoginForm> {
   }
 
   @override
-  Widget build(BuildContext context) => new Scaffold(
-        key: _scaffoldKey,
-        body: new Container(
-          child: new SafeArea(
-            top: false,
-            bottom: false,
-            child: new Form(
-              key: _formKey,
-              autovalidate: _autoValidate,
-              child: new ListView(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 25.0),
-                children: <Widget>[
-                  new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
-                  new Padding(padding: const EdgeInsets.only(top: 35.0)),
-                  new Text(
-                    "Courses in English",
-                    style: CiEStyle.getAppBarTitleStyle(context),
-                    textAlign: TextAlign.center,
+  Widget build(BuildContext context) {
+    _initLoginFile();
+    return new Scaffold(
+      key: _scaffoldKey,
+      body: new Container(
+        child: new SafeArea(
+          top: false,
+          bottom: false,
+          child: new Form(
+            key: _formKey,
+            autovalidate: _autoValidate,
+            child: new ListView(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0, vertical: 25.0),
+              children: <Widget>[
+                new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
+                new Padding(padding: const EdgeInsets.only(top: 35.0)),
+                new Text(
+                  "Courses in English",
+                  style: CiEStyle.getAppBarTitleStyle(context),
+                  textAlign: TextAlign.center,
+                ),
+                new Padding(padding: const EdgeInsets.only(top: 25.0)),
+                new TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'E-Mail',
                   ),
-                  new Padding(padding: const EdgeInsets.only(top: 25.0)),
-                  new TextFormField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'E-Mail',
+                  keyboardType: TextInputType.emailAddress,
+                  onSaved: (String value) {
+                    loginData.email = value;
+                  },
+                  validator: _validateMail,
+                ),
+                new Padding(padding: const EdgeInsets.only(top: 25.0)),
+                new TextFormField(
+                  key: _passwordFieldKey,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                  ),
+                  obscureText: true,
+                  onSaved: (String value) {
+                    loginData.password = value;
+                  },
+                  validator: _validatePassword,
+                ),
+                new Container(
+                  padding:
+                  const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 25.0),
+                  child: new FlatButton(
+                    color: CiEStyle.getLogoutButtonColor(),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: CiEStyle.getButtonBorderRadius()),
+                    onPressed: ()=> _handleSubmitted(false),
+                    child: new Text(
+                      'LOGIN',
+                      style: new TextStyle(color: Colors.white),
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    onSaved: (String value) {
-                      loginData.email = value;
-                    },
-                    validator: _validateMail,
                   ),
-                  new Padding(padding: const EdgeInsets.only(top: 25.0)),
-                  new TextFormField(
-                    key: _passwordFieldKey,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
-                    obscureText: true,
-                    onSaved: (String value) {
-                      loginData.password = value;
-                    },
-                    validator: _validatePassword,
-                  ),
-                  new Container(
-                    padding:
-                        const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 25.0),
-                    child: new FlatButton(
-                      color: CiEStyle.getLogoutButtonColor(),
-                      shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
-                      onPressed: _handleSubmitted,
-                      child: new Text(
-                        'LOGIN',
-                        style: new TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
+                ),
 
-                   new Text(
-                    "Don't have an Account?",
-                    style: new TextStyle(
-                        color: CiEColor.red),
-                    textAlign: TextAlign.center,
-                  ),
-                  new Container(
-                    padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
+                new Text(
+                  "Don't have an Account?",
+                  style: new TextStyle(
+                      color: CiEColor.red),
+                  textAlign: TextAlign.center,
+                ),
+                new Container(
+                  padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
                   child: new FlatButton(
                     color: CiEColor.red,
-                    shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
-                    onPressed: _handleSubmitted,
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: CiEStyle.getButtonBorderRadius()),
+                    onPressed: ()=> _handleSubmitted(true),
                     child: new Text(
                       'Login as Guest',
                       style: new TextStyle(
-                        color: Colors.white),
+                          color: Colors.white),
                     ),
                   ),
-                  ),
-                  new Text(
-                    "Forgot your password?",
-                    style: new TextStyle(
-                        color: CiEColor.red),
-                    textAlign: TextAlign.center,
-                  ),
-                  
-                ],
-              ),
+                ),
+                new Text(
+                  "Forgot your password?",
+                  style: new TextStyle(
+                      color: CiEColor.red),
+                  textAlign: TextAlign.center,
+                ),
+
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
 }

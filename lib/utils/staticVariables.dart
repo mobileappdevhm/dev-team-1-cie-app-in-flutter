@@ -9,6 +9,7 @@ class StaticVariables {
 
   static const String RESSOURCE_PATH = 'res/';
   static const String IMAGE_PATH = RESSOURCE_PATH + 'images/';
+  static const String FAVORITES_REGISTRATION_BUTTON = "Register Favorited Courses";
 
   static const int HOURS_TO_MIN = 60;
   static const int CAMPUS_COMMUTE_MIN = 45;
@@ -19,14 +20,16 @@ class StaticVariables {
   static const String FAVORITES_REGISTRATION_BUTTON_INACTIVE = "Courses Already Submitted";
 
   /* Settings Page */
+  static const String GUEST_NAME ='Guest';
   static const String LOGGED_IN_AS ='Logged in as';
   static const String LOGOUT_BUTTON ='Log out';
+  static const String LOGIN_BUTTON ='Log in';
   static const String STATUS ='Status';
   static const String DEPARTMENT ='Department';
   static const String CONTACT_OFFICE ='Contact International Office';
   static const String CIE_CERTIFICATE ='Courses in English Certificate';
   static const String IE_CERTIFICATE ='International Engineering Certificate';
-  static const String TAKEN_COURSES ='Taken Courses';
+  static const String TAKEN_COURSES ='Course History';
 
   /* Settings/Taken Courses Page */
   static const String TOTAL_OF = 'Total of';
