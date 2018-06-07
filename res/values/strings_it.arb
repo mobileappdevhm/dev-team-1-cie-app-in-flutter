@@ -1,0 +1,49 @@
+{
+  "app_title": "CiE",
+
+  "start_headline": "Corsi in inglese",
+  "start_button_start": "Start",
+
+  "welcome_headline": "Corsi in inglese",
+  "welcome_email_hint": "E-mail",
+  "welcome_password_hint": "Password",
+  "welcome_button_login": "LOGIN",
+  "welcome_text_noAccount": "Non hai un account?",
+  "welcome_button_loginAsGuest": "Accedi come ospite",
+  "welcome_text_forgetPassword": "Hai dimenticato la password?",
+
+  "tabs_courses": "Corsi",
+  "tabs_map": "Mappa",
+  "tabs_timetable": "Orario",
+  "tabs_favorites": "Preferiti",
+  "tabs_settings": "Impostazioni",
+
+  "courses_title": "Corsi",
+  "courses_filter_department": "Dipartimento",
+  "courses_search_hint": "Cerca per nome del corso",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "Time",
+
+  "map_title": "Mappa",
+  "map_campus_lothstrasse": "Lothstrasse Campus",
+  "map_campus_pasing": "Pasing Campus",
+  "map_campus_karlstrasse": "Campus di Karlstrasse",
+  "map_openMapDescription": "Fai clic sulla mappa per ottenere indicazioni stradali.",
+
+  "timetable_title": "Orario",
+
+  "favorites_title": "Preferiti",
+  "favorites_button_register": "Registra i corsi preferiti",
+
+  "settings_title": "Impostazioni",
+  "settings_status_label": "Stato:",
+  "settings_status_local": "Studente locale",
+  "settings_status_exchange": "Scambia studenti",
+  "settings_department_label": "Dipartimento:",
+  "settings_loggedInAs_label": "Connesso come",
+  "settings_button_logout": "Esci",
+  "settings_contactInternationalOffice": "Contatta l'ufficio internazionale",
+  "settings_cieCertificate": "Corsi in inglese certificato",
+  "settings_ieCertificate": "Certificato di ingegneria internazionale",
+  "settings_takenCourses_label": "Corsi presi"
+}

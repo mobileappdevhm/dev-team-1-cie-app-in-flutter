@@ -1,0 +1,49 @@
+{
+  "app_title": "CiE",
+
+  "start_headline": "Cursos em inglês",
+  "start_button_start": "Iniciar",
+
+  "welcome_headline": "Cursos em inglês",
+  "welcome_email_hint": "E-Mail",
+  "welcome_password_hint": "Senha",
+  "welcome_button_login": "LOGIN",
+  "welcome_text_noAccount": "Não tem uma conta?",
+  "welcome_button_loginAsGuest": "Login como convidado",
+  "welcome_text_forgetPassword": "Esqueceu sua senha?",
+
+  "tabs_courses": "Cursos",
+  "tabs_map": "Mapa",
+  "tabs_timetable": "Horário",
+  "tabs_favorites": "Favoritos",
+  "tabs_settings": "Configurações",
+
+  "courses_title": "Cursos",
+  "courses_filter_department": "Departamento",
+  "courses_search_hint": "Pesquisar por nome do curso",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "Tempo",
+
+  "map_title": "Mapa",
+  "map_campus_lothstrasse": "Lothstrasse Campus",
+  "map_campus_pasing": "Pasing Campus",
+  "map_campus_karlstrasse": "Karlstrasse Campus",
+  "map_openMapDescription": "Clique no mapa para obter direcções.",
+
+  "timetable_title": "Horário",
+
+  "favorites_title": "Favoritos",
+  "favorites_button_register": "Registre cursos favoritos",
+
+  "settings_title": "Configurações",
+  "settings_status_label": "Status:",
+  "settings_status_local": "estudante local",
+  "settings_status_exchange": "estudante do Exchange",
+  "settings_department_label": "Departamento:",
+  "settings_loggedInAs_label": "Conectado como",
+  "settings_button_logout": "Sair",
+  "settings_contactInternationalOffice": "Contact International Office",
+  "settings_cieCertificate": "Cursos em certificado de inglês",
+  "settings_ieCertificate": "International Engineering Certificate",
+  "settings_takenCourses_label": "Cursos realizados"
+}

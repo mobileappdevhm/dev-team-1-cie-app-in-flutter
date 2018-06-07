@@ -1,0 +1,49 @@
+{
+  "app_title": "CiE",
+
+  "start_headline": "Kurser på engelska",
+  "start_button_start": "Start",
+
+  "welcome_headline": "Kurser på engelska",
+  "welcome_email_hint": "E-post",
+  "welcome_password_hint": "Lösenord",
+  "welcome_button_login": "LOGIN",
+  "welcome_text_noAccount": "Har du inte ett konto?",
+  "welcome_button_loginAsGuest": "Logga in som gäst",
+  "welcome_text_forgetPassword": "Glömt ditt lösenord?",
+
+  "tabs_courses": "Kurser",
+  "tabs_map": "Map",
+  "tabs_timetable": "Timetable",
+  "tabs_favorites": "Favoriter",
+  "tabs_settings": "Inställningar",
+
+  "courses_title": "Kurser",
+  "courses_filter_department": "Department",
+  "courses_search_hint": "Sök efter kursnamn",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "Time",
+
+  "map_title": "Map",
+  "map_campus_lothstrasse": "Lothstrasse Campus",
+  "map_campus_pasing": "Pasing Campus",
+  "map_campus_karlstrasse": "Karlstrasse Campus",
+  "map_openMapDescription": "Klicka på kartan för att få vägbeskrivning.",
+
+  "timetable_title": "Timetable",
+
+  "favorites_title": "Favoriter",
+  "favorites_button_register": "Registrera favoriterade kurser",
+
+  "settings_title": "Inställningar",
+  "settings_status_label": "Status:",
+  "settings_status_local": "Lokal student",
+  "settings_status_exchange": "Exchange student",
+  "settings_department_label": "Avdelning:",
+  "settings_loggedInAs_label": "Inloggad som",
+  "settings_button_logout": "Logga ut",
+  "settings_contactInternationalOffice": "Kontakta International Office",
+  "settings_cieCertificate": "Kurser i engelska certifikat",
+  "settings_ieCertificate": "International Engineering Certificate",
+  "settings_takenCourses_label": "Taken Courses"
+}

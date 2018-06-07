@@ -1,0 +1,49 @@
+{
+  "app_title": "CiE",
+
+  "start_headline": "Kurssit englanniksi",
+  "start_button_start": "Käynnistä",
+
+  "welcome_headline": "Kurssit englanniksi",
+  "welcome_email_hint": "Sähköposti",
+  "welcome_password_hint": "Salasana",
+  "welcome_button_login": "LOGIN",
+  "welcome_text_noAccount": "Sinulla ei ole tiliä?",
+  "welcome_button_loginAsGuest": "Kirjaudu sisään vierailijaksi",
+  "welcome_text_forgetPassword": "Unohditko salasanasi?",
+
+  "tabs_courses": "Kurssit",
+  "tabs_map": "Kartta",
+  "tabs_timetable": "Aikataulu",
+  "tabs_favorites": "Suosikit",
+  "tabs_settings": "Asetukset",
+
+  "courses_title": "Kurssit",
+  "courses_filter_department": "osasto",
+  "courses_search_hint": "Haku kurssien nimestä",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "Time",
+
+  "map_title": "Kartta",
+  "map_campus_lothstrasse": "Lothstrasse Campus",
+  "map_campus_pasing": "Pasing Campus",
+  "map_campus_karlstrasse": "Karlstrasse Campus",
+  "map_openMapDescription": "Napsauta karttaa saadaksesi reittiohjeet.",
+
+  "aikataulu": "aikataulu",
+
+  "favorites_title": "Suosikit",
+  "favorites_button_register": "Rekisteröidy suosikki kursseja",
+
+  "settings_title": "Asetukset",
+  "settings_status_label": "Tila:",
+  "settings_status_local": "Paikallinen opiskelija",
+  "settings_status_exchange": "Vaihto-opiskelija",
+  "settings_department_label": "Osasto:",
+  "settings_loggedInAs_label": "Kirjautunut sisään",
+  "settings_button_logout": "Kirjaudu ulos",
+  "settings_contactInternationalOffice": "Ota yhteys kansainväliseen toimistoon",
+  "settings_cieCertificate": "Courses in English Certificate",
+  "settings_ieCertificate": "International Engineering Certificate",
+  "settings_takenCourses_label": "Kurssit"
+}

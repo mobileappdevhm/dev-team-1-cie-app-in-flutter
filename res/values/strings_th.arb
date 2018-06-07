@@ -1,0 +1,49 @@
+{
+  "app_title": "CiE",
+
+  "start_headline": "หลักสูตรภาษาอังกฤษ",
+  "start_button_start": "Start",
+
+  "welcome_headline": "หลักสูตรภาษาอังกฤษ",
+  "welcome_email_hint": "E-Mail",
+  "welcome_password_hint": "รหัสผ่าน",
+  "welcome_button_login": "LOGIN",
+  "welcome_text_noAccount": "ไม่มีบัญชีหรือ?",
+  "welcome_button_loginAsGuest": "เข้าสู่ระบบด้วย Guest",
+  "welcome_text_forgetPassword": "ลืมรหัสผ่านของคุณ?",
+
+  "tabs_courses": "หลักสูตร",
+  "tabs_map": "แผนที่",
+  "tabs_timetable": "ตารางเวลา",
+  "tabs_favorites": "รายการโปรด",
+  "tabs_settings": "การตั้งค่า",
+
+  "courses_title": "หลักสูตร",
+  "courses_filter_department": "ภาควิชา",
+  "courses_search_hint": "ค้นหาตามชื่อหลักสูตร",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "เวลา",
+
+  "map_title": "แผนที่",
+  "map_campus_lothstrasse": "Lothstrasse Campus",
+  "map_campus_pasing": "Pasing Campus",
+  "map_campus_karlstrasse": "วิทยาเขต Karlstrasse",
+  "map_openMapDescription": "คลิกที่แผนที่เพื่อขอเส้นทาง",
+
+  "timetable_title": "ตารางเวลา",
+
+  "favorites_title": "รายการโปรด",
+  "favorites_button_register": "ลงทะเบียนหลักสูตรที่ชื่นชอบ",
+
+  "settings_title": "การตั้งค่า",
+  "settings_status_label": "สถานะ:",
+  "settings_status_local": "นักเรียนท้องถิ่น",
+  "settings_status_exchange": "แลกเปลี่ยนนักเรียน",
+  "settings_department_label": "ภาควิชา:",
+  "settings_loggedInAs_label": "เข้าสู่ระบบด้วย",
+  "settings_button_logout": "ออกจากระบบ",
+  "settings_contactInternationalOffice": "ติดต่อสำนักงานระหว่างประเทศ",
+  "settings_cieCertificate": "หลักสูตรภาษาอังกฤษ",
+  "settings_ieCertificate": "ใบรับรองวิศวกรรมนานาชาติ",
+  "settings_takenCourses_label": "หลักสูตรที่เอามา"
+}

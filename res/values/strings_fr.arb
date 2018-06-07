@@ -1,0 +1,49 @@
+{
+  "app_title": "CiE",
+
+  "start_headline": "Cours en anglais",
+  "start_button_start": "Démarrer",
+
+  "welcome_headline": "Cours en anglais",
+  "welcome_email_hint": "E-Mail",
+  "welcome_password_hint": "Mot de passe",
+  "welcome_button_login": "CONNEXION",
+  "welcome_text_noAccount": "Vous n'avez pas de compte?",
+  "welcome_button_loginAsGuest": "Se connecter en tant qu'invité",
+  "welcome_text_forgetPassword": "Mot de passe oublié?",
+
+  "tabs_courses": "Cours",
+  "tabs_map": "Carte",
+  "tabs_timetable": "Calendrier",
+  "tabs_favorites": "Favoris",
+  "tabs_settings": "Paramètres",
+
+  "courses_title": "Cours",
+  "courses_filter_department": "Département",
+  "courses_search_hint": "Recherche par nom de cours",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "Heure",
+
+  "map_title": "Carte",
+  "map_campus_lothstrasse": "Lothstrasse Campus",
+  "map_campus_pasing": "Pasing Campus",
+  "map_campus_karlstrasse": "Karlstrasse Campus",
+  "map_openMapDescription": "Cliquer sur la carte pour obtenir l'itinéraire.",
+
+  "schedule_title": "Calendrier",
+
+  "favorites_title": "Favoris",
+  "favorites_button_register": "Enregistrer les cours favoris",
+
+  "settings_title": "Paramètres",
+  "settings_status_label": "Statut:",
+  "settings_status_local": "Étudiant local",
+  "settings_status_exchange": "Echange d'étudiants",
+  "settings_department_label": "Département:",
+  "settings_loggedInAs_label": "Connecté en tant que",
+  "settings_button_logout": "Déconnexion",
+  "settings_contactInternationalOffice": "Contacter le bureau international",
+  "settings_cieCertificate": "Cours en anglais",
+  "settings_ieCertificate": "Certificat d'ingénierie international",
+  "settings_takenCourses_label": "Cours suivis"
+}
