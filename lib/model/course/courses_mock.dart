@@ -23,7 +23,7 @@ class CoursesMock implements Courses {
         1,
         1,
         "test@test.de",
-        "Test",
+        "Professor X",
         1,
         false,
         CourseAvailability.PENDING));
@@ -38,7 +38,7 @@ class CoursesMock implements Courses {
         1,
         1,
         "test@test.de",
-        "Test",
+        "Professor X",
         1,
         true,
         CourseAvailability.AVAILABLE));
@@ -62,7 +62,7 @@ class CoursesMock implements Courses {
         1,
         1,
         "test@test.de",
-        "Test",
+        "Professor X",
         1,
         true,
         CourseAvailability.AVAILABLE));
@@ -74,7 +74,7 @@ class CoursesMock implements Courses {
         1,
         1,
         "test@test.de",
-        "Test",
+        "Professor X",
         1,
         false,
         CourseAvailability.AVAILABLE));
@@ -86,7 +86,7 @@ class CoursesMock implements Courses {
         1,
         1,
         "test@test.de",
-        "Test",
+        "Professor X",
         1,
         false,
         CourseAvailability.PENDING));
@@ -98,7 +98,7 @@ class CoursesMock implements Courses {
         1,
         1,
         "test@test.de",
-        "Test",
+        "Professor X",
         1,
         true,
         CourseAvailability.PENDING));
@@ -110,7 +110,7 @@ class CoursesMock implements Courses {
         1,
         1,
         "test@test.de",
-        "Test",
+        "Professor X",
         1,
         false,
         CourseAvailability.UNAVAILABLE));
@@ -122,7 +122,7 @@ class CoursesMock implements Courses {
         1,
         1,
         "test@test.de",
-        "Test",
+        "Professor X",
         1,
         false,
         CourseAvailability.AVAILABLE));
