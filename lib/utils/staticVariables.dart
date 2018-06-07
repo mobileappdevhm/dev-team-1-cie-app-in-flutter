@@ -10,6 +10,12 @@ class StaticVariables {
   static const String RESSOURCE_PATH = 'res/';
   static const String IMAGE_PATH = RESSOURCE_PATH + 'images/';
   static const String FAVORITES_REGISTRATION_BUTTON = "Register These Courses";
+  static const String FAVORITES_REGISTRATION_BUTTON = "Register Favorited Courses";
+
+  static const int HOURS_TO_MIN = 60;
+  static const int CAMPUS_COMMUTE_MIN = 45;
+
+  static const String TIME_CONFLICT_MESSAGE = "Possible Scheduling Conflict";
 
   /* Settings Page */
   static const String GUEST_NAME ='Guest';
@@ -26,6 +32,4 @@ class StaticVariables {
   /* Settings/Taken Courses Page */
   static const String TOTAL_OF = 'Total of';
   static const String ECTS = 'ECTS';
-
-
 }

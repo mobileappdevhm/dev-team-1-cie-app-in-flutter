@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 
 class CiEStyle {
+  static TextStyle getTimeTableSectionHeadingStyle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 18.0,
+    );
+  }
+
   static TextStyle getCoursesListFacultyStyle() {
     return new TextStyle(
       color: CiEColor.turquoise,
@@ -118,7 +125,27 @@ class CiEStyle {
   static double getCourseDescriptionIconSize() {
     return 50.0;
   }
+  static TextStyle getTimeTableListMediumGray() {
+    return new TextStyle(
+      color: CiEColor.mediumGray,
+      fontSize: 15.0,
+    );
+  }
+  static TextStyle getTimeTableListVariable() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 15.0,
+      fontWeight: FontWeight.bold,
+    );
+  }
 
+  static TextStyle getTimeTableCourseTitle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
+    );
+  }
 }
 
 

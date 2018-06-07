@@ -2,6 +2,7 @@ import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/views/maps.dart';
+import 'package:cie_team1/views/schedule.dart';
 import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,7 +52,7 @@ class TabsPageState extends State<TabsPage> {
           new CourseList(courseListPresenter, false),
           // Behaves as Courses Page
           new MapPage(),
-          //TODO replace with timetable
+          new Schedule(),
           new Container(color: Colors.blue),
           new CourseList(courseListPresenter, true),
           // Behaves as Favorites Page

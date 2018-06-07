@@ -10,19 +10,20 @@ class GenericIcon {
   static const int memStorageActiveFavorite = 0xe87d;
   static const int memStorageInactiveFavorite = 0xe87e;
   static const String fontFamily = 'MaterialIcons';
-  static Icon buildGenericAvailabilityIcon(int availability) {
+
+  static Icon buildGenericAvailabilityIcon(CourseAvailability availability) {
     IconData iconData;
     Color color;
     switch (availability) {
-      case CourseDefinitions.AVAILABILITY_AVAILABLE:
+      case CourseAvailability.AVAILABLE:
         iconData = const IconData(memStorageAvailable, fontFamily: fontFamily);
         color = CiEColor.green;
         break;
-      case CourseDefinitions.AVAILABILITY_PENDING:
+      case CourseAvailability.PENDING:
         iconData = const IconData(memStoragePending, fontFamily: fontFamily);
         color = CiEColor.yellow;
-    break;
-      case CourseDefinitions.AVAILABILITY_UNAVAILABLE:
+        break;
+      case CourseAvailability.UNAVAILABLE:
         iconData = const IconData(memStorageUnavailable, fontFamily: fontFamily);
         color = CiEColor.red;
         break;
@@ -35,10 +36,27 @@ class GenericIcon {
 
   static Icon buildGenericFavoriteIcon(bool isActive) {
     return new Icon(
-      (isActive ? const IconData(memStorageActiveFavorite, fontFamily: 'MaterialIcons'):
-        const IconData(memStorageInactiveFavorite, fontFamily: 'MaterialIcons')),
+      (isActive ? const IconData(
+          memStorageActiveFavorite, fontFamily: 'MaterialIcons') :
+      const IconData(memStorageInactiveFavorite, fontFamily: 'MaterialIcons')),
       size: CiEStyle.getCoursesListIconSize(),
       color: CiEColor.red,
     );
   }
+
+  static Widget buildGenericConflictIcon(String message) {
+    return new Container(
+        padding: new EdgeInsets.all(15.0),
+        alignment: Alignment.center,
+        child: new Chip(
+          backgroundColor: Colors.redAccent,
+          avatar: new CircleAvatar(
+            backgroundColor: Colors.white,
+            child: new Text('!'),
+          ),
+          label: new Text(message, style: new TextStyle(color: Colors.white),),
+        )
+    );
+  }
+
 }
