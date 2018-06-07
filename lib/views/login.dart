@@ -1,3 +1,4 @@
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/model/login/loginData.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -86,15 +87,15 @@ class LoginFormState extends State<LoginForm> {
                   new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
                   new Padding(padding: const EdgeInsets.only(top: 35.0)),
                   new Text(
-                    "Courses in English",
+                    S.of(context).login_headline,
                     style: CiEStyle.getAppBarTitleStyle(context),
                     textAlign: TextAlign.center,
                   ),
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new TextFormField(
-                    decoration: const InputDecoration(
+                    decoration: new InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'E-Mail',
+                      labelText: S.of(context).login_email_hint,
                     ),
                     keyboardType: TextInputType.emailAddress,
                     onSaved: (String value) {
@@ -105,9 +106,9 @@ class LoginFormState extends State<LoginForm> {
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new TextFormField(
                     key: _passwordFieldKey,
-                    decoration: const InputDecoration(
+                    decoration: new InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Password',
+                      labelText: S.of(context).login_password_hint,
                     ),
                     obscureText: true,
                     onSaved: (String value) {
@@ -116,45 +117,41 @@ class LoginFormState extends State<LoginForm> {
                     validator: _validatePassword,
                   ),
                   new Container(
-                    padding:
-                        const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 25.0),
+                    padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 25.0),
                     child: new FlatButton(
                       color: CiEStyle.getLogoutButtonColor(),
-                      shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: CiEStyle.getButtonBorderRadius()),
                       onPressed: _handleSubmitted,
                       child: new Text(
-                        'LOGIN',
+                        S.of(context).login_button_login,
                         style: new TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
-
-                   new Text(
-                    "Don't have an Account?",
-                    style: new TextStyle(
-                        color: CiEColor.red),
+                  new Text(
+                    S.of(context).login_text_noAccount,
+                    style: new TextStyle(color: CiEColor.red),
                     textAlign: TextAlign.center,
                   ),
                   new Container(
                     padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
-                  child: new FlatButton(
-                    color: CiEColor.red,
-                    shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
-                    onPressed: _handleSubmitted,
-                    child: new Text(
-                      'Login as Guest',
-                      style: new TextStyle(
-                        color: Colors.white),
+                    child: new FlatButton(
+                      color: CiEColor.red,
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: CiEStyle.getButtonBorderRadius()),
+                      onPressed: _handleSubmitted,
+                      child: new Text(
+                        S.of(context).login_button_loginAsGuest,
+                        style: new TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
-                  ),
                   new Text(
-                    "Forgot your password?",
-                    style: new TextStyle(
-                        color: CiEColor.red),
+                    S.of(context).login_text_forgetPassword,
+                    style: new TextStyle(color: CiEColor.red),
                     textAlign: TextAlign.center,
                   ),
-                  
                 ],
               ),
             ),
