@@ -24,7 +24,7 @@ class AppLocalizations {
       data = null;
     }
 
-    if(data != null) {
+    if (data != null) {
       print("Load $path");
       this._sentences = json.decode(data);
     }
@@ -47,7 +47,7 @@ class AppLocalizations {
     if (_sentences == null) {
       throw "Asset and fallback assets couldn't be loaded";
     }
-    
+
     return true;
   }
 
