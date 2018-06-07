@@ -13,26 +13,26 @@ class CourseListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return new ListTile(
-        leading: GenericIcon.buildGenericAvailabilityIcon(
-            courseListPresenter.getAvailability(id)),
-        title: new Text(courseListPresenter.getTitle(id),
-          style: CiEStyle.getCoursesTitleStyle(),),
-        subtitle: new Row(
-          children: <Widget>[
-            new Padding (
-              padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-              child: new Text("DP " + courseListPresenter.getFaculty(id),
-                style: CiEStyle.getCoursesListFacultyStyle(),),
-            ),
-            new Text("Time: " + courseListPresenter.getLectureTime(id),
-              style: CiEStyle.getCoursesListTimeStyle(),),
-          ],
-        ),
-        trailing: inheritedChild,
-        onTap: ()=> _toggleDescription(context),
-      );
-    }
+    return new ListTile(
+      leading: GenericIcon.buildGenericAvailabilityIcon(
+          courseListPresenter.getAvailability(id)),
+      title: new Text(courseListPresenter.getTitle(id),
+        style: CiEStyle.getCoursesTitleStyle(),),
+      subtitle: new Row(
+        children: <Widget>[
+          new Padding (
+            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+            child: new Text("DP " + courseListPresenter.getFaculty(id),
+              style: CiEStyle.getCoursesListFacultyStyle(),),
+          ),
+          new Text("Time: " + courseListPresenter.getLectureTimesBeautiful(id),
+            style: CiEStyle.getCoursesListTimeStyle(),),
+        ],
+      ),
+      trailing: inheritedChild,
+      onTap: () => _toggleDescription(context),
+    );
+  }
 
   void _toggleDescription(BuildContext context) {
     Navigator.push(

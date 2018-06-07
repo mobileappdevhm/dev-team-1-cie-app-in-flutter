@@ -41,53 +41,53 @@ class CourseListState extends State<CourseList> {
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
       String departmentLabel = "Department #";
       widgets.add(
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Container(
-                padding: pad,
-                child: new DropdownButton<String>(
-                items: CourseDefinitions.DEPARTMENTS.map((String value) {
-                return new DropdownMenuItem<String>(
-                value: value,
-                child: new Text(departmentLabel+value, overflow: TextOverflow.clip),
-              );
-              }).toList(),
-              onChanged: (String val) {
-                setState(() {
-                  this.filter = val;
-                });
-              },
-                iconSize: 32.0,
-                value: filter,
-            )
-          ),
-          new Container(
-            padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
-            child: new IconButton(
-                color: CiEColor.mediumGray,
-                icon: new Icon(Icons.search),
-                onPressed: toggleSearch
+          new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                    padding: pad,
+                    child: new DropdownButton<String>(
+                      items: CourseDefinitions.DEPARTMENTS.map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(departmentLabel+value, overflow: TextOverflow.clip),
+                        );
+                      }).toList(),
+                      onChanged: (String val) {
+                        setState(() {
+                          this.filter = val;
+                        });
+                      },
+                      iconSize: 32.0,
+                      value: filter,
+                    )
                 ),
-          )
-        ])
+                new Container(
+                  padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
+                  child: new IconButton(
+                      color: CiEColor.mediumGray,
+                      icon: new Icon(Icons.search),
+                      onPressed: toggleSearch
+                  ),
+                )
+              ])
       );
 
       if (shouldSearch) {
         widgets.add(
-          new Container(
-            padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
-            alignment: Alignment.center,
-            child: new TextField(
-              controller: c1,
-              decoration: const InputDecoration(
-                hintText: "Search by Course Name",
-                contentPadding: const EdgeInsets.all(10.0),
-                border: OutlineInputBorder(),
+            new Container(
+              padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
+              alignment: Alignment.center,
+              child: new TextField(
+                controller: c1,
+                decoration: const InputDecoration(
+                  hintText: "Search by Course Name",
+                  contentPadding: const EdgeInsets.all(10.0),
+                  border: OutlineInputBorder(),
                 ),
-              onChanged: (String val)=>updateSearch(val),
-            ),
-          )
+                onChanged: (String val)=>updateSearch(val),
+              ),
+            )
         );
       }
     }
@@ -97,9 +97,9 @@ class CourseListState extends State<CourseList> {
           || (shouldFilterByFavorites == true && courseListPresenter.getFavourite(i))) {
         if (shouldSearch== false || (courseListPresenter.getTitle(i).contains(searchValue))) {
           widgets.add(
-              //GenericBorderContainer.buildGenericBorderedElement(
-                  new CourseListItem(courseListPresenter, i, favoriteIcon(i))
-              //)
+            //GenericBorderContainer.buildGenericBorderedElement(
+              new CourseListItem(courseListPresenter, i, favoriteIcon(i))
+            //)
           );
           //widgets.add(GenericBorderContainer.buildGenericBlurredLine());
           widgets.add(new Divider());
@@ -121,8 +121,8 @@ class CourseListState extends State<CourseList> {
                     StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE,
                 style: new TextStyle(color: Colors.white)),
               ),
-          ),
-        )
+            ),
+          )
       );
     }
     return new ListView(children:widgets);
@@ -138,9 +138,9 @@ class CourseListState extends State<CourseList> {
   }
 
   void _toggleFavourite(int id) {
-      setState(() {
-        courseListPresenter.toggleFavourite(id);
-      });
+    setState(() {
+      courseListPresenter.toggleFavourite(id);
+    });
   }
 
   void toggleSearch() {

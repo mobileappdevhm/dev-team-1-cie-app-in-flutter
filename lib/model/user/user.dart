@@ -10,6 +10,5 @@ class User {
   List<Course> currentCourses;
   List<Course> prevCourses;
 
-  User(this.id, this.username, this.firstName, this.lastName, this.department, this.status,this.currentCourses, this.prevCourses);
-
+  User(this.id, this.username, this.firstName, this.lastName, this.department, this.status, this.currentCourses, this.prevCourses);
 }

@@ -1,5 +1,4 @@
 import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/user/currentUser_prod.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:test/test.dart';
@@ -12,12 +11,31 @@ void main() {
 
     setUp(() {
       courses = [
-        new Course("Blaba", "7", "2-3", "boring", 2, 2, "example@hm.edu",
-            "Max Mustermann", 1, false, 5)
+        new Course(
+          "Blaba",
+          "7",
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+              new DayTime(11, 30), "R0.009")
+          ],
+          "boring",
+          2,
+          2,
+          "example@hm.edu",
+          "Max Mustermann",
+          CourseAvailability.AVAILABLE,
+          false,
+        ),
       ];
 
       sut = new User(
-          42, 'Max42', 'Max', 'Mustermann', '7', 'sleeping', courses, courses);
+          42,
+          'Max42',
+          'Max',
+          'Mustermann',
+          '7',
+          'sleeping',
+          courses,
+          courses);
     });
 
     test('1', () {
@@ -51,34 +69,46 @@ void main() {
     test('7', () {
       expect(sut.username, 'Max42');
     });
-
-
   });
 
 
-  group("simpleUserProdTest", ()
-  {
-
+  group("simpleUserProdTest", () {
     List<Course> courses;
     User user;
 
     setUp(() {
       courses = [
-        new Course("Blaba", "7", "2-3", "boring", 2, 2, "example@hm.edu",
-            "Max Mustermann", 1, false, 5)
+        new Course(
+          "Blaba",
+          "7",
+          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+              new DayTime(11, 30), "R0.009")
+          ],
+          "boring",
+          2,
+          2,
+          "example@hm.edu",
+          "Max Mustermann",
+          CourseAvailability.AVAILABLE,
+          false,
+        ),
       ];
 
       user = new User(
-          42, 'Max42', 'Max', 'Mustermann', '7', 'sleeping', courses, courses);
+          42,
+          'Max42',
+          'Max',
+          'Mustermann',
+          '7',
+          'sleeping',
+          courses,
+          courses);
     });
 
     test('1', () {
-
       final CurrentUserProd sut = new CurrentUserProd();
 
       expect(sut.getCurrentUser(), null);
     });
-
   });
-
 }
