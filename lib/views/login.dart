@@ -49,7 +49,6 @@ class LoginFormState extends State<LoginForm> {
     });
     setState(() {
       _loggedIn = !isUsingGuestMode;
-      print(_loggedIn);
     });
 
     //TODO remove the line below and use the comments to activate form validation
