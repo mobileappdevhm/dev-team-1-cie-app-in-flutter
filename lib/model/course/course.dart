@@ -1,19 +1,18 @@
 class Course {
   final String name;
-  final String faculty;
+  final Faculty faculty;
   final List<Lecture> lecturesPerWeek;
   final String description;
   final int hoursPerWeek;
   final int ects;
   final String professorEmail;
   final String professorName;
-  final int availableForStudent;
+  final CourseAvailability available;
   bool isFavourite;
-  final CourseAvailability availability;
 
   Course(this.name, this.faculty, this.lecturesPerWeek, this.description,
       this.hoursPerWeek, this.ects, this.professorEmail, this.professorName,
-      this.availableForStudent, this.isFavourite, this.availability) {
+      this.available, this.isFavourite) {
     //Set this course as parent of every lectures contained
     //Required for timetable
     lecturesPerWeek.forEach((l) => l.course = this);
@@ -33,7 +32,8 @@ class Lecture {
   final String room;
   Course course;
 
-  Lecture(this.campus, this.weekday, this.startDayTime, this.endDayTime, this.room);
+  Lecture(this.campus, this.weekday, this.startDayTime, this.endDayTime,
+      this.room);
 
   //Return int which helps to get the order of lectures in week correct
   int sortValue() {
@@ -63,8 +63,158 @@ class DayTime {
   }
 }
 
+enum CourseAvailability { AVAILABLE, PENDING, UNAVAILABLE }
 enum Weekday { Mon, Tue, Wed, The, Fri, Sat, Sun }
 enum Campus { KARLSTRASSE, LOTHSTRASSE, PASING }
+enum Faculty {
+  ZERO,
+  ONE,
+  TWO,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
+  TEN,
+  ELEVEN,
+  TWELVE,
+  THIRTEEN
+}
+
+class CourseAvailabilityUtility {
+  static int getFacultyAsInt(CourseAvailability a) {
+    switch (a) {
+      case CourseAvailability.AVAILABLE:
+        return 0;
+      case CourseAvailability.PENDING:
+        return 1;
+      case CourseAvailability.UNAVAILABLE:
+        return 2;
+    }
+    return 0;
+  }
+
+  static CourseAvailability intToCourseAvailability (int i) {
+    switch (i) {
+      case 0:
+        return CourseAvailability.AVAILABLE;
+      case 1:
+        return CourseAvailability.PENDING;
+      case 2:
+        return CourseAvailability.UNAVAILABLE;
+    }
+    return CourseAvailability.AVAILABLE;
+  }
+}
+
+
+
+class FacultyUtility {
+  static int getFacultyAsInt(Faculty f) {
+    switch (f) {
+      case Faculty.ZERO:
+        return 0;
+      case Faculty.ONE:
+        return 1;
+      case Faculty.TWO:
+        return 2;
+      case Faculty.THREE:
+        return 3;
+      case Faculty.FOUR:
+        return 4;
+      case Faculty.FIVE:
+        return 5;
+      case Faculty.SIX:
+        return 6;
+      case Faculty.SEVEN:
+        return 7;
+      case Faculty.EIGHT:
+        return 8;
+      case Faculty.NINE:
+        return 9;
+      case Faculty.TEN:
+        return 10;
+      case Faculty.ELEVEN:
+        return 11;
+      case Faculty.TWELVE:
+        return 12;
+      case Faculty.THIRTEEN:
+        return 13;
+    }
+    return 0;
+  }
+
+  static Faculty intToFaculty(int i) {
+    switch (i) {
+      case 0:
+        return Faculty.ZERO;
+      case 1:
+        return Faculty.ONE;
+      case 2:
+        return Faculty.TWO;
+      case 3:
+        return Faculty.THREE;
+      case 4:
+        return Faculty.FOUR;
+      case 5:
+        return Faculty.FIVE;
+      case 6:
+        return Faculty.SIX;
+      case 7:
+        return Faculty.SEVEN;
+      case 8:
+        return Faculty.EIGHT;
+      case 9:
+        return Faculty.NINE;
+      case 10:
+        return Faculty.TEN;
+      case 11:
+        return Faculty.ELEVEN;
+      case 12:
+        return Faculty.TWELVE;
+      case 13:
+        return Faculty.THIRTEEN;
+    }
+    return Faculty.ZERO;
+  }
+
+  static String getFacultyAsString(Faculty f) {
+    switch (f) {
+      case Faculty.ZERO:
+        return "00";
+      case Faculty.ONE:
+        return "01";
+      case Faculty.TWO:
+        return "02";
+      case Faculty.THREE:
+        return "03";
+      case Faculty.FOUR:
+        return "04";
+      case Faculty.FIVE:
+        return "05";
+      case Faculty.SIX:
+        return "06";
+      case Faculty.SEVEN:
+        return "07";
+      case Faculty.EIGHT:
+        return "08";
+      case Faculty.NINE:
+        return "09";
+      case Faculty.TEN:
+        return "10";
+      case Faculty.ELEVEN:
+        return "11";
+      case Faculty.TWELVE:
+        return "12";
+      case Faculty.THIRTEEN:
+        return "13";
+    }
+    // Not reachable.
+    return "";
+  }
+}
 
 class CampusUtility {
   static String getCampusAsString(Campus campus) {
@@ -147,8 +297,6 @@ class WeekdayUtility {
 
   static Weekday getCurrentWeekday() {
     var now = new DateTime.now();
-    return intToWeekday(now.weekday-1);
+    return intToWeekday(now.weekday - 1);
   }
 }
-
-enum CourseAvailability { AVAILABLE, PENDING, UNAVAILABLE }

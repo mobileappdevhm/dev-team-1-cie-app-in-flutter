@@ -1,4 +1,5 @@
-import 'package:cie_team1/views/login.dart';
+import 'package:cie_team1/model/course/courses_mock.dart';
+import 'package:cie_team1/views/takenCourses.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ void main() {
           return new MaterialApp(
             home: new Material(
               child: new Center(
-                  child: new LoginForm()
+                  child: new TakenCourses()
               ),
             ),
           );
@@ -23,35 +24,26 @@ void main() {
 
 
     final Iterable<Widget> listOfWidgets = tester.allWidgets;
+
     int counter = 0;
     for (Widget widget in listOfWidgets) {
       if (widget is Text) {
         if (counter == 0) {
-          expect(widget.data, 'Courses in English');
+          expect(widget.data, 'Total of 6 ECTS');
           counter++;
-        }else if(counter == 1){
-          expect(widget.data, 'E-Mail');
+        } else if (counter == 1) {
+          expect(widget.data, CoursesMock.generateMockCourseTitle(1));
           counter++;
-        }else if(counter == 2){
-          expect(widget.data, 'Password');
+        } else if (counter == 2) {
+          expect(widget.data.substring(0,2),'DP');
           counter++;
-        }else if(counter == 3){
-          expect(widget.data, 'LOGIN');
-          counter++;
-        }else if(counter == 4){
-          expect(widget.data, 'Don\'t have an Account?');
-          counter++;
-        }else if(counter == 5){
-          expect(widget.data, 'Login as Guest');
-          counter++;
-        }else if(counter == 6){
-          expect(widget.data, 'Forgot your password?');
+        } else if (counter == 3) {
+          expect(widget.data.isNotEmpty, true);
           counter++;
         }
-
+        // can be extended
       }
     }
-
 
   });
 

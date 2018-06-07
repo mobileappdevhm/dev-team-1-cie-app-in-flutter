@@ -1,30 +1,33 @@
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses_mock.dart';
-import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_team1/model/user/user.dart';
 
 class CurrentUserMock implements CurrentUser {
   List<Course> prevCourses = [];
   List<Course> currentCourses = [];
-  User testUser;
+  User currentUser;
 
   CurrentUserMock() {
-    prevCourses.add(CoursesMock.staticGetCourses()[0]);
-    prevCourses.add(CoursesMock.staticGetCourses()[1]);
-    prevCourses.add(CoursesMock.staticGetCourses()[2]);
+    CoursesMock coursesMock = new CoursesMock();
+    List<Course> courses = coursesMock.getCourses();
+    prevCourses.add(courses[0]);
+    prevCourses.add(courses[1]);
+    prevCourses.add(courses[2]);
+    prevCourses.add(courses[3]);
 
-    currentCourses.add(CoursesMock.staticGetCourses()[0]);
-    currentCourses.add(CoursesMock.staticGetCourses()[1]);
-    currentCourses.add(CoursesMock.staticGetCourses()[2]);
-    currentCourses.add(CoursesMock.staticGetCourses()[3]);
-    currentCourses.add(CoursesMock.staticGetCourses()[4]);
-    currentCourses.add(CoursesMock.staticGetCourses()[5]);
+    currentCourses.add(courses[4]);
+    currentCourses.add(courses[5]);
+    currentCourses.add(courses[6]);
+    currentCourses.add(courses[7]);
+    currentCourses.add(courses[8]);
 
-    testUser = new User(1, "Jane1","Jane","Doe", "07",  "Local", StaticVariables.IMAGE_PATH + "profile.png" , currentCourses,prevCourses);
+    currentUser = new User(
+        1, "Jane1", "Jane", "Doe", "07", "Local", currentCourses, prevCourses);
   }
+
   @override
   User getCurrentUser() {
-    return testUser;
+    return currentUser;
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class TimeTableItem extends StatelessWidget {
   static const double WIDTH_FIRST_COLUMN = 65.0;
   static const double WIDTH_SECOND_COLUMN = 45.0;
-  static const double WIDTH_THIRD_COLUMN = 90.0;
+  static const double WIDTH_THIRD_COLUMN = 95.0;
 
   final Lecture lecture;
 
@@ -61,7 +61,7 @@ class TimeTableItem extends StatelessWidget {
                 ),
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
-                  child: new Text("Time:",
+                  child: new Text("Time: ",
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),
@@ -99,7 +99,7 @@ class TimeTableItem extends StatelessWidget {
                 ),
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
-                  child: new Text("Room:",
+                  child: new Text("Room: ",
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),

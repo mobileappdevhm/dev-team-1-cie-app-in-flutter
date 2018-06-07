@@ -43,7 +43,7 @@ class CourseListPresenter {
   }
 
   CourseAvailability getAvailability(int id) {
-    return _courses.getCourses()[id].availability;
+    return _courses.getCourses()[id].available;
   }
 
   String getFaculty(int id) {

@@ -57,7 +57,7 @@ class TimeTablePresenter {
   }
 
   String getFaculty(int id) {
-    return getLectures()[id].course.faculty;
+    return FacultyUtility.getFacultyAsString(getLectures()[id].course.faculty);
   }
 
   String getProfessorName(int id) {
@@ -72,18 +72,4 @@ class TimeTablePresenter {
   String getWeekday(int id) {
     return WeekdayUtility.getWeekdayAsString(getLectures()[id].weekday);
   }
-
-
-
-  //@override
-  //List<Widget> getTimeTableItems() {
-  //  List<Widget> result = <Widget>[];
-//
-  //  //for (int i = 0; i < getCourses().length; i++) {
-  //  for (int i = 0; i < getLectures().length; i++) {
-  //    result.add(new TimeTableItem.ScheduleItem(this, i));
-  //  }
-//
-  //  return result;
-  //}
 }

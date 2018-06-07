@@ -1,5 +1,6 @@
 import 'package:cie_team1/model/login/loginData.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
@@ -83,73 +84,77 @@ class LoginFormState extends State<LoginForm> {
                     horizontal: 16.0, vertical: 25.0),
                 children: <Widget>[
                   new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
-                  new Padding(padding: const EdgeInsets.only(top: 25.0)),
+                  new Padding(padding: const EdgeInsets.only(top: 35.0)),
                   new Text(
                     "Courses in English",
-                    style: new TextStyle(color: Colors.red, fontSize: 30.0),
+                    style: CiEStyle.getAppBarTitleStyle(context),
                     textAlign: TextAlign.center,
                   ),
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new TextFormField(
                     decoration: const InputDecoration(
-                      fillColor: CiEColor.lightGray,
-                      filled: true,
-                      border: InputBorder.none,
-                      labelText: 'E-mail',
+                      border: OutlineInputBorder(),
+                      labelText: 'E-Mail',
                     ),
                     keyboardType: TextInputType.emailAddress,
                     onSaved: (String value) {
                       loginData.email = value;
                     },
-                    //initialValue: Storage.getEmail(),
                     validator: _validateMail,
                   ),
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new TextFormField(
                     key: _passwordFieldKey,
                     decoration: const InputDecoration(
-                      fillColor: CiEColor.lightGray,
-                      filled: true,
-                      border: InputBorder.none,
+                      border: OutlineInputBorder(),
                       labelText: 'Password',
                     ),
                     obscureText: true,
                     onSaved: (String value) {
                       loginData.password = value;
                     },
-                    //initialValue: Storage.getPassword(),
                     validator: _validatePassword,
                   ),
                   new Container(
                     padding:
-                        const EdgeInsets.fromLTRB(125.0, 25.0, 125.0, 25.0),
+                        const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 25.0),
                     child: new FlatButton(
-                      color: Colors.red,
+                      color: CiEStyle.getLogoutButtonColor(),
+                      shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
                       onPressed: _handleSubmitted,
                       child: new Text(
-                        'Login',
+                        'LOGIN',
                         style: new TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
-                  new Text(
+
+                   new Text(
                     "Don't have an Account?",
                     style: new TextStyle(
-                        color: Colors.red),
+                        color: CiEColor.red),
                     textAlign: TextAlign.center,
                   ),
-                  new Text(
-                    "Sign up!",
-                    style: new TextStyle(
-                        color: Colors.red, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
+                  new Container(
+                    padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
+                  child: new FlatButton(
+                    color: CiEColor.red,
+                    shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
+                    onPressed: _handleSubmitted,
+                    child: new Text(
+                      'Login as Guest',
+                      style: new TextStyle(
+                        color: Colors.white),
+                    ),
+                  ),
                   ),
                   new Text(
                     "Forgot your password?",
                     style: new TextStyle(
-                        color: Colors.red),
+                        color: CiEColor.red),
                     textAlign: TextAlign.center,
                   ),
+                  
                 ],
               ),
             ),

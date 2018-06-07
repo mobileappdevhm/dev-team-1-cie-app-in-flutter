@@ -72,7 +72,11 @@ class _CourseDetailsState extends State<CourseDetails> {
                           left: 0.0, top: 25.0, right: 0.0, bottom: 25.0),
                       child: new Text(
                         "Description",
-                        style: new TextStyle(fontSize: 25.0),
+                        style: new TextStyle(
+                          fontSize: 25.0, 
+                          color: CiEColor.gray, 
+                          letterSpacing: 2.0
+                          ),
                       )),
                 ],
               ),

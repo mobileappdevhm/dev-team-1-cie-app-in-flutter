@@ -155,7 +155,7 @@ void main(){
           false,
           CourseAvailability.AVAILABLE);
 
-      expect(sut.availableForStudent, 1);
+      expect(sut.available, 1);
     });
 
     test('10', () {
@@ -191,6 +191,27 @@ void main(){
 
       expect(sut.availability, CourseAvailability.AVAILABLE);
     });
+  });
+
+
+  group('static stuff', (){
+    
+    test('available', (){
+
+      expect(CourseDefinitions.AVAILABILITY_AVAILABLE,0);
+    });
+
+    test('available', (){
+
+      expect(CourseDefinitions.AVAILABILITY_PENDING,1);
+    });
+
+    test('available', (){
+
+      expect(CourseDefinitions.AVAILABILITY_UNAVAILABLE,2);
+    });
+    
+    
   });
 
 

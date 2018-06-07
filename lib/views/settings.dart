@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
+import 'package:cie_team1/views/takenCourses.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/widgets/prevCourseList.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,14 +24,6 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    var assetsImage =
-        new AssetImage(currentUserPresenter.getCurrentUserProfileDir());
-    var profile = new Image(
-      image: assetsImage,
-      width: 100.0,
-      height: 100.0,
-    );
-
     return new Scaffold(
       body: new Center(
         child: new Padding(
@@ -44,19 +37,24 @@ class _SettingsState extends State<Settings> {
                       child: new Row(
                     children: <Widget>[
                       new Padding(
-                        padding: const EdgeInsets.only(left: 0.0),
-                        child: profile,
-                      )
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: const Icon(
+                          Icons.person_outline,
+                          size: 75.0,
+                          color: Colors.black,
+                        ),
+                      ),
                     ],
                   )),
                   new Column(
                     children: <Widget>[
                       new Container(
-                          padding: const EdgeInsets.only(bottom: 10.0),
+                          padding:
+                              const EdgeInsets.only(bottom: 10.0, right: 10.0),
                           child: new Row(
                             children: <Widget>[
                               new Text(
-                                'Logged in as ',
+                                StaticVariables.LOGGED_IN_AS,
                                 style: CiEStyle.getSettingsStyle(),
                               ),
                               new Text(
@@ -69,9 +67,9 @@ class _SettingsState extends State<Settings> {
                         onPressed: () => _logout(context),
                         shape: new RoundedRectangleBorder(
                             borderRadius: CiEStyle.getButtonBorderRadius()),
-                        color: CiEStyle.getLogoutButtonColor(),
+                        color: CiEColor.red,
                         child: new Text(
-                          "Log out",
+                          StaticVariables.LOGOUT_BUTTON,
                           style: CiEStyle.getSettingsLogoutStyle(),
                         ),
                       ),
@@ -88,13 +86,11 @@ class _SettingsState extends State<Settings> {
                         child: new Row(
                           children: <Widget>[
                             new Text(
-                              "Status: ",
+                              StaticVariables.STATUS + " : ",
                               style: CiEStyle.getSettingsStyle(),
                             ),
                             new Text(
-                              " " +
-                                  currentUserPresenter.getCurrentUserStatus() +
-                                  " student",
+                              " " + currentUserPresenter.getCurrentUserStatus(),
                               style: CiEStyle.getSettingsInfoStyle(),
                             )
                           ],
@@ -103,7 +99,7 @@ class _SettingsState extends State<Settings> {
                       new Row(
                         children: <Widget>[
                           new Text(
-                            "Department: ",
+                            StaticVariables.DEPARTMENT + " : ",
                             style: CiEStyle.getSettingsStyle(),
                           ),
                           new Text(
@@ -116,31 +112,29 @@ class _SettingsState extends State<Settings> {
                     ],
                   )),
               new Container(
-                  padding: const EdgeInsets.only(top: 16.0),
                   child: new Column(
+                children: <Widget>[
+                  new Row(
                     children: <Widget>[
-                      new Row(
-                        children: <Widget>[
-                          new Icon(Icons.mail_outline),
-                          //Todo: Implement deep link
-                          new FlatButton(
-                            child: new Text(
-                              " Contact International Office",
-                              style: CiEStyle.getSettingsContactStyle(),
-                            ),
-                            onPressed: _onContactInternationalOffice,
-                          ),
-                        ],
+                      new Icon(Icons.mail_outline),
+                      new FlatButton(
+                        child: new Text(
+                          StaticVariables.CONTACT_OFFICE,
+                          style: CiEStyle.getSettingsContactStyle(),
+                        ),
+                        onPressed: _onContactInternationalOffice,
                       ),
-                      new Divider(),
                     ],
-                  )),
+                  ),
+                  new Divider(),
+                ],
+              )),
               new Container(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                 child: new Row(children: <Widget>[
                   new Expanded(
                       child: new Text(
-                    "Courses in English Certificate",
+                    StaticVariables.CIE_CERTIFICATE,
                     style: CiEStyle.getSettingsStyle(),
                   )),
                   new Text("$credits /15", style: CiEStyle.getSettingsStyle()),
@@ -154,7 +148,7 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.only(top: 20.0, bottom: 16.0),
                 child: new Row(children: <Widget>[
                   new Expanded(
-                      child: new Text("International Engineering Certificate",
+                      child: new Text(StaticVariables.IE_CERTIFICATE,
                           style: CiEStyle.getSettingsStyle())),
                   new Text("$engCredits /15",
                       style: CiEStyle.getSettingsStyle()),
@@ -163,18 +157,28 @@ class _SettingsState extends State<Settings> {
               ),
               new LinearProgressIndicator(value: engCredits / 15),
               /* This causes overload on horizontal screen */
-              new Padding(
-                padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
-                child: new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        child: new Text("Taken Courses",
-                            style: CiEStyle.getSettingsStyle())),
-                  ],
+
+              new GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new TakenCourses()));
+                },
+                child: new Padding(
+                  padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
+                  child: new Row(
+                    children: <Widget>[
+                      new Expanded(
+                          child: new Text(StaticVariables.TAKEN_COURSES,
+                              style: CiEStyle.getSettingsStyle())),
+                      new Icon(
+                        Icons.keyboard_arrow_right,
+                        color: CiEColor.gray,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              new Flexible(
-                child: new PrevCourseList(currentUserPresenter),
               ),
             ],
           ),
