@@ -53,7 +53,6 @@ class TabsPageState extends State<TabsPage> {
           // Behaves as Courses Page
           new MapPage(),
           new Schedule(),
-          new Container(color: Colors.blue),
           new CourseList(courseListPresenter, true),
           // Behaves as Favorites Page
           new Settings(),
