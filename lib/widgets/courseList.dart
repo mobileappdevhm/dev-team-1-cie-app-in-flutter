@@ -19,10 +19,7 @@ class CourseList extends StatefulWidget {
   State<StatefulWidget> createState() {
     return new CourseListState(courseListPresenter, shouldFilterByFavorites);
   }
-
-  void toggleFilter() {
-    shouldFilterByFavorites = !shouldFilterByFavorites;
-  }
+  void toggleFilter() { shouldFilterByFavorites = !shouldFilterByFavorites; }
 }
 
 class CourseListState extends State<CourseList> {
@@ -31,7 +28,7 @@ class CourseListState extends State<CourseList> {
   final bool shouldFilterByFavorites;
   bool shouldSearch = false;
   String filter = "07";
-  String searchValue = "";
+  String searchValue="";
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites);
 
@@ -49,14 +46,10 @@ class CourseListState extends State<CourseList> {
                 new Container(
                     padding: pad,
                     child: new DropdownButton<String>(
-                      items: [
-                        "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12",
-                        "13", "14"
-                      ].map((String value) {
+                      items: CourseDefinitions.DEPARTMENTS.map((String value) {
                         return new DropdownMenuItem<String>(
                           value: value,
-                          child: new Text(departmentLabel + value,
-                              overflow: TextOverflow.clip),
+                          child: new Text(departmentLabel+value, overflow: TextOverflow.clip),
                         );
                       }).toList(),
                       onChanged: (String val) {
@@ -91,26 +84,20 @@ class CourseListState extends State<CourseList> {
                   contentPadding: const EdgeInsets.all(10.0),
                   border: OutlineInputBorder(),
                 ),
-                onChanged: (String val) => updateSearch(val),
+                onChanged: (String val)=>updateSearch(val),
               ),
             )
         );
       }
     }
 
-    for (int i = 0; i < courseListPresenter
-        .getCourses()
-        .length; i++) {
-      if (shouldFilterByFavorites == false &&
-          courseListPresenter.getFaculty(i) == filter
-          || (shouldFilterByFavorites == true &&
-              courseListPresenter.getFavourite(i))) {
-        if (shouldSearch == false ||
-            (courseListPresenter.getTitle(i).contains(searchValue))) {
+    for (int i=0; i< courseListPresenter.getCourses().length; i++) {
+      if (shouldFilterByFavorites == false && courseListPresenter.getFaculty(i)==filter
+          || (shouldFilterByFavorites == true && courseListPresenter.getFavourite(i))) {
+        if (shouldSearch== false || (courseListPresenter.getTitle(i).contains(searchValue))) {
           widgets.add(
             //GenericBorderContainer.buildGenericBorderedElement(
               new CourseListItem(courseListPresenter, i, favoriteIcon(i))
-              //new CourseListItem(courseListPresenter, i, false)
             //)
           );
           //widgets.add(GenericBorderContainer.buildGenericBlurredLine());
@@ -124,19 +111,18 @@ class CourseListState extends State<CourseList> {
             margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
             child: new RaisedButton(
               color: CiEColor.red,
-              shape: new RoundedRectangleBorder(
-                  borderRadius: CiEStyle.getButtonBorderRadius()),
+              shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
               onPressed: () => voidFunction,
               child: new Container(
                 margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
-                child: new Text(StaticVariables.FAVORITES_REGISTRATION_BUTTON,
+                child:new Text(StaticVariables.FAVORITES_REGISTRATION_BUTTON,
                     style: new TextStyle(color: Colors.white)),
               ),
             ),
           )
       );
     }
-    return new ListView(children: widgets);
+    return new ListView(children:widgets);
   }
 
   Widget favoriteIcon(int id) {
@@ -144,7 +130,7 @@ class CourseListState extends State<CourseList> {
       icon: GenericIcon.buildGenericFavoriteIcon(
           courseListPresenter.getFavourite(id)
       ),
-      onPressed: () => _toggleFavourite(id),
+      onPressed: ()=>_toggleFavourite(id),
     );
   }
 

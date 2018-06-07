@@ -1,6 +1,6 @@
 class Course {
   final String name;
-  final Faculty faculty;
+  final String faculty;
   final List<Lecture> lecturesPerWeek;
   final String description;
   final int hoursPerWeek;
@@ -63,25 +63,32 @@ class DayTime {
   }
 }
 
+class CourseDefinitions {
+  static const List<String> DEPARTMENTS = [
+    "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12",
+    "13", "14"
+  ];
+}
+
 enum CourseAvailability { AVAILABLE, PENDING, UNAVAILABLE }
 enum Weekday { Mon, Tue, Wed, The, Fri, Sat, Sun }
 enum Campus { KARLSTRASSE, LOTHSTRASSE, PASING }
-enum Faculty {
-  ZERO,
-  ONE,
-  TWO,
-  THREE,
-  FOUR,
-  FIVE,
-  SIX,
-  SEVEN,
-  EIGHT,
-  NINE,
-  TEN,
-  ELEVEN,
-  TWELVE,
-  THIRTEEN
-}
+//enum Faculty {
+//  ZERO,
+//  ONE,
+//  TWO,
+//  THREE,
+//  FOUR,
+//  FIVE,
+//  SIX,
+//  SEVEN,
+//  EIGHT,
+//  NINE,
+//  TEN,
+//  ELEVEN,
+//  TWELVE,
+//  THIRTEEN
+//}
 
 class CourseAvailabilityUtility {
   static int getFacultyAsInt(CourseAvailability a) {
@@ -111,110 +118,110 @@ class CourseAvailabilityUtility {
 
 
 
-class FacultyUtility {
-  static int getFacultyAsInt(Faculty f) {
-    switch (f) {
-      case Faculty.ZERO:
-        return 0;
-      case Faculty.ONE:
-        return 1;
-      case Faculty.TWO:
-        return 2;
-      case Faculty.THREE:
-        return 3;
-      case Faculty.FOUR:
-        return 4;
-      case Faculty.FIVE:
-        return 5;
-      case Faculty.SIX:
-        return 6;
-      case Faculty.SEVEN:
-        return 7;
-      case Faculty.EIGHT:
-        return 8;
-      case Faculty.NINE:
-        return 9;
-      case Faculty.TEN:
-        return 10;
-      case Faculty.ELEVEN:
-        return 11;
-      case Faculty.TWELVE:
-        return 12;
-      case Faculty.THIRTEEN:
-        return 13;
-    }
-    return 0;
-  }
-
-  static Faculty intToFaculty(int i) {
-    switch (i) {
-      case 0:
-        return Faculty.ZERO;
-      case 1:
-        return Faculty.ONE;
-      case 2:
-        return Faculty.TWO;
-      case 3:
-        return Faculty.THREE;
-      case 4:
-        return Faculty.FOUR;
-      case 5:
-        return Faculty.FIVE;
-      case 6:
-        return Faculty.SIX;
-      case 7:
-        return Faculty.SEVEN;
-      case 8:
-        return Faculty.EIGHT;
-      case 9:
-        return Faculty.NINE;
-      case 10:
-        return Faculty.TEN;
-      case 11:
-        return Faculty.ELEVEN;
-      case 12:
-        return Faculty.TWELVE;
-      case 13:
-        return Faculty.THIRTEEN;
-    }
-    return Faculty.ZERO;
-  }
-
-  static String getFacultyAsString(Faculty f) {
-    switch (f) {
-      case Faculty.ZERO:
-        return "00";
-      case Faculty.ONE:
-        return "01";
-      case Faculty.TWO:
-        return "02";
-      case Faculty.THREE:
-        return "03";
-      case Faculty.FOUR:
-        return "04";
-      case Faculty.FIVE:
-        return "05";
-      case Faculty.SIX:
-        return "06";
-      case Faculty.SEVEN:
-        return "07";
-      case Faculty.EIGHT:
-        return "08";
-      case Faculty.NINE:
-        return "09";
-      case Faculty.TEN:
-        return "10";
-      case Faculty.ELEVEN:
-        return "11";
-      case Faculty.TWELVE:
-        return "12";
-      case Faculty.THIRTEEN:
-        return "13";
-    }
-    // Not reachable.
-    return "";
-  }
-}
+//class FacultyUtility {
+//  static int getFacultyAsInt(Faculty f) {
+//    switch (f) {
+//      case Faculty.ZERO:
+//        return 0;
+//      case Faculty.ONE:
+//        return 1;
+//      case Faculty.TWO:
+//        return 2;
+//      case Faculty.THREE:
+//        return 3;
+//      case Faculty.FOUR:
+//        return 4;
+//      case Faculty.FIVE:
+//        return 5;
+//      case Faculty.SIX:
+//        return 6;
+//      case Faculty.SEVEN:
+//        return 7;
+//      case Faculty.EIGHT:
+//        return 8;
+//      case Faculty.NINE:
+//        return 9;
+//      case Faculty.TEN:
+//        return 10;
+//      case Faculty.ELEVEN:
+//        return 11;
+//      case Faculty.TWELVE:
+//        return 12;
+//      case Faculty.THIRTEEN:
+//        return 13;
+//    }
+//    return 0;
+//  }
+//
+//  static Faculty intToFaculty(int i) {
+//    switch (i) {
+//      case 0:
+//        return Faculty.ZERO;
+//      case 1:
+//        return Faculty.ONE;
+//      case 2:
+//        return Faculty.TWO;
+//      case 3:
+//        return Faculty.THREE;
+//      case 4:
+//        return Faculty.FOUR;
+//      case 5:
+//        return Faculty.FIVE;
+//      case 6:
+//        return Faculty.SIX;
+//      case 7:
+//        return Faculty.SEVEN;
+//      case 8:
+//        return Faculty.EIGHT;
+//      case 9:
+//        return Faculty.NINE;
+//      case 10:
+//        return Faculty.TEN;
+//      case 11:
+//        return Faculty.ELEVEN;
+//      case 12:
+//        return Faculty.TWELVE;
+//      case 13:
+//        return Faculty.THIRTEEN;
+//    }
+//    return Faculty.ZERO;
+//  }
+//
+//  static String getFacultyAsString(Faculty f) {
+//    switch (f) {
+//      case Faculty.ZERO:
+//        return "00";
+//      case Faculty.ONE:
+//        return "01";
+//      case Faculty.TWO:
+//        return "02";
+//      case Faculty.THREE:
+//        return "03";
+//      case Faculty.FOUR:
+//        return "04";
+//      case Faculty.FIVE:
+//        return "05";
+//      case Faculty.SIX:
+//        return "06";
+//      case Faculty.SEVEN:
+//        return "07";
+//      case Faculty.EIGHT:
+//        return "08";
+//      case Faculty.NINE:
+//        return "09";
+//      case Faculty.TEN:
+//        return "10";
+//      case Faculty.ELEVEN:
+//        return "11";
+//      case Faculty.TWELVE:
+//        return "12";
+//      case Faculty.THIRTEEN:
+//        return "13";
+//    }
+//    // Not reachable.
+//    return "";
+//  }
+//}
 
 class CampusUtility {
   static String getCampusAsString(Campus campus) {

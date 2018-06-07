@@ -57,7 +57,7 @@ class TimeTablePresenter {
   }
 
   String getFaculty(int id) {
-    return FacultyUtility.getFacultyAsString(getLectures()[id].course.faculty);
+    return getLectures()[id].course.faculty;
   }
 
   String getProfessorName(int id) {

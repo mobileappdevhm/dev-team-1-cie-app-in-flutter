@@ -30,7 +30,7 @@ class CourseListItem extends StatelessWidget {
         ],
       ),
       trailing: inheritedChild,
-      onTap: ()=> _toggleDescription(context),
+      onTap: () => _toggleDescription(context),
     );
   }
 

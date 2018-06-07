@@ -29,9 +29,8 @@ class CoursesMock implements Courses {
     return "Title of Course " + i.toString();
   }
 
-  static Faculty generateMockDepartment(int i) {
-    //Every faculty expect zero
-    return FacultyUtility.intToFaculty((i % 12)+1);
+  static String generateMockDepartment(int i) {
+    return CourseDefinitions.DEPARTMENTS[i.round()%CourseDefinitions.DEPARTMENTS.length];
   }
 
   static String generateMockDescription(int i) {
