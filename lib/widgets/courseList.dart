@@ -1,6 +1,6 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
-import 'package:cie_team1/generic/genericBorderContainer.dart';
+import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -29,6 +29,7 @@ class CourseListState extends State<CourseList> {
   bool shouldSearch = false;
   String filter = "07";
   String searchValue="";
+  bool coursesRegistered = false;
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites);
 
@@ -107,16 +108,18 @@ class CourseListState extends State<CourseList> {
     }
     if (shouldFilterByFavorites == true) {
       widgets.add(
-          new Container(
-            margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
-            child: new RaisedButton(
-              color: CiEColor.red,
+        new Container(
+          margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
+          child: new RaisedButton(
+              color: (coursesRegistered == false) ? CiEColor.red : CiEColor.lightGray,
               shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
-              onPressed: () => voidFunction,
+              onPressed: (coursesRegistered == false) ? _handleCourseSubmission : ()=>_voidFunction,
               child: new Container(
                 margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
-                child:new Text(StaticVariables.FAVORITES_REGISTRATION_BUTTON,
-                    style: new TextStyle(color: Colors.white)),
+                child:new Text(
+                    (coursesRegistered == false) ? StaticVariables.FAVORITES_REGISTRATION_BUTTON:
+                    StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE,
+                style: new TextStyle(color: Colors.white)),
               ),
             ),
           )
@@ -146,12 +149,19 @@ class CourseListState extends State<CourseList> {
     });
   }
 
-  // TODO: Push Data for TimeTable Here
-  void voidFunction() {
-    setState(() {
-      this.shouldSearch = !shouldSearch;
-    });
+  // Build Asynchronously so that we can easily TODO: Send POST Request to Nine
+  void _handleCourseSubmission() {
+    var no = () {};
+    var yes = () {
+      setState(() {
+        coursesRegistered = true;
+      });
+    };
+    GenericAlert.confirm(context, no, yes,
+        StaticVariables.ALERT_REGISTRATION_SUBMISSION).then((_) {});
   }
+
+  void _voidFunction() {}
 
   void updateSearch(String val) {
     setState(() {
