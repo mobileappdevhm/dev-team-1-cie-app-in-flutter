@@ -9,7 +9,6 @@ class StaticVariables {
 
   static const String RESSOURCE_PATH = 'res/';
   static const String IMAGE_PATH = RESSOURCE_PATH + 'images/';
-  static const String FAVORITES_REGISTRATION_BUTTON = "Register These Courses";
   static const String FAVORITES_REGISTRATION_BUTTON = "Register Favorited Courses";
 
   static const int HOURS_TO_MIN = 60;
