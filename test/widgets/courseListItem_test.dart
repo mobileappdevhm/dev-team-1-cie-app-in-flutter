@@ -6,6 +6,7 @@ import 'package:cie_team1/widgets/courseList.dart';
 
 /*void main() {
 //Todo: adopt to new implementation
+
   testWidgets('1 widgetTest', (WidgetTester tester) async {
 
     // You can use keys to locate the widget you need to test
