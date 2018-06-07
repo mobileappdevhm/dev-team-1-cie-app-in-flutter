@@ -10,12 +10,12 @@ abstract class CourseListViewContract {
 class CourseListPresenter {
   //List<Course> courses = [];
   Courses _courses;
-  
+
   CourseListPresenter() {
     CourseInjector.configure(Flavor.MOCK);
     _courses = new CourseInjector().courses;
   }
-  
+
   void toggleFavourite(int id) {
     if (_courses.getCourses()[id].isFavourite) {
       _courses.getCourses()[id].isFavourite = false;
@@ -37,22 +37,38 @@ class CourseListPresenter {
   }
 
   List<Course> getPrevCourses(CurrentUser currentUser) {
-    return currentUser.getCurrentUser().prevCourses;
+    return currentUser
+        .getCurrentUser()
+        .prevCourses;
   }
 
-  int getAvailability(int id) {
-    return _courses.getCourses()[id].availability;
+  CourseAvailability getAvailability(int id) {
+    return _courses.getCourses()[id].available;
   }
 
   String getFaculty(int id) {
     return _courses.getCourses()[id].faculty.toString();
   }
 
-  String getLectureTime(int id) {
-    return _courses.getCourses()[id].lectureTime.toString();
-  }
-
   String getTitle(int id) {
     return _courses.getCourses()[id].name;
+  }
+
+  List<Lecture> getLectureTimes(int id) {
+    return _courses.getCourses()[id].lecturesPerWeek;
+  }
+
+  String getLectureTimesBeautiful(int id) {
+    List<Lecture> lectures = _courses.getCourses()[id].lecturesPerWeek;
+    String result = "";
+    for (var i = 0; i < lectures.length; i++) {
+      if (i != 0)
+        result += '\n';
+      result += WeekdayUtility.getWeekdayAsString(lectures[i].weekday) + ' ' +
+          lectures[i].startDayTime.toString() + '-' +
+          lectures[i].endDayTime.toString();
+    }
+
+    return result;
   }
 }
