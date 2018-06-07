@@ -4,26 +4,12 @@ import 'package:cie_team1/widgets/courseDetails.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:flutter/material.dart';
 
-class CourseListItem extends StatefulWidget {
-  // Stateful because we can mark items as favourite
-  final CourseListPresenter courseListPresenter;
-  final int id;
-  final bool shouldFilter;
-
-  CourseListItem(this.courseListPresenter, this.id, this.shouldFilter);
-
-  @override
-  State<StatefulWidget> createState() {
-    return new CourseListItemState(courseListPresenter, id, shouldFilter);
-  }
-}
-
-class CourseListItemState extends State<CourseListItem> {
+class CourseListItem extends StatelessWidget {
   final int id;
   final CourseListPresenter courseListPresenter;
-  final bool shouldFilter;
+  Widget inheritedChild;
 
-  CourseListItemState(this.courseListPresenter, this.id, this.shouldFilter);
+  CourseListItem(this.courseListPresenter, this.id, this.inheritedChild);
 
   @override
   Widget build(BuildContext context) {
@@ -34,37 +20,21 @@ class CourseListItemState extends State<CourseListItem> {
         style: CiEStyle.getCoursesTitleStyle(),),
       subtitle: new Row(
         children: <Widget>[
-          new Container(
-            child: new Padding (
-              padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-              child: new Text("FK " + courseListPresenter.getFaculty(id),
-                style: CiEStyle.getCoursesListFacultyStyle(),
-                textAlign: TextAlign.start,
-              ),
-            ),
+          new Padding (
+            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+            child: new Text("DP " + courseListPresenter.getFaculty(id),
+              style: CiEStyle.getCoursesListFacultyStyle(),),
           ),
           new Text("Time: " + courseListPresenter.getLectureTimesBeautiful(id),
-            style: CiEStyle.getCoursesListTimeStyle(),
-            textAlign: TextAlign.right,
-          ),
+            style: CiEStyle.getCoursesListTimeStyle(),),
         ],
       ),
-      trailing: new IconButton(
-        icon: GenericIcon.buildGenericFavoriteIcon(
-            courseListPresenter.getFavourite(id)),
-        onPressed: _toggleFavourite,
-      ),
-      onTap: _toggleDescription,
+      trailing: inheritedChild,
+      onTap: ()=> _toggleDescription(context),
     );
   }
 
-  void _toggleFavourite() {
-    setState(() {
-      courseListPresenter.toggleFavourite(id);
-    });
-  }
-
-  void _toggleDescription() {
+  void _toggleDescription(BuildContext context) {
     Navigator.push(
         context,
         new MaterialPageRoute(builder: (context) => new CourseDetails()));
