@@ -72,7 +72,7 @@ class CourseDefinitions {
 }
 
 enum CourseAvailability { AVAILABLE, PENDING, UNAVAILABLE }
-enum Weekday { Mon, Tue, Wed, The, Fri, Sat, Sun }
+enum Weekday { Mon, Tue, Wed, Thu, Fri, Sat, Sun }
 enum Campus { KARLSTRASSE, LOTHSTRASSE, PASING }
 //enum Faculty {
 //  ZERO,
@@ -248,8 +248,8 @@ class WeekdayUtility {
         return "Tue";
       case Weekday.Wed:
         return "Wed";
-      case Weekday.The:
-        return "The";
+      case Weekday.Thu:
+        return "Thu";
       case Weekday.Fri:
         return "Fri";
       case Weekday.Sat:
@@ -269,7 +269,7 @@ class WeekdayUtility {
         return 1;
       case Weekday.Wed:
         return 2;
-      case Weekday.The:
+      case Weekday.Thu:
         return 3;
       case Weekday.Fri:
         return 4;
@@ -291,7 +291,7 @@ class WeekdayUtility {
       case 2:
         return Weekday.Wed;
       case 3:
-        return Weekday.The;
+        return Weekday.Thu;
       case 4:
         return Weekday.Fri;
       case 5:
