@@ -26,7 +26,7 @@ void main() {
     });
 
     test('4', () {
-      for (int i=1; i< 100; i++) {
+      for (int i=1; i < 99; i++) {
         expect(sut.getFaculty(i), CoursesMock.generateMockDepartment(i+1));
       }
     });
@@ -46,7 +46,7 @@ void main() {
     });
 
     test('4', () {
-      for (int i=1; i< 100; i++) {
+      for (int i=1; i< 99; i++) {
         expect(sut.getTitle(i), CoursesMock.generateMockCourseTitle(i+1));
       }
     });
