@@ -1,11 +1,12 @@
+import 'package:cie_team1/generated/i18n.dart';
+import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/timeTablePresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/schedulingUtility.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/utils/schedulingUtility.dart';
-import 'package:cie_team1/generic/genericIcon.dart';
 
 class Schedule extends StatelessWidget {
   TimeTablePresenter timeTablePresenter = new TimeTablePresenter();
@@ -14,10 +15,11 @@ class Schedule extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> children = new List<Widget>();
 
-    children.add(new ScheduleDivider("Today"));
+    children.add(new ScheduleDivider(S.of(context).schedule_headline_today));
     children.add(_getTimeTableSpecificDay(WeekdayUtility.getCurrentWeekday()));
 
-    children.add(new ScheduleDivider("Weekly"));
+    children.add(new ScheduleDivider(S
+        .of(context).schedule_headline_weekly));
     // monday -> friday
     for (int i = 0; i <= 4; i++){
       children.add(_getTimeTableSpecificDay(WeekdayUtility.intToWeekday(i)));

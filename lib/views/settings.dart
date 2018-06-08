@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/views/takenCourses.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_team1/views/takenCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -54,7 +54,7 @@ class _SettingsState extends State<Settings> {
                           child: new Row(
                             children: <Widget>[
                               new Text(
-                                StaticVariables.LOGGED_IN_AS,
+                                S.of(context).settings_label_loggedInAs,
                                 style: CiEStyle.getSettingsStyle(),
                               ),
                               new Text(
@@ -69,7 +69,7 @@ class _SettingsState extends State<Settings> {
                             borderRadius: CiEStyle.getButtonBorderRadius()),
                         color: CiEColor.red,
                         child: new Text(
-                          StaticVariables.LOGOUT_BUTTON,
+                          S.of(context).settings_button_logout,
                           style: CiEStyle.getSettingsLogoutStyle(),
                         ),
                       ),
@@ -86,7 +86,7 @@ class _SettingsState extends State<Settings> {
                         child: new Row(
                           children: <Widget>[
                             new Text(
-                              StaticVariables.STATUS + " : ",
+                              S.of(context).settings_label_loggedInAs + " : ",
                               style: CiEStyle.getSettingsStyle(),
                             ),
                             new Text(
@@ -99,7 +99,7 @@ class _SettingsState extends State<Settings> {
                       new Row(
                         children: <Widget>[
                           new Text(
-                            StaticVariables.DEPARTMENT + " : ",
+                            S.of(context).settings_label_department + " : ",
                             style: CiEStyle.getSettingsStyle(),
                           ),
                           new Text(
@@ -119,7 +119,7 @@ class _SettingsState extends State<Settings> {
                       new Icon(Icons.mail_outline),
                       new FlatButton(
                         child: new Text(
-                          StaticVariables.CONTACT_OFFICE,
+                          S.of(context).settings_contactInternationalOffice,
                           style: CiEStyle.getSettingsContactStyle(),
                         ),
                         onPressed: _onContactInternationalOffice,
@@ -134,7 +134,7 @@ class _SettingsState extends State<Settings> {
                 child: new Row(children: <Widget>[
                   new Expanded(
                       child: new Text(
-                    StaticVariables.CIE_CERTIFICATE,
+                    S.of(context).settings_cieCertificate,
                     style: CiEStyle.getSettingsStyle(),
                   )),
                   new Text("$credits /15", style: CiEStyle.getSettingsStyle()),
@@ -148,7 +148,7 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.only(top: 20.0, bottom: 16.0),
                 child: new Row(children: <Widget>[
                   new Expanded(
-                      child: new Text(StaticVariables.IE_CERTIFICATE,
+                      child: new Text(S.of(context).settings_ieCertificate,
                           style: CiEStyle.getSettingsStyle())),
                   new Text("$engCredits /15",
                       style: CiEStyle.getSettingsStyle()),
@@ -170,7 +170,8 @@ class _SettingsState extends State<Settings> {
                   child: new Row(
                     children: <Widget>[
                       new Expanded(
-                          child: new Text(StaticVariables.TAKEN_COURSES,
+                          child: new Text(
+                              S.of(context).settings_label_takenCourses,
                               style: CiEStyle.getSettingsStyle())),
                       new Icon(
                         Icons.keyboard_arrow_right,
@@ -188,10 +189,10 @@ class _SettingsState extends State<Settings> {
   }
 
   Future _onContactInternationalOffice() async {
-    if (await canLaunch(StaticVariables.internationalOfficeEmail)) {
-      await launch(StaticVariables.internationalOfficeEmail);
+    if (await canLaunch(S.of(context).settings_contactInternationalOffice)) {
+      await launch(S.of(context).settings_contactInternationalOffice);
     } else {
-      throw 'Could not launch $StaticVariables.internationalOfficeEmail';
+      throw 'Could not launch $S.of(context).settings_contactInternationalOffice';
     }
   }
 

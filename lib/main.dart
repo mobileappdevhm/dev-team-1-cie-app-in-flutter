@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         localeResolutionCallback:
             S.delegate.resolution(fallback: new Locale("en", "")),
-        title: 'CiE',
+        onGenerateTitle: (context) => S.of(context).app_title,
         theme: new ThemeData(
           primarySwatch: Colors.red,
         ),
