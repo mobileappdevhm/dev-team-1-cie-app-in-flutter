@@ -37,16 +37,6 @@ class CoursesMock implements Courses {
     return "Course Description " + i.toString();
   }
 
-  static List<String> mockTimes() {
-    return [
-      "8:00 - 10:45",
-      "9:45 - 11:30",
-      "10:00 - 11:30",
-      "13:00 - 12:00",
-      "11:00 - 12:45"
-    ];
-  }
-
   static List<Lecture> generateMockTime(int i) {
     return generatedMockLectures()[i];
   }
@@ -122,7 +112,7 @@ class CoursesMock implements Courses {
         lectures.add(
             [
               new Lecture(
-                  campus[i % campus.length], WeekdayUtility.intToWeekday(i % 4),
+                  campus[i % campus.length], WeekdayUtility.intToWeekday(i % 5),
                   times[i % times.length][0], times[i % times.length][1], rooms[i % rooms.length])
             ]);
       }
