@@ -93,18 +93,17 @@ void main() {
     for (Widget widget in listOfWidgets) {
       if (widget is Text) {
         if (counter == 0) {
-          expect(widget.data, StaticVariables.LOTHSTRASSE);
+          expect(widget.data, "Lothstrasse Campus");
           counter++;
         } else if (counter == 2) {
-          expect(widget.data, StaticVariables.PASING);
+          expect(widget.data, "Pasing Campus");
           counter++;
         } else if (counter == 4) {
-         expect(widget.data, StaticVariables.KARLSTRASSE);
+         expect(widget.data, "Karlstrasse Campus");
           counter++;
         } 
       }
     }
-
   });
 
 }

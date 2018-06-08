@@ -27,45 +27,45 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (counter == 0) {
-            expect(widget.data, StaticVariables.LOGGED_IN_AS);
+            expect(widget.data, "Logged in as");
             counter++;
           } else if (counter == 1) {
             expect(widget.data, " " + new CurrentUserPresenter().getFullName());
             counter++;
           } else if (counter == 2) {
-            expect(widget.data, StaticVariables.LOGOUT_BUTTON);
+            expect(widget.data, "Log out");
             counter++;
           } else if (counter == 3) {
-            expect(widget.data, StaticVariables.STATUS + " : ");
+            expect(widget.data, "Status : ");
             counter++;
           } else if (counter == 4) {
             expect(widget.data,
                 " " + new CurrentUserPresenter().getCurrentUserStatus());
             counter++;
           } else if (counter == 5) {
-            expect(widget.data, StaticVariables.DEPARTMENT + " : ");
+            expect(widget.data, "Department : ");
             counter++;
           } else if (counter == 6) {
             expect(widget.data,
                 " " + new CurrentUserPresenter().getCurrentUserFaculty());
             counter++;
           } else if (counter == 7) {
-            expect(widget.data, StaticVariables.CONTACT_OFFICE);
+            expect(widget.data, "Contact International Office");
             counter++;
           } else if (counter == 8) {
-            expect(widget.data, StaticVariables.CIE_CERTIFICATE);
+            expect(widget.data, "Courses in English Certificate");
             counter++;
           } else if (counter == 9) {
             expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 10) {
-            expect(widget.data, StaticVariables.IE_CERTIFICATE);
+            expect(widget.data, "International Engineering Certificate");
             counter++;
           } else if (counter == 11) {
             expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 12) {
-            expect(widget.data, StaticVariables.TAKEN_COURSES);
+            expect(widget.data, "Taken Courses");
             counter++;
           }
         }
