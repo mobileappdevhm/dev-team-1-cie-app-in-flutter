@@ -105,7 +105,7 @@ class LoginFormState extends State<LoginForm> {
     if (value.isEmpty) return 'Password is required.';
     //final RegExp passwordExp = new RegExp(
     //    r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&=§])[A-Za-z\d$@$!%*?&=§]{8,}");
-    if (value.length >= 8)//(!passwordExp.hasMatch(value))
+    if (value.length < 8)//(!passwordExp.hasMatch(value))
       return 'Password does not match requirements.';
     return null;
   }
