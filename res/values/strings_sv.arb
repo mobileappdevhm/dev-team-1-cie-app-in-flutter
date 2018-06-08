@@ -1,5 +1,5 @@
 {
-  "app_title": "CiE",
+  "main_title": "CiE",
 
   "start_headline": "Kurser på engelska",
   "start_button_start": "Start",
@@ -11,39 +11,73 @@
   "login_text_noAccount": "Har du inte ett konto?",
   "login_button_loginAsGuest": "Logga in som gäst",
   "login_text_forgetPassword": "Glömt ditt lösenord?",
+  "login_error_passwordNotValid": "Lösenordet är inte giltigt",
 
   "tabs_courses": "Kurser",
   "tabs_maps": "Map",
-  "tabs_schedule": "Timetable",
+  "tabs_schedule": "Tidsplan",
   "tabs_favorites": "Favoriter",
   "tabs_settings": "Inställningar",
 
   "courses_title": "Kurser",
   "courses_filter_department": "Department",
-  "courses_search_hint": "Sök efter kursnamn",
+  "courses_hint_search": "Sök efter kursnamn",
   "courses_list_department_short": "DP",
   "courses_list_time": "Time",
+  "courses_list_noCoursesFound": "Inga kurser hittades!",
+
+  "courses_title_courseDetails": "Kursinformation",
+  "courses_label_description": "Beskrivning",
+  "courses_label_hoursPerWeek": "Hours per Week:",
+  "courses_label_ects": "ECTS",
+  "courses_label_contact": "Kontakt",
+  "courses_courseStatus_available": "Available",
+  "courses_courseStatus_maybeAvailable": "Kanske tillgänglig",
+  "courses_courseStatus_notAvailable": "Ej tillgänglig",
+
+  "course_weekdays_short_0": "Mon",
+  "course_weekdays_short_1": "tis",
+  "course_weekdays_short_2": "ons",
+  "course_weekdays_short_3": "Thu",
+  "course_weekdays_short_4": "Fri",
+  "course_weekdays_short_5": "Sat",
+  "course_weekdays_short_6": "Sun",
 
   "maps_title": "Map",
   "maps_campus_lothstrasse": "Lothstrasse Campus",
   "maps_campus_pasing": "Pasing Campus",
   "maps_campus_karlstrasse": "Karlstrasse Campus",
-  "maps_openMapDescription": "Klicka på kartan för att få vägbeskrivning.",
+  "maps_openMapDescription": "Klicka på kartorna för att få vägbeskrivning.",
 
   "schedule_title": "Timetable",
+  "schedule_headline_today": "Today",
+  "schedule_headline_weekly": "Weekly",
+  "schedule_text_timeConflict": "Möjlig schemaläggningskonflikt",
+
+  "schedule_item_campus": "Campus",
+  "schedule_item_time": "Time",
+  "schedule_item_day": "Day",
+  "schedule_item_room": "Room",
 
   "favorites_title": "Favoriter",
   "favorites_button_register": "Registrera favoriterade kurser",
+  "favorites_button_alreadyRegistered": "Kurser som redan skickats in",
+  "favorites_message_completeRegistration": "Fullständig registrering?",
 
   "settings_title": "Inställningar",
-  "settings_status_label": "Status:",
+  "settings_label_status": "Status:",
   "settings_status_local": "Lokal student",
   "settings_status_exchange": "Exchange student",
-  "settings_department_label": "Avdelning:",
-  "settings_loggedInAs_label": "Inloggad som",
+  "settings_label_department": "Department",
+  "settings_label_loggedInAs": "Inloggad som",
   "settings_button_logout": "Logga ut",
   "settings_contactInternationalOffice": "Kontakta International Office",
   "settings_cieCertificate": "Kurser i engelska certifikat",
   "settings_ieCertificate": "International Engineering Certificate",
-  "settings_takenCourses_label": "Taken Courses"
+  "settings_label_takenCourses": "Taken Courses",
+  "settings_label_totalOf": "Totalt av",
+  "settings_label_ects": "ECTS",
+
+  "alert_button_yes": "COMPLETE",
+  "alert_button_no": "CANCEL"
 }

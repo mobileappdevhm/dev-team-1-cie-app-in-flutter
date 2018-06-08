@@ -1,5 +1,5 @@
 {
-  "app_title": "CiE",
+  "main_title": "CiE",
 
   "start_headline": "Courses in English",
   "start_button_start": "Start",
@@ -13,7 +13,6 @@
   "login_text_forgetPassword": "Forgot your password?",
   "login_error_passwordNotValid": "Password is not valid",
 
-//test comment
   "tabs_courses": "Courses",
   "tabs_maps": "Map",
   "tabs_schedule": "Timetable",
@@ -22,9 +21,27 @@
 
   "courses_title": "Courses",
   "courses_filter_department": "Department",
-  "courses_search_hint": "Search by Course Name",
+  "courses_hint_search": "Search by Course Name",
   "courses_list_department_short": "DP",
   "courses_list_time": "Time",
+  "courses_list_noCoursesFound": "No Courses found!",
+
+  "courses_title_courseDetails": "Course Details",
+  "courses_label_description": "Description",
+  "courses_label_hoursPerWeek": "Hours per Week:",
+  "courses_label_ects": "ECTS",
+  "courses_label_contact": "Contact",
+  "courses_courseStatus_available": "Available",
+  "courses_courseStatus_maybeAvailable": "Maybe available",
+  "courses_courseStatus_notAvailable": "Not available",
+
+  "course_weekdays_short_0": "Mon",
+  "course_weekdays_short_1": "Tue",
+  "course_weekdays_short_2": "Wed",
+  "course_weekdays_short_3": "Thu",
+  "course_weekdays_short_4": "Fri",
+  "course_weekdays_short_5": "Sat",
+  "course_weekdays_short_6": "Sun",
 
   "maps_title": "Map",
   "maps_campus_lothstrasse": "Lothstrasse Campus",
@@ -33,19 +50,34 @@
   "maps_openMapDescription": "Click on the maps to get directions.",
 
   "schedule_title": "Timetable",
+  "schedule_headline_today": "Today",
+  "schedule_headline_weekly": "Weekly",
+  "schedule_text_timeConflict": "Possible Scheduling Conflict",
+
+  "schedule_item_campus": "Campus",
+  "schedule_item_time": "Time",
+  "schedule_item_day": "Day",
+  "schedule_item_room": "Room",
 
   "favorites_title": "Favorites",
   "favorites_button_register": "Register Favorited Courses",
+  "favorites_button_alreadyRegistered": "Courses Already Submitted",
+  "favorites_message_completeRegistration": "Complete Registration?",
 
   "settings_title": "Settings",
-  "settings_status_label": "Status:",
+  "settings_label_status": "Status:",
   "settings_status_local": "Local student",
   "settings_status_exchange": "Exchange student",
-  "settings_department_label": "Department:",
-  "settings_loggedInAs_label": "Logged in as",
+  "settings_label_department": "Department",
+  "settings_label_loggedInAs": "Logged in as",
   "settings_button_logout": "Log out",
   "settings_contactInternationalOffice": "Contact International Office",
   "settings_cieCertificate": "Courses in English Certificate",
   "settings_ieCertificate": "International Engineering Certificate",
-  "settings_takenCourses_label": "Taken Courses"
+  "settings_label_takenCourses": "Taken Courses",
+  "settings_label_totalOf": "Total of",
+  "settings_label_ects": "ECTS",
+
+  "alert_button_yes": "COMPLETE",
+  "alert_button_no": "CANCEL"
 }
