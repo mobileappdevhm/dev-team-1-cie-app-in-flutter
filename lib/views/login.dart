@@ -37,7 +37,7 @@ class LoginFormState extends State<LoginForm> {
   void _handleSubmitted() async {
     final FormState form = _formKey.currentState;
 
-    if (_formWasEdited && form.validate()) {
+    if (form.validate() && _formWasEdited) {
       form.save();
       //do api call ------------------------
       final String username = usernameController.text;
