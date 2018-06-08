@@ -18,9 +18,13 @@ class CurrentUserMock implements CurrentUser {
 
     currentCourses.add(courses[4]);
     currentCourses.add(courses[5]);
-    currentCourses.add(courses[6]);
-    currentCourses.add(courses[7]);
     currentCourses.add(courses[8]);
+    currentCourses.add(courses[9]);
+    currentCourses.add(courses[10]);
+    currentCourses.add(courses[11]);
+    currentCourses.add(courses[12]);
+    currentCourses.add(courses[17]);
+    currentCourses.add(courses[43]);
 
     currentUser = new User(
         1, "Jane1", "Jane", "Doe", "07", "Local", currentCourses, prevCourses);

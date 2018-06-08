@@ -34,21 +34,21 @@ class _CourseDetailsState extends State<CourseDetails> {
                   children: <Widget>[
                     new Expanded(
                         child: new Align(
-                      alignment: Alignment.centerLeft,
-                      child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Text(
-                            "Title of course",
-                            style: CiEStyle.getCourseDescriptionTitleStyle(),
+                          alignment: Alignment.centerLeft,
+                          child: new Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              new Text(
+                                "Title of course",
+                                style: CiEStyle.getCourseDescriptionTitleStyle(),
+                              ),
+                              new Text(
+                                "FK 07",
+                                style: CiEStyle.getCourseDescriptionFacultyStyle(),
+                              ),
+                            ],
                           ),
-                          new Text(
-                            "FK 07",
-                            style: CiEStyle.getCourseDescriptionFacultyStyle(),
-                          ),
-                        ],
-                      ),
-                    )),
+                        )),
                     new Expanded(
                       child: new Align(
                         alignment: Alignment.centerRight,
@@ -73,10 +73,10 @@ class _CourseDetailsState extends State<CourseDetails> {
                       child: new Text(
                         "Description",
                         style: new TextStyle(
-                          fontSize: 25.0, 
-                          color: CiEColor.gray, 
-                          letterSpacing: 2.0
-                          ),
+                            fontSize: 25.0,
+                            color: CiEColor.gray,
+                            letterSpacing: 2.0
+                        ),
                       )),
                 ],
               ),

@@ -1,6 +1,6 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
-import 'package:cie_team1/generic/genericBorderContainer.dart';
+import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -29,6 +29,7 @@ class CourseListState extends State<CourseList> {
   bool shouldSearch = false;
   String filter = "07";
   String searchValue="";
+  bool coursesRegistered = false;
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites);
 
@@ -40,53 +41,53 @@ class CourseListState extends State<CourseList> {
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
       String departmentLabel = "Department #";
       widgets.add(
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Container(
-                padding: pad,
-                child: new DropdownButton<String>(
-                items: CourseDefinitions.DEPARTMENTS.map((String value) {
-                return new DropdownMenuItem<String>(
-                value: value,
-                child: new Text(departmentLabel+value, overflow: TextOverflow.clip),
-              );
-              }).toList(),
-              onChanged: (String val) {
-                setState(() {
-                  this.filter = val;
-                });
-              },
-                iconSize: 32.0,
-                value: filter,
-            )
-          ),
-          new Container(
-            padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
-            child: new IconButton(
-                color: CiEColor.mediumGray,
-                icon: new Icon(Icons.search),
-                onPressed: toggleSearch
+          new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                    padding: pad,
+                    child: new DropdownButton<String>(
+                      items: CourseDefinitions.DEPARTMENTS.map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(departmentLabel+value, overflow: TextOverflow.clip),
+                        );
+                      }).toList(),
+                      onChanged: (String val) {
+                        setState(() {
+                          this.filter = val;
+                        });
+                      },
+                      iconSize: 32.0,
+                      value: filter,
+                    )
                 ),
-          )
-        ])
+                new Container(
+                  padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
+                  child: new IconButton(
+                      color: CiEColor.mediumGray,
+                      icon: new Icon(Icons.search),
+                      onPressed: toggleSearch
+                  ),
+                )
+              ])
       );
 
       if (shouldSearch) {
         widgets.add(
-          new Container(
-            padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
-            alignment: Alignment.center,
-            child: new TextField(
-              controller: c1,
-              decoration: const InputDecoration(
-                hintText: "Search by Course Name",
-                contentPadding: const EdgeInsets.all(10.0),
-                border: OutlineInputBorder(),
+            new Container(
+              padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
+              alignment: Alignment.center,
+              child: new TextField(
+                controller: c1,
+                decoration: const InputDecoration(
+                  hintText: "Search by Course Name",
+                  contentPadding: const EdgeInsets.all(10.0),
+                  border: OutlineInputBorder(),
                 ),
-              onChanged: (String val)=>updateSearch(val),
-            ),
-          )
+                onChanged: (String val)=>updateSearch(val),
+              ),
+            )
         );
       }
     }
@@ -96,9 +97,9 @@ class CourseListState extends State<CourseList> {
           || (shouldFilterByFavorites == true && courseListPresenter.getFavourite(i))) {
         if (shouldSearch== false || (courseListPresenter.getTitle(i).contains(searchValue))) {
           widgets.add(
-              //GenericBorderContainer.buildGenericBorderedElement(
-                  new CourseListItem(courseListPresenter, i, favoriteIcon(i))
-              //)
+            //GenericBorderContainer.buildGenericBorderedElement(
+              new CourseListItem(courseListPresenter, i, favoriteIcon(i))
+            //)
           );
           //widgets.add(GenericBorderContainer.buildGenericBlurredLine());
           widgets.add(new Divider());
@@ -110,16 +111,18 @@ class CourseListState extends State<CourseList> {
         new Container(
           margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
           child: new RaisedButton(
-              color: CiEColor.red,
+              color: (coursesRegistered == false) ? CiEColor.red : CiEColor.lightGray,
               shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
-              onPressed: () => voidFunction,
+              onPressed: (coursesRegistered == false) ? _handleCourseSubmission : ()=>_voidFunction,
               child: new Container(
                 margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
-                child:new Text(StaticVariables.FAVORITES_REGISTRATION_BUTTON,
+                child:new Text(
+                    (coursesRegistered == false) ? StaticVariables.FAVORITES_REGISTRATION_BUTTON:
+                    StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE,
                 style: new TextStyle(color: Colors.white)),
               ),
-          ),
-        )
+            ),
+          )
       );
     }
     return new ListView(children:widgets);
@@ -135,9 +138,9 @@ class CourseListState extends State<CourseList> {
   }
 
   void _toggleFavourite(int id) {
-      setState(() {
-        courseListPresenter.toggleFavourite(id);
-      });
+    setState(() {
+      courseListPresenter.toggleFavourite(id);
+    });
   }
 
   void toggleSearch() {
@@ -146,12 +149,19 @@ class CourseListState extends State<CourseList> {
     });
   }
 
-  // TODO: Push Data for TimeTable Here
-  void voidFunction() {
-    setState(() {
-      this.shouldSearch = !shouldSearch;
-    });
+  // Build Asynchronously so that we can easily TODO: Send POST Request to Nine
+  void _handleCourseSubmission() {
+    var no = () {};
+    var yes = () {
+      setState(() {
+        coursesRegistered = true;
+      });
+    };
+    GenericAlert.confirm(context, no, yes,
+        StaticVariables.ALERT_REGISTRATION_SUBMISSION).then((_) {});
   }
+
+  void _voidFunction() {}
 
   void updateSearch(String val) {
     setState(() {
