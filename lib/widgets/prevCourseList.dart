@@ -1,3 +1,4 @@
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/widgets/prevCourseListItem.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class PrevCourseListState extends State<PrevCourseList> {
       );
     } catch (e) {
       print("CourseList.dart: " + e.toString());
-      return new Text("No Courses found!");
+      return new Text(S.of(context).courses_list_noCoursesFound);
     }
   }
 }

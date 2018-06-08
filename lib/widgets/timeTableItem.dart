@@ -1,3 +1,4 @@
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,8 @@ class TimeTableItem extends StatelessWidget {
     return new ListTile(
       title: new Column(
         children: <Widget>[
-          new Padding(
-              padding: new EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0)),
-          new Row (
+          new Padding(padding: new EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0)),
+          new Row(
             children: <Widget>[
               new Text(
                 lecture.course.name,
@@ -48,7 +48,7 @@ class TimeTableItem extends StatelessWidget {
                         //Static width to align values
                         width: WIDTH_FIRST_COLUMN,
                         child: new Text(
-                          "Campus: ",
+                          S.of(context).schedule_item_campus + ": ",
                           style: CiEStyle.getTimeTableListMediumGray(),
                         ),
                       ),
@@ -61,15 +61,19 @@ class TimeTableItem extends StatelessWidget {
                 ),
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
-                  child: new Text("Time: ",
+                  child: new Text(
+                    S.of(context).schedule_item_time + ": ",
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),
                 ),
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
-                  child: new Text(" " + lecture.startDayTime.toString() + "-" +
-                      lecture.endDayTime.toString(),
+                  child: new Text(
+                    " " +
+                        lecture.startDayTime.toString() +
+                        "-" +
+                        lecture.endDayTime.toString(),
                     style: CiEStyle.getTimeTableListVariable(),
                     textAlign: TextAlign.start,
                   ),
@@ -86,12 +90,13 @@ class TimeTableItem extends StatelessWidget {
                         //Static width to align values
                         width: WIDTH_FIRST_COLUMN,
                         child: new Text(
-                          "Day: ",
+                          S.of(context).schedule_item_day + ": ",
                           style: CiEStyle.getTimeTableListMediumGray(),
                         ),
                       ),
                       new Text(
-                        WeekdayUtility.getWeekdayAsString(lecture.weekday),
+                        WeekdayUtility.getWeekdayAsString(
+                            lecture.weekday, context),
                         style: CiEStyle.getTimeTableListVariable(),
                       ),
                     ],
@@ -99,14 +104,16 @@ class TimeTableItem extends StatelessWidget {
                 ),
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
-                  child: new Text("Room: ",
+                  child: new Text(
+                    S.of(context).schedule_item_room + ": ",
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),
                 ),
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
-                  child: new Text(" " + lecture.room,
+                  child: new Text(
+                    " " + lecture.room,
                     style: CiEStyle.getTimeTableListVariable(),
                     textAlign: TextAlign.start,
                   ),
@@ -117,8 +124,6 @@ class TimeTableItem extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
-
 }

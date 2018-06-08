@@ -2,6 +2,7 @@ import 'package:cie_team1/di/courses_di.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class CourseListViewContract {
   //Todo: Needed in future
@@ -37,9 +38,7 @@ class CourseListPresenter {
   }
 
   List<Course> getPrevCourses(CurrentUser currentUser) {
-    return currentUser
-        .getCurrentUser()
-        .prevCourses;
+    return currentUser.getCurrentUser().prevCourses;
   }
 
   CourseAvailability getAvailability(int id) {
@@ -58,15 +57,17 @@ class CourseListPresenter {
     return _courses.getCourses()[id].lecturesPerWeek;
   }
 
-  String getLectureTimesBeautiful(int id) {
+  String getLectureTimesBeautiful(int id, BuildContext context) {
     List<Lecture> lectures = _courses.getCourses()[id].lecturesPerWeek;
     String result = "";
     for (var i = 0; i < lectures.length; i++) {
-      if (i != 0)
-        result += '\n';
-      result += WeekdayUtility.getWeekdayAsString(lectures[i].weekday) + ' ' +
-          lectures[i].startDayTime.toString() + '-' +
-          lectures[i].endDayTime.toString();
+      if (i != 0) result += '\n';
+      result +=
+          WeekdayUtility.getWeekdayAsString(lectures[i].weekday, context) +
+              ' ' +
+              lectures[i].startDayTime.toString() +
+              '-' +
+              lectures[i].endDayTime.toString();
     }
 
     return result;
