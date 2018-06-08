@@ -13,7 +13,7 @@
   "login_text_forgetPassword": "Hai dimenticato la password?",
 
   "tabs_courses": "Corsi",
-  "tabs_map": "Mappa",
+  "tabs_maps": "Mappa",
   "tabs_schedule": "Orario",
   "tabs_favorites": "Preferiti",
   "tabs_settings": "Impostazioni",
@@ -24,11 +24,11 @@
   "courses_list_department_short": "DP",
   "courses_list_time": "Time",
 
-  "map_title": "Mappa",
-  "map_campus_lothstrasse": "Lothstrasse Campus",
-  "map_campus_pasing": "Pasing Campus",
-  "map_campus_karlstrasse": "Campus di Karlstrasse",
-  "map_openMapDescription": "Fai clic sulla mappa per ottenere indicazioni stradali.",
+  "maps_title": "Mappa",
+  "maps_campus_lothstrasse": "Lothstrasse Campus",
+  "maps_campus_pasing": "Pasing Campus",
+  "maps_campus_karlstrasse": "Campus di Karlstrasse",
+  "maps_openMapDescription": "Fai clic sulla mapspa per ottenere indicazioni stradali.",
 
   "schedule_title": "Orario",
 

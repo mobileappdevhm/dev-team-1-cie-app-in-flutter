@@ -31,16 +31,17 @@ class S implements WidgetsLocalizations {
   String get favorites_title => "Favorites";
   String get login_button_login => "LOGIN";
   String get login_button_loginAsGuest => "Login as Guest";
+  String get login_error_passwordNotValid => "Password is not valid";
   String get login_headline => "Courses in English";
   String get login_label_email => "E-Mail";
   String get login_label_password => "Password";
   String get login_text_forgetPassword => "Forgot your password?";
   String get login_text_noAccount => "Don't have an account?";
-  String get map_campus_karlstrasse => "Karlstrasse Campus";
-  String get map_campus_lothstrasse => "Lothstrasse Campus";
-  String get map_campus_pasing => "Pasing Campus";
-  String get map_openMapDescription => "Click on the map to get directions.";
-  String get map_title => "Map";
+  String get maps_campus_karlstrasse => "Karlstrasse Campus";
+  String get maps_campus_lothstrasse => "Lothstrasse Campus";
+  String get maps_campus_pasing => "Pasing Campus";
+  String get maps_openMapDescription => "Click on the maps to get directions.";
+  String get maps_title => "Map";
   String get schedule_title => "Timetable";
   String get settings_button_logout => "Log out";
   String get settings_cieCertificate => "Courses in English Certificate";
@@ -57,7 +58,7 @@ class S implements WidgetsLocalizations {
   String get start_headline => "Courses in English";
   String get tabs_courses => "Courses";
   String get tabs_favorites => "Favorites";
-  String get tabs_map => "Map";
+  String get tabs_maps => "Map";
   String get tabs_schedule => "Timetable";
   String get tabs_settings => "Settings";
 }
@@ -75,6 +76,8 @@ class de extends S {
   @override
   String get login_button_login => "ANMELDEN";
   @override
+  String get maps_campus_pasing => "Campus Pasing";
+  @override
   String get start_headline => "Kurse in Englisch";
   @override
   String get courses_title => "Kurse";
@@ -89,17 +92,13 @@ class de extends S {
   @override
   String get settings_status_label => "Status:";
   @override
-  String get map_campus_lothstrasse => "Campus Lothstraße";
-  @override
-  String get map_campus_pasing => "Campus Pasing";
-  @override
   String get settings_button_logout => "Abmelden";
   @override
   String get settings_cieCertificate => "Courses in English Zertifikat";
   @override
   String get settings_takenCourses_label => "Belegte Kurse";
   @override
-  String get tabs_map => "Karte";
+  String get tabs_maps => "Karte";
   @override
   String get courses_search_hint => "Suche nach Kursnamen";
   @override
@@ -109,7 +108,7 @@ class de extends S {
   @override
   String get settings_contactInternationalOffice => "Kontaktiere das International Office";
   @override
-  String get map_campus_karlstrasse => "Campus Karlstraße";
+  String get maps_title => "Karte";
   @override
   String get tabs_settings => "Einstellungen";
   @override
@@ -123,15 +122,17 @@ class de extends S {
   @override
   String get settings_loggedInAs_label => "Angemeldet als";
   @override
-  String get map_title => "Karte";
+  String get maps_openMapDescription => "Klicken Sie auf die Karte, um eine Wegbeschreibung zu erhalten.";
   @override
-  String get map_openMapDescription => "Klicken Sie auf die Karte, um eine Wegbeschreibung zu erhalten.";
+  String get maps_campus_lothstrasse => "Campus Lothstraße";
   @override
   String get tabs_favorites => "Favoriten";
   @override
   String get courses_filter_department => "Fakultät";
   @override
   String get settings_department_label => "Fakultät:";
+  @override
+  String get maps_campus_karlstrasse => "Campus Karlstraße";
   @override
   String get start_button_start => "Start";
   @override
@@ -159,6 +160,8 @@ class fi extends S {
   @override
   String get login_button_login => "LOGIN";
   @override
+  String get maps_campus_pasing => "Pasing Campus";
+  @override
   String get start_headline => "Kurssit englanniksi";
   @override
   String get courses_title => "Kurssit";
@@ -173,17 +176,13 @@ class fi extends S {
   @override
   String get settings_status_label => "Tila:";
   @override
-  String get map_campus_lothstrasse => "Lothstrasse Campus";
-  @override
-  String get map_campus_pasing => "Pasing Campus";
-  @override
   String get settings_button_logout => "Kirjaudu ulos";
   @override
   String get settings_cieCertificate => "Courses in English Certificate";
   @override
   String get settings_takenCourses_label => "Kurssit";
   @override
-  String get tabs_map => "Kartta";
+  String get tabs_maps => "Kartta";
   @override
   String get courses_search_hint => "Haku kurssien nimestä";
   @override
@@ -193,7 +192,7 @@ class fi extends S {
   @override
   String get settings_contactInternationalOffice => "Ota yhteys kansainväliseen toimistoon";
   @override
-  String get map_campus_karlstrasse => "Karlstrasse Campus";
+  String get maps_title => "Kartta";
   @override
   String get tabs_settings => "Asetukset";
   @override
@@ -207,15 +206,17 @@ class fi extends S {
   @override
   String get settings_loggedInAs_label => "Kirjautunut sisään";
   @override
-  String get map_title => "Kartta";
+  String get maps_openMapDescription => "Napsauta karttaa saadaksesi reittiohjeet.";
   @override
-  String get map_openMapDescription => "Napsauta karttaa saadaksesi reittiohjeet.";
+  String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get tabs_favorites => "Suosikit";
   @override
   String get courses_filter_department => "osasto";
   @override
   String get settings_department_label => "Osasto:";
+  @override
+  String get maps_campus_karlstrasse => "Karlstrasse Campus";
   @override
   String get start_button_start => "Käynnistä";
   @override
@@ -243,6 +244,8 @@ class sv extends S {
   @override
   String get login_button_login => "LOGIN";
   @override
+  String get maps_campus_pasing => "Pasing Campus";
+  @override
   String get start_headline => "Kurser på engelska";
   @override
   String get courses_title => "Kurser";
@@ -257,17 +260,13 @@ class sv extends S {
   @override
   String get settings_status_label => "Status:";
   @override
-  String get map_campus_lothstrasse => "Lothstrasse Campus";
-  @override
-  String get map_campus_pasing => "Pasing Campus";
-  @override
   String get settings_button_logout => "Logga ut";
   @override
   String get settings_cieCertificate => "Kurser i engelska certifikat";
   @override
   String get settings_takenCourses_label => "Taken Courses";
   @override
-  String get tabs_map => "Map";
+  String get tabs_maps => "Map";
   @override
   String get courses_search_hint => "Sök efter kursnamn";
   @override
@@ -279,7 +278,7 @@ class sv extends S {
   @override
   String get settings_contactInternationalOffice => "Kontakta International Office";
   @override
-  String get map_campus_karlstrasse => "Karlstrasse Campus";
+  String get maps_title => "Map";
   @override
   String get tabs_settings => "Inställningar";
   @override
@@ -293,15 +292,17 @@ class sv extends S {
   @override
   String get settings_loggedInAs_label => "Inloggad som";
   @override
-  String get map_title => "Map";
+  String get maps_openMapDescription => "Klicka på kartan för att få vägbeskrivning.";
   @override
-  String get map_openMapDescription => "Klicka på kartan för att få vägbeskrivning.";
+  String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get tabs_favorites => "Favoriter";
   @override
   String get courses_filter_department => "Department";
   @override
   String get settings_department_label => "Avdelning:";
+  @override
+  String get maps_campus_karlstrasse => "Karlstrasse Campus";
   @override
   String get start_button_start => "Start";
   @override
@@ -329,6 +330,8 @@ class pt extends S {
   @override
   String get login_button_login => "LOGIN";
   @override
+  String get maps_campus_pasing => "Pasing Campus";
+  @override
   String get start_headline => "Cursos em inglês";
   @override
   String get courses_title => "Cursos";
@@ -343,17 +346,13 @@ class pt extends S {
   @override
   String get settings_status_label => "Status:";
   @override
-  String get map_campus_lothstrasse => "Lothstrasse Campus";
-  @override
-  String get map_campus_pasing => "Pasing Campus";
-  @override
   String get settings_button_logout => "Sair";
   @override
   String get settings_cieCertificate => "Cursos em certificado de inglês";
   @override
   String get settings_takenCourses_label => "Cursos realizados";
   @override
-  String get tabs_map => "Mapa";
+  String get tabs_maps => "Mapa";
   @override
   String get courses_search_hint => "Pesquisar por nome do curso";
   @override
@@ -365,7 +364,7 @@ class pt extends S {
   @override
   String get settings_contactInternationalOffice => "Contact International Office";
   @override
-  String get map_campus_karlstrasse => "Karlstrasse Campus";
+  String get maps_title => "Mapa";
   @override
   String get tabs_settings => "Configurações";
   @override
@@ -379,15 +378,17 @@ class pt extends S {
   @override
   String get settings_loggedInAs_label => "Conectado como";
   @override
-  String get map_title => "Mapa";
+  String get maps_openMapDescription => "Clique no mapsa para obter direcções.";
   @override
-  String get map_openMapDescription => "Clique no mapa para obter direcções.";
+  String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get tabs_favorites => "Favoritos";
   @override
   String get courses_filter_department => "Departamento";
   @override
   String get settings_department_label => "Departamento:";
+  @override
+  String get maps_campus_karlstrasse => "Karlstrasse Campus";
   @override
   String get start_button_start => "Iniciar";
   @override
@@ -415,6 +416,8 @@ class th extends S {
   @override
   String get login_button_login => "LOGIN";
   @override
+  String get maps_campus_pasing => "Pasing Campus";
+  @override
   String get start_headline => "หลักสูตรภาษาอังกฤษ";
   @override
   String get courses_title => "หลักสูตร";
@@ -429,17 +432,13 @@ class th extends S {
   @override
   String get settings_status_label => "สถานะ:";
   @override
-  String get map_campus_lothstrasse => "Lothstrasse Campus";
-  @override
-  String get map_campus_pasing => "Pasing Campus";
-  @override
   String get settings_button_logout => "ออกจากระบบ";
   @override
   String get settings_cieCertificate => "หลักสูตรภาษาอังกฤษ";
   @override
   String get settings_takenCourses_label => "หลักสูตรที่เอามา";
   @override
-  String get tabs_map => "แผนที่";
+  String get tabs_maps => "แผนที่";
   @override
   String get courses_search_hint => "ค้นหาตามชื่อหลักสูตร";
   @override
@@ -451,7 +450,7 @@ class th extends S {
   @override
   String get settings_contactInternationalOffice => "ติดต่อสำนักงานระหว่างประเทศ";
   @override
-  String get map_campus_karlstrasse => "วิทยาเขต Karlstrasse";
+  String get maps_title => "แผนที่";
   @override
   String get tabs_settings => "การตั้งค่า";
   @override
@@ -465,15 +464,17 @@ class th extends S {
   @override
   String get settings_loggedInAs_label => "เข้าสู่ระบบด้วย";
   @override
-  String get map_title => "แผนที่";
+  String get maps_openMapDescription => "คลิกที่แผนที่เพื่อขอเส้นทาง";
   @override
-  String get map_openMapDescription => "คลิกที่แผนที่เพื่อขอเส้นทาง";
+  String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get tabs_favorites => "รายการโปรด";
   @override
   String get courses_filter_department => "ภาควิชา";
   @override
   String get settings_department_label => "ภาควิชา:";
+  @override
+  String get maps_campus_karlstrasse => "วิทยาเขต Karlstrasse";
   @override
   String get start_button_start => "Start";
   @override
@@ -505,6 +506,8 @@ class it extends S {
   @override
   String get login_button_login => "LOGIN";
   @override
+  String get maps_campus_pasing => "Pasing Campus";
+  @override
   String get start_headline => "Corsi in inglese";
   @override
   String get courses_title => "Corsi";
@@ -519,17 +522,13 @@ class it extends S {
   @override
   String get settings_status_label => "Stato:";
   @override
-  String get map_campus_lothstrasse => "Lothstrasse Campus";
-  @override
-  String get map_campus_pasing => "Pasing Campus";
-  @override
   String get settings_button_logout => "Esci";
   @override
   String get settings_cieCertificate => "Corsi in inglese certificato";
   @override
   String get settings_takenCourses_label => "Corsi presi";
   @override
-  String get tabs_map => "Mappa";
+  String get tabs_maps => "Mappa";
   @override
   String get courses_search_hint => "Cerca per nome del corso";
   @override
@@ -541,7 +540,7 @@ class it extends S {
   @override
   String get settings_contactInternationalOffice => "Contatta l'ufficio internazionale";
   @override
-  String get map_campus_karlstrasse => "Campus di Karlstrasse";
+  String get maps_title => "Mappa";
   @override
   String get tabs_settings => "Impostazioni";
   @override
@@ -555,15 +554,17 @@ class it extends S {
   @override
   String get settings_loggedInAs_label => "Connesso come";
   @override
-  String get map_title => "Mappa";
+  String get maps_openMapDescription => "Fai clic sulla mapspa per ottenere indicazioni stradali.";
   @override
-  String get map_openMapDescription => "Fai clic sulla mappa per ottenere indicazioni stradali.";
+  String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get tabs_favorites => "Preferiti";
   @override
   String get courses_filter_department => "Dipartimento";
   @override
   String get settings_department_label => "Dipartimento:";
+  @override
+  String get maps_campus_karlstrasse => "Campus di Karlstrasse";
   @override
   String get start_button_start => "Start";
   @override
@@ -591,6 +592,8 @@ class fr extends S {
   @override
   String get login_button_login => "CONNEXION";
   @override
+  String get maps_campus_pasing => "Pasing Campus";
+  @override
   String get start_headline => "Cours en anglais";
   @override
   String get courses_title => "Cours";
@@ -605,17 +608,13 @@ class fr extends S {
   @override
   String get settings_status_label => "Statut:";
   @override
-  String get map_campus_lothstrasse => "Lothstrasse Campus";
-  @override
-  String get map_campus_pasing => "Pasing Campus";
-  @override
   String get settings_button_logout => "Déconnexion";
   @override
   String get settings_cieCertificate => "Cours en anglais";
   @override
   String get settings_takenCourses_label => "Cours suivis";
   @override
-  String get tabs_map => "Carte";
+  String get tabs_maps => "Carte";
   @override
   String get courses_search_hint => "Recherche par nom de cours";
   @override
@@ -627,7 +626,7 @@ class fr extends S {
   @override
   String get settings_contactInternationalOffice => "Contacter le bureau international";
   @override
-  String get map_campus_karlstrasse => "Karlstrasse Campus";
+  String get maps_title => "Carte";
   @override
   String get tabs_settings => "Paramètres";
   @override
@@ -641,15 +640,17 @@ class fr extends S {
   @override
   String get settings_loggedInAs_label => "Connecté en tant que";
   @override
-  String get map_title => "Carte";
+  String get maps_openMapDescription => "Cliquer sur la carte pour obtenir l'itinéraire.";
   @override
-  String get map_openMapDescription => "Cliquer sur la carte pour obtenir l'itinéraire.";
+  String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get tabs_favorites => "Favoris";
   @override
   String get courses_filter_department => "Département";
   @override
   String get settings_department_label => "Département:";
+  @override
+  String get maps_campus_karlstrasse => "Karlstrasse Campus";
   @override
   String get start_button_start => "Démarrer";
   @override

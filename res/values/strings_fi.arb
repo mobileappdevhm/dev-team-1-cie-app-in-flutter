@@ -13,7 +13,7 @@
   "login_text_forgetPassword": "Unohditko salasanasi?",
 
   "tabs_courses": "Kurssit",
-  "tabs_map": "Kartta",
+  "tabs_maps": "Kartta",
   "tabs_schedule": "Aikataulu",
   "tabs_favorites": "Suosikit",
   "tabs_settings": "Asetukset",
@@ -24,11 +24,11 @@
   "courses_list_department_short": "DP",
   "courses_list_time": "Time",
 
-  "map_title": "Kartta",
-  "map_campus_lothstrasse": "Lothstrasse Campus",
-  "map_campus_pasing": "Pasing Campus",
-  "map_campus_karlstrasse": "Karlstrasse Campus",
-  "map_openMapDescription": "Napsauta karttaa saadaksesi reittiohjeet.",
+  "maps_title": "Kartta",
+  "maps_campus_lothstrasse": "Lothstrasse Campus",
+  "maps_campus_pasing": "Pasing Campus",
+  "maps_campus_karlstrasse": "Karlstrasse Campus",
+  "maps_openMapDescription": "Napsauta karttaa saadaksesi reittiohjeet.",
 
   "aikataulu": "aikataulu",
 

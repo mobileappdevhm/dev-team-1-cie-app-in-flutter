@@ -11,9 +11,11 @@
   "login_text_noAccount": "Don't have an account?",
   "login_button_loginAsGuest": "Login as Guest",
   "login_text_forgetPassword": "Forgot your password?",
+  "login_error_passwordNotValid": "Password is not valid",
 
+//test comment
   "tabs_courses": "Courses",
-  "tabs_map": "Map",
+  "tabs_maps": "Map",
   "tabs_schedule": "Timetable",
   "tabs_favorites": "Favorites",
   "tabs_settings": "Settings",
@@ -24,11 +26,11 @@
   "courses_list_department_short": "DP",
   "courses_list_time": "Time",
 
-  "map_title": "Map",
-  "map_campus_lothstrasse": "Lothstrasse Campus",
-  "map_campus_pasing": "Pasing Campus",
-  "map_campus_karlstrasse": "Karlstrasse Campus",
-  "map_openMapDescription": "Click on the map to get directions.",
+  "maps_title": "Map",
+  "maps_campus_lothstrasse": "Lothstrasse Campus",
+  "maps_campus_pasing": "Pasing Campus",
+  "maps_campus_karlstrasse": "Karlstrasse Campus",
+  "maps_openMapDescription": "Click on the maps to get directions.",
 
   "schedule_title": "Timetable",
 

@@ -12,7 +12,7 @@
   "login_button_loginAsGuest": "Als Gast anmelden",
 
   "tabs_courses": "Kurse",
-  "tabs_map": "Karte",
+  "tabs_maps": "Karte",
   "tabs_schedule": "Stundenplan",
   "tabs_favorites": "Favoriten",
   "tabs_settings": "Einstellungen",
@@ -23,11 +23,11 @@
   "courses_list_department_short": "FK",
   "courses_list_time": "Uhrzeit",
 
-  "map_title": "Karte",
-  "map_campus_lothstrasse": "Campus Lothstraße",
-  "map_campus_pasing": "Campus Pasing",
-  "map_campus_karlstrasse": "Campus Karlstraße",
-  "map_openMapDescription": "Klicken Sie auf die Karte, um eine Wegbeschreibung zu erhalten.",
+  "maps_title": "Karte",
+  "maps_campus_lothstrasse": "Campus Lothstraße",
+  "maps_campus_pasing": "Campus Pasing",
+  "maps_campus_karlstrasse": "Campus Karlstraße",
+  "maps_openMapDescription": "Klicken Sie auf die Karte, um eine Wegbeschreibung zu erhalten.",
 
   "schedule_title": "Stundenplan",
 

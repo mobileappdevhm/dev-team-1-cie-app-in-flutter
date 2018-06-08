@@ -13,7 +13,7 @@
   "login_text_forgetPassword": "Glömt ditt lösenord?",
 
   "tabs_courses": "Kurser",
-  "tabs_map": "Map",
+  "tabs_maps": "Map",
   "tabs_schedule": "Timetable",
   "tabs_favorites": "Favoriter",
   "tabs_settings": "Inställningar",
@@ -24,11 +24,11 @@
   "courses_list_department_short": "DP",
   "courses_list_time": "Time",
 
-  "map_title": "Map",
-  "map_campus_lothstrasse": "Lothstrasse Campus",
-  "map_campus_pasing": "Pasing Campus",
-  "map_campus_karlstrasse": "Karlstrasse Campus",
-  "map_openMapDescription": "Klicka på kartan för att få vägbeskrivning.",
+  "maps_title": "Map",
+  "maps_campus_lothstrasse": "Lothstrasse Campus",
+  "maps_campus_pasing": "Pasing Campus",
+  "maps_campus_karlstrasse": "Karlstrasse Campus",
+  "maps_openMapDescription": "Klicka på kartan för att få vägbeskrivning.",
 
   "schedule_title": "Timetable",
 

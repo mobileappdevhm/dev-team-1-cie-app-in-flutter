@@ -13,7 +13,7 @@
   "login_text_forgetPassword": "ลืมรหัสผ่านของคุณ?",
 
   "tabs_courses": "หลักสูตร",
-  "tabs_map": "แผนที่",
+  "tabs_maps": "แผนที่",
   "tabs_schedule": "ตารางเวลา",
   "tabs_favorites": "รายการโปรด",
   "tabs_settings": "การตั้งค่า",
@@ -24,11 +24,11 @@
   "courses_list_department_short": "DP",
   "courses_list_time": "เวลา",
 
-  "map_title": "แผนที่",
-  "map_campus_lothstrasse": "Lothstrasse Campus",
-  "map_campus_pasing": "Pasing Campus",
-  "map_campus_karlstrasse": "วิทยาเขต Karlstrasse",
-  "map_openMapDescription": "คลิกที่แผนที่เพื่อขอเส้นทาง",
+  "maps_title": "แผนที่",
+  "maps_campus_lothstrasse": "Lothstrasse Campus",
+  "maps_campus_pasing": "Pasing Campus",
+  "maps_campus_karlstrasse": "วิทยาเขต Karlstrasse",
+  "maps_openMapDescription": "คลิกที่แผนที่เพื่อขอเส้นทาง",
 
   "schedule_title": "ตารางเวลา",
 
