@@ -5,8 +5,8 @@
   "start_button_start": "Start",
 
   "login_headline": "Corsi in inglese",
-  "login_email_hint": "E-mail",
-  "login_password_hint": "Password",
+  "login_label_email": "E-mail",
+  "login_label_password": "Password",
   "login_button_login": "LOGIN",
   "login_text_noAccount": "Non hai un account?",
   "login_button_loginAsGuest": "Accedi come ospite",
@@ -14,7 +14,7 @@
 
   "tabs_courses": "Corsi",
   "tabs_map": "Mappa",
-  "tabs_timetable": "Orario",
+  "tabs_schedule": "Orario",
   "tabs_favorites": "Preferiti",
   "tabs_settings": "Impostazioni",
 
@@ -30,7 +30,7 @@
   "map_campus_karlstrasse": "Campus di Karlstrasse",
   "map_openMapDescription": "Fai clic sulla mappa per ottenere indicazioni stradali.",
 
-  "timetable_title": "Orario",
+  "schedule_title": "Orario",
 
   "favorites_title": "Preferiti",
   "favorites_button_register": "Registra i corsi preferiti",

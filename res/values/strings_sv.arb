@@ -5,8 +5,8 @@
   "start_button_start": "Start",
 
   "login_headline": "Kurser på engelska",
-  "login_email_hint": "E-post",
-  "login_password_hint": "Lösenord",
+  "login_label_email": "E-post",
+  "login_label_password": "Lösenord",
   "login_button_login": "LOGIN",
   "login_text_noAccount": "Har du inte ett konto?",
   "login_button_loginAsGuest": "Logga in som gäst",
@@ -14,7 +14,7 @@
 
   "tabs_courses": "Kurser",
   "tabs_map": "Map",
-  "tabs_timetable": "Timetable",
+  "tabs_schedule": "Timetable",
   "tabs_favorites": "Favoriter",
   "tabs_settings": "Inställningar",
 
@@ -30,7 +30,7 @@
   "map_campus_karlstrasse": "Karlstrasse Campus",
   "map_openMapDescription": "Klicka på kartan för att få vägbeskrivning.",
 
-  "timetable_title": "Timetable",
+  "schedule_title": "Timetable",
 
   "favorites_title": "Favoriter",
   "favorites_button_register": "Registrera favoriterade kurser",

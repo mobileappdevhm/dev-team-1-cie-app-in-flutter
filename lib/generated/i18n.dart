@@ -31,9 +31,9 @@ class S implements WidgetsLocalizations {
   String get favorites_title => "Favorites";
   String get login_button_login => "LOGIN";
   String get login_button_loginAsGuest => "Login as Guest";
-  String get login_email_hint => "E-Mail";
   String get login_headline => "Courses in English";
-  String get login_password_hint => "Password";
+  String get login_label_email => "E-Mail";
+  String get login_label_password => "Password";
   String get login_text_forgetPassword => "Forgot your password?";
   String get login_text_noAccount => "Don't have an account?";
   String get map_campus_karlstrasse => "Karlstrasse Campus";
@@ -41,6 +41,7 @@ class S implements WidgetsLocalizations {
   String get map_campus_pasing => "Pasing Campus";
   String get map_openMapDescription => "Click on the map to get directions.";
   String get map_title => "Map";
+  String get schedule_title => "Timetable";
   String get settings_button_logout => "Log out";
   String get settings_cieCertificate => "Courses in English Certificate";
   String get settings_contactInternationalOffice => "Contact International Office";
@@ -57,9 +58,8 @@ class S implements WidgetsLocalizations {
   String get tabs_courses => "Courses";
   String get tabs_favorites => "Favorites";
   String get tabs_map => "Map";
+  String get tabs_schedule => "Timetable";
   String get tabs_settings => "Settings";
-  String get tabs_timetable => "Timetable";
-  String get timetable_title => "Timetable";
 }
 
 class de extends S {
@@ -71,9 +71,9 @@ class de extends S {
   @override
   String get login_button_loginAsGuest => "Als Gast anmelden";
   @override
-  String get login_button_login => "ANMELDEN";
+  String get login_label_email => "E-Mail";
   @override
-  String get timetable_title => "Stundenplan";
+  String get login_button_login => "ANMELDEN";
   @override
   String get start_headline => "Kurse in Englisch";
   @override
@@ -83,11 +83,7 @@ class de extends S {
   @override
   String get settings_ieCertificate => "International Engineering Zertifikat";
   @override
-  String get login_email_hint => "E-Mail";
-  @override
   String get login_headline => "Kurse in Englisch";
-  @override
-  String get tabs_timetable => "Stundenplan";
   @override
   String get courses_list_department_short => "FK";
   @override
@@ -107,9 +103,9 @@ class de extends S {
   @override
   String get courses_search_hint => "Suche nach Kursnamen";
   @override
-  String get login_password_hint => "Passwort";
-  @override
   String get tabs_courses => "Kurse";
+  @override
+  String get schedule_title => "Stundenplan";
   @override
   String get settings_contactInternationalOffice => "Kontaktiere das International Office";
   @override
@@ -118,6 +114,8 @@ class de extends S {
   String get tabs_settings => "Einstellungen";
   @override
   String get app_title => "CiE";
+  @override
+  String get login_label_password => "Passwort";
   @override
   String get settings_status_local => "Lokaler Student";
   @override
@@ -141,6 +139,8 @@ class de extends S {
   @override
   String get favorites_button_register => "Registere favorisierte Kurse";
   @override
+  String get tabs_schedule => "Stundenplan";
+  @override
   String get login_text_noAccount => "Noch keinen Account?";
   @override
   String get favorites_title => "Favoriten";
@@ -155,6 +155,8 @@ class fi extends S {
   @override
   String get login_button_loginAsGuest => "Kirjaudu sisään vierailijaksi";
   @override
+  String get login_label_email => "Sähköposti";
+  @override
   String get login_button_login => "LOGIN";
   @override
   String get start_headline => "Kurssit englanniksi";
@@ -165,11 +167,7 @@ class fi extends S {
   @override
   String get settings_ieCertificate => "International Engineering Certificate";
   @override
-  String get login_email_hint => "Sähköposti";
-  @override
   String get login_headline => "Kurssit englanniksi";
-  @override
-  String get tabs_timetable => "Aikataulu";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -189,8 +187,6 @@ class fi extends S {
   @override
   String get courses_search_hint => "Haku kurssien nimestä";
   @override
-  String get login_password_hint => "Salasana";
-  @override
   String get login_text_forgetPassword => "Unohditko salasanasi?";
   @override
   String get tabs_courses => "Kurssit";
@@ -202,6 +198,8 @@ class fi extends S {
   String get tabs_settings => "Asetukset";
   @override
   String get app_title => "CiE";
+  @override
+  String get login_label_password => "Salasana";
   @override
   String get settings_status_local => "Paikallinen opiskelija";
   @override
@@ -225,6 +223,8 @@ class fi extends S {
   @override
   String get favorites_button_register => "Rekisteröidy suosikki kursseja";
   @override
+  String get tabs_schedule => "Aikataulu";
+  @override
   String get login_text_noAccount => "Sinulla ei ole tiliä?";
   @override
   String get favorites_title => "Suosikit";
@@ -239,9 +239,9 @@ class sv extends S {
   @override
   String get login_button_loginAsGuest => "Logga in som gäst";
   @override
-  String get login_button_login => "LOGIN";
+  String get login_label_email => "E-post";
   @override
-  String get timetable_title => "Timetable";
+  String get login_button_login => "LOGIN";
   @override
   String get start_headline => "Kurser på engelska";
   @override
@@ -251,11 +251,7 @@ class sv extends S {
   @override
   String get settings_ieCertificate => "International Engineering Certificate";
   @override
-  String get login_email_hint => "E-post";
-  @override
   String get login_headline => "Kurser på engelska";
-  @override
-  String get tabs_timetable => "Timetable";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -275,11 +271,11 @@ class sv extends S {
   @override
   String get courses_search_hint => "Sök efter kursnamn";
   @override
-  String get login_password_hint => "Lösenord";
-  @override
   String get login_text_forgetPassword => "Glömt ditt lösenord?";
   @override
   String get tabs_courses => "Kurser";
+  @override
+  String get schedule_title => "Timetable";
   @override
   String get settings_contactInternationalOffice => "Kontakta International Office";
   @override
@@ -288,6 +284,8 @@ class sv extends S {
   String get tabs_settings => "Inställningar";
   @override
   String get app_title => "CiE";
+  @override
+  String get login_label_password => "Lösenord";
   @override
   String get settings_status_local => "Lokal student";
   @override
@@ -311,6 +309,8 @@ class sv extends S {
   @override
   String get favorites_button_register => "Registrera favoriterade kurser";
   @override
+  String get tabs_schedule => "Timetable";
+  @override
   String get login_text_noAccount => "Har du inte ett konto?";
   @override
   String get favorites_title => "Favoriter";
@@ -325,9 +325,9 @@ class pt extends S {
   @override
   String get login_button_loginAsGuest => "Login como convidado";
   @override
-  String get login_button_login => "LOGIN";
+  String get login_label_email => "E-Mail";
   @override
-  String get timetable_title => "Horário";
+  String get login_button_login => "LOGIN";
   @override
   String get start_headline => "Cursos em inglês";
   @override
@@ -337,11 +337,7 @@ class pt extends S {
   @override
   String get settings_ieCertificate => "International Engineering Certificate";
   @override
-  String get login_email_hint => "E-Mail";
-  @override
   String get login_headline => "Cursos em inglês";
-  @override
-  String get tabs_timetable => "Horário";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -361,11 +357,11 @@ class pt extends S {
   @override
   String get courses_search_hint => "Pesquisar por nome do curso";
   @override
-  String get login_password_hint => "Senha";
-  @override
   String get login_text_forgetPassword => "Esqueceu sua senha?";
   @override
   String get tabs_courses => "Cursos";
+  @override
+  String get schedule_title => "Horário";
   @override
   String get settings_contactInternationalOffice => "Contact International Office";
   @override
@@ -374,6 +370,8 @@ class pt extends S {
   String get tabs_settings => "Configurações";
   @override
   String get app_title => "CiE";
+  @override
+  String get login_label_password => "Senha";
   @override
   String get settings_status_local => "estudante local";
   @override
@@ -397,6 +395,8 @@ class pt extends S {
   @override
   String get favorites_button_register => "Registre cursos favoritos";
   @override
+  String get tabs_schedule => "Horário";
+  @override
   String get login_text_noAccount => "Não tem uma conta?";
   @override
   String get favorites_title => "Favoritos";
@@ -411,9 +411,9 @@ class th extends S {
   @override
   String get login_button_loginAsGuest => "เข้าสู่ระบบด้วย Guest";
   @override
-  String get login_button_login => "LOGIN";
+  String get login_label_email => "E-Mail";
   @override
-  String get timetable_title => "ตารางเวลา";
+  String get login_button_login => "LOGIN";
   @override
   String get start_headline => "หลักสูตรภาษาอังกฤษ";
   @override
@@ -423,11 +423,7 @@ class th extends S {
   @override
   String get settings_ieCertificate => "ใบรับรองวิศวกรรมนานาชาติ";
   @override
-  String get login_email_hint => "E-Mail";
-  @override
   String get login_headline => "หลักสูตรภาษาอังกฤษ";
-  @override
-  String get tabs_timetable => "ตารางเวลา";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -447,11 +443,11 @@ class th extends S {
   @override
   String get courses_search_hint => "ค้นหาตามชื่อหลักสูตร";
   @override
-  String get login_password_hint => "รหัสผ่าน";
-  @override
   String get login_text_forgetPassword => "ลืมรหัสผ่านของคุณ?";
   @override
   String get tabs_courses => "หลักสูตร";
+  @override
+  String get schedule_title => "ตารางเวลา";
   @override
   String get settings_contactInternationalOffice => "ติดต่อสำนักงานระหว่างประเทศ";
   @override
@@ -460,6 +456,8 @@ class th extends S {
   String get tabs_settings => "การตั้งค่า";
   @override
   String get app_title => "CiE";
+  @override
+  String get login_label_password => "รหัสผ่าน";
   @override
   String get settings_status_local => "นักเรียนท้องถิ่น";
   @override
@@ -483,6 +481,8 @@ class th extends S {
   @override
   String get favorites_button_register => "ลงทะเบียนหลักสูตรที่ชื่นชอบ";
   @override
+  String get tabs_schedule => "ตารางเวลา";
+  @override
   String get login_text_noAccount => "ไม่มีบัญชีหรือ?";
   @override
   String get favorites_title => "รายการโปรด";
@@ -501,9 +501,9 @@ class it extends S {
   @override
   String get login_button_loginAsGuest => "Accedi come ospite";
   @override
-  String get login_button_login => "LOGIN";
+  String get login_label_email => "E-mail";
   @override
-  String get timetable_title => "Orario";
+  String get login_button_login => "LOGIN";
   @override
   String get start_headline => "Corsi in inglese";
   @override
@@ -513,11 +513,7 @@ class it extends S {
   @override
   String get settings_ieCertificate => "Certificato di ingegneria internazionale";
   @override
-  String get login_email_hint => "E-mail";
-  @override
   String get login_headline => "Corsi in inglese";
-  @override
-  String get tabs_timetable => "Orario";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -537,11 +533,11 @@ class it extends S {
   @override
   String get courses_search_hint => "Cerca per nome del corso";
   @override
-  String get login_password_hint => "Password";
-  @override
   String get login_text_forgetPassword => "Hai dimenticato la password?";
   @override
   String get tabs_courses => "Corsi";
+  @override
+  String get schedule_title => "Orario";
   @override
   String get settings_contactInternationalOffice => "Contatta l'ufficio internazionale";
   @override
@@ -550,6 +546,8 @@ class it extends S {
   String get tabs_settings => "Impostazioni";
   @override
   String get app_title => "CiE";
+  @override
+  String get login_label_password => "Password";
   @override
   String get settings_status_local => "Studente locale";
   @override
@@ -573,6 +571,8 @@ class it extends S {
   @override
   String get favorites_button_register => "Registra i corsi preferiti";
   @override
+  String get tabs_schedule => "Orario";
+  @override
   String get login_text_noAccount => "Non hai un account?";
   @override
   String get favorites_title => "Preferiti";
@@ -587,6 +587,8 @@ class fr extends S {
   @override
   String get login_button_loginAsGuest => "Se connecter en tant qu'invité";
   @override
+  String get login_label_email => "E-Mail";
+  @override
   String get login_button_login => "CONNEXION";
   @override
   String get start_headline => "Cours en anglais";
@@ -597,11 +599,7 @@ class fr extends S {
   @override
   String get settings_ieCertificate => "Certificat d'ingénierie international";
   @override
-  String get login_email_hint => "E-Mail";
-  @override
   String get login_headline => "Cours en anglais";
-  @override
-  String get tabs_timetable => "Calendrier";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -621,11 +619,11 @@ class fr extends S {
   @override
   String get courses_search_hint => "Recherche par nom de cours";
   @override
-  String get login_password_hint => "Mot de passe";
-  @override
   String get login_text_forgetPassword => "Mot de passe oublié?";
   @override
   String get tabs_courses => "Cours";
+  @override
+  String get schedule_title => "Calendrier";
   @override
   String get settings_contactInternationalOffice => "Contacter le bureau international";
   @override
@@ -634,6 +632,8 @@ class fr extends S {
   String get tabs_settings => "Paramètres";
   @override
   String get app_title => "CiE";
+  @override
+  String get login_label_password => "Mot de passe";
   @override
   String get settings_status_local => "Étudiant local";
   @override
@@ -656,6 +656,8 @@ class fr extends S {
   String get courses_list_time => "Heure";
   @override
   String get favorites_button_register => "Enregistrer les cours favoris";
+  @override
+  String get tabs_schedule => "Calendrier";
   @override
   String get login_text_noAccount => "Vous n'avez pas de compte?";
   @override

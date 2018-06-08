@@ -5,15 +5,15 @@
   "start_button_start": "Start",
 
   "login_headline": "Kurse in Englisch",
-  "login_email_hint": "E-Mail",
-  "login_password_hint": "Passwort",
+  "login_label_email": "E-Mail",
+  "login_label_password": "Passwort",
   "login_button_login": "ANMELDEN",
   "login_text_noAccount": "Noch keinen Account?",
   "login_button_loginAsGuest": "Als Gast anmelden",
 
   "tabs_courses": "Kurse",
   "tabs_map": "Karte",
-  "tabs_timetable": "Stundenplan",
+  "tabs_schedule": "Stundenplan",
   "tabs_favorites": "Favoriten",
   "tabs_settings": "Einstellungen",
 
@@ -29,7 +29,7 @@
   "map_campus_karlstrasse": "Campus Karlstraße",
   "map_openMapDescription": "Klicken Sie auf die Karte, um eine Wegbeschreibung zu erhalten.",
 
-  "timetable_title": "Stundenplan",
+  "schedule_title": "Stundenplan",
 
   "favorites_title": "Favoriten",
   "favorites_button_register": "Registere favorisierte Kurse",

@@ -5,8 +5,8 @@
   "start_button_start": "Käynnistä",
 
   "login_headline": "Kurssit englanniksi",
-  "login_email_hint": "Sähköposti",
-  "login_password_hint": "Salasana",
+  "login_label_email": "Sähköposti",
+  "login_label_password": "Salasana",
   "login_button_login": "LOGIN",
   "login_text_noAccount": "Sinulla ei ole tiliä?",
   "login_button_loginAsGuest": "Kirjaudu sisään vierailijaksi",
@@ -14,7 +14,7 @@
 
   "tabs_courses": "Kurssit",
   "tabs_map": "Kartta",
-  "tabs_timetable": "Aikataulu",
+  "tabs_schedule": "Aikataulu",
   "tabs_favorites": "Suosikit",
   "tabs_settings": "Asetukset",
 

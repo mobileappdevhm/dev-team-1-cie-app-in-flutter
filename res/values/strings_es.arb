@@ -5,8 +5,8 @@
   "start_button_start": "Start",
 
   "login_headline": "Cursos en inglés",
-  "login_email_hint": "E-Mail",
-  "login_password_hint": "Contraseña",
+  "login_label_email": "E-Mail",
+  "login_label_password": "Contraseña",
   "login_button_login": "INICIAR SESIÓN",
   "login_text_noAccount": "¿No tienes una cuenta?",
   "login_button_loginAsGuest": "Iniciar sesión como invitado",
@@ -14,7 +14,7 @@
 
   "tabs_courses": "Cursos",
   "tabs_map": "Mapa",
-  "tabs_timetable": "Horario",
+  "tabs_schedule": "Horario",
   "tabs_favorites": "Favoritos",
   "tabs_settings": "Configuraciones",
 

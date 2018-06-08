@@ -5,8 +5,8 @@
   "start_button_start": "Start",
 
   "login_headline": "หลักสูตรภาษาอังกฤษ",
-  "login_email_hint": "E-Mail",
-  "login_password_hint": "รหัสผ่าน",
+  "login_label_email": "E-Mail",
+  "login_label_password": "รหัสผ่าน",
   "login_button_login": "LOGIN",
   "login_text_noAccount": "ไม่มีบัญชีหรือ?",
   "login_button_loginAsGuest": "เข้าสู่ระบบด้วย Guest",
@@ -14,7 +14,7 @@
 
   "tabs_courses": "หลักสูตร",
   "tabs_map": "แผนที่",
-  "tabs_timetable": "ตารางเวลา",
+  "tabs_schedule": "ตารางเวลา",
   "tabs_favorites": "รายการโปรด",
   "tabs_settings": "การตั้งค่า",
 
@@ -30,7 +30,7 @@
   "map_campus_karlstrasse": "วิทยาเขต Karlstrasse",
   "map_openMapDescription": "คลิกที่แผนที่เพื่อขอเส้นทาง",
 
-  "timetable_title": "ตารางเวลา",
+  "schedule_title": "ตารางเวลา",
 
   "favorites_title": "รายการโปรด",
   "favorites_button_register": "ลงทะเบียนหลักสูตรที่ชื่นชอบ",
