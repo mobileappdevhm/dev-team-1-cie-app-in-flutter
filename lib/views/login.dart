@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/model/login/loginData.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -136,16 +137,16 @@ class LoginFormState extends State<LoginForm> {
                   new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
                   new Padding(padding: const EdgeInsets.only(top: 35.0)),
                   new Text(
-                    "Courses in English",
+                    S.of(context).login_headline,
                     style: CiEStyle.getAppBarTitleStyle(context),
                     textAlign: TextAlign.center,
                   ),
                   new Padding(padding: const EdgeInsets.only(top: 25.0)),
                   new TextFormField(
                     controller: usernameController,
-                    decoration: const InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: 'E-Mail',
+                    decoration: new InputDecoration(
+                      border: new OutlineInputBorder(),
+                      labelText: S.of(context).login_label_email,
                     ),
                     keyboardType: TextInputType.emailAddress,
                     onSaved: (String value) {
@@ -157,9 +158,9 @@ class LoginFormState extends State<LoginForm> {
                   new TextFormField(
                     controller: passwordController,
                     key: _passwordFieldKey,
-                    decoration: const InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: 'Password',
+                    decoration: new InputDecoration(
+                      border: new OutlineInputBorder(),
+                      labelText: S.of(context).login_label_password,
                     ),
                     obscureText: true,
                     onSaved: (String value) {
@@ -175,7 +176,7 @@ class LoginFormState extends State<LoginForm> {
                           borderRadius: CiEStyle.getButtonBorderRadius()),
                       onPressed: _handleSubmitted,
                       child: new Text(
-                        'LOGIN',
+                        S.of(context).login_button_login,
                         style: new TextStyle(color: Colors.white),
                       ),
                     ),
@@ -183,7 +184,7 @@ class LoginFormState extends State<LoginForm> {
                   new FlatButton(
                     onPressed: () => _launchUrl("https://nine.wi.hm.edu/Account/Register"),
                     child: new Text(
-                      "Don't have an Account?",
+                      S.of(context).login_text_noAccount,
                       style: new TextStyle(color: CiEColor.red),
                       textAlign: TextAlign.center,
                     ),
@@ -196,7 +197,7 @@ class LoginFormState extends State<LoginForm> {
                           borderRadius: CiEStyle.getButtonBorderRadius()),
                       onPressed: _handleGuestLogin,
                       child: new Text(
-                        'Login as Guest',
+                        S.of(context).login_button_loginAsGuest,
                         style: new TextStyle(color: Colors.white),
                       ),
                     ),
@@ -204,7 +205,7 @@ class LoginFormState extends State<LoginForm> {
                   new FlatButton(
                     onPressed: () => _launchUrl("https://nine.wi.hm.edu/Account/ForgotPassword"),
                     child: new Text(
-                      "Forgot your password?",
+                      S.of(context).login_text_forgetPassword,
                       style: new TextStyle(color: CiEColor.red),
                       textAlign: TextAlign.center,
                     ),

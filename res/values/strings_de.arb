@@ -1,0 +1,87 @@
+{
+  "main_title": "CiE",
+
+  "start_headline": "Kurse auf Englisch",
+  "start_button_start": "Start",
+
+  "login_headline": "Kurse auf Englisch",
+  "login_label_email": "E-Mail",
+  "login_label_password": "Passwort",
+  "login_button_login": "LOGIN",
+  "login_text_noAccount": "Noch kein Konto?",
+  "login_button_loginAsGuest": "Als Gast einloggen",
+  "login_text_forgetPassword": "Passwort vergessen?",
+  "login_error_passwordNotValid": "Passwort ist nicht gültig",
+
+  "tabs_courses": "Kurse",
+  "tabs_maps": "Karte",
+  "tabs_schedule": "Fahrplan",
+  "tabs_favorites": "Favoriten",
+  "tabs_settings": "Einstellungen",
+
+  "courses_title": "Kurse",
+  "courses_filter_department": "Abteilung",
+  "courses_hint_search": "Suche nach Kursname",
+  "courses_list_department_short": "FK",
+  "courses_list_time": "Zeit",
+  "courses_list_noCoursesFound": "Keine Kurse gefunden!",
+
+  "courses_title_courseDetails": "Kursdetails",
+  "courses_label_description": "Beschreibung",
+  "courses_label_hoursPerWeek": "Stunden pro Woche",
+  "courses_label_ects": "ECTS",
+  "courses_label_contact": "Kontakt",
+  "courses_courseStatus_available": "Verfügbar",
+  "courses_courseStatus_pending": "Vielleicht verfügbar",
+  "courses_courseStatus_unavailable": "Nicht verfügbar",
+
+  "course_campusShort_karlstrasse": "Karl.",
+  "course_campusShort_lothstrasse": "Loth.",
+  "course_campusShort_pasing": "Pasing",
+
+  "course_weekdays_short_0": "Mo",
+  "course_weekdays_short_1": "Di",
+  "course_weekdays_short_2": "Mi",
+  "course_weekdays_short_3": "Do",
+  "course_weekdays_short_4": "Fr",
+  "course_weekdays_short_5": "Sa",
+  "course_weekdays_short_6": "So",
+
+  "maps_title": "Karte",
+  "maps_campus_lothstrasse": "Campus Lothstraße",
+  "maps_campus_pasing": "Pasing Campus",
+  "maps_campus_karlstrasse": "Karlstraße Campus",
+  "maps_openMapDescription": "Klicke auf die Karten, um eine Wegbeschreibung zu erhalten.",
+
+  "schedule_title": "Zeitplan",
+  "schedule_headline_today": "Heute",
+  "schedule_headline_weekly": "wöchentlich",
+  "schedule_text_timeConflict": "Möglicher zeitlicher Konflikt",
+
+  "schedule_item_campus": "Campus",
+  "schedule_item_time": "Zeit",
+  "schedule_item_day": "Tag",
+  "schedule_item_room": "Raum",
+
+  "favorites_title": "Favoriten",
+  "favorites_button_register": "Favoritenliste eintragen",
+  "favorites_button_alreadyRegistered": "Bereits eingereichte Kurse",
+  "favorites_message_completeRegistration": "Vollständige Registrierung?",
+
+  "settings_title": "Einstellungen",
+  "settings_label_status": "Status",
+  "settings_status_local": "Lokaler Student",
+  "settings_status_exchange": "Austauschstudent",
+  "settings_label_department": "Fakultät",
+  "settings_label_loggedInAs": "Angemeldet als",
+  "settings_button_logout": "Abmelden",
+  "settings_contactInternationalOffice": "International Office",
+  "settings_cieCertificate": "Courses in English Zertifikat",
+  "settings_ieCertificate": "International Engineering Zertifikat",
+  "settings_label_takenCourses": "Belegte Kurse",
+  "settings_label_totalOf": "Insgesamt",
+  "settings_label_ects": "ECTS",
+
+  "alert_button_yes": "BESTÄTIGEN",
+  "alert_button_no": "ABBRECHEN"
+}

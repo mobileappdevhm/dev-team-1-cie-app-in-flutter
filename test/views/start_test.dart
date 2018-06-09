@@ -1,3 +1,4 @@
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/views/start.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,14 @@ void main() {
       new StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
           return new MaterialApp(
+            localizationsDelegates: [S.delegate],
+            supportedLocales: S.delegate.supportedLocales,
+            localeResolutionCallback:
+            S.delegate.resolution(fallback: new Locale("en", "")),
+            onGenerateTitle: (context) => S.of(context).main_title,
+            theme: new ThemeData(
+              primarySwatch: Colors.red,
+            ),
             home: new Material(
               child: new Center(
                   child: new WelcomePage()

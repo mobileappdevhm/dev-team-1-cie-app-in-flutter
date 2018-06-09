@@ -1,7 +1,8 @@
+import 'package:cie_team1/generated/i18n.dart';
+import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/widgets/courseDetails.dart';
-import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:flutter/material.dart';
 
 class CourseListItem extends StatelessWidget {
@@ -16,17 +17,26 @@ class CourseListItem extends StatelessWidget {
     return new ListTile(
       leading: GenericIcon.buildGenericAvailabilityIcon(
           courseListPresenter.getAvailability(id)),
-      title: new Text(courseListPresenter.getTitle(id),
-        style: CiEStyle.getCoursesTitleStyle(),),
+      title: new Text(
+        courseListPresenter.getTitle(id),
+        style: CiEStyle.getCoursesTitleStyle(),
+      ),
       subtitle: new Row(
         children: <Widget>[
-          new Padding (
+          new Padding(
             padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-            child: new Text("DP " + courseListPresenter.getFaculty(id),
-              style: CiEStyle.getCoursesListFacultyStyle(),),
+            child: new Text(
+              S.of(context).courses_list_department_short +
+                  courseListPresenter.getFaculty(id),
+              style: CiEStyle.getCoursesListFacultyStyle(),
+            ),
           ),
-          new Text("Time: " + courseListPresenter.getLectureTimesBeautiful(id),
-            style: CiEStyle.getCoursesListTimeStyle(),),
+          new Text(
+            S.of(context).courses_list_time +
+                ": " +
+                courseListPresenter.getLectureTimesBeautiful(id, context),
+            style: CiEStyle.getCoursesListTimeStyle(),
+          ),
         ],
       ),
       trailing: inheritedChild,
@@ -35,8 +45,7 @@ class CourseListItem extends StatelessWidget {
   }
 
   void _toggleDescription(BuildContext context) {
-    Navigator.push(
-        context,
+    Navigator.push(context,
         new MaterialPageRoute(builder: (context) => new CourseDetails()));
   }
 }

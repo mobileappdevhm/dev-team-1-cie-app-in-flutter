@@ -1,0 +1,87 @@
+{
+  "main_title": "CiE",
+
+  "start_headline": "Kurssit englanniksi",
+  "start_button_start": "Käynnistä",
+
+  "login_headline": "Kurssit englanniksi",
+  "login_label_email": "Sähköposti",
+  "login_label_password": "Salasana",
+  "login_button_login": "LOGIN",
+  "login_text_noAccount": "Sinulla ei ole tiliä?",
+  "login_button_loginAsGuest": "Kirjaudu sisään vierailijaksi",
+  "login_text_forgetPassword": "Unohtuiko salasana?",
+  "login_error_passwordNotValid": "Salasana ei ole kelvollinen",
+
+  "tabs_courses": "Kurssit",
+  "tabs_maps": "Kartta",
+  "tabs_schedule": "Aikataulu",
+  "tabs_favorites": "Suosikit",
+  "tabs_settings": "Asetukset",
+
+  "courses_title": "Kurssit",
+  "courses_filter_department": "osasto",
+  "courses_hint_search": "Haku kurssien nimestä",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "Time",
+  "courses_list_noCoursesFound": "Ei löytynyt kursseja!",
+
+  "courses_title_courseDetails": "Kurssitiedot",
+  "courses_label_description": "Kuvaus",
+  "courses_label_hoursPerWeek": "Tunnit viikossa",
+  "courses_label_ects": "ECTS",
+  "courses_label_contact": "Yhteystiedot",
+  "courses_courseStatus_available": "Saatavilla",
+  "courses_courseStatus_pending": "Ehkä saatavilla",
+  "courses_courseStatus_unavailable": "Ei saatavilla",
+
+  "course_campusShort_karlstrasse": "Karl.",
+  "course_campusShort_lothstrasse": "Loth.",
+  "course_campusShort_pasing": "Pasing",
+
+  "course_weekdays_short_0": "Mon",
+  "course_weekdays_short_1": "Tue",
+  "course_weekdays_short_2": "Wed",
+  "course_weekdays_short_3": "To",
+  "course_weekdays_short_4": "Fri",
+  "course_weekdays_short_5": "Sat",
+  "course_weekdays_short_6": "Sun",
+
+  "maps_title": "Kartta",
+  "maps_campus_lothstrasse": "Lothstrasse Campus",
+  "maps_campus_pasing": "Pasing Campus",
+  "maps_campus_karlstrasse": "Karlstrasse Campus",
+  "maps_openMapDescription": "Napsauta karttoja saadaksesi reittiohjeet.",
+
+  "schedule_title": "Aikataulu",
+  "schedule_headline_today": "Tänään",
+  "schedule_headline_weekly": "Weekly",
+  "schedule_text_timeConflict": "Mahdollinen ajoitusongelma",
+
+  "schedule_item_campus": "Campus",
+  "schedule_item_time": "Aika",
+  "schedule_item_day": "päivä",
+  "schedule_item_room": "Room",
+
+  "favorites_title": "Suosikit",
+  "favorites_button_register": "Rekisteröidy suosikki kursseja",
+  "favorites_button_alreadyRegistered": "Kurssit jo lähetetty",
+  "favorites_message_completeRegistration": "Täydellinen rekisteröinti?",
+
+  "settings_title": "Asetukset",
+  "settings_label_status": "Tila",
+  "settings_status_local": "Paikallinen opiskelija",
+  "settings_status_exchange": "Vaihto-opiskelija",
+  "settings_label_department": "osasto",
+  "settings_label_loggedInAs": "Kirjautunut sisään",
+  "settings_button_logout": "Kirjaudu ulos",
+  "settings_contactInternationalOffice": "Ota yhteys kansainväliseen toimistoon",
+  "settings_cieCertificate": "Courses in English Certificate",
+  "settings_ieCertificate": "International Engineering Certificate",
+  "settings_label_takenCourses": "Taken Courses",
+  "settings_label_totalOf": "Yhteensä",
+  "settings_label_ects": "ECTS",
+
+  "alert_button_yes": "COMPLETE",
+  "alert_button_no": "PERUUTA"
+}

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapPage extends StatefulWidget {
   final String apiKey = 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us';
@@ -16,9 +17,12 @@ class _MapPageState extends State<MapPage> {
   Uri renderURL;
   static const int defaultWidth = 600;
   static const int defaultHeight = 400;
-  static const String RESOURCE_KARLSTRASSE = StaticVariables.IMAGE_PATH + 'karlstrasse.png';
-  static const String RESOURCE_LOTHSTRASSE = StaticVariables.IMAGE_PATH + 'lothstrasse.png';
-  static const String RESOURCE_PASING  = StaticVariables.IMAGE_PATH + 'pasing.png';
+  static const String RESOURCE_KARLSTRASSE =
+      StaticVariables.IMAGE_PATH + 'karlstrasse.png';
+  static const String RESOURCE_LOTHSTRASSE =
+      StaticVariables.IMAGE_PATH + 'lothstrasse.png';
+  static const String RESOURCE_PASING =
+      StaticVariables.IMAGE_PATH + 'pasing.png';
   Map<String, String> lothLocation = {
     "latitude": '48.1542593',
     "longitude": '11.5539808'
@@ -33,39 +37,35 @@ class _MapPageState extends State<MapPage> {
   };
 
   _buildUri(String campus) {
-      var baseUri = new Uri(
-          scheme: 'https',
-          host: 'maps.googleapis.com',
-          port: 443,
-          path: '/maps/api/staticmap',
-          queryParameters: {
-            'size': '${defaultWidth}x$defaultHeight',
-            'center':
-                '${_getCoordinates(campus)['latitude']},${_getCoordinates(campus)['longitude']}',
-            'zoom': '18',
-            '${widget.apiKey}': ''
-          });
-      var finalUrl = baseUri;
+    var baseUri = new Uri(
+        scheme: 'https',
+        host: 'maps.googleapis.com',
+        port: 443,
+        path: '/maps/api/staticmap',
+        queryParameters: {
+          'size': '${defaultWidth}x$defaultHeight',
+          'center': '${_getCoordinates(campus)['latitude']},${_getCoordinates(
+              campus)['longitude']}',
+          'zoom': '18',
+          '${widget.apiKey}': ''
+        });
+    var finalUrl = baseUri;
   }
 
   _getCoordinates(String campus) {
-    switch (campus) {
-      case StaticVariables.KARLSTRASSE:
-        return karlLocation;
-      case StaticVariables.LOTHSTRASSE:
-        return lothLocation;
-      case StaticVariables.PASING:
-        return pasingLocation;
-      default:
-        return lothLocation;
-    }
+    if (campus == S.of(context).maps_campus_karlstrasse)
+      return karlLocation;
+    else if (campus == S.of(context).maps_campus_pasing)
+      return pasingLocation;
+    else
+      return lothLocation;
   }
 
   _launchMaps(String campus) async {
-    String googleUrl =
-    'comgooglemaps://?center=${_getCoordinates(campus)['latitude']},${_getCoordinates(campus)['longitude']}';
-    String appleUrl =
-      'https://maps.apple.com/?sll=${_getCoordinates(campus)['latitude']},${_getCoordinates(campus)['longitude']}';
+    String googleUrl = 'comgooglemaps://?center=${_getCoordinates(
+        campus)['latitude']},${_getCoordinates(campus)['longitude']}';
+    String appleUrl = 'https://maps.apple.com/?sll=${_getCoordinates(
+        campus)['latitude']},${_getCoordinates(campus)['longitude']}';
     if (await canLaunch("comgooglemaps://")) {
       print('launching googleUrl');
       await launch(googleUrl);
@@ -79,9 +79,9 @@ class _MapPageState extends State<MapPage> {
 
   Widget buildMapCard(String resource, String campus) {
     return new GestureDetector(
-        onTap: (){
-          _launchMaps(campus);
-        },
+      onTap: () {
+        _launchMaps(campus);
+      },
       child: new Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,16 +91,19 @@ class _MapPageState extends State<MapPage> {
               child: Image.asset(resource),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Text(campus, style: CiEStyle.getMapsTitleStyle(),),
-                  SizedBox(height: 8.0),
-                  new Text('Click on the map to get directions.', style: CiEStyle.getMapsDescriptionStyle())
-              ],
-            )
-            ),
+                padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text(
+                      campus,
+                      style: CiEStyle.getMapsTitleStyle(),
+                    ),
+                    SizedBox(height: 8.0),
+                    new Text(S.of(context).maps_openMapDescription,
+                        style: CiEStyle.getMapsDescriptionStyle())
+                  ],
+                )),
           ],
         ),
       ),
@@ -109,19 +112,23 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    _buildUri(StaticVariables.KARLSTRASSE);
-    _buildUri(StaticVariables.LOTHSTRASSE);
-    _buildUri(StaticVariables.PASING);
-    return new ListView(
-      children: <Widget>[
+    _buildUri(S.of(context).maps_campus_karlstrasse);
+    _buildUri(S.of(context).maps_campus_lothstrasse);
+    _buildUri(S.of(context).maps_campus_pasing);
+    return new Scaffold(
+      body: new ListView(
+        children: <Widget>[
 //        new Container(
 //          padding: new EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
 //          child: new Text(StaticVariables.message, textAlign: TextAlign.left, style: CiEStyle.getMapsDescriptionStyle()),
 //      ),
-        buildMapCard(RESOURCE_LOTHSTRASSE, StaticVariables.LOTHSTRASSE),
-        buildMapCard(RESOURCE_PASING, StaticVariables.PASING),
-        buildMapCard(RESOURCE_KARLSTRASSE, StaticVariables.KARLSTRASSE),
-    ],
+          buildMapCard(
+              RESOURCE_LOTHSTRASSE, S.of(context).maps_campus_lothstrasse),
+          buildMapCard(RESOURCE_PASING, S.of(context).maps_campus_pasing),
+          buildMapCard(
+              RESOURCE_KARLSTRASSE, S.of(context).maps_campus_karlstrasse),
+        ],
+      ),
     );
   }
 }

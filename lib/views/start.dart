@@ -1,8 +1,9 @@
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
-import 'package:flutter/material.dart';
 import 'package:cie_team1/widgets/CiEAnimation.dart';
+import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {
   _WelcomePageState createState() => new _WelcomePageState();
@@ -45,7 +46,7 @@ class _WelcomePageState extends State<WelcomePage>
             padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
           ),
           new Text(
-            'Courses in English',
+            S.of(context).start_headline,
             style: new TextStyle(
                 fontSize: 30.0, color: CiEColor.red, letterSpacing: 2.0),
           ),
@@ -58,7 +59,7 @@ class _WelcomePageState extends State<WelcomePage>
               onPressed: () =>
                   Navigator.pushReplacementNamed(context, Routes.Login),
               child: new Text(
-                "Start",
+                S.of(context).start_button_start,
                 style: new TextStyle(color: Colors.white),
               ),
             ),
