@@ -32,8 +32,8 @@
   "courses_label_ects": "ECTS",
   "courses_label_contact": "ติดต่อ",
   "courses_courseStatus_available": "พร้อมใช้งาน",
-  "courses_courseStatus_maybeAvailable": "อาจจะใช้ได้",
-  "courses_courseStatus_notAvailable": "ไม่พร้อมใช้งาน",
+  "courses_courseStatus_pending": "อาจจะใช้ได้",
+  "courses_courseStatus_unavailable": "ไม่พร้อมใช้งาน",
 
   "course_campusShort_karlstrasse": "Karl.",
   "course_campusShort_lothstrasse": "Loth.",

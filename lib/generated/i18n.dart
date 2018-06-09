@@ -34,8 +34,8 @@ class S implements WidgetsLocalizations {
   String get course_weekdays_short_5 => "Sat";
   String get course_weekdays_short_6 => "Sun";
   String get courses_courseStatus_available => "Available";
-  String get courses_courseStatus_maybeAvailable => "Maybe available";
-  String get courses_courseStatus_notAvailable => "Not available";
+  String get courses_courseStatus_pending => "Maybe available";
+  String get courses_courseStatus_unavailable => "Not available";
   String get courses_filter_department => "Department";
   String get courses_hint_search => "Search by Course Name";
   String get courses_label_contact => "Contact";
@@ -134,6 +134,8 @@ class de extends S {
   @override
   String get login_text_forgetPassword => "Passwort vergessen?";
   @override
+  String get courses_courseStatus_unavailable => "Nicht verfügbar";
+  @override
   String get settings_label_loggedInAs => "Angemeldet als";
   @override
   String get schedule_title => "Zeitplan";
@@ -200,6 +202,8 @@ class de extends S {
   @override
   String get tabs_courses => "Kurse";
   @override
+  String get courses_courseStatus_pending => "Vielleicht verfügbar";
+  @override
   String get favorites_button_alreadyRegistered => "Bereits eingereichte Kurse";
   @override
   String get courses_title_courseDetails => "Kursdetails";
@@ -211,8 +215,6 @@ class de extends S {
   String get maps_title => "Karte";
   @override
   String get tabs_settings => "Einstellungen";
-  @override
-  String get courses_courseStatus_maybeAvailable => "Vielleicht verfügbar";
   @override
   String get login_label_password => "Passwort";
   @override
@@ -243,8 +245,6 @@ class de extends S {
   String get settings_label_totalOf => "Insgesamt";
   @override
   String get main_title => "CiE";
-  @override
-  String get courses_courseStatus_notAvailable => "Nicht verfügbar";
 }
 
 class fi extends S {
@@ -285,6 +285,8 @@ class fi extends S {
   String get tabs_maps => "Kartta";
   @override
   String get login_text_forgetPassword => "Unohtuiko salasana?";
+  @override
+  String get courses_courseStatus_unavailable => "Ei saatavilla";
   @override
   String get settings_label_loggedInAs => "Kirjautunut sisään";
   @override
@@ -352,6 +354,8 @@ class fi extends S {
   @override
   String get tabs_courses => "Kurssit";
   @override
+  String get courses_courseStatus_pending => "Ehkä saatavilla";
+  @override
   String get favorites_button_alreadyRegistered => "Kurssit jo lähetetty";
   @override
   String get courses_title_courseDetails => "Kurssitiedot";
@@ -363,8 +367,6 @@ class fi extends S {
   String get maps_title => "Kartta";
   @override
   String get tabs_settings => "Asetukset";
-  @override
-  String get courses_courseStatus_maybeAvailable => "Ehkä saatavilla";
   @override
   String get login_label_password => "Salasana";
   @override
@@ -395,8 +397,6 @@ class fi extends S {
   String get settings_label_totalOf => "Yhteensä";
   @override
   String get main_title => "CiE";
-  @override
-  String get courses_courseStatus_notAvailable => "Ei saatavilla";
 }
 
 class sv extends S {
@@ -437,6 +437,8 @@ class sv extends S {
   String get tabs_maps => "Map";
   @override
   String get login_text_forgetPassword => "Glömt ditt lösenord?";
+  @override
+  String get courses_courseStatus_unavailable => "Ej tillgänglig";
   @override
   String get settings_label_loggedInAs => "Inloggad som";
   @override
@@ -504,6 +506,8 @@ class sv extends S {
   @override
   String get tabs_courses => "Kurser";
   @override
+  String get courses_courseStatus_pending => "Kanske tillgänglig";
+  @override
   String get favorites_button_alreadyRegistered => "Kurser som redan skickats in";
   @override
   String get courses_title_courseDetails => "Kursinformation";
@@ -515,8 +519,6 @@ class sv extends S {
   String get maps_title => "Map";
   @override
   String get tabs_settings => "Inställningar";
-  @override
-  String get courses_courseStatus_maybeAvailable => "Kanske tillgänglig";
   @override
   String get login_label_password => "Lösenord";
   @override
@@ -547,8 +549,6 @@ class sv extends S {
   String get settings_label_totalOf => "Totalt av";
   @override
   String get main_title => "CiE";
-  @override
-  String get courses_courseStatus_notAvailable => "Ej tillgänglig";
 }
 
 class pt extends S {
@@ -589,6 +589,8 @@ class pt extends S {
   String get tabs_maps => "Mapa";
   @override
   String get login_text_forgetPassword => "Esqueceu sua senha?";
+  @override
+  String get courses_courseStatus_unavailable => "Não disponível";
   @override
   String get settings_label_loggedInAs => "Conectado como";
   @override
@@ -656,6 +658,8 @@ class pt extends S {
   @override
   String get tabs_courses => "Cursos";
   @override
+  String get courses_courseStatus_pending => "Talvez disponível";
+  @override
   String get favorites_button_alreadyRegistered => "Cursos já enviados";
   @override
   String get courses_title_courseDetails => "Detalhes do curso";
@@ -667,8 +671,6 @@ class pt extends S {
   String get maps_title => "Mapa";
   @override
   String get tabs_settings => "Configurações";
-  @override
-  String get courses_courseStatus_maybeAvailable => "Talvez disponível";
   @override
   String get login_label_password => "Senha";
   @override
@@ -699,8 +701,6 @@ class pt extends S {
   String get settings_label_totalOf => "Total de";
   @override
   String get main_title => "CiE";
-  @override
-  String get courses_courseStatus_notAvailable => "Não disponível";
 }
 
 class th extends S {
@@ -741,6 +741,8 @@ class th extends S {
   String get tabs_maps => "แผนที่";
   @override
   String get login_text_forgetPassword => "ลืมรหัสผ่านของคุณ?";
+  @override
+  String get courses_courseStatus_unavailable => "ไม่พร้อมใช้งาน";
   @override
   String get settings_label_loggedInAs => "เข้าสู่ระบบด้วย";
   @override
@@ -808,6 +810,8 @@ class th extends S {
   @override
   String get tabs_courses => "หลักสูตร";
   @override
+  String get courses_courseStatus_pending => "อาจจะใช้ได้";
+  @override
   String get favorites_button_alreadyRegistered => "หลักสูตรที่ส่งแล้ว";
   @override
   String get courses_title_courseDetails => "รายละเอียดหลักสูตร";
@@ -819,8 +823,6 @@ class th extends S {
   String get maps_title => "แผนที่";
   @override
   String get tabs_settings => "การตั้งค่า";
-  @override
-  String get courses_courseStatus_maybeAvailable => "อาจจะใช้ได้";
   @override
   String get login_label_password => "รหัสผ่าน";
   @override
@@ -851,8 +853,6 @@ class th extends S {
   String get settings_label_totalOf => "รวม";
   @override
   String get main_title => "CiE";
-  @override
-  String get courses_courseStatus_notAvailable => "ไม่พร้อมใช้งาน";
 }
 
 class en extends S {
@@ -897,6 +897,8 @@ class it extends S {
   String get tabs_maps => "Mappa";
   @override
   String get login_text_forgetPassword => "Hai dimenticato la password?";
+  @override
+  String get courses_courseStatus_unavailable => "Non disponibile";
   @override
   String get settings_label_loggedInAs => "Connesso come";
   @override
@@ -964,6 +966,8 @@ class it extends S {
   @override
   String get tabs_courses => "Corsi";
   @override
+  String get courses_courseStatus_pending => "Forse disponibile";
+  @override
   String get favorites_button_alreadyRegistered => "Corsi già inoltrati";
   @override
   String get courses_title_courseDetails => "Dettagli del corso";
@@ -975,8 +979,6 @@ class it extends S {
   String get maps_title => "Mappa";
   @override
   String get tabs_settings => "Impostazioni";
-  @override
-  String get courses_courseStatus_maybeAvailable => "Forse disponibile";
   @override
   String get login_label_password => "Password";
   @override
@@ -1007,8 +1009,6 @@ class it extends S {
   String get settings_label_totalOf => "Totale di";
   @override
   String get main_title => "CiE";
-  @override
-  String get courses_courseStatus_notAvailable => "Non disponibile";
 }
 
 class fr extends S {
@@ -1049,6 +1049,8 @@ class fr extends S {
   String get tabs_maps => "Carte";
   @override
   String get login_text_forgetPassword => "Mot de passe oublié?";
+  @override
+  String get courses_courseStatus_unavailable => "Non disponible";
   @override
   String get settings_label_loggedInAs => "Connecté en tant que";
   @override
@@ -1116,6 +1118,8 @@ class fr extends S {
   @override
   String get tabs_courses => "Cours";
   @override
+  String get courses_courseStatus_pending => "Peut-être disponible";
+  @override
   String get favorites_button_alreadyRegistered => "Cours déjà soumis";
   @override
   String get courses_title_courseDetails => "Détails du cours";
@@ -1127,8 +1131,6 @@ class fr extends S {
   String get maps_title => "Carte";
   @override
   String get tabs_settings => "Paramètres";
-  @override
-  String get courses_courseStatus_maybeAvailable => "Peut-être disponible";
   @override
   String get login_label_password => "Mot de passe";
   @override
@@ -1159,8 +1161,6 @@ class fr extends S {
   String get settings_label_totalOf => "Total de";
   @override
   String get main_title => "CiE";
-  @override
-  String get courses_courseStatus_notAvailable => "Non disponible";
 }
 
 class es extends S {

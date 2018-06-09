@@ -32,8 +32,8 @@
   "courses_label_ects": "ECTS",
   "courses_label_contact": "Contact",
   "courses_courseStatus_available": "Available",
-  "courses_courseStatus_maybeAvailable": "Maybe available",
-  "courses_courseStatus_notAvailable": "Not available",
+  "courses_courseStatus_pending": "Maybe available",
+  "courses_courseStatus_unavailable": "Not available",
 
   "course_campusShort_karlstrasse": "Karl.",
   "course_campusShort_lothstrasse": "Loth.",

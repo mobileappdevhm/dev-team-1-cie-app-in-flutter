@@ -32,8 +32,8 @@
   "courses_label_ects": "ECTS",
   "courses_label_contact": "Yhteystiedot",
   "courses_courseStatus_available": "Saatavilla",
-  "courses_courseStatus_maybeAvailable": "Ehkä saatavilla",
-  "courses_courseStatus_notAvailable": "Ei saatavilla",
+  "courses_courseStatus_pending": "Ehkä saatavilla",
+  "courses_courseStatus_unavailable": "Ei saatavilla",
 
   "course_campusShort_karlstrasse": "Karl.",
   "course_campusShort_lothstrasse": "Loth.",
