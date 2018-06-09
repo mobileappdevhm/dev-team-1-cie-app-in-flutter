@@ -38,7 +38,7 @@ class S implements WidgetsLocalizations {
   String get courses_label_contact => "Contact";
   String get courses_label_description => "Description";
   String get courses_label_ects => "ECTS";
-  String get courses_label_hoursPerWeek => "Hours per Week:";
+  String get courses_label_hoursPerWeek => "Hours per Week";
   String get courses_list_department_short => "DP";
   String get courses_list_noCoursesFound => "No Courses found!";
   String get courses_list_time => "Time";
@@ -77,7 +77,7 @@ class S implements WidgetsLocalizations {
   String get settings_label_department => "Department";
   String get settings_label_ects => "ECTS";
   String get settings_label_loggedInAs => "Logged in as";
-  String get settings_label_status => "Status:";
+  String get settings_label_status => "Status";
   String get settings_label_takenCourses => "Taken Courses";
   String get settings_label_totalOf => "Total of";
   String get settings_status_exchange => "Exchange student";
@@ -113,11 +113,13 @@ class de extends S {
   @override
   String get settings_title => "Einstellungen";
   @override
+  String get settings_label_status => "Status";
+  @override
   String get schedule_item_time => "Zeit";
   @override
   String get courses_list_noCoursesFound => "Keine Kurse gefunden!";
   @override
-  String get courses_label_hoursPerWeek => "Stunden pro Woche:";
+  String get courses_label_hoursPerWeek => "Stunden pro Woche";
   @override
   String get courses_list_department_short => "FK";
   @override
@@ -231,6 +233,8 @@ class de extends S {
   @override
   String get settings_label_totalOf => "Insgesamt";
   @override
+  String get main_title => "CiE";
+  @override
   String get courses_courseStatus_notAvailable => "Nicht verfügbar";
 }
 
@@ -255,13 +259,13 @@ class fi extends S {
   @override
   String get settings_title => "Asetukset";
   @override
-  String get settings_label_status => "Tila:";
+  String get settings_label_status => "Tila";
   @override
   String get schedule_item_time => "Aika";
   @override
   String get courses_list_noCoursesFound => "Ei löytynyt kursseja!";
   @override
-  String get courses_label_hoursPerWeek => "Tunnit viikossa:";
+  String get courses_label_hoursPerWeek => "Tunnit viikossa";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -401,13 +405,13 @@ class sv extends S {
   @override
   String get settings_title => "Inställningar";
   @override
-  String get settings_label_status => "Status:";
+  String get settings_label_status => "Status";
   @override
   String get schedule_item_time => "Time";
   @override
   String get courses_list_noCoursesFound => "Inga kurser hittades!";
   @override
-  String get courses_label_hoursPerWeek => "Hours per Week:";
+  String get courses_label_hoursPerWeek => "Hours per Week";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -547,13 +551,13 @@ class pt extends S {
   @override
   String get settings_title => "Configurações";
   @override
-  String get settings_label_status => "Status:";
+  String get settings_label_status => "Status";
   @override
   String get schedule_item_time => "Tempo";
   @override
   String get courses_list_noCoursesFound => "Nenhum curso encontrado!";
   @override
-  String get courses_label_hoursPerWeek => "Horas por semana:";
+  String get courses_label_hoursPerWeek => "Horas por semana";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -693,13 +697,13 @@ class th extends S {
   @override
   String get settings_title => "การตั้งค่า";
   @override
-  String get settings_label_status => "สถานะ:";
+  String get settings_label_status => "สถานะ";
   @override
   String get schedule_item_time => "เวลา";
   @override
   String get courses_list_noCoursesFound => "ไม่พบหลักสูตร!";
   @override
-  String get courses_label_hoursPerWeek => "Hours per Week:";
+  String get courses_label_hoursPerWeek => "Hours per Week";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -839,13 +843,13 @@ class it extends S {
   @override
   String get settings_title => "Impostazioni";
   @override
-  String get settings_label_status => "Stato:";
+  String get settings_label_status => "Stato";
   @override
   String get schedule_item_time => "Time";
   @override
   String get courses_list_noCoursesFound => "Nessun corso trovato!";
   @override
-  String get courses_label_hoursPerWeek => "Ore per settimana:";
+  String get courses_label_hoursPerWeek => "Ore per settimana";
   @override
   String get courses_list_department_short => "DP";
   @override
@@ -985,13 +989,13 @@ class fr extends S {
   @override
   String get settings_title => "Paramètres";
   @override
-  String get settings_label_status => "Statut:";
+  String get settings_label_status => "Statut";
   @override
   String get schedule_item_time => "Heure";
   @override
   String get courses_list_noCoursesFound => "Aucun cours trouvé!";
   @override
-  String get courses_label_hoursPerWeek => "Heures par semaine:";
+  String get courses_label_hoursPerWeek => "Heures par semaine";
   @override
   String get courses_list_department_short => "DP";
   @override

@@ -28,7 +28,7 @@
 
   "courses_title_courseDetails": "Kursinformation",
   "courses_label_description": "Beskrivning",
-  "courses_label_hoursPerWeek": "Hours per Week:",
+  "courses_label_hoursPerWeek": "Hours per Week",
   "courses_label_ects": "ECTS",
   "courses_label_contact": "Kontakt",
   "courses_courseStatus_available": "Available",
@@ -65,7 +65,7 @@
   "favorites_message_completeRegistration": "Fullständig registrering?",
 
   "settings_title": "Inställningar",
-  "settings_label_status": "Status:",
+  "settings_label_status": "Status",
   "settings_status_local": "Lokal student",
   "settings_status_exchange": "Exchange student",
   "settings_label_department": "Department",

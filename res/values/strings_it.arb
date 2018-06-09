@@ -28,7 +28,7 @@
 
   "courses_title_courseDetails": "Dettagli del corso",
   "courses_label_description": "Descrizione",
-  "courses_label_hoursPerWeek": "Ore per settimana:",
+  "courses_label_hoursPerWeek": "Ore per settimana",
   "courses_label_ects": "ECTS",
   "courses_label_contact": "Contatto",
   "courses_courseStatus_available": "Disponibile",
@@ -65,7 +65,7 @@
   "favorites_message_completeRegistration": "Completa registrazione?",
 
   "settings_title": "Impostazioni",
-  "settings_label_status": "Stato:",
+  "settings_label_status": "Stato",
   "settings_status_local": "Studente locale",
   "settings_status_exchange": "Scambia studenti",
   "settings_label_department": "Dipartimento",

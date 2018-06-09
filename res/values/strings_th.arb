@@ -28,7 +28,7 @@
 
   "courses_title_courseDetails": "รายละเอียดหลักสูตร",
   "courses_label_description": "คำอธิบาย",
-  "courses_label_hoursPerWeek": "Hours per Week:",
+  "courses_label_hoursPerWeek": "Hours per Week",
   "courses_label_ects": "ECTS",
   "courses_label_contact": "ติดต่อ",
   "courses_courseStatus_available": "พร้อมใช้งาน",
@@ -65,7 +65,7 @@
   "favorites_message_completeRegistration": "การลงทะเบียนแบบสมบูรณ์?",
 
   "settings_title": "การตั้งค่า",
-  "settings_label_status": "สถานะ:",
+  "settings_label_status": "สถานะ",
   "settings_status_local": "นักเรียนท้องถิ่น",
   "settings_status_exchange": "แลกเปลี่ยนนักเรียน",
   "settings_label_department": "Department",

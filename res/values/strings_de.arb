@@ -1,5 +1,5 @@
 {
-  "Haupttitel": "CiE",
+  "main_title": "CiE",
 
   "start_headline": "Kurse auf Englisch",
   "start_button_start": "Start",
@@ -28,7 +28,7 @@
 
   "courses_title_courseDetails": "Kursdetails",
   "courses_label_description": "Beschreibung",
-  "courses_label_hoursPerWeek": "Stunden pro Woche:",
+  "courses_label_hoursPerWeek": "Stunden pro Woche",
   "courses_label_ects": "ECTS",
   "courses_label_contact": "Kontakt",
   "courses_courseStatus_available": "Verfügbar",
@@ -65,7 +65,7 @@
   "favorites_message_completeRegistration": "Vollständige Registrierung?",
 
   "settings_title": "Einstellungen",
-  "Einstellungen_Label_Status": "Status:",
+  "settings_label_status": "Status",
   "settings_status_local": "Lokaler Student",
   "settings_status_exchange": "Austauschstudent",
   "settings_label_department": "Fakultät",
