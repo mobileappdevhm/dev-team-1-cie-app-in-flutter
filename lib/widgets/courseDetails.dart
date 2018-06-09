@@ -1,6 +1,6 @@
 import 'package:cie_team1/utils/cieColor.dart';
-import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:flutter/material.dart';
 
 class CourseDetails extends StatefulWidget {
   CourseDetails({Key key, this.title}) : super(key: key);
@@ -34,21 +34,21 @@ class _CourseDetailsState extends State<CourseDetails> {
                   children: <Widget>[
                     new Expanded(
                         child: new Align(
-                          alignment: Alignment.centerLeft,
-                          child: new Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              new Text(
-                                "Title of course",
-                                style: CiEStyle.getCourseDescriptionTitleStyle(),
-                              ),
-                              new Text(
-                                "FK 07",
-                                style: CiEStyle.getCourseDescriptionFacultyStyle(),
-                              ),
-                            ],
+                      alignment: Alignment.centerLeft,
+                      child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          new Text(
+                            "Title of course",
+                            style: CiEStyle.getCourseDescriptionTitleStyle(),
                           ),
-                        )),
+                          new Text(
+                            "FK 07",
+                            style: CiEStyle.getCourseDescriptionFacultyStyle(),
+                          ),
+                        ],
+                      ),
+                    )),
                     new Expanded(
                       child: new Align(
                         alignment: Alignment.centerRight,
@@ -58,6 +58,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                             size: iconSize,
                             color: CiEColor.red,
                           ),
+                          onPressed: null,
                         ),
                       ),
                     ),
@@ -75,8 +76,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         style: new TextStyle(
                             fontSize: 25.0,
                             color: CiEColor.gray,
-                            letterSpacing: 2.0
-                        ),
+                            letterSpacing: 2.0),
                       )),
                 ],
               ),

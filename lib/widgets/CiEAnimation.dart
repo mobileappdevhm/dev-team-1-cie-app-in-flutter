@@ -1,6 +1,6 @@
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
 
 class AnimatedLogo extends AnimatedWidget {
   static final _opacityTween = new Tween<double>(begin: 0.1, end: 1.0);
@@ -24,6 +24,3 @@ class AnimatedLogo extends AnimatedWidget {
     );
   }
 }
-
-
-

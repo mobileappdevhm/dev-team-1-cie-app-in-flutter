@@ -14,8 +14,9 @@ void main() {
         new Course(
           "Blaba",
           "7",
-          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
+          [
+            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                new DayTime(11, 30), "R0.009")
           ],
           "boring",
           2,
@@ -28,14 +29,7 @@ void main() {
       ];
 
       sut = new User(
-          42,
-          'Max42',
-          'Max',
-          'Mustermann',
-          '7',
-          'sleeping',
-          courses,
-          courses);
+          42, 'Max42', 'Max', 'Mustermann', '7', 'sleeping', courses, courses);
     });
 
     test('1', () {
@@ -71,7 +65,6 @@ void main() {
     });
   });
 
-
   group("simpleUserProdTest", () {
     List<Course> courses;
     User user;
@@ -81,8 +74,9 @@ void main() {
         new Course(
           "Blaba",
           "7",
-          [new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
+          [
+            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                new DayTime(11, 30), "R0.009")
           ],
           "boring",
           2,
@@ -95,14 +89,7 @@ void main() {
       ];
 
       user = new User(
-          42,
-          'Max42',
-          'Max',
-          'Mustermann',
-          '7',
-          'sleeping',
-          courses,
-          courses);
+          42, 'Max42', 'Max', 'Mustermann', '7', 'sleeping', courses, courses);
     });
 
     test('1', () {

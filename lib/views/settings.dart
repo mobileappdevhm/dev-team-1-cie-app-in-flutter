@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/views/takenCourses.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_team1/views/takenCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -157,7 +157,6 @@ class _SettingsState extends State<Settings> {
               ),
               new LinearProgressIndicator(value: engCredits / 15),
               /* This causes overload on horizontal screen */
-
               new GestureDetector(
                 onTap: () {
                   Navigator.push(

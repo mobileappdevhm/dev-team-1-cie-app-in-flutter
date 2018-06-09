@@ -2,10 +2,7 @@ import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/model/course/courses_prod.dart';
 
-enum Flavor {
-  MOCK,
-  PROD
-}
+enum Flavor { MOCK, PROD }
 
 //DI
 class CourseInjector {

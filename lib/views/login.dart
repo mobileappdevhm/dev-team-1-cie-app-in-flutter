@@ -23,8 +23,6 @@ class LoginFormState extends State<LoginForm> {
 
   LoginData loginData = new LoginData();
 
-  bool _loggedIn = false;
-
   void showInSnackBar(String value) {
     _scaffoldKey.currentState
         .showSnackBar(new SnackBar(content: new Text(value)));
@@ -63,14 +61,10 @@ class LoginFormState extends State<LoginForm> {
             print("Response status: ${response.statusCode}");
             print("Response body: ${response.body}");
             print("Response user: ${json.decode(response.body)['user']}");
-            print("Response id: ${id}");
-            print("Response firstName: ${firstName}");
-            print("Response lastName: ${lastName}");
-            print("Response curriculum: ${curriculum}");
-
-            setState(() {
-              _loggedIn = true;
-            });
+            print("Response id: $id");
+            print("Response firstName: $firstName");
+            print("Response lastName: $lastName");
+            print("Response curriculum: $curriculum");
 
             Navigator.of(context).pushReplacementNamed(Routes.TabPages);
           }

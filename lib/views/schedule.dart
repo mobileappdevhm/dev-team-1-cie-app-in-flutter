@@ -1,11 +1,11 @@
+import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/timeTablePresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/schedulingUtility.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/utils/schedulingUtility.dart';
-import 'package:cie_team1/generic/genericIcon.dart';
 
 class Schedule extends StatelessWidget {
   TimeTablePresenter timeTablePresenter = new TimeTablePresenter();
@@ -19,10 +19,10 @@ class Schedule extends StatelessWidget {
 
     children.add(new ScheduleDivider("Weekly"));
     // monday -> friday
-    for (int i = 0; i <= 4; i++){
+    for (int i = 0; i <= 4; i++) {
       children.add(_getTimeTableSpecificDay(WeekdayUtility.intToWeekday(i)));
     }
-    
+
     return new ListView(
       children: children,
     );
@@ -30,11 +30,10 @@ class Schedule extends StatelessWidget {
 
   Widget _getTimeTableSpecificDay(Weekday weekday) {
     // Get lectures at day an receive timeTableEntry for day
-    List<Lecture> lectureList = timeTablePresenter.getLecturesOfWeekday(
-        weekday);
+    List<Lecture> lectureList =
+        timeTablePresenter.getLecturesOfWeekday(weekday);
     return new TimeTableEntry(lectureList, weekday);
   }
-
 }
 
 // Displays one Entry. If the entry has children then it's displayed
@@ -65,20 +64,19 @@ class TimeTableEntry extends StatelessWidget {
     List<Widget> childrenWidgets = new List<Widget>();
 
     // Add a new item for each child lecture
-    for (int i=0; i<children.length; i++) {
+    for (int i = 0; i < children.length; i++) {
       childrenWidgets.add(new TimeTableEntryItem(children.elementAt(i)));
       // If there exists another lecture in the list, determine if there is
       // enough time to commute to the specified campus location
-      if (i+1 < children.length) {
+      if (i + 1 < children.length) {
         Lecture lectureOne = children.elementAt(i);
-        Lecture lectureTwo = children.elementAt(i+1);
-        if (SchedulingUtility.isCloseTime(lectureOne.endDayTime, lectureTwo.startDayTime)
-            && SchedulingUtility.isFarCampus(lectureOne.campus, lectureTwo.campus)) {
-          childrenWidgets.add(
-              GenericIcon.buildGenericConflictIcon(
-                  StaticVariables.TIME_CONFLICT_MESSAGE
-              )
-          );
+        Lecture lectureTwo = children.elementAt(i + 1);
+        if (SchedulingUtility.isCloseTime(
+                lectureOne.endDayTime, lectureTwo.startDayTime) &&
+            SchedulingUtility.isFarCampus(
+                lectureOne.campus, lectureTwo.campus)) {
+          childrenWidgets.add(GenericIcon
+              .buildGenericConflictIcon(StaticVariables.TIME_CONFLICT_MESSAGE));
         }
       }
     }
@@ -95,8 +93,6 @@ class TimeTableEntry extends StatelessWidget {
     return _buildTile(children, weekday);
   }
 }
-
-
 
 // divider for lectures (weekly / today)
 class ScheduleDivider extends StatelessWidget {
@@ -117,8 +113,7 @@ class ScheduleDivider extends StatelessWidget {
               new Container(
                 child: new Padding(
                     padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                    child: new Text(_heading)
-                ),
+                    child: new Text(_heading)),
               ),
               _getSpacing(new EdgeInsets.fromLTRB(5.0, 0.0, 15.0, 0.0)),
             ],
@@ -133,20 +128,18 @@ class ScheduleDivider extends StatelessWidget {
   Widget _getSpacing(EdgeInsets padding) {
     return new Expanded(
         child: new Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            new Container(
-              child: new Padding(
-                padding: padding,
-                child: new Container(
-                  decoration: new BoxDecoration(
-                      border: new Border.all(color: CiEColor.gray)
-                  ),
-                ),
-              ),
-            )
-          ],
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        new Container(
+          child: new Padding(
+            padding: padding,
+            child: new Container(
+              decoration: new BoxDecoration(
+                  border: new Border.all(color: CiEColor.gray)),
+            ),
+          ),
         )
-    );
+      ],
+    ));
   }
 }

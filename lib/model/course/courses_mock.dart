@@ -1,12 +1,12 @@
+import 'dart:math';
+
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
-import 'dart:math';
 
 class CoursesMock implements Courses {
   static const int GENERATE_COURSES = 100;
 
   List<Course> courses = [];
-
 
   CoursesMock() {
     for (int i = 1; i < GENERATE_COURSES; i++) {
@@ -20,8 +20,7 @@ class CoursesMock implements Courses {
           generateMockEmail(i),
           generateMockName(i),
           generateMockAvailability(i),
-          generateMockFavorite(i)
-      ));
+          generateMockFavorite(i)));
     }
   }
 
@@ -30,7 +29,8 @@ class CoursesMock implements Courses {
   }
 
   static String generateMockDepartment(int i) {
-    return CourseDefinitions.DEPARTMENTS[i.round()%CourseDefinitions.DEPARTMENTS.length];
+    return CourseDefinitions
+        .DEPARTMENTS[i.round() % CourseDefinitions.DEPARTMENTS.length];
   }
 
   static String generateMockDescription(int i) {
@@ -97,27 +97,33 @@ class CoursesMock implements Courses {
     for (int i = 1; i <= GENERATE_COURSES; i++) {
       // Do course with 2 lectures a week
       if (i % 4 == 0) {
-        lectures.add(
-            [
-              new Lecture(
-                  campus[i % campus.length], WeekdayUtility.intToWeekday(i % 4),
-                  times[i % times.length][0], times[i % times.length][1], rooms[i % rooms.length]),
-              new Lecture(
-                  campus[i % campus.length], WeekdayUtility.intToWeekday((i + 1) % 4),
-                  times[(i + 1) % times.length][0], times[(i + 1) % times.length][1], rooms[i % rooms.length])
-            ]);
+        lectures.add([
+          new Lecture(
+              campus[i % campus.length],
+              WeekdayUtility.intToWeekday(i % 4),
+              times[i % times.length][0],
+              times[i % times.length][1],
+              rooms[i % rooms.length]),
+          new Lecture(
+              campus[i % campus.length],
+              WeekdayUtility.intToWeekday((i + 1) % 4),
+              times[(i + 1) % times.length][0],
+              times[(i + 1) % times.length][1],
+              rooms[i % rooms.length])
+        ]);
       }
       // Do course with 1 lecture a week
       else {
-        lectures.add(
-            [
-              new Lecture(
-                  campus[i % campus.length], WeekdayUtility.intToWeekday(i % 5),
-                  times[i % times.length][0], times[i % times.length][1], rooms[i % rooms.length])
-            ]);
+        lectures.add([
+          new Lecture(
+              campus[i % campus.length],
+              WeekdayUtility.intToWeekday(i % 5),
+              times[i % times.length][0],
+              times[i % times.length][1],
+              rooms[i % rooms.length])
+        ]);
       }
     }
-
 
     return lectures;
   }

@@ -16,9 +16,8 @@ class TimeTableItem extends StatelessWidget {
     return new ListTile(
       title: new Column(
         children: <Widget>[
-          new Padding(
-              padding: new EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0)),
-          new Row (
+          new Padding(padding: new EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0)),
+          new Row(
             children: <Widget>[
               new Text(
                 lecture.course.name,
@@ -61,15 +60,19 @@ class TimeTableItem extends StatelessWidget {
                 ),
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
-                  child: new Text("Time: ",
+                  child: new Text(
+                    "Time: ",
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),
                 ),
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
-                  child: new Text(" " + lecture.startDayTime.toString() + "-" +
-                      lecture.endDayTime.toString(),
+                  child: new Text(
+                    " " +
+                        lecture.startDayTime.toString() +
+                        "-" +
+                        lecture.endDayTime.toString(),
                     style: CiEStyle.getTimeTableListVariable(),
                     textAlign: TextAlign.start,
                   ),
@@ -99,14 +102,16 @@ class TimeTableItem extends StatelessWidget {
                 ),
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
-                  child: new Text("Room: ",
+                  child: new Text(
+                    "Room: ",
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),
                 ),
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
-                  child: new Text(" " + lecture.room,
+                  child: new Text(
+                    " " + lecture.room,
                     style: CiEStyle.getTimeTableListVariable(),
                     textAlign: TextAlign.start,
                   ),
@@ -117,8 +122,6 @@ class TimeTableItem extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
-
 }

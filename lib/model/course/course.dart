@@ -10,9 +10,17 @@ class Course {
   final CourseAvailability available;
   bool isFavourite;
 
-  Course(this.name, this.faculty, this.lecturesPerWeek, this.description,
-      this.hoursPerWeek, this.ects, this.professorEmail, this.professorName,
-      this.available, this.isFavourite) {
+  Course(
+      this.name,
+      this.faculty,
+      this.lecturesPerWeek,
+      this.description,
+      this.hoursPerWeek,
+      this.ects,
+      this.professorEmail,
+      this.professorName,
+      this.available,
+      this.isFavourite) {
     //Set this course as parent of every lectures contained
     //Required for timetable
     lecturesPerWeek.forEach((l) => l.course = this);
@@ -32,14 +40,15 @@ class Lecture {
   final String room;
   Course course;
 
-  Lecture(this.campus, this.weekday, this.startDayTime, this.endDayTime,
-      this.room);
+  Lecture(
+      this.campus, this.weekday, this.startDayTime, this.endDayTime, this.room);
 
   //Return int which helps to get the order of lectures in week correct
   int sortValue() {
     // result looks like: whhmm
     return WeekdayUtility.getWeekdayAsInt(weekday) * 10000 +
-        startDayTime.hour * 100 + startDayTime.minute;
+        startDayTime.hour * 100 +
+        startDayTime.minute;
   }
 }
 
@@ -52,12 +61,10 @@ class DayTime {
   @override
   String toString() {
     String hourString = hour.toString();
-    if (hour <= 9)
-      hourString = "0" + hourString;
+    if (hour <= 9) hourString = "0" + hourString;
 
     String minuteString = minute.toString();
-    if (minute <= 9)
-      minuteString = "0" + minuteString;
+    if (minute <= 9) minuteString = "0" + minuteString;
 
     return '$hourString:$minuteString';
   }
@@ -66,8 +73,20 @@ class DayTime {
 //Todo: This needs to be replaced with enum style of implementation in future see below
 class CourseDefinitions {
   static const List<String> DEPARTMENTS = [
-    "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12",
-    "13", "14"
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14"
   ];
 }
 
@@ -104,7 +123,7 @@ class CourseAvailabilityUtility {
     return 0;
   }
 
-  static CourseAvailability intToCourseAvailability (int i) {
+  static CourseAvailability intToCourseAvailability(int i) {
     switch (i) {
       case 0:
         return CourseAvailability.AVAILABLE;
@@ -116,8 +135,6 @@ class CourseAvailabilityUtility {
     return CourseAvailability.AVAILABLE;
   }
 }
-
-
 
 //class FacultyUtility {
 //  static int getFacultyAsInt(Faculty f) {

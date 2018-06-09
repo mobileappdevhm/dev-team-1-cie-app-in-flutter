@@ -1,53 +1,65 @@
 import 'package:cie_team1/di/currentUser_di.dart';
+import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:test/test.dart';
-import 'package:cie_team1/model/course/courses_mock.dart';
-
 
 void main() {
-
   CurrentUserPresenter sut;
 
-  setUp((){
+  setUp(() {
     sut = new CurrentUserPresenter();
   });
 
-  group("User", (){
+  group("User", () {
     test('1', () {
-      expect(sut.getCurrentUser().username, new UserInjector().currentUser.getCurrentUser().username);
+      expect(sut.getCurrentUser().username,
+          new UserInjector().currentUser.getCurrentUser().username);
     });
 
     test('2', () {
-      expect(sut.getCurrentUser().status, new UserInjector().currentUser.getCurrentUser().status);
+      expect(sut.getCurrentUser().status,
+          new UserInjector().currentUser.getCurrentUser().status);
     });
 
     test('3', () {
-      expect(sut.getCurrentUserStatus(), new UserInjector().currentUser.getCurrentUser().status);
+      expect(sut.getCurrentUserStatus(),
+          new UserInjector().currentUser.getCurrentUser().status);
     });
 
     test('4', () {
-      expect(sut.getCurrentUserFaculty(), new UserInjector().currentUser.getCurrentUser().department);
+      expect(sut.getCurrentUserFaculty(),
+          new UserInjector().currentUser.getCurrentUser().department);
     });
 
     test('5', () {
-      expect(sut.getCredits(1), new UserInjector().currentUser.getCurrentUser().prevCourses[1].ects);
+      expect(sut.getCredits(1),
+          new UserInjector().currentUser.getCurrentUser().prevCourses[1].ects);
     });
     test('6', () {
-      expect(sut.getFullName(), new UserInjector().currentUser.getCurrentUser().firstName + " " + new UserInjector().currentUser.getCurrentUser().lastName);
+      expect(
+          sut.getFullName(),
+          new UserInjector().currentUser.getCurrentUser().firstName +
+              " " +
+              new UserInjector().currentUser.getCurrentUser().lastName);
     });
 
     test('7', () {
-      expect(sut.getPrevCourses().length, new UserInjector().currentUser.getCurrentUser().prevCourses.length);
+      expect(sut.getPrevCourses().length,
+          new UserInjector().currentUser.getCurrentUser().prevCourses.length);
     });
 
     test('8', () {
-      expect(sut.getCurrentCourses().length, new UserInjector().currentUser.getCurrentUser().currentCourses.length);
+      expect(
+          sut.getCurrentCourses().length,
+          new UserInjector()
+              .currentUser
+              .getCurrentUser()
+              .currentCourses
+              .length);
     });
-
-
   });
 
-  group("facultycheck", (){
+  group("facultycheck", () {
     test('1', () {
       expect(sut.getFaculty(1), CoursesMock.generateMockDepartment(2));
     });
@@ -59,10 +71,9 @@ void main() {
     test('3', () {
       expect(sut.getFaculty(3), CoursesMock.generateMockDepartment(4));
     });
-
   });
 
-  group("title", (){
+  group("title", () {
     test('1', () {
       expect(sut.getTitle(0), CoursesMock.generateMockCourseTitle(1));
     });
@@ -74,8 +85,5 @@ void main() {
     test('3', () {
       expect(sut.getTitle(2), CoursesMock.generateMockCourseTitle(3));
     });
-
-
   });
-
 }

@@ -1,7 +1,7 @@
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/views/tabs.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
@@ -26,7 +26,8 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (WeekdayUtility.getCurrentWeekday() == Weekday.Sun ||
-              WeekdayUtility.getCurrentWeekday() == Weekday.Sat) { // on weekend arent any courses
+              WeekdayUtility.getCurrentWeekday() == Weekday.Sat) {
+            // on weekend arent any courses
             if (counter == 0) {
               expect(widget.data, 'Today');
               counter++;
