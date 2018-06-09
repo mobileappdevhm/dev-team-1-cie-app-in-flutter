@@ -1,3 +1,4 @@
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
@@ -13,6 +14,14 @@ void main() {
         new StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return new MaterialApp(
+              localizationsDelegates: [S.delegate],
+              supportedLocales: S.delegate.supportedLocales,
+              localeResolutionCallback:
+              S.delegate.resolution(fallback: new Locale("en", "")),
+              onGenerateTitle: (context) => S.of(context).main_title,
+              theme: new ThemeData(
+                primarySwatch: Colors.red,
+              ),
               home: new Material(
                 child: new Center(child: new Settings()),
               ),
@@ -27,45 +36,45 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (counter == 0) {
-            expect(widget.data, StaticVariables.LOGGED_IN_AS);
+            expect(widget.data, "Logged in as");
             counter++;
           } else if (counter == 1) {
             expect(widget.data, " " + new CurrentUserPresenter().getFullName());
             counter++;
           } else if (counter == 2) {
-            expect(widget.data, StaticVariables.LOGOUT_BUTTON);
+            expect(widget.data, "Log out");
             counter++;
           } else if (counter == 3) {
-            expect(widget.data, StaticVariables.STATUS + " : ");
+            expect(widget.data, "Status : ");
             counter++;
           } else if (counter == 4) {
             expect(widget.data,
                 " " + new CurrentUserPresenter().getCurrentUserStatus());
             counter++;
           } else if (counter == 5) {
-            expect(widget.data, StaticVariables.DEPARTMENT + " : ");
+            expect(widget.data, "Department : ");
             counter++;
           } else if (counter == 6) {
             expect(widget.data,
                 " " + new CurrentUserPresenter().getCurrentUserFaculty());
             counter++;
           } else if (counter == 7) {
-            expect(widget.data, StaticVariables.CONTACT_OFFICE);
+            expect(widget.data, "Contact International Office");
             counter++;
           } else if (counter == 8) {
-            expect(widget.data, StaticVariables.CIE_CERTIFICATE);
+            expect(widget.data, "Courses in English Certificate");
             counter++;
           } else if (counter == 9) {
             expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 10) {
-            expect(widget.data, StaticVariables.IE_CERTIFICATE);
+            expect(widget.data, "International Engineering Certificate");
             counter++;
           } else if (counter == 11) {
             expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 12) {
-            expect(widget.data, StaticVariables.TAKEN_COURSES);
+            expect(widget.data, "Taken Courses");
             counter++;
           }
         }

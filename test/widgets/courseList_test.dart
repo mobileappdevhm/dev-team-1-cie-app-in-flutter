@@ -1,12 +1,10 @@
+import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
 import 'package:cie_team1/widgets/courseList.dart';
-import 'package:cie_team1/model/course/courses_mock.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-
   //Todo: Please review this test and change adopt to new implementation. I currently don't know how to fix this in appropriate time.
   //group("1",(){
   //  // Expected widget within created widgets. Generated using our mock's behavior
@@ -80,26 +78,28 @@ void main() {
   //  });
   //});
 
-
-  group('2',(){
-
-    setUp((){
-
-    });
+  group('2', () {
+    setUp(() {});
 
     testWidgets('course_description', (WidgetTester tester) async {
-
       final bool isFavoritesPage = false;
 
       await tester.pumpWidget(
         new StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return new MaterialApp(
+              localizationsDelegates: [S.delegate],
+              supportedLocales: S.delegate.supportedLocales,
+              localeResolutionCallback:
+                  S.delegate.resolution(fallback: new Locale("en", "")),
+              onGenerateTitle: (context) => S.of(context).main_title,
+              theme: new ThemeData(
+                primarySwatch: Colors.red,
+              ),
               home: new Material(
                 child: new Center(
                     child: new CourseList(
-                        new CourseListPresenter(), isFavoritesPage)
-                ),
+                        new CourseListPresenter(), isFavoritesPage)),
               ),
             );
           },
@@ -107,14 +107,11 @@ void main() {
       );
       final Iterable<Widget> listOfWidgets = tester.allWidgets;
 
-      for (Widget widget in listOfWidgets){
+      for (Widget widget in listOfWidgets) {
         //await tester.tap();
         //tester.pump();
       }
-
-
     });
-
   });
 }
 
@@ -131,12 +128,13 @@ void checkForFavoritesPageAnomalies(Iterable<Widget> listOfWidgets,
   }
 }
 
-void checkForDuplicateWidgets(Iterable<Widget> listOfWidgets,
-    List<String> expectedTexts) {
+void checkForDuplicateWidgets(
+    Iterable<Widget> listOfWidgets, List<String> expectedTexts) {
   List<Widget> textElements = new List<Widget>();
   for (Widget widget in listOfWidgets) {
     if (textElements.contains(widget)) {
-      fail("Error - Bad Internal CourseListItem State; Duplicate widgets found");
+      fail(
+          "Error - Bad Internal CourseListItem State; Duplicate widgets found");
     }
     textElements.add(widget);
   }
