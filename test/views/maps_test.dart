@@ -13,7 +13,7 @@ void main() {
     });
 
     test('lothstrasse', () {
-      expect(sut.createState().lothLocation.length, 2);
+      expect(sut.createState().lothLocation.length, 3);
     });
 
     test('lothcord', () {
@@ -23,10 +23,13 @@ void main() {
       expect(sut.createState().lothLocation.containsKey("longitude"), true);
       expect(sut.createState().lothLocation.entries.elementAt(1).value,
           '11.5539808');
+      expect(sut.createState().lothLocation.containsKey("place_id"), true);
+      expect(sut.createState().lothLocation.entries.elementAt(2).value,
+          'ChIJR46NWAp2nkcRzrlc_-tCycE');
     });
 
     test('karlstrasse', () {
-      expect(sut.createState().karlLocation.length, 2);
+      expect(sut.createState().karlLocation.length, 3);
     });
 
     test('karlcord', () {
@@ -36,10 +39,13 @@ void main() {
       expect(sut.createState().karlLocation.containsKey("longitude"), true);
       expect(sut.createState().karlLocation.entries.elementAt(1).value,
           '11.5677428');
+      expect(sut.createState().karlLocation.containsKey("place_id"), true);
+      expect(sut.createState().karlLocation.entries.elementAt(2).value,
+          'ChIJe2IFCPF1nkcRHuqVqOgDyvU');
     });
 
     test('pasing', () {
-      expect(sut.createState().pasingLocation.length, 2);
+      expect(sut.createState().pasingLocation.length, 3);
     });
 
     test('pasingcord', () {
@@ -49,6 +55,9 @@ void main() {
       expect(sut.createState().pasingLocation.containsKey("longitude"), true);
       expect(sut.createState().pasingLocation.entries.elementAt(1).value,
           '11.4501612');
+      expect(sut.createState().pasingLocation.containsKey("place_id"), true);
+      expect(sut.createState().pasingLocation.entries.elementAt(2).value,
+          'ChIJt_1dCATYnUcRQWsB490oP9c');
     });
   });
 
