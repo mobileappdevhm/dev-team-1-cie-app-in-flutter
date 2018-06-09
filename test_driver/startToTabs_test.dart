@@ -1,8 +1,6 @@
-
 // Imports the Flutter Driver API
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
-
 
 // there is an instruction for starting this test in startToTabs.dart
 
@@ -23,8 +21,8 @@ void main() {
     });
 
     test('press Button', () async {
-        // Record the performance timeline of things that happen inside the closure
-        final Timeline timeline = await driver.traceAction(() async {
+      // Record the performance timeline of things that happen inside the closure
+      final Timeline timeline = await driver.traceAction(() async {
         // Find the scrollable user list
         final SerializableFinder button = find.text('Start');
 
@@ -34,8 +32,6 @@ void main() {
 
         await driver.tap(button2); //testing button press.
       });
-
-
 
       // The `timeline` object contains all the performance data recorded during
       // the scrolling session. It can be digested into a handful of useful

@@ -8,11 +8,11 @@ class Routes {
   static const String Login = '/login';
   static const String TabPages = '/tabPages';
 
-  static Map<String, WidgetBuilder> getRoutes(){
-  return <String, WidgetBuilder>{
-    Routes.Login: (BuildContext context) => new LoginForm(),
-    Routes.Welcome: (BuildContext context) => new WelcomePage(),
-    Routes.TabPages: (BuildContext context) => new TabsPage(),
+  static Map<String, WidgetBuilder> getRoutes() {
+    return <String, WidgetBuilder>{
+      Routes.Login: (BuildContext context) => new LoginForm(),
+      Routes.Welcome: (BuildContext context) => new WelcomePage(),
+      Routes.TabPages: (BuildContext context) => new TabsPage(),
     };
   }
 }

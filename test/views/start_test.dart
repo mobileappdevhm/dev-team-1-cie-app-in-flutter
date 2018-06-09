@@ -1,10 +1,9 @@
 import 'package:cie_team1/views/start.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
-
   testWidgets('1 widgetTest', (WidgetTester tester) async {
     // Tells the tester to build a UI based on the widget tree passed to it
     await tester.pumpWidget(
@@ -12,15 +11,12 @@ void main() {
         builder: (BuildContext context, StateSetter setState) {
           return new MaterialApp(
             home: new Material(
-              child: new Center(
-                  child: new WelcomePage()
-              ),
+              child: new Center(child: new WelcomePage()),
             ),
           );
         },
       ),
     );
-
 
     final Iterable<Widget> listOfWidgets = tester.allWidgets;
 
@@ -36,8 +32,5 @@ void main() {
         }
       }
     }
-
   });
-
 }
-

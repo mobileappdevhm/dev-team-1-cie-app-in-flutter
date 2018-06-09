@@ -1,8 +1,8 @@
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
-import 'package:flutter/material.dart';
 import 'package:cie_team1/widgets/CiEAnimation.dart';
+import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {
   _WelcomePageState createState() => new _WelcomePageState();

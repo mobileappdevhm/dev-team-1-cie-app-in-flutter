@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
 import 'dart:async';
 
+import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:flutter/material.dart';
+
 class GenericAlert {
-  static Future<Null> confirm(BuildContext context, void no(), void yes(), String msg) {
+  static Future<Null> confirm(
+      BuildContext context, void no(), void yes(), String msg) {
     return showDialog<Null>(
         context: context,
         barrierDismissible: false,

@@ -24,27 +24,28 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
   @override
   Widget build(BuildContext context) {
     return new ListTile(
-      title: new Text(currentUserPresenter.getTitle(id),
-        style: CiEStyle.getPrevCoursesTitleStyle(),),
-      subtitle: new Column(
-        children: <Widget>[
-          new Row(
-            children: <Widget>[
-              new Expanded(
-                child: new Text("DP " + currentUserPresenter.getFaculty(id),
-                  style: CiEStyle.getCoursesListFacultyStyle(),),
-              ),
-              new Text(
-                currentUserPresenter.getCredits(id).toString() + " ECTS",
-                style: CiEStyle.getPrevCoursesCreditsStyle(),
-              ),
-            ],
-          ),
-          new Divider(),
-        ],
-      )
-
-    );
+        title: new Text(
+          currentUserPresenter.getTitle(id),
+          style: CiEStyle.getPrevCoursesTitleStyle(),
+        ),
+        subtitle: new Column(
+          children: <Widget>[
+            new Row(
+              children: <Widget>[
+                new Expanded(
+                  child: new Text(
+                    "DP " + currentUserPresenter.getFaculty(id),
+                    style: CiEStyle.getCoursesListFacultyStyle(),
+                  ),
+                ),
+                new Text(
+                  currentUserPresenter.getCredits(id).toString() + " ECTS",
+                  style: CiEStyle.getPrevCoursesCreditsStyle(),
+                ),
+              ],
+            ),
+            new Divider(),
+          ],
+        ));
   }
-
 }

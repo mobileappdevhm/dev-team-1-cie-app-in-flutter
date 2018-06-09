@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:flutter/material.dart';
 
 class GenericIcon {
   static const int memStorageAvailable = 0xe86c;
@@ -24,11 +24,13 @@ class GenericIcon {
         color = CiEColor.yellow;
         break;
       case CourseAvailability.UNAVAILABLE:
-        iconData = const IconData(memStorageUnavailable, fontFamily: fontFamily);
+        iconData =
+            const IconData(memStorageUnavailable, fontFamily: fontFamily);
         color = CiEColor.red;
         break;
     }
-    return new Icon(iconData,
+    return new Icon(
+      iconData,
       size: CiEStyle.getCoursesListIconSize(),
       color: color,
     );
@@ -36,9 +38,11 @@ class GenericIcon {
 
   static Icon buildGenericFavoriteIcon(bool isActive) {
     return new Icon(
-      (isActive ? const IconData(
-          memStorageActiveFavorite, fontFamily: 'MaterialIcons') :
-      const IconData(memStorageInactiveFavorite, fontFamily: 'MaterialIcons')),
+      (isActive
+          ? const IconData(memStorageActiveFavorite,
+              fontFamily: 'MaterialIcons')
+          : const IconData(memStorageInactiveFavorite,
+              fontFamily: 'MaterialIcons')),
       size: CiEStyle.getCoursesListIconSize(),
       color: CiEColor.red,
     );
@@ -54,9 +58,10 @@ class GenericIcon {
             backgroundColor: Colors.white,
             child: new Text('!'),
           ),
-          label: new Text(message, style: new TextStyle(color: Colors.white),),
-        )
-    );
+          label: new Text(
+            message,
+            style: new TextStyle(color: Colors.white),
+          ),
+        ));
   }
-
 }

@@ -364,6 +364,5 @@ void main() {
     test('22', () {
       expect(WeekdayUtility.intToWeekday(0), Weekday.Mon);
     });
-
   });
 }
