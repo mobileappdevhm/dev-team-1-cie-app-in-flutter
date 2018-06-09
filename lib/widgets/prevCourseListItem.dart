@@ -1,4 +1,3 @@
-import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
@@ -25,31 +24,27 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
   @override
   Widget build(BuildContext context) {
     return new ListTile(
-        title: new Text(
-          currentUserPresenter.getTitle(id),
-          style: CiEStyle.getPrevCoursesTitleStyle(),
-        ),
-        subtitle: new Column(
-          children: <Widget>[
-            new Row(
-              children: <Widget>[
-                new Expanded(
-                  child: new Text(
-                    S.of(context).courses_list_department_short +
-                        currentUserPresenter.getFaculty(id),
-                    style: CiEStyle.getCoursesListFacultyStyle(),
-                  ),
-                ),
-                new Text(
-                  currentUserPresenter.getCredits(id).toString() +
-                      " " +
-                      S.of(context).courses_label_ects,
-                  style: CiEStyle.getPrevCoursesCreditsStyle(),
-                ),
-              ],
-            ),
-            new Divider(),
-          ],
-        ));
+      title: new Text(currentUserPresenter.getTitle(id),
+        style: CiEStyle.getPrevCoursesTitleStyle(),),
+      subtitle: new Column(
+        children: <Widget>[
+          new Row(
+            children: <Widget>[
+              new Expanded(
+                child: new Text("DP " + currentUserPresenter.getFaculty(id),
+                  style: CiEStyle.getCoursesListFacultyStyle(),),
+              ),
+              new Text(
+                currentUserPresenter.getCredits(id).toString() + " ECTS",
+                style: CiEStyle.getPrevCoursesCreditsStyle(),
+              ),
+            ],
+          ),
+          new Divider(),
+        ],
+      )
+
+    );
   }
+
 }

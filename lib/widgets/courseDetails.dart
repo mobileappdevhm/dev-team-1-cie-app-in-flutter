@@ -1,7 +1,6 @@
-import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
 
 class CourseDetails extends StatefulWidget {
   CourseDetails({Key key, this.title}) : super(key: key);
@@ -19,7 +18,7 @@ class _CourseDetailsState extends State<CourseDetails> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
-          S.of(context).courses_title_courseDetails,
+          "Course Details",
           style: CiEStyle.getAppBarTitleStyle(context),
         ),
         elevation: CiEStyle.getAppBarElevation(context),
@@ -35,21 +34,21 @@ class _CourseDetailsState extends State<CourseDetails> {
                   children: <Widget>[
                     new Expanded(
                         child: new Align(
-                      alignment: Alignment.centerLeft,
-                      child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Text(
-                            "Title of course",
-                            style: CiEStyle.getCourseDescriptionTitleStyle(),
+                          alignment: Alignment.centerLeft,
+                          child: new Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              new Text(
+                                "Title of course",
+                                style: CiEStyle.getCourseDescriptionTitleStyle(),
+                              ),
+                              new Text(
+                                "FK 07",
+                                style: CiEStyle.getCourseDescriptionFacultyStyle(),
+                              ),
+                            ],
                           ),
-                          new Text(
-                            "FK 07",
-                            style: CiEStyle.getCourseDescriptionFacultyStyle(),
-                          ),
-                        ],
-                      ),
-                    )),
+                        )),
                     new Expanded(
                       child: new Align(
                         alignment: Alignment.centerRight,
@@ -72,11 +71,12 @@ class _CourseDetailsState extends State<CourseDetails> {
                       padding: const EdgeInsets.only(
                           left: 0.0, top: 25.0, right: 0.0, bottom: 25.0),
                       child: new Text(
-                        S.of(context).courses_label_description,
+                        "Description",
                         style: new TextStyle(
                             fontSize: 25.0,
                             color: CiEColor.gray,
-                            letterSpacing: 2.0),
+                            letterSpacing: 2.0
+                        ),
                       )),
                 ],
               ),
@@ -107,7 +107,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         new Row(
                           children: <Widget>[
                             new Text(
-                              S.of(context).courses_label_hoursPerWeek + ":",
+                              "Hours per Week:",
                               style: new TextStyle(fontSize: 17.0),
                             ),
                             new Text(
@@ -120,7 +120,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         new Row(
                           children: <Widget>[
                             new Text(
-                              S.of(context).courses_label_ects + ":",
+                              "ECTS:",
                               style: new TextStyle(fontSize: 17.0),
                             ),
                             new Text(
@@ -147,7 +147,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                 color: CiEColor.green,
                               ),
                               new Text(
-                                S.of(context).courses_courseStatus_available,
+                                "Available",
                                 style: new TextStyle(
                                   fontSize: 17.0,
                                   color: CiEColor.green,
@@ -166,7 +166,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                 size: 30.0,
                               ),
                               new Text(
-                                S.of(context).courses_label_contact,
+                                "Contact",
                                 style: new TextStyle(fontSize: 17.0),
                               ),
                             ],

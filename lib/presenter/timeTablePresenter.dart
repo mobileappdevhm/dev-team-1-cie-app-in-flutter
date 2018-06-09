@@ -1,7 +1,8 @@
 import 'package:cie_team1/di/currentUser_di.dart';
 import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/model/user/user.dart';
+import 'package:cie_team1/model/user/currentUser.dart';
+import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 
 class TimeTablePresenter {
@@ -18,15 +19,17 @@ class TimeTablePresenter {
 
   //Get courses of user
   List<Course> getCourses() {
-    return _currentUser.getCurrentUser().currentCourses;
+    return _currentUser
+        .getCurrentUser()
+        .currentCourses;
   }
 
   //Get every lectures of users courses
   List<Lecture> getLectures() {
     List<Lecture> lectures = [];
     //Add all lectures to lectures list
-    getCourses()
-        .forEach((c) => c.lecturesPerWeek.forEach((l) => lectures.add(l)));
+    getCourses().forEach((c) =>
+        c.lecturesPerWeek.forEach((l) => lectures.add(l)));
     return _sortLectures(lectures);
   }
 
@@ -39,9 +42,8 @@ class TimeTablePresenter {
   List<Lecture> getLecturesOfWeekday(Weekday searchedWeekday) {
     List<Lecture> lectures = [];
     //Add all lectures to lectures list
-    getCourses().forEach((c) => c.lecturesPerWeek
-        .where((l) => l.weekday == searchedWeekday)
-        .forEach((l) => lectures.add(l)));
+    getCourses().forEach((c) =>
+        c.lecturesPerWeek.where((l) => l.weekday == searchedWeekday).forEach((l) => lectures.add(l)));
     return _sortLectures(lectures);
   }
 
@@ -63,13 +65,11 @@ class TimeTablePresenter {
   }
 
   String getTime(int id) {
-    return getLectures()[id].startDayTime.toString() +
-        "-" +
+    return getLectures()[id].startDayTime.toString() + "-" +
         getLectures()[id].endDayTime.toString();
   }
 
-  String getWeekday(int id, BuildContext context) {
-    return WeekdayUtility.getWeekdayAsString(
-        getLectures()[id].weekday, context);
+  String getWeekday(int id) {
+    return WeekdayUtility.getWeekdayAsString(getLectures()[id].weekday);
   }
 }

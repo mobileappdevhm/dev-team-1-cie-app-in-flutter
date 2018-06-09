@@ -1,4 +1,3 @@
-import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/views/maps.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -78,14 +77,6 @@ void main() {
       new StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
           return new MaterialApp(
-            localizationsDelegates: [S.delegate],
-            supportedLocales: S.delegate.supportedLocales,
-            localeResolutionCallback:
-            S.delegate.resolution(fallback: new Locale("en", "")),
-            onGenerateTitle: (context) => S.of(context).main_title,
-            theme: new ThemeData(
-              primarySwatch: Colors.red,
-            ),
             home: new Material(
               child: new Center(
                   child: new MapPage()
@@ -102,17 +93,18 @@ void main() {
     for (Widget widget in listOfWidgets) {
       if (widget is Text) {
         if (counter == 0) {
-          expect(widget.data, "Lothstrasse Campus");
+          expect(widget.data, StaticVariables.LOTHSTRASSE);
           counter++;
         } else if (counter == 2) {
-          expect(widget.data, "Pasing Campus");
+          expect(widget.data, StaticVariables.PASING);
           counter++;
         } else if (counter == 4) {
-         expect(widget.data, "Karlstrasse Campus");
+         expect(widget.data, StaticVariables.KARLSTRASSE);
           counter++;
         } 
       }
     }
+
   });
 
 }

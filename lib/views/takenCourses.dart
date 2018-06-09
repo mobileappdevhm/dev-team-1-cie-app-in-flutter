@@ -1,7 +1,9 @@
-import 'package:cie_team1/generated/i18n.dart';
+import 'dart:async';
+
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/prevCourseList.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +24,7 @@ class _TakenCoursesState extends State<TakenCourses> {
     return new Scaffold(
         appBar: new AppBar(
           title: new Text(
-            S.of(context).settings_label_takenCourses,
+            StaticVariables.TAKEN_COURSES,
             style: CiEStyle.getAppBarTitleStyle(context),
           ),
           elevation: CiEStyle.getAppBarElevation(context),
@@ -37,11 +39,11 @@ class _TakenCoursesState extends State<TakenCourses> {
                     padding: const EdgeInsets.only(
                         top: 32.0, bottom: 8.0, left: 16.0),
                     child: new Text(
-                        S.of(context).settings_label_totalOf +
+                        StaticVariables.TOTAL_OF +
                             " " +
                             credits.toString() +
                             " " +
-                            S.of(context).settings_label_ects,
+                            StaticVariables.ECTS,
                         style: CiEStyle.getSettingsStyle()),
                   )
                 ],

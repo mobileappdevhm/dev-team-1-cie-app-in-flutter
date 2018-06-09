@@ -1,27 +1,24 @@
-import 'package:cie_team1/generated/i18n.dart';
 import 'package:cie_team1/widgets/courseDetails.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
-  group('settingspagewidget', () {
+
+
+
+  group('settingspagewidget', ()
+  {
     testWidgets('1 widgetTest for settings', (WidgetTester tester) async {
 // Tells the tester to build a UI based on the widget tree passed to it
       await tester.pumpWidget(
         new StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return new MaterialApp(
-              localizationsDelegates: [S.delegate],
-              supportedLocales: S.delegate.supportedLocales,
-              localeResolutionCallback:
-                  S.delegate.resolution(fallback: new Locale("en", "")),
-              onGenerateTitle: (context) => S.of(context).main_title,
-              theme: new ThemeData(
-                primarySwatch: Colors.red,
-              ),
               home: new Material(
-                child: new Center(child: new CourseDetails()),
+                child: new Center(
+                    child: new CourseDetails()
+                ),
               ),
             );
           },
@@ -45,27 +42,36 @@ void main() {
           } else if (counter == 3) {
             expect(widget.data.isEmpty, false);
             counter++;
-          } else if (counter == 4) {
+          }else if (counter == 4) {
             expect(widget.data, "Hours per Week:");
             counter++;
-          } else if (counter == 5) {
-            expect(widget.data.isEmpty, false);
+          }else if (counter == 5) {
+            expect(widget.data.isEmpty,false);
             counter++;
-          } else if (counter == 6) {
+          }else if (counter == 6) {
             expect(widget.data, 'ECTS:');
             counter++;
-          } else if (counter == 7) {
-            expect(widget.data.isEmpty, false);
+          }else if (counter == 7) {
+            expect(widget.data.isEmpty,false);
             counter++;
-          } else if (counter == 8) {
+          }else if (counter == 8) {
             expect(widget.data, "Available");
             counter++;
-          } else if (counter == 9) {
-            expect(widget.data, "Contact");
+          }else if (counter == 9) {
+            expect(widget.data,"Contact");
             counter++;
           }
+
         }
       }
     });
+
+
+
+
+
   });
+
+
+
 }

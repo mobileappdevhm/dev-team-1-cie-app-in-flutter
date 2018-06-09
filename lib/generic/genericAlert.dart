@@ -1,11 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'dart:async';
 
-import 'package:cie_team1/generated/i18n.dart';
-import 'package:flutter/material.dart';
-
 class GenericAlert {
-  static Future<Null> confirm(
-      BuildContext context, void no(), void yes(), String msg) {
+  static Future<Null> confirm(BuildContext context, void no(), void yes(), String msg) {
     return showDialog<Null>(
         context: context,
         barrierDismissible: false,
@@ -14,14 +12,14 @@ class GenericAlert {
             title: new Text(msg),
             actions: <Widget>[
               new FlatButton(
-                child: new Text(S.of(context).alert_button_yes),
+                child: const Text(StaticVariables.ALERT_YES),
                 onPressed: () {
                   Navigator.of(context).pop();
                   yes();
                 },
               ),
               new FlatButton(
-                child: new Text(S.of(context).alert_button_no),
+                child: const Text(StaticVariables.ALERT_NO),
                 onPressed: () {
                   Navigator.of(context).pop();
                   no();

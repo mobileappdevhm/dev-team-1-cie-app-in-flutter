@@ -1,11 +1,11 @@
-import 'package:cie_team1/generated/i18n.dart';
+import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
-import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/widgets/courseListItem.dart';
+import 'package:cie_team1/model/course/course.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class CourseList extends StatefulWidget {
@@ -19,10 +19,7 @@ class CourseList extends StatefulWidget {
   State<StatefulWidget> createState() {
     return new CourseListState(courseListPresenter, shouldFilterByFavorites);
   }
-
-  void toggleFilter() {
-    shouldFilterByFavorites = !shouldFilterByFavorites;
-  }
+  void toggleFilter() { shouldFilterByFavorites = !shouldFilterByFavorites; }
 }
 
 class CourseListState extends State<CourseList> {
@@ -31,7 +28,7 @@ class CourseListState extends State<CourseList> {
   final bool shouldFilterByFavorites;
   bool shouldSearch = false;
   String filter = "07";
-  String searchValue = "";
+  String searchValue="";
   bool coursesRegistered = false;
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites);
@@ -42,99 +39,101 @@ class CourseListState extends State<CourseList> {
 
     if (shouldFilterByFavorites == false) {
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
-      String departmentLabel = S.of(context).courses_filter_department + " #";
-      widgets.add(new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Container(
-                padding: pad,
-                child: new DropdownButton<String>(
-                  items: CourseDefinitions.DEPARTMENTS.map((String value) {
-                    return new DropdownMenuItem<String>(
-                      value: value,
-                      child: new Text(departmentLabel + value,
-                          overflow: TextOverflow.clip),
-                    );
-                  }).toList(),
-                  onChanged: (String val) {
-                    setState(() {
-                      this.filter = val;
-                    });
-                  },
-                  iconSize: 32.0,
-                  value: filter,
-                )),
-            new Container(
-              padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
-              child: new IconButton(
-                  color: CiEColor.mediumGray,
-                  icon: new Icon(Icons.search),
-                  onPressed: toggleSearch),
-            )
-          ]));
+      String departmentLabel = "Department #";
+      widgets.add(
+          new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                    padding: pad,
+                    child: new DropdownButton<String>(
+                      items: CourseDefinitions.DEPARTMENTS.map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(departmentLabel+value, overflow: TextOverflow.clip),
+                        );
+                      }).toList(),
+                      onChanged: (String val) {
+                        setState(() {
+                          this.filter = val;
+                        });
+                      },
+                      iconSize: 32.0,
+                      value: filter,
+                    )
+                ),
+                new Container(
+                  padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
+                  child: new IconButton(
+                      color: CiEColor.mediumGray,
+                      icon: new Icon(Icons.search),
+                      onPressed: toggleSearch
+                  ),
+                )
+              ])
+      );
 
       if (shouldSearch) {
-        widgets.add(new Container(
-          padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
-          alignment: Alignment.center,
-          child: new TextField(
-            controller: c1,
-            decoration: new InputDecoration(
-              hintText: S.of(context).courses_hint_search,
-              contentPadding: const EdgeInsets.all(10.0),
-              border: OutlineInputBorder(),
-            ),
-            onChanged: (String val) => updateSearch(val),
-          ),
-        ));
+        widgets.add(
+            new Container(
+              padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
+              alignment: Alignment.center,
+              child: new TextField(
+                controller: c1,
+                decoration: const InputDecoration(
+                  hintText: "Search by Course Name",
+                  contentPadding: const EdgeInsets.all(10.0),
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (String val)=>updateSearch(val),
+              ),
+            )
+        );
       }
     }
 
-    for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
-      if (shouldFilterByFavorites == false &&
-              courseListPresenter.getFaculty(i) == filter ||
-          (shouldFilterByFavorites == true &&
-              courseListPresenter.getFavourite(i))) {
-        if (shouldSearch == false ||
-            (courseListPresenter.getTitle(i).contains(searchValue))) {
-          widgets
-              .add(new CourseListItem(courseListPresenter, i, favoriteIcon(i))
-                  //)
-                  );
+    for (int i=0; i< courseListPresenter.getCourses().length; i++) {
+      if (shouldFilterByFavorites == false && courseListPresenter.getFaculty(i)==filter
+          || (shouldFilterByFavorites == true && courseListPresenter.getFavourite(i))) {
+        if (shouldSearch== false || (courseListPresenter.getTitle(i).contains(searchValue))) {
+          widgets.add(
+            //GenericBorderContainer.buildGenericBorderedElement(
+              new CourseListItem(courseListPresenter, i, favoriteIcon(i))
+            //)
+          );
+          //widgets.add(GenericBorderContainer.buildGenericBlurredLine());
           widgets.add(new Divider());
         }
       }
     }
     if (shouldFilterByFavorites == true) {
-      widgets.add(new Container(
-        margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
-        child: new RaisedButton(
-          color:
-              (coursesRegistered == false) ? CiEColor.red : CiEColor.lightGray,
-          shape: new RoundedRectangleBorder(
-              borderRadius: CiEStyle.getButtonBorderRadius()),
-          onPressed: (coursesRegistered == false)
-              ? _handleCourseSubmission
-              : () => _voidFunction,
-          child: new Container(
-            margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
-            child: new Text(
-                (coursesRegistered == false)
-                    ? S.of(context).favorites_button_register
-                    : S.of(context).favorites_button_alreadyRegistered,
+      widgets.add(
+        new Container(
+          margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
+          child: new RaisedButton(
+              color: (coursesRegistered == false) ? CiEColor.red : CiEColor.lightGray,
+              shape: new RoundedRectangleBorder(borderRadius: CiEStyle.getButtonBorderRadius()),
+              onPressed: (coursesRegistered == false) ? _handleCourseSubmission : ()=>_voidFunction,
+              child: new Container(
+                margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
+                child:new Text(
+                    (coursesRegistered == false) ? StaticVariables.FAVORITES_REGISTRATION_BUTTON:
+                    StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE,
                 style: new TextStyle(color: Colors.white)),
-          ),
-        ),
-      ));
+              ),
+            ),
+          )
+      );
     }
-    return new ListView(children: widgets);
+    return new ListView(children:widgets);
   }
 
   Widget favoriteIcon(int id) {
     return new IconButton(
-      icon: GenericIcon
-          .buildGenericFavoriteIcon(courseListPresenter.getFavourite(id)),
-      onPressed: () => _toggleFavourite(id),
+      icon: GenericIcon.buildGenericFavoriteIcon(
+          courseListPresenter.getFavourite(id)
+      ),
+      onPressed: ()=>_toggleFavourite(id),
     );
   }
 
@@ -158,10 +157,8 @@ class CourseListState extends State<CourseList> {
         coursesRegistered = true;
       });
     };
-    GenericAlert
-        .confirm(context, no, yes,
-            S.of(context).favorites_message_completeRegistration)
-        .then((_) {});
+    GenericAlert.confirm(context, no, yes,
+        StaticVariables.ALERT_REGISTRATION_SUBMISSION).then((_) {});
   }
 
   void _voidFunction() {}
