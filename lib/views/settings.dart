@@ -86,7 +86,7 @@ class _SettingsState extends State<Settings> {
                         child: new Row(
                           children: <Widget>[
                             new Text(
-                              S.of(context).settings_label_loggedInAs + " : ",
+                              S.of(context).settings_label_status + " : ",
                               style: CiEStyle.getSettingsStyle(),
                             ),
                             new Text(

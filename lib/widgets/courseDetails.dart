@@ -107,7 +107,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         new Row(
                           children: <Widget>[
                             new Text(
-                              S.of(context).courses_label_hoursPerWeek,
+                              S.of(context).courses_label_hoursPerWeek + ":",
                               style: new TextStyle(fontSize: 17.0),
                             ),
                             new Text(
@@ -120,7 +120,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         new Row(
                           children: <Widget>[
                             new Text(
-                              S.of(context).courses_label_ects,
+                              S.of(context).courses_label_ects + ":",
                               style: new TextStyle(fontSize: 17.0),
                             ),
                             new Text(
