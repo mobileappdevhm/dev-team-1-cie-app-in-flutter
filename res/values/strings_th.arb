@@ -1,0 +1,83 @@
+{
+  "main_title": "CiE",
+
+  "start_headline": "หลักสูตรภาษาอังกฤษ",
+  "start_button_start": "Start",
+
+  "login_headline": "หลักสูตรภาษาอังกฤษ",
+  "login_label_email": "E-Mail",
+  "login_label_password": "รหัสผ่าน",
+  "login_button_login": "LOGIN",
+  "login_text_noAccount": "ไม่มีบัญชีหรือ?",
+  "login_button_loginAsGuest": "เข้าสู่ระบบด้วย Guest",
+  "login_text_forgetPassword": "ลืมรหัสผ่านของคุณ?",
+  "login_error_passwordNotValid": "รหัสผ่านไม่ถูกต้อง",
+
+  "tabs_courses": "หลักสูตร",
+  "tabs_maps": "แผนที่",
+  "tabs_schedule": "ตารางเวลา",
+  "tabs_favorites": "รายการโปรด",
+  "tabs_settings": "การตั้งค่า",
+
+  "courses_title": "หลักสูตร",
+  "courses_filter_department": "ภาควิชา",
+  "courses_hint_search": "ค้นหาตามชื่อหลักสูตร",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "เวลา",
+  "courses_list_noCoursesFound": "ไม่พบหลักสูตร!",
+
+  "courses_title_courseDetails": "รายละเอียดหลักสูตร",
+  "courses_label_description": "คำอธิบาย",
+  "courses_label_hoursPerWeek": "Hours per Week",
+  "courses_label_ects": "ECTS",
+  "courses_label_contact": "ติดต่อ",
+  "courses_courseStatus_available": "พร้อมใช้งาน",
+  "courses_courseStatus_maybeAvailable": "อาจจะใช้ได้",
+  "courses_courseStatus_notAvailable": "ไม่พร้อมใช้งาน",
+
+  "course_weekdays_short_0": "จันทร์",
+  "course_weekdays_short_1": "อังคาร",
+  "course_weekdays_short_2": "พุธ",
+  "course_weekdays_short_3": "พฤหัสบดี",
+  "course_weekdays_short_4": "ศุกร์",
+  "course_weekdays_short_5": "เสาร์",
+  "course_weekdays_short_6": "ดวงอาทิตย์",
+
+  "maps_title": "แผนที่",
+  "map_campus_lothstrasse": "วิทยาเขต Lothstrasse",
+  "maps_campus_pasing": "Pasing Campus",
+  "map_campus_karlstrasse": "วิทยาเขต Karlstrasse",
+  "maps_openMapDescription": "คลิกที่แผนที่เพื่อขอเส้นทาง",
+
+  "schedule_title": "ตารางเวลา",
+  "schedule_headline_today": "วันนี้",
+  "schedule_headline_weekly": "Weekly",
+  "schedule_text_timeConflict": "ความขัดแย้งในการจัดกำหนดการที่เป็นไปได้",
+
+  "schedule_item_campus": "วิทยาเขต",
+  "schedule_item_time": "เวลา",
+  "schedule_item_day": "วัน",
+  "schedule_item_room": "ห้อง",
+
+  "favorites_title": "รายการโปรด",
+  "favorites_button_register": "ลงทะเบียนหลักสูตรที่ชื่นชอบ",
+  "favorites_button_alreadyRegistered": "หลักสูตรที่ส่งแล้ว",
+  "favorites_message_completeRegistration": "การลงทะเบียนแบบสมบูรณ์?",
+
+  "settings_title": "การตั้งค่า",
+  "settings_label_status": "สถานะ",
+  "settings_status_local": "นักเรียนท้องถิ่น",
+  "settings_status_exchange": "แลกเปลี่ยนนักเรียน",
+  "settings_label_department": "Department",
+  "settings_label_loggedInAs": "เข้าสู่ระบบด้วย",
+  "settings_button_logout": "ออกจากระบบ",
+  "settings_contactInternationalOffice": "ติดต่อสำนักงานระหว่างประเทศ",
+  "settings_cieCertificate": "หลักสูตรภาษาอังกฤษ",
+  "settings_ieCertificate": "ใบรับรองวิศวกรรมนานาชาติ",
+  "settings_label_takenCourses": "หลักสูตรที่ได้รับ",
+  "settings_label_totalOf": "รวม",
+  "settings_label_ects": "ECTS",
+
+  "alert_button_yes": "COMPLETE",
+  "alert_button_no": "CANCEL"
+}

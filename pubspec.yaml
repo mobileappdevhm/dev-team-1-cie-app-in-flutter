@@ -9,8 +9,14 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.0
   url_launcher: "^3.0.1"
+  intl: "^0.15.6"
+
+  flutter_localizations:
+      sdk: flutter
 
 dev_dependencies:
+  flutter_localizations:
+      sdk: flutter
   flutter_test:
     sdk: flutter
   flutter_driver:
@@ -39,7 +45,6 @@ flutter:
     - res/images/karlstrasse.png
     - res/images/lothstrasse.png
     - res/images/pasing.png
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

@@ -1,0 +1,83 @@
+{
+  "main_title": "CiE",
+
+  "start_headline": "Corsi in inglese",
+  "start_button_start": "Start",
+
+  "login_headline": "Corsi in inglese",
+  "login_label_email": "E-mail",
+  "login_label_password": "Password",
+  "login_button_login": "LOGIN",
+  "login_text_noAccount": "Non hai un account?",
+  "login_button_loginAsGuest": "Accedi come ospite",
+  "login_text_forgetPassword": "Hai dimenticato la password?",
+  "login_error_passwordNotValid": "La password non è valida",
+
+  "tabs_courses": "Corsi",
+  "tabs_maps": "Mappa",
+  "tabs_schedule": "Orario",
+  "tabs_favorites": "Preferiti",
+  "tabs_settings": "Impostazioni",
+
+  "courses_title": "Corsi",
+  "courses_filter_department": "Dipartimento",
+  "courses_hint_search": "Cerca per nome del corso",
+  "courses_list_department_short": "DP",
+  "courses_list_time": "Time",
+  "courses_list_noCoursesFound": "Nessun corso trovato!",
+
+  "courses_title_courseDetails": "Dettagli del corso",
+  "courses_label_description": "Descrizione",
+  "courses_label_hoursPerWeek": "Ore per settimana",
+  "courses_label_ects": "ECTS",
+  "courses_label_contact": "Contatto",
+  "courses_courseStatus_available": "Disponibile",
+  "courses_courseStatus_maybeAvailable": "Forse disponibile",
+  "courses_courseStatus_notAvailable": "Non disponibile",
+
+  "course_weekdays_short_0": "Mon",
+  "course_weekdays_short_1": "Tue",
+  "course_weekdays_short_2": "Wed",
+  "course_weekdays_short_3": "Thu",
+  "course_weekdays_short_4": "Fri",
+  "course_weekdays_short_5": "Sat",
+  "course_weekdays_short_6": "Sun",
+
+  "maps_title": "Mappa",
+  "maps_campus_lothstrasse": "Lothstrasse Campus",
+  "maps_campus_pasing": "Pasing Campus",
+  "maps_campus_karlstrasse": "Campus di Karlstrasse",
+  "maps_openMapDescription": "Fai clic sulle mappe per ottenere indicazioni stradali.",
+
+  "schedule_title": "Orario",
+  "schedule_headline_today": "Today",
+  "schedule_headline_weekly": "Weekly",
+  "schedule_text_timeConflict": "Possibile conflitto di pianificazione",
+
+  "schedule_item_campus": "Campus",
+  "schedule_item_time": "Time",
+  "schedule_item_day": "Day",
+  "schedule_item_room": "Room",
+
+  "favorites_title": "Preferiti",
+  "favorites_button_register": "Registra i corsi preferiti",
+  "favorites_button_alreadyRegistered": "Corsi già inoltrati",
+  "favorites_message_completeRegistration": "Completa registrazione?",
+
+  "settings_title": "Impostazioni",
+  "settings_label_status": "Stato",
+  "settings_status_local": "Studente locale",
+  "settings_status_exchange": "Scambia studenti",
+  "settings_label_department": "Dipartimento",
+  "settings_label_loggedInAs": "Connesso come",
+  "settings_button_logout": "Esci",
+  "settings_contactInternationalOffice": "Contatta l'ufficio internazionale",
+  "settings_cieCertificate": "Corsi in inglese certificato",
+  "settings_ieCertificate": "Certificato di ingegneria internazionale",
+  "settings_label_takenCourses": "Corsi presi",
+  "settings_label_totalOf": "Totale di",
+  "settings_label_ects": "ECTS",
+
+  "alert_button_yes": "COMPLETE",
+  "alert_button_no": "ANNULLA"
+}
