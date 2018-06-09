@@ -115,18 +115,20 @@ class _MapPageState extends State<MapPage> {
     _buildUri(S.of(context).maps_campus_karlstrasse);
     _buildUri(S.of(context).maps_campus_lothstrasse);
     _buildUri(S.of(context).maps_campus_pasing);
-    return new ListView(
-      children: <Widget>[
+    return new Scaffold(
+      body: new ListView(
+        children: <Widget>[
 //        new Container(
 //          padding: new EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
 //          child: new Text(StaticVariables.message, textAlign: TextAlign.left, style: CiEStyle.getMapsDescriptionStyle()),
 //      ),
-        buildMapCard(
-            RESOURCE_LOTHSTRASSE, S.of(context).maps_campus_lothstrasse),
-        buildMapCard(RESOURCE_PASING, S.of(context).maps_campus_pasing),
-        buildMapCard(
-            RESOURCE_KARLSTRASSE, S.of(context).maps_campus_karlstrasse),
-      ],
+          buildMapCard(
+              RESOURCE_LOTHSTRASSE, S.of(context).maps_campus_lothstrasse),
+          buildMapCard(RESOURCE_PASING, S.of(context).maps_campus_pasing),
+          buildMapCard(
+              RESOURCE_KARLSTRASSE, S.of(context).maps_campus_karlstrasse),
+        ],
+      ),
     );
   }
 }

@@ -23,9 +23,9 @@ class Schedule extends StatelessWidget {
       children.add(_getTimeTableSpecificDay(WeekdayUtility.intToWeekday(i)));
     }
 
-    return new ListView(
+    return new Scaffold( body:new ListView(
       children: children,
-    );
+    ));
   }
 
   Widget _getTimeTableSpecificDay(Weekday weekday) {

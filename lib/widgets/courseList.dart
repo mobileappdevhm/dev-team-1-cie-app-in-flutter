@@ -127,7 +127,7 @@ class CourseListState extends State<CourseList> {
         ),
       ));
     }
-    return new ListView(children: widgets);
+    return new Scaffold( body: new ListView(children: widgets));
   }
 
   Widget favoriteIcon(int id) {
