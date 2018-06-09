@@ -8,7 +8,7 @@
   "login_label_email": "E-Mail",
   "login_label_password": "Password",
   "login_button_login": "LOGIN",
-  "login_text_noAccount": "Don't have an account?",
+  "login_text_noAccount": "Don't have an Account?",
   "login_button_loginAsGuest": "Login as Guest",
   "login_text_forgetPassword": "Forgot your password?",
   "login_error_passwordNotValid": "Password is not valid",
@@ -34,6 +34,10 @@
   "courses_courseStatus_available": "Available",
   "courses_courseStatus_maybeAvailable": "Maybe available",
   "courses_courseStatus_notAvailable": "Not available",
+
+  "course_campusShort_karlstrasse": "Karl.",
+  "course_campusShort_lothstrasse": "Loth.",
+  "course_campusShort_pasing": "Pasing",
 
   "course_weekdays_short_0": "Mon",
   "course_weekdays_short_1": "Tue",

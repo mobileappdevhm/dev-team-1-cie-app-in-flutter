@@ -35,6 +35,10 @@
   "courses_courseStatus_maybeAvailable": "Forse disponibile",
   "courses_courseStatus_notAvailable": "Non disponibile",
 
+  "course_campusShort_karlstrasse": "Karl.",
+  "course_campusShort_lothstrasse": "Loth.",
+  "course_campusShort_pasing": "Pasing",
+
   "course_weekdays_short_0": "Mon",
   "course_weekdays_short_1": "Tue",
   "course_weekdays_short_2": "Wed",

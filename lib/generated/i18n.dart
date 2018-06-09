@@ -23,6 +23,9 @@ class S implements WidgetsLocalizations {
 
   String get alert_button_no => "CANCEL";
   String get alert_button_yes => "COMPLETE";
+  String get course_campusShort_karlstrasse => "Karl.";
+  String get course_campusShort_lothstrasse => "Loth.";
+  String get course_campusShort_pasing => "Pasing";
   String get course_weekdays_short_0 => "Mon";
   String get course_weekdays_short_1 => "Tue";
   String get course_weekdays_short_2 => "Wed";
@@ -55,7 +58,7 @@ class S implements WidgetsLocalizations {
   String get login_label_email => "E-Mail";
   String get login_label_password => "Password";
   String get login_text_forgetPassword => "Forgot your password?";
-  String get login_text_noAccount => "Don't have an account?";
+  String get login_text_noAccount => "Don't have an Account?";
   String get main_title => "CiE";
   String get maps_campus_karlstrasse => "Karlstrasse Campus";
   String get maps_campus_lothstrasse => "Lothstrasse Campus";
@@ -139,6 +142,10 @@ class de extends S {
   @override
   String get courses_hint_search => "Suche nach Kursname";
   @override
+  String get course_campusShort_karlstrasse => "Karl.";
+  @override
+  String get course_campusShort_pasing => "Pasing";
+  @override
   String get settings_status_exchange => "Austauschstudent";
   @override
   String get maps_openMapDescription => "Klicke auf die Karten, um eine Wegbeschreibung zu erhalten.";
@@ -148,6 +155,8 @@ class de extends S {
   String get maps_campus_lothstrasse => "Campus Lothstraße";
   @override
   String get courses_filter_department => "Abteilung";
+  @override
+  String get course_campusShort_lothstrasse => "Loth.";
   @override
   String get maps_campus_karlstrasse => "Karlstraße Campus";
   @override
@@ -285,6 +294,10 @@ class fi extends S {
   @override
   String get courses_hint_search => "Haku kurssien nimestä";
   @override
+  String get course_campusShort_karlstrasse => "Karl.";
+  @override
+  String get course_campusShort_pasing => "Pasing";
+  @override
   String get settings_status_exchange => "Vaihto-opiskelija";
   @override
   String get maps_openMapDescription => "Napsauta karttoja saadaksesi reittiohjeet.";
@@ -294,6 +307,8 @@ class fi extends S {
   String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get courses_filter_department => "osasto";
+  @override
+  String get course_campusShort_lothstrasse => "Loth.";
   @override
   String get maps_campus_karlstrasse => "Karlstrasse Campus";
   @override
@@ -431,6 +446,10 @@ class sv extends S {
   @override
   String get courses_hint_search => "Sök efter kursnamn";
   @override
+  String get course_campusShort_karlstrasse => "Karl.";
+  @override
+  String get course_campusShort_pasing => "Pasing";
+  @override
   String get settings_status_exchange => "Exchange student";
   @override
   String get maps_openMapDescription => "Klicka på kartorna för att få vägbeskrivning.";
@@ -440,6 +459,8 @@ class sv extends S {
   String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get courses_filter_department => "Department";
+  @override
+  String get course_campusShort_lothstrasse => "Loth.";
   @override
   String get maps_campus_karlstrasse => "Karlstrasse Campus";
   @override
@@ -577,6 +598,10 @@ class pt extends S {
   @override
   String get courses_hint_search => "Pesquisar por nome do curso";
   @override
+  String get course_campusShort_karlstrasse => "Karl.";
+  @override
+  String get course_campusShort_pasing => "Pasing";
+  @override
   String get settings_status_exchange => "estudante do Exchange";
   @override
   String get maps_openMapDescription => "Clique nos mapas para obter direções.";
@@ -586,6 +611,8 @@ class pt extends S {
   String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get courses_filter_department => "Departamento";
+  @override
+  String get course_campusShort_lothstrasse => "Loth.";
   @override
   String get maps_campus_karlstrasse => "Karlstrasse Campus";
   @override
@@ -687,7 +714,7 @@ class th extends S {
   @override
   String get login_label_email => "E-Mail";
   @override
-  String get maps_campus_pasing => "Pasing Campus";
+  String get maps_campus_pasing => "วิทยาเขต Pasing";
   @override
   String get settings_label_takenCourses => "หลักสูตรที่ได้รับ";
   @override
@@ -723,13 +750,23 @@ class th extends S {
   @override
   String get courses_hint_search => "ค้นหาตามชื่อหลักสูตร";
   @override
+  String get course_campusShort_karlstrasse => "Karl.";
+  @override
+  String get course_campusShort_pasing => "Pasing";
+  @override
   String get settings_status_exchange => "แลกเปลี่ยนนักเรียน";
   @override
   String get maps_openMapDescription => "คลิกที่แผนที่เพื่อขอเส้นทาง";
   @override
   String get courses_label_contact => "ติดต่อ";
   @override
+  String get maps_campus_lothstrasse => "วิทยาเขต Lothstrasse";
+  @override
   String get courses_filter_department => "ภาควิชา";
+  @override
+  String get course_campusShort_lothstrasse => "Loth.";
+  @override
+  String get maps_campus_karlstrasse => "วิทยาเขต Karlstrasse";
   @override
   String get schedule_headline_weekly => "Weekly";
   @override
@@ -869,6 +906,10 @@ class it extends S {
   @override
   String get courses_hint_search => "Cerca per nome del corso";
   @override
+  String get course_campusShort_karlstrasse => "Karl.";
+  @override
+  String get course_campusShort_pasing => "Pasing";
+  @override
   String get settings_status_exchange => "Scambia studenti";
   @override
   String get maps_openMapDescription => "Fai clic sulle mappe per ottenere indicazioni stradali.";
@@ -878,6 +919,8 @@ class it extends S {
   String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get courses_filter_department => "Dipartimento";
+  @override
+  String get course_campusShort_lothstrasse => "Loth.";
   @override
   String get maps_campus_karlstrasse => "Campus di Karlstrasse";
   @override
@@ -1015,6 +1058,10 @@ class fr extends S {
   @override
   String get courses_hint_search => "Recherche par nom de cours";
   @override
+  String get course_campusShort_karlstrasse => "Karl.";
+  @override
+  String get course_campusShort_pasing => "Pasing";
+  @override
   String get settings_status_exchange => "Echange d'étudiants";
   @override
   String get maps_openMapDescription => "Cliquez sur les cartes pour obtenir les directions.";
@@ -1024,6 +1071,8 @@ class fr extends S {
   String get maps_campus_lothstrasse => "Lothstrasse Campus";
   @override
   String get courses_filter_department => "Département";
+  @override
+  String get course_campusShort_lothstrasse => "Loth.";
   @override
   String get maps_campus_karlstrasse => "Karlstrasse Campus";
   @override

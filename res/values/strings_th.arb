@@ -35,6 +35,10 @@
   "courses_courseStatus_maybeAvailable": "อาจจะใช้ได้",
   "courses_courseStatus_notAvailable": "ไม่พร้อมใช้งาน",
 
+  "course_campusShort_karlstrasse": "Karl.",
+  "course_campusShort_lothstrasse": "Loth.",
+  "course_campusShort_pasing": "Pasing",
+
   "course_weekdays_short_0": "จันทร์",
   "course_weekdays_short_1": "อังคาร",
   "course_weekdays_short_2": "พุธ",
@@ -44,9 +48,9 @@
   "course_weekdays_short_6": "ดวงอาทิตย์",
 
   "maps_title": "แผนที่",
-  "map_campus_lothstrasse": "วิทยาเขต Lothstrasse",
-  "maps_campus_pasing": "Pasing Campus",
-  "map_campus_karlstrasse": "วิทยาเขต Karlstrasse",
+  "maps_campus_lothstrasse": "วิทยาเขต Lothstrasse",
+  "maps_campus_pasing": "วิทยาเขต Pasing",
+  "maps_campus_karlstrasse": "วิทยาเขต Karlstrasse",
   "maps_openMapDescription": "คลิกที่แผนที่เพื่อขอเส้นทาง",
 
   "schedule_title": "ตารางเวลา",
