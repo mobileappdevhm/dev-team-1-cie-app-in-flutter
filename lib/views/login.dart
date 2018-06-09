@@ -8,6 +8,7 @@ import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -111,6 +112,14 @@ class LoginFormState extends State<LoginForm> {
     return null;
   }
 
+  _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw ('Could not launch url $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) => new Scaffold(
         key: _scaffoldKey,
@@ -172,10 +181,13 @@ class LoginFormState extends State<LoginForm> {
                       ),
                     ),
                   ),
-                  new Text(
-                    S.of(context).login_text_noAccount,
-                    style: new TextStyle(color: CiEColor.red),
-                    textAlign: TextAlign.center,
+                  new FlatButton(
+                    onPressed: () => _launchUrl("https://nine.wi.hm.edu/Account/Register"),
+                    child: new Text(
+                      S.of(context).login_text_noAccount,
+                      style: new TextStyle(color: CiEColor.red),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   new Container(
                     padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
@@ -190,10 +202,13 @@ class LoginFormState extends State<LoginForm> {
                       ),
                     ),
                   ),
-                  new Text(
-                    S.of(context).login_text_forgetPassword,
-                    style: new TextStyle(color: CiEColor.red),
-                    textAlign: TextAlign.center,
+                  new FlatButton(
+                    onPressed: () => _launchUrl("https://nine.wi.hm.edu/Account/ForgotPassword"),
+                    child: new Text(
+                      S.of(context).login_text_forgetPassword,
+                      style: new TextStyle(color: CiEColor.red),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),
