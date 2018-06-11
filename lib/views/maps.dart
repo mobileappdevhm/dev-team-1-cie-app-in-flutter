@@ -24,18 +24,21 @@ class _MapPageState extends State<MapPage> {
       StaticVariables.IMAGE_PATH + 'pasing.png';
   Map<String, String> lothLocation = {
     "latitude": '48.1542593',
-    "longitude": '11.5539808'
+    "longitude": '11.5539808',
+    "place_id": 'ChIJR46NWAp2nkcRzrlc_-tCycE'
   };
   Map<String, String> pasingLocation = {
     "latitude": '48.1415925',
-    "longitude": '11.4501612'
+    "longitude": '11.4501612',
+    "place_id": 'ChIJt_1dCATYnUcRQWsB490oP9c'
   };
   Map<String, String> karlLocation = {
     "latitude": '48.1429336',
-    "longitude": '11.5677428'
+    "longitude": '11.5677428',
+    "place_id": 'ChIJe2IFCPF1nkcRHuqVqOgDyvU'
   };
 
-  _getCoordinates(String campus) {
+  _getLocation(String campus) {
     switch (campus) {
       case StaticVariables.KARLSTRASSE:
         return karlLocation;
@@ -49,15 +52,14 @@ class _MapPageState extends State<MapPage> {
   }
 
   _launchMaps(String campus) async {
-    String googleUrl = 'comgooglemaps://?center=${_getCoordinates(
-        campus)['latitude']},${_getCoordinates(campus)['longitude']}';
-    String appleUrl = 'https://maps.apple.com/?sll=${_getCoordinates(
-        campus)['latitude']},${_getCoordinates(campus)['longitude']}';
+    var _mapLocation = _getLocation(campus);
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=${_mapLocation['latitude']},${_mapLocation['longitude']}&query_place_id=${_mapLocation['place_id']}';
+    String appleUrl =
+        'https://maps.apple.com/?sll=${_mapLocation['latitude']},${_mapLocation['longitude']}';
     if (await canLaunch(googleUrl)) {
-      print('launching googleUrl');
       await launch(googleUrl);
     } else if (await canLaunch(appleUrl)) {
-      print('launching apple url');
       await launch(appleUrl);
     } else {
       throw 'Could not launch url';
