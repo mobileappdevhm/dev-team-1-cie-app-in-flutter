@@ -1,3 +1,78 @@
+class CourseBuilder {
+  /* FIELDS FROM NINE */
+  /* TODO: Implement These & Merge, delete nineAPIConsumer.dart's NineCourse class
+  final String id;
+  final String description;
+  final bool isCoterie;
+  final bool hasHomeBias;
+  final List<dynamic> correlations;
+  final List<dynamic> dates;
+  final String name;
+  final String shortName;
+  final List<dynamic> actions;
+  */
+
+  String name;
+  String faculty;
+  List<Lecture> lecturesPerWeek;
+  String description;
+  int hoursPerWeek;
+  int ects;
+  String professorEmail;
+  String professorName;
+  CourseAvailability available;
+  bool isFavourite;
+
+  // Standard Builder Pattern Implementation
+  CourseBuilder withName(String name) {
+    this.name = name;
+    return this;
+  }
+  CourseBuilder withFaculty(String faculty) {
+    this.faculty = faculty;
+    return this;
+  }
+  CourseBuilder withLecturesPerWeek(List<Lecture> lecturesPerWeek) {
+    this.lecturesPerWeek = lecturesPerWeek;
+    return this;
+  }
+  CourseBuilder withDescription(String description) {
+    this.description = description;
+    return this;
+  }
+  CourseBuilder withHoursPerWeek(int hoursPerWeek) {
+    this.hoursPerWeek = hoursPerWeek;
+    return this;
+  }
+  CourseBuilder withEcts(int ects) {
+    this.ects = ects;
+    return this;
+  }
+  CourseBuilder withProfessorEmail(String professorEmail) {
+    this.professorEmail = professorEmail;
+    return this;
+  }
+  CourseBuilder withProfessorName(String professorName) {
+    this.professorName = professorName;
+    return this;
+  }
+  CourseBuilder withAvailable(CourseAvailability available) {
+    this.available = available;
+    return this;
+  }
+  CourseBuilder withIsFavorite(bool isFavorite) {
+    this.isFavourite = isFavorite;
+    return this;
+  }
+
+  Course build(){
+    return new Course (this.name, this.faculty, this.lecturesPerWeek,
+      this.description, this.hoursPerWeek, this.ects, this.professorEmail,
+      this.professorName, this.available, this.isFavourite
+    );
+  }
+}
+
 class Course {
   final String name;
   final String faculty;
@@ -10,19 +85,6 @@ class Course {
   final CourseAvailability available;
   bool isFavourite;
 
-  /* FIELDS FROM NINE */
-  /*
-  final String id;
-  final String description;
-  final bool isCoterie;
-  final bool hasHomeBias;
-  final List<dynamic> correlations;
-  final List<dynamic> dates;
-  final String name;
-  final String shortName;
-  final List<dynamic> actions;
-  */
-
   Course(
       this.name,
       this.faculty,
@@ -34,17 +96,6 @@ class Course {
       this.professorName,
       this.available,
       this.isFavourite
-      /*
-      this.id,
-      this.description,
-      this.isCoterie,
-      this.hasHomeBias,
-      this.correlations,
-      this.dates,
-      this.name,
-      this.shortName,
-      this.actions
-      */
       ) {
     //Set this course as parent of every lectures contained
     //Required for timetable
@@ -160,111 +211,6 @@ class CourseAvailabilityUtility {
     return CourseAvailability.AVAILABLE;
   }
 }
-
-//class FacultyUtility {
-//  static int getFacultyAsInt(Faculty f) {
-//    switch (f) {
-//      case Faculty.ZERO:
-//        return 0;
-//      case Faculty.ONE:
-//        return 1;
-//      case Faculty.TWO:
-//        return 2;
-//      case Faculty.THREE:
-//        return 3;
-//      case Faculty.FOUR:
-//        return 4;
-//      case Faculty.FIVE:
-//        return 5;
-//      case Faculty.SIX:
-//        return 6;
-//      case Faculty.SEVEN:
-//        return 7;
-//      case Faculty.EIGHT:
-//        return 8;
-//      case Faculty.NINE:
-//        return 9;
-//      case Faculty.TEN:
-//        return 10;
-//      case Faculty.ELEVEN:
-//        return 11;
-//      case Faculty.TWELVE:
-//        return 12;
-//      case Faculty.THIRTEEN:
-//        return 13;
-//    }
-//    return 0;
-//  }
-//
-//  static Faculty intToFaculty(int i) {
-//    switch (i) {
-//      case 0:
-//        return Faculty.ZERO;
-//      case 1:
-//        return Faculty.ONE;
-//      case 2:
-//        return Faculty.TWO;
-//      case 3:
-//        return Faculty.THREE;
-//      case 4:
-//        return Faculty.FOUR;
-//      case 5:
-//        return Faculty.FIVE;
-//      case 6:
-//        return Faculty.SIX;
-//      case 7:
-//        return Faculty.SEVEN;
-//      case 8:
-//        return Faculty.EIGHT;
-//      case 9:
-//        return Faculty.NINE;
-//      case 10:
-//        return Faculty.TEN;
-//      case 11:
-//        return Faculty.ELEVEN;
-//      case 12:
-//        return Faculty.TWELVE;
-//      case 13:
-//        return Faculty.THIRTEEN;
-//    }
-//    return Faculty.ZERO;
-//  }
-//
-//  static String getFacultyAsString(Faculty f) {
-//    switch (f) {
-//      case Faculty.ZERO:
-//        return "00";
-//      case Faculty.ONE:
-//        return "01";
-//      case Faculty.TWO:
-//        return "02";
-//      case Faculty.THREE:
-//        return "03";
-//      case Faculty.FOUR:
-//        return "04";
-//      case Faculty.FIVE:
-//        return "05";
-//      case Faculty.SIX:
-//        return "06";
-//      case Faculty.SEVEN:
-//        return "07";
-//      case Faculty.EIGHT:
-//        return "08";
-//      case Faculty.NINE:
-//        return "09";
-//      case Faculty.TEN:
-//        return "10";
-//      case Faculty.ELEVEN:
-//        return "11";
-//      case Faculty.TWELVE:
-//        return "12";
-//      case Faculty.THIRTEEN:
-//        return "13";
-//    }
-//    // Not reachable.
-//    return "";
-//  }
-//}
 
 class CampusUtility {
   static String getCampusAsString(Campus campus) {

@@ -31,7 +31,7 @@ class CourseListState extends State<CourseList> {
   final TextEditingController c1 = new TextEditingController();
   final bool shouldFilterByFavorites;
   bool shouldSearch = false;
-  String filter = "07";
+  String filter = "09";
   String searchValue = "";
   bool coursesRegistered = false;
 

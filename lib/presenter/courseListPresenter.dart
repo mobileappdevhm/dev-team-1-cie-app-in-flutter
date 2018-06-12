@@ -20,6 +20,10 @@ class CourseListPresenter {
     _courses = new CourseInjector().courses;
   }
 
+  // TODO: Heavily modify this function.
+  // TODO: -Rename to be more relevant to update function,
+  // TODO: -Check if course is already stored before adding here
+  // TODO: -Make the loop contents more relevant and move it somewhere else
   void addCourse() {
     List<Course> courseList = _courses.getCourses();
     FileStore.readFileAsString(FileStore.COURSES).then((String val){
@@ -29,7 +33,7 @@ class CourseListPresenter {
         NineCourse course = NineCourse.fromJson(jsonData[i]);
         courseList.add(new Course(
           course.name,
-          "07",
+          "09",
           [
             new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
                 new DayTime(11, 30), "R0.009")

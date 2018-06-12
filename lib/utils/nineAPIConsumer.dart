@@ -22,7 +22,7 @@ class NineAPIEngine {
   }
 }
 
-// TODO: Merge this implementation with course.dart
+// TODO: Merge this implementation with course.dart, then delete this class
 class NineCourse {
   final String id;
   final String description;
