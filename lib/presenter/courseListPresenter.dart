@@ -1,7 +1,11 @@
 import 'package:cie_team1/di/courses_di.dart';
+import 'package:flutter/material.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
+import 'package:cie_team1/utils/fileStore.dart';
+import 'package:cie_team1/utils/nineAPIConsumer.dart';
+import 'dart:convert';
 
 abstract class CourseListViewContract {
   //Todo: Needed in future
@@ -9,10 +13,38 @@ abstract class CourseListViewContract {
 
 class CourseListPresenter {
   Courses _courses;
+  final ValueChanged<bool> onChanged;
 
-  CourseListPresenter() {
+  CourseListPresenter(this.onChanged) {
     CourseInjector.configure(Flavor.MOCK);
     _courses = new CourseInjector().courses;
+  }
+
+  void addCourse() {
+    List<Course> courseList = _courses.getCourses();
+    FileStore.readFileAsString(FileStore.COURSES).then((String val){
+      //NineCourse.fromJson(json.decode(val))
+      final List<dynamic> jsonData = json.decode(val);
+      for (int i=0; i<jsonData.length; i++) {
+        NineCourse course = NineCourse.fromJson(jsonData[i]);
+        courseList.add(new Course(
+          course.name,
+          "07",
+          [
+            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                new DayTime(11, 30), "R0.009")
+          ],
+          "boring",
+          2,
+          2,
+          "example@hm.edu",
+          "Max Mustermann",
+          CourseAvailability.AVAILABLE,
+          false,
+        ));
+      }
+      this.onChanged(true);
+    });
   }
 
   void toggleFavourite(int id) {

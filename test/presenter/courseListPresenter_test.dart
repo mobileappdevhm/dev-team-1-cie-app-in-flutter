@@ -6,7 +6,7 @@ void main() {
   CourseListPresenter sut;
 
   setUp(() {
-    sut = new CourseListPresenter();
+    sut = new CourseListPresenter(null);
   });
 
   group("facultycheck", () {

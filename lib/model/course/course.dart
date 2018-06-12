@@ -10,6 +10,19 @@ class Course {
   final CourseAvailability available;
   bool isFavourite;
 
+  /* FIELDS FROM NINE */
+  /*
+  final String id;
+  final String description;
+  final bool isCoterie;
+  final bool hasHomeBias;
+  final List<dynamic> correlations;
+  final List<dynamic> dates;
+  final String name;
+  final String shortName;
+  final List<dynamic> actions;
+  */
+
   Course(
       this.name,
       this.faculty,
@@ -20,7 +33,19 @@ class Course {
       this.professorEmail,
       this.professorName,
       this.available,
-      this.isFavourite) {
+      this.isFavourite
+      /*
+      this.id,
+      this.description,
+      this.isCoterie,
+      this.hasHomeBias,
+      this.correlations,
+      this.dates,
+      this.name,
+      this.shortName,
+      this.actions
+      */
+      ) {
     //Set this course as parent of every lectures contained
     //Required for timetable
     lecturesPerWeek.forEach((l) => l.course = this);

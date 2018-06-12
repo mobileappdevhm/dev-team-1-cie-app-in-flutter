@@ -7,6 +7,7 @@ import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/nineAPIConsumer.dart';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
@@ -36,11 +37,34 @@ class CourseListState extends State<CourseList> {
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites);
 
+  handleUpdate() {
+    NineAPIEngine.pullCourseJSON(context, false);
+    setState(() {
+      courseListPresenter.addCourse();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = new List<Widget>();
 
     if (shouldFilterByFavorites == false) {
+
+      widgets.add(
+          new FlatButton(
+            //onPressed: ()=>  NineAPIEngine.updateCourseJSON(context),
+            onPressed: ()=> handleUpdate(),
+            color: Colors.blue,
+            padding: EdgeInsets.all(10.0),
+            child: Column( // Replace with a Row for horizontal icon + text
+              children: <Widget>[
+                new Icon(Icons.refresh),
+                new Text("Get Updated Course Catalog")
+              ],
+            ),
+          )
+      );
+
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
       String departmentLabel = "Department #";
       widgets.add(new Row(

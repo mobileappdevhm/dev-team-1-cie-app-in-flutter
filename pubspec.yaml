@@ -16,6 +16,7 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   flutter_launcher_icons: "^0.3.2"
+  progress_hud: "^0.2.2"
 
 flutter_icons:
   image_path: "res/images/hm_app_icon.png"
