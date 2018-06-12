@@ -1,19 +1,15 @@
 import 'package:cie_team1/di/currentUser_di.dart';
 import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
-
-
+import 'package:cie_team1/model/user/user.dart';
 
 class CurrentUserPresenter {
-  //List<Course> courses = [];
   CurrentUser _currentUser;
 
   CurrentUserPresenter() {
     UserInjector.configure(Flavor.MOCK);
     _currentUser = new UserInjector().currentUser;
   }
-
 
   User getCurrentUser() {
     return _currentUser.getCurrentUser();
@@ -28,18 +24,22 @@ class CurrentUserPresenter {
   }
 
   String getFullName() {
-    return _currentUser.getCurrentUser().firstName + " " +  _currentUser.getCurrentUser().lastName ;
+    return _currentUser.getCurrentUser().firstName +
+        " " +
+        _currentUser.getCurrentUser().lastName;
   }
 
   String getCurrentUserName() {
-    return _currentUser.getCurrentUser().firstName + " " + _currentUser.getCurrentUser().lastName;
+    return _currentUser.getCurrentUser().firstName +
+        " " +
+        _currentUser.getCurrentUser().lastName;
   }
 
-  List<Course> getPrevCourses(){
+  List<Course> getPrevCourses() {
     return _currentUser.getCurrentUser().prevCourses;
   }
 
-  List<Course> getCurrentCourses(){
+  List<Course> getCurrentCourses() {
     return _currentUser.getCurrentUser().currentCourses;
   }
 
@@ -55,10 +55,9 @@ class CurrentUserPresenter {
   int getDep3Credits() {
     var sum = 0;
     _currentUser.getCurrentUser().prevCourses.forEach((course) {
-      if(course.faculty == "3"){
+      if (course.faculty == "3") {
         sum = sum + course.ects;
       }
-
     });
     return sum;
   }
@@ -74,10 +73,7 @@ class CurrentUserPresenter {
     return _currentUser.getCurrentUser().prevCourses[id].ects;
   }
 
-
   String getFaculty(int id) {
     return _currentUser.getCurrentUser().prevCourses[id].faculty.toString();
   }
-
-
 }

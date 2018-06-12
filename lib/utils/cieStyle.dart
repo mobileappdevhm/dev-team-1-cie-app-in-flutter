@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:flutter/material.dart';
 
 class CiEStyle {
   static TextStyle getTimeTableSectionHeadingStyle() {
@@ -49,14 +49,12 @@ class CiEStyle {
     return 30.0;
   }
 
-  static TextStyle getAppBarTitleStyle(BuildContext context){
+  static TextStyle getAppBarTitleStyle(BuildContext context) {
     return new TextStyle(
-      fontSize: 20.0,
-      color: CiEColor.red,
-      letterSpacing: 2.0
-    );
+        fontSize: 20.0, color: CiEColor.red, letterSpacing: 2.0);
   }
-  static double getAppBarElevation(BuildContext context){
+
+  static double getAppBarElevation(BuildContext context) {
     return Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0;
   }
 
@@ -80,9 +78,7 @@ class CiEStyle {
   }
 
   static TextStyle getSettingsLogoutStyle() {
-    return new TextStyle(
-      color: Colors.white
-    );
+    return new TextStyle(color: Colors.white);
   }
 
   static TextStyle getSettingsPrivacyStyle() {
@@ -99,17 +95,14 @@ class CiEStyle {
 
   static TextStyle getPrevCoursesCreditsStyle() {
     return new TextStyle(
-      fontSize: 20.0,
-      fontWeight: FontWeight.bold,
-      color: CiEColor.red
-    );
+        fontSize: 20.0, fontWeight: FontWeight.bold, color: CiEColor.red);
   }
 
-  static Color getLogoutButtonColor(){
+  static Color getLogoutButtonColor() {
     return CiEColor.red;
   }
 
-  static BorderRadius getButtonBorderRadius(){
+  static BorderRadius getButtonBorderRadius() {
     return new BorderRadius.circular(30.0);
   }
 
@@ -131,12 +124,14 @@ class CiEStyle {
   static double getCourseDescriptionIconSize() {
     return 50.0;
   }
+
   static TextStyle getTimeTableListMediumGray() {
     return new TextStyle(
       color: CiEColor.mediumGray,
       fontSize: 15.0,
     );
   }
+
   static TextStyle getTimeTableListVariable() {
     return new TextStyle(
       color: CiEColor.gray,
@@ -153,5 +148,3 @@ class CiEStyle {
     );
   }
 }
-
-

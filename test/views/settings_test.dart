@@ -1,8 +1,8 @@
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:cie_team1/views/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {

@@ -1,17 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:flutter/material.dart';
 
 class GenericBorderContainer {
   static Widget buildGenericBorderedElement(Widget child) {
     return new Container(
         decoration: new BoxDecoration(
           border: new Border(
-              bottom: new BorderSide(
-                  color: CiEColor.lightGray,
-                  width: 1.0)),
+              bottom: new BorderSide(color: CiEColor.lightGray, width: 1.0)),
         ),
-        child: child
-    );
+        child: child);
   }
 
   static Widget buildGenericBlurredLine() {
@@ -24,7 +21,6 @@ class GenericBorderContainer {
               blurRadius: 5.0,
             ),
           ],
-        )
-    );
+        ));
   }
 }
