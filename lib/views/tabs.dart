@@ -28,6 +28,8 @@ class TabsPageState extends State<TabsPage> {
     NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
     courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
+    // TODO: Standard file protections, check if file exists, contents!=null etc.
+    courseListPresenter.addCoursesFromMemory();
     this._appTitle = TabItems[_tab].title;
   }
 

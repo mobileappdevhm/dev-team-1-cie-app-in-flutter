@@ -24,7 +24,7 @@ class CourseListPresenter {
   // TODO: -Rename to be more relevant to update function,
   // TODO: -Check if course is already stored before adding here
   // TODO: -Make the loop contents more relevant and move it somewhere else
-  void addCourse() {
+  void addCoursesFromMemory() {
     List<Course> courseList = _courses.getCourses();
     FileStore.readFileAsString(FileStore.COURSES).then((String val){
       //NineCourse.fromJson(json.decode(val))

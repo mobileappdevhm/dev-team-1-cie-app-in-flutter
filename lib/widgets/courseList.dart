@@ -40,7 +40,7 @@ class CourseListState extends State<CourseList> {
   handleUpdate() {
     NineAPIEngine.pullCourseJSON(context, false);
     setState(() {
-      courseListPresenter.addCourse();
+      courseListPresenter.addCoursesFromMemory();
     });
   }
 
