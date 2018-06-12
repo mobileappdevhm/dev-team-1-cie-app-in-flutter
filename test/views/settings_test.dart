@@ -36,35 +36,38 @@ void main() {
             expect(widget.data, StaticVariables.LOGOUT_BUTTON);
             counter++;
           } else if (counter == 3) {
+            expect(widget.data, StaticVariables.PRIVACY_BUTTON);
+            counter++;
+          }else if (counter == 4) {
             expect(widget.data, StaticVariables.STATUS + " : ");
             counter++;
-          } else if (counter == 4) {
+          } else if (counter == 5) {
             expect(widget.data,
                 " " + new CurrentUserPresenter().getCurrentUserStatus());
             counter++;
-          } else if (counter == 5) {
+          } else if (counter == 6) {
             expect(widget.data, StaticVariables.DEPARTMENT + " : ");
             counter++;
-          } else if (counter == 6) {
+          } else if (counter == 7) {
             expect(widget.data,
                 " " + new CurrentUserPresenter().getCurrentUserFaculty());
             counter++;
-          } else if (counter == 7) {
+          } else if (counter == 8) {
             expect(widget.data, StaticVariables.CONTACT_OFFICE);
             counter++;
-          } else if (counter == 8) {
+          } else if (counter == 9) {
             expect(widget.data, StaticVariables.CIE_CERTIFICATE);
             counter++;
-          } else if (counter == 9) {
-            expect(widget.data.isEmpty, false);
-            counter++;
           } else if (counter == 10) {
-            expect(widget.data, StaticVariables.IE_CERTIFICATE);
+            expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 11) {
-            expect(widget.data.isEmpty, false);
+            expect(widget.data, StaticVariables.IE_CERTIFICATE);
             counter++;
           } else if (counter == 12) {
+            expect(widget.data.isEmpty, false);
+            counter++;
+          } else if (counter == 13) {
             expect(widget.data, StaticVariables.TAKEN_COURSES);
             counter++;
           }

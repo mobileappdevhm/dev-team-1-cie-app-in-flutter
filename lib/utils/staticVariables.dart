@@ -28,6 +28,7 @@ class StaticVariables {
   static const String CIE_CERTIFICATE = 'Courses in English Certificate';
   static const String IE_CERTIFICATE = 'International Engineering Certificate';
   static const String TAKEN_COURSES = 'Taken Courses';
+  static const String PRIVACY_BUTTON = 'Our Privacy Policy';
 
   /* Settings/Taken Courses Page */
   static const String TOTAL_OF = 'Total of';

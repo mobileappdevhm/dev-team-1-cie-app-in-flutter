@@ -33,16 +33,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                 child: new Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: new Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                          "Curabitur congue nisl porttitor enim tempor, nec venenatis nibh congue. "
-                          "Donec congue eleifend libero, sit amet eleifend augue mattis quis. "
-                          "Fusce in luctus dolor. Curabitur sodales tellus sit amet faucibus aliquet. "
-                          "Cras eget congue diam. Maecenas aliquam tortor a lorem aliquam, ac pellentesque odio aliquam. "
-                          "Morbi vulputate dolor mi, sit amet consectetur odio hendrerit eu. Aenean efficitur at nibh in placerat. "
-                          "Vestibulum sodales metus eleifend metus malesuada commodo. "
-                          "Vivamus eleifend, tellus non eleifend tempus, massa lorem commodo tellus, in condimentum elit eros vel dolor. "
-                          "Donec tincidunt bibendum bibendum. "
-                          "Praesent lectus leo, fringilla in mattis ut, semper at mauris. ",
+                      privacyText,
                       style: new TextStyle(fontSize: 15.0),
                     )),
               ),
@@ -78,4 +69,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
       ),
     );
   }
+
+  final String privacyText = "Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten (nachfolgend kurz „Daten“) innerhalb unseres Onlineangebotes und der mit ihm verbundenen Webseiten, Funktionen und Inhalte sowie externen Onlinepräsenzen, wie z.B. unser Social Media Profile auf (nachfolgend gemeinsam bezeichnet als „Onlineangebot“). Im Hinblick auf die verwendeten Begrifflichkeiten, wie z.B. „Verarbeitung“ oder „Verantwortlicher“ verweisen wir auf die Definitionen im Art. 4 der Datenschutzgrundverordnung (DSGVO)";
+
 }
