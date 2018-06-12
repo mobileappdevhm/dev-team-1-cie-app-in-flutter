@@ -28,7 +28,7 @@ void main() {
 
       int counter = 0;
       for (Widget widget in listOfWidgets) {
-        //TODO: making all those things like Today Fri flexible
+        //TODO: making all those things like Today or Fri flexible
         if (widget is Text) {
           if (counter == 0) {
             expect(widget.data, 'Today');

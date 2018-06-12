@@ -21,6 +21,7 @@ class StaticVariables {
   /* Settings Page */
   static const String LOGGED_IN_AS ='Logged in as';
   static const String LOGOUT_BUTTON ='Log out';
+  static const String PRIVACY_BUTTON ='Our Privacy Policy';
   static const String STATUS ='Status';
   static const String DEPARTMENT ='Department';
   static const String CONTACT_OFFICE ='Contact International Office';
