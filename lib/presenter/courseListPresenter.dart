@@ -4,7 +4,6 @@ import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/utils/fileStore.dart';
-import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'dart:convert';
 
 abstract class CourseListViewContract {
@@ -27,25 +26,27 @@ class CourseListPresenter {
   void addCoursesFromMemory() {
     List<Course> courseList = _courses.getCourses();
     FileStore.readFileAsString(FileStore.COURSES).then((String val){
-      //NineCourse.fromJson(json.decode(val))
       final List<dynamic> jsonData = json.decode(val);
       for (int i=0; i<jsonData.length; i++) {
-        NineCourse course = NineCourse.fromJson(jsonData[i]);
-        courseList.add(new Course(
-          course.name,
-          "09",
-          [
-            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-                new DayTime(11, 30), "R0.009")
-          ],
-          "boring",
-          2,
-          2,
-          "example@hm.edu",
-          "Max Mustermann",
-          CourseAvailability.AVAILABLE,
-          false,
-        ));
+        CourseBuilder courseBuilder = new CourseBuilder.fromJson(jsonData[i]);
+          // TODO: Delete the following builder code & only rely on the .fromJson
+          // once all relevent data is available from the Nine API
+          courseBuilder
+            .withLecturesPerWeek(
+            [
+              new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                  new DayTime(11, 30), "R0.009")
+            ])
+            .withDescription("boring")
+            .withHoursPerWeek(2)
+            .withEcts(2)
+            .withProfessorEmail("example@hm.edu")
+            .withProfessorName("Max Mustermann")
+            .withAvailable(CourseAvailability.AVAILABLE)
+            .withIsFavorite(false);
+        Course c = courseBuilder.build();
+        courseList.add(c);
+        print(c.name);
       }
       this.onChanged(true);
     });

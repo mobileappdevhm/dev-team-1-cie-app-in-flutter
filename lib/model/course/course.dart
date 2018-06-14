@@ -1,21 +1,18 @@
 class CourseBuilder {
   /* FIELDS FROM NINE */
-  /* TODO: Implement These & Merge, delete nineAPIConsumer.dart's NineCourse class
-  final String id;
-  final String description;
-  final bool isCoterie;
-  final bool hasHomeBias;
-  final List<dynamic> correlations;
-  final List<dynamic> dates;
-  final String name;
-  final String shortName;
-  final List<dynamic> actions;
-  */
-
+  //TODO: Implement These & Merge, delete nineAPIConsumer.dart's NineCourse class
+  String id;
+  String description;
+  bool isCoterie;
+  bool hasHomeBias;
+  List<dynamic> correlations;
+  List<dynamic> dates;
   String name;
+  String shortName;
+  List<dynamic> actions;
+
   String faculty;
   List<Lecture> lecturesPerWeek;
-  String description;
   int hoursPerWeek;
   int ects;
   String professorEmail;
@@ -24,8 +21,41 @@ class CourseBuilder {
   bool isFavourite;
 
   // Standard Builder Pattern Implementation
+  CourseBuilder withId(String id) {
+    this.id = id;
+    return this;
+  }
+
+  CourseBuilder withDescription(String description) {
+    this.description=description;
+    return this;
+  }
+  CourseBuilder withIsCoterie(bool isCoterie) {
+    this.isCoterie=isCoterie;
+    return this;
+  }
+  CourseBuilder withhasHomeBias(bool hasHomeBias) {
+    this.hasHomeBias=hasHomeBias;
+    return this;
+  }
+  CourseBuilder withCorrelations(List<dynamic> correlations) {
+    this.correlations=correlations;
+    return this;
+  }
+  CourseBuilder withdates(List<dynamic> dates) {
+    this.dates=dates;
+    return this;
+  }
   CourseBuilder withName(String name) {
-    this.name = name;
+    this.name=name;
+    return this;
+  }
+  CourseBuilder withShortName(String shortName) {
+    this.shortName=shortName;
+    return this;
+  }
+  CourseBuilder withActions(List<dynamic >actions) {
+    this.actions=actions;
     return this;
   }
   CourseBuilder withFaculty(String faculty) {
@@ -34,10 +64,6 @@ class CourseBuilder {
   }
   CourseBuilder withLecturesPerWeek(List<Lecture> lecturesPerWeek) {
     this.lecturesPerWeek = lecturesPerWeek;
-    return this;
-  }
-  CourseBuilder withDescription(String description) {
-    this.description = description;
     return this;
   }
   CourseBuilder withHoursPerWeek(int hoursPerWeek) {
@@ -65,19 +91,50 @@ class CourseBuilder {
     return this;
   }
 
-  Course build(){
-    return new Course (this.name, this.faculty, this.lecturesPerWeek,
-      this.description, this.hoursPerWeek, this.ects, this.professorEmail,
-      this.professorName, this.available, this.isFavourite
+  factory CourseBuilder.fromJson(Map<String, dynamic> jsonData) {
+    String dep = ((jsonData['correlations'][0]['organiser']));
+    return new CourseBuilder(
+      id: jsonData['id'],
+      description: jsonData['description'],
+      isCoterie: jsonData['isCoterie'],
+      hasHomeBias: jsonData['hasHomeBias'],
+      correlations: jsonData['correlations'],
+      dates: jsonData['dates'],
+      name: jsonData['name'],
+      shortName: jsonData['shortName'],
+      actions: jsonData['actions'],
+      faculty: dep.substring(3, dep.length)
     );
+  }
+
+  CourseBuilder({this.id, this.description, this.isCoterie, this.hasHomeBias,
+    this.correlations, this.dates, this.name, this.shortName, this.actions,
+    this.faculty});
+
+  Course build(){
+    return new Course(
+      this.id, this.description, this.isCoterie, this.hasHomeBias,
+      this.correlations, this.dates, this.name, this.shortName, this.actions,
+      this.faculty, this.lecturesPerWeek, this.hoursPerWeek, this.ects,
+      this.professorEmail, this.professorName, this.available, this.isFavourite);
   }
 }
 
 class Course {
-  final String name;
+  String id;
+  String description;
+  bool isCoterie;
+  bool hasHomeBias;
+  List<dynamic> correlations;
+  List<dynamic> dates;
+  String name;
+  String shortName;
+  List<dynamic> actions;
+
+  //final String name;
   final String faculty;
   final List<Lecture> lecturesPerWeek;
-  final String description;
+  //final String description;
   final int hoursPerWeek;
   final int ects;
   final String professorEmail;
@@ -86,10 +143,19 @@ class Course {
   bool isFavourite;
 
   Course(
+      this.id,
+      this.description,
+      this.isCoterie,
+      this.hasHomeBias,
+      this.correlations,
+      this.dates,
       this.name,
+      this.shortName,
+      this.actions,
+      //this.name,
       this.faculty,
       this.lecturesPerWeek,
-      this.description,
+      //this.description,
       this.hoursPerWeek,
       this.ects,
       this.professorEmail,

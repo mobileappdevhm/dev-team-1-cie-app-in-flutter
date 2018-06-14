@@ -21,33 +21,3 @@ class NineAPIEngine {
     }
   }
 }
-
-// TODO: Merge this implementation with course.dart, then delete this class
-class NineCourse {
-  final String id;
-  final String description;
-  final bool isCoterie;
-  final bool hasHomeBias;
-  final List<dynamic> correlations;
-  final List<dynamic> dates;
-  final String name;
-  final String shortName;
-  final List<dynamic> actions;
-
-  NineCourse({this.id, this.description, this.isCoterie, this.hasHomeBias,
-    this.correlations, this.dates, this.name, this.shortName, this.actions});
-
-  factory NineCourse.fromJson(Map<String, dynamic> jsonData) {
-    return new NineCourse(
-      id: jsonData['id'],
-      description: jsonData['description'],
-      isCoterie: jsonData['isCoterie'],
-      hasHomeBias: jsonData['hasHomeBias'],
-      correlations: jsonData['correlations'],
-      dates: jsonData['dates'],
-      name: jsonData['name'],
-      shortName: jsonData['shortName'],
-      actions: jsonData['actions'],
-    );
-  }
-}
