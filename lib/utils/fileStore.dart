@@ -19,7 +19,6 @@ class FileStore {
       String contents = await file.readAsString();
       return contents;
     } on FileSystemException {
-      print("File Read Error");
       return null;
     }
   }

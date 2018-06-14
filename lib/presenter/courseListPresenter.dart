@@ -25,31 +25,49 @@ class CourseListPresenter {
   // TODO: -Make the loop contents more relevant and move it somewhere else
   void addCoursesFromMemory() {
     List<Course> courseList = _courses.getCourses();
+    bool didUpdate = false;
     FileStore.readFileAsString(FileStore.COURSES).then((String val){
-      final List<dynamic> jsonData = json.decode(val);
-      for (int i=0; i<jsonData.length; i++) {
-        CourseBuilder courseBuilder = new CourseBuilder.fromJson(jsonData[i]);
-          // TODO: Delete the following builder code & only rely on the .fromJson
-          // once all relevent data is available from the Nine API
-          courseBuilder
-            .withLecturesPerWeek(
-            [
-              new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-                  new DayTime(11, 30), "R0.009")
-            ])
-            .withDescription("boring")
-            .withHoursPerWeek(2)
-            .withEcts(2)
-            .withProfessorEmail("example@hm.edu")
-            .withProfessorName("Max Mustermann")
-            .withAvailable(CourseAvailability.AVAILABLE)
-            .withIsFavorite(false);
-        Course c = courseBuilder.build();
-        courseList.add(c);
-        print(c.name);
+      if (val != null) {
+        final List<dynamic> jsonData = json.decode(val);
+        for (int i=0; i<jsonData.length; i++) {
+          CourseBuilder courseBuilder = new CourseBuilder.fromJson(jsonData[i]);
+            // TODO: Delete the following builder code & only rely on the .fromJson
+            // once all relevent data is available from the Nine API
+            courseBuilder
+              .withLecturesPerWeek(
+              [
+                new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                    new DayTime(11, 30), "R0.009")
+              ])
+              .withDescription("boring")
+              .withHoursPerWeek(2)
+              .withEcts(2)
+              .withProfessorEmail("example@hm.edu")
+              .withProfessorName("Max Mustermann")
+              .withAvailable(CourseAvailability.AVAILABLE)
+              .withIsFavorite(false);
+          Course c = courseBuilder.build();
+          if (isNewCourseData(courseList, c)) {
+            courseList.add(c);
+            didUpdate = true;
+          }
+        }
+        if (didUpdate == true) {
+          courseList.sort((one, two) => one.name.compareTo(two.name));
+          this.onChanged(true);
+        }
       }
-      this.onChanged(true);
     });
+  }
+
+  bool isNewCourseData(List<Course> courseList, Course candidate) {
+    for (Course c in courseList) {
+      // compares using the unique id from Nine
+      if (c.equals(candidate)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   void toggleFavourite(int id) {

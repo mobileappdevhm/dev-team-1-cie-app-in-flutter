@@ -37,32 +37,35 @@ class CourseListState extends State<CourseList> {
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites);
 
-  handleUpdate() {
+  handleUpdate() async {
+    //pullCourseJSON also checks for internet connectivity. This method should
+    //begin execution as soon as possible, check later for setState
     NineAPIEngine.pullCourseJSON(context, false);
-    setState(() {
-      courseListPresenter.addCoursesFromMemory();
-    });
+    var isConnected = await NineAPIEngine.isInternetConnected();
+    if (isConnected == true) {
+      setState(() {
+        courseListPresenter.addCoursesFromMemory();
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = new List<Widget>();
 
-    if (shouldFilterByFavorites == false) {
 
+    if (shouldFilterByFavorites == false) {
       widgets.add(
-          new FlatButton(
-            //onPressed: ()=>  NineAPIEngine.updateCourseJSON(context),
-            onPressed: ()=> handleUpdate(),
-            color: Colors.blue,
-            padding: EdgeInsets.all(10.0),
-            child: Column( // Replace with a Row for horizontal icon + text
-              children: <Widget>[
-                new Icon(Icons.refresh),
-                new Text("Get Updated Course Catalog")
-              ],
-            ),
+        new Container(
+          color: Colors.blue,
+          padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+          child: new Column(
+            children: <Widget>[
+              new Text("Pull down to Refresh", style: CiEStyle.getCourseListRefreshText()),
+              new Icon(Icons.arrow_downward),
+            ],
           )
+        )
       );
 
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
@@ -149,7 +152,12 @@ class CourseListState extends State<CourseList> {
         ),
       ));
     }
-    return new ListView(children: widgets);
+
+    return new RefreshIndicator(
+        child: new ListView(children: widgets),
+        onRefresh: ()=> NineAPIEngine.pullCourseJSON(context, true),
+        color: Colors.blue,
+    );
   }
 
   Widget favoriteIcon(int id) {

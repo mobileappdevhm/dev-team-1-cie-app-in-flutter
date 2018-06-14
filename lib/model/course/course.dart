@@ -172,6 +172,11 @@ class Course {
     //Is there a lecture on searched day
     return lecturesPerWeek.any((lecture) => lecture.weekday == weekDay);
   }
+
+  bool equals(Course course) {
+    // we can expect that ids will be unique from the nine API
+    return (this.id == course.id);
+  }
 }
 
 class Lecture {
