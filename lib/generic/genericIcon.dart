@@ -10,6 +10,8 @@ class GenericIcon {
   static const int memStorageUnavailable = 0xe888;
   static const int memStorageActiveFavorite = 0xe87d;
   static const int memStorageInactiveFavorite = 0xe87e;
+  static const int memStorageactiveSearch = 0xe8b6;
+  static const int memStorageInactiveSearch = 0xe14c;
   static const String fontFamily = 'MaterialIcons';
 
   static Icon buildGenericAvailabilityIcon(CourseAvailability availability) {
@@ -46,6 +48,16 @@ class GenericIcon {
               fontFamily: 'MaterialIcons')),
       size: CiEStyle.getCoursesListIconSize(),
       color: CiEColor.red,
+    );
+  }
+
+  static Icon buildGenericSearcgIcon(bool isActive) {
+    return new Icon(
+      (isActive
+          ? const IconData(memStorageInactiveSearch,
+          fontFamily: 'MaterialIcons')
+          : const IconData(memStorageactiveSearch,
+          fontFamily: 'MaterialIcons')),
     );
   }
 
