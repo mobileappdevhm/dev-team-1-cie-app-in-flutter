@@ -38,9 +38,12 @@ class _CourseDetailsState extends State<CourseDetails> {
                       child: new Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          new Text(
-                            "Title of course",
-                            style: CiEStyle.getCourseDescriptionTitleStyle(),
+                          new Container(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: new Text(
+                              "Title of course",
+                              style: CiEStyle.getCourseDescriptionTitleStyle(),
+                            ),
                           ),
                           new Text(
                             "FK 07",
@@ -49,7 +52,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         ],
                       ),
                     )),
-                    new Expanded(
+                    new Container(
                       child: new Align(
                         alignment: Alignment.centerRight,
                         child: new IconButton(
@@ -70,7 +73,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 children: <Widget>[
                   new Padding(
                       padding: const EdgeInsets.only(
-                          left: 0.0, top: 25.0, right: 0.0, bottom: 25.0),
+                          left: 0.0, top: 15.0, right: 0.0, bottom: 15.0),
                       child: new Text(
                         "Description",
                         style: new TextStyle(
@@ -81,8 +84,8 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ],
               ),
               new Expanded(
-                child: new Padding(
-                    padding: const EdgeInsets.all(4.0),
+                  flex: 1,
+                  child: new SingleChildScrollView(
                     child: new Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
                           "Curabitur congue nisl porttitor enim tempor, nec venenatis nibh congue. "
@@ -95,7 +98,9 @@ class _CourseDetailsState extends State<CourseDetails> {
                           "Donec tincidunt bibendum bibendum. "
                           "Praesent lectus leo, fringilla in mattis ut, semper at mauris. ",
                       style: new TextStyle(fontSize: 15.0),
-                    )),
+                    ),
+
+                  )
               ),
               new Row(
                 children: <Widget>[
@@ -133,7 +138,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       ],
                     ),
                   ),
-                  new Expanded(
+                  new Container(
                     child: new Column(
                       children: <Widget>[
                         new Padding(
