@@ -38,4 +38,6 @@ class StaticVariables {
   static const String ALERT_YES = "COMPLETE";
   static const String ALERT_NO = "CANCEL";
   static const String ALERT_REGISTRATION_SUBMISSION = "Complete Registration?";
+
+  static const String FK = "DP";
 }
