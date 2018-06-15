@@ -45,7 +45,7 @@ class GenericIcon {
           fontFamily: 'MaterialIcons')
           : const IconData(memStorageInactiveFavorite,
           fontFamily: 'MaterialIcons')),
-      size: CiEStyle.getCoursesListIconSize(),
+      size: CiEStyle.getCoursesListIconSize() + 15.0,
       color: CiEColor.red,
     );
   }
@@ -54,7 +54,7 @@ class GenericIcon {
     return new Icon(
       const IconData(0xe0e1,
           fontFamily: 'MaterialIcons'),
-      size: 30.0,
+      size: CiEStyle.getCoursesListIconSize(),
     );
   }
 

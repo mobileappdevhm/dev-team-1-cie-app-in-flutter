@@ -41,63 +41,18 @@ class _CourseDetailsState extends State<CourseDetails> {
       ),
       body: new Center(
         child: new Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 10.0),
           child: new Column(
             children: <Widget>[
-              new Container(
-                child: new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        child: new Align(
-                          alignment: Alignment.centerLeft,
-                          child: new Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              new Text(
-                                presenter.getTitle(id),
-                                style: CiEStyle
-                                    .getCourseDescriptionTitleStyle(),
-                              ),
-                              new Text(
-                                presenter.getFacultyBeautiful(id),
-                                style: CiEStyle
-                                    .getCourseDescriptionFacultyStyle(),
-                              ),
-                            ],
-                          ),
-                        )),
-                    new Expanded(
-                      child: new Align(
-                        alignment: Alignment.centerRight,
-                        child: new IconButton(
-                          icon: GenericIcon.buildGenericFavoriteIcon(
-                              presenter.getFavourite(id)),
-                          onPressed: () => _toggleFavorite(id),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Padding(
-                      padding: const EdgeInsets.only(
-                          left: 0.0, top: 25.0, right: 0.0, bottom: 25.0),
-                      child: new Text(
-                          StaticVariables.DESCRIPTION,
-                          style: CiEStyle.getCourseDetailsHeadingStyle()
-                      )),
-                ],
-              ),
-              new Expanded(
-                child: new Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: new Text(presenter.getDescription(id),
-                      style: new TextStyle(fontSize: 15.0),
-                    )),
-              ),
+              //Title, Clickable heart
+              buildTitleRow(),
+              //Description title
+              buildDescriptionHeadingRow(),
+              //Description
+              buildDescriptionRow(),
+              //Footer, ects, hours, availability, contact
+              //buildFooterRow(),
+
               //Bottom row with information about ects availability contact
               new Row(
                 children: <Widget>[
@@ -187,6 +142,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                   ),
                 ],
               )
+
             ],
           ),
         ),
@@ -204,5 +160,79 @@ class _CourseDetailsState extends State<CourseDetails> {
     setState(() {
 
     });
+  }
+
+  Widget buildDescriptionHeadingRow() {
+    //Description heading row
+    return new Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        new Padding(
+            padding: const EdgeInsets.only(
+                left: 0.0, top: 25.0, right: 0.0, bottom: 25.0),
+            child: new Text(
+                StaticVariables.DESCRIPTION,
+                style: CiEStyle.getCourseDetailsHeadingStyle()
+            )),
+      ],
+    );
+  }
+
+  Widget buildDescriptionRow() {
+    return new Expanded(
+      child: new Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: new Text(presenter.getDescription(id),
+            style: new TextStyle(fontSize: 15.0),
+          )),
+    );
+  }
+
+  Widget buildTitleRow() {
+    //Obove Desription stuff
+    return new Container(
+      child: new Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new Expanded(
+              child: new Align(
+                alignment: Alignment.centerLeft,
+                child: new Column(
+                  //Place at top
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new Text(
+                      presenter.getTitle(id),
+                      style: CiEStyle
+                          .getCourseDescriptionTitleStyle(),
+                    ),
+                    new Text(
+                      presenter.getFacultyBeautiful(id),
+                      style: CiEStyle
+                          .getCourseDescriptionFacultyStyle(),
+                    ),
+                  ],
+                ),
+              )),
+          //Heart icon and toggler
+          new Container(
+            child: new Padding(
+              padding: new EdgeInsets.only(left: 15.0),
+              child: new IconButton(
+                iconSize: CiEStyle.getCoursesListIconSize() +
+                    15.0,
+                icon: GenericIcon.buildGenericFavoriteIcon(
+                    presenter.getFavourite(id)),
+                onPressed: () => _toggleFavorite(id),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildFooterRow() {
+    return null;
   }
 }
