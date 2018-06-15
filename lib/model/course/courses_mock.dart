@@ -10,17 +10,21 @@ class CoursesMock implements Courses {
 
   CoursesMock() {
     for (int i = 1; i < GENERATE_COURSES; i++) {
-      courses.add(new Course(
-          generateMockCourseTitle(i),
-          generateMockDepartment(i),
-          generateMockTime(i),
-          generateMockDescription(i),
-          generateMockClassLength(i),
-          generateMockECTS(i),
-          generateMockEmail(i),
-          generateMockName(i),
-          generateMockAvailability(i),
-          generateMockFavorite(i)));
+      courses.add(
+        new CourseBuilder()
+          .withName(generateMockCourseTitle(i))
+          .withFaculty(generateMockDepartment(i))
+          .withFaculty(generateMockDepartment(i))
+          .withLecturesPerWeek(generateMockTime(i))
+          .withDescription(generateMockDescription(i))
+          .withHoursPerWeek(generateMockClassLength(i))
+          .withEcts(generateMockECTS(i))
+          .withProfessorEmail(generateMockEmail(i))
+          .withProfessorName(generateMockName(i))
+          .withAvailable(generateMockAvailability(i))
+          .withIsFavorite(generateMockFavorite(i))
+          .build()
+      );
     }
   }
 

@@ -21,4 +21,7 @@ class CiEColor {
 
   //turquoise = #00a0d2 rgb(0, 160, 210)
   static const Color turquoise = const Color.fromRGBO(0, 160, 210, 1.0);
+
+  //white= #FFFFFF rgb(255, 255, 255)
+  static const Color black = const Color.fromRGBO(0, 0, 0, 1.0);
 }

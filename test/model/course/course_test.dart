@@ -5,58 +5,59 @@ import 'package:test/test.dart';
 void main() {
   group("simplecourseTest", () {
     test('1', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.name, "Blaba");
     });
 
     test('2', () {
-      final Course sut = new Course(
-          "Blaba",
-          "7",
-          [
+      final Course sut = new CourseBuilder()
+          .withName("Blaba")
+          .withFaculty("7")
+          .withLecturesPerWeek([
             new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
                 new DayTime(11, 30), "R0.009")
-          ],
-          "boring",
-          2,
-          2,
-          "example@hm.edu",
-          "Max Mustermann",
-          CourseAvailability.AVAILABLE,
-          false);
-
+          ])
+          .withDescription("boring")
+          .withHoursPerWeek(2)
+          .withEcts(2)
+          .withProfessorEmail("example@hm.edu")
+          .withProfessorName("Max Mustermann")
+          .withAvailable(CourseAvailability.AVAILABLE)
+          .withIsFavorite(false)
+      .build();
       expect(sut.faculty, "7");
     });
     test('3', () {
-      final Course sut = new Course(
-          "Blaba",
-          "7",
-          [
+      final Course sut = new CourseBuilder()
+          .withName("Blaba")
+          .withFaculty("7")
+          .withLecturesPerWeek([
             new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
                 new DayTime(11, 30), "R0.009")
-          ],
-          "boring",
-          2,
-          2,
-          "example@hm.edu",
-          "Max Mustermann",
-          CourseAvailability.AVAILABLE,
-          false);
+          ])
+          .withDescription("boring")
+          .withHoursPerWeek(2)
+          .withEcts(2)
+          .withProfessorEmail("example@hm.edu")
+          .withProfessorName("Max Mustermann")
+          .withAvailable(CourseAvailability.AVAILABLE)
+          .withIsFavorite(false)
+          .build();
 
       expect(sut.lecturesPerWeek[0].weekday, Weekday.Mon);
       expect(sut.lecturesPerWeek[0].startDayTime.toString(),
@@ -65,199 +66,199 @@ void main() {
           new DayTime(11, 30).toString());
     });
     test('4', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.description, "boring");
     });
     test('5', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.hoursPerWeek, 2);
     });
     test('6', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.ects, 2);
     });
 
     test('7', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.professorEmail, "example@hm.edu");
     });
 
     test('8', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.professorName, "Max Mustermann");
     });
 
     test('9', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.available, CourseAvailability.AVAILABLE);
     });
 
     test('10', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.isFavourite, false);
     });
 
     test('11', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.available, CourseAvailability.AVAILABLE);
     });
 
     test('12 ocure', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.occursOnDay(Weekday.Mon), true);
     });
 
     test('13 ocure', () {
-      final Course sut = new Course(
-        "Blaba",
-        "7",
-        [
+      final Course sut = new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
           new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
               new DayTime(11, 30), "R0.009")
-        ],
-        "boring",
-        2,
-        2,
-        "example@hm.edu",
-        "Max Mustermann",
-        CourseAvailability.AVAILABLE,
-        false,
-      );
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+      .build();
 
       expect(sut.occursOnDay(Weekday.Sun), false);
     });

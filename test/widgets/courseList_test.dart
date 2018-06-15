@@ -90,7 +90,7 @@ void main() {
               home: new Material(
                 child: new Center(
                     child: new CourseList(
-                        new CourseListPresenter(), isFavoritesPage)),
+                        new CourseListPresenter(null), isFavoritesPage)),
               ),
             );
           },

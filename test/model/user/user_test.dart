@@ -10,22 +10,23 @@ void main() {
     List<Course> courses;
 
     setUp(() {
+
       courses = [
-        new Course(
-          "Blaba",
-          "7",
-          [
-            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-                new DayTime(11, 30), "R0.009")
-          ],
-          "boring",
-          2,
-          2,
-          "example@hm.edu",
-          "Max Mustermann",
-          CourseAvailability.AVAILABLE,
-          false,
-        ),
+        new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
+          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+              new DayTime(11, 30), "R0.009")
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+        .build()
       ];
 
       sut = new User(
@@ -71,21 +72,21 @@ void main() {
 
     setUp(() {
       courses = [
-        new Course(
-          "Blaba",
-          "7",
-          [
-            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-                new DayTime(11, 30), "R0.009")
-          ],
-          "boring",
-          2,
-          2,
-          "example@hm.edu",
-          "Max Mustermann",
-          CourseAvailability.AVAILABLE,
-          false,
-        ),
+        new CourseBuilder()
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([
+          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+              new DayTime(11, 30), "R0.009")
+        ])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail("example@hm.edu")
+        .withProfessorName("Max Mustermann")
+        .withAvailable(CourseAvailability.AVAILABLE)
+        .withIsFavorite(false)
+        .build()
       ];
 
       user = new User(

@@ -147,4 +147,12 @@ class CiEStyle {
       fontWeight: FontWeight.bold,
     );
   }
+
+  static TextStyle getCourseListRefreshText() {
+    return new TextStyle(
+      color: CiEColor.black,
+      fontSize: 17.0,
+      fontWeight: FontWeight.w300
+    );
+  }
 }
