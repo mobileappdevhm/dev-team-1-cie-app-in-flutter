@@ -41,7 +41,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                           new Container(
                             padding: const EdgeInsets.only(bottom: 10.0),
                             child: new Text(
-                              "Title of course whatever in case it's very long",
+                              "Title of course",
                               style: CiEStyle.getCourseDescriptionTitleStyle(),
                             ),
                           ),
