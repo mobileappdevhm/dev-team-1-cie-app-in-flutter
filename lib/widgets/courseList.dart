@@ -7,6 +7,7 @@ import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/nineAPIConsumer.dart';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
@@ -30,17 +31,43 @@ class CourseListState extends State<CourseList> {
   final TextEditingController c1 = new TextEditingController();
   final bool shouldFilterByFavorites;
   bool shouldSearch = false;
-  String filter = "07";
+  String filter = "09";
   String searchValue = "";
   bool coursesRegistered = false;
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites);
 
+  handleUpdate() async {
+    //pullCourseJSON also checks for internet connectivity. This method should
+    //begin execution as soon as possible, check later for setState
+    NineAPIEngine.pullCourseJSON(context, false);
+    var isConnected = await NineAPIEngine.isInternetConnected();
+    if (isConnected == true) {
+      setState(() {
+        courseListPresenter.addCoursesFromMemory();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = new List<Widget>();
 
+
     if (shouldFilterByFavorites == false) {
+      widgets.add(
+        new Container(
+          color: Colors.blue,
+          padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+          child: new Column(
+            children: <Widget>[
+              new Text("Pull down to Refresh", style: CiEStyle.getCourseListRefreshText()),
+              new Icon(Icons.arrow_downward),
+            ],
+          )
+        )
+      );
+
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
       String departmentLabel = "Department #";
       widgets.add(new Row(
@@ -125,7 +152,12 @@ class CourseListState extends State<CourseList> {
         ),
       ));
     }
-    return new ListView(children: widgets);
+
+    return new RefreshIndicator(
+        child: new ListView(children: widgets),
+        onRefresh: ()=> NineAPIEngine.pullCourseJSON(context, true),
+        color: Colors.blue,
+    );
   }
 
   Widget favoriteIcon(int id) {

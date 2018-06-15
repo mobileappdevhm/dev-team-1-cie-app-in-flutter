@@ -27,7 +27,7 @@ class StaticVariables {
   static const String CONTACT_OFFICE = 'Contact International Office';
   static const String CIE_CERTIFICATE = 'Courses in English Certificate';
   static const String IE_CERTIFICATE = 'International Engineering Certificate';
-  static const String TAKEN_COURSES = 'Taken Courses';
+  static const String TAKEN_COURSES = 'Course History';
 
   /* Settings/Taken Courses Page */
   static const String TOTAL_OF = 'Total of';

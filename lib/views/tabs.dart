@@ -7,6 +7,7 @@ import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/nineAPIConsumer.dart';
 
 class TabsPage extends StatefulWidget {
   @override
@@ -23,8 +24,12 @@ class TabsPageState extends State<TabsPage> {
   @override
   void initState() {
     super.initState();
+    // TODO: Investigate scenarios where internet is not available/request fails
+    NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
-    courseListPresenter = new CourseListPresenter();
+    courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
+    // TODO: Standard file protections, check if file exists, contents!=null etc.
+    courseListPresenter.addCoursesFromMemory();
     this._appTitle = TabItems[_tab].title;
   }
 
@@ -32,6 +37,12 @@ class TabsPageState extends State<TabsPage> {
   void dispose() {
     super.dispose();
     _tabController.dispose();
+  }
+
+  void _maybeChangeCallback(bool didChange) {
+    if (didChange == true) {
+      setState(()=>{});
+    }
   }
 
   @override

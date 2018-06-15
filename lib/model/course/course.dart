@@ -1,8 +1,140 @@
+class CourseBuilder {
+  /* FIELDS FROM NINE */
+  //TODO: Implement These & Merge, delete nineAPIConsumer.dart's NineCourse class
+  String id;
+  String description;
+  bool isCoterie;
+  bool hasHomeBias;
+  List<dynamic> correlations;
+  List<dynamic> dates;
+  String name;
+  String shortName;
+  List<dynamic> actions;
+
+  String faculty;
+  List<Lecture> lecturesPerWeek;
+  int hoursPerWeek;
+  int ects;
+  String professorEmail;
+  String professorName;
+  CourseAvailability available;
+  bool isFavourite;
+
+  // Standard Builder Pattern Implementation
+  CourseBuilder withId(String id) {
+    this.id = id;
+    return this;
+  }
+
+  CourseBuilder withDescription(String description) {
+    this.description=description;
+    return this;
+  }
+  CourseBuilder withIsCoterie(bool isCoterie) {
+    this.isCoterie=isCoterie;
+    return this;
+  }
+  CourseBuilder withhasHomeBias(bool hasHomeBias) {
+    this.hasHomeBias=hasHomeBias;
+    return this;
+  }
+  CourseBuilder withCorrelations(List<dynamic> correlations) {
+    this.correlations=correlations;
+    return this;
+  }
+  CourseBuilder withdates(List<dynamic> dates) {
+    this.dates=dates;
+    return this;
+  }
+  CourseBuilder withName(String name) {
+    this.name=name;
+    return this;
+  }
+  CourseBuilder withShortName(String shortName) {
+    this.shortName=shortName;
+    return this;
+  }
+  CourseBuilder withActions(List<dynamic >actions) {
+    this.actions=actions;
+    return this;
+  }
+  CourseBuilder withFaculty(String faculty) {
+    this.faculty = faculty;
+    return this;
+  }
+  CourseBuilder withLecturesPerWeek(List<Lecture> lecturesPerWeek) {
+    this.lecturesPerWeek = lecturesPerWeek;
+    return this;
+  }
+  CourseBuilder withHoursPerWeek(int hoursPerWeek) {
+    this.hoursPerWeek = hoursPerWeek;
+    return this;
+  }
+  CourseBuilder withEcts(int ects) {
+    this.ects = ects;
+    return this;
+  }
+  CourseBuilder withProfessorEmail(String professorEmail) {
+    this.professorEmail = professorEmail;
+    return this;
+  }
+  CourseBuilder withProfessorName(String professorName) {
+    this.professorName = professorName;
+    return this;
+  }
+  CourseBuilder withAvailable(CourseAvailability available) {
+    this.available = available;
+    return this;
+  }
+  CourseBuilder withIsFavorite(bool isFavorite) {
+    this.isFavourite = isFavorite;
+    return this;
+  }
+
+  factory CourseBuilder.fromJson(Map<String, dynamic> jsonData) {
+    String dep = ((jsonData['correlations'][0]['organiser']));
+    return new CourseBuilder(
+      id: jsonData['id'],
+      description: jsonData['description'],
+      isCoterie: jsonData['isCoterie'],
+      hasHomeBias: jsonData['hasHomeBias'],
+      correlations: jsonData['correlations'],
+      dates: jsonData['dates'],
+      name: jsonData['name'],
+      shortName: jsonData['shortName'],
+      actions: jsonData['actions'],
+      faculty: dep.substring(3, dep.length)
+    );
+  }
+
+  CourseBuilder({this.id, this.description, this.isCoterie, this.hasHomeBias,
+    this.correlations, this.dates, this.name, this.shortName, this.actions,
+    this.faculty});
+
+  Course build(){
+    return new Course(
+      this.id, this.description, this.isCoterie, this.hasHomeBias,
+      this.correlations, this.dates, this.name, this.shortName, this.actions,
+      this.faculty, this.lecturesPerWeek, this.hoursPerWeek, this.ects,
+      this.professorEmail, this.professorName, this.available, this.isFavourite);
+  }
+}
+
 class Course {
-  final String name;
+  String id;
+  String description;
+  bool isCoterie;
+  bool hasHomeBias;
+  List<dynamic> correlations;
+  List<dynamic> dates;
+  String name;
+  String shortName;
+  List<dynamic> actions;
+
+  //final String name;
   final String faculty;
   final List<Lecture> lecturesPerWeek;
-  final String description;
+  //final String description;
   final int hoursPerWeek;
   final int ects;
   final String professorEmail;
@@ -11,16 +143,26 @@ class Course {
   bool isFavourite;
 
   Course(
+      this.id,
+      this.description,
+      this.isCoterie,
+      this.hasHomeBias,
+      this.correlations,
+      this.dates,
       this.name,
+      this.shortName,
+      this.actions,
+      //this.name,
       this.faculty,
       this.lecturesPerWeek,
-      this.description,
+      //this.description,
       this.hoursPerWeek,
       this.ects,
       this.professorEmail,
       this.professorName,
       this.available,
-      this.isFavourite) {
+      this.isFavourite
+      ) {
     //Set this course as parent of every lectures contained
     //Required for timetable
     lecturesPerWeek.forEach((l) => l.course = this);
@@ -29,6 +171,11 @@ class Course {
   bool occursOnDay(Weekday weekDay) {
     //Is there a lecture on searched day
     return lecturesPerWeek.any((lecture) => lecture.weekday == weekDay);
+  }
+
+  bool equals(Course course) {
+    // we can expect that ids will be unique from the nine API
+    return (this.id == course.id);
   }
 }
 
@@ -135,111 +282,6 @@ class CourseAvailabilityUtility {
     return CourseAvailability.AVAILABLE;
   }
 }
-
-//class FacultyUtility {
-//  static int getFacultyAsInt(Faculty f) {
-//    switch (f) {
-//      case Faculty.ZERO:
-//        return 0;
-//      case Faculty.ONE:
-//        return 1;
-//      case Faculty.TWO:
-//        return 2;
-//      case Faculty.THREE:
-//        return 3;
-//      case Faculty.FOUR:
-//        return 4;
-//      case Faculty.FIVE:
-//        return 5;
-//      case Faculty.SIX:
-//        return 6;
-//      case Faculty.SEVEN:
-//        return 7;
-//      case Faculty.EIGHT:
-//        return 8;
-//      case Faculty.NINE:
-//        return 9;
-//      case Faculty.TEN:
-//        return 10;
-//      case Faculty.ELEVEN:
-//        return 11;
-//      case Faculty.TWELVE:
-//        return 12;
-//      case Faculty.THIRTEEN:
-//        return 13;
-//    }
-//    return 0;
-//  }
-//
-//  static Faculty intToFaculty(int i) {
-//    switch (i) {
-//      case 0:
-//        return Faculty.ZERO;
-//      case 1:
-//        return Faculty.ONE;
-//      case 2:
-//        return Faculty.TWO;
-//      case 3:
-//        return Faculty.THREE;
-//      case 4:
-//        return Faculty.FOUR;
-//      case 5:
-//        return Faculty.FIVE;
-//      case 6:
-//        return Faculty.SIX;
-//      case 7:
-//        return Faculty.SEVEN;
-//      case 8:
-//        return Faculty.EIGHT;
-//      case 9:
-//        return Faculty.NINE;
-//      case 10:
-//        return Faculty.TEN;
-//      case 11:
-//        return Faculty.ELEVEN;
-//      case 12:
-//        return Faculty.TWELVE;
-//      case 13:
-//        return Faculty.THIRTEEN;
-//    }
-//    return Faculty.ZERO;
-//  }
-//
-//  static String getFacultyAsString(Faculty f) {
-//    switch (f) {
-//      case Faculty.ZERO:
-//        return "00";
-//      case Faculty.ONE:
-//        return "01";
-//      case Faculty.TWO:
-//        return "02";
-//      case Faculty.THREE:
-//        return "03";
-//      case Faculty.FOUR:
-//        return "04";
-//      case Faculty.FIVE:
-//        return "05";
-//      case Faculty.SIX:
-//        return "06";
-//      case Faculty.SEVEN:
-//        return "07";
-//      case Faculty.EIGHT:
-//        return "08";
-//      case Faculty.NINE:
-//        return "09";
-//      case Faculty.TEN:
-//        return "10";
-//      case Faculty.ELEVEN:
-//        return "11";
-//      case Faculty.TWELVE:
-//        return "12";
-//      case Faculty.THIRTEEN:
-//        return "13";
-//    }
-//    // Not reachable.
-//    return "";
-//  }
-//}
 
 class CampusUtility {
   static String getCampusAsString(Campus campus) {

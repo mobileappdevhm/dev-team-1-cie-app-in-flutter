@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
@@ -24,14 +23,18 @@ class FileStore {
     }
   }
 
-  static Future<Map> readFileAsJson(String resource) async {
-    try {
-      File file = await getFile(resource);
-      String contents = await file.readAsString();
-      Map jsonMap = json.decode(contents);
-      return jsonMap;
-    } on FileSystemException {
-      return null;
-    }
+  static String readFileAsStringSync(String resource) {
+    readFileAsString(resource).then((value) {
+      return value;
+    });
+    return null;
+  }
+
+  static Future<File> writeToFile(String resource, String data) async {
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    String filename = "$dir/" + resource + ".txt";
+    File f = new File(filename);
+    f.writeAsString(data);
+    return f;
   }
 }

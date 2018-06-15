@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('simple tests', () {
     test('1 courseListPresenterTest', () async {
-      final CourseListPresenter courseListPresenter = new CourseListPresenter();
+      final CourseListPresenter courseListPresenter = new CourseListPresenter(null);
       final int id = 1;
 
       final CourseListItem courseListItem = new CourseListItem(
@@ -24,7 +24,7 @@ void main() {
     });
 
     test('1 idTest', () async {
-      final CourseListPresenter courseListPresenter = new CourseListPresenter();
+      final CourseListPresenter courseListPresenter = new CourseListPresenter(null);
       final int id = 1;
 
       final CourseListItem courseListItem = new CourseListItem(

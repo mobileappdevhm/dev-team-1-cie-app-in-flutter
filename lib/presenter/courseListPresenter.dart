@@ -1,7 +1,10 @@
 import 'package:cie_team1/di/courses_di.dart';
+import 'package:flutter/material.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
+import 'package:cie_team1/utils/fileStore.dart';
+import 'dart:convert';
 
 abstract class CourseListViewContract {
   //Todo: Needed in future
@@ -9,10 +12,62 @@ abstract class CourseListViewContract {
 
 class CourseListPresenter {
   Courses _courses;
+  final ValueChanged<bool> onChanged;
 
-  CourseListPresenter() {
+  CourseListPresenter(this.onChanged) {
     CourseInjector.configure(Flavor.MOCK);
     _courses = new CourseInjector().courses;
+  }
+
+  // TODO: Heavily modify this function.
+  // TODO: -Rename to be more relevant to update function,
+  // TODO: -Check if course is already stored before adding here
+  // TODO: -Make the loop contents more relevant and move it somewhere else
+  void addCoursesFromMemory() {
+    List<Course> courseList = _courses.getCourses();
+    bool didUpdate = false;
+    FileStore.readFileAsString(FileStore.COURSES).then((String val){
+      if (val != null) {
+        final List<dynamic> jsonData = json.decode(val);
+        for (int i=0; i<jsonData.length; i++) {
+          CourseBuilder courseBuilder = new CourseBuilder.fromJson(jsonData[i]);
+            // TODO: Delete the following builder code & only rely on the .fromJson
+            // once all relevent data is available from the Nine API
+            courseBuilder
+              .withLecturesPerWeek(
+              [
+                new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                    new DayTime(11, 30), "R0.009")
+              ])
+              .withDescription("boring")
+              .withHoursPerWeek(2)
+              .withEcts(2)
+              .withProfessorEmail("example@hm.edu")
+              .withProfessorName("Max Mustermann")
+              .withAvailable(CourseAvailability.AVAILABLE)
+              .withIsFavorite(false);
+          Course c = courseBuilder.build();
+          if (isNewCourseData(courseList, c)) {
+            courseList.add(c);
+            didUpdate = true;
+          }
+        }
+        if (didUpdate == true) {
+          courseList.sort((one, two) => one.name.compareTo(two.name));
+          this.onChanged(true);
+        }
+      }
+    });
+  }
+
+  bool isNewCourseData(List<Course> courseList, Course candidate) {
+    for (Course c in courseList) {
+      // compares using the unique id from Nine
+      if (c.equals(candidate)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   void toggleFavourite(int id) {

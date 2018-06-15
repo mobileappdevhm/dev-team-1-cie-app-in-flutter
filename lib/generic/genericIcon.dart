@@ -2,6 +2,7 @@ import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_hud/progress_hud.dart';
 
 class GenericIcon {
   static const int memStorageAvailable = 0xe86c;
@@ -63,5 +64,14 @@ class GenericIcon {
             style: new TextStyle(color: Colors.white),
           ),
         ));
+  }
+  static Widget buildGenericSpinner() {
+    return new ProgressHUD(
+        backgroundColor: Colors.black12,
+        color: Colors.white,
+        containerColor: Colors.blue,
+        borderRadius: 5.0,
+        text: "Refreshing"
+    );
   }
 }
