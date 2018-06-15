@@ -96,12 +96,12 @@ void main() {
           },
         ),
       );
-      final Iterable<Widget> listOfWidgets = tester.allWidgets;
+      //final Iterable<Widget> listOfWidgets = tester.allWidgets;
 
-      for (Widget widget in listOfWidgets) {
+      //for (Widget widget in listOfWidgets) {
         //await tester.tap();
         //tester.pump();
-      }
+      //}
     });
   });
 }

@@ -81,6 +81,12 @@ class CiEStyle {
     return new TextStyle(color: Colors.white);
   }
 
+  static TextStyle getSettingsPrivacyStyle() {
+    return new TextStyle(
+        color: Colors.white
+    );
+  }
+
   static TextStyle getPrevCoursesTitleStyle() {
     return new TextStyle(
       fontSize: 16.0,

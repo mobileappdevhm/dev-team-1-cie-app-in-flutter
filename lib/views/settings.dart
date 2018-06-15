@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/views/takenCourses.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/views/takenCourses.dart';
+import 'package:cie_team1/widgets/privacyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -71,6 +72,19 @@ class _SettingsState extends State<Settings> {
                         child: new Text(
                           StaticVariables.LOGOUT_BUTTON,
                           style: CiEStyle.getSettingsLogoutStyle(),
+                        ),
+                      ),
+                      new Padding(
+                        padding : const EdgeInsets.only(top:5.0),
+                      ),
+                      new RaisedButton(
+                        onPressed: () => _togglePrivacyPage(context),
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: CiEStyle.getButtonBorderRadius()),
+                        color: CiEColor.red,
+                        child: new Text(
+                          StaticVariables.PRIVACY_BUTTON,
+                          style: CiEStyle.getSettingsPrivacyStyle(),
                         ),
                       ),
                     ],
@@ -157,6 +171,7 @@ class _SettingsState extends State<Settings> {
               ),
               new LinearProgressIndicator(value: engCredits / 15),
               /* This causes overload on horizontal screen */
+
               new GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -197,5 +212,11 @@ class _SettingsState extends State<Settings> {
   void _logout(BuildContext context) {
     //TODO maybe some more things are required here later
     Navigator.pushReplacementNamed(context, Routes.Login);
+  }
+
+  void _togglePrivacyPage(BuildContext context) {
+    Navigator.push(
+        context,
+        new MaterialPageRoute(builder: (context) => new PrivacyPage()));
   }
 }

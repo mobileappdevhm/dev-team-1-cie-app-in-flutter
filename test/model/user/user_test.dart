@@ -67,11 +67,10 @@ void main() {
   });
 
   group("simpleUserProdTest", () {
-    List<Course> courses;
-    User user;
+    //List<Course> courses;
 
     setUp(() {
-      courses = [
+      /*courses = [
         new CourseBuilder()
         .withName("Blaba")
         .withFaculty("7")
@@ -87,10 +86,8 @@ void main() {
         .withAvailable(CourseAvailability.AVAILABLE)
         .withIsFavorite(false)
         .build()
-      ];
+      ];*/
 
-      user = new User(
-          42, 'Max42', 'Max', 'Mustermann', '7', 'sleeping', courses, courses);
     });
 
     test('1', () {
