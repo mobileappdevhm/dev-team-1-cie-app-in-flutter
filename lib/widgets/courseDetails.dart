@@ -81,8 +81,8 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ],
               ),
               new Expanded(
-                child: new Padding(
-                    padding: const EdgeInsets.all(4.0),
+                  flex: 1,
+                  child: new SingleChildScrollView(
                     child: new Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
                           "Curabitur congue nisl porttitor enim tempor, nec venenatis nibh congue. "
@@ -95,7 +95,9 @@ class _CourseDetailsState extends State<CourseDetails> {
                           "Donec tincidunt bibendum bibendum. "
                           "Praesent lectus leo, fringilla in mattis ut, semper at mauris. ",
                       style: new TextStyle(fontSize: 15.0),
-                    )),
+                    ),
+
+                  )
               ),
               new Row(
                 children: <Widget>[
