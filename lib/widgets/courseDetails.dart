@@ -1,4 +1,5 @@
 import 'package:cie_team1/generic/genericIcon.dart';
+import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -17,11 +18,7 @@ class CourseDetails extends StatefulWidget {
 }
 
 class _CourseDetailsState extends State<CourseDetails> {
-  static const EdgeInsets SPACE_BETWEEN_ROWS = const EdgeInsets.only(
-      top: 5.0, bottom: 5.0);
-  static const EdgeInsets SPACE_BETWEEN_ROWS_WITHOUT_ICONS = const EdgeInsets
-      .only(
-      top: 12.0, bottom: 12.0);
+  static const double FOOTER_TILE_HEIGHT = 40.0;
 
   final CourseListPresenter presenter;
   final int id;
@@ -51,98 +48,7 @@ class _CourseDetailsState extends State<CourseDetails> {
               //Description
               buildDescriptionRow(),
               //Footer, ects, hours, availability, contact
-              //buildFooterRow(),
-
-              //Bottom row with information about ects availability contact
-              new Row(
-                children: <Widget>[
-                  new Expanded(
-                    flex: 2,
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        new Padding(
-                          padding: SPACE_BETWEEN_ROWS_WITHOUT_ICONS,
-                          child: new Row(
-                            children: <Widget>[
-                              new Text(
-                                StaticVariables.HOURS_PER_WEEK + ":",
-                                style: new TextStyle(fontSize: 17.0),
-                              ),
-                              new Text(
-                                "2",
-                                style: new TextStyle(
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                        new Padding(
-                          padding: SPACE_BETWEEN_ROWS_WITHOUT_ICONS,
-                          child: new Row(
-                            children: <Widget>[
-                              new Text(
-                                StaticVariables.ECTS + ":",
-                                style: new TextStyle(fontSize: 17.0),
-                              ),
-                              new Text(
-                                "2",
-                                style: new TextStyle(
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  new Expanded(
-                    child: new Column(
-                      children: <Widget>[
-                        new Padding(
-                          padding: SPACE_BETWEEN_ROWS,
-                          child: new Row(
-                            children: <Widget>[
-                              new Icon(
-                                const IconData(0xe86c,
-                                    fontFamily: 'MaterialIcons'),
-                                size: 30.0,
-                                color: CiEColor.green,
-                              ),
-                              new Text(
-                                "Available",
-                                style: new TextStyle(
-                                  fontSize: 17.0,
-                                  color: CiEColor.green,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        new Padding(
-                          padding: SPACE_BETWEEN_ROWS,
-                          child: new FlatButton(
-                              padding: new EdgeInsets.all(0.0),
-                              onPressed: () => _toggleContact,
-                              child: new Row(
-                                children: <Widget>[
-                                  GenericIcon.buildGenericContactIcon(),
-                                  new Text(
-                                    StaticVariables.CONTACT,
-                                    style: new TextStyle(fontSize: 17.0),
-                                  ),
-                                ],
-                              )
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )
-
+              buildFooterRow(),
             ],
           ),
         ),
@@ -233,6 +139,85 @@ class _CourseDetailsState extends State<CourseDetails> {
   }
 
   Widget buildFooterRow() {
-    return null;
+    return //Bottom row with information about ects availability contact
+      new Row (
+        //Place right and left
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          //Left side of footer
+          new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Container(
+                height: FOOTER_TILE_HEIGHT,
+                child: new Row(
+                  children: <Widget>[
+                    new Text(
+                      StaticVariables.HOURS_PER_WEEK + ":",
+                      style: CiEStyle.getCourseDetailsFooterTextStyle(),
+                    ),
+                    new Text(
+                        "2",
+                        style: CiEStyle.getCourseDetailsFooterTextStyleBolt()
+                    ),
+                  ],
+                ),
+              ),
+              new Container(
+                height: FOOTER_TILE_HEIGHT,
+                child: new Row(
+                  children: <Widget>[
+                    new Text(
+                      StaticVariables.ECTS + ":",
+                      style: new TextStyle(fontSize: 17.0),
+                    ),
+                    new Text(
+                      "2",
+                      style: new TextStyle(
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          //Right side of footer
+          new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Container(
+                height: FOOTER_TILE_HEIGHT,
+                child: new Row(
+                  children: <Widget>[
+                    GenericIcon.buildGenericAvailabilityIcon(
+                        presenter.getAvailability(id)),
+                    CourseAvailabilityUtility.intToColoredString(
+                        presenter.getAvailability(id),
+                        CiEStyle.getCourseDetailsFontSize()),
+                  ],
+                ),
+              ),
+              new Container(
+                height: FOOTER_TILE_HEIGHT,
+                child: new FlatButton(
+                  //There is padding by default we dont need this here
+                    padding: new EdgeInsets.all(0.0),
+                    onPressed: () => _toggleContact,
+                    child: new Row(
+                      children: <Widget>[
+                        GenericIcon.buildGenericContactIcon(),
+                        new Text(
+                          StaticVariables.CONTACT,
+                          style: CiEStyle.getCourseDetailsFooterTextStyle(),
+                        ),
+                      ],
+                    )
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
   }
 }

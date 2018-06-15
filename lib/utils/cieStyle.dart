@@ -156,11 +156,30 @@ class CiEStyle {
     );
   }
 
+  static TextStyle getCourseDetailsFooterTextStyle() {
+    return new TextStyle(
+      fontSize: getCourseDetailsFontSize(),
+      color: CiEColor.gray,
+    );
+  }
+
+  static TextStyle getCourseDetailsFooterTextStyleBolt() {
+    return new TextStyle(
+      fontSize: getCourseDetailsFontSize(),
+      color: CiEColor.gray,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   static TextStyle getCourseDetailsHeadingStyle() {
     return new TextStyle(
         fontSize: 25.0,
         color: CiEColor.gray,
         letterSpacing: 2.0
     );
+  }
+
+  static double getCourseDetailsFontSize() {
+    return 18.0;
   }
 }
