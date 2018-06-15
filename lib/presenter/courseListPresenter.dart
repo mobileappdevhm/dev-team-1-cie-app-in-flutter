@@ -102,12 +102,20 @@ class CourseListPresenter {
     return _courses.getCourses()[id].faculty.toString();
   }
 
+  String getFacultyBeautiful(int id) {
+    return "FK " + _courses.getCourses()[id].faculty.toString();
+  }
+
   String getTitle(int id) {
     return _courses.getCourses()[id].name;
   }
 
   List<Lecture> getLectureTimes(int id) {
     return _courses.getCourses()[id].lecturesPerWeek;
+  }
+
+  String getDescription(int id) {
+    return _courses.getCourses()[id].description;
   }
 
   String getLectureTimesBeautiful(int id) {

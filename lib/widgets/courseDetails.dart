@@ -1,20 +1,29 @@
+import 'package:cie_team1/generic/genericIcon.dart';
+import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class CourseDetails extends StatefulWidget {
-  CourseDetails({Key key, this.title}) : super(key: key);
+  CourseDetails(this.id, this.presenter, {Key key, this.title})
+      : super(key: key);
   final String title;
+  final int id;
+  final CourseListPresenter presenter;
 
   @override
-  _CourseDetailsState createState() => new _CourseDetailsState();
+  _CourseDetailsState createState() => new _CourseDetailsState(id, presenter);
 }
 
 class _CourseDetailsState extends State<CourseDetails> {
+  final CourseListPresenter presenter;
+  final int id;
+
+  _CourseDetailsState(this.id, this.presenter);
+
   @override
   Widget build(BuildContext context) {
-    double iconSize = CiEStyle.getCourseDescriptionIconSize();
-
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
@@ -34,30 +43,28 @@ class _CourseDetailsState extends State<CourseDetails> {
                   children: <Widget>[
                     new Expanded(
                         child: new Align(
-                      alignment: Alignment.centerLeft,
-                      child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Text(
-                            "Title of course",
-                            style: CiEStyle.getCourseDescriptionTitleStyle(),
+                          alignment: Alignment.centerLeft,
+                          child: new Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              new Text(
+                                presenter.getTitle(id),
+                                style: CiEStyle
+                                    .getCourseDescriptionTitleStyle(),
+                              ),
+                              new Text(
+                                presenter.getFacultyBeautiful(id),
+                                style: CiEStyle
+                                    .getCourseDescriptionFacultyStyle(),
+                              ),
+                            ],
                           ),
-                          new Text(
-                            "FK 07",
-                            style: CiEStyle.getCourseDescriptionFacultyStyle(),
-                          ),
-                        ],
-                      ),
-                    )),
+                        )),
                     new Expanded(
                       child: new Align(
                         alignment: Alignment.centerRight,
                         child: new IconButton(
-                          icon: new Icon(
-                            const IconData(0xe87e, fontFamily: 'MaterialIcons'),
-                            size: iconSize,
-                            color: CiEColor.red,
-                          ),
+                          icon: GenericIcon.buildGenericFavoriteIcon(false),
                           onPressed: null,
                         ),
                       ),
@@ -72,28 +79,15 @@ class _CourseDetailsState extends State<CourseDetails> {
                       padding: const EdgeInsets.only(
                           left: 0.0, top: 25.0, right: 0.0, bottom: 25.0),
                       child: new Text(
-                        "Description",
-                        style: new TextStyle(
-                            fontSize: 25.0,
-                            color: CiEColor.gray,
-                            letterSpacing: 2.0),
+                          StaticVariables.DESCRIPTION,
+                          style: CiEStyle.getCourseDetailsHeadingStyle()
                       )),
                 ],
               ),
               new Expanded(
                 child: new Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: new Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                          "Curabitur congue nisl porttitor enim tempor, nec venenatis nibh congue. "
-                          "Donec congue eleifend libero, sit amet eleifend augue mattis quis. "
-                          "Fusce in luctus dolor. Curabitur sodales tellus sit amet faucibus aliquet. "
-                          "Cras eget congue diam. Maecenas aliquam tortor a lorem aliquam, ac pellentesque odio aliquam. "
-                          "Morbi vulputate dolor mi, sit amet consectetur odio hendrerit eu. Aenean efficitur at nibh in placerat. "
-                          "Vestibulum sodales metus eleifend metus malesuada commodo. "
-                          "Vivamus eleifend, tellus non eleifend tempus, massa lorem commodo tellus, in condimentum elit eros vel dolor. "
-                          "Donec tincidunt bibendum bibendum. "
-                          "Praesent lectus leo, fringilla in mattis ut, semper at mauris. ",
+                    child: new Text(presenter.getDescription(id),
                       style: new TextStyle(fontSize: 15.0),
                     )),
               ),
@@ -107,7 +101,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         new Row(
                           children: <Widget>[
                             new Text(
-                              "Hours per Week:",
+                              StaticVariables.HOURS_PER_WEEK + ":",
                               style: new TextStyle(fontSize: 17.0),
                             ),
                             new Text(
@@ -120,7 +114,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         new Row(
                           children: <Widget>[
                             new Text(
-                              "ECTS:",
+                              StaticVariables.ECTS + ":",
                               style: new TextStyle(fontSize: 17.0),
                             ),
                             new Text(
@@ -166,7 +160,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                                 size: 30.0,
                               ),
                               new Text(
-                                "Contact",
+                                StaticVariables.CONTACT,
                                 style: new TextStyle(fontSize: 17.0),
                               ),
                             ],

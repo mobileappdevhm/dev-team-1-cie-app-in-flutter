@@ -155,4 +155,12 @@ class CiEStyle {
       fontWeight: FontWeight.w300
     );
   }
+
+  static TextStyle getCourseDetailsHeadingStyle() {
+    return new TextStyle(
+        fontSize: 25.0,
+        color: CiEColor.gray,
+        letterSpacing: 2.0
+    );
+  }
 }

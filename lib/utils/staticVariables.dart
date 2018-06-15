@@ -38,4 +38,9 @@ class StaticVariables {
   static const String ALERT_YES = "COMPLETE";
   static const String ALERT_NO = "CANCEL";
   static const String ALERT_REGISTRATION_SUBMISSION = "Complete Registration?";
+
+  /* Course Detail Page */
+  static const String DESCRIPTION = "Description";
+  static const String HOURS_PER_WEEK = "Hours per Week";
+  static const String CONTACT = "Contact";
 }
