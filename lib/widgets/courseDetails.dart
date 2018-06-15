@@ -17,6 +17,12 @@ class CourseDetails extends StatefulWidget {
 }
 
 class _CourseDetailsState extends State<CourseDetails> {
+  static const EdgeInsets SPACE_BETWEEN_ROWS = const EdgeInsets.only(
+      top: 5.0, bottom: 5.0);
+  static const EdgeInsets SPACE_BETWEEN_ROWS_WITHOUT_ICONS = const EdgeInsets
+      .only(
+      top: 12.0, bottom: 12.0);
+
   final CourseListPresenter presenter;
   final int id;
 
@@ -27,7 +33,7 @@ class _CourseDetailsState extends State<CourseDetails> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
-          "Course Details",
+          StaticVariables.COURSE_DETAILS,
           style: CiEStyle.getAppBarTitleStyle(context),
         ),
         elevation: CiEStyle.getAppBarElevation(context),
@@ -64,8 +70,9 @@ class _CourseDetailsState extends State<CourseDetails> {
                       child: new Align(
                         alignment: Alignment.centerRight,
                         child: new IconButton(
-                          icon: GenericIcon.buildGenericFavoriteIcon(false),
-                          onPressed: null,
+                          icon: GenericIcon.buildGenericFavoriteIcon(
+                              presenter.getFavourite(id)),
+                          onPressed: () => _toggleFavorite(id),
                         ),
                       ),
                     ),
@@ -91,6 +98,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       style: new TextStyle(fontSize: 15.0),
                     )),
               ),
+              //Bottom row with information about ects availability contact
               new Row(
                 children: <Widget>[
                   new Expanded(
@@ -98,31 +106,39 @@ class _CourseDetailsState extends State<CourseDetails> {
                     child: new Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        new Row(
-                          children: <Widget>[
-                            new Text(
-                              StaticVariables.HOURS_PER_WEEK + ":",
-                              style: new TextStyle(fontSize: 17.0),
-                            ),
-                            new Text(
-                              "2",
-                              style: new TextStyle(
-                                  fontSize: 17.0, fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        new Padding(
+                          padding: SPACE_BETWEEN_ROWS_WITHOUT_ICONS,
+                          child: new Row(
+                            children: <Widget>[
+                              new Text(
+                                StaticVariables.HOURS_PER_WEEK + ":",
+                                style: new TextStyle(fontSize: 17.0),
+                              ),
+                              new Text(
+                                "2",
+                                style: new TextStyle(
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
-                        new Row(
-                          children: <Widget>[
-                            new Text(
-                              StaticVariables.ECTS + ":",
-                              style: new TextStyle(fontSize: 17.0),
-                            ),
-                            new Text(
-                              "2",
-                              style: new TextStyle(
-                                  fontSize: 17.0, fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        new Padding(
+                          padding: SPACE_BETWEEN_ROWS_WITHOUT_ICONS,
+                          child: new Row(
+                            children: <Widget>[
+                              new Text(
+                                StaticVariables.ECTS + ":",
+                                style: new TextStyle(fontSize: 17.0),
+                              ),
+                              new Text(
+                                "2",
+                                style: new TextStyle(
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -131,7 +147,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                     child: new Column(
                       children: <Widget>[
                         new Padding(
-                          padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                          padding: SPACE_BETWEEN_ROWS,
                           child: new Row(
                             children: <Widget>[
                               new Icon(
@@ -151,19 +167,19 @@ class _CourseDetailsState extends State<CourseDetails> {
                           ),
                         ),
                         new Padding(
-                          padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-                          child: new Row(
-                            children: <Widget>[
-                              new Icon(
-                                const IconData(0xe0e1,
-                                    fontFamily: 'MaterialIcons'),
-                                size: 30.0,
-                              ),
-                              new Text(
-                                StaticVariables.CONTACT,
-                                style: new TextStyle(fontSize: 17.0),
-                              ),
-                            ],
+                          padding: SPACE_BETWEEN_ROWS,
+                          child: new FlatButton(
+                              padding: new EdgeInsets.all(0.0),
+                              onPressed: () => _toggleContact,
+                              child: new Row(
+                                children: <Widget>[
+                                  GenericIcon.buildGenericContactIcon(),
+                                  new Text(
+                                    StaticVariables.CONTACT,
+                                    style: new TextStyle(fontSize: 17.0),
+                                  ),
+                                ],
+                              )
                           ),
                         ),
                       ],
@@ -176,5 +192,17 @@ class _CourseDetailsState extends State<CourseDetails> {
         ),
       ),
     );
+  }
+
+  void _toggleFavorite(int id) {
+    setState(() {
+      presenter.toggleFavourite(id);
+    });
+  }
+
+  void _toggleContact(int id) {
+    setState(() {
+
+    });
   }
 }

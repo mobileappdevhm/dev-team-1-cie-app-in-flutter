@@ -43,4 +43,5 @@ class StaticVariables {
   static const String DESCRIPTION = "Description";
   static const String HOURS_PER_WEEK = "Hours per Week";
   static const String CONTACT = "Contact";
+  static const String COURSE_DETAILS = "Course Details";
 }
