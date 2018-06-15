@@ -1,3 +1,4 @@
+import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/widgets/courseDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,7 +13,7 @@ void main() {
           builder: (BuildContext context, StateSetter setState) {
             return new MaterialApp(
               home: new Material(
-                child: new Center(child: new CourseDetails()),
+                child: new Center(child: new CourseDetails(0, new CourseListPresenter(null), )),
               ),
             );
           },
@@ -25,10 +26,10 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (counter == 0) {
-            expect(widget.data, 'Title of course');
+            expect(widget.data, 'Title of Course 1');
             counter++;
           } else if (counter == 1) {
-            expect(widget.data, 'FK 07');
+            expect(widget.data, 'FK 02');
             counter++;
           } else if (counter == 2) {
             expect(widget.data, 'Description');
@@ -49,7 +50,7 @@ void main() {
             expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 8) {
-            expect(widget.data, "Available");
+            expect(widget.data, "Pending");
             counter++;
           } else if (counter == 9) {
             expect(widget.data, "Contact");
