@@ -182,4 +182,11 @@ class CiEStyle {
   static double getCourseDetailsFontSize() {
     return 18.0;
   }
+
+  static TextStyle getCourseDetailsDescription() {
+    return new TextStyle(
+        fontSize: 15.0,
+        color: CiEColor.gray,
+    );
+  }
 }

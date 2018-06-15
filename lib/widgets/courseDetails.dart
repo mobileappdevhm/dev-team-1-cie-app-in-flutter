@@ -85,12 +85,24 @@ class _CourseDetailsState extends State<CourseDetails> {
   }
 
   Widget buildDescriptionRow() {
+    if (presenter.getDescription(id) == "") {
+      return new Expanded(
+          child: new SingleChildScrollView(
+
+            child: Text(StaticVariables.NO_DESCRIPTION + "\n\nProfessor: " + presenter.getProfessorName(id),
+              style: CiEStyle.getCourseDetailsDescription(),
+            ),
+          ),
+      );
+    }
+
     return new Expanded(
-      child: new Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: new Text(presenter.getDescription(id),
-            style: new TextStyle(fontSize: 15.0),
-          )),
+      child: new SingleChildScrollView(
+
+        child: Text(presenter.getDescription(id) + "\n\nProfessor: " + presenter.getProfessorName(id),
+          style: CiEStyle.getCourseDetailsDescription(),
+        ),
+      ),
     );
   }
 
@@ -157,7 +169,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       style: CiEStyle.getCourseDetailsFooterTextStyle(),
                     ),
                     new Text(
-                        "2",
+                        " " + presenter.getHoursPerWeek(id),
                         style: CiEStyle.getCourseDetailsFooterTextStyleBolt()
                     ),
                   ],
@@ -172,7 +184,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       style: new TextStyle(fontSize: 17.0),
                     ),
                     new Text(
-                      "2",
+                      " " + presenter.getEcts(id),
                       style: new TextStyle(
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold),
