@@ -295,6 +295,18 @@ class CampusUtility {
     }
     return "";
   }
+
+  static String getCampusAsLongString(Campus campus) {
+    switch (campus) {
+      case Campus.KARLSTRASSE:
+        return "Karlstrasse";
+      case Campus.LOTHSTRASSE:
+        return "Lothstrasse";
+      case Campus.PASING:
+        return "Pasing";
+    }
+    return "";
+  }
 }
 
 //This is not beautiful but there are no enums with assigned values since yet

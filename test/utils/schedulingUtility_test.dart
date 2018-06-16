@@ -243,9 +243,9 @@ void main() {
       String text = SchedulingUtility
           .constructSchedulingConflictText(testLectureOne, testLectureTwo);
       expect(text.contains(CampusUtility
-          .getCampusAsString(testLectureOne.campus)), true);
+          .getCampusAsLongString(testLectureOne.campus)), true);
       expect(text.contains(CampusUtility
-          .getCampusAsString(testLectureTwo.campus)), true);
+          .getCampusAsLongString(testLectureTwo.campus)), true);
     });
 
     test('uses the specified time to render the conflict', () {

@@ -37,8 +37,8 @@ class SchedulingUtility {
   }
 
   static String constructSchedulingConflictText(Lecture one, Lecture two) {
-    String campusOne = CampusUtility.getCampusAsString(one.campus);
-    String campusTwo = CampusUtility.getCampusAsString(two.campus);
+    String campusOne = CampusUtility.getCampusAsLongString(one.campus);
+    String campusTwo = CampusUtility.getCampusAsLongString(two.campus);
     String time = SchedulingUtility.timeRequired(one.campus, two.campus).toString();
     return one.course.name + " is held in the " + campusOne + " campus, and " +
         two.course.name + " is held in the " + campusTwo  + " campus.\n\n"
