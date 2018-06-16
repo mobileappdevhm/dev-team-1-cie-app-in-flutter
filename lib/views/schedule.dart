@@ -85,6 +85,7 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
       if (i + 1 < children.length) {
         Lecture lectureOne = children.elementAt(i);
         Lecture lectureTwo = children.elementAt(i + 1);
+<<<<<<< HEAD
         if (SchedulingUtility.isCloseTime(
             lectureOne.endDayTime, lectureTwo.startDayTime) &&
             SchedulingUtility.isFarCampus(
@@ -96,6 +97,11 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
               child: GenericIcon
                   .buildGenericConflictIcon(
                   StaticVariables.TIME_CONFLICT_MESSAGE)));
+=======
+        if (SchedulingUtility.isSchedulingConflict(lectureOne.endDayTime, lectureTwo.startDayTime, lectureOne.campus, lectureTwo.campus)) {
+          childrenWidgets.add(GenericIcon
+              .buildGenericConflictIcon(StaticVariables.TIME_CONFLICT_MESSAGE));
+>>>>>>> master
         }
       }
     }

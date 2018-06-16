@@ -6,6 +6,12 @@ class StaticVariables {
   static const String LOTHSTRASSE = 'Lothstrasse Campus';
   static const String PASING = 'Pasing Campus';
 
+  static const int SAME_CAMPUS_COMMUTE_MINS = 0;
+  static const int LOTHSTRASSE_PASING_COMMUTE_MINS = 45;
+  static const int LOTHSTRASSE_KARLSTRASSE_COMMUTE_MINS = 20;
+  static const int KARLSTRASSE_PASING_COMMUTE_MINS = 25;
+
+
   static const String RESSOURCE_PATH = 'res/';
   static const String IMAGE_PATH = RESSOURCE_PATH + 'images/';
 
