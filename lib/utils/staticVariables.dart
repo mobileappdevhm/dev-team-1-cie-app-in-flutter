@@ -38,4 +38,7 @@ class StaticVariables {
   static const String ALERT_YES = "COMPLETE";
   static const String ALERT_NO = "CANCEL";
   static const String ALERT_REGISTRATION_SUBMISSION = "Complete Registration?";
+  static const String ALERT_OK = "OK";
+  static const String ALERT_TIMECONFLICT_ACKNOWLEDGE = "Please consider that the commute between these two classes may take more than 45 minutes.\n"
+      +"You may not arrive to class on time.";
 }
