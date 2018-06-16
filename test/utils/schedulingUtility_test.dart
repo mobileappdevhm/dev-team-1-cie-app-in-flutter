@@ -1,71 +1,69 @@
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/schedulingUtility.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 
 @Timeout(const Duration(seconds: 5))
 void main() {
-  group('far campus', () {
+  group('timeRequired', () {
     test('1 far campus, both same Loth', () async {
-      final bool sut =
-          SchedulingUtility.isFarCampus(Campus.LOTHSTRASSE, Campus.LOTHSTRASSE);
+      final int timeRequired = SchedulingUtility.timeRequired(Campus.LOTHSTRASSE,
+          Campus.LOTHSTRASSE);
 
-      expect(sut, false);
+      expect(timeRequired, StaticVariables.SAME_CAMPUS_COMMUTE_MINS);
     });
 
     test('2 far campus, both same Pasing', () async {
-      final bool sut =
-          SchedulingUtility.isFarCampus(Campus.PASING, Campus.PASING);
+      final int timeRequired = SchedulingUtility.timeRequired(Campus.PASING,
+          Campus.PASING);
 
-      expect(sut, false);
+      expect(timeRequired, StaticVariables.SAME_CAMPUS_COMMUTE_MINS);
     });
 
     test('3 far campus, both same Karl', () async {
-      final bool sut =
-          SchedulingUtility.isFarCampus(Campus.KARLSTRASSE, Campus.KARLSTRASSE);
+      final int timeRequired = SchedulingUtility.timeRequired(Campus.KARLSTRASSE,
+          Campus.KARLSTRASSE);
 
-      expect(sut, false);
+      expect(timeRequired, StaticVariables.SAME_CAMPUS_COMMUTE_MINS);
     });
 
     test('4 far campus, Loth Pasing', () async {
-      final bool sut =
-          SchedulingUtility.isFarCampus(Campus.LOTHSTRASSE, Campus.PASING);
+      final int timeRequired = SchedulingUtility.timeRequired(Campus.LOTHSTRASSE,
+          Campus.PASING);
 
-      expect(sut, true);
+      expect(timeRequired, StaticVariables.LOTHSTRASSE_PASING_COMMUTE_MINS);
     });
 
     test('5 far campus, Loth Pasing', () async {
-      final bool sut =
-          SchedulingUtility.isFarCampus(Campus.PASING, Campus.LOTHSTRASSE);
+      final int timeRequired = SchedulingUtility.timeRequired(Campus.PASING,
+          Campus.LOTHSTRASSE);
 
-      expect(sut, true);
+      expect(timeRequired, StaticVariables.LOTHSTRASSE_PASING_COMMUTE_MINS);
     });
 
     test('6 far campus, Loth Karl', () async {
-      final bool sut =
-          SchedulingUtility.isFarCampus(Campus.KARLSTRASSE, Campus.LOTHSTRASSE);
+      final int timeRequired = SchedulingUtility.timeRequired(Campus.LOTHSTRASSE,
+          Campus.KARLSTRASSE);
 
-      expect(sut, false);
+      expect(timeRequired, StaticVariables.LOTHSTRASSE_KARLSTRASSE_COMMUTE_MINS);
     });
 
-    test('7 far campus, Loth Karl', () async {
-      final bool sut =
-          SchedulingUtility.isFarCampus(Campus.LOTHSTRASSE, Campus.KARLSTRASSE);
-
-      expect(sut, false);
+    test('7 far campus, Karl Loth', () async {
+      final int timeRequired = SchedulingUtility.timeRequired(Campus.KARLSTRASSE,
+          Campus.LOTHSTRASSE);
+      expect(timeRequired, StaticVariables.LOTHSTRASSE_KARLSTRASSE_COMMUTE_MINS);
     });
 
     test('8 far campus, Pasing Karl', () async {
-      final bool sut =
-          SchedulingUtility.isFarCampus(Campus.PASING, Campus.KARLSTRASSE);
-
-      expect(sut, true);
+      final int timeRequired = SchedulingUtility.timeRequired(Campus.PASING,
+          Campus.KARLSTRASSE);
+      expect(timeRequired, StaticVariables.KARLSTRASSE_PASING_COMMUTE_MINS);
     });
 
     test('9 far campus, Pasing Karl', () async {
-      final bool sut =
-          SchedulingUtility.isFarCampus(Campus.KARLSTRASSE, Campus.PASING);
-
-      expect(sut, true);
+      final int timeRequired = SchedulingUtility.timeRequired(Campus.KARLSTRASSE,
+          Campus.PASING);
+      expect(timeRequired, StaticVariables.KARLSTRASSE_PASING_COMMUTE_MINS);
     });
   }); //group
 
@@ -116,63 +114,37 @@ void main() {
     });
   }); //group
 
-  group("isFarCampus", () {
-    test('1', () {
-      bool result =
-          SchedulingUtility.isFarCampus(Campus.KARLSTRASSE, Campus.KARLSTRASSE);
-      expect(result, false);
-    });
-
-    test('2', () {
-      bool result =
-          SchedulingUtility.isFarCampus(Campus.LOTHSTRASSE, Campus.LOTHSTRASSE);
-      expect(result, false);
-    });
-
-    test('3', () {
-      bool result = SchedulingUtility.isFarCampus(Campus.PASING, Campus.PASING);
-      expect(result, false);
-    });
-
-    test('4', () {
-      bool result =
-          SchedulingUtility.isFarCampus(Campus.KARLSTRASSE, Campus.LOTHSTRASSE);
-      expect(result, false);
-    });
-
-    test('3', () {
-      bool result =
-          SchedulingUtility.isFarCampus(Campus.KARLSTRASSE, Campus.PASING);
-      expect(result, true);
-    });
-
-    test('4', () {
-      bool result =
-          SchedulingUtility.isFarCampus(Campus.LOTHSTRASSE, Campus.PASING);
-      expect(result, true);
-    });
-  });
-
   group("isCloseTime", () {
     test('1', () {
       DayTime one = new DayTime(10, 00);
       DayTime two = new DayTime(11, 30);
-      bool result = SchedulingUtility.isCloseTime(one, two);
+      bool result = SchedulingUtility.isCloseTime(one, two,
+      StaticVariables.KARLSTRASSE_PASING_COMMUTE_MINS);
       expect(result, false);
     });
 
     test('2', () {
       DayTime one = new DayTime(11, 30);
       DayTime two = new DayTime(11, 45);
-      bool result = SchedulingUtility.isCloseTime(one, two);
+      bool result = SchedulingUtility.isCloseTime(one, two,
+      StaticVariables.KARLSTRASSE_PASING_COMMUTE_MINS);
       expect(result, true);
     });
 
-    test('2', () {
+    test('3', () {
+      DayTime one = new DayTime(11, 30);
+      DayTime two = new DayTime(11, 45);
+      bool result = SchedulingUtility.isCloseTime(one, two,
+      StaticVariables.LOTHSTRASSE_KARLSTRASSE_COMMUTE_MINS);
+      expect(result, true);
+    });
+
+    test('4', () {
       DayTime one = new DayTime(11, 30);
       DayTime two = new DayTime(11, 30);
-      bool result = SchedulingUtility.isCloseTime(one, two);
-      expect(result, true);
+      bool result = SchedulingUtility.isCloseTime(one, two,
+      StaticVariables.SAME_CAMPUS_COMMUTE_MINS);
+      expect(result, false);
     });
   });
 
@@ -201,6 +173,24 @@ void main() {
 
       bool result = SchedulingUtility.isSchedulingConflict(
           dayTimeOne, dayTimeTwo, Campus.LOTHSTRASSE, Campus.PASING);
+      expect(result, true);
+    });
+
+    test('4', () {
+      DayTime dayTimeOne = new DayTime(9, 30);
+      DayTime dayTimeTwo = new DayTime(9, 45);
+
+      bool result = SchedulingUtility.isSchedulingConflict(
+          dayTimeOne, dayTimeTwo, Campus.LOTHSTRASSE, Campus.KARLSTRASSE);
+      expect(result, true);
+    });
+
+    test('4', () {
+      DayTime dayTimeOne = new DayTime(13, 30);
+      DayTime dayTimeTwo = new DayTime(13, 45);
+
+      bool result = SchedulingUtility.isSchedulingConflict(
+          dayTimeOne, dayTimeTwo, Campus.PASING, Campus.KARLSTRASSE);
       expect(result, true);
     });
   });

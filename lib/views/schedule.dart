@@ -71,10 +71,7 @@ class TimeTableEntry extends StatelessWidget {
       if (i + 1 < children.length) {
         Lecture lectureOne = children.elementAt(i);
         Lecture lectureTwo = children.elementAt(i + 1);
-        if (SchedulingUtility.isCloseTime(
-                lectureOne.endDayTime, lectureTwo.startDayTime) &&
-            SchedulingUtility.isFarCampus(
-                lectureOne.campus, lectureTwo.campus)) {
+        if (SchedulingUtility.isSchedulingConflict(lectureOne.endDayTime, lectureTwo.startDayTime, lectureOne.campus, lectureTwo.campus)) {
           childrenWidgets.add(GenericIcon
               .buildGenericConflictIcon(StaticVariables.TIME_CONFLICT_MESSAGE));
         }
