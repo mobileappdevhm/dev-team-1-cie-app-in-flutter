@@ -20,6 +20,8 @@ class CourseListItem extends StatelessWidget {
       title: new Text(
         courseListPresenter.getTitle(id),
         style: CiEStyle.getCoursesTitleStyle(),
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
       ),
       subtitle: new Row(
         mainAxisAlignment: MainAxisAlignment.start,
