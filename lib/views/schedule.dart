@@ -43,6 +43,7 @@ class Schedule extends StatelessWidget {
 
 // Displays one Entry. If the entry has children then it's displayed
 // with an ExpansionTile.
+
 class TimeTableEntryItem extends StatelessWidget {
   final Lecture lecture;
 
@@ -57,18 +58,19 @@ class TimeTableEntryItem extends StatelessWidget {
     return _buildTile(lecture);
   }
 }
+
 class TimeTableEntry extends StatefulWidget {
   final List<Lecture> children;
   final Weekday weekday;
+
   TimeTableEntry(this.children, this.weekday);
+
   @override
   _TimeTableEntryState createState() => new _TimeTableEntryState(children,weekday);
 }
 
-class _TimeTableEntryState extends State<TimeTableEntry> {
-
 // Split Lectures into weekdays. One expandable tile per weekday
-//class TimeTableEntry extends StatelessWidget {
+class _TimeTableEntryState extends State<TimeTableEntry> {
   final List<Lecture> children;
   final Weekday weekday;
 
@@ -85,23 +87,14 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
       if (i + 1 < children.length) {
         Lecture lectureOne = children.elementAt(i);
         Lecture lectureTwo = children.elementAt(i + 1);
-<<<<<<< HEAD
-        if (SchedulingUtility.isCloseTime(
-            lectureOne.endDayTime, lectureTwo.startDayTime) &&
-            SchedulingUtility.isFarCampus(
-                lectureOne.campus, lectureTwo.campus)) {
+        if (SchedulingUtility.isSchedulingConflict(
+            lectureOne.endDayTime, lectureTwo.startDayTime, lectureOne.campus,
+            lectureTwo.campus)) {
           childrenWidgets.add(new FlatButton(
-            //add(
-            //padding: new EdgeInsets.all(1.0),
               onPressed: _popup,
               child: GenericIcon
                   .buildGenericConflictIcon(
                   StaticVariables.TIME_CONFLICT_MESSAGE)));
-=======
-        if (SchedulingUtility.isSchedulingConflict(lectureOne.endDayTime, lectureTwo.startDayTime, lectureOne.campus, lectureTwo.campus)) {
-          childrenWidgets.add(GenericIcon
-              .buildGenericConflictIcon(StaticVariables.TIME_CONFLICT_MESSAGE));
->>>>>>> master
         }
       }
     }
@@ -119,11 +112,12 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
   }
 
   void _popup() {
-      confirmDialog1(context).then((bool value){
-        print("value is $value");
-      });
+    confirmDialog1(context).then((bool value) {
+      print("value is $value");
+    });
   }
 }
+
 // divider for lectures (weekly / today)
 class ScheduleDivider extends StatelessWidget {
   final String _heading;
