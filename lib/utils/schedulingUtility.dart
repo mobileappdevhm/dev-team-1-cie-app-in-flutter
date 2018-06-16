@@ -35,4 +35,15 @@ class SchedulingUtility {
       Campus campusOne, Campus campusTwo) {
     return isCloseTime(dayTimeOne, dayTimeTwo, timeRequired(campusOne, campusTwo));
   }
+
+  static String constructSchedulingConflictText(Lecture one, Lecture two) {
+    String campusOne = CampusUtility.getCampusAsString(one.campus);
+    String campusTwo = CampusUtility.getCampusAsString(two.campus);
+    String time = SchedulingUtility.timeRequired(one.campus, two.campus).toString();
+    return one.course.name + " is held in the " + campusOne + " campus, and " +
+        two.course.name + " is held in the " + campusTwo  + " campus.\n\n"
+        "Please consider that the commute between the " + campusOne + " and the "
+        + campusTwo + " campus may take more than " + time
+        + " minutes.\n\nYou may not arrive to class on time.";
+  }
 }

@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:cie_team1/generic/genericIcon.dart';
+import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/timeTablePresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
@@ -8,8 +7,6 @@ import 'package:cie_team1/utils/schedulingUtility.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
 
 class Schedule extends StatelessWidget {
   TimeTablePresenter timeTablePresenter = new TimeTablePresenter();
@@ -91,7 +88,9 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
             lectureOne.endDayTime, lectureTwo.startDayTime, lectureOne.campus,
             lectureTwo.campus)) {
           childrenWidgets.add(new FlatButton(
-              onPressed: _popup,
+              onPressed: ()=> GenericAlert.confirmDialog(context,
+                  StaticVariables.TIME_CONFLICT_MESSAGE, SchedulingUtility
+                      .constructSchedulingConflictText(lectureOne, lectureTwo)),
               child: GenericIcon
                   .buildGenericConflictIcon(
                   StaticVariables.TIME_CONFLICT_MESSAGE)));
@@ -109,12 +108,6 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
   @override
   Widget build(BuildContext context) {
     return _buildTile(children, weekday);
-  }
-
-  void _popup() {
-    confirmDialog1(context).then((bool value) {
-      print("value is $value");
-    });
   }
 }
 
@@ -168,24 +161,3 @@ class ScheduleDivider extends StatelessWidget {
   }
 }
 
-
-Future<bool> confirmDialog1(BuildContext context) {
-  return showDialog<bool>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return new AlertDialog(
-          title: const Text(StaticVariables.ALERT_TIMECONFLICT_ACKNOWLEDGE,
-        ),
-          actions: <Widget>[
-            new FlatButton(
-              child: const Text(StaticVariables.ALERT_OK),
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-            ),
-
-          ],
-        );
-      });
-}
