@@ -3,7 +3,7 @@ import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
 
 class TimeTableItem extends StatelessWidget {
-  static const double WIDTH_FIRST_COLUMN = 65.0;
+  static const double WIDTH_FIRST_COLUMN = 69.0;
   static const double WIDTH_SECOND_COLUMN = 45.0;
   static const double WIDTH_THIRD_COLUMN = 95.0;
 
@@ -19,13 +19,13 @@ class TimeTableItem extends StatelessWidget {
           new Padding(padding: new EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0)),
           new Row(
             children: <Widget>[
-              new Text(
-                lecture.course.name,
-                style: CiEStyle.getCoursesTitleStyle(),
-              ),
-              new Text(
-                " - " + lecture.course.professorName,
-                style: CiEStyle.getTimeTableListMediumGray(),
+              new Expanded(
+                child: new Text(
+                  lecture.course.name,
+                  style: CiEStyle.getCoursesTitleStyle(),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
               ),
             ],
           ),
@@ -116,6 +116,22 @@ class TimeTableItem extends StatelessWidget {
                     textAlign: TextAlign.start,
                   ),
                 ),
+              ],
+            ),
+            new Row(
+              children: <Widget>[
+                new Container(
+                  width: WIDTH_FIRST_COLUMN,
+                  child: new Text("Professor:"),
+                ),
+                new Expanded(
+                    child: new Text(
+                      lecture.course.professorName,
+                      style: CiEStyle.getTimeTableListVariable(),
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                )
               ],
             ),
             new Padding(padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0))
