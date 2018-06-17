@@ -27,7 +27,6 @@ class Schedule extends StatelessWidget {
     return new ListView(
       children: children,
     );
-
   }
 
   Widget _getTimeTableSpecificDay(Weekday weekday) {
@@ -63,7 +62,8 @@ class TimeTableEntry extends StatefulWidget {
   TimeTableEntry(this.children, this.weekday);
 
   @override
-  _TimeTableEntryState createState() => new _TimeTableEntryState(children,weekday);
+  _TimeTableEntryState createState() =>
+      new _TimeTableEntryState(children, weekday);
 }
 
 // Split Lectures into weekdays. One expandable tile per weekday
@@ -84,15 +84,15 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
       if (i + 1 < children.length) {
         Lecture lectureOne = children.elementAt(i);
         Lecture lectureTwo = children.elementAt(i + 1);
-        if (SchedulingUtility.isSchedulingConflict(
-            lectureOne.endDayTime, lectureTwo.startDayTime, lectureOne.campus,
-            lectureTwo.campus)) {
+        if (SchedulingUtility.isSchedulingConflict(lectureOne.endDayTime,
+            lectureTwo.startDayTime, lectureOne.campus, lectureTwo.campus)) {
           childrenWidgets.add(new FlatButton(
-              onPressed: ()=> GenericAlert.confirmDialog(context,
-                  StaticVariables.TIME_CONFLICT_MESSAGE, SchedulingUtility
-                      .constructSchedulingConflictText(lectureOne, lectureTwo)),
-              child: GenericIcon
-                  .buildGenericConflictIcon(
+              onPressed: () => GenericAlert.confirmDialog(
+                  context,
+                  StaticVariables.TIME_CONFLICT_MESSAGE,
+                  SchedulingUtility.constructSchedulingConflictText(
+                      lectureOne, lectureTwo)),
+              child: GenericIcon.buildGenericConflictIcon(
                   StaticVariables.TIME_CONFLICT_MESSAGE)));
         }
       }
@@ -160,4 +160,3 @@ class ScheduleDivider extends StatelessWidget {
     ));
   }
 }
-

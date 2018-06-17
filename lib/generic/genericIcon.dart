@@ -51,7 +51,7 @@ class GenericIcon {
     );
   }
 
-  static Icon buildGenericSearcgIcon(bool isActive) {
+  static Icon buildGenericSearchIcon(bool isActive) {
     return new Icon(
       (isActive
           ? const IconData(memStorageInactiveSearch,

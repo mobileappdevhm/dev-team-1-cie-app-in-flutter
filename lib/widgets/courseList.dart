@@ -96,7 +96,7 @@ class CourseListState extends State<CourseList> {
               child: new IconButton(
                   color: CiEColor.mediumGray,
                   icon: GenericIcon
-                      .buildGenericSearcgIcon(shouldSearch),
+                      .buildGenericSearchIcon(shouldSearch),
                   onPressed: toggleSearch),
             )
           ]));

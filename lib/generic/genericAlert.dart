@@ -33,17 +33,19 @@ class GenericAlert {
         });
   }
 
-  static Future<bool> confirmDialog(BuildContext context, String title, String content) {
+  static Future<bool> confirmDialog(
+      BuildContext context, String title, String content) {
     return showDialog<bool>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
           return new AlertDialog(
-            title: new Text(title,
-
+            title: new Text(
+              title,
             ),
-            content: new Text(content,
-                style: CiEStyle.getWarningTextStyle(),
+            content: new Text(
+              content,
+              style: CiEStyle.getWarningTextStyle(),
             ),
             actions: <Widget>[
               new FlatButton(
@@ -52,7 +54,6 @@ class GenericAlert {
                   Navigator.of(context).pop(true);
                 },
               ),
-
             ],
           );
         });
