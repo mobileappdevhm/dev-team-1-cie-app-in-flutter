@@ -10,7 +10,7 @@ class FileStore {
 
   static Future<File> getFile(String resource) async {
     String dir = (await getApplicationDocumentsDirectory()).path;
-    String filename = "$dir/" + resource + ".txt";
+    String filename = "$dir/" + resource + ".json";
     return new File(filename);
   }
 
@@ -26,7 +26,7 @@ class FileStore {
 
   static Future<File> writeToFile(String resource, String data) async {
     String dir = (await getApplicationDocumentsDirectory()).path;
-    String filename = "$dir/" + resource + ".txt";
+    String filename = "$dir/" + resource + ".json";
     File f = new File(filename);
     f.writeAsString(data);
     return f;

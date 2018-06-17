@@ -34,8 +34,6 @@ class TabsPageState extends State<TabsPage> {
     currentUserPresenter = new CurrentUserPresenter(_maybeChangeCallback,
         Flavor.PROD);
     courseListPresenter.addCoursesFromMemory();
-    currentUserPresenter.loadUserSettingsAsFirstUse();
-    //currentUserPresenter.loadUserSettingsFromMemory();
     this._appTitle = TabItems[_tab].title;
   }
 

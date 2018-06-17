@@ -48,6 +48,6 @@ class StaticVariables {
   static const String ALERT_REGISTRATION_SUBMISSION = "Complete Registration?";
 
   /* Metrics Strings */
-  static const String METRICS_ENABLED = "User Statistics Enabled";
-  static const String METRICS_DISABLED = "User Statistics Disabled";
+  static const String METRICS_ENABLED = "User Metrics Enabled";
+  static const String METRICS_DISABLED = "User Metrics Disabled";
 }

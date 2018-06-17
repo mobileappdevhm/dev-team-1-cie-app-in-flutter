@@ -60,15 +60,6 @@ class LoginFormState extends State<LoginForm> {
             final String lastName =
                 json.decode(response.body)['user']['lastName'];
             var curriculum = json.decode(response.body)['curriculum']['organiser']['name'];
-            /*
-            print("Response status: ${response.statusCode}");
-            print("Response body: ${response.body}");
-            print("Response user: ${json.decode(response.body)['user']}");
-            print("Response id: $id");
-            print("Response firstName: $firstName");
-            print("Response lastName: $lastName");
-            print("Response curriculum: $curriculum");
-            */
             updateUserSettings(context, firstName, lastName, curriculum);
           }
         });
@@ -84,7 +75,7 @@ class LoginFormState extends State<LoginForm> {
   }
 
   void _handleGuestLogin() {
-    continueAsGuest(context);
+    updateUserSettings(context, null, null, null);
   }
 
   String _validateMail(String value) {
@@ -219,60 +210,33 @@ class LoginFormState extends State<LoginForm> {
     super.dispose();
   }
 
-  void updateUserSettings(BuildContext context, String firstName, String lastName, dynamic curriculum) {
+  void updateUserSettings(BuildContext context, String firstName,
+      String lastName, dynamic curriculum) {
+    bool isLoggedIn = false;
+    UserBuilder builder;
+    if (firstName != null && lastName != null && curriculum != null) {
+      isLoggedIn = true;
+
+    } else { // Continuing As Guest
+      firstName = "Guest";
+      lastName = "User";
+      curriculum = "N/A";
+    }
+
     FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
       if (val != null) {
         dynamic settings = json.decode(val);
-        UserBuilder builder = UserBuilder.fromJson(settings);
-        User tempUserObj = builder
-          .withIsLoggedIn(true)
-          .withFirstName(firstName)
-          .withLastName(lastName)
-          .withDepartment(curriculum)
-          .build();
-        String data = json.encode(User.toJson(tempUserObj));
-        FileStore.writeToFile(FileStore.USER_SETTINGS, data);
-      } else {
-        UserBuilder builder = new UserBuilder();
-        User tempUserObj = builder
-            .withIsLoggedIn(true)
-            .withFirstName(firstName)
-            .withLastName(lastName)
-            .withDepartment(curriculum)
-            .build();
-        String data = json.encode(User.toJson(tempUserObj));
-        FileStore.writeToFile(FileStore.USER_SETTINGS, data);
+        builder = UserBuilder.fromJson(settings);
       }
-      Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+      User tempUserObj = builder
+        .withFirstName(firstName)
+        .withLastName(lastName)
+        .withDepartment(curriculum)
+        .withIsLoggedIn(isLoggedIn)
+        .build();
+      String data = json.encode(User.toJson(tempUserObj));
+      FileStore.writeToFile(FileStore.USER_SETTINGS, data);
     });
-  }
-
-  void continueAsGuest(BuildContext context) {
-    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
-      if (val != null) {
-        dynamic settings = json.decode(val);
-        UserBuilder builder = UserBuilder.fromJson(settings);
-        User tempUserObj = builder
-            .withFirstName("Guest")
-            .withLastName("User")
-            .withDepartment("N/A")
-          .withIsLoggedIn(false)
-          .build();
-        String data = json.encode(User.toJson(tempUserObj));
-        FileStore.writeToFile(FileStore.USER_SETTINGS, data);
-      } else {
-        UserBuilder builder = new UserBuilder();
-        User tempUserObj = builder
-            .withFirstName("Guest")
-            .withLastName("User")
-            .withDepartment("N/A")
-          .withIsLoggedIn(false)
-          .build();
-        String data = json.encode(User.toJson(tempUserObj));
-        FileStore.writeToFile(FileStore.USER_SETTINGS, data);
-      }
-      Navigator.of(context).pushReplacementNamed(Routes.TabPages);
-    });
-
+    Navigator.of(context).pushReplacementNamed(Routes.TabPages);
   }
 }

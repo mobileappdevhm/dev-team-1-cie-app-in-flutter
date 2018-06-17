@@ -103,49 +103,12 @@ class CurrentUserPresenter {
           _currentUser.getCurrentUser().isLoggedIn = isLoggedIn;
           this.onChanged(true);
         }
-        String firstName = settings['firstName'];
-        String lastName = settings['lastName'];
-        String department = settings['department'];
-        /*
-        print(firstName);
-        print(lastName);
-        print(department);
-        */
-        /*
-        _currentUser.getCurrentUser().firstName = firstName;
-        _currentUser.getCurrentUser().lastName = lastName;
-        _currentUser.getCurrentUser().department = department;
-        */
-      } else {
-        loadUserSettingsAsFirstUse();
       }
     });
-  }
-
-  void loadUserSettingsAsFirstUse() {
-    /*
-    print("FIRST USE");
-    _currentUser.getCurrentUser().isMetricsEnabled = true;
-    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
-      if (val != null) {
-        dynamic settings = json.decode(val);
-        print(".\t\tFROM LOGIN" + settings.toString());
-        UserBuilder builder = UserBuilder.fromJson(settings);
-        User tempUserObj = builder
-            .withIsMetricsEnabled(true)
-            .build();
-      } else {
-        print("ERR 134");
-      }
-    });
-    this.onChanged(true);
-    */
   }
 
   void saveUserSettings() {
-    print("BAD");
     String data = json.encode(User.toJson(_currentUser.getCurrentUser()));
-    print ("SaveUserSettings - " + data);
     FileStore.writeToFile(FileStore.USER_SETTINGS, data);
   }
 }
