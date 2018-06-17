@@ -1,3 +1,4 @@
+enum Flavor { MOCK, PROD }
 class StaticVariables {
   static const internationalOfficeEmail = 'mailto:international-office@hm.edu';
 
@@ -27,7 +28,8 @@ class StaticVariables {
 
   /* Settings Page */
   static const String LOGGED_IN_AS = 'Logged in as';
-  static const String LOGOUT_BUTTON = 'Log out';
+  static const String LOGOUT_BUTTON = 'Log Out';
+  static const String LOGIN_BUTTON = 'Log In';
   static const String STATUS = 'Status';
   static const String DEPARTMENT = 'Department';
   static const String CONTACT_OFFICE = 'Contact International Office';
@@ -44,4 +46,8 @@ class StaticVariables {
   static const String ALERT_YES = "COMPLETE";
   static const String ALERT_NO = "CANCEL";
   static const String ALERT_REGISTRATION_SUBMISSION = "Complete Registration?";
+
+  /* Metrics Strings */
+  static const String METRICS_ENABLED = "User Statistics Enabled";
+  static const String METRICS_DISABLED = "User Statistics Disabled";
 }

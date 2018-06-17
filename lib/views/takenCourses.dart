@@ -14,8 +14,9 @@ class TakenCourses extends StatefulWidget {
 }
 
 class _TakenCoursesState extends State<TakenCourses> {
-  static CurrentUserPresenter currentUserPresenter = new CurrentUserPresenter();
+  static CurrentUserPresenter currentUserPresenter = new CurrentUserPresenter(_voidCallback, Flavor.PROD);
   int credits = currentUserPresenter.getTotalCredits();
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,4 +53,5 @@ class _TakenCoursesState extends State<TakenCourses> {
           ),
         ));
   }
+  static void _voidCallback(bool didChange) {}
 }

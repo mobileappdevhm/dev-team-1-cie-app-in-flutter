@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 class FileStore {
   static const String COURSES = "_courses";
   static const String LOGIN = "_login";
+  static const String USER_SETTINGS = "_user";
 
   static Future<File> getFile(String resource) async {
     String dir = (await getApplicationDocumentsDirectory()).path;
@@ -21,13 +22,6 @@ class FileStore {
     } on FileSystemException {
       return null;
     }
-  }
-
-  static String readFileAsStringSync(String resource) {
-    readFileAsString(resource).then((value) {
-      return value;
-    });
-    return null;
   }
 
   static Future<File> writeToFile(String resource, String data) async {

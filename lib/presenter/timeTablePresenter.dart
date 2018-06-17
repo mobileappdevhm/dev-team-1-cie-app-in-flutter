@@ -2,12 +2,13 @@ import 'package:cie_team1/di/currentUser_di.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/model/user/user.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 
 class TimeTablePresenter {
   CurrentUser _currentUser;
 
-  TimeTablePresenter() {
-    UserInjector.configure(Flavor.MOCK);
+  TimeTablePresenter(Flavor flavor) {
+    UserInjector.configure(flavor);
     _currentUser = new UserInjector().currentUser;
   }
 

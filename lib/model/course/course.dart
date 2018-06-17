@@ -1,6 +1,5 @@
 class CourseBuilder {
   /* FIELDS FROM NINE */
-  //TODO: Implement These & Merge, delete nineAPIConsumer.dart's NineCourse class
   String id;
   String description;
   bool isCoterie;

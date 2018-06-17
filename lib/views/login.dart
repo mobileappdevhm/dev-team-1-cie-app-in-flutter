@@ -8,6 +8,8 @@ import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cie_team1/utils/fileStore.dart';
+import 'package:cie_team1/model/user/user.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -57,7 +59,8 @@ class LoginFormState extends State<LoginForm> {
                 json.decode(response.body)['user']['firstName'];
             final String lastName =
                 json.decode(response.body)['user']['lastName'];
-            var curriculum = json.decode(response.body)['curriculum'];
+            var curriculum = json.decode(response.body)['curriculum']['organiser']['name'];
+            /*
             print("Response status: ${response.statusCode}");
             print("Response body: ${response.body}");
             print("Response user: ${json.decode(response.body)['user']}");
@@ -65,8 +68,8 @@ class LoginFormState extends State<LoginForm> {
             print("Response firstName: $firstName");
             print("Response lastName: $lastName");
             print("Response curriculum: $curriculum");
-
-            Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+            */
+            updateUserSettings(context, firstName, lastName, curriculum);
           }
         });
       } catch (_) {
@@ -81,9 +84,7 @@ class LoginFormState extends State<LoginForm> {
   }
 
   void _handleGuestLogin() {
-    //TODO save guest data down here, for now we just redirect
-
-    Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+    continueAsGuest(context);
   }
 
   String _validateMail(String value) {
@@ -216,5 +217,62 @@ class LoginFormState extends State<LoginForm> {
     usernameController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void updateUserSettings(BuildContext context, String firstName, String lastName, dynamic curriculum) {
+    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+      if (val != null) {
+        dynamic settings = json.decode(val);
+        UserBuilder builder = UserBuilder.fromJson(settings);
+        User tempUserObj = builder
+          .withIsLoggedIn(true)
+          .withFirstName(firstName)
+          .withLastName(lastName)
+          .withDepartment(curriculum)
+          .build();
+        String data = json.encode(User.toJson(tempUserObj));
+        FileStore.writeToFile(FileStore.USER_SETTINGS, data);
+      } else {
+        UserBuilder builder = new UserBuilder();
+        User tempUserObj = builder
+            .withIsLoggedIn(true)
+            .withFirstName(firstName)
+            .withLastName(lastName)
+            .withDepartment(curriculum)
+            .build();
+        String data = json.encode(User.toJson(tempUserObj));
+        FileStore.writeToFile(FileStore.USER_SETTINGS, data);
+      }
+      Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+    });
+  }
+
+  void continueAsGuest(BuildContext context) {
+    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+      if (val != null) {
+        dynamic settings = json.decode(val);
+        UserBuilder builder = UserBuilder.fromJson(settings);
+        User tempUserObj = builder
+            .withFirstName("Guest")
+            .withLastName("User")
+            .withDepartment("N/A")
+          .withIsLoggedIn(false)
+          .build();
+        String data = json.encode(User.toJson(tempUserObj));
+        FileStore.writeToFile(FileStore.USER_SETTINGS, data);
+      } else {
+        UserBuilder builder = new UserBuilder();
+        User tempUserObj = builder
+            .withFirstName("Guest")
+            .withLastName("User")
+            .withDepartment("N/A")
+          .withIsLoggedIn(false)
+          .build();
+        String data = json.encode(User.toJson(tempUserObj));
+        FileStore.writeToFile(FileStore.USER_SETTINGS, data);
+      }
+      Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+    });
+
   }
 }

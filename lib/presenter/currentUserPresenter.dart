@@ -2,12 +2,18 @@ import 'package:cie_team1/di/currentUser_di.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/model/user/user.dart';
+import 'package:cie_team1/utils/fileStore.dart';
+import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
+import 'dart:convert';
 
 class CurrentUserPresenter {
   CurrentUser _currentUser;
+  final ValueChanged<bool> onChanged;
+  final Flavor flavor;
 
-  CurrentUserPresenter() {
-    UserInjector.configure(Flavor.MOCK);
+  CurrentUserPresenter(this.onChanged, this.flavor) {
+    UserInjector.configure(flavor);
     _currentUser = new UserInjector().currentUser;
   }
 
@@ -75,5 +81,71 @@ class CurrentUserPresenter {
 
   String getFaculty(int id) {
     return _currentUser.getCurrentUser().prevCourses[id].faculty.toString();
+  }
+
+  void toggleIsMetricsEnabled() {
+    bool isMetricsEnabled = _currentUser.getCurrentUser().isMetricsEnabled;
+    _currentUser.getCurrentUser().isMetricsEnabled = !isMetricsEnabled;
+    this.onChanged(true);
+  }
+
+  void loadUserSettingsFromMemory() {
+    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+      if (val != null) {
+        dynamic settings = json.decode(val);
+        bool isMetricsEnabled = settings['isMetricsEnabled'] == 'true' ? true: false;
+        if (_currentUser.getCurrentUser().isMetricsEnabled != isMetricsEnabled) {
+          _currentUser.getCurrentUser().isMetricsEnabled = isMetricsEnabled;
+          this.onChanged(true);
+        }
+        bool isLoggedIn = settings['isLoggedIn'] == 'true' ? true: false;
+        if (_currentUser.getCurrentUser().isLoggedIn != isLoggedIn) {
+          _currentUser.getCurrentUser().isLoggedIn = isLoggedIn;
+          this.onChanged(true);
+        }
+        String firstName = settings['firstName'];
+        String lastName = settings['lastName'];
+        String department = settings['department'];
+        /*
+        print(firstName);
+        print(lastName);
+        print(department);
+        */
+        /*
+        _currentUser.getCurrentUser().firstName = firstName;
+        _currentUser.getCurrentUser().lastName = lastName;
+        _currentUser.getCurrentUser().department = department;
+        */
+      } else {
+        loadUserSettingsAsFirstUse();
+      }
+    });
+  }
+
+  void loadUserSettingsAsFirstUse() {
+    /*
+    print("FIRST USE");
+    _currentUser.getCurrentUser().isMetricsEnabled = true;
+    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+      if (val != null) {
+        dynamic settings = json.decode(val);
+        print(".\t\tFROM LOGIN" + settings.toString());
+        UserBuilder builder = UserBuilder.fromJson(settings);
+        User tempUserObj = builder
+            .withIsMetricsEnabled(true)
+            .build();
+      } else {
+        print("ERR 134");
+      }
+    });
+    this.onChanged(true);
+    */
+  }
+
+  void saveUserSettings() {
+    print("BAD");
+    String data = json.encode(User.toJson(_currentUser.getCurrentUser()));
+    print ("SaveUserSettings - " + data);
+    FileStore.writeToFile(FileStore.USER_SETTINGS, data);
   }
 }
