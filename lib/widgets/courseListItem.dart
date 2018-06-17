@@ -1,6 +1,7 @@
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseDetails.dart';
 import 'package:flutter/material.dart';
 
@@ -19,18 +20,21 @@ class CourseListItem extends StatelessWidget {
       title: new Text(
         courseListPresenter.getTitle(id),
         style: CiEStyle.getCoursesTitleStyle(),
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
       ),
       subtitle: new Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           new Padding(
             padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
             child: new Text(
-              "DP " + courseListPresenter.getFaculty(id),
+              StaticVariables.FK + " " + courseListPresenter.getFaculty(id),
               style: CiEStyle.getCoursesListFacultyStyle(),
             ),
           ),
           new Text(
-            "Time: " + courseListPresenter.getLectureTimesBeautiful(id),
+            courseListPresenter.getLectureTimesBeautiful(id),
             style: CiEStyle.getCoursesListTimeStyle(),
           ),
         ],
@@ -42,6 +46,6 @@ class CourseListItem extends StatelessWidget {
 
   void _toggleDescription(BuildContext context) {
     Navigator.push(context,
-        new MaterialPageRoute(builder: (context) => new CourseDetails()));
+        new MaterialPageRoute(builder: (context) => new CourseDetails(id, courseListPresenter)));
   }
 }
