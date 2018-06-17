@@ -38,6 +38,10 @@ class StaticVariables {
   static const String TAKEN_COURSES = 'Taken Courses';
   static const String PRIVACY_BUTTON = 'Our Privacy Policy';
 
+  static const String GUEST_FIRST_NAME = "Guest";
+  static const String GUEST_LAST_NAME = "User";
+  static const String GUEST_DEPARTMENT = "N/A";
+
   /* Settings/Taken Courses Page */
   static const String TOTAL_OF = 'Total of';
   static const String ECTS = 'ECTS';

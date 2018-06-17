@@ -218,15 +218,17 @@ class LoginFormState extends State<LoginForm> {
       isLoggedIn = true;
 
     } else { // Continuing As Guest
-      firstName = "Guest";
-      lastName = "User";
-      curriculum = "N/A";
+      firstName = StaticVariables.GUEST_FIRST_NAME;
+      lastName = StaticVariables.GUEST_LAST_NAME;
+      curriculum = StaticVariables.GUEST_DEPARTMENT;
     }
 
     FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
       if (val != null) {
         dynamic settings = json.decode(val);
         builder = UserBuilder.fromJson(settings);
+      } else {
+        builder = new UserBuilder();
       }
       User tempUserObj = builder
         .withFirstName(firstName)
