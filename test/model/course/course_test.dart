@@ -1,5 +1,6 @@
 import 'package:cie_team1/model/course/course.dart';
 import 'package:test/test.dart';
+import 'dart:convert';
 
 @Timeout(const Duration(seconds: 10))
 void main() {
@@ -364,6 +365,135 @@ void main() {
     });
     test('22', () {
       expect(WeekdayUtility.intToWeekday(0), Weekday.Mon);
+    });
+  });
+
+  group('courseBuilder test', ()
+  {
+    test('complete builder test', () {
+      var testString = "test";
+      var testBool = true;
+      var testInt = 1;
+      var testDynamicList = new List<dynamic>();
+      var testLectureList = new List<Lecture>();
+      var testCourseAvailability = CourseAvailability.PENDING;
+      CourseBuilder builder = new CourseBuilder()
+        .withName(testString)
+        .withId(testString)
+        .withDescription(testString)
+        .withIsCoterie(testBool)
+        .withhasHomeBias(testBool)
+        .withCorrelations(testDynamicList)
+        .withdates(testDynamicList)
+        .withShortName(testString)
+        .withActions(testDynamicList)
+        .withFaculty(testString)
+        .withLecturesPerWeek(testLectureList)
+        .withHoursPerWeek(testInt)
+        .withEcts(testInt)
+        .withProfessorEmail(testString)
+        .withProfessorName(testString)
+        .withAvailable(testCourseAvailability)
+        .withIsFavorite(testBool);
+      Course built = builder.build();
+      expect(built.name, testString);
+      expect(built.isFavourite, testBool);
+      expect(built.id, testString);
+      expect(built.description, testString);
+      expect(built.isCoterie, testBool);
+      expect(built.hasHomeBias, testBool);
+      expect(built.correlations, testDynamicList);
+      expect(built.dates, testDynamicList);
+      expect(built.shortName, testString);
+      expect(built.actions, testDynamicList);
+      expect(built.faculty, testString);
+      expect(built.lecturesPerWeek, testLectureList);
+      expect(built.ects, testInt);
+      expect(built.professorEmail, testString);
+      expect(built.professorName, testString);
+      expect(built.available, testCourseAvailability);
+      expect(built.isFavourite, testBool);
+    });
+
+    test('fromJson test', () {
+      CourseBuilder builder;
+      Map<String, dynamic> jsonData = json.decode(
+      '''
+      {"id":"493e7e17-1508-e811-94bf-00155d6e6b0a","description":null,
+      "isCoterie":false,"hasHomeBias":false,"correlations":[{"organiser":"FK 09"
+      ,"curriculum":"WIM","actions":[]},{"organiser":"FK 09","curriculum":"MBA"
+      ,"actions":[]},{"organiser":"FK 13","curriculum":"CIE","actions":[]}],
+      "dates":[{"begin":"20180427T140000Z","end":"20180427T190000Z","title":null
+      ,"isCanceled":false,"rooms":[{"number":"R 2.091","building":"R","campus":
+      "Lothstrasse","actions":[]}],"lecturer":[{"title":null,"firstName":null,
+      "lastName":"Rothlauf","actions":[]}],"actions":[]},{"begin":
+      "20180323T150000Z","end":"20180323T200000Z","title":null,"isCanceled":
+      false,"rooms":[{"number":"R 2.091","building":"R","campus":"Lothstrasse",
+      "actions":[]}],"lecturer":[{"title":null,"firstName":null,"lastName":
+      "Rothlauf","actions":[]}],"actions":[]},{"begin":"20180324T080000Z","end":
+      "20180324T160000Z","title":null,"isCanceled":false,"rooms":[{"number":
+      "R 2.091","building":"R","campus":"Lothstrasse","actions":[]}],"lecturer":
+      [{"title":null,"firstName":null,"lastName":"Rothlauf","actions":[]}],
+      "actions":[]},{"begin":"20180325T070000Z","end":"20180325T150000Z","title"
+      :null,"isCanceled":false,"rooms":[{"number":"R 2.091","building":"R",
+      "campus":"Lothstrasse","actions":[]}],"lecturer":[{"title":null,
+      "firstName":null,"lastName":"Rothlauf","actions":[]}],"actions":[]},
+      {"begin":"20180428T070000Z","end":"20180428T150000Z","title":null,
+      "isCanceled":false,"rooms":[{"number":"R 2.091","building":"R","campus":
+      "Lothstrasse","actions":[]}],"lecturer":[{"title":null,"firstName":null,
+      "lastName":"Rothlauf","actions":[]}],"actions":[]},{"begin":
+      "20180429T070000Z","end":"20180429T150000Z","title":null,"isCanceled":
+      false,"rooms":[{"number":"R 2.091","building":"R","campus":"Lothstrasse",
+      "actions":[]}],"lecturer":[{"title":null,"firstName":null,"lastName":
+      "Rothlauf","actions":[]}],"actions":[]}],"name":"Intercultural Management"
+      ,"shortName":"Intcult Mgt and Ledership","actions":[]}
+      '''
+      );
+      try {
+        builder = new CourseBuilder.fromJson(jsonData);
+      } catch(e) {
+        fail("Unable to parse json data");
+      }
+      var testString = "test";
+      var testBool = true;
+      var testInt = 1;
+      var testDynamicList = new List<dynamic>();
+      var testLectureList = new List<Lecture>();
+      var testCourseAvailability = CourseAvailability.PENDING;
+      builder
+          .withId(testString)
+          .withDescription(testString)
+          .withIsCoterie(testBool)
+          .withhasHomeBias(testBool)
+          .withCorrelations(testDynamicList)
+          .withdates(testDynamicList)
+          .withShortName(testString)
+          .withActions(testDynamicList)
+          .withLecturesPerWeek(testLectureList)
+          .withHoursPerWeek(testInt)
+          .withEcts(testInt)
+          .withProfessorEmail(testString)
+          .withProfessorName(testString)
+          .withAvailable(testCourseAvailability)
+          .withIsFavorite(testBool);
+      Course built = builder.build();
+      expect(built.name, "Intercultural Management");
+      expect(built.isFavourite, testBool);
+      expect(built.id, testString);
+      expect(built.description, testString);
+      expect(built.isCoterie, testBool);
+      expect(built.hasHomeBias, testBool);
+      expect(built.correlations, testDynamicList);
+      expect(built.dates, testDynamicList);
+      expect(built.shortName, testString);
+      expect(built.actions, testDynamicList);
+      expect(built.faculty, "09");
+      expect(built.lecturesPerWeek, testLectureList);
+      expect(built.ects, testInt);
+      expect(built.professorEmail, testString);
+      expect(built.professorName, testString);
+      expect(built.available, testCourseAvailability);
+      expect(built.isFavourite, testBool);
     });
   });
 }

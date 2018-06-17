@@ -1,3 +1,6 @@
+import 'package:cie_team1/utils/cieColor.dart';
+import 'package:flutter/material.dart';
+
 class CourseBuilder {
   /* FIELDS FROM NINE */
   //TODO: Implement These & Merge, delete nineAPIConsumer.dart's NineCourse class
@@ -280,6 +283,37 @@ class CourseAvailabilityUtility {
         return CourseAvailability.UNAVAILABLE;
     }
     return CourseAvailability.AVAILABLE;
+  }
+
+
+  static Widget intToColoredString(CourseAvailability i, double size) {
+    switch (i) {
+      case CourseAvailability.AVAILABLE:
+        return new Text(
+          "Available",
+          style: new TextStyle(
+            fontSize: size,
+            color: CiEColor.green,
+          ),
+        );
+      case CourseAvailability.PENDING:
+        return new Text(
+          "Pending",
+          style: new TextStyle(
+            fontSize: size,
+            color: CiEColor.yellow,
+          ),
+        );
+      case CourseAvailability.UNAVAILABLE:
+        return new Text(
+          "Unavailable",
+          style: new TextStyle(
+            fontSize: size,
+            color: CiEColor.red,
+          ),
+        );
+    }
+    return null;
   }
 }
 

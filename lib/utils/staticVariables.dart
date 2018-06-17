@@ -6,6 +6,12 @@ class StaticVariables {
   static const String LOTHSTRASSE = 'Lothstrasse Campus';
   static const String PASING = 'Pasing Campus';
 
+  static const int SAME_CAMPUS_COMMUTE_MINS = 0;
+  static const int LOTHSTRASSE_PASING_COMMUTE_MINS = 45;
+  static const int LOTHSTRASSE_KARLSTRASSE_COMMUTE_MINS = 20;
+  static const int KARLSTRASSE_PASING_COMMUTE_MINS = 25;
+
+
   static const String RESSOURCE_PATH = 'res/';
   static const String IMAGE_PATH = RESSOURCE_PATH + 'images/';
 
@@ -39,5 +45,12 @@ class StaticVariables {
   static const String ALERT_NO = "CANCEL";
   static const String ALERT_REGISTRATION_SUBMISSION = "Complete Registration?";
 
+  /* Course Detail Page */
   static const String FK = "DP";
+  static const String DESCRIPTION = "Description";
+  static const String HOURS_PER_WEEK = "Hours per Week";
+  static const String CONTACT = "Contact";
+  static const String COURSE_DETAILS = "Course Details";
+  static const String NO_DESCRIPTION = "Sorry but there is currently no description available for this course.";
+  static const String PROFESSOR = "Professor";
 }

@@ -46,6 +46,6 @@ class CourseListItem extends StatelessWidget {
 
   void _toggleDescription(BuildContext context) {
     Navigator.push(context,
-        new MaterialPageRoute(builder: (context) => new CourseDetails()));
+        new MaterialPageRoute(builder: (context) => new CourseDetails(id, courseListPresenter)));
   }
 }
