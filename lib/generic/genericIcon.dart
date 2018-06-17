@@ -10,6 +10,7 @@ class GenericIcon {
   static const int memStorageUnavailable = 0xe888;
   static const int memStorageActiveFavorite = 0xe87d;
   static const int memStorageInactiveFavorite = 0xe87e;
+  static const int memStorageContact = 0xe0e1;
   static const String fontFamily = 'MaterialIcons';
 
   static Icon buildGenericAvailabilityIcon(CourseAvailability availability) {
@@ -26,7 +27,7 @@ class GenericIcon {
         break;
       case CourseAvailability.UNAVAILABLE:
         iconData =
-            const IconData(memStorageUnavailable, fontFamily: fontFamily);
+        const IconData(memStorageUnavailable, fontFamily: fontFamily);
         color = CiEColor.red;
         break;
     }
@@ -41,11 +42,19 @@ class GenericIcon {
     return new Icon(
       (isActive
           ? const IconData(memStorageActiveFavorite,
-              fontFamily: 'MaterialIcons')
+          fontFamily: 'MaterialIcons')
           : const IconData(memStorageInactiveFavorite,
-              fontFamily: 'MaterialIcons')),
-      size: CiEStyle.getCoursesListIconSize(),
+          fontFamily: 'MaterialIcons')),
+      size: CiEStyle.getCoursesListIconSize() + 15.0,
       color: CiEColor.red,
+    );
+  }
+
+  static Icon buildGenericContactIcon() {
+    return new Icon(
+      const IconData(0xe0e1,
+          fontFamily: 'MaterialIcons'),
+      size: CiEStyle.getCoursesListIconSize(),
     );
   }
 
@@ -65,6 +74,7 @@ class GenericIcon {
           ),
         ));
   }
+
   static Widget buildGenericSpinner() {
     return new ProgressHUD(
         backgroundColor: Colors.black12,
