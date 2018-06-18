@@ -12,7 +12,6 @@ class StaticVariables {
   static const int LOTHSTRASSE_KARLSTRASSE_COMMUTE_MINS = 20;
   static const int KARLSTRASSE_PASING_COMMUTE_MINS = 25;
 
-
   static const String RESSOURCE_PATH = 'res/';
   static const String IMAGE_PATH = RESSOURCE_PATH + 'images/';
 
@@ -54,4 +53,19 @@ class StaticVariables {
   /* Metrics Strings */
   static const String METRICS_ENABLED = "User Metrics Enabled";
   static const String METRICS_DISABLED = "User Metrics Disabled";
+  static const String ALERT_OK = "OK";
+  static const String ALERT_UNDERSTAND = "I UNDERSTAND";
+  static const String ALERT_TIMECONFLICT_ACKNOWLEDGE =
+      "Please consider that the commute between these two classes may take more than 45 minutes.\n" +
+          "You may not arrive to class on time.";
+
+  /* Course Detail Page */
+  static const String FK = "DP";
+  static const String DESCRIPTION = "Description";
+  static const String HOURS_PER_WEEK = "Hours per Week";
+  static const String CONTACT = "Contact";
+  static const String COURSE_DETAILS = "Course Details";
+  static const String NO_DESCRIPTION =
+      "Sorry but there is currently no description available for this course.";
+  static const String PROFESSOR = "Professor";
 }

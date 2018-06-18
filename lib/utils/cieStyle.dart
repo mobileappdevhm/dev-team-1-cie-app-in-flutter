@@ -129,6 +129,14 @@ class CiEStyle {
     );
   }
 
+  static TextStyle getWarningTextStyle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 17.0,
+      fontWeight: FontWeight.w300
+    );
+  }
+
   static TextStyle getCourseDescriptionFacultyStyle() {
     return new TextStyle(
       color: CiEColor.turquoise,
@@ -169,6 +177,40 @@ class CiEStyle {
       color: CiEColor.black,
       fontSize: 17.0,
       fontWeight: FontWeight.w300
+    );
+  }
+
+  static TextStyle getCourseDetailsFooterTextStyle() {
+    return new TextStyle(
+      fontSize: getCourseDetailsFontSize(),
+      color: CiEColor.gray,
+    );
+  }
+
+  static TextStyle getCourseDetailsFooterTextStyleBolt() {
+    return new TextStyle(
+      fontSize: getCourseDetailsFontSize(),
+      color: CiEColor.gray,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  static TextStyle getCourseDetailsHeadingStyle() {
+    return new TextStyle(
+        fontSize: 25.0,
+        color: CiEColor.gray,
+        letterSpacing: 2.0
+    );
+  }
+
+  static double getCourseDetailsFontSize() {
+    return 18.0;
+  }
+
+  static TextStyle getCourseDetailsDescription() {
+    return new TextStyle(
+        fontSize: 15.0,
+        color: CiEColor.gray,
     );
   }
 }

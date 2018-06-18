@@ -1,3 +1,6 @@
+import 'package:cie_team1/utils/cieColor.dart';
+import 'package:flutter/material.dart';
+
 class CourseBuilder {
   /* FIELDS FROM NINE */
   String id;
@@ -280,6 +283,37 @@ class CourseAvailabilityUtility {
     }
     return CourseAvailability.AVAILABLE;
   }
+
+
+  static Widget intToColoredString(CourseAvailability i, double size) {
+    switch (i) {
+      case CourseAvailability.AVAILABLE:
+        return new Text(
+          "Available",
+          style: new TextStyle(
+            fontSize: size,
+            color: CiEColor.green,
+          ),
+        );
+      case CourseAvailability.PENDING:
+        return new Text(
+          "Pending",
+          style: new TextStyle(
+            fontSize: size,
+            color: CiEColor.yellow,
+          ),
+        );
+      case CourseAvailability.UNAVAILABLE:
+        return new Text(
+          "Unavailable",
+          style: new TextStyle(
+            fontSize: size,
+            color: CiEColor.red,
+          ),
+        );
+    }
+    return null;
+  }
 }
 
 class CampusUtility {
@@ -289,6 +323,18 @@ class CampusUtility {
         return "Karl.";
       case Campus.LOTHSTRASSE:
         return "Loth.";
+      case Campus.PASING:
+        return "Pasing";
+    }
+    return "";
+  }
+
+  static String getCampusAsLongString(Campus campus) {
+    switch (campus) {
+      case Campus.KARLSTRASSE:
+        return "Karlstrasse";
+      case Campus.LOTHSTRASSE:
+        return "Lothstrasse";
       case Campus.PASING:
         return "Pasing";
     }

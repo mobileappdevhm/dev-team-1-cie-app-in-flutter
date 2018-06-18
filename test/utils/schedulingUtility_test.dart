@@ -5,6 +5,48 @@ import 'package:cie_team1/utils/staticVariables.dart';
 
 @Timeout(const Duration(seconds: 5))
 void main() {
+  Course testCourseOne;
+  Course testCourseTwo;
+  Lecture testLectureOne;
+  Lecture testLectureTwo;
+  setUp((){
+    testLectureOne = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
+        new DayTime(10, 00), new DayTime(11, 30), "R0.009") ;
+    testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon, new DayTime(10, 00),
+        new DayTime(11, 30), "R0.009") ;
+    testCourseOne = new CourseBuilder()
+      .withName("Blaba")
+      .withFaculty("7")
+      .withLecturesPerWeek([
+        testLectureOne
+      ])
+      .withDescription("boring")
+      .withHoursPerWeek(2)
+      .withEcts(2)
+      .withProfessorEmail("example@hm.edu")
+      .withProfessorName("Max Mustermann")
+      .withAvailable(CourseAvailability.AVAILABLE)
+      .withIsFavorite(false)
+      .build();
+    testCourseTwo = new CourseBuilder()
+      .withName("Blaba")
+      .withFaculty("7")
+      .withLecturesPerWeek([
+        testLectureTwo
+      ])
+      .withDescription("boring")
+      .withHoursPerWeek(2)
+      .withEcts(2)
+      .withProfessorEmail("example@hm.edu")
+      .withProfessorName("Max Mustermann")
+      .withAvailable(CourseAvailability.AVAILABLE)
+      .withIsFavorite(false)
+      .build();
+    testLectureOne.course = testCourseOne;
+    testLectureTwo.course = testCourseTwo;
+  });
+
+
   group('timeRequired', () {
     test('1 far campus, both same Loth', () async {
       final int timeRequired = SchedulingUtility.timeRequired(Campus.LOTHSTRASSE,
@@ -192,6 +234,26 @@ void main() {
       bool result = SchedulingUtility.isSchedulingConflict(
           dayTimeOne, dayTimeTwo, Campus.PASING, Campus.KARLSTRASSE);
       expect(result, true);
+    });
+  });
+
+  group("schedulingConflictText", ()
+  {
+    test('uses text according to the campus', () {
+      String text = SchedulingUtility
+          .constructSchedulingConflictText(testLectureOne, testLectureTwo);
+      expect(text.contains(CampusUtility
+          .getCampusAsLongString(testLectureOne.campus)), true);
+      expect(text.contains(CampusUtility
+          .getCampusAsLongString(testLectureTwo.campus)), true);
+    });
+
+    test('uses the specified time to render the conflict', () {
+      String text = SchedulingUtility
+          .constructSchedulingConflictText(testLectureOne, testLectureTwo);
+      expect(text.contains(SchedulingUtility
+          .timeRequired(testLectureOne.campus, testLectureTwo.campus)
+          .toString()), true);
     });
   });
 } //main

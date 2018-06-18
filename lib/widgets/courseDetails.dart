@@ -1,24 +1,36 @@
+import 'package:cie_team1/generic/genericIcon.dart';
+import 'package:cie_team1/model/course/course.dart';
+import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class CourseDetails extends StatefulWidget {
-  CourseDetails({Key key, this.title}) : super(key: key);
+  CourseDetails(this.id, this.presenter, {Key key, this.title})
+      : super(key: key);
   final String title;
+  final int id;
+  final CourseListPresenter presenter;
 
   @override
-  _CourseDetailsState createState() => new _CourseDetailsState();
+  _CourseDetailsState createState() => new _CourseDetailsState(id, presenter);
 }
 
 class _CourseDetailsState extends State<CourseDetails> {
+  static const double FOOTER_TILE_HEIGHT = 40.0;
+
+  final CourseListPresenter presenter;
+  final int id;
+
+  _CourseDetailsState(this.id, this.presenter);
+
   @override
   Widget build(BuildContext context) {
-    double iconSize = CiEStyle.getCourseDescriptionIconSize();
-
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
-          "Course Details",
+          StaticVariables.COURSE_DETAILS,
           style: CiEStyle.getAppBarTitleStyle(context),
         ),
         elevation: CiEStyle.getAppBarElevation(context),
@@ -26,166 +38,211 @@ class _CourseDetailsState extends State<CourseDetails> {
       ),
       body: new Center(
         child: new Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 10.0),
           child: new Column(
             children: <Widget>[
-              new Container(
-                child: new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        child: new Align(
-                      alignment: Alignment.centerLeft,
-                      child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Container(
-                            padding: const EdgeInsets.only(bottom: 10.0),
-                            child: new Text(
-                              "Title of course",
-                              style: CiEStyle.getCourseDescriptionTitleStyle(),
-                            ),
-                          ),
-                          new Text(
-                            "FK 07",
-                            style: CiEStyle.getCourseDescriptionFacultyStyle(),
-                          ),
-                        ],
-                      ),
-                    )),
-                    new Container(
-                      child: new Align(
-                        alignment: Alignment.centerRight,
-                        child: new IconButton(
-                          icon: new Icon(
-                            const IconData(0xe87e, fontFamily: 'MaterialIcons'),
-                            size: iconSize,
-                            color: CiEColor.red,
-                          ),
-                          onPressed: null,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Padding(
-                      padding: const EdgeInsets.only(
-                          left: 0.0, top: 15.0, right: 0.0, bottom: 15.0),
-                      child: new Text(
-                        "Description",
-                        style: new TextStyle(
-                            fontSize: 25.0,
-                            color: CiEColor.gray,
-                            letterSpacing: 2.0),
-                      )),
-                ],
-              ),
-              new Expanded(
-                  flex: 1,
-                  child: new SingleChildScrollView(
-                    child: new Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                          "Curabitur congue nisl porttitor enim tempor, nec venenatis nibh congue. "
-                          "Donec congue eleifend libero, sit amet eleifend augue mattis quis. "
-                          "Fusce in luctus dolor. Curabitur sodales tellus sit amet faucibus aliquet. "
-                          "Cras eget congue diam. Maecenas aliquam tortor a lorem aliquam, ac pellentesque odio aliquam. "
-                          "Morbi vulputate dolor mi, sit amet consectetur odio hendrerit eu. Aenean efficitur at nibh in placerat. "
-                          "Vestibulum sodales metus eleifend metus malesuada commodo. "
-                          "Vivamus eleifend, tellus non eleifend tempus, massa lorem commodo tellus, in condimentum elit eros vel dolor. "
-                          "Donec tincidunt bibendum bibendum. "
-                          "Praesent lectus leo, fringilla in mattis ut, semper at mauris. ",
-                      style: new TextStyle(fontSize: 15.0),
-                    ),
-
-                  )
-              ),
-              new Row(
-                children: <Widget>[
-                  new Expanded(
-                    flex: 2,
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        new Row(
-                          children: <Widget>[
-                            new Text(
-                              "Hours per Week:",
-                              style: new TextStyle(fontSize: 17.0),
-                            ),
-                            new Text(
-                              "2",
-                              style: new TextStyle(
-                                  fontSize: 17.0, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        new Row(
-                          children: <Widget>[
-                            new Text(
-                              "ECTS:",
-                              style: new TextStyle(fontSize: 17.0),
-                            ),
-                            new Text(
-                              "2",
-                              style: new TextStyle(
-                                  fontSize: 17.0, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  new Container(
-                    child: new Column(
-                      children: <Widget>[
-                        new Padding(
-                          padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-                          child: new Row(
-                            children: <Widget>[
-                              new Icon(
-                                const IconData(0xe86c,
-                                    fontFamily: 'MaterialIcons'),
-                                size: 30.0,
-                                color: CiEColor.green,
-                              ),
-                              new Text(
-                                "Available",
-                                style: new TextStyle(
-                                  fontSize: 17.0,
-                                  color: CiEColor.green,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-                          child: new Row(
-                            children: <Widget>[
-                              new Icon(
-                                const IconData(0xe0e1,
-                                    fontFamily: 'MaterialIcons'),
-                                size: 30.0,
-                              ),
-                              new Text(
-                                "Contact",
-                                style: new TextStyle(fontSize: 17.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )
+              //Title, Clickable heart
+              buildTitleRow(),
+              //Description title
+              buildDescriptionHeadingRow(),
+              //Description
+              buildDescriptionRow(),
+              //Footer, ects, hours, availability, contact
+              buildFooterRow(),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _toggleFavorite(int id) {
+    setState(() {
+      presenter.toggleFavourite(id);
+    });
+  }
+
+  void _toggleContact(int id) {
+    setState(() {
+
+    });
+  }
+
+  Widget buildDescriptionHeadingRow() {
+    //Description heading row
+    return new Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        new Padding(
+            padding: const EdgeInsets.only(
+                left: 0.0, top: 25.0, right: 0.0, bottom: 25.0),
+            child: new Text(
+                StaticVariables.DESCRIPTION,
+                style: CiEStyle.getCourseDetailsHeadingStyle()
+            )),
+      ],
+    );
+  }
+
+  Widget buildDescriptionRow() {
+    if (presenter.getDescription(id) == "") {
+      return new SingleChildScrollView(
+        child: new Text(StaticVariables.NO_DESCRIPTION + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
+          style: CiEStyle.getCourseDetailsDescription(),
+        ),
+      );
+    }
+
+    return new SingleChildScrollView(
+      child: new Text(presenter.getDescription(id) + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
+        style: CiEStyle.getCourseDetailsDescription(),
+      ),
+    );
+    /*
+    if (presenter.getDescription(id) == "") {
+      return new Expanded(
+          child: new SingleChildScrollView(
+            child: Text(StaticVariables.NO_DESCRIPTION + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
+              style: CiEStyle.getCourseDetailsDescription(),
+            ),
+          ),
+      );
+    }
+
+    return new Expanded(
+      child: new SingleChildScrollView(
+        child: Text(presenter.getDescription(id) + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
+          style: CiEStyle.getCourseDetailsDescription(),
+        ),
+      ),
+    );
+    */
+  }
+
+  Widget buildTitleRow() {
+    //Obove Desription stuff
+    return new Container(
+      child: new Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new Expanded(
+              child: new Align(
+                alignment: Alignment.centerLeft,
+                child: new Column(
+                  //Place at top
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new Text(
+                      presenter.getTitle(id),
+                      style: CiEStyle
+                          .getCourseDescriptionTitleStyle(),
+                    ),
+                    new Text(
+                      presenter.getFacultyBeautiful(id),
+                      style: CiEStyle
+                          .getCourseDescriptionFacultyStyle(),
+                    ),
+                  ],
+                ),
+              )),
+          //Heart icon and toggler
+          new Container(
+            child: new Padding(
+              padding: new EdgeInsets.only(left: 15.0),
+              child: new IconButton(
+                iconSize: CiEStyle.getCoursesListIconSize() +
+                    15.0,
+                icon: GenericIcon.buildGenericFavoriteIcon(
+                    presenter.getFavourite(id)),
+                onPressed: () => _toggleFavorite(id),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildFooterRow() {
+    return //Bottom row with information about ects availability contact
+      new Row (
+        //Place right and left
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          //Left side of footer
+          new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Container(
+                height: FOOTER_TILE_HEIGHT,
+                child: new Row(
+                  children: <Widget>[
+                    new Text(
+                      StaticVariables.HOURS_PER_WEEK + ":",
+                      style: CiEStyle.getCourseDetailsFooterTextStyle(),
+                    ),
+                    new Text(
+                        " " + presenter.getHoursPerWeek(id),
+                        style: CiEStyle.getCourseDetailsFooterTextStyleBolt()
+                    ),
+                  ],
+                ),
+              ),
+              new Container(
+                height: FOOTER_TILE_HEIGHT,
+                child: new Row(
+                  children: <Widget>[
+                    new Text(
+                      StaticVariables.ECTS + ":",
+                      style: new TextStyle(fontSize: 17.0),
+                    ),
+                    new Text(
+                      " " + presenter.getEcts(id),
+                      style: new TextStyle(
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          //Right side of footer
+          new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Container(
+                height: FOOTER_TILE_HEIGHT,
+                child: new Row(
+                  children: <Widget>[
+                    GenericIcon.buildGenericAvailabilityIcon(
+                        presenter.getAvailability(id)),
+                    CourseAvailabilityUtility.intToColoredString(
+                        presenter.getAvailability(id),
+                        CiEStyle.getCourseDetailsFontSize()),
+                  ],
+                ),
+              ),
+              new Container(
+                height: FOOTER_TILE_HEIGHT,
+                child: new FlatButton(
+                  //There is padding by default we dont need this here
+                    padding: new EdgeInsets.all(0.0),
+                    onPressed: () => _toggleContact,
+                    child: new Row(
+                      children: <Widget>[
+                        GenericIcon.buildGenericContactIcon(),
+                        new Text(
+                          StaticVariables.CONTACT,
+                          style: CiEStyle.getCourseDetailsFooterTextStyle(),
+                        ),
+                      ],
+                    )
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
   }
 }

@@ -44,7 +44,6 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
                 ),
               ],
             ),
-            new Divider(),
           ],
         ));
   }

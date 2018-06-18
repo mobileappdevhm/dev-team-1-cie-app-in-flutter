@@ -39,7 +39,7 @@ class CourseListPresenter {
                 new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
                     new DayTime(11, 30), "R0.009")
               ])
-              .withDescription("boring")
+              .withDescription("")
               .withHoursPerWeek(2)
               .withEcts(2)
               .withProfessorEmail("example@hm.edu")
@@ -102,12 +102,33 @@ class CourseListPresenter {
     return _courses.getCourses()[id].faculty.toString();
   }
 
+  String getFacultyBeautiful(int id) {
+    return "FK " + _courses.getCourses()[id].faculty.toString();
+  }
+
   String getTitle(int id) {
     return _courses.getCourses()[id].name;
   }
 
   List<Lecture> getLectureTimes(int id) {
     return _courses.getCourses()[id].lecturesPerWeek;
+  }
+
+  String getDescription(int id) {
+    return _courses.getCourses()[id].description;
+  }
+
+  //Todo: to implement
+  String getHoursPerWeek(int id) {
+    return "-";
+  }
+
+  String getEcts(int id) {
+    return _courses.getCourses()[id].ects.toString();
+  }
+
+  String getProfessorName(int id) {
+    return _courses.getCourses()[id].professorName;
   }
 
   String getLectureTimesBeautiful(int id) {
