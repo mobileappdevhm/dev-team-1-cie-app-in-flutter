@@ -92,7 +92,6 @@ class _CourseDetailsState extends State<CourseDetails> {
         ),
       );
     }
-
     return new SingleChildScrollView(
       child: new Text(presenter.getDescription(id) + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
         style: CiEStyle.getCourseDetailsDescription(),
@@ -108,7 +107,6 @@ class _CourseDetailsState extends State<CourseDetails> {
           ),
       );
     }
-
     return new Expanded(
       child: new SingleChildScrollView(
         child: Text(presenter.getDescription(id) + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
