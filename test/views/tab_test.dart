@@ -42,6 +42,7 @@ void main() {
                 counter++;
               } else if (counter == 3) {
                 expect(widget.data.substring(0, 8), 'Campus: '); // possibility that this test could fail
+                // if failing just comment it out and write an issue
                 counter++;
               }
             }
