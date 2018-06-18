@@ -166,4 +166,28 @@ class CourseListPresenter {
 
     return result;
   }
+
+  //Get every lectures of users courses
+  List<Lecture> getFavouriteLectures() {
+    List<Lecture> lectures = [];
+    //Add all favourite lectures to lectures list
+    getCourses().where((c) => c.isFavourite)
+        .forEach((c) => c.lecturesPerWeek.forEach((l) => lectures.add(l)));
+    return _sortLectures(lectures);
+  }
+
+  //Sort lectures. Monday first
+  List<Lecture> _sortLectures(List<Lecture> lectures) {
+    lectures.sort((a, b) => a.sortValue() - b.sortValue());
+    return lectures;
+  }
+
+  List<Lecture> getFavouriteLecturesOfWeekday(Weekday searchedWeekday) {
+    List<Lecture> lectures = [];
+    //Add all lectures to lectures list
+    getCourses().where((c) => c.isFavourite).forEach((c) => c.lecturesPerWeek
+        .where((l) => l.weekday == searchedWeekday)
+        .forEach((l) => lectures.add(l)));
+    return _sortLectures(lectures);
+  }
 }
