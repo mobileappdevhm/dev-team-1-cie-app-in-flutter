@@ -90,9 +90,14 @@ class _SettingsState extends State<Settings> {
                           shape: new RoundedRectangleBorder(
                               borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEColor.red,
-                          child: new Text(
+                          child: isLoggedIn == true ?
+                          new Text(
                             StaticVariables.LOGOUT_BUTTON,
-                            style: CiEStyle.getSettingsLogoutStyle(),
+                            style: CiEStyle.getSettingsLogoutStyle()
+                          ):
+                          new Text(
+                            StaticVariables.LOGIN_BUTTON,
+                            style: CiEStyle.getSettingsLogoutStyle()
                           ),
                         ),
                         new Padding(
