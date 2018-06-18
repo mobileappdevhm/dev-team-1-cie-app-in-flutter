@@ -106,14 +106,14 @@ void main() {
             counter++;
           } else if (counter == 3) {
             expect(widget.data, StaticVariables.PRIVACY_BUTTON);
-            tester.tap(find.byWidget(widget));
+            await tester.tap(find.byWidget(widget));
             counter++;
           }
         }
       }
     });
 
-    testWidgets('1 widgetTest for settings', (WidgetTester tester) async {
+    testWidgets('3 widgetTest for settings Pressing Taken Courses Button', (WidgetTester tester) async {
       // Tells the tester to build a UI based on the widget tree passed to it
       await tester.pumpWidget(
         new StatefulBuilder(
@@ -155,12 +155,26 @@ void main() {
             expect(widget.data, StaticVariables.DEPARTMENT + " : ");
             counter++;
           } else if (counter == 7) {
-            expect(widget.data,
-                " " + new CurrentUserPresenter().getCurrentUserFaculty());
+            expect(widget.data, " " + new CurrentUserPresenter().getCurrentUserFaculty());
             counter++;
           } else if (counter == 8) {
             expect(widget.data, StaticVariables.CONTACT_OFFICE);
-            tester.tap(find.byWidget(widget));
+            counter++;
+          } else if (counter == 9) {
+            expect(widget.data, StaticVariables.CIE_CERTIFICATE);
+            counter++;
+          } else if (counter == 10) {
+            expect(widget.data.isEmpty, false);
+            counter++;
+          } else if (counter == 11) {
+            expect(widget.data, StaticVariables.IE_CERTIFICATE);
+            counter++;
+          } else if (counter == 12) {
+            expect(widget.data.isEmpty, false);
+            counter++;
+          } else if (counter == 13) {
+            expect(widget.data, StaticVariables.TAKEN_COURSES);
+            await tester.tap(find.byWidget(widget));
             counter++;
           }
         }
