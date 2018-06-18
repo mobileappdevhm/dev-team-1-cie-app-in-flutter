@@ -130,30 +130,9 @@ class _SettingsState extends State<Settings> {
                               )
                             ],
                           )),
-                      new RaisedButton(
-                        onPressed: () => _logout(context),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: CiEStyle.getButtonBorderRadius()),
-                        color: CiEColor.red,
-                        child: new Text(
-                          isLoggedIn == true ? StaticVariables.LOGOUT_BUTTON:
-                            StaticVariables.LOGIN_BUTTON,
-                          style: CiEStyle.getSettingsLogoutStyle(),
-                        ),
-                      ),
                       new Padding(
                         padding : const EdgeInsets.only(top:5.0),
                       ),
-                      new RaisedButton(
-                        onPressed: () => _togglePrivacyPage(context),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: CiEStyle.getButtonBorderRadius()),
-                        color: CiEColor.red,
-                        child: new Text(
-                          StaticVariables.PRIVACY_BUTTON,
-                          style: CiEStyle.getSettingsPrivacyStyle(),
-                          ),
-                        ),
                         new Row(
                           children: <Widget>[
                             new Text(
