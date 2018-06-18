@@ -8,6 +8,7 @@ import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
+import 'dart:async';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
@@ -156,9 +157,15 @@ class CourseListState extends State<CourseList> {
 
     return new RefreshIndicator(
         child: new ListView(children: widgets),
-        onRefresh: ()=> NineAPIEngine.pullCourseJSON(context, true),
+        onRefresh: ()=> handleRefreshIndicator(context, courseListPresenter),
         color: Colors.blue,
     );
+  }
+
+  Future<Null> handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
+    Future<Null> complete = NineAPIEngine.pullCourseJSON(context, true);
+    presenter.onChanged(true);
+    return complete;
   }
 
   Widget favoriteIcon(int id) {

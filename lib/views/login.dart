@@ -237,8 +237,9 @@ class LoginFormState extends State<LoginForm> {
         .withIsLoggedIn(isLoggedIn)
         .build();
       String data = json.encode(User.toJson(tempUserObj));
-      FileStore.writeToFile(FileStore.USER_SETTINGS, data);
+      FileStore.writeToFile(FileStore.USER_SETTINGS, data).then((f) {
+        Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+      });
     });
-    Navigator.of(context).pushReplacementNamed(Routes.TabPages);
   }
 }
