@@ -366,4 +366,46 @@ void main() {
       expect(WeekdayUtility.intToWeekday(0), Weekday.Mon);
     });
   });
+
+  group("CourseBuilder", (){
+
+    test('1', () {
+      final CourseBuilder sut = new CourseBuilder();
+      expect(sut.withId("1").id, '1');
+    });
+
+    test('2', () {
+      final CourseBuilder sut = new CourseBuilder();
+      expect(sut.withIsCoterie(true).isCoterie, true);
+    });
+
+    test('3', () {
+      final CourseBuilder sut = new CourseBuilder();
+      expect(sut.withhasHomeBias(true).hasHomeBias, true);
+    });
+
+    test('4', () {
+      final CourseBuilder sut = new CourseBuilder();
+      expect(sut.withShortName("213412343412").shortName, '213412343412');
+    });
+
+    test('5', () {
+      final CourseBuilder sut = new CourseBuilder();
+      expect(sut.withCorrelations(new List<dynamic>()).runtimeType, new CourseBuilder().runtimeType);
+    });
+
+    test('6', () {
+      final CourseBuilder sut = new CourseBuilder();
+      expect(sut.withActions(new List<dynamic>()).runtimeType, new CourseBuilder().runtimeType);
+    });
+
+    test('6', () {
+      final CourseBuilder sut = new CourseBuilder();
+      expect(sut.withdates(new List<dynamic>()).runtimeType, new CourseBuilder().runtimeType);
+    });
+
+
+  });
+
+
 }
