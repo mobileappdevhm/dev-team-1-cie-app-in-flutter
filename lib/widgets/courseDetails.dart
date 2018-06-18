@@ -86,6 +86,20 @@ class _CourseDetailsState extends State<CourseDetails> {
 
   Widget buildDescriptionRow() {
     if (presenter.getDescription(id) == "") {
+      return new SingleChildScrollView(
+        child: new Text(StaticVariables.NO_DESCRIPTION + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
+          style: CiEStyle.getCourseDetailsDescription(),
+        ),
+      );
+    }
+
+    return new SingleChildScrollView(
+      child: new Text(presenter.getDescription(id) + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
+        style: CiEStyle.getCourseDetailsDescription(),
+      ),
+    );
+    /*
+    if (presenter.getDescription(id) == "") {
       return new Expanded(
           child: new SingleChildScrollView(
             child: Text(StaticVariables.NO_DESCRIPTION + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
@@ -102,6 +116,7 @@ class _CourseDetailsState extends State<CourseDetails> {
         ),
       ),
     );
+    */
   }
 
   Widget buildTitleRow() {
