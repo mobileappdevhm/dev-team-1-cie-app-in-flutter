@@ -69,7 +69,7 @@ class TabsPageState extends State<TabsPage> {
           new CourseList(courseListPresenter, false),
           // Behaves as Courses Page
           new MapPage(),
-          new Schedule(),
+          new Schedule(courseListPresenter),
           // Behaves as Favorites Page
           new CourseList(courseListPresenter, true),
           new Settings(currentUserPresenter),
