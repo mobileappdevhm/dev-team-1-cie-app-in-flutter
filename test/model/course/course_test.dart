@@ -1,5 +1,7 @@
 import 'package:cie_team1/model/course/course.dart';
+import 'package:flutter/material.dart';
 import 'package:test/test.dart';
+import 'package:cie_team1/utils/cieColor.dart';
 
 @Timeout(const Duration(seconds: 10))
 void main() {
@@ -318,12 +320,34 @@ void main() {
           1);
     });
 
-    test('available', () {
+    test('unavailable', () {
       expect(
           CourseAvailabilityUtility
               .getFacultyAsInt(CourseAvailability.UNAVAILABLE),
           2);
     });
+
+    test('available', () {
+      expect(
+          CourseAvailabilityUtility
+              .intToColoredString(CourseAvailability.AVAILABLE,1.0).toString(),
+          new Text('Available',style: new TextStyle(fontSize: 1.0, color: CiEColor.green)).toString());
+    });
+
+    test('available', () {
+      expect(
+          CourseAvailabilityUtility
+              .intToColoredString(CourseAvailability.PENDING,1.0).toString(),
+          new Text('Pending',style: new TextStyle(fontSize: 1.0, color: CiEColor.yellow)).toString());
+    });
+
+    test('unavailable', () {
+      expect(
+          CourseAvailabilityUtility
+              .intToColoredString(CourseAvailability.UNAVAILABLE,1.0).toString(),
+          new Text('Unavailable',style: new TextStyle(fontSize: 1.0, color: CiEColor.red)).toString());
+    });
+
   });
 
   group('weekday utility', () {
