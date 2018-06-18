@@ -262,6 +262,46 @@ void main() {
 
       expect(sut.occursOnDay(Weekday.Sun), false);
     });
+
+    test('14 equals', () {
+      final Course sut = new CourseBuilder()
+          .withName("Blaba")
+          .withFaculty("7")
+          .withLecturesPerWeek([
+        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+            new DayTime(11, 30), "R0.009")
+      ])
+      
+      
+          .withDescription("boring")
+          .withHoursPerWeek(2)
+          .withEcts(2)
+          .withProfessorEmail("example@hm.edu")
+          .withProfessorName("Max Mustermann")
+          .withAvailable(CourseAvailability.AVAILABLE)
+          .withIsFavorite(false)
+          .build();
+
+      final Course sut2 = new CourseBuilder()
+          .withName("Blaba")
+          .withFaculty("7")
+          .withLecturesPerWeek([
+        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+            new DayTime(11, 30), "R0.009")
+      ])
+
+
+          .withDescription("boring")
+          .withHoursPerWeek(2)
+          .withEcts(2)
+          .withProfessorEmail("example@hm.edu")
+          .withProfessorName("Max Mustermann")
+          .withAvailable(CourseAvailability.AVAILABLE)
+          .withIsFavorite(false)
+          .build();
+
+      expect(sut.equals(sut2), true);
+    });
   });
 
   group('static stuff', () {
@@ -402,6 +442,24 @@ void main() {
     test('6', () {
       final CourseBuilder sut = new CourseBuilder();
       expect(sut.withdates(new List<dynamic>()).runtimeType, new CourseBuilder().runtimeType);
+    });
+
+    test('6', () {
+      /*
+      final Map<String,dynamic> map = new Map<String,dynamic>();
+
+      map["id"] = "10";
+      map["description"] = "10";
+      map["isCoterie"] = true;
+      map["hasHomeBias"] = true;
+      map["correlation"] = true;
+      map["dates"] = "s";
+      map["name"] = "asdbkvk";
+      map["shortName"] = "sadasdsad";
+      map["actions"] = "1";
+      final CourseBuilder sut = CourseBuilder.fromJson(map);
+      expect(sut.runtimeType, new CourseBuilder().runtimeType);
+      */
     });
 
 
