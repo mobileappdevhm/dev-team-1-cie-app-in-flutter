@@ -113,6 +113,14 @@ class CiEStyle {
     );
   }
 
+  static TextStyle getWarningTextStyle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 17.0,
+      fontWeight: FontWeight.w300
+    );
+  }
+
   static TextStyle getCourseDescriptionFacultyStyle() {
     return new TextStyle(
       color: CiEColor.turquoise,

@@ -95,7 +95,8 @@ class CourseListState extends State<CourseList> {
               padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
               child: new IconButton(
                   color: CiEColor.mediumGray,
-                  icon: new Icon(Icons.search),
+                  icon: GenericIcon
+                      .buildGenericSearchIcon(shouldSearch),
                   onPressed: toggleSearch),
             )
           ]));
