@@ -93,11 +93,26 @@ class CourseBuilder {
     return this;
   }
 
+  static String buildProfessorName(dynamic jsonData) {
+    dynamic professor = (jsonData['dates'][0]['lecturer'][0]);
+    String title = professor['title'].toString();
+    title = title != "null" ? title + " ": "";
+    String firstName = professor['firstName'].toString();
+    firstName = firstName != "null" ? firstName + " " : "";
+    String lastName = professor['lastName'].toString();
+    lastName = lastName != "null" ? lastName : "";
+    return title + firstName + lastName;
+  }
+
+  static String buildDescription(dynamic jsonData) {
+    return jsonData['description'] != null ? jsonData['description'] : "";
+  }
+
   factory CourseBuilder.fromJson(Map<String, dynamic> jsonData) {
     String dep = ((jsonData['correlations'][0]['organiser']));
     return new CourseBuilder(
       id: jsonData['id'],
-      description: jsonData['description'],
+      description: buildDescription(jsonData),
       isCoterie: jsonData['isCoterie'],
       hasHomeBias: jsonData['hasHomeBias'],
       correlations: jsonData['correlations'],
@@ -105,13 +120,14 @@ class CourseBuilder {
       name: jsonData['name'],
       shortName: jsonData['shortName'],
       actions: jsonData['actions'],
-      faculty: dep.substring(3, dep.length)
+      faculty: dep.substring(3, dep.length),
+      professorName: buildProfessorName(jsonData)
     );
   }
 
   CourseBuilder({this.id, this.description, this.isCoterie, this.hasHomeBias,
     this.correlations, this.dates, this.name, this.shortName, this.actions,
-    this.faculty});
+    this.faculty, this.professorName});
 
   Course build(){
     return new Course(

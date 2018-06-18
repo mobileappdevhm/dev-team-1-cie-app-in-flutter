@@ -66,6 +66,6 @@ class StaticVariables {
   static const String CONTACT = "Contact";
   static const String COURSE_DETAILS = "Course Details";
   static const String NO_DESCRIPTION =
-      "Sorry but there is currently no description available for this course.";
+      "Sorry, there no description available for this course. Please check again later";
   static const String PROFESSOR = "Professor";
 }

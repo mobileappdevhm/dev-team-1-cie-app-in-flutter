@@ -24,6 +24,7 @@ class CourseListPresenter {
   // TODO: -Check if course is already stored before adding here
   // TODO: -Make the loop contents more relevant and move it somewhere else
   void addCoursesFromMemory() {
+    this.onChanged(true);
     List<Course> courseList = _courses.getCourses();
     bool didUpdate = false;
     FileStore.readFileAsString(FileStore.COURSES).then((String val){
@@ -39,11 +40,9 @@ class CourseListPresenter {
                 new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
                     new DayTime(11, 30), "R0.009")
               ])
-              .withDescription("")
               .withHoursPerWeek(2)
               .withEcts(2)
               .withProfessorEmail("example@hm.edu")
-              .withProfessorName("Max Mustermann")
               .withAvailable(CourseAvailability.AVAILABLE)
               .withIsFavorite(false);
           Course c = courseBuilder.build();

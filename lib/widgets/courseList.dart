@@ -162,8 +162,9 @@ class CourseListState extends State<CourseList> {
     );
   }
 
-  Future<Null> handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
+  handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
     Future<Null> complete = NineAPIEngine.pullCourseJSON(context, true);
+    presenter.addCoursesFromMemory();
     presenter.onChanged(true);
     return complete;
   }
