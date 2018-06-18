@@ -9,7 +9,7 @@ import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 
 class Schedule extends StatelessWidget {
-  TimeTablePresenter timeTablePresenter = new TimeTablePresenter();
+  TimeTablePresenter timeTablePresenter = new TimeTablePresenter(Flavor.PROD);
 
   @override
   Widget build(BuildContext context) {

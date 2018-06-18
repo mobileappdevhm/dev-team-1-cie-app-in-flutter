@@ -8,6 +8,8 @@ import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cie_team1/utils/fileStore.dart';
+import 'package:cie_team1/model/user/user.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -57,16 +59,8 @@ class LoginFormState extends State<LoginForm> {
                 json.decode(response.body)['user']['firstName'];
             final String lastName =
                 json.decode(response.body)['user']['lastName'];
-            var curriculum = json.decode(response.body)['curriculum'];
-            print("Response status: ${response.statusCode}");
-            print("Response body: ${response.body}");
-            print("Response user: ${json.decode(response.body)['user']}");
-            print("Response id: $id");
-            print("Response firstName: $firstName");
-            print("Response lastName: $lastName");
-            print("Response curriculum: $curriculum");
-
-            Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+            var curriculum = json.decode(response.body)['curriculum']['organiser']['name'];
+            updateUserSettings(context, firstName, lastName, curriculum);
           }
         });
       } catch (_) {
@@ -81,9 +75,7 @@ class LoginFormState extends State<LoginForm> {
   }
 
   void _handleGuestLogin() {
-    //TODO save guest data down here, for now we just redirect
-
-    Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+    updateUserSettings(context, null, null, null);
   }
 
   String _validateMail(String value) {
@@ -216,5 +208,38 @@ class LoginFormState extends State<LoginForm> {
     usernameController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void updateUserSettings(BuildContext context, String firstName,
+      String lastName, dynamic curriculum) {
+    bool isLoggedIn = false;
+    UserBuilder builder;
+    if (firstName != null && lastName != null && curriculum != null) {
+      isLoggedIn = true;
+
+    } else { // Continuing As Guest
+      firstName = StaticVariables.GUEST_FIRST_NAME;
+      lastName = StaticVariables.GUEST_LAST_NAME;
+      curriculum = StaticVariables.GUEST_DEPARTMENT;
+    }
+
+    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+      if (val != null) {
+        dynamic settings = json.decode(val);
+        builder = UserBuilder.fromJson(settings);
+      } else {
+        builder = new UserBuilder();
+      }
+      User tempUserObj = builder
+        .withFirstName(firstName)
+        .withLastName(lastName)
+        .withDepartment(curriculum)
+        .withIsLoggedIn(isLoggedIn)
+        .build();
+      String data = json.encode(User.toJson(tempUserObj));
+      FileStore.writeToFile(FileStore.USER_SETTINGS, data).then((f) {
+        Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+      });
+    });
   }
 }

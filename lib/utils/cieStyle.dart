@@ -77,6 +77,22 @@ class CiEStyle {
     );
   }
 
+  static TextStyle getSettingsEnabledStyle() {
+    return new TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w200,
+      color: CiEColor.black
+    );
+  }
+
+  static TextStyle getSettingsDisabledStyle() {
+    return new TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w200,
+      color: CiEColor.mediumGray
+    );
+  }
+
   static TextStyle getSettingsLogoutStyle() {
     return new TextStyle(color: Colors.white);
   }

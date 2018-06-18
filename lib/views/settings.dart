@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/views/takenCourses.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -11,17 +10,38 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
-  Settings({Key key, this.title}) : super(key: key);
-  final String title;
+  final CurrentUserPresenter currentUserPresenter;
+
+  Settings(this.currentUserPresenter);
 
   @override
-  _SettingsState createState() => new _SettingsState();
+  _SettingsState createState() => new _SettingsState(currentUserPresenter);
 }
 
 class _SettingsState extends State<Settings> {
-  static CurrentUserPresenter currentUserPresenter = new CurrentUserPresenter();
-  int credits = currentUserPresenter.getTotalCredits();
-  int engCredits = currentUserPresenter.getDep3Credits();
+  final CurrentUserPresenter currentUserPresenter;
+  int credits = 0;
+  int engCredits = 0;
+  bool isMetricsEnabled = false;
+  bool isLoggedIn = false;
+
+  _SettingsState(this.currentUserPresenter);
+
+  @override
+  void initState() {
+    super.initState();
+    currentUserPresenter.loadUserSettingsFromMemory();
+    credits = currentUserPresenter.getTotalCredits();
+    engCredits = currentUserPresenter.getDep3Credits();
+    setState(() {
+      if (currentUserPresenter.getCurrentUser().isMetricsEnabled != null) {
+        isMetricsEnabled = (currentUserPresenter.getCurrentUser().isMetricsEnabled);
+      }
+      if (currentUserPresenter.getCurrentUser().isLoggedIn != null) {
+        isLoggedIn = (currentUserPresenter.getCurrentUser().isLoggedIn);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +90,14 @@ class _SettingsState extends State<Settings> {
                           shape: new RoundedRectangleBorder(
                               borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEColor.red,
-                          child: new Text(
+                          child: isLoggedIn == true ?
+                          new Text(
                             StaticVariables.LOGOUT_BUTTON,
-                            style: CiEStyle.getSettingsLogoutStyle(),
+                            style: CiEStyle.getSettingsLogoutStyle()
+                          ):
+                          new Text(
+                            StaticVariables.LOGIN_BUTTON,
+                            style: CiEStyle.getSettingsLogoutStyle()
                           ),
                         ),
                         new Padding(
@@ -109,8 +134,10 @@ class _SettingsState extends State<Settings> {
                                 style: CiEStyle.getSettingsInfoStyle(),
                               )
                             ],
-                          ),
-                        ),
+                          )),
+                      new Padding(
+                        padding : const EdgeInsets.only(top:5.0),
+                      ),
                         new Row(
                           children: <Widget>[
                             new Text(
@@ -195,7 +222,8 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                 ),
-              ],
+              buildUserMetricsWidget(),
+            ],
             ),
           ),
         ),
@@ -219,5 +247,32 @@ class _SettingsState extends State<Settings> {
   void _togglePrivacyPage(BuildContext context) {
     Navigator.push(context,
         new MaterialPageRoute(builder: (context) => new PrivacyPage()));
+  }
+
+  Widget buildUserMetricsWidget() {
+    return new Row(
+      children: <Widget>[
+        new Switch(
+          value: isMetricsEnabled,
+          onChanged: (bool v) {
+            setState(() {
+              // Toggle in widget for faster render
+              isMetricsEnabled = !isMetricsEnabled;
+              // Toggle in 'cache'
+              currentUserPresenter.toggleIsMetricsEnabled();
+              // Save 'cache' locally
+              currentUserPresenter.saveUserSettings();
+            });
+          },
+        ),
+        isMetricsEnabled == true ?
+        new Text(StaticVariables.METRICS_ENABLED,
+            style: CiEStyle.getSettingsEnabledStyle()
+        ):
+        new Text(StaticVariables.METRICS_DISABLED,
+            style: CiEStyle.getSettingsDisabledStyle()
+        ),
+      ],
+    );
   }
 }
