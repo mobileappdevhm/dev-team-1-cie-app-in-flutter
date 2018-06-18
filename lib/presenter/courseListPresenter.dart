@@ -13,6 +13,7 @@ abstract class CourseListViewContract {
 class CourseListPresenter {
   Courses _courses;
   final ValueChanged<bool> onChanged;
+  List<int> _coursesToDeleteOnViewChange = List<int>();
 
   CourseListPresenter(this.onChanged) {
     CourseInjector.configure(Flavor.MOCK);
@@ -27,17 +28,18 @@ class CourseListPresenter {
     this.onChanged(true);
     List<Course> courseList = _courses.getCourses();
     bool didUpdate = false;
-    FileStore.readFileAsString(FileStore.COURSES).then((String val){
+    FileStore.readFileAsString(FileStore.COURSES).then((String val) {
       if (val != null) {
         final List<dynamic> jsonData = json.decode(val);
-        for (int i=0; i<jsonData.length; i++) {
+        for (int i = 0; i < jsonData.length; i++) {
           CourseBuilder courseBuilder = new CourseBuilder.fromJson(jsonData[i]);
-            // TODO: Delete the following builder code & only rely on the .fromJson
-            // once all relevent data is available from the Nine API
-            courseBuilder
+          // TODO: Delete the following builder code & only rely on the .fromJson
+          // once all relevent data is available from the Nine API
+          courseBuilder
               .withLecturesPerWeek(
               [
-                new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                new Lecture(
+                    Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
                     new DayTime(11, 30), "R0.009")
               ])
               .withHoursPerWeek(2)
@@ -69,6 +71,11 @@ class CourseListPresenter {
     return true;
   }
 
+  //Remove the courses outstanding for remove
+  void deactivate() {
+    _coursesToDeleteOnViewChange.clear();
+  }
+
   void toggleFavourite(int id) {
     if (_courses.getCourses()[id].isFavourite) {
       _courses.getCourses()[id].isFavourite = false;
@@ -77,8 +84,21 @@ class CourseListPresenter {
     }
   }
 
+  void toggleFavouriteWhenChangeView(int id) {
+    toggleFavourite(id);
+    if (_coursesToDeleteOnViewChange.contains(id)) {
+      _coursesToDeleteOnViewChange.remove(id);
+    } else {
+      _coursesToDeleteOnViewChange.add(id);
+    }
+  }
+
   bool getFavourite(int id) {
     return _courses.getCourses()[id].isFavourite;
+  }
+
+  bool getWillChangeOnViewChange(int id) {
+    return _coursesToDeleteOnViewChange.contains(id);
   }
 
   void toggleShowCourseDescription(int id) {
@@ -90,7 +110,9 @@ class CourseListPresenter {
   }
 
   List<Course> getPrevCourses(CurrentUser currentUser) {
-    return currentUser.getCurrentUser().prevCourses;
+    return currentUser
+        .getCurrentUser()
+        .prevCourses;
   }
 
   CourseAvailability getAvailability(int id) {
