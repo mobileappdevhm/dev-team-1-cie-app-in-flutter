@@ -35,7 +35,7 @@ void main() {
                 Flavor.MOCK).getFullName());
             counter++;
           } else if (counter == 2) {
-            expect(widget.data, StaticVariables.LOGIN_BUTTON);
+            expect(widget.data, StaticVariables.LOGOUT_BUTTON);
             counter++;
           } else if (counter == 3) {
             expect(widget.data, StaticVariables.PRIVACY_BUTTON);
