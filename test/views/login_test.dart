@@ -72,9 +72,11 @@ void main() {
             counter++;
           } else if (counter == 1) {
             expect(widget.data, 'E-Mail');
+            //write dummy stuff
             counter++;
           } else if (counter == 2) {
             expect(widget.data, 'Password');
+            //write dummy stuff
             counter++;
           } else if (counter == 3) {
             expect(widget.data, 'LOGIN');
@@ -84,5 +86,7 @@ void main() {
         }
       }
     });
+
+    //ToDo: login with real user. Dummy needed
   });
 }
