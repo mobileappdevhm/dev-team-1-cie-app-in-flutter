@@ -30,7 +30,8 @@ class CoursesMock implements Courses {
   }
 
   static String generateMockId(int i) {
-    // Make obviously distinguishable and unique from Nine course ids
+    // Make obviously distinguishable and unique from Nine course ids until
+    // nine supports a full course list and we can remove these mocks
     return "fake-123abc" + i.toString();
   }
 
@@ -77,7 +78,6 @@ class CoursesMock implements Courses {
 
   static bool generateMockFavorite(int i) {
     return false;
-    //return i / pi.round() % 3 == 0 && i % 2 == 0;
   }
 
   static List<List<Lecture>> generatedMockLectures() {
