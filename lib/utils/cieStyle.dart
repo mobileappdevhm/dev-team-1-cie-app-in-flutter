@@ -197,7 +197,7 @@ class CiEStyle {
 
   static TextStyle getCourseDetailsHeadingStyle() {
     return new TextStyle(
-        fontSize: 25.0,
+        fontSize: 20.0,
         color: CiEColor.gray,
         letterSpacing: 2.0
     );

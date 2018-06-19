@@ -105,7 +105,6 @@ class TabsPageState extends State<TabsPage> {
 
 class TabItem {
   const TabItem({this.title, this.icon});
-
   final String title;
   final IconData icon;
 }
