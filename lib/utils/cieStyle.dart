@@ -51,7 +51,7 @@ class CiEStyle {
 
   static TextStyle getAppBarTitleStyle(BuildContext context) {
     return new TextStyle(
-        fontSize: 20.0, color: CiEColor.red, letterSpacing: 2.0);
+        fontSize: 20.0, color: CiEColor.white, letterSpacing: 2.0);
   }
 
   static double getAppBarElevation(BuildContext context) {
