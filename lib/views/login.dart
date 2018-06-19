@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:cie_team1/model/login/loginData.dart';
+import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/fileStore.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
-import 'package:cie_team1/utils/fileStore.dart';
-import 'package:cie_team1/model/user/user.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -59,7 +59,8 @@ class LoginFormState extends State<LoginForm> {
                 json.decode(response.body)['user']['firstName'];
             final String lastName =
                 json.decode(response.body)['user']['lastName'];
-            var curriculum = json.decode(response.body)['curriculum']['organiser']['name'];
+            var curriculum =
+                json.decode(response.body)['curriculum']['organiser']['name'];
             updateUserSettings(context, firstName, lastName, curriculum);
           }
         });
@@ -120,13 +121,13 @@ class LoginFormState extends State<LoginForm> {
                     horizontal: 16.0, vertical: 25.0),
                 children: <Widget>[
                   new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
-                  new Padding(padding: const EdgeInsets.only(top: 35.0)),
+                  new Padding(padding: const EdgeInsets.only(top: 20.0)),
                   new Text(
                     "Courses in English",
                     style: CiEStyle.getAppBarTitleStyle(context),
                     textAlign: TextAlign.center,
                   ),
-                  new Padding(padding: const EdgeInsets.only(top: 25.0)),
+                  new Padding(padding: const EdgeInsets.only(top: 20.0)),
                   new TextFormField(
                     controller: usernameController,
                     decoration: const InputDecoration(
@@ -139,7 +140,7 @@ class LoginFormState extends State<LoginForm> {
                     },
                     validator: _validateMail,
                   ),
-                  new Padding(padding: const EdgeInsets.only(top: 25.0)),
+                  new Padding(padding: const EdgeInsets.only(top: 20.0)),
                   new TextFormField(
                     controller: passwordController,
                     key: _passwordFieldKey,
@@ -154,7 +155,7 @@ class LoginFormState extends State<LoginForm> {
                     validator: _validatePassword,
                   ),
                   new Container(
-                    padding: const EdgeInsets.fromLTRB(25.0, 25.0, 10.0, 25.0),
+                    padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 5.0),
                     child: new FlatButton(
                       color: CiEStyle.getLogoutButtonColor(),
                       shape: new RoundedRectangleBorder(
@@ -167,7 +168,8 @@ class LoginFormState extends State<LoginForm> {
                     ),
                   ),
                   new FlatButton(
-                    onPressed: () => _launchUrl("https://nine.wi.hm.edu/Account/Register"),
+                    onPressed: () =>
+                        _launchUrl("https://nine.wi.hm.edu/Account/Register"),
                     child: new Text(
                       "Don't have an Account?",
                       style: new TextStyle(color: CiEColor.red),
@@ -175,7 +177,7 @@ class LoginFormState extends State<LoginForm> {
                     ),
                   ),
                   new Container(
-                    padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
+                    padding: const EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
                     child: new FlatButton(
                       color: CiEColor.red,
                       shape: new RoundedRectangleBorder(
@@ -188,7 +190,8 @@ class LoginFormState extends State<LoginForm> {
                     ),
                   ),
                   new FlatButton(
-                    onPressed: () => _launchUrl("https://nine.wi.hm.edu/Account/ForgotPassword"),
+                    onPressed: () => _launchUrl(
+                        "https://nine.wi.hm.edu/Account/ForgotPassword"),
                     child: new Text(
                       "Forgot your password?",
                       style: new TextStyle(color: CiEColor.red),
@@ -216,8 +219,8 @@ class LoginFormState extends State<LoginForm> {
     UserBuilder builder;
     if (firstName != null && lastName != null && curriculum != null) {
       isLoggedIn = true;
-
-    } else { // Continuing As Guest
+    } else {
+      // Continuing As Guest
       firstName = StaticVariables.GUEST_FIRST_NAME;
       lastName = StaticVariables.GUEST_LAST_NAME;
       curriculum = StaticVariables.GUEST_DEPARTMENT;
@@ -231,11 +234,11 @@ class LoginFormState extends State<LoginForm> {
         builder = new UserBuilder();
       }
       User tempUserObj = builder
-        .withFirstName(firstName)
-        .withLastName(lastName)
-        .withDepartment(curriculum)
-        .withIsLoggedIn(isLoggedIn)
-        .build();
+          .withFirstName(firstName)
+          .withLastName(lastName)
+          .withDepartment(curriculum)
+          .withIsLoggedIn(isLoggedIn)
+          .build();
       String data = json.encode(User.toJson(tempUserObj));
       FileStore.writeToFile(FileStore.USER_SETTINGS, data).then((f) {
         Navigator.of(context).pushReplacementNamed(Routes.TabPages);
