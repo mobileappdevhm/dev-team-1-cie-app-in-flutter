@@ -1,13 +1,15 @@
 import 'package:cie_team1/di/currentUser_di.dart';
 import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:test/test.dart';
 
 void main() {
   CurrentUserPresenter sut;
 
   setUp(() {
-    sut = new CurrentUserPresenter();
+    void _voidCallback(bool didChange) {}
+    sut = new CurrentUserPresenter(_voidCallback, Flavor.MOCK);
   });
 
   group("User", () {

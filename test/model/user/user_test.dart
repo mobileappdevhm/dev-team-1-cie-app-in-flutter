@@ -29,12 +29,20 @@ void main() {
         .build()
       ];
 
-      sut = new User(
-          42, 'Max42', 'Max', 'Mustermann', '7', 'sleeping', courses, courses);
+      sut = new UserBuilder()
+      .withID("id-123")
+      .withUsername("Max42")
+      .withFirstName("Max")
+      .withLastName("Mustermann")
+      .withDepartment("07")
+      .withStatus("sleeping")
+      .withCurrentCourses(courses)
+      .withPrevCourses(courses)
+      .build();
     });
 
     test('1', () {
-      expect(sut.id, 42);
+      expect(sut.id, "id-123");
     });
 
     test('2', () {
@@ -42,7 +50,7 @@ void main() {
     });
 
     test('2', () {
-      expect(sut.department, '7');
+      expect(sut.department, '07');
     });
 
     test('3', () {
@@ -69,7 +77,7 @@ void main() {
   group("simpleUserProdTest", () {
     //List<Course> courses;
 
-    setUp(() {
+    //setUp(() {
       /*courses = [
         new CourseBuilder()
         .withName("Blaba")
@@ -88,12 +96,12 @@ void main() {
         .build()
       ];*/
 
-    });
+    //});
 
     test('1', () {
       final CurrentUserProd sut = new CurrentUserProd();
 
-      expect(sut.getCurrentUser(), null);
+      expect(sut.getCurrentUser()!=null, true);
     });
   });
 }

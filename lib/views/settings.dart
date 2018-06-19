@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/views/takenCourses.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -11,190 +10,221 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
-  Settings({Key key, this.title}) : super(key: key);
-  final String title;
+  final CurrentUserPresenter currentUserPresenter;
+
+  Settings(this.currentUserPresenter);
 
   @override
-  _SettingsState createState() => new _SettingsState();
+  _SettingsState createState() => new _SettingsState(currentUserPresenter);
 }
 
 class _SettingsState extends State<Settings> {
-  static CurrentUserPresenter currentUserPresenter = new CurrentUserPresenter();
-  int credits = currentUserPresenter.getTotalCredits();
-  int engCredits = currentUserPresenter.getDep3Credits();
+  final CurrentUserPresenter currentUserPresenter;
+  int credits = 0;
+  int engCredits = 0;
+  bool isMetricsEnabled = false;
+  bool isLoggedIn = false;
+
+  _SettingsState(this.currentUserPresenter);
+
+  @override
+  void initState() {
+    super.initState();
+    currentUserPresenter.loadUserSettingsFromMemory();
+    credits = currentUserPresenter.getTotalCredits();
+    engCredits = currentUserPresenter.getDep3Credits();
+    setState(() {
+      if (currentUserPresenter.getCurrentUser().isMetricsEnabled != null) {
+        isMetricsEnabled = (currentUserPresenter.getCurrentUser().isMetricsEnabled);
+      }
+      if (currentUserPresenter.getCurrentUser().isLoggedIn != null) {
+        isLoggedIn = (currentUserPresenter.getCurrentUser().isLoggedIn);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Center(
-        child: new Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              new Row(
-                children: <Widget>[
-                  new Expanded(
-                      child: new Row(
-                    children: <Widget>[
-                      new Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: const Icon(
-                          Icons.person_outline,
-                          size: 75.0,
-                          color: Colors.black,
+      body: new SingleChildScrollView(
+        child: new Center(
+          child: new Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        child: new Row(
+                          children: <Widget>[
+                            new Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: const Icon(
+                                Icons.person_outline,
+                                size: 75.0,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        )),
+                    new Column(
+                      children: <Widget>[
+                        new Container(
+                            padding:
+                            const EdgeInsets.only(bottom: 10.0, right: 10.0),
+                            child: new Row(
+                              children: <Widget>[
+                                new Text(
+                                  StaticVariables.LOGGED_IN_AS,
+                                  style: CiEStyle.getSettingsStyle(),
+                                ),
+                                new Text(
+                                  " " + currentUserPresenter.getFullName(),
+                                  style: CiEStyle.getSettingsInfoStyle(),
+                                ),
+                              ],
+                            )),
+                        new RaisedButton(
+                          onPressed: () => _logout(context),
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: CiEStyle.getButtonBorderRadius()),
+                          color: CiEColor.red,
+                          child: isLoggedIn == true ?
+                          new Text(
+                            StaticVariables.LOGOUT_BUTTON,
+                            style: CiEStyle.getSettingsLogoutStyle()
+                          ):
+                          new Text(
+                            StaticVariables.LOGIN_BUTTON,
+                            style: CiEStyle.getSettingsLogoutStyle()
+                          ),
                         ),
-                      ),
-                    ],
-                  )),
-                  new Column(
-                    children: <Widget>[
-                      new Container(
-                          padding:
-                              const EdgeInsets.only(bottom: 10.0, right: 10.0),
+                        new Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                        ),
+                        new RaisedButton(
+                          onPressed: () => _togglePrivacyPage(context),
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: CiEStyle.getButtonBorderRadius()),
+                          color: CiEColor.red,
+                          child: new Text(
+                            StaticVariables.PRIVACY_BUTTON,
+                            style: CiEStyle.getSettingsPrivacyStyle(),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                new Container(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: new Column(
+                      children: <Widget>[
+                        new Container(
+                          padding: const EdgeInsets.only(bottom: 10.0),
                           child: new Row(
                             children: <Widget>[
                               new Text(
-                                StaticVariables.LOGGED_IN_AS,
+                                StaticVariables.STATUS + " : ",
                                 style: CiEStyle.getSettingsStyle(),
                               ),
                               new Text(
-                                " " + currentUserPresenter.getFullName(),
+                                " " + currentUserPresenter.getCurrentUserStatus(),
                                 style: CiEStyle.getSettingsInfoStyle(),
-                              ),
+                              )
                             ],
                           )),
-                      new RaisedButton(
-                        onPressed: () => _logout(context),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: CiEStyle.getButtonBorderRadius()),
-                        color: CiEColor.red,
-                        child: new Text(
-                          StaticVariables.LOGOUT_BUTTON,
-                          style: CiEStyle.getSettingsLogoutStyle(),
-                        ),
-                      ),
                       new Padding(
                         padding : const EdgeInsets.only(top:5.0),
                       ),
-                      new RaisedButton(
-                        onPressed: () => _togglePrivacyPage(context),
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: CiEStyle.getButtonBorderRadius()),
-                        color: CiEColor.red,
-                        child: new Text(
-                          StaticVariables.PRIVACY_BUTTON,
-                          style: CiEStyle.getSettingsPrivacyStyle(),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              new Container(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: new Column(
-                    children: <Widget>[
-                      new Container(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: new Row(
+                        new Row(
                           children: <Widget>[
                             new Text(
-                              StaticVariables.STATUS + " : ",
+                              StaticVariables.DEPARTMENT + " : ",
                               style: CiEStyle.getSettingsStyle(),
                             ),
                             new Text(
-                              " " + currentUserPresenter.getCurrentUserStatus(),
+                              " " + currentUserPresenter.getCurrentUserFaculty(),
                               style: CiEStyle.getSettingsInfoStyle(),
-                            )
+                            ),
                           ],
                         ),
-                      ),
-                      new Row(
-                        children: <Widget>[
-                          new Text(
-                            StaticVariables.DEPARTMENT + " : ",
-                            style: CiEStyle.getSettingsStyle(),
-                          ),
-                          new Text(
-                            " " + currentUserPresenter.getCurrentUserFaculty(),
-                            style: CiEStyle.getSettingsInfoStyle(),
-                          ),
-                        ],
-                      ),
-                      new Divider(),
-                    ],
-                  )),
-              new Container(
-                  child: new Column(
-                children: <Widget>[
-                  new Row(
-                    children: <Widget>[
-                      new Icon(Icons.mail_outline),
-                      new FlatButton(
-                        child: new Text(
-                          StaticVariables.CONTACT_OFFICE,
-                          style: CiEStyle.getSettingsContactStyle(),
+                        new Divider(),
+                      ],
+                    )),
+                new Container(
+                    child: new Column(
+                      children: <Widget>[
+                        new Row(
+                          children: <Widget>[
+                            new Icon(Icons.mail_outline),
+                            new FlatButton(
+                              child: new Text(
+                                StaticVariables.CONTACT_OFFICE,
+                                style: CiEStyle.getSettingsContactStyle(),
+                              ),
+                              onPressed: _onContactInternationalOffice,
+                            ),
+                          ],
                         ),
-                        onPressed: _onContactInternationalOffice,
-                      ),
-                    ],
-                  ),
-                  new Divider(),
-                ],
-              )),
-              new Container(
-                padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-                child: new Row(children: <Widget>[
-                  new Expanded(
-                      child: new Text(
-                    StaticVariables.CIE_CERTIFICATE,
-                    style: CiEStyle.getSettingsStyle(),
-                  )),
-                  new Text("$credits /15", style: CiEStyle.getSettingsStyle()),
-                  // Calculate ECTS/15 but one of the courses need to be from department 13
-                ]),
-              ),
-              new LinearProgressIndicator(
-                value: credits / 15,
-              ),
-              new Container(
-                padding: const EdgeInsets.only(top: 20.0, bottom: 16.0),
-                child: new Row(children: <Widget>[
-                  new Expanded(
-                      child: new Text(StaticVariables.IE_CERTIFICATE,
-                          style: CiEStyle.getSettingsStyle())),
-                  new Text("$engCredits /15",
-                      style: CiEStyle.getSettingsStyle()),
-                  // Calculate ECTS of department 3 /15 with at least 2 ects from dep. 13
-                ]),
-              ),
-              new LinearProgressIndicator(value: engCredits / 15),
-              /* This causes overload on horizontal screen */
+                        new Divider(),
+                      ],
+                    )),
+                new Container(
+                  padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                  child: new Row(children: <Widget>[
+                    new Expanded(
+                        child: new Text(
+                          StaticVariables.CIE_CERTIFICATE,
+                          style: CiEStyle.getSettingsStyle(),
+                        )),
+                    new Text("$credits /15", style: CiEStyle.getSettingsStyle()),
+                    // Calculate ECTS/15 but one of the courses need to be from department 13
+                  ]),
+                ),
+                new LinearProgressIndicator(
+                  value: credits / 15,
+                ),
+                new Container(
+                  padding: const EdgeInsets.only(top: 20.0, bottom: 16.0),
+                  child: new Row(children: <Widget>[
+                    new Expanded(
+                        child: new Text(StaticVariables.IE_CERTIFICATE,
+                            style: CiEStyle.getSettingsStyle())),
+                    new Text("$engCredits /15",
+                        style: CiEStyle.getSettingsStyle()),
+                    // Calculate ECTS of department 3 /15 with at least 2 ects from dep. 13
+                  ]),
+                ),
+                new LinearProgressIndicator(value: engCredits / 15),
+                /* This causes overload on horizontal screen */
 
-              new GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (context) => new TakenCourses()));
-                },
-                child: new Padding(
-                  padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
-                  child: new Row(
-                    children: <Widget>[
-                      new Expanded(
-                          child: new Text(StaticVariables.TAKEN_COURSES,
-                              style: CiEStyle.getSettingsStyle())),
-                      new Icon(
-                        Icons.keyboard_arrow_right,
-                        color: CiEColor.gray,
-                      )
-                    ],
+                new GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new TakenCourses()));
+                  },
+                  child: new Padding(
+                    padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
+                    child: new Row(
+                      children: <Widget>[
+                        new Expanded(
+                            child: new Text(StaticVariables.TAKEN_COURSES,
+                                style: CiEStyle.getSettingsStyle())),
+                        new Icon(
+                          Icons.keyboard_arrow_right,
+                          color: CiEColor.gray,
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              buildUserMetricsWidget(),
             ],
+            ),
           ),
         ),
       ),
@@ -215,8 +245,34 @@ class _SettingsState extends State<Settings> {
   }
 
   void _togglePrivacyPage(BuildContext context) {
-    Navigator.push(
-        context,
+    Navigator.push(context,
         new MaterialPageRoute(builder: (context) => new PrivacyPage()));
+  }
+
+  Widget buildUserMetricsWidget() {
+    return new Row(
+      children: <Widget>[
+        new Switch(
+          value: isMetricsEnabled,
+          onChanged: (bool v) {
+            setState(() {
+              // Toggle in widget for faster render
+              isMetricsEnabled = !isMetricsEnabled;
+              // Toggle in 'cache'
+              currentUserPresenter.toggleIsMetricsEnabled();
+              // Save 'cache' locally
+              currentUserPresenter.saveUserSettings();
+            });
+          },
+        ),
+        isMetricsEnabled == true ?
+        new Text(StaticVariables.METRICS_ENABLED,
+            style: CiEStyle.getSettingsEnabledStyle()
+        ):
+        new Text(StaticVariables.METRICS_DISABLED,
+            style: CiEStyle.getSettingsDisabledStyle()
+        ),
+      ],
+    );
   }
 }

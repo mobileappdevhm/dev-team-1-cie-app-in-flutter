@@ -1,6 +1,8 @@
+import 'package:cie_team1/utils/cieColor.dart';
+import 'package:flutter/material.dart';
+
 class CourseBuilder {
   /* FIELDS FROM NINE */
-  //TODO: Implement These & Merge, delete nineAPIConsumer.dart's NineCourse class
   String id;
   String description;
   bool isCoterie;
@@ -91,11 +93,26 @@ class CourseBuilder {
     return this;
   }
 
+  static String buildProfessorName(dynamic jsonData) {
+    dynamic professor = (jsonData['dates'][0]['lecturer'][0]);
+    String title = professor['title'].toString();
+    title = title != "null" ? title + " ": "";
+    String firstName = professor['firstName'].toString();
+    firstName = firstName != "null" ? firstName + " " : "";
+    String lastName = professor['lastName'].toString();
+    lastName = lastName != "null" ? lastName : "";
+    return title + firstName + lastName;
+  }
+
+  static String buildDescription(dynamic jsonData) {
+    return jsonData['description'] != null ? jsonData['description'] : "";
+  }
+
   factory CourseBuilder.fromJson(Map<String, dynamic> jsonData) {
     String dep = ((jsonData['correlations'][0]['organiser']));
     return new CourseBuilder(
       id: jsonData['id'],
-      description: jsonData['description'],
+      description: buildDescription(jsonData),
       isCoterie: jsonData['isCoterie'],
       hasHomeBias: jsonData['hasHomeBias'],
       correlations: jsonData['correlations'],
@@ -103,13 +120,14 @@ class CourseBuilder {
       name: jsonData['name'],
       shortName: jsonData['shortName'],
       actions: jsonData['actions'],
-      faculty: dep.substring(3, dep.length)
+      faculty: dep.substring(3, dep.length),
+      professorName: buildProfessorName(jsonData)
     );
   }
 
   CourseBuilder({this.id, this.description, this.isCoterie, this.hasHomeBias,
     this.correlations, this.dates, this.name, this.shortName, this.actions,
-    this.faculty});
+    this.faculty, this.professorName});
 
   Course build(){
     return new Course(
@@ -281,6 +299,37 @@ class CourseAvailabilityUtility {
     }
     return CourseAvailability.AVAILABLE;
   }
+
+
+  static Widget intToColoredString(CourseAvailability i, double size) {
+    switch (i) {
+      case CourseAvailability.AVAILABLE:
+        return new Text(
+          "Available",
+          style: new TextStyle(
+            fontSize: size,
+            color: CiEColor.green,
+          ),
+        );
+      case CourseAvailability.PENDING:
+        return new Text(
+          "Pending",
+          style: new TextStyle(
+            fontSize: size,
+            color: CiEColor.yellow,
+          ),
+        );
+      case CourseAvailability.UNAVAILABLE:
+        return new Text(
+          "Unavailable",
+          style: new TextStyle(
+            fontSize: size,
+            color: CiEColor.red,
+          ),
+        );
+    }
+    return null;
+  }
 }
 
 class CampusUtility {
@@ -290,6 +339,18 @@ class CampusUtility {
         return "Karl.";
       case Campus.LOTHSTRASSE:
         return "Loth.";
+      case Campus.PASING:
+        return "Pasing";
+    }
+    return "";
+  }
+
+  static String getCampusAsLongString(Campus campus) {
+    switch (campus) {
+      case Campus.KARLSTRASSE:
+        return "Karlstrasse";
+      case Campus.LOTHSTRASSE:
+        return "Lothstrasse";
       case Campus.PASING:
         return "Pasing";
     }

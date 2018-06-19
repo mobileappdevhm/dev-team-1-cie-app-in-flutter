@@ -51,7 +51,7 @@ class CiEStyle {
 
   static TextStyle getAppBarTitleStyle(BuildContext context) {
     return new TextStyle(
-        fontSize: 20.0, color: CiEColor.red, letterSpacing: 2.0);
+        fontSize: 20.0, color: CiEColor.white, letterSpacing: 2.0);
   }
 
   static double getAppBarElevation(BuildContext context) {
@@ -74,6 +74,22 @@ class CiEStyle {
     return new TextStyle(
       fontSize: 16.0,
       fontWeight: FontWeight.bold,
+    );
+  }
+
+  static TextStyle getSettingsEnabledStyle() {
+    return new TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w200,
+      color: CiEColor.black
+    );
+  }
+
+  static TextStyle getSettingsDisabledStyle() {
+    return new TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w200,
+      color: CiEColor.mediumGray
     );
   }
 
@@ -110,6 +126,14 @@ class CiEStyle {
     return new TextStyle(
       color: CiEColor.gray,
       fontSize: 23.0,
+    );
+  }
+
+  static TextStyle getWarningTextStyle() {
+    return new TextStyle(
+      color: CiEColor.gray,
+      fontSize: 17.0,
+      fontWeight: FontWeight.w300
     );
   }
 
@@ -153,6 +177,40 @@ class CiEStyle {
       color: CiEColor.black,
       fontSize: 17.0,
       fontWeight: FontWeight.w300
+    );
+  }
+
+  static TextStyle getCourseDetailsFooterTextStyle() {
+    return new TextStyle(
+      fontSize: getCourseDetailsFontSize(),
+      color: CiEColor.gray,
+    );
+  }
+
+  static TextStyle getCourseDetailsFooterTextStyleBolt() {
+    return new TextStyle(
+      fontSize: getCourseDetailsFontSize(),
+      color: CiEColor.gray,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  static TextStyle getCourseDetailsHeadingStyle() {
+    return new TextStyle(
+        fontSize: 20.0,
+        color: CiEColor.gray,
+        letterSpacing: 2.0
+    );
+  }
+
+  static double getCourseDetailsFontSize() {
+    return 18.0;
+  }
+
+  static TextStyle getCourseDetailsDescription() {
+    return new TextStyle(
+        fontSize: 15.0,
+        color: CiEColor.gray,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/views/maps.dart';
@@ -8,6 +9,7 @@ import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 
 class TabsPage extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class TabsPage extends StatefulWidget {
 class TabsPageState extends State<TabsPage> {
   PageController _tabController;
   CourseListPresenter courseListPresenter;
+  CurrentUserPresenter currentUserPresenter;
   var _appTitle = '';
 
   int _tab = 2; //change this to the default tab page value
@@ -28,8 +31,10 @@ class TabsPageState extends State<TabsPage> {
     NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
     courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
-    // TODO: Standard file protections, check if file exists, contents!=null etc.
+    currentUserPresenter = new CurrentUserPresenter(_maybeChangeCallback,
+        Flavor.PROD);
     courseListPresenter.addCoursesFromMemory();
+    currentUserPresenter.loadUserSettingsFromMemory();
     this._appTitle = TabItems[_tab].title;
   }
 
@@ -52,9 +57,10 @@ class TabsPageState extends State<TabsPage> {
         title: new Text(
           _appTitle,
           style: CiEStyle.getAppBarTitleStyle(context),
+          textAlign: TextAlign.center,
         ),
         elevation: CiEStyle.getAppBarElevation(context),
-        backgroundColor: CiEColor.lightGray,
+        backgroundColor: CiEColor.red,
       ),
       body: new PageView(
         controller: _tabController,
@@ -63,10 +69,10 @@ class TabsPageState extends State<TabsPage> {
           new CourseList(courseListPresenter, false),
           // Behaves as Courses Page
           new MapPage(),
-          new Schedule(),
+          new Schedule(courseListPresenter),
           // Behaves as Favorites Page
           new CourseList(courseListPresenter, true),
-          new Settings(),
+          new Settings(currentUserPresenter),
         ],
       ),
       bottomNavigationBar: new BottomNavigationBar(
@@ -99,7 +105,6 @@ class TabsPageState extends State<TabsPage> {
 
 class TabItem {
   const TabItem({this.title, this.icon});
-
   final String title;
   final IconData icon;
 }

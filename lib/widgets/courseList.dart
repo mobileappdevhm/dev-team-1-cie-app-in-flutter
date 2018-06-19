@@ -8,6 +8,7 @@ import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
+import 'dart:async';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
@@ -57,7 +58,7 @@ class CourseListState extends State<CourseList> {
     if (shouldFilterByFavorites == false) {
       widgets.add(
         new Container(
-          color: Colors.blue,
+          color: CiEColor.turquoise,
           padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
           child: new Column(
             children: <Widget>[
@@ -68,6 +69,7 @@ class CourseListState extends State<CourseList> {
         )
       );
 
+      //Select department to filter for
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
       String departmentLabel = "Department #";
       widgets.add(new Row(
@@ -95,7 +97,8 @@ class CourseListState extends State<CourseList> {
               padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
               child: new IconButton(
                   color: CiEColor.mediumGray,
-                  icon: new Icon(Icons.search),
+                  icon: GenericIcon
+                      .buildGenericSearchIcon(shouldSearch),
                   onPressed: toggleSearch),
             )
           ]));
@@ -117,11 +120,14 @@ class CourseListState extends State<CourseList> {
       }
     }
 
+    //Build the tiles of the course list / favorites list
     for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
       if (shouldFilterByFavorites == false &&
               courseListPresenter.getFaculty(i) == filter ||
           (shouldFilterByFavorites == true &&
-              courseListPresenter.getFavourite(i))) {
+              courseListPresenter.getFavourite(i)) ||
+          (shouldFilterByFavorites == true &&
+              courseListPresenter.getWillChangeOnViewChange(i))) {
         if (shouldSearch == false ||
             (courseListPresenter.getTitle(i).contains(searchValue))) {
           widgets
@@ -155,9 +161,21 @@ class CourseListState extends State<CourseList> {
 
     return new RefreshIndicator(
         child: new ListView(children: widgets),
-        onRefresh: ()=> NineAPIEngine.pullCourseJSON(context, true),
-        color: Colors.blue,
+        onRefresh: ()=> handleRefreshIndicator(context, courseListPresenter),
+        color: CiEColor.turquoise,
     );
+  }
+
+  @override
+  void deactivate() {
+    courseListPresenter.deactivate();
+  }
+
+  handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
+    Future<Null> complete = NineAPIEngine.pullCourseJSON(context, true);
+    presenter.addCoursesFromMemory();
+    presenter.onChanged(true);
+    return complete;
   }
 
   Widget favoriteIcon(int id) {
@@ -170,7 +188,11 @@ class CourseListState extends State<CourseList> {
 
   void _toggleFavourite(int id) {
     setState(() {
-      courseListPresenter.toggleFavourite(id);
+      //Remove course from favourites only after view change
+      if(shouldFilterByFavorites)
+        courseListPresenter.toggleFavouriteWhenChangeView(id);
+      else
+        courseListPresenter.toggleFavourite(id);
     });
   }
 
