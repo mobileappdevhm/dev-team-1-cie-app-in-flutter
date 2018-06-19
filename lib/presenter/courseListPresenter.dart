@@ -139,9 +139,8 @@ class CourseListPresenter {
     return _courses.getCourses()[id].description;
   }
 
-  //Todo: to implement
   String getHoursPerWeek(int id) {
-    return "-";
+    return _courses.getCourses()[id].hoursPerWeek.toString();
   }
 
   String getEcts(int id) {
