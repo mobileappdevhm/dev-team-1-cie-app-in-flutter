@@ -77,7 +77,7 @@ void main() {
   group("simpleUserProdTest", () {
     //List<Course> courses;
 
-    setUp(() {
+    //setUp(() {
       /*courses = [
         new CourseBuilder()
         .withName("Blaba")
@@ -96,7 +96,7 @@ void main() {
         .build()
       ];*/
 
-    });
+    //});
 
     test('1', () {
       final CurrentUserProd sut = new CurrentUserProd();

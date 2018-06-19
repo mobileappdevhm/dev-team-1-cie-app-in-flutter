@@ -69,6 +69,7 @@ class CourseListState extends State<CourseList> {
         )
       );
 
+      //Select department to filter for
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
       String departmentLabel = "Department #";
       widgets.add(new Row(
@@ -119,11 +120,14 @@ class CourseListState extends State<CourseList> {
       }
     }
 
+    //Build the tiles of the course list / favorites list
     for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
       if (shouldFilterByFavorites == false &&
               courseListPresenter.getFaculty(i) == filter ||
           (shouldFilterByFavorites == true &&
-              courseListPresenter.getFavourite(i))) {
+              courseListPresenter.getFavourite(i)) ||
+          (shouldFilterByFavorites == true &&
+              courseListPresenter.getWillChangeOnViewChange(i))) {
         if (shouldSearch == false ||
             (courseListPresenter.getTitle(i).contains(searchValue))) {
           widgets
@@ -162,6 +166,11 @@ class CourseListState extends State<CourseList> {
     );
   }
 
+  @override
+  void deactivate() {
+    courseListPresenter.deactivate();
+  }
+
   handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
     Future<Null> complete = NineAPIEngine.pullCourseJSON(context, true);
     presenter.addCoursesFromMemory();
@@ -179,7 +188,11 @@ class CourseListState extends State<CourseList> {
 
   void _toggleFavourite(int id) {
     setState(() {
-      courseListPresenter.toggleFavourite(id);
+      //Remove course from favourites only after view change
+      if(shouldFilterByFavorites)
+        courseListPresenter.toggleFavouriteWhenChangeView(id);
+      else
+        courseListPresenter.toggleFavourite(id);
     });
   }
 
