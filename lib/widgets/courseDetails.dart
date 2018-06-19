@@ -164,14 +164,12 @@ class _CourseDetailsState extends State<CourseDetails> {
                   children: <Widget>[
                     new Text(
                       StaticVariables.ECTS + ":",
-                      style: new TextStyle(fontSize: 17.0),
+                      style: CiEStyle.getCourseDetailsFooterTextStyle()
                     ),
                     new Text(
                       " " + presenter.getEcts(id),
-                      style: new TextStyle(
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.bold),
-                    ),
+                      style: CiEStyle.getCourseDetailsFooterTextStyleBolt(),
+                    )
                   ],
                 ),
               ),
@@ -194,7 +192,7 @@ class _CourseDetailsState extends State<CourseDetails> {
           ),
           //Right side of footer
           new Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               new Container(
                 height: FOOTER_TILE_HEIGHT,
