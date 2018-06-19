@@ -154,7 +154,7 @@ class LoginFormState extends State<LoginForm> {
                     validator: _validatePassword,
                   ),
                   new Container(
-                    padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 25.0),
+                    padding: const EdgeInsets.fromLTRB(25.0, 25.0, 10.0, 25.0),
                     child: new FlatButton(
                       color: CiEStyle.getLogoutButtonColor(),
                       shape: new RoundedRectangleBorder(
