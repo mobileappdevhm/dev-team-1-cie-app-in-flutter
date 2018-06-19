@@ -2,14 +2,20 @@ import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/widgets/CiEAnimation.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {
-  _WelcomePageState createState() => new _WelcomePageState();
+  static FirebaseAnalytics analytics = new FirebaseAnalytics();
+  _WelcomePageState createState() => new _WelcomePageState(analytics);
 }
 
 class _WelcomePageState extends State<WelcomePage>
     with SingleTickerProviderStateMixin {
+
+  _WelcomePageState(this.analytics);
+
+  final FirebaseAnalytics analytics;
   AnimationController controller;
   Animation<double> animation;
 
@@ -27,6 +33,8 @@ class _WelcomePageState extends State<WelcomePage>
       }
     });
     controller.forward();
+
+    analytics.setCurrentScreen(screenName: "start screen");
   }
 
   dispose() {

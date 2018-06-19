@@ -5,23 +5,33 @@ import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginForm extends StatefulWidget {
+  static FirebaseAnalytics analytics = new FirebaseAnalytics();
   const LoginForm({Key key}) : super(key: key);
 
   @override
-  LoginFormState createState() => new LoginFormState();
+  LoginFormState createState() => new LoginFormState(analytics);
 }
 
 class LoginFormState extends State<LoginForm> {
+  LoginFormState(this.analytics);
+
+  final FirebaseAnalytics analytics;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final usernameController = new TextEditingController();
   final passwordController = new TextEditingController();
 
   LoginData loginData = new LoginData();
+
+  initState() {
+    super.initState();
+    analytics.setCurrentScreen(screenName: "login screen");
+  }
 
   void showInSnackBar(String value) {
     _scaffoldKey.currentState
@@ -65,6 +75,9 @@ class LoginFormState extends State<LoginForm> {
             print("Response firstName: $firstName");
             print("Response lastName: $lastName");
             print("Response curriculum: $curriculum");
+
+            //track login
+            analytics.logLogin();
 
             Navigator.of(context).pushReplacementNamed(Routes.TabPages);
           }

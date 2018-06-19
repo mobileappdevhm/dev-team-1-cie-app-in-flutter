@@ -1,7 +1,7 @@
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/views/start.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/material.dart';
 import 'package:firebase_analytics/observer.dart';
 
 FirebaseAnalytics analytics = new FirebaseAnalytics();
@@ -26,3 +26,5 @@ class MyApp extends StatelessWidget {
         ],);
   }
 }
+
+
