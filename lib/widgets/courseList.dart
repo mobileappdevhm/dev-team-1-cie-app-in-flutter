@@ -58,7 +58,7 @@ class CourseListState extends State<CourseList> {
     if (shouldFilterByFavorites == false) {
       widgets.add(
         new Container(
-          color: Colors.blue,
+          color: CiEColor.turquoise,
           padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
           child: new Column(
             children: <Widget>[
@@ -162,7 +162,7 @@ class CourseListState extends State<CourseList> {
     return new RefreshIndicator(
         child: new ListView(children: widgets),
         onRefresh: ()=> handleRefreshIndicator(context, courseListPresenter),
-        color: Colors.blue,
+        color: CiEColor.turquoise,
     );
   }
 
