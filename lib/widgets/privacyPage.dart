@@ -13,14 +13,17 @@ class PrivacyPage extends StatefulWidget {
 
 class _PrivacyPageState extends State<PrivacyPage> {
   bool changeLanguage = false;
-  String privacyPolicy = "";
+  String privacyPolicyText = "";
+  String privacyButtonText = "";
 
   @override
   Widget build(BuildContext context) {
     if (changeLanguage == true) {
-      privacyPolicy = privacyText;
+      privacyPolicyText = privacyText;
+      privacyButtonText = StaticVariables.CHANGE_TO_ENGLISH;
     } else {
-      privacyPolicy = privacyText1;
+      privacyPolicyText = privacyText1;
+      privacyButtonText = StaticVariables.CHANGE_TO_GERMAN;
     }
     return new Scaffold(
       appBar: new AppBar(
@@ -40,7 +43,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                 flex: 1,
                 child: new SingleChildScrollView(
                     child: new Text(
-                  privacyPolicy,
+                  privacyPolicyText,
                   style: new TextStyle(fontSize: 15.0),
                 )),
               ),
@@ -75,7 +78,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                           borderRadius: CiEStyle.getButtonBorderRadius()),
                       color: CiEColor.red,
                       child: new Text(
-                        StaticVariables.CHANGE_LANGUAGE,
+                        privacyButtonText,
                         style: CiEStyle.getSettingsPrivacyStyle(),
                       ),
                     ),
