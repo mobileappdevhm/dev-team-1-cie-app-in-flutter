@@ -60,7 +60,7 @@ class TabsPageState extends State<TabsPage> {
           textAlign: TextAlign.center,
         ),
         elevation: CiEStyle.getAppBarElevation(context),
-        backgroundColor: CiEColor.lightGray,
+        backgroundColor: CiEColor.red,
       ),
       body: new PageView(
         controller: _tabController,
