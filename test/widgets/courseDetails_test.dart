@@ -26,7 +26,6 @@ void main() {
       int counter = 0;
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
-          print(counter.toString() + widget.data);
           if (counter == 0) {
             expect(widget.data, 'Title of Course 1');
             counter++;

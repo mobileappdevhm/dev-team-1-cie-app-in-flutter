@@ -12,6 +12,7 @@ class CoursesMock implements Courses {
     for (int i = 1; i < GENERATE_COURSES; i++) {
       courses.add(
         new CourseBuilder()
+          .withId(generateMockId(i))
           .withName(generateMockCourseTitle(i))
           .withFaculty(generateMockDepartment(i))
           .withFaculty(generateMockDepartment(i))
@@ -26,6 +27,11 @@ class CoursesMock implements Courses {
           .build()
       );
     }
+  }
+
+  static String generateMockId(int i) {
+    // Make obviously distinguishable and unique from Nine course ids
+    return "fake-123abc" + i.toString();
   }
 
   static String generateMockCourseTitle(int i) {
@@ -70,7 +76,8 @@ class CoursesMock implements Courses {
   }
 
   static bool generateMockFavorite(int i) {
-    return i / pi.round() % 3 == 0 && i % 2 == 0;
+    return false;
+    //return i / pi.round() % 3 == 0 && i % 2 == 0;
   }
 
   static List<List<Lecture>> generatedMockLectures() {
