@@ -1,15 +1,33 @@
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/presenter/timeTablePresenter.dart';
+import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/schedulingUtility.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 
-class Schedule extends StatelessWidget {
-  TimeTablePresenter timeTablePresenter = new TimeTablePresenter(Flavor.PROD);
+class Schedule extends StatefulWidget {
+  CourseListPresenter courseListPresenter;
+
+  Schedule(this.courseListPresenter);
+
+  @override
+  _ScheduleState createState() => new _ScheduleState(courseListPresenter);
+}
+
+class _ScheduleState extends State<Schedule> {
+  CourseListPresenter courseListPresenter;
+
+  _ScheduleState(this.courseListPresenter);
+
+  @override
+  void initState() {
+    setState(() {
+      courseListPresenter;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +50,7 @@ class Schedule extends StatelessWidget {
   Widget _getTimeTableSpecificDay(Weekday weekday) {
     // Get lectures at day an receive timeTableEntry for day
     List<Lecture> lectureList =
-        timeTablePresenter.getLecturesOfWeekday(weekday);
+      courseListPresenter.getFavouriteLecturesOfWeekday(weekday);
     return new TimeTableEntry(lectureList, weekday);
   }
 }
