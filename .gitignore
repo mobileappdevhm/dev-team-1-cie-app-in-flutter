@@ -32,3 +32,4 @@ ios/Podfile.lock
 ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 ios/.generated/
 pubspec.lock
+dev_team_01.iml
