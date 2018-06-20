@@ -45,25 +45,25 @@ void main() {
           } else if (counter == 5) {
             expect(widget.data.isEmpty, false);
             counter++;
-          } else if (counter == 6) {
+          } else if (counter == 7) {
             expect(widget.data, 'ECTS:');
             counter++;
-          } else if (counter == 7) {
+          } else if (counter == 8) {
             expect(widget.data.isEmpty, false);
             counter++;
-          } else if (counter == 8) {
+          } else if (counter == 9) {
             expect(widget.data, "Hours per Week:");
             counter++;
-          } else if (counter == 9) {
+          } else if (counter == 10) {
             expect(widget.data.contains("1"), true);
             counter++;
-          } else if (counter == 10) {
+          } else if (counter == 11) {
             expect(widget.data, 'Pending');
             counter++;
-          } else if (counter == 11) {
+          } else if (counter == 12) {
             expect(widget.data, 'Contact');
             counter++;
-          } else if (counter == 12) {
+          } else if (counter == 13) {
             expect(widget.data, 'Course Details');
             counter++;
           }
