@@ -47,4 +47,46 @@ void main() {
       }
     }
   });
+
+  group('Login', () {
+    testWidgets('1 Login press', (WidgetTester tester) async {
+      // Tells the tester to build a UI based on the widget tree passed to it
+      await tester.pumpWidget(
+        new StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return new MaterialApp(
+              home: new Material(
+                child: new Center(child: new LoginForm()),
+              ),
+            );
+          },
+        ),
+      );
+
+      final Iterable<Widget> listOfWidgets = tester.allWidgets;
+      int counter = 0;
+      for (Widget widget in listOfWidgets) {
+        if (widget is Text) {
+          if (counter == 0) {
+            expect(widget.data, 'Courses in English');
+            counter++;
+          } else if (counter == 1) {
+            expect(widget.data, 'E-Mail');
+            //write dummy stuff
+            counter++;
+          } else if (counter == 2) {
+            expect(widget.data, 'Password');
+            //write dummy stuff
+            counter++;
+          } else if (counter == 3) {
+            expect(widget.data, 'LOGIN');
+            await tester.tap(find.byWidget(widget));
+            counter++;
+          }
+        }
+      }
+    });
+
+    //ToDo: login with real user. Dummy needed
+  });
 }

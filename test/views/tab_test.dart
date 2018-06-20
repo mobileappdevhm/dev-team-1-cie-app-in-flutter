@@ -34,31 +34,20 @@ void main() {
                 WeekdayUtility
                     .getWeekdayAsString(WeekdayUtility.getCurrentWeekday()));
             counter++;
-          }
-          /*
-          TODO this test will fail on everyday expecting wednesday
-          if (WeekdayUtility.getCurrentWeekday() != Weekday.Sun &&
-              WeekdayUtility.getCurrentWeekday() != Weekday.Sat){
-            if (counter == 1) {
-              expect(
-                  widget.data,
-                  WeekdayUtility
-                      .getWeekdayAsString(WeekdayUtility.getCurrentWeekday()));
-              counter++;
-            } else if (counter == 2) {
-              expect(widget.data.substring(0, 15), "Title of Course");
-              counter++;
-            } else if (counter == 3) {
-              expect(widget.data.substring(0, 13), ' - Professor ');
-              counter++;
-            } else if (counter == 4) {
-              expect(widget.data.substring(0, 8), 'Campus: ');
-              counter++;
-            } else if (counter == 5) {
-              expect(widget.data, 'Pasing');
-              counter++;
+          }else if(counter >= 2){
+            if (WeekdayUtility.getCurrentWeekday() != Weekday.Sun &&
+                WeekdayUtility.getCurrentWeekday() != Weekday.Sat){
+              if (counter == 2) {
+                expect(widget.data.substring(0, 15), "Title of Course");
+                counter++;
+              } else if (counter == 3) {
+                expect(widget.data.substring(0, 8), 'Campus: '); // possibility that this test could fail
+                // if failing just comment it out and write an issue
+                counter++;
+              }
             }
-          }*/
+          }
+
         }
       }
     });
