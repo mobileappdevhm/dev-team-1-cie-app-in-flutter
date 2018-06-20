@@ -62,7 +62,7 @@ class CourseListItem extends StatelessWidget {
   }
 
   Widget _getConflictWarning(id) {
-    if (courseListPresenter.checkIfConflictsOtherFavorite(id)) {
+    if (courseListPresenter.checkIfConflictsOtherFavoriteCourse(id)) {
       String textToShow;
       TextStyle textStyleToShow;
       if (courseListPresenter.getCourses()[id].isFavourite) {

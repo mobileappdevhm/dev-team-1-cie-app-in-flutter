@@ -189,10 +189,16 @@ class CourseListPresenter {
   }
 
   //If lectures of this course conflicts with other favourite lecture return true
-  bool checkIfConflictsOtherFavorite(id) {
+  bool checkIfConflictsOtherFavoriteCourse(id) {
     return getCourses()[id].lecturesPerWeek.any((thisFavorite) =>
         getFavouriteLectures().any((otherFavorite) =>
             _checkTimeConflict(thisFavorite, otherFavorite)));
+  }
+
+  //If lectures of this course conflicts with other favourite lecture return true
+  bool checkIfConflictsOtherFavoriteLecture(Lecture lecture) {
+    return getFavouriteLectures().any((otherFavorite) =>
+        _checkTimeConflict(lecture, otherFavorite));
   }
 
   bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
@@ -231,14 +237,47 @@ class CourseListPresenter {
       Campus campusOne, Campus campusTwo, int timeBetweenLectures) {
     if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
         campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
-      return timeBetweenLectures >= StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL;
+      return timeBetweenLectures >=
+          StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL;
     } else if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.PASING ||
         campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
       return timeBetweenLectures >= StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS;
-    } else if (campusOne == Campus.KARLSTRASSE && campusTwo == Campus.PASING ||
-        campusTwo == Campus.KARLSTRASSE && campusOne == Campus.PASING) {
+    } else {
       return timeBetweenLectures >= StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL;
     }
-    return false;
+  }
+
+  int _timeRequiredForCampusSwitch(Campus campusOne, Campus campusTwo) {
+    if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
+        campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
+      return StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL;
+    } else if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.PASING ||
+        campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
+      return StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS;
+    } else {
+      return StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL;
+    }
+  }
+
+  String constructSchedulingConflictText(Lecture one, Lecture two) {
+    String campusOne = CampusUtility.getCampusAsLongString(one.campus);
+    String campusTwo = CampusUtility.getCampusAsLongString(two.campus);
+    String time =
+        _timeRequiredForCampusSwitch(one.campus, two.campus).toString();
+    return one.course.name +
+        " is held in the " +
+        campusOne +
+        " campus, and " +
+        two.course.name +
+        " is held in the " +
+        campusTwo +
+        " campus.\n\n"
+        "Please consider that the commute between the " +
+        campusOne +
+        " and the " +
+        campusTwo +
+        " campus may take more than " +
+        time +
+        " minutes.\n\nYou may not arrive to class on time.";
   }
 }
