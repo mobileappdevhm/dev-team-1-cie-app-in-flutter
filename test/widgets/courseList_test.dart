@@ -72,7 +72,7 @@ void main() {
           listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
     });
 
-    testWidgets('course_description', (WidgetTester tester) async {
+    /*testWidgets('course_description', (WidgetTester tester) async {
       final bool isFavoritesPage = false;
 
       await tester.pumpWidget(
@@ -89,7 +89,7 @@ void main() {
         ),
       );
       tester.allWidgets;
-    });
+    });*/
   });
 }
 

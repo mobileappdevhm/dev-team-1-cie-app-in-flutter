@@ -64,9 +64,6 @@ void main() {
             expect(widget.data,StaticVariables.CHANGE_TO_GERMAN);
             await tester.tap(find.byWidget(widget));
             counter++;
-          } else if (counter == 3) {
-            expect(widget.data, 'Privacy Policy');
-            counter++;
           }
         }
       }
