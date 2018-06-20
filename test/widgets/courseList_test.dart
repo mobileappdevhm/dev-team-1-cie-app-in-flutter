@@ -1,18 +1,16 @@
-/*
+import 'package:cie_team1/model/course/courses_mock.dart';
+@Skip('Travis')
+
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cie_team1/utils/StaticVariables.dart';
-import 'package:cie_team1/model/course/courses_mock.dart';
-*/
+
 
 void main() {
 
-}
-/*
 
   group("1", () {
     // Expected widget within created widgets. Generated using our mock's behavior
@@ -42,7 +40,7 @@ void main() {
               home: new Material(
                 child: new Center(
                     child: new CourseList(
-                        new CourseListPresenter(null), isFavoritesPage)),
+                        new CourseListPresenter(null,), isFavoritesPage, new CurrentUserPresenter(null, Flavor.MOCK))),
               ),
             );
           },
@@ -54,6 +52,7 @@ void main() {
       checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
       checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
     });
+
 
     testWidgets('basic favorites page', (WidgetTester tester) async {
       final bool isFavoritesPage = true;
@@ -65,8 +64,7 @@ void main() {
               home: new Material(
                 child: new Center(
                     child: new CourseList(
-                        new CourseListPresenter(null), isFavoritesPage, new CurrentUserPresenter(null,
-                        Flavor.MOCK))),
+                        new CourseListPresenter(null), isFavoritesPage, new CurrentUserPresenter(null, Flavor.MOCK))),
               ),
             );
           },
@@ -78,6 +76,7 @@ void main() {
       checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
     });
 
+
     testWidgets('course_description', (WidgetTester tester) async {
       final bool isFavoritesPage = false;
 
@@ -88,7 +87,7 @@ void main() {
               home: new Material(
                 child: new Center(
                     child: new CourseList(
-                        new CourseListPresenter(null), isFavoritesPage)),
+                        new CourseListPresenter(null), isFavoritesPage ,new CurrentUserPresenter(null, Flavor.MOCK))),
               ),
             );
           },
@@ -142,4 +141,4 @@ void checkIfTextsCreatedCorrectly(Iterable<Widget> listOfWidgets,
     }
   }
 }
-*/
+
