@@ -25,6 +25,7 @@ class CourseListPresenter {
   // TODO: -Make the loop contents more relevant and move it somewhere else
   void addCoursesFromMemory() {
     this.onChanged(true);
+
     List<Course> courseList = _courses.getCourses();
     bool didUpdate = false;
     FileStore.readFileAsString(FileStore.COURSES).then((String val) {
