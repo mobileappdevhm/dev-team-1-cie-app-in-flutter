@@ -54,12 +54,20 @@ class TabsPageState extends State<TabsPage> {
   }
 
   void _savePressed() {
-    IcsExporter.exportAsIcs(new CourseInjector()
-        .courses
-        .getCourses()
-        .where((c) => c.isFavourite)
-        .toList());
-    showInSnackBar("Calendar-File stored locally!");
+    IcsExporter
+        .exportAsIcs(new CourseInjector()
+            .courses
+            .getCourses()
+            .where((c) => c.isFavourite)
+            .toList())
+        .then((String path) {
+      print("path: " + path.toString());
+      if (path.length > 0) {
+        showInSnackBar("The Calendar-File was stored locally: " + path);
+      } else {
+        showInSnackBar("The Calendar-File could not be stored locally!");
+      }
+    });
   }
 
   void showInSnackBar(String value) {
@@ -80,7 +88,7 @@ class TabsPageState extends State<TabsPage> {
         elevation: CiEStyle.getAppBarElevation(context),
         backgroundColor: CiEColor.red,
         actions: <Widget>[
-          ((_appTitle == 'Timetable')
+          ((_appTitle == 'Schedule')
               ? new IconButton(
                   icon: new Icon(Icons.save_alt),
                   color: CiEColor.white,

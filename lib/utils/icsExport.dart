@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/details/date.dart';
 import 'package:cie_team1/utils/fileStore.dart';
@@ -7,9 +9,11 @@ class IcsExporter {
       "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Courses in Englisch by HM//Calendar 1.0//EN\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\n";
   static const String _END = "End:VCALENDAR\r\n";
 
-  static void exportAsIcs(List<Course> favorites) {
+  static Future<String> exportAsIcs(List<Course> favorites) async {
     String result = getFavoritesAsIcsString(favorites);
-    FileStore.writeToFile(FileStore.ICS_EXPORT, result, ".ics");
+    FileStore.writeToFile(FileStore.ICS_EXPORT, result, ".ics", true);
+    var file = await FileStore.getFile(FileStore.ICS_EXPORT, ".ics", true);
+    return file.path;
   }
 
   static String getFavoritesAsIcsString(List<Course> favorites) {
