@@ -7,10 +7,11 @@ class FileStore {
   static const String COURSES = "_courses";
   static const String LOGIN = "_login";
   static const String USER_SETTINGS = "_user";
+  static const String ICS_EXPORT = "_calendar";
 
-  static Future<File> getFile(String resource) async {
+  static Future<File> getFile(String resource, [String extension = ".json"]) async {
     String dir = (await getApplicationDocumentsDirectory()).path;
-    String filename = "$dir/" + resource + ".json";
+    String filename = "$dir/" + resource + extension;
     return new File(filename);
   }
 
@@ -24,11 +25,11 @@ class FileStore {
     }
   }
 
-  static Future<File> writeToFile(String resource, String data) async {
+  static Future<File> writeToFile(String resource, String data, [String extension = ".json"]) async {
     String dir = (await getApplicationDocumentsDirectory()).path;
-    String filename = "$dir/" + resource + ".json";
+    String filename = "$dir/" + resource + extension;
     File f = new File(filename);
-    f.writeAsString(data);
+    await f.writeAsString(data);
     return f;
   }
 }
