@@ -1,4 +1,5 @@
 import 'package:cie_team1/di/courses_di.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
@@ -36,11 +37,9 @@ class CourseListPresenter {
           // TODO: Delete the following builder code & only rely on the .fromJson
           // once all relevent data is available from the Nine API
           courseBuilder
-              .withLecturesPerWeek(
-              [
-                new Lecture(
-                    Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-                    new DayTime(11, 30), "R0.009")
+              .withLecturesPerWeek([
+                new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
+                    new DayTime(10, 00), new DayTime(11, 30), "R0.009")
               ])
               .withHoursPerWeek(2)
               .withEcts(2)
@@ -110,9 +109,7 @@ class CourseListPresenter {
   }
 
   List<Course> getPrevCourses(CurrentUser currentUser) {
-    return currentUser
-        .getCurrentUser()
-        .prevCourses;
+    return currentUser.getCurrentUser().prevCourses;
   }
 
   CourseAvailability getAvailability(int id) {
@@ -170,7 +167,8 @@ class CourseListPresenter {
   List<Lecture> getFavouriteLectures() {
     List<Lecture> lectures = [];
     //Add all favourite lectures to lectures list
-    getCourses().where((c) => c.isFavourite)
+    getCourses()
+        .where((c) => c.isFavourite)
         .forEach((c) => c.lecturesPerWeek.forEach((l) => lectures.add(l)));
     return _sortLectures(lectures);
   }
@@ -184,10 +182,9 @@ class CourseListPresenter {
   List<Lecture> getFavouriteLecturesOfWeekday(Weekday searchedWeekday) {
     List<Lecture> lectures = [];
     //Add all lectures to lectures list
-    getCourses().where((c) => c.isFavourite).forEach((c) =>
-        c.lecturesPerWeek
-            .where((l) => l.weekday == searchedWeekday)
-            .forEach((l) => lectures.add(l)));
+    getCourses().where((c) => c.isFavourite).forEach((c) => c.lecturesPerWeek
+        .where((l) => l.weekday == searchedWeekday)
+        .forEach((l) => lectures.add(l)));
     return _sortLectures(lectures);
   }
 
@@ -200,16 +197,13 @@ class CourseListPresenter {
 
   bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
     //Cant conflict itself
-    if (thisFavorite == otherFavorite)
-      return false;
+    if (thisFavorite == otherFavorite) return false;
     //If weekday is not same return false
-    if (thisFavorite.weekday != otherFavorite.weekday)
-      return false;
+    if (thisFavorite.weekday != otherFavorite.weekday) return false;
     //If running at same time return true
-    int timeBetweenLectures = _getTimeBetweenLectures(
-        thisFavorite, otherFavorite);
-    if (timeBetweenLectures < 0)
-      return true;
+    int timeBetweenLectures =
+        _getTimeBetweenLectures(thisFavorite, otherFavorite);
+    if (timeBetweenLectures < 0) return true;
     //If time is not enough to switch campus return true
     if (!_timeIsEnoughForCampusSwitch(
         thisFavorite.campus, otherFavorite.campus, timeBetweenLectures))
@@ -233,8 +227,18 @@ class CourseListPresenter {
     return valueOne > valueTwo ? valueOne : valueTwo;
   }
 
-  bool _timeIsEnoughForCampusSwitch(Campus campusOne, Campus campusTwo,
-      int timeBetweenLectures) {
-    return true;
+  bool _timeIsEnoughForCampusSwitch(
+      Campus campusOne, Campus campusTwo, int timeBetweenLectures) {
+    if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
+        campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
+      return timeBetweenLectures >= StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL;
+    } else if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.PASING ||
+        campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
+      return timeBetweenLectures >= StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS;
+    } else if (campusOne == Campus.KARLSTRASSE && campusTwo == Campus.PASING ||
+        campusTwo == Campus.KARLSTRASSE && campusOne == Campus.PASING) {
+      return timeBetweenLectures >= StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL;
+    }
+    return false;
   }
 }
