@@ -157,6 +157,7 @@ class CourseListState extends State<CourseList> {
     courseListPresenter.deactivate();
   }
 
+  // Create a raised button on which is used on favorite page to allow users to submit there choice to lottery
   Widget _getRaisedSubmitButton() {
     bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn;
 
