@@ -1,4 +1,5 @@
 import 'package:cie_team1/model/course/course.dart';
+import 'package:cie_team1/model/course/details/date.dart';
 import 'package:test/test.dart';
 import 'dart:convert';
 
@@ -375,6 +376,7 @@ void main() {
       var testBool = true;
       var testInt = 1;
       var testDynamicList = new List<dynamic>();
+      var testDatesList = new List<Date>();
       var testLectureList = new List<Lecture>();
       var testCourseAvailability = CourseAvailability.PENDING;
       CourseBuilder builder = new CourseBuilder()
@@ -384,7 +386,7 @@ void main() {
         .withIsCoterie(testBool)
         .withhasHomeBias(testBool)
         .withCorrelations(testDynamicList)
-        .withdates(testDynamicList)
+        .withdates(testDatesList)
         .withShortName(testString)
         .withActions(testDynamicList)
         .withFaculty(testString)
@@ -403,7 +405,7 @@ void main() {
       expect(built.isCoterie, testBool);
       expect(built.hasHomeBias, testBool);
       expect(built.correlations, testDynamicList);
-      expect(built.dates, testDynamicList);
+      expect(built.dates, testDatesList);
       expect(built.shortName, testString);
       expect(built.actions, testDynamicList);
       expect(built.faculty, testString);
@@ -458,6 +460,7 @@ void main() {
       var testBool = true;
       var testInt = 1;
       var testDynamicList = new List<dynamic>();
+      var testDatesList = new List<Date>();
       var testLectureList = new List<Lecture>();
       var testCourseAvailability = CourseAvailability.PENDING;
       builder
@@ -466,7 +469,7 @@ void main() {
           .withIsCoterie(testBool)
           .withhasHomeBias(testBool)
           .withCorrelations(testDynamicList)
-          .withdates(testDynamicList)
+          .withdates(testDatesList)
           .withShortName(testString)
           .withActions(testDynamicList)
           .withLecturesPerWeek(testLectureList)
@@ -484,7 +487,7 @@ void main() {
       expect(built.isCoterie, testBool);
       expect(built.hasHomeBias, testBool);
       expect(built.correlations, testDynamicList);
-      expect(built.dates, testDynamicList);
+      expect(built.dates, testDatesList);
       expect(built.shortName, testString);
       expect(built.actions, testDynamicList);
       expect(built.faculty, "09");
