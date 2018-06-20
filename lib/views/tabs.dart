@@ -66,12 +66,12 @@ class TabsPageState extends State<TabsPage> {
         controller: _tabController,
         onPageChanged: _onPageChanged,
         children: <Widget>[
-          new CourseList(courseListPresenter, false),
+          new CourseList(courseListPresenter, false, currentUserPresenter),
           // Behaves as Courses Page
           new MapPage(),
           new Schedule(courseListPresenter),
           // Behaves as Favorites Page
-          new CourseList(courseListPresenter, true),
+          new CourseList(courseListPresenter, true, currentUserPresenter),
           new Settings(currentUserPresenter),
         ],
       ),
