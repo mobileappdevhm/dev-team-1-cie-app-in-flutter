@@ -13,6 +13,7 @@ class CiEStyle {
     return new TextStyle(
       color: CiEColor.turquoise,
       fontWeight: FontWeight.bold,
+      fontSize: 14.0,
     );
   }
 

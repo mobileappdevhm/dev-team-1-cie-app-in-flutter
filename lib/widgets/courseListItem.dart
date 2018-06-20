@@ -37,10 +37,14 @@ class CourseListItem extends StatelessWidget {
                   style: CiEStyle.getCoursesListFacultyStyle(),
                 ),
               ),
-              new Text(
-                courseListPresenter.getLectureTimesBeautiful(id),
-                style: CiEStyle.getCoursesListTimeStyle(),
-              ),
+              new Padding(
+                //Calculated padding to align left side
+                padding: new EdgeInsets.fromLTRB(0.0, (CiEStyle.getCoursesListFacultyStyle().fontSize - CiEStyle.getCoursesListTimeStyle().fontSize) / 2.0 , 0.0, 0.0),
+                child: new Text(
+                  courseListPresenter.getLectureTimesBeautiful(id),
+                  style: CiEStyle.getCoursesListTimeStyle(),
+                ),
+              )
             ],
           ),
         ],
@@ -51,7 +55,9 @@ class CourseListItem extends StatelessWidget {
   }
 
   void _toggleDescription(BuildContext context) {
-    Navigator.push(context,
-        new MaterialPageRoute(builder: (context) => new CourseDetails(id, courseListPresenter)));
+    Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new CourseDetails(id, courseListPresenter)));
   }
 }
