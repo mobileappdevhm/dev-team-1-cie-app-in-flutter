@@ -23,19 +23,25 @@ class CourseListItem extends StatelessWidget {
         maxLines: 3,
         overflow: TextOverflow.ellipsis,
       ),
-      subtitle: new Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      subtitle: new Column(
         children: <Widget>[
-          new Padding(
-            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-            child: new Text(
-              StaticVariables.FK + " " + courseListPresenter.getFaculty(id),
-              style: CiEStyle.getCoursesListFacultyStyle(),
-            ),
-          ),
-          new Text(
-            courseListPresenter.getLectureTimesBeautiful(id),
-            style: CiEStyle.getCoursesListTimeStyle(),
+          //Show department and time
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Padding(
+                padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+                child: new Text(
+                  StaticVariables.FK + " " + courseListPresenter.getFaculty(id),
+                  style: CiEStyle.getCoursesListFacultyStyle(),
+                ),
+              ),
+              new Text(
+                courseListPresenter.getLectureTimesBeautiful(id),
+                style: CiEStyle.getCoursesListTimeStyle(),
+              ),
+            ],
           ),
         ],
       ),
