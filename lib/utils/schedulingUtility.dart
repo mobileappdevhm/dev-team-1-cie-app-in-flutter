@@ -4,10 +4,20 @@ import 'package:cie_team1/utils/staticVariables.dart';
 class SchedulingUtility {
   // This method relies on the list of courses being displayed in chronological
   // order in terms of lecture time
-  static bool isCloseTime(DayTime one, DayTime two, timeRequired) {
-    int time1 = one.hour * StaticVariables.HOURS_TO_MIN + one.minute;
-    int time2 = two.hour * StaticVariables.HOURS_TO_MIN + two.minute;
-    return (time2 - time1).abs() < timeRequired;
+  static bool isCloseTime(Lecture lectureOne, Lecture lectureTwo, timeRequired) {
+    int startOne = convertToMinutes(lectureOne.startDayTime.hour,
+        lectureOne.startDayTime.minute);
+    int endOne = convertToMinutes(lectureOne.endDayTime.hour,
+        lectureOne.endDayTime.minute);
+    int startTwo = convertToMinutes(lectureTwo.startDayTime.hour,
+        lectureTwo.startDayTime.minute);
+
+    return ((startTwo - endOne).abs() < timeRequired ||
+        (startOne >= startTwo && startTwo <= endOne));
+  }
+
+  static int convertToMinutes(int hours, int minutes) {
+    return hours*StaticVariables.HOURS_TO_MIN + minutes;
   }
 
   static int timeRequired(Campus one, Campus two) {
@@ -31,12 +41,22 @@ class SchedulingUtility {
     }
   }
 
-  static bool isSchedulingConflict(DayTime dayTimeOne, DayTime dayTimeTwo,
-      Campus campusOne, Campus campusTwo) {
-    return isCloseTime(dayTimeOne, dayTimeTwo, timeRequired(campusOne, campusTwo));
+  static bool isSchedulingConflict(Lecture lectureOne, Lecture lectureTwo) {
+    return isCloseTime(lectureOne, lectureTwo, timeRequired(lectureOne.campus,
+        lectureTwo.campus));
   }
 
   static String constructSchedulingConflictText(Lecture one, Lecture two) {
+    int startOne = convertToMinutes(one.startDayTime.hour,
+        one.startDayTime.minute);
+    int endOne = convertToMinutes(one.endDayTime.hour,
+        one.endDayTime.minute);
+    int startTwo = convertToMinutes(two.startDayTime.hour,
+        two.startDayTime.minute);
+    if (startTwo >= startOne && startTwo <= endOne) {
+      return "Please consider that the schedules between " + one.course.name +
+          " and " + two.course.name + " overlap.";
+    }
     String campusOne = CampusUtility.getCampusAsLongString(one.campus);
     String campusTwo = CampusUtility.getCampusAsLongString(two.campus);
     String time = SchedulingUtility.timeRequired(one.campus, two.campus).toString();

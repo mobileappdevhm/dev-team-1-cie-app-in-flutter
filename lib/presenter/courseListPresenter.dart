@@ -2,7 +2,6 @@ import 'package:cie_team1/di/courses_di.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
-import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/utils/fileStore.dart';
 import 'dart:convert';
 

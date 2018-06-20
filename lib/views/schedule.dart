@@ -32,7 +32,6 @@ class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = new List<Widget>();
-
     children.add(new ScheduleDivider("Today"));
     children.add(_getTimeTableSpecificDay(WeekdayUtility.getCurrentWeekday()));
 
@@ -73,38 +72,22 @@ class TimeTableEntryItem extends StatelessWidget {
   }
 }
 
-class TimeTableEntry extends StatefulWidget {
+class TimeTableEntry extends StatelessWidget {
   final List<Lecture> children;
   final Weekday weekday;
 
   TimeTableEntry(this.children, this.weekday);
 
   @override
-  _TimeTableEntryState createState() =>
-      new _TimeTableEntryState(children, weekday);
-}
-
-// Split Lectures into weekdays. One expandable tile per weekday
-class _TimeTableEntryState extends State<TimeTableEntry> {
-  final List<Lecture> children;
-  final Weekday weekday;
-
-  _TimeTableEntryState(this.children, this.weekday);
-
-  Widget _buildTile(List<Lecture> children, Weekday weekday) {
-    List<Widget> childrenWidgets = new List<Widget>();
-
-    // Add a new item for each child lecture
-    for (int i = 0; i < children.length; i++) {
-      childrenWidgets.add(new TimeTableEntryItem(children.elementAt(i)));
-      // If there exists another lecture in the list, determine if there is
-      // enough time to commute to the specified campus location
+  Widget build(BuildContext context) {
+    List<Widget> validEntries = new List<Widget>();
+    for (int i=0; i< children.length; i++) {
+      validEntries.add(new TimeTableEntryItem(children.elementAt(i)));
       if (i + 1 < children.length) {
         Lecture lectureOne = children.elementAt(i);
         Lecture lectureTwo = children.elementAt(i + 1);
-        if (SchedulingUtility.isSchedulingConflict(lectureOne.endDayTime,
-            lectureTwo.startDayTime, lectureOne.campus, lectureTwo.campus)) {
-          childrenWidgets.add(new FlatButton(
+        if (SchedulingUtility.isSchedulingConflict(lectureOne, lectureTwo)) {
+          validEntries.add(new FlatButton(
               onPressed: () => GenericAlert.confirmDialog(
                   context,
                   StaticVariables.TIME_CONFLICT_MESSAGE,
@@ -115,17 +98,11 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
         }
       }
     }
-
     return new ExpansionTile(
       initiallyExpanded: true,
       title: new Text(WeekdayUtility.getWeekdayAsString(weekday)),
-      children: childrenWidgets,
+      children: validEntries,
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildTile(children, weekday);
   }
 }
 

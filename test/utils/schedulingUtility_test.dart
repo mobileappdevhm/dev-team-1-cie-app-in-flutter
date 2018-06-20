@@ -12,8 +12,8 @@ void main() {
   setUp((){
     testLectureOne = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
         new DayTime(10, 00), new DayTime(11, 30), "R0.009") ;
-    testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon, new DayTime(10, 00),
-        new DayTime(11, 30), "R0.009") ;
+    testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon, new DayTime(11, 45),
+        new DayTime(13, 30), "R0.009") ;
     testCourseOne = new CourseBuilder()
       .withName("Blaba")
       .withFaculty("7")
@@ -111,46 +111,56 @@ void main() {
 
   group('schedulingtest', () {
     test('1 both Pasing', () async {
-      final DayTime day1 = new DayTime(12, 0);
-      final DayTime day2 = new DayTime(12, 5);
+      testLectureOne = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(10, 00), new DayTime(11, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(11, 45), new DayTime(13, 15), "R0.009") ;
       final bool sut = SchedulingUtility.isSchedulingConflict(
-          day1, day2, Campus.PASING, Campus.PASING);
+          testLectureOne, testLectureTwo);
 
       expect(sut, false);
     });
 
     test('2 both Loth', () async {
-      final DayTime day1 = new DayTime(12, 0);
-      final DayTime day2 = new DayTime(12, 5);
+      testLectureOne = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(10, 00), new DayTime(12, 00), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(12, 5), new DayTime(13, 15), "R0.009") ;
       final bool sut = SchedulingUtility.isSchedulingConflict(
-          day1, day2, Campus.LOTHSTRASSE, Campus.LOTHSTRASSE);
+          testLectureOne, testLectureTwo);
 
       expect(sut, false);
     });
 
     test('2 Loth Pasing', () async {
-      final DayTime day1 = new DayTime(12, 0);
-      final DayTime day2 = new DayTime(12, 5);
+      testLectureOne = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(10, 00), new DayTime(12, 00), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(12, 15), new DayTime(13, 15), "R0.009") ;
       final bool sut = SchedulingUtility.isSchedulingConflict(
-          day1, day2, Campus.LOTHSTRASSE, Campus.PASING);
+          testLectureOne, testLectureTwo);
 
       expect(sut, true);
     });
 
     test('2 Loth Pasing much time', () async {
-      final DayTime day1 = new DayTime(12, 0);
-      final DayTime day2 = new DayTime(18, 5);
+      testLectureOne = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(10, 00), new DayTime(12, 00), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(18, 5), new DayTime(22, 00), "R0.009") ;
       final bool sut = SchedulingUtility.isSchedulingConflict(
-          day1, day2, Campus.LOTHSTRASSE, Campus.PASING);
+          testLectureOne, testLectureTwo);
 
       expect(sut, false);
     });
 
     test('2 Loth Loth much time', () async {
-      final DayTime day1 = new DayTime(12, 0);
-      final DayTime day2 = new DayTime(18, 5);
+      testLectureOne = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(10, 00), new DayTime(12, 00), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(18, 5), new DayTime(22, 00), "R0.009") ;
       final bool sut = SchedulingUtility.isSchedulingConflict(
-          day1, day2, Campus.LOTHSTRASSE, Campus.LOTHSTRASSE);
+          testLectureOne, testLectureTwo);
 
       expect(sut, false);
     });
@@ -158,33 +168,44 @@ void main() {
 
   group("isCloseTime", () {
     test('1', () {
-      DayTime one = new DayTime(10, 00);
-      DayTime two = new DayTime(11, 30);
-      bool result = SchedulingUtility.isCloseTime(one, two,
-      StaticVariables.KARLSTRASSE_PASING_COMMUTE_MINS);
+      testLectureOne = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
+          new DayTime(10, 00), new DayTime(10, 00), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(11, 30), new DayTime(13, 00), "R0.009") ;
+      bool result = SchedulingUtility.isCloseTime(testLectureOne,
+          testLectureTwo, StaticVariables.KARLSTRASSE_PASING_COMMUTE_MINS);
+
       expect(result, false);
     });
 
     test('2', () {
-      DayTime one = new DayTime(11, 30);
-      DayTime two = new DayTime(11, 45);
-      bool result = SchedulingUtility.isCloseTime(one, two,
-      StaticVariables.KARLSTRASSE_PASING_COMMUTE_MINS);
+      testLectureOne = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
+          new DayTime(10, 00), new DayTime(11, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(11, 45), new DayTime(13, 00), "R0.009") ;
+      bool result = SchedulingUtility.isCloseTime(testLectureOne,
+          testLectureTwo, StaticVariables.KARLSTRASSE_PASING_COMMUTE_MINS);
+
       expect(result, true);
     });
 
     test('3', () {
-      DayTime one = new DayTime(11, 30);
-      DayTime two = new DayTime(11, 45);
-      bool result = SchedulingUtility.isCloseTime(one, two,
-      StaticVariables.LOTHSTRASSE_KARLSTRASSE_COMMUTE_MINS);
+      testLectureOne = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
+          new DayTime(10, 00), new DayTime(11, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(11, 45), new DayTime(13, 00), "R0.009") ;
+      bool result = SchedulingUtility.isCloseTime(testLectureOne,
+          testLectureTwo, StaticVariables.LOTHSTRASSE_KARLSTRASSE_COMMUTE_MINS);
+
       expect(result, true);
     });
 
     test('4', () {
-      DayTime one = new DayTime(11, 30);
-      DayTime two = new DayTime(11, 30);
-      bool result = SchedulingUtility.isCloseTime(one, two,
+      testLectureOne = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
+          new DayTime(10, 00), new DayTime(11, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(11, 30), new DayTime(13, 00), "R0.009") ;
+      bool result = SchedulingUtility.isCloseTime(testLectureOne, testLectureTwo,
       StaticVariables.SAME_CAMPUS_COMMUTE_MINS);
       expect(result, false);
     });
@@ -192,47 +213,57 @@ void main() {
 
   group("isSchedulingConflict", () {
     test('1', () {
-      DayTime dayTimeOne = new DayTime(10, 00);
-      DayTime dayTimeTwo = new DayTime(11, 30);
+      testLectureOne = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(8, 00), new DayTime(10, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(11, 30), new DayTime(13, 00), "R0.009") ;
+      final bool result = SchedulingUtility.isSchedulingConflict(
+        testLectureOne, testLectureTwo);
 
-      bool result = SchedulingUtility.isSchedulingConflict(
-          dayTimeOne, dayTimeTwo, Campus.LOTHSTRASSE, Campus.PASING);
       expect(result, false);
     });
 
     test('2', () {
-      DayTime dayTimeOne = new DayTime(11, 30);
-      DayTime dayTimeTwo = new DayTime(11, 45);
+      testLectureOne = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(8, 00), new DayTime(11, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(11, 45), new DayTime(13, 00), "R0.009") ;
+      final bool result = SchedulingUtility.isSchedulingConflict(
+        testLectureOne, testLectureTwo);
 
-      bool result = SchedulingUtility.isSchedulingConflict(
-          dayTimeOne, dayTimeTwo, Campus.LOTHSTRASSE, Campus.LOTHSTRASSE);
       expect(result, false);
     });
 
     test('3', () {
-      DayTime dayTimeOne = new DayTime(11, 30);
-      DayTime dayTimeTwo = new DayTime(11, 45);
+      testLectureOne = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(8, 00), new DayTime(11, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(11, 45), new DayTime(13, 00), "R0.009") ;
+      final bool result = SchedulingUtility.isSchedulingConflict(
+        testLectureOne, testLectureTwo);
 
-      bool result = SchedulingUtility.isSchedulingConflict(
-          dayTimeOne, dayTimeTwo, Campus.LOTHSTRASSE, Campus.PASING);
       expect(result, true);
     });
 
     test('4', () {
-      DayTime dayTimeOne = new DayTime(9, 30);
-      DayTime dayTimeTwo = new DayTime(9, 45);
+      testLectureOne = new Lecture(Campus.LOTHSTRASSE, Weekday.Mon,
+          new DayTime(8, 00), new DayTime(9, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
+          new DayTime(9, 45), new DayTime(11, 00), "R0.009") ;
+      final bool result = SchedulingUtility.isSchedulingConflict(
+        testLectureOne, testLectureTwo);
 
-      bool result = SchedulingUtility.isSchedulingConflict(
-          dayTimeOne, dayTimeTwo, Campus.LOTHSTRASSE, Campus.KARLSTRASSE);
       expect(result, true);
     });
 
     test('4', () {
-      DayTime dayTimeOne = new DayTime(13, 30);
-      DayTime dayTimeTwo = new DayTime(13, 45);
+      testLectureOne = new Lecture(Campus.PASING, Weekday.Mon,
+          new DayTime(11, 00), new DayTime(13, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
+          new DayTime(13, 45), new DayTime(15, 00), "R0.009") ;
+      final bool result = SchedulingUtility.isSchedulingConflict(
+        testLectureOne, testLectureTwo);
 
-      bool result = SchedulingUtility.isSchedulingConflict(
-          dayTimeOne, dayTimeTwo, Campus.PASING, Campus.KARLSTRASSE);
       expect(result, true);
     });
   });
@@ -242,6 +273,7 @@ void main() {
     test('uses text according to the campus', () {
       String text = SchedulingUtility
           .constructSchedulingConflictText(testLectureOne, testLectureTwo);
+
       expect(text.contains(CampusUtility
           .getCampusAsLongString(testLectureOne.campus)), true);
       expect(text.contains(CampusUtility
@@ -251,9 +283,38 @@ void main() {
     test('uses the specified time to render the conflict', () {
       String text = SchedulingUtility
           .constructSchedulingConflictText(testLectureOne, testLectureTwo);
+      print(SchedulingUtility.timeRequired(testLectureOne.campus,
+          testLectureTwo.campus));
+
       expect(text.contains(SchedulingUtility
           .timeRequired(testLectureOne.campus, testLectureTwo.campus)
           .toString()), true);
+    });
+
+    test('considers overlapping schedules', () {
+      testLectureOne = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
+        new DayTime(10, 00), new DayTime(11, 30), "R0.009") ;
+      testLectureTwo = new Lecture(Campus.PASING, Weekday.Mon, new DayTime(10, 30),
+        new DayTime(12, 00), "R0.009") ;
+      testLectureOne.course = testCourseOne;
+      testLectureTwo.course = testCourseTwo;
+      String text = SchedulingUtility
+          .constructSchedulingConflictText(testLectureOne, testLectureTwo);
+      print(SchedulingUtility.timeRequired(testLectureOne.campus,
+          testLectureTwo.campus));
+
+      expect(text.contains("overlap"), true);
+    });
+  });
+  group("convertToMinutes", ()
+  {
+    test('1', () {
+      for (int i=0; i<24; i++) {
+        for (int j=i; j<60; j++) {
+          expect(SchedulingUtility.convertToMinutes(i, j),
+          i*StaticVariables.HOURS_TO_MIN+j);
+        }
+      }
     });
   });
 } //main
