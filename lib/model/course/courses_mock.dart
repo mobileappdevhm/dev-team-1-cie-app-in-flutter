@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
+import 'package:cie_team1/model/course/details/date.dart';
 
 class CoursesMock implements Courses {
   static const int GENERATE_COURSES = 100;
@@ -12,6 +13,7 @@ class CoursesMock implements Courses {
     for (int i = 1; i < GENERATE_COURSES; i++) {
       courses.add(
         new CourseBuilder()
+          .withId("AllCoursesWillHaveTheSameID" + i.toString())
           .withName(generateMockCourseTitle(i))
           .withFaculty(generateMockDepartment(i))
           .withFaculty(generateMockDepartment(i))
@@ -23,6 +25,7 @@ class CoursesMock implements Courses {
           .withProfessorName(generateMockName(i))
           .withAvailable(generateMockAvailability(i))
           .withIsFavorite(generateMockFavorite(i))
+          .withdates(generateMockDates())
           .build()
       );
     }
@@ -71,6 +74,34 @@ class CoursesMock implements Courses {
 
   static bool generateMockFavorite(int i) {
     return i / pi.round() % 3 == 0 && i % 2 == 0;
+  }
+  
+  static List<Date> generateMockDates(){
+    var map = new Map<String, dynamic>();
+    map['begin'] = "20180427T150000Z";
+    map['end'] = "20180427T200000Z";
+    map['title'] = null;
+    map['isCanceled'] = false;
+
+    var room = new Map<String, dynamic>();
+    room['number'] = "R 2.091";
+    room['building'] = "R";
+    room['campus'] = "Lothstrasse";
+    var rooms = new List<Map<String, dynamic>>();
+    rooms.add(room);
+    map['rooms'] = rooms;
+
+    var lecturer = Map<String, dynamic>();
+    lecturer['title'] = null;
+    lecturer['firstName'] = "Vorname";
+    lecturer['lastName'] = "Nachname";
+    var lecturers = new List<Map<String, dynamic>>();
+    lecturers.add(lecturer);
+    map['lecturer'] = lecturers;
+
+    var list = List<Map<String,dynamic>>();
+    list.add(map);
+    return DateBuilder.fromJson(list);
   }
 
   static List<List<Lecture>> generatedMockLectures() {

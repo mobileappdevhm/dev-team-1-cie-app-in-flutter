@@ -1,5 +1,5 @@
 class RoomBuilder {
-  static List<Room> fromJson(Map<String, dynamic> jsonRooms) {
+  static List<Room> fromJson(List<dynamic> jsonRooms) {
     if (jsonRooms == null) return null;
     var list = new List<Room>();
     for (int i = 0; i < jsonRooms.length; i++) {

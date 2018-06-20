@@ -1,3 +1,4 @@
+import 'package:cie_team1/model/course/details/date.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class CourseBuilder {
   bool isCoterie;
   bool hasHomeBias;
   List<dynamic> correlations;
-  List<dynamic> dates;
+  List<Date> dates;
   String name;
   String shortName;
   List<dynamic> actions;
@@ -116,7 +117,7 @@ class CourseBuilder {
       isCoterie: jsonData['isCoterie'],
       hasHomeBias: jsonData['hasHomeBias'],
       correlations: jsonData['correlations'],
-      dates: jsonData['dates'],
+      dates: DateBuilder.fromJson(jsonData['dates']),
       name: jsonData['name'],
       shortName: jsonData['shortName'],
       actions: jsonData['actions'],

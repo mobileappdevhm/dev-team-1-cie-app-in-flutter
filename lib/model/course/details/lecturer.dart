@@ -1,5 +1,5 @@
 class LecturerBuilder {
-  static List<Lecturer> fromJson(Map<String, dynamic> jsonLecturers){
+  static List<Lecturer> fromJson(List<dynamic> jsonLecturers){
     if(jsonLecturers == null)
       return null;
     var list = new List<Lecturer>();
