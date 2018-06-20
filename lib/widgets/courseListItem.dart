@@ -39,7 +39,13 @@ class CourseListItem extends StatelessWidget {
               ),
               new Padding(
                 //Calculated padding to align left side
-                padding: new EdgeInsets.fromLTRB(0.0, (CiEStyle.getCoursesListFacultyStyle().fontSize - CiEStyle.getCoursesListTimeStyle().fontSize) / 2.0 , 0.0, 0.0),
+                padding: new EdgeInsets.fromLTRB(
+                    0.0,
+                    (CiEStyle.getCoursesListFacultyStyle().fontSize -
+                            CiEStyle.getCoursesListTimeStyle().fontSize) /
+                        2.0,
+                    0.0,
+                    0.0),
                 child: new Text(
                   courseListPresenter.getLectureTimesBeautiful(id),
                   style: CiEStyle.getCoursesListTimeStyle(),
@@ -47,11 +53,30 @@ class CourseListItem extends StatelessWidget {
               )
             ],
           ),
+          _getConflictWarning(id),
         ],
       ),
       trailing: inheritedChild,
       onTap: () => _toggleDescription(context),
     );
+  }
+
+  Widget _getConflictWarning(id) {
+    if (courseListPresenter.checkIfConflictsOtherFavorite(id)) {
+
+      return new Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          new Text(
+            "Conflicts with other Favorite",
+            style: CiEStyle.getCourseConflictWarningStyle(),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      );
+    }
+    else
+      return null;
   }
 
   void _toggleDescription(BuildContext context) {

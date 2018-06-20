@@ -206,4 +206,11 @@ class CiEStyle {
       color: CiEColor.gray,
     );
   }
+
+  static TextStyle getCourseConflictWarningStyle() {
+    return new TextStyle(
+      fontSize: 15.0,
+      color: CiEColor.red,
+    );
+  }
 }

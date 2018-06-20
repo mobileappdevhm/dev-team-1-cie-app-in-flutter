@@ -233,6 +233,10 @@ class DayTime {
 
     return '$hourString:$minuteString';
   }
+
+  int getAsInt() {
+    return hour * 60 + minute;
+  }
 }
 
 //Todo: This needs to be replaced with enum style of implementation in future see below

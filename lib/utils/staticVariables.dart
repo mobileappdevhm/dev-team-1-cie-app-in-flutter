@@ -70,4 +70,6 @@ class StaticVariables {
   static const String NO_DESCRIPTION =
       "Sorry, there no description available for this course. Please check again later.";
   static const String PROFESSOR = "Professor";
+
+
 }

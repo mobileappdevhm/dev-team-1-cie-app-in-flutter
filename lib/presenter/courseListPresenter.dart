@@ -184,9 +184,54 @@ class CourseListPresenter {
   List<Lecture> getFavouriteLecturesOfWeekday(Weekday searchedWeekday) {
     List<Lecture> lectures = [];
     //Add all lectures to lectures list
-    getCourses().where((c) => c.isFavourite).forEach((c) => c.lecturesPerWeek
-        .where((l) => l.weekday == searchedWeekday)
-        .forEach((l) => lectures.add(l)));
+    getCourses().where((c) => c.isFavourite).forEach((c) =>
+        c.lecturesPerWeek
+            .where((l) => l.weekday == searchedWeekday)
+            .forEach((l) => lectures.add(l)));
     return _sortLectures(lectures);
+  }
+
+  //If lectures of this course conflicts with other favourite lecture return true
+  bool checkIfConflictsOtherFavorite(id) {
+    return getCourses()[id].lecturesPerWeek.any((thisFavorite) =>
+        getFavouriteLectures().any((otherFavorite) =>
+            _checkTimeConflict(thisFavorite, otherFavorite)));
+  }
+
+  bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
+    //If weekday is not same return false
+    if (thisFavorite.weekday != otherFavorite.weekday)
+      return false;
+    //If running at same time return true
+    int timeBetweenLectures = _getTimeBetweenLectures(
+        thisFavorite, otherFavorite);
+    if (timeBetweenLectures < 0)
+      return true;
+    //If time is not enough to switch campus return true
+    if (!_timeIsEnoughForCampusSwitch(
+        thisFavorite.campus, otherFavorite.campus, timeBetweenLectures))
+      return true;
+    return false;
+  }
+
+  // < 0 when lectures are running at same time
+  // 0 lectures starting right after each other
+  // > 0 minutes between lectures are returned
+  int _getTimeBetweenLectures(Lecture thisFavorite, Lecture otherFavorite) {
+    //Idea is to sub end time from start time in both ways.
+    //If both vales are neg or pos courses are take place at same time.
+    //If one value is positive the other negative the positive value is time between lectures
+    //This only works because we can assume that endTime is later than startTime
+    int valueOne = thisFavorite.startDayTime.getAsInt() -
+        otherFavorite.endDayTime.getAsInt();
+    int valueTwo = otherFavorite.startDayTime.getAsInt() -
+        thisFavorite.endDayTime.getAsInt();
+
+    return valueOne > valueTwo ? valueOne : valueTwo;
+  }
+
+  bool _timeIsEnoughForCampusSwitch(Campus campusOne, Campus campusTwo,
+      int timeBetweenLectures) {
+    return true;
   }
 }
