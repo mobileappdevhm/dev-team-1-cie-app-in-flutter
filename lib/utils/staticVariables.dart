@@ -72,4 +72,7 @@ class StaticVariables {
   static const String PROFESSOR = "Professor";
 
 
+
+  static String COURSE_CONFLICTS_WITH_OTHER_FAVORIT = "Conflicts with other Favorit";
+  static String COURSE_CONFLICTS_WITH_FAVORIT = "Conflicts with a Favorit";
 }

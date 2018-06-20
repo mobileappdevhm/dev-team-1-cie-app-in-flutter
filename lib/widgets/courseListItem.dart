@@ -63,20 +63,31 @@ class CourseListItem extends StatelessWidget {
 
   Widget _getConflictWarning(id) {
     if (courseListPresenter.checkIfConflictsOtherFavorite(id)) {
+      String textToShow;
+      TextStyle textStyleToShow;
+      if (courseListPresenter.getCourses()[id].isFavourite) {
+        textToShow = StaticVariables.COURSE_CONFLICTS_WITH_OTHER_FAVORIT;
+        textStyleToShow = CiEStyle.getCourseConflictWarningStyle();
+      } else {
+        textToShow = StaticVariables.COURSE_CONFLICTS_WITH_FAVORIT;
+        textStyleToShow = CiEStyle.getCourseConflictNotificationStyle();
+      }
 
       return new Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           new Text(
-            "Conflicts with other Favorite",
-            style: CiEStyle.getCourseConflictWarningStyle(),
+            textToShow,
+            style: textStyleToShow,
             overflow: TextOverflow.ellipsis,
           ),
         ],
       );
     }
     else
-      return null;
+      //Return empty container to workaround a flutter bug
+      //And we could use it to add some padding then layout isn't moving ife something changes
+      return new Padding(padding: new EdgeInsets.fromLTRB(0.0, CiEStyle.getCourseConflictWarningStyle().fontSize + 3.0, 0.0, 0.0));
   }
 
   void _toggleDescription(BuildContext context) {

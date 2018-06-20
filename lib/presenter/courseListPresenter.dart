@@ -199,6 +199,9 @@ class CourseListPresenter {
   }
 
   bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
+    //Cant conflict itself
+    if (thisFavorite == otherFavorite)
+      return false;
     //If weekday is not same return false
     if (thisFavorite.weekday != otherFavorite.weekday)
       return false;
