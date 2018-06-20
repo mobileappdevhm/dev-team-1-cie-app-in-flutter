@@ -280,4 +280,17 @@ class CourseListPresenter {
         time +
         " minutes.\n\nYou may not arrive to class on time.";
   }
+
+  String getCourseDescriptionConflictText(int id) {
+    String reason = "";
+
+    if (getCourses()[id].isFavourite)
+      reason += "This course is in conflict with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
+    else
+      reason += "This course is unlikely to be chosen together with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
+
+    return reason;
+  }
+
+
 }

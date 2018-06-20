@@ -207,6 +207,20 @@ class CiEStyle {
     );
   }
 
+  static TextStyle getCourseDetailsConflictWarningText() {
+    return new TextStyle(
+      fontSize: 15.0,
+      color: CiEColor.red,
+    );
+  }
+
+  static TextStyle getCourseDetailsConflictNotificationText() {
+    return new TextStyle(
+      fontSize: 15.0,
+      color: CiEColor.yellow,
+    );
+  }
+
   static TextStyle getCourseConflictNotificationStyle() {
     return new TextStyle(
       fontSize: 15.0,
