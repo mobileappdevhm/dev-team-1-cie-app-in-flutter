@@ -38,21 +38,20 @@ class _CourseDetailsState extends State<CourseDetails> {
       ),
       body: new Center(
         child: new Padding(
-          padding: const EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 10.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 10.0),
           child: new Column(
             children: <Widget>[
-              //Title, Clickable heart
               buildTitleRow(),
-              //Description title
               buildDescriptionHeadingRow(),
-              //Description
-              buildDescriptionRow(),
-              //Footer, ects, hours, availability, contact
+              new Expanded(
+                child: buildDescriptionRow(),
+              ),
               buildFooterRow(),
             ],
           ),
         ),
       ),
+      //bottomNavigationBar: buildFooterRow2(),
     );
   }
 
@@ -75,7 +74,7 @@ class _CourseDetailsState extends State<CourseDetails> {
       children: <Widget>[
         new Padding(
             padding: const EdgeInsets.only(
-                left: 0.0, top: 25.0, right: 0.0, bottom: 25.0),
+                left: 0.0, top: 10.0, right: 0.0, bottom: 15.0),
             child: new Text(
                 StaticVariables.DESCRIPTION,
                 style: CiEStyle.getCourseDetailsHeadingStyle()
@@ -86,26 +85,21 @@ class _CourseDetailsState extends State<CourseDetails> {
 
   Widget buildDescriptionRow() {
     if (presenter.getDescription(id) == "") {
-      return new Expanded(
-          child: new SingleChildScrollView(
-            child: Text(StaticVariables.NO_DESCRIPTION + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
-              style: CiEStyle.getCourseDetailsDescription(),
-            ),
-          ),
-      );
-    }
-
-    return new Expanded(
-      child: new SingleChildScrollView(
-        child: Text(presenter.getDescription(id) + "\n\n" + StaticVariables.PROFESSOR + ": " + presenter.getProfessorName(id),
+      return new SingleChildScrollView(
+        child: new Text(StaticVariables.NO_DESCRIPTION + "\n\n",
           style: CiEStyle.getCourseDetailsDescription(),
         ),
+      );
+    }
+    return new SingleChildScrollView(
+      child: new Text(presenter.getDescription(id) + "\n\n",
+        style: CiEStyle.getCourseDetailsDescription(),
       ),
     );
   }
 
   Widget buildTitleRow() {
-    //Obove Desription stuff
+    //Above Description stuff
     return new Container(
       child: new Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,13 +113,19 @@ class _CourseDetailsState extends State<CourseDetails> {
                   children: <Widget>[
                     new Text(
                       presenter.getTitle(id),
-                      style: CiEStyle
-                          .getCourseDescriptionTitleStyle(),
+                      style: CiEStyle .getCourseDescriptionTitleStyle(),
                     ),
                     new Text(
                       presenter.getFacultyBeautiful(id),
-                      style: CiEStyle
-                          .getCourseDescriptionFacultyStyle(),
+                      style: CiEStyle .getCourseDescriptionFacultyStyle(),
+                    ),
+                    new Text(
+                      presenter.getLectureTimesBeautiful(id),
+                      style: CiEStyle .getCoursesListTimeStyle(),
+                    ),
+                    new Text(StaticVariables.PROFESSOR + " " +
+                        presenter.getProfessorName(id),
+                        style: CiEStyle.getCoursesListTimeStyle()
                     ),
                   ],
                 ),
@@ -163,13 +163,13 @@ class _CourseDetailsState extends State<CourseDetails> {
                 child: new Row(
                   children: <Widget>[
                     new Text(
-                      StaticVariables.HOURS_PER_WEEK + ":",
-                      style: CiEStyle.getCourseDetailsFooterTextStyle(),
+                      StaticVariables.ECTS + ":",
+                      style: CiEStyle.getCourseDetailsFooterTextStyle()
                     ),
                     new Text(
-                        " " + presenter.getHoursPerWeek(id),
-                        style: CiEStyle.getCourseDetailsFooterTextStyleBolt()
-                    ),
+                      " " + presenter.getEcts(id),
+                      style: CiEStyle.getCourseDetailsFooterTextStyleBolt(),
+                    )
                   ],
                 ),
               ),
@@ -178,14 +178,12 @@ class _CourseDetailsState extends State<CourseDetails> {
                 child: new Row(
                   children: <Widget>[
                     new Text(
-                      StaticVariables.ECTS + ":",
-                      style: new TextStyle(fontSize: 17.0),
+                      StaticVariables.HOURS_PER_WEEK + ":",
+                      style: CiEStyle.getCourseDetailsFooterTextStyle(),
                     ),
                     new Text(
-                      " " + presenter.getEcts(id),
-                      style: new TextStyle(
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.bold),
+                        " " + presenter.getHoursPerWeek(id),
+                        style: CiEStyle.getCourseDetailsFooterTextStyleBolt()
                     ),
                   ],
                 ),

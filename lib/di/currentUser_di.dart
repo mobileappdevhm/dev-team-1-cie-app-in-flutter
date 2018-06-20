@@ -1,8 +1,7 @@
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/model/user/currentUser_mock.dart';
 import 'package:cie_team1/model/user/currentUser_prod.dart';
-
-enum Flavor { MOCK, PROD }
+import 'package:cie_team1/utils/staticVariables.dart';
 
 //DI
 class UserInjector {
