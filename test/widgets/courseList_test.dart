@@ -1,6 +1,5 @@
-import 'package:cie_team1/model/course/courses_mock.dart';
 @Skip('Travis')
-
+import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
@@ -18,7 +17,11 @@ void main() {
     // Texts that are unique to the favorites page
     List<String> favoritesPageAnomalies;
 
+    CurrentUserPresenter userPresenter;
+
     setUp(() {
+      void voidCallback(bool didChange) {}
+      userPresenter = new CurrentUserPresenter(voidCallback, Flavor.MOCK);
       expectedTexts = new List<String>();
       favoritesPageAnomalies = new List<String>();
       for (int i = 1; i < 100; i++) {
@@ -40,7 +43,7 @@ void main() {
               home: new Material(
                 child: new Center(
                     child: new CourseList(
-                        new CourseListPresenter(null,), isFavoritesPage, new CurrentUserPresenter(null, Flavor.MOCK))),
+                        new CourseListPresenter(null,), isFavoritesPage, userPresenter)),
               ),
             );
           },
@@ -64,7 +67,7 @@ void main() {
               home: new Material(
                 child: new Center(
                     child: new CourseList(
-                        new CourseListPresenter(null), isFavoritesPage, new CurrentUserPresenter(null, Flavor.MOCK))),
+                        new CourseListPresenter(null), isFavoritesPage, userPresenter)),
               ),
             );
           },
@@ -87,7 +90,7 @@ void main() {
               home: new Material(
                 child: new Center(
                     child: new CourseList(
-                        new CourseListPresenter(null), isFavoritesPage ,new CurrentUserPresenter(null, Flavor.MOCK))),
+                        new CourseListPresenter(null), isFavoritesPage ,userPresenter)),
               ),
             );
           },
