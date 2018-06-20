@@ -1,10 +1,8 @@
-import 'package:cie_team1/di/courses_di.dart';
-import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/generic/genericAlert.dart';
+import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/icsExport.dart';
 import 'package:cie_team1/utils/schedulingUtility.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
@@ -24,30 +22,17 @@ class _ScheduleState extends State<Schedule> {
 
   _ScheduleState(this.courseListPresenter);
 
-  String _content;
   @override
   void initState() {
+    super.initState();
     setState(() {
       courseListPresenter;
-      _content = "";
     });
-  }
-
-  void onPressFunction(){
-    var result = IcsExporter.getFavoritesAsIcsString(new CourseInjector().courses.getCourses().where((c) => c.isFavourite).toList());
-    print(result);
-    _content = result;
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> children = new List<Widget>();
-    //TODO remove next to children
-    children.add(new FlatButton(
-      child: new Text("ICS Exporter"),
-      onPressed: () => onPressFunction(),
-    ));
-    children.add(new Text(IcsExporter.getFavoritesAsIcsString(new CourseInjector().courses.getCourses().where((c) => c.isFavourite).toList())));
 
     children.add(new ScheduleDivider("Today"));
     children.add(_getTimeTableSpecificDay(WeekdayUtility.getCurrentWeekday()));
@@ -66,7 +51,7 @@ class _ScheduleState extends State<Schedule> {
   Widget _getTimeTableSpecificDay(Weekday weekday) {
     // Get lectures at day an receive timeTableEntry for day
     List<Lecture> lectureList =
-      courseListPresenter.getFavouriteLecturesOfWeekday(weekday);
+        courseListPresenter.getFavouriteLecturesOfWeekday(weekday);
     return new TimeTableEntry(lectureList, weekday);
   }
 }
