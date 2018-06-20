@@ -44,6 +44,8 @@ class StaticVariables {
   /* Settings/Taken Courses Page */
   static const String TOTAL_OF = 'Total of';
   static const String ECTS = 'ECTS';
+  static const String CHANGE_TO_ENGLISH = 'Translate to English';
+  static const String CHANGE_TO_GERMAN = 'Translate to German';
 
   /* Alert Strings */
   static const String ALERT_YES = "COMPLETE";
