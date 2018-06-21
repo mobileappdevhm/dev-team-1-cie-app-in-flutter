@@ -1,3 +1,4 @@
+@Skip("Flutter Bug regarding Path")
 import 'package:cie_team1/utils/fileStore.dart';
 import 'package:flutter_test/flutter_test.dart';
 
