@@ -169,7 +169,7 @@ class CiEStyle {
 
   static TextStyle getCourseListRefreshText() {
     return new TextStyle(
-        color: CiEColor.black, fontSize: 17.0, fontWeight: FontWeight.w300);
+        color: CiEColor.mediumGray, fontSize: 17.0, fontWeight: FontWeight.w300);
   }
 
   static TextStyle getCourseDetailsFooterTextStyle() {
