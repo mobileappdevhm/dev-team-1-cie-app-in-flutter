@@ -32,7 +32,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
           style: CiEStyle.getAppBarTitleStyle(context),
         ),
         elevation: CiEStyle.getAppBarElevation(context),
-        backgroundColor: CiEColor.lightGray,
+        backgroundColor: CiEColor.red,
       ),
       body: new Center(
         child: new Padding(

@@ -34,7 +34,7 @@ class _CourseDetailsState extends State<CourseDetails> {
           style: CiEStyle.getAppBarTitleStyle(context),
         ),
         elevation: CiEStyle.getAppBarElevation(context),
-        backgroundColor: CiEColor.lightGray,
+        backgroundColor: CiEColor.red,
       ),
       body: new Center(
         child: new Padding(
@@ -71,13 +71,20 @@ class _CourseDetailsState extends State<CourseDetails> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         new Padding(
-            padding: const EdgeInsets.only(
-                left: 0.0, top: 10.0, right: 0.0, bottom: 15.0),
-            child: new Text(StaticVariables.DESCRIPTION,
-                style: CiEStyle.getCourseDetailsHeadingStyle())),
+          padding: const EdgeInsets.only(
+            left: 0.0, top: 15.0, right: 0.0, bottom: 15.0)),
+        _getSpacing(new EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 30.0)),
+        new Container(
+          child: new Padding(
+            padding: new EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 30.0),
+            child: new Text(StaticVariables.DESCRIPTION, style: CiEStyle.getCourseDetailsHeadingStyle())),
+          ),
+            _getSpacing(new EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 30.0)),
+
       ],
     );
   }
+
 
   Widget buildDescriptionRow() {
     String textToShow;
@@ -131,6 +138,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                   presenter.getTitle(id),
                   style: CiEStyle.getCourseDescriptionTitleStyle(),
                 ),
+                new Padding(padding: const EdgeInsets.only(top: 5.0)),
                 new Text(
                   presenter.getFacultyBeautiful(id),
                   style: CiEStyle.getCourseDescriptionFacultyStyle(),
@@ -238,5 +246,24 @@ class _CourseDetailsState extends State<CourseDetails> {
         ),
       ],
     );
+  }
+
+    //Draws a line
+  Widget _getSpacing(EdgeInsets padding) {
+    return new Expanded(
+        child: new Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        new Container(
+          child: new Padding(
+            padding: padding,
+            child: new Container(
+              decoration: new BoxDecoration(
+                  border: new Border.all(color: CiEColor.gray, width: 0.5)),
+            ),
+          ),
+        )
+      ],
+    ));
   }
 }
