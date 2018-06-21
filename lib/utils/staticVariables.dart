@@ -16,7 +16,9 @@ class StaticVariables {
   static const String IMAGE_PATH = RESSOURCE_PATH + 'images/';
 
   static const int HOURS_TO_MIN = 60;
-  static const int CAMPUS_COMMUTE_MIN = 45;
+  static const int CAMPUS_COMMUTE_MIN_LOTH_KARL = 15;
+  static const int CAMPUS_COMMUTE_MIN_LOTH_PAS = 45;
+  static const int CAMPUS_COMMUTE_MIN_PAS_KARL = 35;
 
   static const String TIME_CONFLICT_MESSAGE = "Possible Scheduling Conflict";
 
@@ -24,6 +26,8 @@ class StaticVariables {
       "Register Favorited Courses";
   static const String FAVORITES_REGISTRATION_BUTTON_INACTIVE =
       "Courses Already Submitted";
+  static const String FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST =
+      "Please log in to use lottery";
 
   /* Settings Page */
   static const String LOGGED_IN_AS = 'Logged in as';
@@ -44,6 +48,8 @@ class StaticVariables {
   /* Settings/Taken Courses Page */
   static const String TOTAL_OF = 'Total of';
   static const String ECTS = 'ECTS';
+  static const String CHANGE_TO_ENGLISH = 'Translate to English';
+  static const String CHANGE_TO_GERMAN = 'Translate to German';
 
   /* Alert Strings */
   static const String ALERT_YES = "COMPLETE";
@@ -68,4 +74,9 @@ class StaticVariables {
   static const String NO_DESCRIPTION =
       "Sorry, there no description available for this course. Please check again later.";
   static const String PROFESSOR = "Professor";
+
+
+
+  static String COURSE_CONFLICTS_WITH_OTHER_FAVORIT = "Conflicts with other Favorit";
+  static String COURSE_CONFLICTS_WITH_FAVORIT = "Conflicts with a Favorit";
 }
