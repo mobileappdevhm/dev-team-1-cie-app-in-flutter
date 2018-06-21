@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
@@ -53,7 +52,6 @@ class CourseListState extends State<CourseList> {
     }
   }
 
-
   handleUpdate() async {
     //pullCourseJSON also checks for internet connectivity. This method should
     //begin execution as soon as possible, check later for setState
@@ -71,14 +69,14 @@ class CourseListState extends State<CourseList> {
     List<Widget> widgets = new List<Widget>();
 
     if (shouldFilterByFavorites == false) {
-      widgets.add(
-        new Container(
+      widgets.add(new Container(
           color: CiEColor.white,
           padding: new EdgeInsets.symmetric(vertical: 10.0),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text("Pull down to Refresh", style: CiEStyle.getCourseListRefreshText()),
+              new Text("Pull down to Refresh",
+                  style: CiEStyle.getCourseListRefreshText()),
               new Icon(Icons.arrow_downward, color: CiEColor.mediumGray)
             ],
           )));
@@ -133,11 +131,9 @@ class CourseListState extends State<CourseList> {
         ));
       }
     } else {
-      widgets.add(
-        new Padding(
-          padding: const EdgeInsets.all(10.0),
-        )
-      );
+      widgets.add(new Padding(
+        padding: const EdgeInsets.all(10.0),
+      ));
     }
 
     //Build the tiles of the course list / favorites list
@@ -165,9 +161,8 @@ class CourseListState extends State<CourseList> {
 
     return new RefreshIndicator(
         child: new ListView(children: widgets),
-        onRefresh: ()=> handleRefreshIndicator(context, courseListPresenter),
-        color: CiEColor.mediumGray
-    );
+        onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
+        color: CiEColor.mediumGray);
   }
 
   @override
@@ -194,7 +189,8 @@ class CourseListState extends State<CourseList> {
       buttonColor = CiEColor.lightGray;
       function = null;
     } else if (coursesRegistered && isLoggedIn && !isDepartmentSet) {
-      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
+      textToShow =
+          StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT;
       buttonColor = CiEColor.lightGray;
       function = null;
     } else {
@@ -236,7 +232,7 @@ class CourseListState extends State<CourseList> {
       if (shouldFilterByFavorites)
         courseListPresenter.toggleFavouriteWhenChangeView(id);
       else
-        courseListPresenter.toggleFavourite(id,true);
+        courseListPresenter.toggleFavourite(id, true);
     });
   }
 
@@ -259,8 +255,6 @@ class CourseListState extends State<CourseList> {
             context, no, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
         .then((_) {});
   }
-
-  void _voidFunction() {}
 
   void updateSearch(String val) {
     setState(() {
