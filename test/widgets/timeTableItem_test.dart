@@ -22,7 +22,8 @@ void main() {
       .withEcts(2)
       .withProfessorEmail("example@hm.edu")
       .withProfessorName("Max Mustermann")
-      .withAvailable(CourseAvailability.AVAILABLE)
+      .withIsCoterie(false)
+      .withhasHomeBias(false)
       .withIsFavorite(false)
       .build();
     testLectureOne.course = testCourseOne;

@@ -57,7 +57,7 @@ class _CourseDetailsState extends State<CourseDetails> {
 
   void _toggleFavorite(int id) {
     setState(() {
-      presenter.toggleFavourite(id, true);
+      presenter.toggleFavourite(id);
     });
   }
 
