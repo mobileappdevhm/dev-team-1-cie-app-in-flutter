@@ -27,7 +27,7 @@ class _TakenCoursesState extends State<TakenCourses> {
             style: CiEStyle.getAppBarTitleStyle(context),
           ),
           elevation: CiEStyle.getAppBarElevation(context),
-          backgroundColor: CiEColor.lightGray,
+          backgroundColor: CiEColor.red,
         ),
         body: new Center(
           child: new Column(
@@ -36,7 +36,7 @@ class _TakenCoursesState extends State<TakenCourses> {
                 children: <Widget>[
                   new Padding(
                     padding: const EdgeInsets.only(
-                        top: 32.0, bottom: 8.0, left: 16.0),
+                        top: 20.0, bottom: 8.0, left: 16.0),
                     child: new Text(
                         StaticVariables.TOTAL_OF +
                             " " +

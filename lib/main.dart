@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
         title: 'CiE',
         theme: new ThemeData(
+          dividerColor: Colors.transparent,
           primarySwatch: Colors.red,
         ),
         home: new WelcomePage(),

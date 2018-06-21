@@ -183,6 +183,15 @@ void main() {
     test('22', () {
       expect(WeekdayUtility.intToWeekday(0), Weekday.Mon);
     });
+
+    test('23', () {
+      expect(new DayTime(5, 59).getAsInt(), 359);
+    });
+
+    test('24', () {
+      expect(new Lecture(Campus.PASING,Weekday.Mon,DayTime(1, 50),DayTime(2, 50),"1000").sortValue()
+          < new Lecture(Campus.PASING,Weekday.Mon,DayTime(1, 51),DayTime(2, 50),"1000").sortValue(), true);
+    });
   });
 
   group('courseBuilder test', () {

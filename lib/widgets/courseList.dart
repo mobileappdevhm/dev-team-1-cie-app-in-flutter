@@ -18,14 +18,15 @@ class CourseList extends StatefulWidget {
   final CourseListPresenter courseListPresenter;
   final CurrentUserPresenter userPresenter;
   bool shouldFilterByFavorites = false;
+  FocusNode focus;
 
   CourseList(this.courseListPresenter, this.shouldFilterByFavorites,
-      this.userPresenter);
+      this.userPresenter, this.focus);
 
   @override
   State<StatefulWidget> createState() {
     return new CourseListState(
-        courseListPresenter, shouldFilterByFavorites, userPresenter);
+        courseListPresenter, shouldFilterByFavorites, userPresenter, focus);
   }
 
   void toggleFilter() {
@@ -42,15 +43,16 @@ class CourseListState extends State<CourseList> {
   String filter = "09";
   String searchValue = "";
   bool coursesRegistered = false;
-  User currentUser;
+  FocusNode focus;
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites,
-      this.userPresenter) {
+      this.userPresenter, this.focus) {
     if (this.userPresenter.getCurrentUser().isLoggedIn &&
         this.userPresenter.getCurrentUser().department.isNotEmpty) {
       this.filter = this.userPresenter.getCurrentUser().department;
     }
   }
+
 
   handleUpdate() async {
     //pullCourseJSON also checks for internet connectivity. This method should
@@ -69,14 +71,15 @@ class CourseListState extends State<CourseList> {
     List<Widget> widgets = new List<Widget>();
 
     if (shouldFilterByFavorites == false) {
-      widgets.add(new Container(
-          color: CiEColor.turquoise,
-          padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-          child: new Column(
+      widgets.add(
+        new Container(
+          color: CiEColor.white,
+          padding: new EdgeInsets.symmetric(vertical: 10.0),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text("Pull down to Refresh",
-                  style: CiEStyle.getCourseListRefreshText()),
-              new Icon(Icons.arrow_downward),
+              new Text("Pull down to Refresh", style: CiEStyle.getCourseListRefreshText()),
+              new Icon(Icons.arrow_downward, color: CiEColor.mediumGray)
             ],
           )));
 
@@ -118,6 +121,7 @@ class CourseListState extends State<CourseList> {
           padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
           alignment: Alignment.center,
           child: new TextField(
+            focusNode: focus,
             controller: c1,
             decoration: const InputDecoration(
               hintText: "Search by Course Name",
@@ -128,6 +132,12 @@ class CourseListState extends State<CourseList> {
           ),
         ));
       }
+    } else {
+      widgets.add(
+        new Padding(
+          padding: const EdgeInsets.all(10.0),
+        )
+      );
     }
 
     //Build the tiles of the course list / favorites list
@@ -154,9 +164,9 @@ class CourseListState extends State<CourseList> {
     }
 
     return new RefreshIndicator(
-      child: new ListView(children: widgets),
-      onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
-      color: CiEColor.turquoise,
+        child: new ListView(children: widgets),
+        onRefresh: ()=> handleRefreshIndicator(context, courseListPresenter),
+        color: CiEColor.mediumGray
     );
   }
 
@@ -226,7 +236,7 @@ class CourseListState extends State<CourseList> {
       if (shouldFilterByFavorites)
         courseListPresenter.toggleFavouriteWhenChangeView(id);
       else
-        courseListPresenter.toggleFavourite(id);
+        courseListPresenter.toggleFavourite(id,true);
     });
   }
 

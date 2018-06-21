@@ -3,6 +3,7 @@ import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
@@ -116,17 +117,37 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
         }
       }
     }
-    return new ExpansionTile(
-      initiallyExpanded: true,
-      title: new Text(WeekdayUtility.getWeekdayAsString(weekday)),
-      children: childrenWidgets,
-    );
+    if (childrenWidgets.length > 0) {
+      return new ExpansionTile(
+        initiallyExpanded: true,
+        title: new Text(WeekdayUtility.getWeekdayAsLongString(weekday),
+            style: new TextStyle(fontWeight: FontWeight.w500)),
+        children: childrenWidgets.length == 0 ?
+        [
+          new Container(
+              padding: new EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+              alignment: Alignment.topLeft,
+              child: new Text("No class", textAlign: TextAlign.start,)
+          )
+        ]
+            : childrenWidgets,
+      );
+    }
+    return noClassHeader("- No class on "
+        + WeekdayUtility.getWeekdayAsLongString(weekday)+" -");
   }
 
   @override
   Widget build(BuildContext context) {
     return _buildTile(children, weekday);
   }
+}
+
+Widget noClassHeader(String text) {
+  return new Container(
+    alignment: Alignment.center,
+    child: new Text(text, style: CiEStyle.getTimeTableListMediumGray(),),
+  );
 }
 
 // divider for lectures (weekly / today)
