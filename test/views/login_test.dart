@@ -50,8 +50,6 @@ void main() {
 
   group('Login', () {
     testWidgets('1 Login press', (WidgetTester tester) async {
-
-
       // Tells the tester to build a UI based on the widget tree passed to it
       await tester.pumpWidget(
         new StatefulBuilder(
@@ -91,13 +89,8 @@ void main() {
       }
     });
 
-    //ToDo: login with real user. Dummy needed
-
-
 
     testWidgets('1 Guest press', (WidgetTester tester) async {
-
-
       // Tells the tester to build a UI based on the widget tree passed to it
       await tester.pumpWidget(
         new StatefulBuilder(
@@ -140,10 +133,7 @@ void main() {
       }
     });
 
-
     testWidgets('1 Guest press', (WidgetTester tester) async {
-
-
       // Tells the tester to build a UI based on the widget tree passed to it
       await tester.pumpWidget(
         new StatefulBuilder(
