@@ -50,6 +50,8 @@ void main() {
 
   group('Login', () {
     testWidgets('1 Login press', (WidgetTester tester) async {
+
+
       // Tells the tester to build a UI based on the widget tree passed to it
       await tester.pumpWidget(
         new StatefulBuilder(
@@ -72,10 +74,12 @@ void main() {
             counter++;
           } else if (counter == 1) {
             expect(widget.data, 'E-Mail');
+            await tester.tap(find.byWidget(widget));
             //write dummy stuff
             counter++;
           } else if (counter == 2) {
             expect(widget.data, 'Password');
+            await tester.tap(find.byWidget(widget));
             //write dummy stuff
             counter++;
           } else if (counter == 3) {
