@@ -231,6 +231,7 @@ class LoginFormState extends State<LoginForm> {
     UserBuilder builder;
     if (firstName != null && lastName != null && curriculum != null) {
       isLoggedIn = true;
+      analytics.setUserProperty(name: "curriculum", value: curriculum);
     } else {
       // Continuing As Guest
       firstName = StaticVariables.GUEST_FIRST_NAME;

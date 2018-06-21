@@ -42,7 +42,7 @@ class _SettingsState extends State<Settings> {
         isLoggedIn = (currentUserPresenter.getCurrentUser().isLoggedIn);
       }
     });
-    analytics.setUserProperty(name: "department", value: currentUserPresenter.getCurrentUserFaculty();
+    analytics.setUserProperty(name: "department", value: currentUserPresenter.getCurrentUserFaculty());
     analytics.setCurrentScreen(screenName: "profile_screen");
   }
 
