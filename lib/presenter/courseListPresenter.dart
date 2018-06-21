@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:cie_team1/di/courses_di.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:flutter/material.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
+import 'package:cie_team1/model/course/details/date.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/utils/fileStore.dart';
 import 'dart:convert';
+import 'dart:math';
+import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:flutter/material.dart';
 
 abstract class CourseListViewContract {
   //Todo: Needed in future
@@ -34,17 +38,50 @@ class CourseListPresenter {
         final List<dynamic> jsonData = json.decode(val);
         for (int i = 0; i < jsonData.length; i++) {
           CourseBuilder courseBuilder = new CourseBuilder.fromJson(jsonData[i]);
-          // TODO: Delete the following builder code & only rely on the .fromJson
-          // once all relevent data is available from the Nine API
+          Campus campus;
+          DateTime begin;
+          DateTime end;
+          String roomNumber;
+          Date date;
+          if (courseBuilder.dates.length > 0) {
+            for (int i = 0; i < courseBuilder.dates.length; i++) {
+              if (!courseBuilder.dates[i].isCanceled)
+                date = courseBuilder.dates[i];
+            }
+            if (date != null && date.rooms != null && date.rooms.length > 0) {
+              //real data
+              begin = DateTime.parse(date.begin);
+              end = DateTime.parse(date.end);
+              roomNumber = date.rooms[0].number;
+              campus = CampusUtility.getStringAsCampus(date.rooms[0].campus);
+            } else {
+              //unknown data
+              begin = DateTime.parse(courseBuilder.dates[0].begin);
+              end = DateTime.parse(courseBuilder.dates[0].end);
+              roomNumber = "unknown";
+              campus = Campus.LOTHSTRASSE;
+            }
+          } else {
+            //completely unknown data
+            begin = new DateTime.now();
+            end = new DateTime.now();
+            roomNumber = "unknown";
+            campus = Campus.LOTHSTRASSE;
+          }
+
           courseBuilder
               .withLecturesPerWeek([
-                new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
-                    new DayTime(10, 00), new DayTime(11, 30), "R0.009")
+                new Lecture(
+                    campus,
+                    WeekdayUtility.intToWeekday((begin.day - 1) % 6),
+                    new DayTime(begin.hour, begin.minute),
+                    new DayTime(end.hour, end.minute),
+                    roomNumber)
               ])
               .withHoursPerWeek(2)
               .withEcts(2)
+          //TODO replace with professor email if available
               .withProfessorEmail("example@hm.edu")
-              .withAvailable(CourseAvailability.AVAILABLE)
               .withIsFavorite(false);
           Course c = courseBuilder.build();
           if (isNewCourseData(courseList, c)) {
@@ -197,8 +234,13 @@ class CourseListPresenter {
 
   //If lectures of this course conflicts with other favourite lecture return true
   bool checkIfConflictsOtherFavoriteLecture(Lecture lecture) {
-    return getFavouriteLectures().any((otherFavorite) =>
-        _checkTimeConflict(lecture, otherFavorite));
+    return getFavouriteLectures()
+        .any((otherFavorite) => _checkTimeConflict(lecture, otherFavorite));
+  }
+
+  //If lectures of this course conflicts with other favourite lecture return true
+  List<Lecture> getConflictingLectures(int id) {
+    return getFavouriteLectures().where((l) => getCourses()[id].lecturesPerWeek.any((c) => _checkTimeConflict(c, l))).toList();
   }
 
   bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
@@ -281,16 +323,66 @@ class CourseListPresenter {
         " minutes.\n\nYou may not arrive to class on time.";
   }
 
-  String getCourseDescriptionConflictText(int id) {
-    String reason = "";
+  //Returns a list with two strings
+  List<String> getCourseDescriptionConflictText(int id) {
+    List<String> reason = new List<String>();
 
     if (getCourses()[id].isFavourite)
-      reason += "This course is in conflict with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
+      reason.add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_OTHER_FAVORIT);
     else
-      reason += "This course is unlikely to be chosen together with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
+      reason.add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_FAVORIT);
+
+    //Find courses who conflicts and why there is a conflict
+    List<Lecture> conflicts = getConflictingLectures(id);
+    if (conflicts != null) {
+      Set<Course> conflictingCourses =
+      conflicts.map((l) => l.course).toSet();
+      conflictingCourses.forEach(
+              (c) => reason.insert(1, "\n" + _getConflictReasonText(getCourses()[id], c)));
+    }
 
     return reason;
   }
 
+  //Generated a text which shows the user why this course conflicts with other courses
+  String _getConflictReasonText(Course thisFavorite, Course otherFavorite) {
+    String result = otherFavorite.name + ": ";
 
+    //
+
+    //Add commute time conflict text
+    thisFavorite.lecturesPerWeek
+        .forEach((l) => otherFavorite.lecturesPerWeek
+            .forEach((f) => result += _getLectureConflictProblemText(l, f)));
+    //timeBetweenLecturesText.forEach((res) => result += res);
+
+    return result;
+  }
+
+  //Compare two lectues and return error text if they conflict
+  String _getLectureConflictProblemText(Lecture l, Lecture f) {
+    String result = "";
+
+    if (_getTimeBetweenLectures(l, f) < 0) {
+      result += "Lectures at same time";
+    } else {
+      Campus campusOne = l.campus;
+      Campus campusTwo = f.campus;
+      if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
+          campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
+        result += "Commute Time Lothstr. to Karlstr. < " +
+            StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL.toString();
+      } else
+      if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.PASING ||
+          campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
+        result += "Commute Time Lothstr. to Pasing < " +
+            StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS.toString();
+      } else {
+        result += "Commute Time Pasing to Karlstr. < " +
+            StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL.toString();
+      }
+    }
+
+    return result;
+  }
 }

@@ -1,66 +1,42 @@
+import 'dart:convert';
+
 import 'package:cie_team1/model/course/course.dart';
-import 'package:flutter/material.dart';
+import 'package:cie_team1/model/course/details/correlation.dart';
+import 'package:cie_team1/model/course/details/date.dart';
+import 'package:cie_team1/model/course/details/lecturer.dart';
+import 'package:cie_team1/model/course/details/room.dart';
 import 'package:test/test.dart';
-import 'package:cie_team1/utils/cieColor.dart';
 
 @Timeout(const Duration(seconds: 10))
 void main() {
   group("simplecourseTest", () {
+    Course sut;
+    setUp(() {
+      sut = new CourseBuilder()
+          .withName("Blaba")
+          .withFaculty("7")
+          .withLecturesPerWeek([
+            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                new DayTime(11, 30), "R0.009")
+          ])
+          .withDescription("boring")
+          .withHoursPerWeek(2)
+          .withEcts(2)
+          .withProfessorEmail("example@hm.edu")
+          .withProfessorName("Max Mustermann")
+          .withIsFavorite(false)
+          .withhasHomeBias(false)
+          .withIsCoterie(false)
+          .build();
+    });
     test('1', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.name, "Blaba");
     });
 
     test('2', () {
-      final Course sut = new CourseBuilder()
-          .withName("Blaba")
-          .withFaculty("7")
-          .withLecturesPerWeek([
-            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-                new DayTime(11, 30), "R0.009")
-          ])
-          .withDescription("boring")
-          .withHoursPerWeek(2)
-          .withEcts(2)
-          .withProfessorEmail("example@hm.edu")
-          .withProfessorName("Max Mustermann")
-          .withAvailable(CourseAvailability.AVAILABLE)
-          .withIsFavorite(false)
-      .build();
       expect(sut.faculty, "7");
     });
     test('3', () {
-      final Course sut = new CourseBuilder()
-          .withName("Blaba")
-          .withFaculty("7")
-          .withLecturesPerWeek([
-            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-                new DayTime(11, 30), "R0.009")
-          ])
-          .withDescription("boring")
-          .withHoursPerWeek(2)
-          .withEcts(2)
-          .withProfessorEmail("example@hm.edu")
-          .withProfessorName("Max Mustermann")
-          .withAvailable(CourseAvailability.AVAILABLE)
-          .withIsFavorite(false)
-          .build();
-
       expect(sut.lecturesPerWeek[0].weekday, Weekday.Mon);
       expect(sut.lecturesPerWeek[0].startDayTime.toString(),
           new DayTime(10, 00).toString());
@@ -68,241 +44,41 @@ void main() {
           new DayTime(11, 30).toString());
     });
     test('4', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.description, "boring");
     });
     test('5', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.hoursPerWeek, 2);
     });
     test('6', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.ects, 2);
     });
 
     test('7', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.professorEmail, "example@hm.edu");
     });
 
     test('8', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.professorName, "Max Mustermann");
     });
 
     test('9', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.available, CourseAvailability.AVAILABLE);
     });
 
     test('10', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.isFavourite, false);
     });
 
     test('11', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.available, CourseAvailability.AVAILABLE);
     });
 
     test('12 ocure', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.occursOnDay(Weekday.Mon), true);
     });
 
     test('13 ocure', () {
-      final Course sut = new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-      .build();
-
       expect(sut.occursOnDay(Weekday.Sun), false);
-    });
-
-    test('14 equals', () {
-      final Course sut = new CourseBuilder()
-          .withName("Blaba")
-          .withFaculty("7")
-          .withLecturesPerWeek([
-        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-            new DayTime(11, 30), "R0.009")
-      ])
-      
-      
-          .withDescription("boring")
-          .withHoursPerWeek(2)
-          .withEcts(2)
-          .withProfessorEmail("example@hm.edu")
-          .withProfessorName("Max Mustermann")
-          .withAvailable(CourseAvailability.AVAILABLE)
-          .withIsFavorite(false)
-          .build();
-
-      final Course sut2 = new CourseBuilder()
-          .withName("Blaba")
-          .withFaculty("7")
-          .withLecturesPerWeek([
-        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-            new DayTime(11, 30), "R0.009")
-      ])
-
-
-          .withDescription("boring")
-          .withHoursPerWeek(2)
-          .withEcts(2)
-          .withProfessorEmail("example@hm.edu")
-          .withProfessorName("Max Mustermann")
-          .withAvailable(CourseAvailability.AVAILABLE)
-          .withIsFavorite(false)
-          .build();
-
-      expect(sut.equals(sut2), true);
     });
   });
 
@@ -320,34 +96,12 @@ void main() {
           1);
     });
 
-    test('unavailable', () {
+    test('available', () {
       expect(
           CourseAvailabilityUtility
               .getFacultyAsInt(CourseAvailability.UNAVAILABLE),
           2);
     });
-
-    test('available', () {
-      expect(
-          CourseAvailabilityUtility
-              .intToColoredString(CourseAvailability.AVAILABLE,1.0).toString(),
-          new Text('Available',style: new TextStyle(fontSize: 1.0, color: CiEColor.green)).toString());
-    });
-
-    test('available', () {
-      expect(
-          CourseAvailabilityUtility
-              .intToColoredString(CourseAvailability.PENDING,1.0).toString(),
-          new Text('Pending',style: new TextStyle(fontSize: 1.0, color: CiEColor.yellow)).toString());
-    });
-
-    test('unavailable', () {
-      expect(
-          CourseAvailabilityUtility
-              .intToColoredString(CourseAvailability.UNAVAILABLE,1.0).toString(),
-          new Text('Unavailable',style: new TextStyle(fontSize: 1.0, color: CiEColor.red)).toString());
-    });
-
   });
 
   group('weekday utility', () {
@@ -431,63 +185,135 @@ void main() {
     });
   });
 
-  group("CourseBuilder", (){
-
-    test('1', () {
-      final CourseBuilder sut = new CourseBuilder();
-      expect(sut.withId("1").id, '1');
+  group('courseBuilder test', () {
+    test('complete builder test', () {
+      var testString = "test";
+      var testBool = true;
+      var testInt = 1;
+      var testDynamicList = new List<dynamic>();
+      var testCorrelationList = new List<Correlation>();
+      var testDateList = new List<Date>();
+      var testLectureList = new List<Lecture>();
+      CourseBuilder builder = new CourseBuilder()
+          .withName(testString)
+          .withId(testString)
+          .withDescription(testString)
+          .withIsCoterie(testBool)
+          .withhasHomeBias(testBool)
+          .withCorrelations(testCorrelationList)
+          .withdates(testDateList)
+          .withShortName(testString)
+          .withActions(testDynamicList)
+          .withFaculty(testString)
+          .withLecturesPerWeek(testLectureList)
+          .withHoursPerWeek(testInt)
+          .withEcts(testInt)
+          .withProfessorEmail(testString)
+          .withProfessorName(testString)
+          .withIsFavorite(testBool);
+      Course built = builder.build();
+      expect(built.name, testString);
+      expect(built.isFavourite, testBool);
+      expect(built.id, testString);
+      expect(built.description, testString);
+      expect(built.isCoterie, testBool);
+      expect(built.hasHomeBias, testBool);
+      expect(built.correlations, testCorrelationList);
+      expect(built.dates, testDateList);
+      expect(built.shortName, testString);
+      expect(built.actions, testDynamicList);
+      expect(built.faculty, testString);
+      expect(built.lecturesPerWeek, testLectureList);
+      expect(built.ects, testInt);
+      expect(built.professorEmail, testString);
+      expect(built.professorName, testString);
+      expect(built.available, CourseAvailability.UNAVAILABLE);
+      expect(built.isFavourite, testBool);
     });
 
-    test('2', () {
-      final CourseBuilder sut = new CourseBuilder();
-      expect(sut.withIsCoterie(true).isCoterie, true);
+    test('fromJson test', () {
+      CourseBuilder builder;
+      Map<String, dynamic> jsonData = json.decode('''
+      {"id":"493e7e17-1508-e811-94bf-00155d6e6b0a","description":null,
+      "isCoterie":false,"hasHomeBias":false,"correlations":[{"organiser":"FK 09"
+      ,"curriculum":"WIM","actions":[]},{"organiser":"FK 09","curriculum":"MBA"
+      ,"actions":[]},{"organiser":"FK 13","curriculum":"CIE","actions":[]}],
+      "dates":[{"begin":"20180427T140000Z","end":"20180427T190000Z","title":null
+      ,"isCanceled":false,"rooms":[{"number":"R 2.091","building":"R","campus":
+      "Lothstrasse","actions":[]}],"lecturer":[{"title":null,"firstName":null,
+      "lastName":"Rothlauf","actions":[]}],"actions":[]},{"begin":
+      "20180323T150000Z","end":"20180323T200000Z","title":null,"isCanceled":
+      false,"rooms":[{"number":"R 2.091","building":"R","campus":"Lothstrasse",
+      "actions":[]}],"lecturer":[{"title":null,"firstName":null,"lastName":
+      "Rothlauf","actions":[]}],"actions":[]},{"begin":"20180324T080000Z","end":
+      "20180324T160000Z","title":null,"isCanceled":false,"rooms":[{"number":
+      "R 2.091","building":"R","campus":"Lothstrasse","actions":[]}],"lecturer":
+      [{"title":null,"firstName":null,"lastName":"Rothlauf","actions":[]}],
+      "actions":[]},{"begin":"20180325T070000Z","end":"20180325T150000Z","title"
+      :null,"isCanceled":false,"rooms":[{"number":"R 2.091","building":"R",
+      "campus":"Lothstrasse","actions":[]}],"lecturer":[{"title":null,
+      "firstName":null,"lastName":"Rothlauf","actions":[]}],"actions":[]},
+      {"begin":"20180428T070000Z","end":"20180428T150000Z","title":null,
+      "isCanceled":false,"rooms":[{"number":"R 2.091","building":"R","campus":
+      "Lothstrasse","actions":[]}],"lecturer":[{"title":null,"firstName":null,
+      "lastName":"Rothlauf","actions":[]}],"actions":[]},{"begin":
+      "20180429T070000Z","end":"20180429T150000Z","title":null,"isCanceled":
+      false,"rooms":[{"number":"R 2.091","building":"R","campus":"Lothstrasse",
+      "actions":[]}],"lecturer":[{"title":null,"firstName":null,"lastName":
+      "Rothlauf","actions":[]}],"actions":[]}],"name":"Intercultural Management"
+      ,"shortName":"Intcult Mgt and Ledership","actions":[]}
+      ''');
+      try {
+        builder = new CourseBuilder.fromJson(jsonData);
+      } catch (e) {
+        fail("Unable to parse json data");
+      }
+      var testString = "test";
+      var testBool = true;
+      var testInt = 1;
+      var testDynamicList = new List<dynamic>();
+      var testCorrelationList = new List<Correlation>();
+      var testDateList = new List<Date>();
+      var testRoomList = new List<Room>();
+      var testLecturerList = new List<Lecturer>();
+      var testLectureList = new List<Lecture>();
+      builder
+          .withId(testString)
+          .withDescription(testString)
+          .withIsCoterie(testBool)
+          .withhasHomeBias(testBool)
+          .withCorrelations(testCorrelationList)
+          .withdates(testDateList)
+          .withShortName(testString)
+          .withActions(testDynamicList)
+          .withLecturesPerWeek(testLectureList)
+          .withHoursPerWeek(testInt)
+          .withEcts(testInt)
+          .withProfessorEmail(testString)
+          .withProfessorName(testString)
+          .withIsFavorite(testBool);
+      Course built = builder.build();
+      expect(built.name, "Intercultural Management");
+      expect(built.isFavourite, testBool);
+      expect(built.id, testString);
+      expect(built.description, testString);
+      expect(built.isCoterie, testBool);
+      expect(built.hasHomeBias, testBool);
+      expect(built.correlations, testCorrelationList);
+      expect(built.dates, testDateList);
+      if (built.dates.length > 0) {
+        expect(built.dates[0].rooms, testRoomList);
+        expect(built.dates[0].lecturers, testLecturerList);
+      }
+      expect(built.shortName, testString);
+      expect(built.actions, testDynamicList);
+      expect(built.faculty, "09");
+      expect(built.lecturesPerWeek, testLectureList);
+      expect(built.ects, testInt);
+      expect(built.professorEmail, testString);
+      expect(built.professorName, testString);
+      expect(built.available, CourseAvailability.UNAVAILABLE);
+      expect(built.isFavourite, testBool);
     });
-
-    test('3', () {
-      final CourseBuilder sut = new CourseBuilder();
-      expect(sut.withhasHomeBias(true).hasHomeBias, true);
-    });
-
-    test('4', () {
-      final CourseBuilder sut = new CourseBuilder();
-      expect(sut.withShortName("213412343412").shortName, '213412343412');
-    });
-
-    test('5', () {
-      final CourseBuilder sut = new CourseBuilder();
-      expect(sut.withCorrelations(new List<dynamic>()).runtimeType, new CourseBuilder().runtimeType);
-    });
-
-    test('6', () {
-      final CourseBuilder sut = new CourseBuilder();
-      expect(sut.withActions(new List<dynamic>()).runtimeType, new CourseBuilder().runtimeType);
-    });
-
-    test('6', () {
-      final CourseBuilder sut = new CourseBuilder();
-      expect(sut.withdates(new List<dynamic>()).runtimeType, new CourseBuilder().runtimeType);
-    });
-
-    test('6', () {
-      /*
-      final Map<String,dynamic> map = new Map<String,dynamic>();
-
-      map["id"] = "10";
-      map["description"] = "10";
-      map["isCoterie"] = true;
-      map["hasHomeBias"] = true;
-      map["correlation"] = true;
-      map["dates"] = "s";
-      map["name"] = "asdbkvk";
-      map["shortName"] = "sadasdsad";
-      map["actions"] = "1";
-      final CourseBuilder sut = CourseBuilder.fromJson(map);
-      expect(sut.runtimeType, new CourseBuilder().runtimeType);
-      */
-    });
-
-
   });
-
-
 }
