@@ -1,15 +1,17 @@
+import 'package:cie_team1/di/courses_di.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/icsExport.dart';
+import 'package:cie_team1/utils/nineAPIConsumer.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/views/schedule.dart';
 import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/nineAPIConsumer.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
 
 class TabsPage extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class TabsPage extends StatefulWidget {
 }
 
 class TabsPageState extends State<TabsPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   PageController _tabController;
   CourseListPresenter courseListPresenter;
   CurrentUserPresenter currentUserPresenter;
@@ -31,8 +34,8 @@ class TabsPageState extends State<TabsPage> {
     NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
     courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
-    currentUserPresenter = new CurrentUserPresenter(_maybeChangeCallback,
-        Flavor.PROD);
+    currentUserPresenter =
+        new CurrentUserPresenter(_maybeChangeCallback, Flavor.PROD);
     courseListPresenter.addCoursesFromMemory();
     currentUserPresenter.loadUserSettingsFromMemory();
     this._appTitle = TabItems[_tab].title;
@@ -46,13 +49,36 @@ class TabsPageState extends State<TabsPage> {
 
   void _maybeChangeCallback(bool didChange) {
     if (didChange == true) {
-      setState(()=>{});
+      setState(() => {});
     }
+  }
+
+  void _savePressed() {
+    IcsExporter
+        .exportAsIcs(new CourseInjector()
+            .courses
+            .getCourses()
+            .where((c) => c.isFavourite)
+            .toList())
+        .then((String path) {
+      print("path: " + path.toString());
+      if (path.length > 0) {
+        showInSnackBar("The Calendar-File was stored locally: " + path);
+      } else {
+        showInSnackBar("The Calendar-File could not be stored locally!");
+      }
+    });
+  }
+
+  void showInSnackBar(String value) {
+    _scaffoldKey.currentState
+        .showSnackBar(new SnackBar(content: new Text(value)));
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: _scaffoldKey,
       appBar: new AppBar(
         title: new Text(
           _appTitle,
@@ -61,6 +87,19 @@ class TabsPageState extends State<TabsPage> {
         ),
         elevation: CiEStyle.getAppBarElevation(context),
         backgroundColor: CiEColor.red,
+        actions: <Widget>[
+          ((_appTitle == 'Schedule')
+              ? new IconButton(
+                  icon: new Icon(Icons.save_alt),
+                  color: CiEColor.white,
+                  highlightColor: CiEColor.white,
+                  splashColor: CiEColor.white,
+                  disabledColor: CiEColor.white,
+                  iconSize: 30.0,
+                  tooltip: 'action button',
+                  onPressed: () => _savePressed())
+              : new Text("")),
+        ],
       ),
       body: new PageView(
         controller: _tabController,
@@ -105,6 +144,7 @@ class TabsPageState extends State<TabsPage> {
 
 class TabItem {
   const TabItem({this.title, this.icon});
+
   final String title;
   final IconData icon;
 }

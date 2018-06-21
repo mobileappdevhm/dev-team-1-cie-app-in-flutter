@@ -13,7 +13,6 @@ class CoursesMock implements Courses {
           .withId("AllCoursesWillHaveTheSameID" + i.toString())
           .withName(generateMockCourseTitle(i))
           .withFaculty(generateMockDepartment(i))
-          .withFaculty(generateMockDepartment(i))
           .withLecturesPerWeek(generateMockTime(i))
           .withDescription(generateMockDescription(i))
           .withHoursPerWeek(generateMockClassLength(i))
@@ -22,7 +21,7 @@ class CoursesMock implements Courses {
           .withProfessorName(generateMockName(i))
           .withhasHomeBias(generateMockHomeBias(i))
           .withIsCoterie(generateMockCoterie(i))
-          .withIsFavorite(generateMockFavorite(i))
+          .withIsFavorite(false)
           .withdates(generateMockDates())
           .build());
     }
@@ -59,18 +58,6 @@ class CoursesMock implements Courses {
 
   static String generateMockName(int i) {
     return "Professor name" + i.toString();
-  }
-
-  static CourseAvailability generateMockAvailability(int i) {
-    return CourseAvailabilityUtility.intToCourseAvailability(i % 3);
-  }
-
-  static int generateMockAvailabilityLevel(int i) {
-    return i % 2;
-  }
-
-  static bool generateMockFavorite(int i) {
-    return false;
   }
 
   static List<Date> generateMockDates() {
