@@ -16,7 +16,9 @@ class StaticVariables {
   static const String IMAGE_PATH = RESSOURCE_PATH + 'images/';
 
   static const int HOURS_TO_MIN = 60;
-  static const int CAMPUS_COMMUTE_MIN = 45;
+  static const int CAMPUS_COMMUTE_MIN_LOTH_KARL = 15;
+  static const int CAMPUS_COMMUTE_MIN_LOTH_PAS = 45;
+  static const int CAMPUS_COMMUTE_MIN_PAS_KARL = 35;
 
   static const String TIME_CONFLICT_MESSAGE = "Possible Scheduling Conflict";
 
@@ -72,4 +74,9 @@ class StaticVariables {
   static const String NO_DESCRIPTION =
       "Sorry, there no description available for this course. Please check again later.";
   static const String PROFESSOR = "Professor";
+
+
+
+  static String COURSE_CONFLICTS_WITH_OTHER_FAVORIT = "Conflicts with other Favorit";
+  static String COURSE_CONFLICTS_WITH_FAVORIT = "Conflicts with a Favorit";
 }
