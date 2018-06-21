@@ -1,15 +1,17 @@
+import 'dart:async';
+
 import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
+import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/nineAPIConsumer.dart';
-import 'dart:async';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
@@ -40,9 +42,15 @@ class CourseListState extends State<CourseList> {
   String filter = "09";
   String searchValue = "";
   bool coursesRegistered = false;
+  User currentUser;
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites,
-      this.userPresenter);
+      this.userPresenter) {
+    if (this.userPresenter.getCurrentUser().isLoggedIn &&
+        this.userPresenter.getCurrentUser().department.isNotEmpty) {
+      this.filter = this.userPresenter.getCurrentUser().department;
+    }
+  }
 
   handleUpdate() async {
     //pullCourseJSON also checks for internet connectivity. This method should
@@ -74,7 +82,7 @@ class CourseListState extends State<CourseList> {
 
       //Select department to filter for
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
-      String departmentLabel = "Department #";
+      String departmentLabel = "Department ";
       widgets.add(new Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -154,22 +162,28 @@ class CourseListState extends State<CourseList> {
 
   @override
   void deactivate() {
+    super.deactivate();
     courseListPresenter.deactivate();
   }
 
-  // Create a raised button on which is used on favorite page to allow users to submit there choice to lottery
+  // Create a raised button on which is used on favorite page to allow users to submit their choices to lottery
   Widget _getRaisedSubmitButton() {
     bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn;
+    bool isDepartmentSet = userPresenter.getCurrentUser().department.isNotEmpty;
 
     //Decide how to show submit button
     String textToShow;
     Color buttonColor;
     Function function;
-    if (coursesRegistered && isLoggedIn) {
+    if (coursesRegistered && isLoggedIn && isDepartmentSet) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
       buttonColor = CiEColor.red;
       function = _handleCourseSubmission;
     } else if (!coursesRegistered && isLoggedIn) {
+      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
+      buttonColor = CiEColor.lightGray;
+      function = null;
+    } else if (coursesRegistered && isLoggedIn && !isDepartmentSet) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
       buttonColor = CiEColor.lightGray;
       function = null;
