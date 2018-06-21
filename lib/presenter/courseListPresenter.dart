@@ -383,7 +383,7 @@ class CourseListPresenter {
     String result = "";
 
     if (_getTimeBetweenLectures(l, f) < 0) {
-      result += "Lectures at same time";
+      result += "Lecture time schedules overlap.";
     } else {
       Campus campusOne = l.campus;
       Campus campusTwo = f.campus;

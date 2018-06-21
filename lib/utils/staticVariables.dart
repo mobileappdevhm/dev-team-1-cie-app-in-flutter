@@ -38,7 +38,7 @@ class StaticVariables {
   static const String CONTACT_OFFICE = 'Contact International Office';
   static const String CIE_CERTIFICATE = 'Courses in English Certificate';
   static const String IE_CERTIFICATE = 'International Engineering Certificate';
-  static const String TAKEN_COURSES = 'Taken Courses';
+  static const String TAKEN_COURSES = 'Course History';
   static const String PRIVACY_BUTTON = 'Our Privacy Policy';
 
   static const String GUEST_FIRST_NAME = "Guest";
@@ -77,8 +77,8 @@ class StaticVariables {
 
 
 
-  static String COURSE_CONFLICTS_WITH_OTHER_FAVORIT = "Conflicts with other Favorit";
-  static String COURSE_CONFLICTS_WITH_FAVORIT = "Conflicts with a Favorit";
+  static String COURSE_CONFLICTS_WITH_OTHER_FAVORIT = "Conflicts with other Favorite";
+  static String COURSE_CONFLICTS_WITH_FAVORIT = "Conflicts with a Favorite";
   static String COURSE_DESCRIPTION_CONFLICTS_WITH_OTHER_FAVORIT = "This course is in conflict with another favorite course:";
   static String COURSE_DESCRIPTION_CONFLICTS_WITH_FAVORIT = "This course is unlikely to be chosen together with another favorite course:";
 }
