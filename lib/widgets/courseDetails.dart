@@ -42,7 +42,6 @@ class _CourseDetailsState extends State<CourseDetails> {
           child: new Column(
             children: <Widget>[
               buildTitleRow(),
-              buildDescriptionHeadingRow(),
               new Expanded(
                 child: buildDescriptionRow(),
               ),
@@ -71,24 +70,24 @@ class _CourseDetailsState extends State<CourseDetails> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         new Padding(
-          padding: const EdgeInsets.only(
-            left: 0.0, top: 15.0, right: 0.0, bottom: 15.0)),
+            padding: const EdgeInsets.only(
+                left: 0.0, top: 15.0, right: 0.0, bottom: 15.0)),
         _getSpacing(new EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 30.0)),
         new Container(
           child: new Padding(
-            padding: new EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 30.0),
-            child: new Text(StaticVariables.DESCRIPTION, style: CiEStyle.getCourseDetailsHeadingStyle())),
-          ),
-            _getSpacing(new EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 30.0)),
-
+              padding: new EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 30.0),
+              child: new Text(StaticVariables.DESCRIPTION,
+                  style: CiEStyle.getCourseDetailsHeadingStyle())),
+        ),
+        _getSpacing(new EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 30.0)),
       ],
     );
   }
 
-
   Widget buildDescriptionRow() {
     String textToShow;
-    if (presenter.getDescription(id) == "") {
+    if (presenter.getDescription(id) == "" ||
+        presenter.getDescription(id) == null) {
       textToShow = StaticVariables.NO_DESCRIPTION;
     } else {
       textToShow = presenter.getDescription(id);
@@ -100,18 +99,42 @@ class _CourseDetailsState extends State<CourseDetails> {
     else
       conflictTextStyle = CiEStyle.getCourseDetailsConflictNotificationText();
 
+    TextStyle conflictReasonTextStyle;
+    if (presenter.getCourses()[id].isFavourite)
+      conflictReasonTextStyle =
+          CiEStyle.getCourseDetailsConflictReasonWarningText();
+    else
+      conflictReasonTextStyle =
+          CiEStyle.getCourseDetailsConflictReasonNotificationText();
+
+    List<String> conflictText = presenter.getCourseDescriptionConflictText(id);
+
     return new SingleChildScrollView(
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          presenter.checkIfConflictsOtherFavoriteCourse(id) ? new Padding(
-            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-            child: new Text(
-              presenter.getCourseDescriptionConflictText(id),
-              style: conflictTextStyle,
-            ),
-          ) : new Container(),
+          presenter.checkIfConflictsOtherFavoriteCourse(id)
+              ? new Padding(
+                  padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
+                  child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      new Text(
+                        conflictText[0] != null
+                            ? conflictText[0]
+                            : "Ooops something went wront can't find conflicting cours.",
+                        style: conflictTextStyle,
+                      ),
+                      new Text(
+                        conflictText[1] != null ? conflictText[1] : "",
+                        style: conflictReasonTextStyle,
+                      ),
+                    ],
+                  ))
+              : new Container(),
+          buildDescriptionHeadingRow(),
           new Text(
             textToShow,
             style: CiEStyle.getCourseDetailsDescription(),
@@ -248,7 +271,7 @@ class _CourseDetailsState extends State<CourseDetails> {
     );
   }
 
-    //Draws a line
+  //Draws a line
   Widget _getSpacing(EdgeInsets padding) {
     return new Expanded(
         child: new Column(
