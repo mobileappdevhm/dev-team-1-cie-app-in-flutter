@@ -66,12 +66,14 @@ class TabsPageState extends State<TabsPage> {
         controller: _tabController,
         onPageChanged: _onPageChanged,
         children: <Widget>[
-          new CourseList(courseListPresenter, false, currentUserPresenter),
+          new CourseList(courseListPresenter, false,
+              currentUserPresenter, new FocusNode()),
           // Behaves as Courses Page
           new MapPage(),
           new Schedule(courseListPresenter),
           // Behaves as Favorites Page
-          new CourseList(courseListPresenter, true, currentUserPresenter),
+          new CourseList(courseListPresenter, true,
+              currentUserPresenter, new FocusNode()),
           new Settings(currentUserPresenter),
         ],
       ),
@@ -96,6 +98,7 @@ class TabsPageState extends State<TabsPage> {
   }
 
   void _onPageChanged(int tab) {
+    FocusScope.of(context).requestFocus(new FocusNode());
     setState(() {
       this._tab = tab;
     });
