@@ -142,7 +142,9 @@ class CourseListPresenter {
 
     analytics.logEvent(name: "toggle_favorite",
         parameters:{
-        "name":_courses.getCourses()[id].name, "favorite":_courses.getCourses()[id].isFavourite
+        "name":_courses.getCourses()[id].name,
+        "favorite":_courses.getCourses()[id].isFavourite,
+        "department":_courses.getCourses()[id].faculty
     });
 
     if (shouldUseMemory) {
