@@ -93,7 +93,7 @@ void main() {
                 child: new Center(
                     child: new CourseList(
                         new CourseListPresenter(null), isFavoritesPage, new CurrentUserPresenter(null,
-                        Flavor.MOCK))),
+                        Flavor.MOCK), new FocusNode())),
               ),
             );
           },
