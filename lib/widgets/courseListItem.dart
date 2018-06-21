@@ -1,4 +1,5 @@
 import 'package:cie_team1/generic/genericIcon.dart';
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
@@ -91,6 +92,13 @@ class CourseListItem extends StatelessWidget {
   }
 
   void _toggleDescription(BuildContext context) {
+
+    //track click on course
+    analytics.logEvent(name: "course_click",parameters: {
+        "title":courseListPresenter.getTitle(id),
+        "department":courseListPresenter.getFaculty(id)
+    });
+
     Navigator.push(
         context,
         new MaterialPageRoute(

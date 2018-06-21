@@ -65,15 +65,14 @@ class LoginFormState extends State<LoginForm> {
           } else {
             final String id = json.decode(response.body)['user']['id'];
             final String firstName =
-                json.decode(response.body)['user']['firstName'];
+            json.decode(response.body)['user']['firstName'];
             final String lastName =
-                json.decode(response.body)['user']['lastName'];
+            json.decode(response.body)['user']['lastName'];
             var curriculum =
-                json.decode(response.body)['curriculum']['organiser']['name'];
+            json.decode(response.body)['curriculum']['organiser']['name'];
             updateUserSettings(context, firstName, lastName, curriculum);
 
-              //track login
-              analytics.logLogin();
+            analytics.logLogin();
           }
         });
       } catch (_) {
