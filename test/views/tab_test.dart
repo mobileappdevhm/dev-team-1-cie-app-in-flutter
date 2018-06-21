@@ -26,15 +26,12 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (counter == 0) {
-            expect(widget.data, 'Today');
+            expect(widget.data, 'Pull down to Refresh');
             counter++;
           } else if (counter == 1) {
-            expect(
-                widget.data,
-                WeekdayUtility
-                    .getWeekdayAsString(WeekdayUtility.getCurrentWeekday()));
+            expect( widget.data.contains("Department"), true);
             counter++;
-          }else if(counter >= 2){
+          } else if(counter >= 2){
             if (WeekdayUtility.getCurrentWeekday() != Weekday.Sun &&
                 WeekdayUtility.getCurrentWeekday() != Weekday.Sat){
               if (counter == 2) {

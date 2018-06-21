@@ -441,6 +441,26 @@ class WeekdayUtility {
     // Not reachable.
     return "";
   }
+  static String getWeekdayAsLongString(Weekday day) {
+    switch (day) {
+      case Weekday.Mon:
+        return "Monday";
+      case Weekday.Tue:
+        return "Tuesday";
+      case Weekday.Wed:
+        return "Wednesday";
+      case Weekday.Thu:
+        return "Thursday";
+      case Weekday.Fri:
+        return "Friday";
+      case Weekday.Sat:
+        return "Saturday";
+      case Weekday.Sun:
+        return "Sunday";
+    }
+    // Not reachable.
+    return "";
+  }
 
   static int getWeekdayAsInt(Weekday day) {
     switch (day) {
