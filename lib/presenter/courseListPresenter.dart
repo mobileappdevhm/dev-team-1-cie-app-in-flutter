@@ -92,7 +92,32 @@ class CourseListPresenter {
           this.onChanged(true);
         }
       }
+      syncFavoritedCoursesFromMemory();
     });
+  }
+
+  void syncFavoritedCoursesFromMemory() {
+    FileStore.readFileAsString(FileStore.FAVORITES).then((String favoriteIds) {
+      if (favoriteIds != null) {
+        dynamic favoritesJson = json.decode(favoriteIds);
+        for (Course c in _courses.getCourses()) {
+          if (favoritesJson[c.id] != null) {
+            c.isFavourite = true;
+          }
+        }
+      }
+      this.onChanged(true);
+    });
+  }
+  void commitFavoritedCoursesToMemory() {
+    // dynamic so we can easily refactor to support more data in the future
+    Map<String, dynamic> toJson = new Map<String, dynamic>();
+    for (Course c in _courses.getCourses()) {
+      if (c.isFavourite) {
+        toJson.putIfAbsent(c.id, ()=>c.isFavourite);
+      }
+    }
+    FileStore.writeToFile(FileStore.FAVORITES, json.encode(toJson));
   }
 
   bool isNewCourseData(List<Course> courseList, Course candidate) {
@@ -110,16 +135,16 @@ class CourseListPresenter {
     _coursesToDeleteOnViewChange.clear();
   }
 
-  void toggleFavourite(int id) {
-    if (_courses.getCourses()[id].isFavourite) {
-      _courses.getCourses()[id].isFavourite = false;
-    } else {
-      _courses.getCourses()[id].isFavourite = true;
+  void toggleFavourite(int id, bool shouldUseMemory) {
+    _courses.getCourses()[id].isFavourite =
+    !_courses.getCourses()[id].isFavourite;
+    if (shouldUseMemory) {
+      commitFavoritedCoursesToMemory();
     }
   }
 
   void toggleFavouriteWhenChangeView(int id) {
-    toggleFavourite(id);
+    toggleFavourite(id, true);
     if (_coursesToDeleteOnViewChange.contains(id)) {
       _coursesToDeleteOnViewChange.remove(id);
     } else {
