@@ -26,7 +26,6 @@ void main() {
       int counter = 0;
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
-          print(counter.toString() + widget.data);
           if (counter == 0) {
             expect(widget.data, 'Title of Course 1');
             counter++;
@@ -39,31 +38,31 @@ void main() {
           } else if (counter == 3) {
             expect(widget.data.isEmpty, false);
             counter++;
-          } else if (counter == 4) {
+          } else if (counter == 5) {
             expect(widget.data, 'Description');
             counter++;
-          } else if (counter == 5) {
-            expect(widget.data.isEmpty, false);
-            counter++;
           } else if (counter == 6) {
-            expect(widget.data, 'ECTS:');
+            expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 7) {
-            expect(widget.data.isEmpty, false);
-            counter++;
-          } else if (counter == 8) {
-            expect(widget.data, "Hours per Week:");
+            expect(widget.data, 'ECTS:');
             counter++;
           } else if (counter == 9) {
-            expect(widget.data.contains("1"), true);
+            expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 10) {
-            expect(widget.data, 'Pending');
+            expect(widget.data, "Hours per Week:");
             counter++;
           } else if (counter == 11) {
-            expect(widget.data, 'Contact');
+            expect(widget.data.contains("1"), true);
             counter++;
           } else if (counter == 12) {
+            expect(widget.data, 'Pending');
+            counter++;
+          } else if (counter == 13) {
+            expect(widget.data, 'Contact');
+            counter++;
+          } else if (counter == 14) {
             expect(widget.data, 'Course Details');
             counter++;
           }
