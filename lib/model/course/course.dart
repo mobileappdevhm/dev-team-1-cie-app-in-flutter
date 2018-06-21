@@ -381,6 +381,19 @@ class CourseAvailabilityUtility {
 }
 
 class CampusUtility {
+  static Campus getStringAsCampus(String campus) {
+    switch (campus) {
+      case "Karlstrasse":
+        return Campus.KARLSTRASSE;
+        break;
+      case "Pasing":
+        return Campus.PASING;
+        break;
+      default:
+        return Campus.LOTHSTRASSE;
+    }
+  }
+
   static String getCampusAsString(Campus campus) {
     switch (campus) {
       case Campus.KARLSTRASSE:

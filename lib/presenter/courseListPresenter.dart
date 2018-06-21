@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:cie_team1/di/courses_di.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:flutter/material.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
+import 'package:cie_team1/model/course/details/date.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/utils/fileStore.dart';
-import 'dart:convert';
+import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:flutter/material.dart';
 
 abstract class CourseListViewContract {
   //Todo: Needed in future
@@ -34,15 +36,49 @@ class CourseListPresenter {
         final List<dynamic> jsonData = json.decode(val);
         for (int i = 0; i < jsonData.length; i++) {
           CourseBuilder courseBuilder = new CourseBuilder.fromJson(jsonData[i]);
-          // TODO: Delete the following builder code & only rely on the .fromJson
-          // once all relevent data is available from the Nine API
+          Campus campus;
+          DateTime begin;
+          DateTime end;
+          String roomNumber;
+          Date date;
+          if (courseBuilder.dates.length > 0) {
+            for (int i = 0; i < courseBuilder.dates.length; i++) {
+              if (!courseBuilder.dates[i].isCanceled)
+                date = courseBuilder.dates[i];
+            }
+            if (date != null && date.rooms != null && date.rooms.length > 0) {
+              //real data
+              begin = DateTime.parse(date.begin);
+              end = DateTime.parse(date.end);
+              roomNumber = date.rooms[0].number;
+              campus = CampusUtility.getStringAsCampus(date.rooms[0].campus);
+            } else {
+              //unknown data
+              begin = DateTime.parse(courseBuilder.dates[0].begin);
+              end = DateTime.parse(courseBuilder.dates[0].end);
+              roomNumber = "unknown";
+              campus = Campus.LOTHSTRASSE;
+            }
+          } else {
+            //completely unknown data
+            begin = new DateTime.now();
+            end = new DateTime.now();
+            roomNumber = "unknown";
+            campus = Campus.LOTHSTRASSE;
+          }
+
           courseBuilder
               .withLecturesPerWeek([
-                new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
-                    new DayTime(10, 00), new DayTime(11, 30), "R0.009")
+                new Lecture(
+                    campus,
+                    WeekdayUtility.intToWeekday((begin.day - 1) % 6),
+                    new DayTime(begin.hour, begin.minute),
+                    new DayTime(end.hour, end.minute),
+                    roomNumber)
               ])
               .withHoursPerWeek(2)
               .withEcts(2)
+          //TODO replace with professor email if available
               .withProfessorEmail("example@hm.edu")
               .withIsFavorite(false);
           Course c = courseBuilder.build();
@@ -196,8 +232,8 @@ class CourseListPresenter {
 
   //If lectures of this course conflicts with other favourite lecture return true
   bool checkIfConflictsOtherFavoriteLecture(Lecture lecture) {
-    return getFavouriteLectures().any((otherFavorite) =>
-        _checkTimeConflict(lecture, otherFavorite));
+    return getFavouriteLectures()
+        .any((otherFavorite) => _checkTimeConflict(lecture, otherFavorite));
   }
 
   bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
@@ -284,12 +320,12 @@ class CourseListPresenter {
     String reason = "";
 
     if (getCourses()[id].isFavourite)
-      reason += "This course is in conflict with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
+      reason +=
+          "This course is in conflict with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
     else
-      reason += "This course is unlikely to be chosen together with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
+      reason +=
+          "This course is unlikely to be chosen together with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
 
     return reason;
   }
-
-
 }
