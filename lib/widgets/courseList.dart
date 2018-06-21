@@ -16,14 +16,15 @@ class CourseList extends StatefulWidget {
   final CourseListPresenter courseListPresenter;
   final CurrentUserPresenter userPresenter;
   bool shouldFilterByFavorites = false;
+  FocusNode focus;
 
   CourseList(this.courseListPresenter, this.shouldFilterByFavorites,
-      this.userPresenter);
+      this.userPresenter, this.focus);
 
   @override
   State<StatefulWidget> createState() {
     return new CourseListState(
-        courseListPresenter, shouldFilterByFavorites, userPresenter);
+        courseListPresenter, shouldFilterByFavorites, userPresenter, focus);
   }
 
   void toggleFilter() {
@@ -40,9 +41,10 @@ class CourseListState extends State<CourseList> {
   String filter = "09";
   String searchValue = "";
   bool coursesRegistered = false;
+  FocusNode focus;
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites,
-      this.userPresenter);
+      this.userPresenter, this.focus);
 
   handleUpdate() async {
     //pullCourseJSON also checks for internet connectivity. This method should
@@ -111,6 +113,7 @@ class CourseListState extends State<CourseList> {
           padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
           alignment: Alignment.center,
           child: new TextField(
+            focusNode: focus,
             controller: c1,
             decoration: const InputDecoration(
               hintText: "Search by Course Name",
