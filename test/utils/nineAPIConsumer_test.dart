@@ -5,20 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
 
   test('1 pullCourseJson', (){
-
     NineAPIEngine.pullCourseJSON(null, true);
-
     //maybe adding Fileread
   });
-
-  /*
-  testWidgets('2 pullCourseJson Foreground', (WidgetTester tester) async{
-
-
-    //NineAPIEngine.pullCourseJSON(context, true);
-
-    //maybe adding Fileread
-  });*/
-
-
 }
