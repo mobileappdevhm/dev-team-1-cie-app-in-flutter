@@ -8,7 +8,7 @@ import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 
 class Schedule extends StatefulWidget {
-  CourseListPresenter courseListPresenter;
+  final CourseListPresenter courseListPresenter;
 
   Schedule(this.courseListPresenter);
 
@@ -32,7 +32,6 @@ class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = new List<Widget>();
-
     children.add(new ScheduleDivider("Today"));
     children.add(_getTimeTableSpecificDay(WeekdayUtility.getCurrentWeekday()));
 
@@ -51,7 +50,6 @@ class _ScheduleState extends State<Schedule> {
     // Get lectures at day an receive timeTableEntry for day
     List<Lecture> lectureList =
         courseListPresenter.getFavouriteLecturesOfWeekday(weekday);
-    return new TimeTableEntry(lectureList, weekday);
     return new TimeTableEntry(lectureList, weekday, courseListPresenter);
   }
 }
@@ -118,7 +116,6 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
         }
       }
     }
-
     return new ExpansionTile(
       initiallyExpanded: true,
       title: new Text(WeekdayUtility.getWeekdayAsString(weekday)),

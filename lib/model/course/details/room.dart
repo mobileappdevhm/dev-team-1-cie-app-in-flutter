@@ -1,9 +1,9 @@
 class RoomBuilder {
-  static List<Room> fromJson(List<dynamic> jsonRooms) {
-    if (jsonRooms == null) return null;
+  static List<Room> fromJson(List<dynamic> jsonData) {
+    if (jsonData == null) return null;
     var list = new List<Room>();
-    for (int i = 0; i < jsonRooms.length; i++) {
-      list.add(new Room(jsonRooms[i]));
+    for (int i = 0; i < jsonData.length; i++) {
+      list.add(new Room(jsonData[i]));
     }
     return list;
   }
@@ -13,11 +13,13 @@ class Room {
   String number;
   String building;
   String campus;
+  List<dynamic> actions;
 
-  Room(Map<String, dynamic> roomAsJson) {
-    this.number = roomAsJson['number'];
-    this.building = roomAsJson['building'];
-    this.campus = roomAsJson['campus'];
+  Room(Map<String, dynamic> jsonData) {
+    this.number = jsonData['number'];
+    this.building = jsonData['building'];
+    this.campus = jsonData['campus'];
+    this.actions = jsonData['actions'];
   }
 
   String getLocation() {

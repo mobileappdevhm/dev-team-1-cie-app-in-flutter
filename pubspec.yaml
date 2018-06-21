@@ -10,7 +10,7 @@ dependencies:
   cupertino_icons: ^0.1.0
   url_launcher: "^3.0.1"
   connectivity: "^0.3.1"
-  simple_permissions: "^0.1.5"
+  simple_permissions: any
 
 dev_dependencies:
   flutter_test:

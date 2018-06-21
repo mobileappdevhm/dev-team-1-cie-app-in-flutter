@@ -1,10 +1,10 @@
 class LecturerBuilder {
-  static List<Lecturer> fromJson(List<dynamic> jsonLecturers){
-    if(jsonLecturers == null)
+  static List<Lecturer> fromJson(List<dynamic> jsonData){
+    if(jsonData == null)
       return null;
     var list = new List<Lecturer>();
-    for(int i = 0; i < jsonLecturers.length; i++) {
-      list.add(new Lecturer(jsonLecturers[i]));
+    for(int i = 0; i < jsonData.length; i++) {
+      list.add(new Lecturer(jsonData[i]));
     }
     return list;
   }
@@ -14,10 +14,12 @@ class Lecturer {
   String title;
   String firstName;
   String lastName;
+  List<dynamic> actions;
 
-  Lecturer(Map<String, dynamic> lecturerAsString){
-    this.title = lecturerAsString['title'];
-    this.firstName = lecturerAsString['firstName'];
-    this.lastName = lecturerAsString['lastName'];
+  Lecturer(Map<String, dynamic> jsonData){
+    this.title = jsonData['title'];
+    this.firstName = jsonData['firstName'];
+    this.lastName = jsonData['lastName'];
+    this.actions = jsonData['actions'];
   }
 }

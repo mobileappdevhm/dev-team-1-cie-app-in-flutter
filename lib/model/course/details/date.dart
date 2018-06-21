@@ -2,11 +2,11 @@ import 'package:cie_team1/model/course/details/lecturer.dart';
 import 'package:cie_team1/model/course/details/room.dart';
 
 class DateBuilder {
-  static List<Date> fromJson(List<dynamic> jsonDates) {
-    if (jsonDates == null) return null;
+  static List<Date> fromJson(List<dynamic> jsonData) {
+    if (jsonData == null) return null;
     var list = new List<Date>();
-    for (int i = 0; i < jsonDates.length; i++) {
-      list.add(new Date(jsonDates[i]));
+    for (int i = 0; i < jsonData.length; i++) {
+      list.add(new Date(jsonData[i]));
     }
     return list;
   }
@@ -19,14 +19,16 @@ class Date {
   bool isCanceled;
   List<Room> rooms;
   List<Lecturer> lecturers;
+  List<dynamic> actions;
 
-  Date(Map<String, dynamic> dateAsJson) {
-    this.begin = dateAsJson['begin'];
-    this.end = dateAsJson['end'];
-    this.title = dateAsJson['title'];
-    this.isCanceled = dateAsJson['isCanceled'];
-    this.rooms = RoomBuilder.fromJson(dateAsJson['rooms']);
-    this.lecturers = LecturerBuilder.fromJson(dateAsJson['lecturer']);
+  Date(Map<String, dynamic> jsonData) {
+    this.begin = jsonData['begin'];
+    this.end = jsonData['end'];
+    this.title = jsonData['title'];
+    this.isCanceled = jsonData['isCanceled'];
+    this.rooms = RoomBuilder.fromJson(jsonData['rooms']);
+    this.lecturers = LecturerBuilder.fromJson(jsonData['lecturer']);
+    this.actions = jsonData['actions'];
   }
 
 }

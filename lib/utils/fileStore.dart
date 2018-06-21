@@ -9,6 +9,7 @@ class FileStore {
   static const String LOGIN = "_login";
   static const String USER_SETTINGS = "_user";
   static const String ICS_EXPORT = "_calendar";
+  static const String FAVORITES = "_favorites";
 
   static Future<File> getFile(String resource,
       [String extension = ".json", bool externalStorage = false]) async {
