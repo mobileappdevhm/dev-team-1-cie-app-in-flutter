@@ -27,7 +27,7 @@ class _TakenCoursesState extends State<TakenCourses> {
             style: CiEStyle.getAppBarTitleStyle(context),
           ),
           elevation: CiEStyle.getAppBarElevation(context),
-          backgroundColor: CiEColor.lightGray,
+          backgroundColor: CiEColor.red,
         ),
         body: new Center(
           child: new Column(
