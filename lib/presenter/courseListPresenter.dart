@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cie_team1/di/courses_di.dart';
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/course/details/date.dart';
@@ -138,6 +139,12 @@ class CourseListPresenter {
   void toggleFavourite(int id, bool shouldUseMemory) {
     _courses.getCourses()[id].isFavourite =
     !_courses.getCourses()[id].isFavourite;
+
+    analytics.logEvent(name: "toggle_favorite",
+        parameters:{
+        "name":_courses.getCourses()[id].name, "favorite":_courses.getCourses()[id].isFavourite
+    });
+
     if (shouldUseMemory) {
       commitFavoritedCoursesToMemory();
     }

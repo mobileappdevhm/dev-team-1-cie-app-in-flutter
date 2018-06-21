@@ -1,3 +1,4 @@
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
@@ -15,6 +16,11 @@ class _PrivacyPageState extends State<PrivacyPage> {
   bool changeLanguage = false;
   String privacyPolicyText = '';
   String privacyButtonText = '';
+
+  initState() {
+    super.initState();
+    analytics.setCurrentScreen(screenName: "privacy_policy_screen");
+  }
 
   @override
   Widget build(BuildContext context) {
