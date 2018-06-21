@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/model/login/loginData.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/utils/cieColor.dart';
@@ -13,17 +14,15 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginForm extends StatefulWidget {
-  static FirebaseAnalytics analytics = new FirebaseAnalytics();
   const LoginForm({Key key}) : super(key: key);
 
   @override
-  LoginFormState createState() => new LoginFormState(analytics);
+  LoginFormState createState() => new LoginFormState();
 }
 
 class LoginFormState extends State<LoginForm> {
-  LoginFormState(this.analytics);
+  LoginFormState();
 
-  final FirebaseAnalytics analytics;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final usernameController = new TextEditingController();
   final passwordController = new TextEditingController();
@@ -32,7 +31,7 @@ class LoginFormState extends State<LoginForm> {
 
   initState() {
     super.initState();
-    analytics.setCurrentScreen(screenName: "login screen");
+    analytics.setCurrentScreen(screenName: "login_screen");
   }
 
   void showInSnackBar(String value) {
@@ -90,6 +89,7 @@ class LoginFormState extends State<LoginForm> {
 
   void _handleGuestLogin() {
     updateUserSettings(context, null, null, null);
+    analytics.logEvent(name: 'guest_login');
   }
 
   String _validateMail(String value) {

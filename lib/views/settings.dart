@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/views/takenCourses.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -41,6 +42,7 @@ class _SettingsState extends State<Settings> {
         isLoggedIn = (currentUserPresenter.getCurrentUser().isLoggedIn);
       }
     });
+    analytics.setCurrentScreen(screenName: "settings_screen");
   }
 
   @override

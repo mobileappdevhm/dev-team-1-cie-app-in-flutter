@@ -7,7 +7,6 @@ import 'package:firebase_analytics/observer.dart';
 
 FirebaseAnalytics analytics = new FirebaseAnalytics();
 
-
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
