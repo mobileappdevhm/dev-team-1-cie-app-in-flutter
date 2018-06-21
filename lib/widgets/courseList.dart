@@ -212,7 +212,7 @@ class CourseListState extends State<CourseList> {
       if (shouldFilterByFavorites)
         courseListPresenter.toggleFavouriteWhenChangeView(id);
       else
-        courseListPresenter.toggleFavourite(id);
+        courseListPresenter.toggleFavourite(id,true);
     });
   }
 
