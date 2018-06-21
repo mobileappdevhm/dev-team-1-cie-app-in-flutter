@@ -135,6 +135,12 @@ class CourseListState extends State<CourseList> {
           ),
         ));
       }
+    } else {
+      widgets.add(
+        new Padding(
+          padding: const EdgeInsets.all(10.0),
+        )
+      );
     }
 
     //Build the tiles of the course list / favorites list
