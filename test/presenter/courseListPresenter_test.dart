@@ -52,13 +52,13 @@ void main() {
   group("favorite", () {
     test('1', () {
       final bool testValue = sut.getFavourite(0);
-      sut.toggleFavourite(0);
+      sut.toggleFavourite(0, false);
       expect(sut.getFavourite(0), !testValue);
     });
 
     test('2', () {
       final bool testValue = sut.getFavourite(1);
-      sut.toggleFavourite(1);
+      sut.toggleFavourite(1, false);
       expect(sut.getFavourite(1), !testValue);
     });
   });

@@ -67,6 +67,7 @@ matrix:
       - brew install ideviceinstaller
       - brew install ios-deploy
       - pod repo update
+      - pip install six
       - gem update cocoapods
       - git clone https://github.com/flutter/flutter.git
       - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
