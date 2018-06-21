@@ -60,19 +60,20 @@ matrix:
 # Job 3 - build IPAs (iOS)
   - os: osx
     language: generic
-    osx_image: xcode8.3
+    osx_image: xcode9.3
     before_script:
-      - pip install six
       - brew update
-      - brew install --HEAD libimobiledevice
+      - brew install libimobiledevice
       - brew install ideviceinstaller
       - brew install ios-deploy
+      - pod repo update
+      - gem update cocoapods
       - git clone https://github.com/flutter/flutter.git
       - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
       - flutter doctor
+      - pub global activate flutter_plugin_tools
     script:
       - flutter -v build ios --no-codesign
-
 cache:
   directories:
   - "$HOME/.pub-cache"
