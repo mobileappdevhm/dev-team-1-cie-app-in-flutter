@@ -86,12 +86,12 @@ class GenericIcon {
         ));
   }
 
-  static Widget buildGenericSpinner() {
+  static Widget buildGenericSpinner([String text = "Refreshing"]) {
     return new ProgressHUD(
         backgroundColor: Colors.black12,
         color: Colors.white,
         containerColor: Colors.blue,
         borderRadius: 5.0,
-        text: "Refreshing");
+        text: text);
   }
 }

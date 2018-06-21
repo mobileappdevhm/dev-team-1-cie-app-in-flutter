@@ -26,6 +26,8 @@ class StaticVariables {
       "Register Favorited Courses";
   static const String FAVORITES_REGISTRATION_BUTTON_INACTIVE =
       "Courses Already Submitted";
+  static const String FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT =
+      "No department specified";
   static const String FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST =
       "Please log in to use lottery";
 
