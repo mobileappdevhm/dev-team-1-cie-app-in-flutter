@@ -1,15 +1,14 @@
-import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/generic/genericAlert.dart';
+import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/schedulingUtility.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 
 class Schedule extends StatefulWidget {
-  CourseListPresenter courseListPresenter;
+  final CourseListPresenter courseListPresenter;
 
   Schedule(this.courseListPresenter);
 
@@ -24,6 +23,7 @@ class _ScheduleState extends State<Schedule> {
 
   @override
   void initState() {
+    super.initState();
     setState(() {
       courseListPresenter;
     });
@@ -49,8 +49,8 @@ class _ScheduleState extends State<Schedule> {
   Widget _getTimeTableSpecificDay(Weekday weekday) {
     // Get lectures at day an receive timeTableEntry for day
     List<Lecture> lectureList =
-      courseListPresenter.getFavouriteLecturesOfWeekday(weekday);
-    return new TimeTableEntry(lectureList, weekday);
+        courseListPresenter.getFavouriteLecturesOfWeekday(weekday);
+    return new TimeTableEntry(lectureList, weekday, courseListPresenter);
   }
 }
 
@@ -72,26 +72,44 @@ class TimeTableEntryItem extends StatelessWidget {
   }
 }
 
-class TimeTableEntry extends StatelessWidget {
+class TimeTableEntry extends StatefulWidget {
   final List<Lecture> children;
   final Weekday weekday;
+  final CourseListPresenter courseListPresenter;
 
-  TimeTableEntry(this.children, this.weekday);
+  TimeTableEntry(this.children, this.weekday, this.courseListPresenter);
 
   @override
-  Widget build(BuildContext context) {
-    List<Widget> validEntries = new List<Widget>();
-    for (int i=0; i< children.length; i++) {
-      validEntries.add(new TimeTableEntryItem(children.elementAt(i)));
+  _TimeTableEntryState createState() =>
+      new _TimeTableEntryState(children, weekday, courseListPresenter);
+}
+
+// Split Lectures into weekdays. One expandable tile per weekday
+class _TimeTableEntryState extends State<TimeTableEntry> {
+  final List<Lecture> children;
+  final Weekday weekday;
+  final CourseListPresenter courseListPresenter;
+
+  _TimeTableEntryState(this.children, this.weekday, this.courseListPresenter);
+
+  Widget _buildTile(List<Lecture> children, Weekday weekday) {
+    List<Widget> childrenWidgets = new List<Widget>();
+
+    // Add a new item for each child lecture
+    for (int i = 0; i < children.length; i++) {
+      childrenWidgets.add(new TimeTableEntryItem(children.elementAt(i)));
+      // If there exists another lecture in the list, determine if there is
+      // enough time to commute to the specified campus location
       if (i + 1 < children.length) {
         Lecture lectureOne = children.elementAt(i);
         Lecture lectureTwo = children.elementAt(i + 1);
-        if (SchedulingUtility.isSchedulingConflict(lectureOne, lectureTwo)) {
-          validEntries.add(new FlatButton(
+        if (courseListPresenter
+            .checkIfConflictsOtherFavoriteLecture(children.elementAt(i))) {
+          childrenWidgets.add(new FlatButton(
               onPressed: () => GenericAlert.confirmDialog(
                   context,
                   StaticVariables.TIME_CONFLICT_MESSAGE,
-                  SchedulingUtility.constructSchedulingConflictText(
+                  courseListPresenter.constructSchedulingConflictText(
                       lectureOne, lectureTwo)),
               child: GenericIcon.buildGenericConflictIcon(
                   StaticVariables.TIME_CONFLICT_MESSAGE)));
@@ -101,8 +119,13 @@ class TimeTableEntry extends StatelessWidget {
     return new ExpansionTile(
       initiallyExpanded: true,
       title: new Text(WeekdayUtility.getWeekdayAsString(weekday)),
-      children: validEntries,
+      children: childrenWidgets,
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildTile(children, weekday);
   }
 }
 

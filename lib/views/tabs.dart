@@ -66,12 +66,12 @@ class TabsPageState extends State<TabsPage> {
         controller: _tabController,
         onPageChanged: _onPageChanged,
         children: <Widget>[
-          new CourseList(courseListPresenter, false),
+          new CourseList(courseListPresenter, false, currentUserPresenter),
           // Behaves as Courses Page
           new MapPage(),
           new Schedule(courseListPresenter),
           // Behaves as Favorites Page
-          new CourseList(courseListPresenter, true),
+          new CourseList(courseListPresenter, true, currentUserPresenter),
           new Settings(currentUserPresenter),
         ],
       ),
@@ -112,7 +112,7 @@ class TabItem {
 const List<TabItem> TabItems = const <TabItem>[
   const TabItem(title: 'Courses', icon: Icons.import_contacts),
   const TabItem(title: 'Map', icon: Icons.map),
-  const TabItem(title: 'Timetable', icon: Icons.event_note),
+  const TabItem(title: 'Schedule', icon: Icons.event_note),
   const TabItem(title: 'Favorites', icon: Icons.favorite_border),
-  const TabItem(title: 'Settings', icon: Icons.settings),
+  const TabItem(title: 'Profile', icon: Icons.person),
 ];

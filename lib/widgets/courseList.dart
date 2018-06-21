@@ -2,6 +2,7 @@ import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
@@ -13,13 +14,16 @@ import 'dart:async';
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
   final CourseListPresenter courseListPresenter;
+  final CurrentUserPresenter userPresenter;
   bool shouldFilterByFavorites = false;
 
-  CourseList(this.courseListPresenter, this.shouldFilterByFavorites);
+  CourseList(this.courseListPresenter, this.shouldFilterByFavorites,
+      this.userPresenter);
 
   @override
   State<StatefulWidget> createState() {
-    return new CourseListState(courseListPresenter, shouldFilterByFavorites);
+    return new CourseListState(
+        courseListPresenter, shouldFilterByFavorites, userPresenter);
   }
 
   void toggleFilter() {
@@ -29,6 +33,7 @@ class CourseList extends StatefulWidget {
 
 class CourseListState extends State<CourseList> {
   final CourseListPresenter courseListPresenter;
+  final CurrentUserPresenter userPresenter;
   final TextEditingController c1 = new TextEditingController();
   final bool shouldFilterByFavorites;
   bool shouldSearch = false;
@@ -36,7 +41,8 @@ class CourseListState extends State<CourseList> {
   String searchValue = "";
   bool coursesRegistered = false;
 
-  CourseListState(this.courseListPresenter, this.shouldFilterByFavorites);
+  CourseListState(this.courseListPresenter, this.shouldFilterByFavorites,
+      this.userPresenter);
 
   handleUpdate() async {
     //pullCourseJSON also checks for internet connectivity. This method should
@@ -54,20 +60,17 @@ class CourseListState extends State<CourseList> {
   Widget build(BuildContext context) {
     List<Widget> widgets = new List<Widget>();
 
-
     if (shouldFilterByFavorites == false) {
-      widgets.add(
-        new Container(
+      widgets.add(new Container(
           color: CiEColor.turquoise,
           padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
           child: new Column(
             children: <Widget>[
-              new Text("Pull down to Refresh", style: CiEStyle.getCourseListRefreshText()),
+              new Text("Pull down to Refresh",
+                  style: CiEStyle.getCourseListRefreshText()),
               new Icon(Icons.arrow_downward),
             ],
-          )
-        )
-      );
+          )));
 
       //Select department to filter for
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
@@ -97,8 +100,7 @@ class CourseListState extends State<CourseList> {
               padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
               child: new IconButton(
                   color: CiEColor.mediumGray,
-                  icon: GenericIcon
-                      .buildGenericSearchIcon(shouldSearch),
+                  icon: GenericIcon.buildGenericSearchIcon(shouldSearch),
                   onPressed: toggleSearch),
             )
           ]));
@@ -139,36 +141,54 @@ class CourseListState extends State<CourseList> {
     if (shouldFilterByFavorites == true) {
       widgets.add(new Container(
         margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
-        child: new RaisedButton(
-          color:
-              (coursesRegistered == false) ? CiEColor.red : CiEColor.lightGray,
-          shape: new RoundedRectangleBorder(
-              borderRadius: CiEStyle.getButtonBorderRadius()),
-          onPressed: (coursesRegistered == false)
-              ? _handleCourseSubmission
-              : () => _voidFunction,
-          child: new Container(
-            margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
-            child: new Text(
-                (coursesRegistered == false)
-                    ? StaticVariables.FAVORITES_REGISTRATION_BUTTON
-                    : StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE,
-                style: new TextStyle(color: Colors.white)),
-          ),
-        ),
+        child: _getRaisedSubmitButton(),
       ));
     }
 
     return new RefreshIndicator(
-        child: new ListView(children: widgets),
-        onRefresh: ()=> handleRefreshIndicator(context, courseListPresenter),
-        color: CiEColor.turquoise,
+      child: new ListView(children: widgets),
+      onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
+      color: CiEColor.turquoise,
     );
   }
 
   @override
   void deactivate() {
     courseListPresenter.deactivate();
+  }
+
+  // Create a raised button on which is used on favorite page to allow users to submit there choice to lottery
+  Widget _getRaisedSubmitButton() {
+    bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn;
+
+    //Decide how to show submit button
+    String textToShow;
+    Color buttonColor;
+    Function function;
+    if (coursesRegistered && isLoggedIn) {
+      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
+      buttonColor = CiEColor.red;
+      function = _handleCourseSubmission;
+    } else if (!coursesRegistered && isLoggedIn) {
+      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
+      buttonColor = CiEColor.lightGray;
+      function = null;
+    } else {
+      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST;
+      buttonColor = CiEColor.lightGray;
+      function = null;
+    }
+
+    return new RaisedButton(
+      color: buttonColor,
+      shape: new RoundedRectangleBorder(
+          borderRadius: CiEStyle.getButtonBorderRadius()),
+      onPressed: () => function,
+      child: new Container(
+        margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
+        child: new Text(textToShow, style: new TextStyle(color: Colors.white)),
+      ),
+    );
   }
 
   handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
@@ -189,7 +209,7 @@ class CourseListState extends State<CourseList> {
   void _toggleFavourite(int id) {
     setState(() {
       //Remove course from favourites only after view change
-      if(shouldFilterByFavorites)
+      if (shouldFilterByFavorites)
         courseListPresenter.toggleFavouriteWhenChangeView(id);
       else
         courseListPresenter.toggleFavourite(id, true);
