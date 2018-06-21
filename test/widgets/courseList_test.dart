@@ -7,10 +7,7 @@ import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
 void main() {
-
-
   group("1", () {
     // Expected widget within created widgets. Generated using our mock's behavior
     List<String> expectedTexts;
@@ -25,61 +22,13 @@ void main() {
       expectedTexts = new List<String>();
       favoritesPageAnomalies = new List<String>();
       for (int i = 1; i < 100; i++) {
-        expectedTexts.add("Department #" + CoursesMock.generateMockDepartment(i));
+        expectedTexts
+            .add("Department #" + CoursesMock.generateMockDepartment(i));
         expectedTexts.add(CoursesMock.generateMockCourseTitle(i));
         expectedTexts.add("DP " + CoursesMock.generateMockDepartment(i));
       }
       favoritesPageAnomalies.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON);
     });
-
-
-    /*
-    testWidgets('basic courses page', (WidgetTester tester) async {
-      final bool isFavoritesPage = false;
-      // This widget tree builds the widgets found on the Courses Page
-      await tester.pumpWidget(
-        new StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return new MaterialApp(
-              home: new Material(
-                child: new Center(
-                    child: new CourseList(
-                        new CourseListPresenter(null,), isFavoritesPage, userPresenter)),
-              ),
-            );
-          },
-        ),
-      );
-      final Iterable<Widget> listOfWidgets = tester.allWidgets;
-
-      checkForDuplicateWidgets(listOfWidgets, expectedTexts);
-      checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
-      checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
-    });*/
-
-    /*
-    testWidgets('basic favorites page', (WidgetTester tester) async {
-      final bool isFavoritesPage = true;
-      // This widget tree builds the widgets found on the Courses Page
-      await tester.pumpWidget(
-        new StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return new MaterialApp(
-              home: new Material(
-                child: new Center(
-                    child: new CourseList(
-                        new CourseListPresenter(null), isFavoritesPage, userPresenter)),
-              ),
-            );
-          },
-        ),
-      );
-      final Iterable<Widget> listOfWidgets = tester.allWidgets;
-
-      checkForDuplicateWidgets(listOfWidgets, expectedTexts);
-      checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
-    });*/
-
 
     testWidgets('course_description', (WidgetTester tester) async {
       final bool isFavoritesPage = false;
@@ -90,8 +39,8 @@ void main() {
             return new MaterialApp(
               home: new Material(
                 child: new Center(
-                    child: new CourseList(
-                        new CourseListPresenter(null), isFavoritesPage ,userPresenter)),
+                    child: new CourseList(new CourseListPresenter(null),
+                        isFavoritesPage, userPresenter)),
               ),
             );
           },
@@ -99,11 +48,7 @@ void main() {
       );
       tester.allWidgets;
     });
-
-
   });
-
-
 }
 
 void checkForFavoritesPageAnomalies(Iterable<Widget> listOfWidgets,
@@ -145,4 +90,3 @@ void checkIfTextsCreatedCorrectly(Iterable<Widget> listOfWidgets,
     }
   }
 }
-
