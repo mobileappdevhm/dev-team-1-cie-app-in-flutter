@@ -61,14 +61,15 @@ class CourseListState extends State<CourseList> {
     List<Widget> widgets = new List<Widget>();
 
     if (shouldFilterByFavorites == false) {
-      widgets.add(new Container(
-          color: CiEColor.turquoise,
-          padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-          child: new Column(
+      widgets.add(
+        new Container(
+          color: CiEColor.white,
+          padding: new EdgeInsets.symmetric(vertical: 10.0),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text("Pull down to Refresh",
-                  style: CiEStyle.getCourseListRefreshText()),
-              new Icon(Icons.arrow_downward),
+              new Text("Pull down to Refresh", style: CiEStyle.getCourseListRefreshText()),
+              new Icon(Icons.arrow_downward, color: CiEColor.mediumGray)
             ],
           )));
 
@@ -146,9 +147,9 @@ class CourseListState extends State<CourseList> {
     }
 
     return new RefreshIndicator(
-      child: new ListView(children: widgets),
-      onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
-      color: CiEColor.turquoise,
+        child: new ListView(children: widgets),
+        onRefresh: ()=> handleRefreshIndicator(context, courseListPresenter),
+        color: CiEColor.mediumGray
     );
   }
 
