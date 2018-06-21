@@ -6,8 +6,6 @@ import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/course/details/date.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/utils/fileStore.dart';
-import 'dart:convert';
-import 'dart:math';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
