@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter_simple_permissions/flutter_simple_permissions.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_permissions/simple_permissions.dart';
 
 class FileStore {
   static const String COURSES = "_courses";
@@ -51,7 +51,7 @@ class FileStore {
   }
 
   static void requestPermission(Permission permission) async {
-    bool res = await SimplePermissions.requestPermission(permission);
+    bool res = await FlutterSimplePermissions.requestPermission(permission);
     print("permission '" +
         permission.toString() +
         "' request result is " +
