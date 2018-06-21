@@ -13,6 +13,7 @@ class CiEStyle {
     return new TextStyle(
       color: CiEColor.turquoise,
       fontWeight: FontWeight.bold,
+      fontSize: 14.0,
     );
   }
 
@@ -203,6 +204,34 @@ class CiEStyle {
     return new TextStyle(
       fontSize: 15.0,
       color: CiEColor.gray,
+    );
+  }
+
+  static TextStyle getCourseDetailsConflictWarningText() {
+    return new TextStyle(
+      fontSize: 15.0,
+      color: CiEColor.red,
+    );
+  }
+
+  static TextStyle getCourseDetailsConflictNotificationText() {
+    return new TextStyle(
+      fontSize: 15.0,
+      color: CiEColor.yellow,
+    );
+  }
+
+  static TextStyle getCourseConflictNotificationStyle() {
+    return new TextStyle(
+      fontSize: 15.0,
+      color: CiEColor.yellow,
+    );
+  }
+
+  static TextStyle getCourseConflictWarningStyle() {
+    return new TextStyle(
+      fontSize: 15.0,
+      color: CiEColor.red,
     );
   }
 }
