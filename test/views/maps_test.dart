@@ -99,4 +99,38 @@ void main() {
       }
     }
   });
+
+  testWidgets('2 widgetTest for map', (WidgetTester tester) async {
+    // Tells the tester to build a UI based on the widget tree passed to it
+    await tester.pumpWidget(
+      new StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return new MaterialApp(
+            home: new Material(
+              child: new Center(child: new MapPage()),
+            ),
+          );
+        },
+      ),
+    );
+
+    final Iterable<Widget> listOfWidgets = tester.allWidgets;
+
+    int counter = 0;
+    for (Widget widget in listOfWidgets) {
+      if (widget is Text) {
+        if (counter == 0) {
+          tester.tap(find.byWidget(widget));
+          counter++;
+        } else if (counter == 2) {
+          tester.tap(find.byWidget(widget));
+          counter++;
+        } else if (counter == 4) {
+          tester.tap(find.byWidget(widget));
+          counter++;
+        }
+      }
+    }
+  });
+  
 }
