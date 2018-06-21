@@ -75,7 +75,7 @@ class CourseListState extends State<CourseList> {
 
       //Select department to filter for
       EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
-      String departmentLabel = "Department #";
+      String departmentLabel = "Department ";
       widgets.add(new Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
