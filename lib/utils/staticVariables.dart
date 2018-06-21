@@ -77,4 +77,6 @@ class StaticVariables {
 
   static String COURSE_CONFLICTS_WITH_OTHER_FAVORIT = "Conflicts with other Favorit";
   static String COURSE_CONFLICTS_WITH_FAVORIT = "Conflicts with a Favorit";
+  static String COURSE_DESCRIPTION_CONFLICTS_WITH_OTHER_FAVORIT = "This course is in conflict with another favorite course:";
+  static String COURSE_DESCRIPTION_CONFLICTS_WITH_FAVORIT = "This course is unlikely to be chosen together with another favorite course:";
 }
