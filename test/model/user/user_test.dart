@@ -10,35 +10,35 @@ void main() {
     List<Course> courses;
 
     setUp(() {
-
       courses = [
         new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-        .build()
+            .withName("Blaba")
+            .withFaculty("7")
+            .withLecturesPerWeek([
+              new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                  new DayTime(11, 30), "R0.009")
+            ])
+            .withDescription("boring")
+            .withHoursPerWeek(2)
+            .withEcts(2)
+            .withProfessorEmail("example@hm.edu")
+            .withProfessorName("Max Mustermann")
+            .withIsFavorite(false)
+            .withhasHomeBias(false)
+            .withIsCoterie(false)
+            .build()
       ];
 
       sut = new UserBuilder()
-      .withID("id-123")
-      .withUsername("Max42")
-      .withFirstName("Max")
-      .withLastName("Mustermann")
-      .withDepartment("07")
-      .withStatus("sleeping")
-      .withCurrentCourses(courses)
-      .withPrevCourses(courses)
-      .build();
+          .withID("id-123")
+          .withUsername("Max42")
+          .withFirstName("Max")
+          .withLastName("Mustermann")
+          .withDepartment("07")
+          .withStatus("sleeping")
+          .withCurrentCourses(courses)
+          .withPrevCourses(courses)
+          .build();
     });
 
     test('1', () {
@@ -78,7 +78,7 @@ void main() {
     //List<Course> courses;
 
     //setUp(() {
-      /*courses = [
+    /*courses = [
         new CourseBuilder()
         .withName("Blaba")
         .withFaculty("7")
@@ -101,7 +101,7 @@ void main() {
     test('1', () {
       final CurrentUserProd sut = new CurrentUserProd();
 
-      expect(sut.getCurrentUser()!=null, true);
+      expect(sut.getCurrentUser() != null, true);
     });
   });
 }

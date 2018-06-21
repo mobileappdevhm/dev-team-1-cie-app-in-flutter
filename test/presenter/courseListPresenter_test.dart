@@ -52,14 +52,35 @@ void main() {
   group("favorite", () {
     test('1', () {
       final bool testValue = sut.getFavourite(0);
-      sut.toggleFavourite(0);
+      sut.toggleFavourite(0, false);
       expect(sut.getFavourite(0), !testValue);
     });
 
     test('2', () {
       final bool testValue = sut.getFavourite(1);
-      sut.toggleFavourite(1);
+      sut.toggleFavourite(1, false);
       expect(sut.getFavourite(1), !testValue);
+    });
+  });
+
+  group("lecture", () {
+    test('1', () {
+      expect(sut.getLectureTimes(0)!=null, true);
+    });
+
+    test('2', () {
+      for (int i=0; i<sut.getCourses().length; i++) {
+        expect(sut.getLectureTimes(i)!=null, true);
+      }
+    });
+  });
+
+  group("static", () {
+    test('getFavouriteLectures 1', () {
+      CourseListPresenter localSut = new CourseListPresenter(null);
+      expect(localSut.getFavouriteLectures().length, 0);
+      localSut.getCourses().elementAt(0).isFavourite = true;
+      expect(localSut.getFavouriteLectures().length, 1);
     });
   });
 }
