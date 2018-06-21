@@ -6,8 +6,6 @@ import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/course/details/date.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/utils/fileStore.dart';
-import 'dart:convert';
-import 'dart:math';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
@@ -94,7 +92,32 @@ class CourseListPresenter {
           this.onChanged(true);
         }
       }
+      syncFavoritedCoursesFromMemory();
     });
+  }
+
+  void syncFavoritedCoursesFromMemory() {
+    FileStore.readFileAsString(FileStore.FAVORITES).then((String favoriteIds) {
+      if (favoriteIds != null) {
+        dynamic favoritesJson = json.decode(favoriteIds);
+        for (Course c in _courses.getCourses()) {
+          if (favoritesJson[c.id] != null) {
+            c.isFavourite = true;
+          }
+        }
+      }
+      this.onChanged(true);
+    });
+  }
+  void commitFavoritedCoursesToMemory() {
+    // dynamic so we can easily refactor to support more data in the future
+    Map<String, dynamic> toJson = new Map<String, dynamic>();
+    for (Course c in _courses.getCourses()) {
+      if (c.isFavourite) {
+        toJson.putIfAbsent(c.id, ()=>c.isFavourite);
+      }
+    }
+    FileStore.writeToFile(FileStore.FAVORITES, json.encode(toJson));
   }
 
   bool isNewCourseData(List<Course> courseList, Course candidate) {
@@ -112,16 +135,16 @@ class CourseListPresenter {
     _coursesToDeleteOnViewChange.clear();
   }
 
-  void toggleFavourite(int id) {
-    if (_courses.getCourses()[id].isFavourite) {
-      _courses.getCourses()[id].isFavourite = false;
-    } else {
-      _courses.getCourses()[id].isFavourite = true;
+  void toggleFavourite(int id, bool shouldUseMemory) {
+    _courses.getCourses()[id].isFavourite =
+    !_courses.getCourses()[id].isFavourite;
+    if (shouldUseMemory) {
+      commitFavoritedCoursesToMemory();
     }
   }
 
   void toggleFavouriteWhenChangeView(int id) {
-    toggleFavourite(id);
+    toggleFavourite(id, true);
     if (_coursesToDeleteOnViewChange.contains(id)) {
       _coursesToDeleteOnViewChange.remove(id);
     } else {
@@ -238,11 +261,6 @@ class CourseListPresenter {
         .any((otherFavorite) => _checkTimeConflict(lecture, otherFavorite));
   }
 
-  //If lectures of this course conflicts with other favourite lecture return true
-  List<Lecture> getConflictingLectures(int id) {
-    return getFavouriteLectures().where((l) => getCourses()[id].lecturesPerWeek.any((c) => _checkTimeConflict(c, l))).toList();
-  }
-
   bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
     //Cant conflict itself
     if (thisFavorite == otherFavorite) return false;
@@ -323,66 +341,16 @@ class CourseListPresenter {
         " minutes.\n\nYou may not arrive to class on time.";
   }
 
-  //Returns a list with two strings
-  List<String> getCourseDescriptionConflictText(int id) {
-    List<String> reason = new List<String>();
+  String getCourseDescriptionConflictText(int id) {
+    String reason = "";
 
     if (getCourses()[id].isFavourite)
-      reason.add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_OTHER_FAVORIT);
+      reason +=
+          "This course is in conflict with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
     else
-      reason.add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_FAVORIT);
-
-    //Find courses who conflicts and why there is a conflict
-    List<Lecture> conflicts = getConflictingLectures(id);
-    if (conflicts != null) {
-      Set<Course> conflictingCourses =
-      conflicts.map((l) => l.course).toSet();
-      conflictingCourses.forEach(
-              (c) => reason.insert(1, "\n" + _getConflictReasonText(getCourses()[id], c)));
-    }
+      reason +=
+          "This course is unlikely to be chosen together with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
 
     return reason;
-  }
-
-  //Generated a text which shows the user why this course conflicts with other courses
-  String _getConflictReasonText(Course thisFavorite, Course otherFavorite) {
-    String result = otherFavorite.name + ": ";
-
-    //
-
-    //Add commute time conflict text
-    thisFavorite.lecturesPerWeek
-        .forEach((l) => otherFavorite.lecturesPerWeek
-            .forEach((f) => result += _getLectureConflictProblemText(l, f)));
-    //timeBetweenLecturesText.forEach((res) => result += res);
-
-    return result;
-  }
-
-  //Compare two lectues and return error text if they conflict
-  String _getLectureConflictProblemText(Lecture l, Lecture f) {
-    String result = "";
-
-    if (_getTimeBetweenLectures(l, f) < 0) {
-      result += "Lectures at same time";
-    } else {
-      Campus campusOne = l.campus;
-      Campus campusTwo = f.campus;
-      if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
-          campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
-        result += "Commute Time Lothstr. to Karlstr. < " +
-            StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL.toString();
-      } else
-      if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.PASING ||
-          campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
-        result += "Commute Time Lothstr. to Pasing < " +
-            StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS.toString();
-      } else {
-        result += "Commute Time Pasing to Karlstr. < " +
-            StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL.toString();
-      }
-    }
-
-    return result;
   }
 }
