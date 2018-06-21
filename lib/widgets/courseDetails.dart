@@ -42,7 +42,6 @@ class _CourseDetailsState extends State<CourseDetails> {
           child: new Column(
             children: <Widget>[
               buildTitleRow(),
-              buildDescriptionHeadingRow(),
               new Expanded(
                 child: buildDescriptionRow(),
               ),
@@ -93,18 +92,37 @@ class _CourseDetailsState extends State<CourseDetails> {
     else
       conflictTextStyle = CiEStyle.getCourseDetailsConflictNotificationText();
 
+    TextStyle conflictReasonTextStyle;
+    if (presenter.getCourses()[id].isFavourite)
+      conflictReasonTextStyle = CiEStyle.getCourseDetailsConflictReasonWarningText();
+    else
+      conflictReasonTextStyle = CiEStyle.getCourseDetailsConflictReasonNotificationText();
+
+    List<String> conflictText = presenter.getCourseDescriptionConflictText(id);
+
     return new SingleChildScrollView(
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           presenter.checkIfConflictsOtherFavoriteCourse(id) ? new Padding(
-            padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-            child: new Text(
-              presenter.getCourseDescriptionConflictText(id),
-              style: conflictTextStyle,
-            ),
+            padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Text(
+                  conflictText[0],
+                  style: conflictTextStyle,
+                ),
+                new Text(
+                  conflictText[1],
+                  style: conflictReasonTextStyle,
+                ),
+              ],
+            )
           ) : new Container(),
+          buildDescriptionHeadingRow(),
           new Text(
             textToShow,
             style: CiEStyle.getCourseDetailsDescription(),
