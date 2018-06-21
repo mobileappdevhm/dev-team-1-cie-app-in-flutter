@@ -6,8 +6,6 @@ import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/course/details/date.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/utils/fileStore.dart';
-import 'dart:convert';
-import 'dart:math';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
@@ -94,7 +92,32 @@ class CourseListPresenter {
           this.onChanged(true);
         }
       }
+      syncFavoritedCoursesFromMemory();
     });
+  }
+
+  void syncFavoritedCoursesFromMemory() {
+    FileStore.readFileAsString(FileStore.FAVORITES).then((String favoriteIds) {
+      if (favoriteIds != null) {
+        dynamic favoritesJson = json.decode(favoriteIds);
+        for (Course c in _courses.getCourses()) {
+          if (favoritesJson[c.id] != null) {
+            c.isFavourite = true;
+          }
+        }
+      }
+      this.onChanged(true);
+    });
+  }
+  void commitFavoritedCoursesToMemory() {
+    // dynamic so we can easily refactor to support more data in the future
+    Map<String, dynamic> toJson = new Map<String, dynamic>();
+    for (Course c in _courses.getCourses()) {
+      if (c.isFavourite) {
+        toJson.putIfAbsent(c.id, ()=>c.isFavourite);
+      }
+    }
+    FileStore.writeToFile(FileStore.FAVORITES, json.encode(toJson));
   }
 
   bool isNewCourseData(List<Course> courseList, Course candidate) {
@@ -112,16 +135,16 @@ class CourseListPresenter {
     _coursesToDeleteOnViewChange.clear();
   }
 
-  void toggleFavourite(int id) {
-    if (_courses.getCourses()[id].isFavourite) {
-      _courses.getCourses()[id].isFavourite = false;
-    } else {
-      _courses.getCourses()[id].isFavourite = true;
+  void toggleFavourite(int id, bool shouldUseMemory) {
+    _courses.getCourses()[id].isFavourite =
+    !_courses.getCourses()[id].isFavourite;
+    if (shouldUseMemory) {
+      commitFavoritedCoursesToMemory();
     }
   }
 
   void toggleFavouriteWhenChangeView(int id) {
-    toggleFavourite(id);
+    toggleFavourite(id, true);
     if (_coursesToDeleteOnViewChange.contains(id)) {
       _coursesToDeleteOnViewChange.remove(id);
     } else {
@@ -196,7 +219,6 @@ class CourseListPresenter {
           '-' +
           lectures[i].endDayTime.toString();
     }
-
     return result;
   }
 
@@ -250,7 +272,7 @@ class CourseListPresenter {
     if (thisFavorite.weekday != otherFavorite.weekday) return false;
     //If running at same time return true
     int timeBetweenLectures =
-        _getTimeBetweenLectures(thisFavorite, otherFavorite);
+    _getTimeBetweenLectures(thisFavorite, otherFavorite);
     if (timeBetweenLectures < 0) return true;
     //If time is not enough to switch campus return true
     if (!_timeIsEnoughForCampusSwitch(
@@ -305,7 +327,7 @@ class CourseListPresenter {
     String campusOne = CampusUtility.getCampusAsLongString(one.campus);
     String campusTwo = CampusUtility.getCampusAsLongString(two.campus);
     String time =
-        _timeRequiredForCampusSwitch(one.campus, two.campus).toString();
+    _timeRequiredForCampusSwitch(one.campus, two.campus).toString();
     return one.course.name +
         " is held in the " +
         campusOne +
@@ -314,7 +336,7 @@ class CourseListPresenter {
         " is held in the " +
         campusTwo +
         " campus.\n\n"
-        "Please consider that the commute between the " +
+            "Please consider that the commute between the " +
         campusOne +
         " and the " +
         campusTwo +
@@ -347,13 +369,10 @@ class CourseListPresenter {
   //Generated a text which shows the user why this course conflicts with other courses
   String _getConflictReasonText(Course thisFavorite, Course otherFavorite) {
     String result = otherFavorite.name + ": ";
-
-    //
-
     //Add commute time conflict text
     thisFavorite.lecturesPerWeek
         .forEach((l) => otherFavorite.lecturesPerWeek
-            .forEach((f) => result += _getLectureConflictProblemText(l, f)));
+        .forEach((f) => result += _getLectureConflictProblemText(l, f)));
     //timeBetweenLecturesText.forEach((res) => result += res);
 
     return result;
@@ -364,7 +383,7 @@ class CourseListPresenter {
     String result = "";
 
     if (_getTimeBetweenLectures(l, f) < 0) {
-      result += "Lectures at same time";
+      result += "Lecture time schedules overlap.";
     } else {
       Campus campusOne = l.campus;
       Campus campusTwo = f.campus;

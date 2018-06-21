@@ -22,7 +22,7 @@ class TabsPageState extends State<TabsPage> {
   CurrentUserPresenter currentUserPresenter;
   var _appTitle = '';
 
-  int _tab = 2; //change this to the default tab page value
+  int _tab = 0; //change this to the default tab page value
 
   @override
   void initState() {
@@ -36,12 +36,6 @@ class TabsPageState extends State<TabsPage> {
     courseListPresenter.addCoursesFromMemory();
     currentUserPresenter.loadUserSettingsFromMemory();
     this._appTitle = TabItems[_tab].title;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _tabController.dispose();
   }
 
   void _maybeChangeCallback(bool didChange) {
@@ -66,12 +60,14 @@ class TabsPageState extends State<TabsPage> {
         controller: _tabController,
         onPageChanged: _onPageChanged,
         children: <Widget>[
-          new CourseList(courseListPresenter, false, currentUserPresenter),
+          new CourseList(courseListPresenter, false,
+              currentUserPresenter, new FocusNode()),
           // Behaves as Courses Page
           new MapPage(),
           new Schedule(courseListPresenter),
           // Behaves as Favorites Page
-          new CourseList(courseListPresenter, true, currentUserPresenter),
+          new CourseList(courseListPresenter, true,
+              currentUserPresenter, new FocusNode()),
           new Settings(currentUserPresenter),
         ],
       ),
@@ -96,6 +92,7 @@ class TabsPageState extends State<TabsPage> {
   }
 
   void _onPageChanged(int tab) {
+    FocusScope.of(context).requestFocus(new FocusNode());
     setState(() {
       this._tab = tab;
     });
