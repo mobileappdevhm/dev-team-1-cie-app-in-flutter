@@ -44,7 +44,6 @@ class CourseListPresenter {
               .withHoursPerWeek(2)
               .withEcts(2)
               .withProfessorEmail("example@hm.edu")
-              .withAvailable(CourseAvailability.AVAILABLE)
               .withIsFavorite(false);
           Course c = courseBuilder.build();
           if (isNewCourseData(courseList, c)) {

@@ -1,3 +1,5 @@
+import 'package:cie_team1/model/course/details/correlation.dart';
+import 'package:cie_team1/model/course/details/date.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +9,8 @@ class CourseBuilder {
   String description;
   bool isCoterie;
   bool hasHomeBias;
-  List<dynamic> correlations;
-  List<dynamic> dates;
+  List<Correlation> correlations;
+  List<Date> dates;
   String name;
   String shortName;
   List<dynamic> actions;
@@ -29,65 +31,75 @@ class CourseBuilder {
   }
 
   CourseBuilder withDescription(String description) {
-    this.description=description;
+    this.description = description;
     return this;
   }
+
   CourseBuilder withIsCoterie(bool isCoterie) {
-    this.isCoterie=isCoterie;
+    this.isCoterie = isCoterie;
     return this;
   }
+
   CourseBuilder withhasHomeBias(bool hasHomeBias) {
-    this.hasHomeBias=hasHomeBias;
+    this.hasHomeBias = hasHomeBias;
     return this;
   }
+
   CourseBuilder withCorrelations(List<dynamic> correlations) {
-    this.correlations=correlations;
+    this.correlations = correlations;
     return this;
   }
+
   CourseBuilder withdates(List<dynamic> dates) {
-    this.dates=dates;
+    this.dates = dates;
     return this;
   }
+
   CourseBuilder withName(String name) {
-    this.name=name;
+    this.name = name;
     return this;
   }
+
   CourseBuilder withShortName(String shortName) {
-    this.shortName=shortName;
+    this.shortName = shortName;
     return this;
   }
-  CourseBuilder withActions(List<dynamic >actions) {
-    this.actions=actions;
+
+  CourseBuilder withActions(List<dynamic> actions) {
+    this.actions = actions;
     return this;
   }
+
   CourseBuilder withFaculty(String faculty) {
     this.faculty = faculty;
     return this;
   }
+
   CourseBuilder withLecturesPerWeek(List<Lecture> lecturesPerWeek) {
     this.lecturesPerWeek = lecturesPerWeek;
     return this;
   }
+
   CourseBuilder withHoursPerWeek(int hoursPerWeek) {
     this.hoursPerWeek = hoursPerWeek;
     return this;
   }
+
   CourseBuilder withEcts(int ects) {
     this.ects = ects;
     return this;
   }
+
   CourseBuilder withProfessorEmail(String professorEmail) {
     this.professorEmail = professorEmail;
     return this;
   }
+
   CourseBuilder withProfessorName(String professorName) {
     this.professorName = professorName;
     return this;
   }
-  CourseBuilder withAvailable(CourseAvailability available) {
-    this.available = available;
-    return this;
-  }
+
   CourseBuilder withIsFavorite(bool isFavorite) {
     this.isFavourite = isFavorite;
     return this;
@@ -96,7 +108,7 @@ class CourseBuilder {
   static String buildProfessorName(dynamic jsonData) {
     dynamic professor = (jsonData['dates'][0]['lecturer'][0]);
     String title = professor['title'].toString();
-    title = title != "null" ? title + " ": "";
+    title = title != "null" ? title + " " : "";
     String firstName = professor['firstName'].toString();
     firstName = firstName != "null" ? firstName + " " : "";
     String lastName = professor['lastName'].toString();
@@ -111,30 +123,63 @@ class CourseBuilder {
   factory CourseBuilder.fromJson(Map<String, dynamic> jsonData) {
     String dep = ((jsonData['correlations'][0]['organiser']));
     return new CourseBuilder(
-      id: jsonData['id'],
-      description: buildDescription(jsonData),
-      isCoterie: jsonData['isCoterie'],
-      hasHomeBias: jsonData['hasHomeBias'],
-      correlations: jsonData['correlations'],
-      dates: jsonData['dates'],
-      name: jsonData['name'],
-      shortName: jsonData['shortName'],
-      actions: jsonData['actions'],
-      faculty: dep.substring(3, dep.length),
-      professorName: buildProfessorName(jsonData)
-    );
+        id: jsonData['id'],
+        description: buildDescription(jsonData),
+        isCoterie: jsonData['isCoterie'],
+        hasHomeBias: jsonData['hasHomeBias'],
+        correlations: CorrelationBuilder.fromJson(jsonData['correlations']),
+        dates: DateBuilder.fromJson(jsonData['dates']),
+        name: jsonData['name'],
+        shortName: jsonData['shortName'],
+        actions: jsonData['actions'],
+        faculty: dep.substring(3, dep.length),
+        professorName: buildProfessorName(jsonData));
   }
 
-  CourseBuilder({this.id, this.description, this.isCoterie, this.hasHomeBias,
-    this.correlations, this.dates, this.name, this.shortName, this.actions,
-    this.faculty, this.professorName});
+  CourseBuilder(
+      {this.id,
+      this.description,
+      this.isCoterie,
+      this.hasHomeBias,
+      this.correlations,
+      this.dates,
+      this.name,
+      this.shortName,
+      this.actions,
+      this.faculty,
+      this.professorName});
 
-  Course build(){
+  Course build() {
+    //isCoterie: false && hasHomeBias: false -> green course
+    if (!isCoterie && !hasHomeBias) {
+      this.available = CourseAvailability.AVAILABLE;
+    }
+    //isCoterie: false && hasHomeBias: true -> yellow course
+    else if (!isCoterie && hasHomeBias) {
+      this.available = CourseAvailability.PENDING;
+    }
+    //isCoterie: true && hasHomeBias: true -> red course
+    else if (isCoterie && hasHomeBias) {
+      this.available = CourseAvailability.UNAVAILABLE;
+    }
     return new Course(
-      this.id, this.description, this.isCoterie, this.hasHomeBias,
-      this.correlations, this.dates, this.name, this.shortName, this.actions,
-      this.faculty, this.lecturesPerWeek, this.hoursPerWeek, this.ects,
-      this.professorEmail, this.professorName, this.available, this.isFavourite);
+        this.id,
+        this.description,
+        this.isCoterie,
+        this.hasHomeBias,
+        this.correlations,
+        this.dates,
+        this.name,
+        this.shortName,
+        this.actions,
+        this.faculty,
+        this.lecturesPerWeek,
+        this.hoursPerWeek,
+        this.ects,
+        this.professorEmail,
+        this.professorName,
+        this.available,
+        this.isFavourite);
   }
 }
 
@@ -143,8 +188,8 @@ class Course {
   String description;
   bool isCoterie;
   bool hasHomeBias;
-  List<dynamic> correlations;
-  List<dynamic> dates;
+  List<Correlation> correlations;
+  List<Date> dates;
   String name;
   String shortName;
   List<dynamic> actions;
@@ -152,6 +197,7 @@ class Course {
   //final String name;
   final String faculty;
   final List<Lecture> lecturesPerWeek;
+
   //final String description;
   final int hoursPerWeek;
   final int ects;
@@ -179,8 +225,7 @@ class Course {
       this.professorEmail,
       this.professorName,
       this.available,
-      this.isFavourite
-      ) {
+      this.isFavourite) {
     //Set this course as parent of every lectures contained
     //Required for timetable
     lecturesPerWeek.forEach((l) => l.course = this);
@@ -303,7 +348,6 @@ class CourseAvailabilityUtility {
     }
     return CourseAvailability.AVAILABLE;
   }
-
 
   static Widget intToColoredString(CourseAvailability i, double size) {
     switch (i) {
