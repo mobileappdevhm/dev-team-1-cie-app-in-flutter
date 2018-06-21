@@ -219,7 +219,6 @@ class CourseListPresenter {
           '-' +
           lectures[i].endDayTime.toString();
     }
-
     return result;
   }
 
@@ -261,6 +260,11 @@ class CourseListPresenter {
         .any((otherFavorite) => _checkTimeConflict(lecture, otherFavorite));
   }
 
+  //If lectures of this course conflicts with other favourite lecture return true
+  List<Lecture> getConflictingLectures(int id) {
+    return getFavouriteLectures().where((l) => getCourses()[id].lecturesPerWeek.any((c) => _checkTimeConflict(c, l))).toList();
+  }
+
   bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
     //Cant conflict itself
     if (thisFavorite == otherFavorite) return false;
@@ -268,7 +272,7 @@ class CourseListPresenter {
     if (thisFavorite.weekday != otherFavorite.weekday) return false;
     //If running at same time return true
     int timeBetweenLectures =
-        _getTimeBetweenLectures(thisFavorite, otherFavorite);
+    _getTimeBetweenLectures(thisFavorite, otherFavorite);
     if (timeBetweenLectures < 0) return true;
     //If time is not enough to switch campus return true
     if (!_timeIsEnoughForCampusSwitch(
@@ -323,7 +327,7 @@ class CourseListPresenter {
     String campusOne = CampusUtility.getCampusAsLongString(one.campus);
     String campusTwo = CampusUtility.getCampusAsLongString(two.campus);
     String time =
-        _timeRequiredForCampusSwitch(one.campus, two.campus).toString();
+    _timeRequiredForCampusSwitch(one.campus, two.campus).toString();
     return one.course.name +
         " is held in the " +
         campusOne +
@@ -332,7 +336,7 @@ class CourseListPresenter {
         " is held in the " +
         campusTwo +
         " campus.\n\n"
-        "Please consider that the commute between the " +
+            "Please consider that the commute between the " +
         campusOne +
         " and the " +
         campusTwo +
@@ -341,16 +345,63 @@ class CourseListPresenter {
         " minutes.\n\nYou may not arrive to class on time.";
   }
 
-  String getCourseDescriptionConflictText(int id) {
-    String reason = "";
+  //Returns a list with two strings
+  List<String> getCourseDescriptionConflictText(int id) {
+    List<String> reason = new List<String>();
 
     if (getCourses()[id].isFavourite)
-      reason +=
-          "This course is in conflict with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
+      reason.add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_OTHER_FAVORIT);
     else
-      reason +=
-          "This course is unlikely to be chosen together with another favorite course.\n\nReason/s detected:\nFeature not implemented yet";
+      reason.add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_FAVORIT);
+
+    //Find courses who conflicts and why there is a conflict
+    List<Lecture> conflicts = getConflictingLectures(id);
+    if (conflicts != null) {
+      Set<Course> conflictingCourses =
+      conflicts.map((l) => l.course).toSet();
+      conflictingCourses.forEach(
+              (c) => reason.insert(1, "\n" + _getConflictReasonText(getCourses()[id], c)));
+    }
 
     return reason;
+  }
+
+  //Generated a text which shows the user why this course conflicts with other courses
+  String _getConflictReasonText(Course thisFavorite, Course otherFavorite) {
+    String result = otherFavorite.name + ": ";
+    //Add commute time conflict text
+    thisFavorite.lecturesPerWeek
+        .forEach((l) => otherFavorite.lecturesPerWeek
+        .forEach((f) => result += _getLectureConflictProblemText(l, f)));
+    //timeBetweenLecturesText.forEach((res) => result += res);
+
+    return result;
+  }
+
+  //Compare two lectues and return error text if they conflict
+  String _getLectureConflictProblemText(Lecture l, Lecture f) {
+    String result = "";
+
+    if (_getTimeBetweenLectures(l, f) < 0) {
+      result += "Lectures at same time";
+    } else {
+      Campus campusOne = l.campus;
+      Campus campusTwo = f.campus;
+      if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
+          campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
+        result += "Commute Time Lothstr. to Karlstr. < " +
+            StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL.toString();
+      } else
+      if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.PASING ||
+          campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
+        result += "Commute Time Lothstr. to Pasing < " +
+            StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS.toString();
+      } else {
+        result += "Commute Time Pasing to Karlstr. < " +
+            StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL.toString();
+      }
+    }
+
+    return result;
   }
 }
