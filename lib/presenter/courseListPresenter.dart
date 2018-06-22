@@ -80,7 +80,7 @@ class CourseListPresenter {
               .withHoursPerWeek(2)
               .withEcts(2)
           //TODO replace with professor email if available
-              .withProfessorEmail("example@hm.edu")
+              .withProfessorEmail(StaticVariables.MOCK_EMAIL)
               .withIsFavorite(false);
           Course c = courseBuilder.build();
           if (isNewCourseData(courseList, c)) {
@@ -216,6 +216,10 @@ class CourseListPresenter {
 
   String getProfessorName(int id) {
     return _courses.getCourses()[id].professorName;
+  }
+
+  String getProfessorEmail(int id) {
+    return _courses.getCourses()[id].professorEmail;
   }
 
   String getLectureTimesBeautiful(int id) {

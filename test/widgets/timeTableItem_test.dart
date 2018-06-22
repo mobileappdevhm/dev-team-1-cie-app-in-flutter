@@ -1,4 +1,5 @@
 import 'package:cie_team1/model/course/course.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,7 +21,7 @@ void main() {
       .withDescription("boring")
       .withHoursPerWeek(2)
       .withEcts(2)
-      .withProfessorEmail("example@hm.edu")
+      .withProfessorEmail(StaticVariables.MOCK_EMAIL)
       .withProfessorName("Max Mustermann")
       .withIsCoterie(false)
       .withhasHomeBias(false)

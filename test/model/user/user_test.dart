@@ -1,6 +1,7 @@
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/user/currentUser_prod.dart';
 import 'package:cie_team1/model/user/user.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:test/test.dart';
 
 @Timeout(const Duration(seconds: 10))
@@ -21,7 +22,7 @@ void main() {
             .withDescription("boring")
             .withHoursPerWeek(2)
             .withEcts(2)
-            .withProfessorEmail("example@hm.edu")
+            .withProfessorEmail(StaticVariables.MOCK_EMAIL)
             .withProfessorName("Max Mustermann")
             .withIsFavorite(false)
             .withhasHomeBias(false)
@@ -90,7 +91,7 @@ void main() {
   //      .withDescription("boring")
   //      .withHoursPerWeek(2)
   //      .withEcts(2)
-  //      .withProfessorEmail("example@hm.edu")
+  //      .withProfessorEmail(StaticVariables.MOCK_EMAIL)
   //      .withProfessorName("Max Mustermann")
   //      .withAvailable(CourseAvailability.AVAILABLE)
   //      .withIsFavorite(false)
