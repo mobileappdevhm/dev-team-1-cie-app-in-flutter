@@ -80,11 +80,6 @@ class TimeTableEntry extends StatelessWidget {
 
   TimeTableEntry(this.children, this.weekday, this.courseListPresenter);
 
-  /*
-  @override
-  _TimeTableEntryState createState() =>
-      new _TimeTableEntryState(children, weekday, courseListPresenter);
-  */
   @override
   Widget build(BuildContext context) {
     //return _buildTile(children, weekday);
