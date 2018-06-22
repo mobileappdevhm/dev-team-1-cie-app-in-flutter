@@ -22,7 +22,7 @@ class TabsPageState extends State<TabsPage> {
   CurrentUserPresenter currentUserPresenter;
   var _appTitle = '';
 
-  int _tab = 0; //change this to the default tab page value
+  int _tab = 2; //change this to the default tab page value
 
   @override
   void initState() {
