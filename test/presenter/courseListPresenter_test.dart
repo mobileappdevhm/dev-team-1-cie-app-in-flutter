@@ -83,4 +83,6 @@ void main() {
       expect(localSut.getFavouriteLectures().length, 1);
     });
   });
+
+
 }
