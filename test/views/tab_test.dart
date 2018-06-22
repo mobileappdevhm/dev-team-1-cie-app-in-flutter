@@ -1,11 +1,22 @@
-import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/views/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
-  //TODO Looks like this test has a problem with some flutter specific listeners
+
+  testWidgets('test123', (WidgetTester tester) async {
+    await tester.pumpWidget(new MaterialApp(home: new TabsPage()));
+
+    expect(find.text("Pull down to Refresh"), findsOneWidget);
+    expect(find.text("Courses"), findsWidgets);
+    expect(find.text("Map"), findsOneWidget);
+    expect(find.text("Schedule"), findsOneWidget);
+    expect(find.text("Favorites"), findsOneWidget);
+    expect(find.text("Profile"), findsOneWidget);
+  });
+  
+//TODO Looks like this test has a problem with some flutter specific listeners
 //  group('settingspagewidget', () {
 //    testWidgets('1 widgetTest for settings', (WidgetTester tester) async {
 //// Tells the tester to build a UI based on the widget tree passed to it
@@ -27,7 +38,6 @@ void main() {
 //      for (Widget widget in listOfWidgets) {
 //        if (widget is Text) {
 //          if (counter == 0) {
-//
 //            expect(widget.data, 'Pull down to Refresh');
 //            counter++;
 //          } else if (counter == 1) {

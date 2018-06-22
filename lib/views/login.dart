@@ -83,7 +83,7 @@ class LoginFormState extends State<LoginForm> {
     updateUserSettings(context, null, null, null);
   }
 
-  String _validateMail(String value) {
+  String validateMail(String value) {
     _formWasEdited = true;
     if (value.isEmpty) return 'Mail is required.';
     final RegExp mailExp = new RegExp(
@@ -92,7 +92,7 @@ class LoginFormState extends State<LoginForm> {
     return null;
   }
 
-  String _validatePassword(String value) {
+  String validatePassword(String value) {
     _formWasEdited = true;
     if (value.isEmpty) return 'Password is required.';
     //final RegExp passwordExp = new RegExp(
@@ -142,7 +142,7 @@ class LoginFormState extends State<LoginForm> {
                     onSaved: (String value) {
                       loginData.email = value;
                     },
-                    validator: _validateMail,
+                    validator: validateMail,
                   ),
                   new Padding(padding: const EdgeInsets.only(top: 20.0)),
                   new TextFormField(
@@ -156,7 +156,7 @@ class LoginFormState extends State<LoginForm> {
                     onSaved: (String value) {
                       loginData.password = value;
                     },
-                    validator: _validatePassword,
+                    validator: validatePassword,
                   ),
                   new Container(
                     padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 5.0),

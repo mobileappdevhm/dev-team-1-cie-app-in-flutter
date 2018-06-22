@@ -74,34 +74,62 @@ void main() {
     });
   });
 
-  group("simpleUserProdTest", () {
-    //List<Course> courses;
+  //TODO Travis has sometimes problems with this test, because it relies on path_provider
+  //group("simpleUserProdTest", () {
+  //  //List<Course> courses;
+//
+  //  //setUp(() {
+  //  /*courses = [
+  //      new CourseBuilder()
+  //      .withName("Blaba")
+  //      .withFaculty("7")
+  //      .withLecturesPerWeek([
+  //        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+  //            new DayTime(11, 30), "R0.009")
+  //      ])
+  //      .withDescription("boring")
+  //      .withHoursPerWeek(2)
+  //      .withEcts(2)
+  //      .withProfessorEmail("example@hm.edu")
+  //      .withProfessorName("Max Mustermann")
+  //      .withAvailable(CourseAvailability.AVAILABLE)
+  //      .withIsFavorite(false)
+  //      .build()
+  //    ];*/
+//
+  //  //});
+//
+  //  test('1', () {
+  //    final CurrentUserProd sut = new CurrentUserProd();
+//
+  //    expect(sut.getCurrentUser() != null, true);
+  //  });
+  //});
 
-    //setUp(() {
-    /*courses = [
-        new CourseBuilder()
-        .withName("Blaba")
-        .withFaculty("7")
-        .withLecturesPerWeek([
-          new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-              new DayTime(11, 30), "R0.009")
-        ])
-        .withDescription("boring")
-        .withHoursPerWeek(2)
-        .withEcts(2)
-        .withProfessorEmail("example@hm.edu")
-        .withProfessorName("Max Mustermann")
-        .withAvailable(CourseAvailability.AVAILABLE)
-        .withIsFavorite(false)
-        .build()
-      ];*/
+  group("user from json", () {
+    test('1 user json', () {
+      var jsonData = new Map<String, dynamic>();
+      jsonData['id'] = "user-id";
+      jsonData['language'] = "de";
+      jsonData['name'] = "name";
+      jsonData['firstName'] = "firstName";
+      jsonData['lastName'] = "lastName";
+      jsonData['department'] = "IT";
+      jsonData['degree'] = "BA";
+      jsonData['isLoggedIn'] = 'true';
+      jsonData['isMetricsEnabled'] = 'true';
 
-    //});
+      var user = UserBuilder.fromJson(jsonData);
 
-    test('1', () {
-      final CurrentUserProd sut = new CurrentUserProd();
-
-      expect(sut.getCurrentUser() != null, true);
+      expect(user.id, "user-id");
+      expect(user.language, "de");
+      expect(user.name, "name");
+      expect(user.firstName, "firstName");
+      expect(user.lastName, "lastName");
+      expect(user.department, "IT");
+      expect(user.degree, "BA");
+      expect(user.isLoggedIn, true);
+      expect(user.isMetricsEnabled, true);
     });
   });
 }
