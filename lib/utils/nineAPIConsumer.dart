@@ -8,7 +8,7 @@ import 'dart:async';
 class NineAPIEngine {
   static const String NINE_COURSE_LIST_URL = 'https://nine.wi.hm.edu/api/v2/courses/FK%2013/CIE/SoSe%2018';
 
-  static Future<Null> pullCourseJSON(BuildContext context, bool inBackground) async {
+  static Future<String> pullCourseJSON(BuildContext context, bool inBackground, bool save) async {
     var isConnected  = await isInternetConnected();
     if (isConnected == true) {
       if (inBackground == false) {
@@ -19,10 +19,13 @@ class NineAPIEngine {
             });
       }
       final response = await get(NINE_COURSE_LIST_URL);
-      FileStore.writeToFile(FileStore.COURSES, response.body);
+      if (save == true) {
+        FileStore.writeToFile(FileStore.COURSES, response.body);
+      }
       if (inBackground == false) {
         Navigator.pop(context);
       }
+      return response.body;
     }
     return null;
   }
