@@ -286,7 +286,7 @@ class DayTime {
 
 //Todo: This needs to be replaced with enum style of implementation in future see below
 class CourseDefinitions {
-  static List<String> DEPARTMENTS = [
+  static const List<String> DEPARTMENTS = [
     "01",
     "02",
     "03",
