@@ -140,7 +140,7 @@ class CourseListPresenter {
     _courses.getCourses()[id].isFavourite =
     !_courses.getCourses()[id].isFavourite;
 
-    //TODO: make tests async 
+    //TODO: make tests async doesn't work right now
     //analytics.logEvent(name: "toggle_favorite",
     //    parameters:{
     //      "name":_courses.getCourses()[id].name.toString(),
