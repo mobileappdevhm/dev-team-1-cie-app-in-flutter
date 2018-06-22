@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cie_team1/generic/genericAlert.dart';
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/model/login/loginData.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/utils/cieColor.dart';
@@ -20,11 +21,18 @@ class LoginForm extends StatefulWidget {
 }
 
 class LoginFormState extends State<LoginForm> {
+  LoginFormState();
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final usernameController = new TextEditingController();
   final passwordController = new TextEditingController();
 
   LoginData loginData = new LoginData();
+
+  initState() {
+    super.initState();
+    analytics.setCurrentScreen(screenName: "login_screen");
+  }
 
   void showInSnackBar(String value) {
     _scaffoldKey.currentState
@@ -66,6 +74,7 @@ class LoginFormState extends State<LoginForm> {
                   jsonData['user']['lastName'],
                   jsonData['curriculum']['organiser']['name']);
             }
+            analytics.logLogin();
           }
         });
       } catch (_) {
@@ -81,6 +90,7 @@ class LoginFormState extends State<LoginForm> {
 
   void _handleGuestLogin() {
     updateUserSettings(context, null, null, null);
+    analytics.logEvent(name: 'guest_login');
   }
 
   String validateMail(String value) {
@@ -223,6 +233,7 @@ class LoginFormState extends State<LoginForm> {
     UserBuilder builder;
     if (firstName != null && lastName != null) {
       isLoggedIn = true;
+      analytics.setUserProperty(name: "curriculum", value: curriculum);
     } else {
       // Continuing As Guest
       firstName = StaticVariables.GUEST_FIRST_NAME;

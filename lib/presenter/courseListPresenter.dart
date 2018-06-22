@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cie_team1/di/courses_di.dart';
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/course/details/date.dart';
@@ -138,9 +139,18 @@ class CourseListPresenter {
   void toggleFavourite(int id, bool shouldUseMemory) {
     _courses.getCourses()[id].isFavourite =
     !_courses.getCourses()[id].isFavourite;
+
+    //TODO: make tests async doesn't work right now
+    //analytics.logEvent(name: "toggle_favorite",
+    //    parameters:{
+    //      "name":_courses.getCourses()[id].name.toString(),
+    //      "favorite":_courses.getCourses()[id].isFavourite.toString(),
+    //      "department":_courses.getCourses()[id].faculty.toString(),});
+
     if (shouldUseMemory) {
       commitFavoritedCoursesToMemory();
     }
+
   }
 
   void toggleFavouriteWhenChangeView(int id) {

@@ -1,3 +1,4 @@
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/routes.dart';
@@ -10,6 +11,9 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage>
     with SingleTickerProviderStateMixin {
+
+  _WelcomePageState();
+
   AnimationController controller;
   Animation<double> animation;
 
@@ -27,6 +31,8 @@ class _WelcomePageState extends State<WelcomePage>
       }
     });
     controller.forward();
+
+    analytics.setCurrentScreen(screenName: "start_screen");
   }
 
   dispose() {

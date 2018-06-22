@@ -1,3 +1,4 @@
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,11 @@ class _MapPageState extends State<MapPage> {
     "longitude": '11.5677428',
     "place_id": 'ChIJe2IFCPF1nkcRHuqVqOgDyvU'
   };
+
+  initState() {
+    super.initState();
+    analytics.setCurrentScreen(screenName: "map_screen");
+  }
 
   _getLocation(String campus) {
     switch (campus) {

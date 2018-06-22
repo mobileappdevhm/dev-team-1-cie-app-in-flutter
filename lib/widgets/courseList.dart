@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
+import 'package:cie_team1/main.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
@@ -51,6 +52,15 @@ class CourseListState extends State<CourseList> {
       if (this.userPresenter.getCurrentUser().department.isNotEmpty) {
         this.filter = this.userPresenter.getCurrentUser().department;
       }
+    }
+  }
+
+  initState() {
+    super.initState();
+    if(!shouldFilterByFavorites) {
+      analytics.setCurrentScreen(screenName: "courses_screen");
+    } else {
+      analytics.setCurrentScreen(screenName: "favorites_screen");
     }
   }
 
@@ -129,6 +139,7 @@ class CourseListState extends State<CourseList> {
               border: OutlineInputBorder(),
             ),
             onChanged: (String val) => updateSearch(val),
+            onSubmitted: (String val) => analytics.logSearch(searchTerm: val),
           ),
         ));
       }
