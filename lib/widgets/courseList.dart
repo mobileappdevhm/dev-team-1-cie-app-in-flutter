@@ -48,7 +48,9 @@ class CourseListState extends State<CourseList> {
       this.userPresenter, this.focus) {
     if (this.userPresenter.getCurrentUser().isLoggedIn &&
         this.userPresenter.getCurrentUser().department.isNotEmpty) {
-      this.filter = this.userPresenter.getCurrentUser().department;
+      if (this.userPresenter.getCurrentUser().department.isNotEmpty) {
+        this.filter = this.userPresenter.getCurrentUser().department;
+      }
     }
   }
 
