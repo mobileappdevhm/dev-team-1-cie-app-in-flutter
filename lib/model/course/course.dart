@@ -286,7 +286,25 @@ class DayTime {
 
 //Todo: This needs to be replaced with enum style of implementation in future see below
 class CourseDefinitions {
-  static const List<String> DEPARTMENTS = [
+  static List<String> getDepartments() {
+    return [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14"
+    ];
+  }
+  static List<String> DEPARTMENTS = [
     "01",
     "02",
     "03",
