@@ -104,4 +104,31 @@ void main() {
       expect(sut.getCurrentUser() != null, true);
     });
   });
+
+  group("user from json", () {
+    test('1 user json', () {
+      var jsonData = new Map<String, dynamic>();
+      jsonData['id'] = "user-id";
+      jsonData['language'] = "de";
+      jsonData['name'] = "name";
+      jsonData['firstName'] = "firstName";
+      jsonData['lastName'] = "lastName";
+      jsonData['department'] = "IT";
+      jsonData['degree'] = "BA";
+      jsonData['isLoggedIn'] = 'true';
+      jsonData['isMetricsEnabled'] = 'true';
+
+      var user = UserBuilder.fromJson(jsonData);
+
+      expect(user.id, "user-id");
+      expect(user.language, "de");
+      expect(user.name, "name");
+      expect(user.firstName, "firstName");
+      expect(user.lastName, "lastName");
+      expect(user.department, "IT");
+      expect(user.degree, "BA");
+      expect(user.isLoggedIn, true);
+      expect(user.isMetricsEnabled, true);
+    });
+  });
 }
