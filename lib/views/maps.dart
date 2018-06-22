@@ -1,5 +1,6 @@
 import 'package:cie_team1/main.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,7 +42,7 @@ class _MapPageState extends State<MapPage> {
 
   initState() {
     super.initState();
-    analytics.setCurrentScreen(screenName: "map_screen");
+    Analytics.setCurrentScreen("map_screen");
   }
 
   _getLocation(String campus) {

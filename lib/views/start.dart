@@ -1,6 +1,7 @@
 import 'package:cie_team1/main.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/widgets/CiEAnimation.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _WelcomePageState extends State<WelcomePage>
     });
     controller.forward();
 
-    analytics.setCurrentScreen(screenName: "start_screen");
+    Analytics.setCurrentScreen("start_screen");
   }
 
   dispose() {

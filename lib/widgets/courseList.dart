@@ -8,6 +8,7 @@ import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
@@ -58,9 +59,9 @@ class CourseListState extends State<CourseList> {
   initState() {
     super.initState();
     if(!shouldFilterByFavorites) {
-      analytics.setCurrentScreen(screenName: "courses_screen");
+      Analytics.setCurrentScreen("courses_screen");
     } else {
-      analytics.setCurrentScreen(screenName: "favorites_screen");
+      Analytics.setCurrentScreen("favorites_screen");
     }
   }
 
@@ -139,7 +140,7 @@ class CourseListState extends State<CourseList> {
               border: OutlineInputBorder(),
             ),
             onChanged: (String val) => updateSearch(val),
-            onSubmitted: (String val) => analytics.logSearch(searchTerm: val),
+            onSubmitted: (String val) => Analytics.logSearch(val),
           ),
         ));
       }
