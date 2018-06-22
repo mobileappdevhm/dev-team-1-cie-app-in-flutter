@@ -1,10 +1,11 @@
+import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 class Analytics {
   static FirebaseAnalytics analytics;
 
   static FirebaseAnalytics getAnalytics() {
-    return analytics;
+    return analytics = null;
   }
 
   static setAnalytics(bool isEnabled) {
