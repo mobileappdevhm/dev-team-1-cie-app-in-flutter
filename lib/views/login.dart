@@ -1,14 +1,15 @@
 import 'dart:convert';
 
+import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/model/login/loginData.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/fileStore.dart';
+import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginForm extends StatefulWidget {
@@ -44,24 +45,27 @@ class LoginFormState extends State<LoginForm> {
       final String username = usernameController.text;
       final String password = passwordController.text;
 
-      //TODO make the api calls in a different class
-      var url = "https://nine.wi.hm.edu/api/v2/account/login";
       try {
-        http.post(url, body: {"username": username, "password": password}).then(
-            (response) {
-          if (response.statusCode != 200) {
-            //TODO do error relevant things here
-            showInSnackBar(
-                'Seems that the user data you provided is not valid, please try again.');
+        NineAPIEngine.postAuth(context, username, password).then((response) {
+          if (response == null) {
+            GenericAlert.confirmDialog(context, 'No Internet connection',
+                'It seems, that you have no internet connection. Please check and try again!');
+          } else if (response.statusCode != 200) {
+            GenericAlert.confirmDialog(context, 'Bad response',
+                'Something went wrong. Please double check your credentials and try again!');
           } else {
-            final String id = json.decode(response.body)['user']['id'];
-            final String firstName =
-                json.decode(response.body)['user']['firstName'];
-            final String lastName =
-                json.decode(response.body)['user']['lastName'];
-            var curriculum =
-                json.decode(response.body)['curriculum']['organiser']['name'];
-            updateUserSettings(context, firstName, lastName, curriculum);
+            var jsonData = json.decode(response.body);
+            if (jsonData['curriculum'] == null) {
+              //no curriculum was set by the user -> user can login but lottery should not be available
+              updateUserSettings(context, jsonData['user']['firstName'],
+                  jsonData['user']['lastName'], null);
+            } else {
+              updateUserSettings(
+                  context,
+                  jsonData['user']['firstName'],
+                  jsonData['user']['lastName'],
+                  jsonData['curriculum']['organiser']['name']);
+            }
           }
         });
       } catch (_) {
@@ -70,8 +74,8 @@ class LoginFormState extends State<LoginForm> {
       }
       //---------------------------
     } else {
-      showInSnackBar('Please provide valid user data before submitting.');
-      //TODO make errors appear directly after failing
+      GenericAlert.confirmDialog(context, 'Unvalid credentials information',
+          'Please provide valid credentials (email & password) before submitting.');
     }
   }
 
@@ -217,7 +221,7 @@ class LoginFormState extends State<LoginForm> {
       String lastName, dynamic curriculum) {
     bool isLoggedIn = false;
     UserBuilder builder;
-    if (firstName != null && lastName != null && curriculum != null) {
+    if (firstName != null && lastName != null) {
       isLoggedIn = true;
     } else {
       // Continuing As Guest
