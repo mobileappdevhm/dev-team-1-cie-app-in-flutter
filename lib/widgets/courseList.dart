@@ -50,7 +50,8 @@ class CourseListState extends State<CourseList> {
     if (this.userPresenter.getCurrentUser().isLoggedIn &&
         this.userPresenter.getCurrentUser().department.isNotEmpty) {
       if (this.userPresenter.getCurrentUser().department.isNotEmpty) {
-        this.filter = this.userPresenter.getCurrentUser().department;
+        String department = this.userPresenter.getCurrentUser().department;
+        this.filter = department.substring(department.length-2, department.length);
       }
     }
   }
@@ -103,11 +104,13 @@ class CourseListState extends State<CourseList> {
                 padding: pad,
                 child: new DropdownButton<String>(
                   items: CourseDefinitions.DEPARTMENTS.map((String value) {
-                    return new DropdownMenuItem<String>(
-                      value: value,
-                      child: new Text(departmentLabel + value,
-                          overflow: TextOverflow.clip),
-                    );
+                    if (value != null) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(departmentLabel + value,
+                            overflow: TextOverflow.clip),
+                      );
+                    }
                   }).toList(),
                   onChanged: (String val) {
                     setState(() {
@@ -125,7 +128,6 @@ class CourseListState extends State<CourseList> {
                   onPressed: toggleSearch),
             )
           ]));
-
       if (shouldSearch) {
         widgets.add(new Container(
           padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
