@@ -5,6 +5,7 @@ import 'package:cie_team1/model/course/details/correlation.dart';
 import 'package:cie_team1/model/course/details/date.dart';
 import 'package:cie_team1/model/course/details/lecturer.dart';
 import 'package:cie_team1/model/course/details/room.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:test/test.dart';
 
 @Timeout(const Duration(seconds: 10))
@@ -22,7 +23,7 @@ void main() {
           .withDescription("boring")
           .withHoursPerWeek(2)
           .withEcts(2)
-          .withProfessorEmail("example@hm.edu")
+          .withProfessorEmail(StaticVariables.MOCK_EMAIL)
           .withProfessorName("Max Mustermann")
           .withIsFavorite(false)
           .withhasHomeBias(false)
@@ -54,7 +55,7 @@ void main() {
     });
 
     test('7', () {
-      expect(sut.professorEmail, "example@hm.edu");
+      expect(sut.professorEmail, StaticVariables.MOCK_EMAIL);
     });
 
     test('8', () {

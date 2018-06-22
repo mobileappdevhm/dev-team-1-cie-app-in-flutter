@@ -1,3 +1,4 @@
+import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
@@ -5,6 +6,7 @@ import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CourseDetails extends StatefulWidget {
   CourseDetails(this.id, this.presenter, {Key key, this.title})
@@ -58,10 +60,6 @@ class _CourseDetailsState extends State<CourseDetails> {
     setState(() {
       presenter.toggleFavourite(id, true);
     });
-  }
-
-  void _toggleContact(int id) {
-    setState(() {});
   }
 
   Widget buildDescriptionHeadingRow() {
@@ -147,10 +145,14 @@ class _CourseDetailsState extends State<CourseDetails> {
   Widget buildTitleRow() {
     String locations = "";
     //Take all locations
-    presenter.getCourses()[id].lecturesPerWeek.map((l) => CampusUtility.getCampusAsLongString(l.campus)).toSet().forEach((s) => locations += " " + s);
+    presenter
+        .getCourses()[id]
+        .lecturesPerWeek
+        .map((l) => CampusUtility.getCampusAsLongString(l.campus))
+        .toSet()
+        .forEach((s) => locations += " " + s);
     //Just for the cast that we don't have location
-    if (locations.trim().isEmpty)
-      locations = " N/A";
+    if (locations.trim().isEmpty) locations = " N/A";
 
     //Above Description stuff
     return new Container(
@@ -182,8 +184,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         " " +
                         presenter.getProfessorName(id),
                     style: CiEStyle.getCoursesListTimeStyle()),
-                new Text(
-                    StaticVariables.CAMPUS + locations,
+                new Text(StaticVariables.CAMPUS + locations,
                     style: CiEStyle.getCoursesListTimeStyle()),
               ],
             ),
@@ -264,7 +265,7 @@ class _CourseDetailsState extends State<CourseDetails> {
               child: new FlatButton(
                   //There is padding by default we dont need this here
                   padding: new EdgeInsets.all(0.0),
-                  onPressed: () => _toggleContact,
+                  onPressed: () => _launchContactProfURL(id),
                   child: new Row(
                     children: <Widget>[
                       GenericIcon.buildGenericContactIcon(),
@@ -298,5 +299,20 @@ class _CourseDetailsState extends State<CourseDetails> {
         )
       ],
     ));
+  }
+
+  _launchContactProfURL(int id) async {
+    if (presenter.getProfessorEmail(id) == StaticVariables.MOCK_EMAIL ||
+        !presenter.getProfessorEmail(id).contains("@")) {
+      GenericAlert.confirmDialog(context, StaticVariables.NO_EMAIL_FOUND,
+          StaticVariables.NO_EMAIL_FOUND_DESCRIPTION);
+    } else {
+      var url = "mailto:" + presenter.getProfessorEmail(id);
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
   }
 }
