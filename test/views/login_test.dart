@@ -220,16 +220,16 @@ void main() {
     var login = new LoginFormState();
 
     test('1 valid password',(){
-      expect(login.validateMail("passwordIsLargerThan8"), true);
+      expect(login.validatePassword("passwordIsLargerThan8"), null);
     });
     test('2 invalid password',(){
-      expect(login.validateMail("passwor"), 'Password does not match requirements.');
+      expect(login.validatePassword("passwor"), 'Password does not match requirements.');
     });
     test('3 invalid password',(){
-      expect(login.validateMail("pwd"), 'Password does not match requirements.');
+      expect(login.validatePassword("pwd"), 'Password does not match requirements.');
     });
     test('4 invalid password',(){
-      expect(login.validateMail(""), 'Password is required.');
+      expect(login.validatePassword(""), 'Password is required.');
     });
   });
 }

@@ -1,4 +1,6 @@
 import 'package:cie_team1/model/course/details/date.dart';
+import 'package:cie_team1/model/course/details/lecturer.dart';
+import 'package:cie_team1/model/course/details/room.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main(){
@@ -32,7 +34,7 @@ void main(){
     expect(dates[0].begin, "20180427T150000Z");
     expect(dates[0].end, "20180427T200000Z");
     expect(dates[0].title, null);
-    expect(dates[0].rooms, rooms);
-    expect(dates[0], lecturers);
+    expect(dates[0].rooms is List<Room>, true);
+    expect(dates[0].lecturers is List<Lecturer>, true);
   });
 }
