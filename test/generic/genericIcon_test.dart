@@ -2,7 +2,7 @@ import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:flutter/material.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 @Timeout(const Duration(seconds: 10))
 void main() {
@@ -47,6 +47,44 @@ void main() {
       expect(inactiveFavoriteIcon.icon.codePoint,
           GenericIcon.memStorageInactiveFavorite);
       expect(inactiveFavoriteIcon.icon.fontFamily, GenericIcon.fontFamily);
+    });
+
+    test('rendersActiveGenericSearchIcon', () {
+      final Icon activeGenericSearchIcon =
+          GenericIcon.buildGenericSearchIcon(true);
+      expect(activeGenericSearchIcon.icon.codePoint,
+          GenericIcon.memStorageInactiveSearch);
+      expect(activeGenericSearchIcon.icon.fontFamily, GenericIcon.fontFamily);
+    });
+
+    test('rendersInactiveGenericSearchIcon', () {
+      final Icon inactiveGenericSearchIcon =
+          GenericIcon.buildGenericSearchIcon(false);
+      expect(inactiveGenericSearchIcon.icon.codePoint,
+          GenericIcon.memStorageactiveSearch);
+      expect(inactiveGenericSearchIcon.icon.fontFamily, GenericIcon.fontFamily);
+    });
+
+    test('rendersGenericContactIcon', () {
+      final Icon activeGenericSearchIcon =
+          GenericIcon.buildGenericContactIcon();
+      expect(activeGenericSearchIcon.icon.codePoint,
+          GenericIcon.memStorageContact);
+      expect(activeGenericSearchIcon.icon.fontFamily, GenericIcon.fontFamily);
+    });
+
+    //testWidgets('rendersGenericConflictIcon', (WidgetTester tester) async {
+    //  String message = "Content";
+    //  tester.pumpWidget(new MaterialApp(home: GenericIcon.buildGenericConflictIcon(message)));
+    //  expect(find.byType(Container), findsOneWidget);
+    //  expect(find.text('!'), findsOneWidget);
+    //  expect(find.text(message), findsOneWidget);
+    //});
+
+    testWidgets('rendersGenericSpinner', (WidgetTester tester) async {
+      await tester.pumpWidget(new MaterialApp(home: GenericIcon.buildGenericSpinner()));
+
+      expect(find.text('Refreshing'), findsOneWidget);
     });
   });
 }
