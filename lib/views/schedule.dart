@@ -75,7 +75,7 @@ class TimeTableEntryItem extends StatelessWidget {
   }
 }
 
-class TimeTableEntry extends StatefulWidget {
+class TimeTableEntry extends StatelessWidget {
   final List<Lecture> children;
   final Weekday weekday;
   final CourseListPresenter courseListPresenter;
@@ -83,19 +83,8 @@ class TimeTableEntry extends StatefulWidget {
   TimeTableEntry(this.children, this.weekday, this.courseListPresenter);
 
   @override
-  _TimeTableEntryState createState() =>
-      new _TimeTableEntryState(children, weekday, courseListPresenter);
-}
-
-// Split Lectures into weekdays. One expandable tile per weekday
-class _TimeTableEntryState extends State<TimeTableEntry> {
-  final List<Lecture> children;
-  final Weekday weekday;
-  final CourseListPresenter courseListPresenter;
-
-  _TimeTableEntryState(this.children, this.weekday, this.courseListPresenter);
-
-  Widget _buildTile(List<Lecture> children, Weekday weekday) {
+  Widget build(BuildContext context) {
+    //return _buildTile(children, weekday);
     List<Widget> childrenWidgets = new List<Widget>();
 
     // Add a new item for each child lecture
@@ -137,11 +126,7 @@ class _TimeTableEntryState extends State<TimeTableEntry> {
     }
     return noClassHeader("- No class on "
         + WeekdayUtility.getWeekdayAsLongString(weekday)+" -");
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return _buildTile(children, weekday);
   }
 }
 
