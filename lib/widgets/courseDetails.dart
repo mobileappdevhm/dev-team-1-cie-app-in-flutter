@@ -145,6 +145,13 @@ class _CourseDetailsState extends State<CourseDetails> {
   }
 
   Widget buildTitleRow() {
+    String locations = "";
+    //Take all locations
+    presenter.getCourses()[id].lecturesPerWeek.map((l) => CampusUtility.getCampusAsLongString(l.campus)).toSet().forEach((s) => locations += " " + s);
+    //Just for the cast that we don't have location
+    if (locations.trim().isEmpty)
+      locations = " N/A";
+
     //Above Description stuff
     return new Container(
       child: new Row(
@@ -174,6 +181,9 @@ class _CourseDetailsState extends State<CourseDetails> {
                     StaticVariables.PROFESSOR +
                         " " +
                         presenter.getProfessorName(id),
+                    style: CiEStyle.getCoursesListTimeStyle()),
+                new Text(
+                    StaticVariables.CAMPUS + locations,
                     style: CiEStyle.getCoursesListTimeStyle()),
               ],
             ),
