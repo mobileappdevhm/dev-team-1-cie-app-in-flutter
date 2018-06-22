@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/main.dart';
@@ -6,11 +8,10 @@ import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/nineAPIConsumer.dart';
-import 'dart:async';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
@@ -45,7 +46,14 @@ class CourseListState extends State<CourseList> {
   FocusNode focus;
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites,
-      this.userPresenter, this.focus);
+      this.userPresenter, this.focus) {
+    if (this.userPresenter.getCurrentUser().isLoggedIn &&
+        this.userPresenter.getCurrentUser().department.isNotEmpty) {
+      if (this.userPresenter.getCurrentUser().department.isNotEmpty) {
+        this.filter = this.userPresenter.getCurrentUser().department;
+      }
+    }
+  }
 
   initState() {
     super.initState();
@@ -73,14 +81,14 @@ class CourseListState extends State<CourseList> {
     List<Widget> widgets = new List<Widget>();
 
     if (shouldFilterByFavorites == false) {
-      widgets.add(
-        new Container(
+      widgets.add(new Container(
           color: CiEColor.white,
           padding: new EdgeInsets.symmetric(vertical: 10.0),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text("Pull down to Refresh", style: CiEStyle.getCourseListRefreshText()),
+              new Text("Pull down to Refresh",
+                  style: CiEStyle.getCourseListRefreshText()),
               new Icon(Icons.arrow_downward, color: CiEColor.mediumGray)
             ],
           )));
@@ -136,11 +144,9 @@ class CourseListState extends State<CourseList> {
         ));
       }
     } else {
-      widgets.add(
-        new Padding(
-          padding: const EdgeInsets.all(10.0),
-        )
-      );
+      widgets.add(new Padding(
+        padding: const EdgeInsets.all(10.0),
+      ));
     }
 
     //Build the tiles of the course list / favorites list
@@ -168,30 +174,36 @@ class CourseListState extends State<CourseList> {
 
     return new RefreshIndicator(
         child: new ListView(children: widgets),
-        onRefresh: ()=> handleRefreshIndicator(context, courseListPresenter),
-        color: CiEColor.mediumGray
-    );
+        onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
+        color: CiEColor.mediumGray);
   }
 
   @override
   void deactivate() {
+    super.deactivate();
     courseListPresenter.deactivate();
   }
 
-  // Create a raised button on which is used on favorite page to allow users to submit there choice to lottery
+  // Create a raised button on which is used on favorite page to allow users to submit their choices to lottery
   Widget _getRaisedSubmitButton() {
     bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn;
+    bool isDepartmentSet = userPresenter.getCurrentUser().department.isNotEmpty;
 
     //Decide how to show submit button
     String textToShow;
     Color buttonColor;
     Function function;
-    if (coursesRegistered && isLoggedIn) {
+    if (coursesRegistered && isLoggedIn && isDepartmentSet) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
       buttonColor = CiEColor.red;
       function = _handleCourseSubmission;
     } else if (!coursesRegistered && isLoggedIn) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
+      buttonColor = CiEColor.lightGray;
+      function = null;
+    } else if (coursesRegistered && isLoggedIn && !isDepartmentSet) {
+      textToShow =
+          StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT;
       buttonColor = CiEColor.lightGray;
       function = null;
     } else {
@@ -233,7 +245,7 @@ class CourseListState extends State<CourseList> {
       if (shouldFilterByFavorites)
         courseListPresenter.toggleFavouriteWhenChangeView(id);
       else
-        courseListPresenter.toggleFavourite(id,true);
+        courseListPresenter.toggleFavourite(id, true);
     });
   }
 
@@ -256,8 +268,6 @@ class CourseListState extends State<CourseList> {
             context, no, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
         .then((_) {});
   }
-
-  void _voidFunction() {}
 
   void updateSearch(String val) {
     setState(() {

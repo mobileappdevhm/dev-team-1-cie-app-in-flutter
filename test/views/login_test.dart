@@ -178,7 +178,58 @@ void main() {
         }
       }
     });
+  });
 
 
+  group('validate mail', (){
+    var login = new LoginFormState();
+
+    test('1 valid mail',(){
+      expect(login.validateMail("valid@mail.com"), null);
+    });
+    test('2 valid mail',(){
+      expect(login.validateMail("v.alid@mail.com"), null);
+    });
+    test('2 valid mail',(){
+      expect(login.validateMail("valid@mail.all.com"), null);
+    });
+    test('4 invalid mail',(){
+      expect(login.validateMail("@mail.com"), 'Please enter a valid e-mail address.');
+    });
+    test('5 invalid mail',(){
+      expect(login.validateMail("@mail.com"), 'Please enter a valid e-mail address.');
+    });
+    test('6 invalid mail',(){
+      expect(login.validateMail("validmail.com"), 'Please enter a valid e-mail address.');
+    });
+    test('7 invalid mail',(){
+      expect(login.validateMail("valid@.com"), 'Please enter a valid e-mail address.');
+    });
+    test('8 invalid mail',(){
+      expect(login.validateMail("valid@mailcom"), 'Please enter a valid e-mail address.');
+    });
+    test('9 invalid mail',(){
+      expect(login.validateMail("valid@mail."), 'Please enter a valid e-mail address.');
+    });
+    test('10 invalid mail',(){
+      expect(login.validateMail(""), 'Mail is required.');
+    });
+  });
+
+  group('validate password', (){
+    var login = new LoginFormState();
+
+    test('1 valid password',(){
+      expect(login.validatePassword("passwordIsLargerThan8"), null);
+    });
+    test('2 invalid password',(){
+      expect(login.validatePassword("passwor"), 'Password does not match requirements.');
+    });
+    test('3 invalid password',(){
+      expect(login.validatePassword("pwd"), 'Password does not match requirements.');
+    });
+    test('4 invalid password',(){
+      expect(login.validatePassword(""), 'Password is required.');
+    });
   });
 }
