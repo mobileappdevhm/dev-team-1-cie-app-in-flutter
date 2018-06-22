@@ -1,5 +1,4 @@
 import 'package:cie_team1/generic/genericAlert.dart';
-import 'package:cie_team1/main.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:cie_team1/main.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/views/takenCourses.dart';

@@ -1,4 +1,3 @@
-import 'package:cie_team1/main.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/analytics.dart';
