@@ -32,7 +32,7 @@ class UserBuilder {
   }
 
   UserBuilder withDepartment(String department) {
-    this.department = department != null ? department : null;
+    this.department = department != null ? department : "";
     return this;
   }
 
