@@ -28,15 +28,23 @@
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
         <a class="navbar-brand" href="index.html">Flutter App #1</a>
-        <!-- <a class="nav-item" href="about.html">About</a> -->
+        <a class="nav-item" href="about.html">About</a>
         <a class="nav-item" href="features.html">Features</a>
-        <!-- <a class="nav-item" href="team.html">Team</a> -->
+        <a class="nav-item" href="team.html">Team</a>
     </div>
 </nav>
 
 <!--Masthead -->
-<header class="masthead text-white text-center" style="background-image: url('assets/img/features_bg.jpg'); background-size: 80%;">
-
+<header class="masthead text-white text-center"
+        style="background-image: url('assets/img/features_bg.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <h1 class="mb-5">Together we can make a difference!</h1>
+            </div>
+        </div>
+    </div>
 </header>
 
 <!--Icons Grid -->
@@ -245,84 +253,122 @@
     </div>
 </section>
 
-<!--
-
-TODO add screenshots to this page
-
-
 <section class="showcase">
     <div class="container-fluid p-0">
         <div class="row no-gutters">
-            <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                 style="background-image: url('assets/img/bg-showcase-1.png');"></div>
-            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                <h2>Material Design</h2>
-                <p class="lead mb-0">We are using the flutter build in material design. Our app comes up in a clean and
-                    user friendly look and feel.</p>
-            </div>
-        </div>
-        <div class="row no-gutters">
-            <div class="col-lg-6 text-white showcase-img"
-                 style="background-image: url('assets/img/bg-showcase-2.jpg');"></div>
+            <div class="col-lg-3 text-white showcase-img"
+                 style="background-image: url('assets/img/view_login.png'); background-size: auto 100%; background-repeat-x: no-repeat; background-position: right;"></div>
+            <div class="col-lg-3  text-white showcase-img"
+                 style="background-image: url('assets/img/view_login_error.png'); background-size: auto 100%; background-repeat-x: no-repeat;"></div>
             <div class="col-lg-6 my-auto showcase-text">
-                <h2>Clean Code</h2>
-                <p class="lead mb-0">Of course the main aim was to implement a wide range of features. But we also
-                    tried to only create good and clean code. So maintainability is high and makes fun, not pain!</p>
+                <h2>Login</h2>
+                <p class="lead mb-0">
+                    On the login view you can decide to login with a existing nine account or as guest. Also you can
+                    find links if you want to register on nine or have forgotten the password.
+                </p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-3 order-lg-2 text-white showcase-img"
+                 style="background-image: url('assets/img/view_schedule.png'); background-size: auto 100%; background-repeat-x: no-repeat; background-position: right;"></div>
+            <div class="col-lg-3 order-lg-2 text-white showcase-img"
+                 style="background-image: url('assets/img/view_schedule_error.png'); background-size: auto 100%; background-repeat-x: no-repeat;"></div>
+            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                <h2>Schedule</h2>
+                <p class="lead mb-0">
+                    The schedule shows your favorited courses in a nice and clean way. Also possible time conflicts are
+                    displayed.
+                </p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-2 text-white showcase-img"
+                 style="background-image: url('assets/img/view_courses.png'); background-size: auto 100%; background-repeat-x: no-repeat; background-position: right;"></div>
+            <div class="col-lg-1  text-white showcase-img"
+                 style="background-image: url('assets/img/view_courses_error.png'); background-size: auto 100%; background-repeat-x: no-repeat;"></div>
+            <div class="col-lg-2  text-white showcase-img"
+                 style="background-image: url('assets/img/view_courses_departments.png'); background-size: auto 100%; background-repeat-x: no-repeat;"></div>
+            <div class="col-lg-6 my-auto showcase-text">
+                <h2>Courses</h2>
+                <p class="lead mb-0">
+                    All of the CiE courses can be found in the course list. Here it is possible to favorite courses and
+                    see some basic information of them. All courses are filtered by department and it is also possible
+                    to search for a special course. Also some possible time conflicts between the courses are shown
+                    here.
+                </p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-3 order-lg-2 text-white showcase-img"
+                 style="background-image: url('assets/img/view_favorites.png'); background-size: auto 100%; background-repeat-x: no-repeat; background-position: right;"></div>
+            <div class="col-lg-3 order-lg-2 text-white showcase-img"
+                 style="background-image: url('assets/img/view_favorites_error.png'); background-size: auto 100%; background-repeat-x: no-repeat;"></div>
+            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                <h2>Favorites</h2>
+                <p class="lead mb-0">
+                    On the favorites page all courses which are favorited are shown. It is also possible to unfavorite
+                    some of the courses here. Possible time conflicts are shown here too.
+                </p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-3 text-white showcase-img"
+                 style="background-image: url('assets/img/view_maps.png'); background-size: auto 100%; background-repeat-x: no-repeat; background-position: right;"></div>
+            <div class="col-lg-3  text-white showcase-img"
+                 style="background-image: url('assets/img/open_google_maps.png'); background-size: auto 100%; background-repeat-x: no-repeat;"></div>
+            <div class="col-lg-6 my-auto showcase-text">
+                <h2>Maps</h2>
+                <p class="lead mb-0">
+                    The map page shows all three different campus maps. If you click on one of the small images you will
+                    be redirected to google maps and can for example redirect to the campus starting at your current
+                    location.
+                </p>
             </div>
         </div>
         <div class="row no-gutters">
             <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                 style="background-image: url('assets/img/bg-showcase-3.jpg');"></div>
+                 style="background-image: url('assets/img/view_profile.png'); background-size: auto 100%; background-repeat-x: no-repeat; background-position: center;"></div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                <h2>Build for...</h2>
-                <p class="lead mb-0">Our app is build for <i style="font-weight: bold">dreamers</i>, for <i
-                        style="font-weight: bold">makers</i>, for people who want to concentrate on the important
-                    things - it's build for <i style="font-weight: bold">YOU!</i> The app will help you find the right
-                    courses, register for them and manage your schedule during the semester, so that you can focus on
-                    things that really care.</p>
+                <h2>Profile</h2>
+                <p class="lead mb-0">
+                    On the profile page all your saved personal data is shown, you can also track the status of your
+                    CiE-Certificate.
+                </p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-3 text-white showcase-img"
+                 style="background-image: url('assets/img/view_courseDetails.png'); background-size: auto 100%; background-repeat-x: no-repeat; background-position: right;"></div>
+            <div class="col-lg-3  text-white showcase-img"
+                 style="background-image: url('assets/img/view_courseDetails_error.png'); background-size: auto 100%; background-repeat-x: no-repeat;"></div>
+            <div class="col-lg-6 my-auto showcase-text">
+                <h2>Course description</h2>
+                <p class="lead mb-0">
+                    To see more details of one of the courses you can click on the short part of it. The next view which
+                    will be displayed is the course details page. Here you can see more information about hte course and
+                    the lecturer. Time conflicts are shown here too.
+                </p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-6 order-lg-2 text-white showcase-img"
+                 style="background-image: url('assets/img/view_privacy.png'); background-size: auto 100%; background-repeat-x: no-repeat; background-position: center;"></div>
+            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                <h2>Privacy Policy</h2>
+                <p class="lead mb-0">
+                    As of the GDPR we added a version of ours in english and german. It could be found over the profile
+                    page.
+                </p>
             </div>
         </div>
     </div>
 </section>
-
-<section class="testimonials text-center bg-light">
-    <div class="container">
-        <h2 class="mb-5">What people are saying...</h2>
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="">
-                    <h5>Margaret E.</h5>
-                    <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="">
-                    <h5>Fred S.</h5>
-                    <p class="font-weight-light mb-0">"Your app is amazing. I've been using it mainly to show the
-                        nice
-                        schedule."</p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="">
-                    <h5>Sarah W.</h5>
-                    <p class="font-weight-light mb-0">"Thanks so much for making this easy and powerful app available
-                        to us!"</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
 
 <!--Footer -->
 <footer class="footer bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-                <!--
                 <ul class="list-inline mb-2">
                     <li class="list-inline-item">
                         <a href="about.html">About</a>
@@ -334,14 +380,16 @@ TODO add screenshots to this page
                     <li class="list-inline-item">&sdot;</li>
                     <li class="list-inline-item">
                         <a href="team.html">Team</a>
-                    </li> -->
+                    </li>
                     <li class="list-inline-item">&sdot;</li>
                     <li class="list-inline-item">
                         <a href="privacy.html">Privacy Policy</a>
                     </li>
                 </ul>
                 <p class="text-muted small mb-4 mb-lg-0">&copy; Development Team #01 2018. All Rights Reserved.</p>
-                <p class="text-muted small mb-4 mb-lg-0">Header image: <a target="_blank" href="https://www.pexels.com/photo/people-silhouette-during-sunset-853168/">Photo by Min An from Pexels</a></p>
+                <p class="text-muted small mb-4 mb-lg-0">Header image: <a target="_blank"
+                                                                          href="https://www.pexels.com/photo/people-silhouette-during-sunset-853168/">Photo
+                    by Min An from Pexels</a></p>
             </div>
             <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
                 <ul class="list-inline mb-0">
