@@ -1,3 +1,4 @@
+@Skip()
 import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
