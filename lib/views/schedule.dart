@@ -1,10 +1,10 @@
 import 'package:cie_team1/generic/genericAlert.dart';
-import 'package:cie_team1/main.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class _ScheduleState extends State<Schedule> {
     super.initState();
     setState(() {
       courseListPresenter;
-      analytics.setCurrentScreen(screenName: "timetable_screen");
+      Analytics.setCurrentScreen("schedule_screen");
     });
   }
 

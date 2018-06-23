@@ -1,6 +1,7 @@
 import 'package:cie_team1/main.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
 
   initState() {
     super.initState();
-    analytics.setCurrentScreen(screenName: "privacy_policy_screen");
+    Analytics.setCurrentScreen("privacy_policy_screen");
   }
 
   @override
