@@ -12,6 +12,8 @@ void main() {
     expect(find.text("Map"), findsOneWidget);
     expect(find.text("Favorites"), findsOneWidget);
     expect(find.text("Profile"), findsOneWidget);
+
+
   });
 
   group('settingspagewidget', () {

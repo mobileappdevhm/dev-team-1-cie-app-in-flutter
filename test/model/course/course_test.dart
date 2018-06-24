@@ -326,4 +326,33 @@ void main() {
       expect(built.isFavourite, testBool);
     });
   });
+
+  group("Course Definitions", ()
+  {
+
+    test('1', () {
+      int counter = 1;
+      for(String sut in CourseDefinitions.DEPARTMENTS.toList()){
+        if(counter<10)
+          expect(sut, "0"+counter.toString());
+        else
+          expect(sut, counter.toString());
+        counter++;
+      }
+
+    });
+
+    test('1', () {
+      int counter = 1;
+      for(String sut in CourseDefinitions.DEPARTMENTS.toList()){
+        if(counter<10)
+          expect(sut, "0"+counter.toString());
+        else
+          expect(sut, counter.toString());
+        counter++;
+      }
+
+    });
+
+  });
 }
