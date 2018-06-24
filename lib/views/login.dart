@@ -1,11 +1,12 @@
 import 'dart:convert';
+
 import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/model/login/loginData.dart';
 import 'package:cie_team1/model/user/user.dart';
+import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/fileStore.dart';
-import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
@@ -62,18 +63,22 @@ class LoginFormState extends State<LoginForm> {
                 'Something went wrong. Please double check your credentials and try again!');
           } else {
             var jsonData = json.decode(response.body);
-            if (jsonData['curriculum'] == null) {
+            if (jsonData['user'] == null) {
+              GenericAlert.confirmDialog(context, 'Unvalid credentials',
+                  'Please provide valid credentials (email & password) before submitting.');
+            } else if (jsonData['curriculum'] == null) {
               //no curriculum was set by the user -> user can login but lottery should not be available
               updateUserSettings(context, jsonData['user']['firstName'],
                   jsonData['user']['lastName'], null);
+              Analytics.logLogin();
             } else {
               updateUserSettings(
                   context,
                   jsonData['user']['firstName'],
                   jsonData['user']['lastName'],
                   jsonData['curriculum']['organiser']['name']);
+              Analytics.logLogin();
             }
-            Analytics.logLogin();
           }
         });
       } catch (_) {
@@ -82,7 +87,7 @@ class LoginFormState extends State<LoginForm> {
       }
       //---------------------------
     } else {
-      GenericAlert.confirmDialog(context, 'Unvalid credentials information',
+      GenericAlert.confirmDialog(context, 'Unvalid credentials',
           'Please provide valid credentials (email & password) before submitting.');
     }
   }
