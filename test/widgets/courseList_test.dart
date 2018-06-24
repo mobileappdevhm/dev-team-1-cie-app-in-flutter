@@ -1,4 +1,3 @@
-@Skip()
 import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
@@ -25,6 +24,7 @@ void main() {
             "Department #" + CoursesMock.generateMockDepartment(i));
         expectedTexts.add(CoursesMock.generateMockCourseTitle(i));
         expectedTexts.add("DP " + CoursesMock.generateMockDepartment(i));
+        expectedTexts.add("Please log in to use lottery");
         //expectedTexts.add("Time: " + CoursesMock.generateMockTime(i));
       }
       favoritesPageAnomalies.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON);
