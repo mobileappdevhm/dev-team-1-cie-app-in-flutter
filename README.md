@@ -4,6 +4,4 @@
 
 # CIE - Team 01
 
-Additional documentation:
-
-- [Map](documentation/Map.md)
+[Project Homepage](https://mobileappdevhm.github.io/dev-team-1-cie-app-in-flutter/)
