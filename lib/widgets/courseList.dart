@@ -47,7 +47,8 @@ class CourseListState extends State<CourseList> {
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites,
       this.userPresenter, this.focus) {
-    if (this.userPresenter.getCurrentUser().isLoggedIn &&
+    if (this.userPresenter.getCurrentUser().isLoggedIn != null &&
+        this.userPresenter.getCurrentUser().isLoggedIn &&
         this.userPresenter.getCurrentUser().department.isNotEmpty) {
       if (this.userPresenter.getCurrentUser().department.isNotEmpty) {
         String department = this.userPresenter.getCurrentUser().department;
@@ -188,8 +189,10 @@ class CourseListState extends State<CourseList> {
 
   // Create a raised button on which is used on favorite page to allow users to submit their choices to lottery
   Widget _getRaisedSubmitButton() {
-    bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn;
-    bool isDepartmentSet = userPresenter.getCurrentUser().department.isNotEmpty;
+    bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn != null ?
+      userPresenter.getCurrentUser().isLoggedIn : false;
+    bool isDepartmentSet = userPresenter.getCurrentUser().department.isNotEmpty
+      != null ? userPresenter.getCurrentUser().department.isNotEmpty : false;
 
     //Decide how to show submit button
     String textToShow;
