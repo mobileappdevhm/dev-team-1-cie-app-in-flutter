@@ -344,7 +344,7 @@ void main() {
 
     test('1', () {
       int counter = 1;
-      for(String sut in CourseDefinitions.DEPARTMENTS.toList()){
+      for(String sut in CourseDefinitions.getDepartments().toList()){
         if(counter<10)
           expect(sut, "0"+counter.toString());
         else
