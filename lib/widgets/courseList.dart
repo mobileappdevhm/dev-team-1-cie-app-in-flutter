@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cie_team1/generic/genericAlert.dart';
+import 'package:cie_team1/generic/genericShowInstruction.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
@@ -52,14 +53,15 @@ class CourseListState extends State<CourseList> {
         this.userPresenter.getCurrentUser().department.isNotEmpty) {
       if (this.userPresenter.getCurrentUser().department.isNotEmpty) {
         String department = this.userPresenter.getCurrentUser().department;
-        this.filter = department.substring(department.length-2, department.length);
+        this.filter =
+            department.substring(department.length - 2, department.length);
       }
     }
   }
 
   initState() {
     super.initState();
-    if(!shouldFilterByFavorites) {
+    if (!shouldFilterByFavorites) {
       Analytics.setCurrentScreen("courses_screen");
     } else {
       Analytics.setCurrentScreen("favorites_screen");
@@ -82,103 +84,108 @@ class CourseListState extends State<CourseList> {
   Widget build(BuildContext context) {
     List<Widget> widgets = new List<Widget>();
 
-    if (shouldFilterByFavorites == false) {
-      widgets.add(new Container(
-          color: CiEColor.white,
-          padding: new EdgeInsets.symmetric(vertical: 10.0),
-          child: new Row(
+    //If there is no course data inform the user that he has to refresh course data
+    if (courseListPresenter.getCourses().isEmpty) {
+      return GenericShowInstruction.getDownloadCourseListFirstWidget();
+    } else {
+      if (shouldFilterByFavorites == false) {
+        widgets.add(new Container(
+            color: CiEColor.white,
+            padding: new EdgeInsets.symmetric(vertical: 10.0),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Text("Pull down to Refresh",
+                    style: CiEStyle.getCourseListRefreshText()),
+                new Icon(Icons.arrow_downward, color: CiEColor.mediumGray)
+              ],
+            )));
+
+        //Select department to filter for
+        EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
+        String departmentLabel = "Department ";
+        widgets.add(new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text("Pull down to Refresh",
-                  style: CiEStyle.getCourseListRefreshText()),
-              new Icon(Icons.arrow_downward, color: CiEColor.mediumGray)
-            ],
-          )));
-
-      //Select department to filter for
-      EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
-      String departmentLabel = "Department ";
-      widgets.add(new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Container(
-                padding: pad,
-                child: new DropdownButton<String>(
-                  items: CourseDefinitions.DEPARTMENTS.map((String value) {
-                    if (value != null) {
-                      return new DropdownMenuItem<String>(
-                        value: value,
-                        child: new Text(departmentLabel + value,
-                            overflow: TextOverflow.clip),
-                      );
-                    }
-                  }).toList(),
-                  onChanged: (String val) {
-                    setState(() {
-                      this.filter = val;
-                    });
-                  },
-                  iconSize: 32.0,
-                  value: filter,
-                )),
-            new Container(
-              padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
-              child: new IconButton(
-                  color: CiEColor.mediumGray,
-                  icon: GenericIcon.buildGenericSearchIcon(shouldSearch),
-                  onPressed: toggleSearch),
-            )
-          ]));
-      if (shouldSearch) {
-        widgets.add(new Container(
-          padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
-          alignment: Alignment.center,
-          child: new TextField(
-            focusNode: focus,
-            controller: c1,
-            decoration: const InputDecoration(
-              hintText: "Search by Course Name",
-              contentPadding: const EdgeInsets.all(10.0),
-              border: OutlineInputBorder(),
+              new Container(
+                  padding: pad,
+                  child: new DropdownButton<String>(
+                    items: CourseDefinitions.DEPARTMENTS.map((String value) {
+                      if (value != null) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(departmentLabel + value,
+                              overflow: TextOverflow.clip),
+                        );
+                      }
+                    }).toList(),
+                    onChanged: (String val) {
+                      setState(() {
+                        this.filter = val;
+                      });
+                    },
+                    iconSize: 32.0,
+                    value: filter,
+                  )),
+              new Container(
+                padding: const EdgeInsets.fromLTRB(80.0, 10.0, 10.0, 10.0),
+                child: new IconButton(
+                    color: CiEColor.mediumGray,
+                    icon: GenericIcon.buildGenericSearchIcon(shouldSearch),
+                    onPressed: toggleSearch),
+              )
+            ]));
+        if (shouldSearch) {
+          widgets.add(new Container(
+            padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
+            alignment: Alignment.center,
+            child: new TextField(
+              focusNode: focus,
+              controller: c1,
+              decoration: const InputDecoration(
+                hintText: "Search by Course Name",
+                contentPadding: const EdgeInsets.all(10.0),
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (String val) => updateSearch(val),
+              onSubmitted: (String val) => Analytics.logSearch(val),
             ),
-            onChanged: (String val) => updateSearch(val),
-            onSubmitted: (String val) => Analytics.logSearch(val),
-          ),
+          ));
+        }
+      } else {
+        widgets.add(new Padding(
+          padding: const EdgeInsets.all(10.0),
         ));
       }
-    } else {
-      widgets.add(new Padding(
-        padding: const EdgeInsets.all(10.0),
-      ));
-    }
 
-    //Build the tiles of the course list / favorites list
-    for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
-      if (shouldFilterByFavorites == false &&
-              courseListPresenter.getFaculty(i) == filter ||
-          (shouldFilterByFavorites == true &&
-              courseListPresenter.getFavourite(i)) ||
-          (shouldFilterByFavorites == true &&
-              courseListPresenter.getWillChangeOnViewChange(i))) {
-        if (shouldSearch == false ||
-            (courseListPresenter.getTitle(i).contains(searchValue))) {
-          widgets
-              .add(new CourseListItem(courseListPresenter, i, favoriteIcon(i)));
-          widgets.add(new Divider());
+      //Build the tiles of the course list / favorites list
+      for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
+        if (shouldFilterByFavorites == false &&
+                courseListPresenter.getFaculty(i) == filter ||
+            (shouldFilterByFavorites == true &&
+                courseListPresenter.getFavourite(i)) ||
+            (shouldFilterByFavorites == true &&
+                courseListPresenter.getWillChangeOnViewChange(i))) {
+          if (shouldSearch == false ||
+              (courseListPresenter.getTitle(i).contains(searchValue))) {
+            widgets.add(
+                new CourseListItem(courseListPresenter, i, favoriteIcon(i)));
+            widgets.add(new Divider());
+          }
         }
       }
-    }
-    if (shouldFilterByFavorites == true) {
-      widgets.add(new Container(
-        margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
-        child: _getRaisedSubmitButton(),
-      ));
-    }
+      if (shouldFilterByFavorites == true) {
+        widgets.add(new Container(
+          margin: const EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
+          child: _getRaisedSubmitButton(),
+        ));
+      }
 
-    return new RefreshIndicator(
-        child: new ListView(children: widgets),
-        onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
-        color: CiEColor.mediumGray);
+      return new RefreshIndicator(
+          child: new ListView(children: widgets),
+          onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
+          color: CiEColor.mediumGray);
+    }
   }
 
   @override
@@ -189,10 +196,13 @@ class CourseListState extends State<CourseList> {
 
   // Create a raised button on which is used on favorite page to allow users to submit their choices to lottery
   Widget _getRaisedSubmitButton() {
-    bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn != null ?
-      userPresenter.getCurrentUser().isLoggedIn : false;
-    bool isDepartmentSet = userPresenter.getCurrentUser().department.isNotEmpty
-      != null ? userPresenter.getCurrentUser().department.isNotEmpty : false;
+    bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn != null
+        ? userPresenter.getCurrentUser().isLoggedIn
+        : false;
+    bool isDepartmentSet =
+        userPresenter.getCurrentUser().department.isNotEmpty != null
+            ? userPresenter.getCurrentUser().department.isNotEmpty
+            : false;
 
     //Decide how to show submit button
     String textToShow;
