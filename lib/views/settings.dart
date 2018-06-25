@@ -1,11 +1,13 @@
 import 'dart:async';
+
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/analytics.dart';
-import 'package:cie_team1/views/takenCourses.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/fileStore.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_team1/views/takenCourses.dart';
 import 'package:cie_team1/widgets/privacyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -36,13 +38,15 @@ class _SettingsState extends State<Settings> {
     engCredits = currentUserPresenter.getDep3Credits();
     setState(() {
       if (currentUserPresenter.getCurrentUser().isMetricsEnabled != null) {
-        isMetricsEnabled = (currentUserPresenter.getCurrentUser().isMetricsEnabled);
+        isMetricsEnabled =
+            (currentUserPresenter.getCurrentUser().isMetricsEnabled);
       }
       if (currentUserPresenter.getCurrentUser().isLoggedIn != null) {
         isLoggedIn = (currentUserPresenter.getCurrentUser().isLoggedIn);
       }
     });
-    Analytics.setUserProperty("department", currentUserPresenter.getCurrentUserFaculty());
+    Analytics.setUserProperty(
+        "department", currentUserPresenter.getCurrentUserFaculty());
     Analytics.setCurrentScreen("profile_screen");
   }
 
@@ -60,22 +64,22 @@ class _SettingsState extends State<Settings> {
                   children: <Widget>[
                     new Expanded(
                         child: new Row(
-                          children: <Widget>[
-                            new Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: const Icon(
-                                Icons.person_outline,
-                                size: 75.0,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        )),
+                      children: <Widget>[
+                        new Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: const Icon(
+                            Icons.person_outline,
+                            size: 75.0,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    )),
                     new Column(
                       children: <Widget>[
                         new Container(
-                            padding:
-                            const EdgeInsets.only(bottom: 10.0, right: 10.0),
+                            padding: const EdgeInsets.only(
+                                bottom: 10.0, right: 10.0),
                             child: new Row(
                               children: <Widget>[
                                 new Text(
@@ -93,15 +97,11 @@ class _SettingsState extends State<Settings> {
                           shape: new RoundedRectangleBorder(
                               borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEColor.red,
-                          child: isLoggedIn == true ?
-                          new Text(
-                            StaticVariables.LOGOUT_BUTTON,
-                            style: CiEStyle.getSettingsLogoutStyle()
-                          ):
-                          new Text(
-                            StaticVariables.LOGIN_BUTTON,
-                            style: CiEStyle.getSettingsLogoutStyle()
-                          ),
+                          child: isLoggedIn == true
+                              ? new Text(StaticVariables.LOGOUT_BUTTON,
+                                  style: CiEStyle.getSettingsLogoutStyle())
+                              : new Text(StaticVariables.LOGIN_BUTTON,
+                                  style: CiEStyle.getSettingsLogoutStyle()),
                         ),
                         new Padding(
                           padding: const EdgeInsets.only(top: 5.0),
@@ -125,22 +125,24 @@ class _SettingsState extends State<Settings> {
                     child: new Column(
                       children: <Widget>[
                         new Container(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child: new Row(
-                            children: <Widget>[
-                              new Text(
-                                StaticVariables.STATUS + " : ",
-                                style: CiEStyle.getSettingsStyle(),
-                              ),
-                              new Text(
-                                " " + currentUserPresenter.getCurrentUserStatus(),
-                                style: CiEStyle.getSettingsInfoStyle(),
-                              )
-                            ],
-                          )),
-                      new Padding(
-                        padding : const EdgeInsets.only(top:5.0),
-                      ),
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: new Row(
+                              children: <Widget>[
+                                new Text(
+                                  StaticVariables.STATUS + " : ",
+                                  style: CiEStyle.getSettingsStyle(),
+                                ),
+                                new Text(
+                                  " " +
+                                      currentUserPresenter
+                                          .getCurrentUserStatus(),
+                                  style: CiEStyle.getSettingsInfoStyle(),
+                                )
+                              ],
+                            )),
+                        new Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                        ),
                         new Row(
                           children: <Widget>[
                             new Text(
@@ -148,7 +150,8 @@ class _SettingsState extends State<Settings> {
                               style: CiEStyle.getSettingsStyle(),
                             ),
                             new Text(
-                              " " + currentUserPresenter.getCurrentUserFaculty(),
+                              " " +
+                                  currentUserPresenter.getCurrentUserFaculty(),
                               style: CiEStyle.getSettingsInfoStyle(),
                             ),
                           ],
@@ -158,31 +161,32 @@ class _SettingsState extends State<Settings> {
                     )),
                 new Container(
                     child: new Column(
+                  children: <Widget>[
+                    new Row(
                       children: <Widget>[
-                        new Row(
-                          children: <Widget>[
-                            new Icon(Icons.mail_outline),
-                            new FlatButton(
-                              child: new Text(
-                                StaticVariables.CONTACT_OFFICE,
-                                style: CiEStyle.getSettingsContactStyle(),
-                              ),
-                              onPressed: _onContactInternationalOffice,
-                            ),
-                          ],
+                        new Icon(Icons.mail_outline),
+                        new FlatButton(
+                          child: new Text(
+                            StaticVariables.CONTACT_OFFICE,
+                            style: CiEStyle.getSettingsContactStyle(),
+                          ),
+                          onPressed: _onContactInternationalOffice,
                         ),
-                        new Divider(),
                       ],
-                    )),
+                    ),
+                    new Divider(),
+                  ],
+                )),
                 new Container(
                   padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                   child: new Row(children: <Widget>[
                     new Expanded(
                         child: new Text(
-                          StaticVariables.CIE_CERTIFICATE,
-                          style: CiEStyle.getSettingsStyle(),
-                        )),
-                    new Text("$credits /15", style: CiEStyle.getSettingsStyle()),
+                      StaticVariables.CIE_CERTIFICATE,
+                      style: CiEStyle.getSettingsStyle(),
+                    )),
+                    new Text("$credits /15",
+                        style: CiEStyle.getSettingsStyle()),
                     // Calculate ECTS/15 but one of the courses need to be from department 13
                   ]),
                 ),
@@ -225,8 +229,8 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                 ),
-              buildUserMetricsWidget(),
-            ],
+                buildUserMetricsWidget(),
+              ],
             ),
           ),
         ),
@@ -243,8 +247,9 @@ class _SettingsState extends State<Settings> {
   }
 
   void _logout(BuildContext context) {
-    //TODO maybe some more things are required here later
-    Navigator.pushReplacementNamed(context, Routes.Login);
+    FileStore.writeToFile(FileStore.USER_SETTINGS, "").then((f) {
+      Navigator.of(context).pushReplacementNamed(Routes.Login);
+    });
   }
 
   void _togglePrivacyPage(BuildContext context) {
@@ -270,13 +275,11 @@ class _SettingsState extends State<Settings> {
             });
           },
         ),
-        isMetricsEnabled == true ?
-        new Text(StaticVariables.METRICS_ENABLED,
-            style: CiEStyle.getSettingsEnabledStyle()
-        ):
-        new Text(StaticVariables.METRICS_DISABLED,
-            style: CiEStyle.getSettingsDisabledStyle()
-        ),
+        isMetricsEnabled == true
+            ? new Text(StaticVariables.METRICS_ENABLED,
+                style: CiEStyle.getSettingsEnabledStyle())
+            : new Text(StaticVariables.METRICS_DISABLED,
+                style: CiEStyle.getSettingsDisabledStyle()),
       ],
     );
   }

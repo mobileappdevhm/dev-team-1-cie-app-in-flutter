@@ -1,6 +1,7 @@
+import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/analytics.dart';
+import 'package:cie_team1/utils/fileStore.dart';
 import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/widgets/CiEAnimation.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage>
     with SingleTickerProviderStateMixin {
-
   _WelcomePageState();
 
   AnimationController controller;
@@ -61,8 +61,7 @@ class _WelcomePageState extends State<WelcomePage>
               color: CiEStyle.getLogoutButtonColor(),
               shape: new RoundedRectangleBorder(
                   borderRadius: CiEStyle.getButtonBorderRadius()),
-              onPressed: () =>
-                  Navigator.pushReplacementNamed(context, Routes.Login),
+              onPressed: () => _startClick(),
               child: new Text(
                 "Start",
                 style: new TextStyle(color: Colors.white),
@@ -75,5 +74,15 @@ class _WelcomePageState extends State<WelcomePage>
         ],
       ),
     );
+  }
+
+  void _startClick() {
+    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+      if (val != null && val.isNotEmpty) {
+        Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+      } else {
+        Navigator.pushReplacementNamed(context, Routes.Login);
+      }
+    });
   }
 }
