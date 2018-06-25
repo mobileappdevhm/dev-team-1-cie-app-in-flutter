@@ -80,18 +80,14 @@ class CiEStyle {
 
   static TextStyle getSettingsEnabledStyle() {
     return new TextStyle(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w200,
-      color: CiEColor.black
-    );
+        fontSize: 16.0, fontWeight: FontWeight.w200, color: CiEColor.black);
   }
 
   static TextStyle getSettingsDisabledStyle() {
     return new TextStyle(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w200,
-      color: CiEColor.mediumGray
-    );
+        fontSize: 16.0,
+        fontWeight: FontWeight.w200,
+        color: CiEColor.mediumGray);
   }
 
   static TextStyle getSettingsLogoutStyle() {
@@ -170,7 +166,9 @@ class CiEStyle {
 
   static TextStyle getCourseListRefreshText() {
     return new TextStyle(
-        color: CiEColor.mediumGray, fontSize: 17.0, fontWeight: FontWeight.w300);
+        color: CiEColor.mediumGray,
+        fontSize: 17.0,
+        fontWeight: FontWeight.w300);
   }
 
   static TextStyle getCourseDetailsFooterTextStyle() {
@@ -190,21 +188,11 @@ class CiEStyle {
 
   static TextStyle getCourseDetailsHeadingStyle() {
     return new TextStyle(
-        fontSize: 20.0,
-        color: CiEColor.gray,
-        letterSpacing: 2.0
-    );
+        fontSize: 20.0, color: CiEColor.gray, letterSpacing: 2.0);
   }
 
   static double getCourseDetailsFontSize() {
     return 18.0;
-  }
-
-  static TextStyle getCourseDetailsDescription() {
-    return new TextStyle(
-      fontSize: 15.0,
-      color: CiEColor.gray,
-    );
   }
 
   static TextStyle getCourseDetailsConflictWarningText() {

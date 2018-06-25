@@ -6,6 +6,7 @@ import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html_view/flutter_html_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CourseDetails extends StatefulWidget {
@@ -73,7 +74,7 @@ class _CourseDetailsState extends State<CourseDetails> {
         _getSpacing(new EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 30.0)),
         new Container(
           child: new Padding(
-              padding: new EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 30.0),
+              padding: new EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
               child: new Text(StaticVariables.DESCRIPTION,
                   style: CiEStyle.getCourseDetailsHeadingStyle())),
         ),
@@ -133,9 +134,8 @@ class _CourseDetailsState extends State<CourseDetails> {
                   ))
               : new Container(),
           buildDescriptionHeadingRow(),
-          new Text(
-            textToShow,
-            style: CiEStyle.getCourseDetailsDescription(),
+          new HtmlView(
+            data: textToShow,
           ),
         ],
       ),
