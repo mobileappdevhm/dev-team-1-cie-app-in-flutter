@@ -142,7 +142,10 @@ class LoginFormState extends State<LoginForm> {
                   new Padding(padding: const EdgeInsets.only(top: 20.0)),
                   new Text(
                     "Courses in English",
-                    style: CiEStyle.getAppBarTitleStyle(context),
+                    style: new TextStyle(
+                        fontSize: 20.0,
+                        color: CiEColor.red,
+                        letterSpacing: 2.0),
                     textAlign: TextAlign.center,
                   ),
                   new Padding(padding: const EdgeInsets.only(top: 20.0)),
@@ -246,7 +249,7 @@ class LoginFormState extends State<LoginForm> {
     }
 
     FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
-      if (val != null) {
+      if (val != null && val.isNotEmpty) {
         dynamic settings = json.decode(val);
         builder = UserBuilder.fromJson(settings);
       } else {
