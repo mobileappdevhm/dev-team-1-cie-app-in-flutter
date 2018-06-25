@@ -90,7 +90,7 @@ class GenericIcon {
     return new ProgressHUD(
         backgroundColor: Colors.black12,
         color: Colors.white,
-        containerColor: Colors.blue,
+        containerColor: Colors.red,
         borderRadius: 5.0,
         text: text);
   }
