@@ -19,8 +19,8 @@ class CourseListPresenter {
   final ValueChanged<bool> onChanged;
   List<int> _coursesToDeleteOnViewChange = List<int>();
 
-  CourseListPresenter(this.onChanged) {
-    CourseInjector.configure(Flavor.PROD);
+  CourseListPresenter(this.onChanged, [Flavor flavor = Flavor.PROD]) {
+    CourseInjector.configure(Flavor.MOCK);
     _courses = new CourseInjector().courses;
   }
 

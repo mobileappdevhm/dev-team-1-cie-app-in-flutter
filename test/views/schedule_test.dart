@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/views/schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,7 +9,7 @@ void main() {
     await tester.pumpWidget(new MaterialApp(
         home: new Scaffold(
             body: new Schedule(
-      new CourseListPresenter(null),
+      new CourseListPresenter(null, Flavor.MOCK),
     ))));
 
     expect(find.text("Today"), findsOneWidget);

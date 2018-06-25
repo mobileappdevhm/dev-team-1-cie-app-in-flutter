@@ -29,7 +29,7 @@ void main() {
       }
       favoritesPageAnomalies.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON);
 
-      clp = new CourseListPresenter(_voidCallback);
+      clp = new CourseListPresenter(_voidCallback, Flavor.MOCK);
       cup = new CurrentUserPresenter(_voidCallback, Flavor.MOCK);
       fN = new FocusNode();
     });

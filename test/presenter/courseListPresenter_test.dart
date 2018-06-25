@@ -1,12 +1,13 @@
 import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:test/test.dart';
 
 void main() {
   CourseListPresenter sut;
 
   setUp(() {
-    sut = new CourseListPresenter(null);
+    sut = new CourseListPresenter(null, Flavor.MOCK);
   });
 
   group("facultycheck", () {
@@ -77,7 +78,7 @@ void main() {
 
   group("static", () {
     test('getFavouriteLectures 1', () {
-      CourseListPresenter localSut = new CourseListPresenter(null);
+      CourseListPresenter localSut = new CourseListPresenter(null, Flavor.MOCK);
       expect(localSut.getFavouriteLectures().length, 0);
       localSut.getCourses().elementAt(0).isFavourite = true;
       expect(localSut.getFavouriteLectures().length, 1);

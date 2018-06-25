@@ -1,4 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,7 +15,7 @@ void main() {
             return new MaterialApp(
               home: new Material(
                 child: new Center(child: new CourseDetails(
-                  0, new CourseListPresenter(null),)),
+                  0, new CourseListPresenter(null, Flavor.MOCK),)),
               ),
             );
           },
