@@ -77,8 +77,8 @@ class CourseListPresenter {
                     new DayTime(end.hour, end.minute),
                     roomNumber)
               ])
-              .withHoursPerWeek(2)
-              .withEcts(2)
+              .withHoursPerWeek(-1)
+              .withEcts(-1)
           //TODO replace with professor email if available
               .withProfessorEmail(StaticVariables.MOCK_EMAIL)
               .withIsFavorite(false);
@@ -206,12 +206,12 @@ class CourseListPresenter {
     return _courses.getCourses()[id].description;
   }
 
-  String getHoursPerWeek(int id) {
-    return _courses.getCourses()[id].hoursPerWeek.toString();
+  int getHoursPerWeek(int id) {
+    return _courses.getCourses()[id].hoursPerWeek;
   }
 
-  String getEcts(int id) {
-    return _courses.getCourses()[id].ects.toString();
+  int getEcts(int id) {
+    return _courses.getCourses()[id].ects;
   }
 
   String getProfessorName(int id) {
