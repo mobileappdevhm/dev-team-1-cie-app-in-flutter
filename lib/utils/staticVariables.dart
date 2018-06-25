@@ -1,4 +1,5 @@
 enum Flavor { MOCK, PROD }
+
 class StaticVariables {
   static const internationalOfficeEmail = 'mailto:international-office@hm.edu';
 
@@ -58,7 +59,8 @@ class StaticVariables {
   static const String ALERT_NO = "CANCEL";
   static const String ALERT_REGISTRATION_SUBMISSION = "Complete Registration?";
   static const String NO_EMAIL_FOUND = "No email address found";
-  static const String NO_EMAIL_FOUND_DESCRIPTION = "Sorry there is no email provided by the API from hm yet.";
+  static const String NO_EMAIL_FOUND_DESCRIPTION =
+      "Sorry there is no email provided by the API from hm yet.";
 
   /* Metrics Strings */
   static const String METRICS_ENABLED = "User Metrics Enabled";
@@ -76,13 +78,17 @@ class StaticVariables {
   static const String CONTACT = "Contact";
   static const String COURSE_DETAILS = "Course Details";
   static const String NO_DESCRIPTION =
-      "Sorry, there is no description available for this course. Please check again later.";
+      "<h4>Sorry, there is no description available for this course. Please check again later.</h4>";
   static const String PROFESSOR = "Professor";
   static const String CAMPUS = "Location";
-  static const String COURSE_CONFLICTS_WITH_OTHER_FAVORIT = "Conflicts with other Favorite";
-  static const String COURSE_CONFLICTS_WITH_FAVORIT = "Conflicts with a Favorite";
-  static const String COURSE_DESCRIPTION_CONFLICTS_WITH_OTHER_FAVORIT = "This course is in conflict with another favorite course:";
-  static const String COURSE_DESCRIPTION_CONFLICTS_WITH_FAVORIT = "This course is unlikely to be chosen together with another favorite course:";
+  static const String COURSE_CONFLICTS_WITH_OTHER_FAVORIT =
+      "Conflicts with other Favorite";
+  static const String COURSE_CONFLICTS_WITH_FAVORIT =
+      "Conflicts with a Favorite";
+  static const String COURSE_DESCRIPTION_CONFLICTS_WITH_OTHER_FAVORIT =
+      "This course is in conflict with another favorite course:";
+  static const String COURSE_DESCRIPTION_CONFLICTS_WITH_FAVORIT =
+      "This course is unlikely to be chosen together with another favorite course:";
 
   static const String MOCK_EMAIL = "example@hm.edu";
 }
