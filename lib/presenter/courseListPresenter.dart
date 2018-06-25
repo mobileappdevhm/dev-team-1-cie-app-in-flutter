@@ -20,7 +20,7 @@ class CourseListPresenter {
   List<int> _coursesToDeleteOnViewChange = List<int>();
 
   CourseListPresenter(this.onChanged) {
-    CourseInjector.configure(Flavor.MOCK);
+    CourseInjector.configure(Flavor.PROD);
     _courses = new CourseInjector().courses;
   }
 
