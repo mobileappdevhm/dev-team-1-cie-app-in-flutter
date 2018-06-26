@@ -38,6 +38,7 @@ class TabsPageState extends State<TabsPage> {
     this._appTitle = TabItems[_tab].title;
   }
 
+  //TODO could this be done in a better way?
   void _maybeChangeCallback(bool didChange) {
     if (didChange == true) {
       setState(() => {});
