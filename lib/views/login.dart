@@ -249,18 +249,28 @@ class LoginFormState extends State<LoginForm> {
     }
 
     FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+      bool metricsIsNull = false;
       if (val != null && val.isNotEmpty) {
         dynamic settings = json.decode(val);
         builder = UserBuilder.fromJson(settings);
       } else {
         builder = new UserBuilder();
+        metricsIsNull = true;
       }
-      User tempUserObj = builder
+
+      builder
           .withFirstName(firstName)
           .withLastName(lastName)
           .withDepartment(curriculum)
-          .withIsLoggedIn(isLoggedIn)
-          .build();
+          .withIsLoggedIn(isLoggedIn);
+
+      //if metrics was null set it to true, otherwise use current value
+      if (metricsIsNull) {
+        builder.withIsMetricsEnabled(true);
+      }
+
+      User tempUserObj = builder.build();
+
       String data = json.encode(User.toJson(tempUserObj));
       FileStore.writeToFile(FileStore.USER_SETTINGS, data).then((f) {
         Navigator.of(context).pushReplacementNamed(Routes.TabPages);

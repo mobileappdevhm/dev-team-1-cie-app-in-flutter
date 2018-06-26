@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:cie_team1/generic/genericAlert.dart';
+import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -17,6 +21,7 @@ class _WelcomePageState extends State<WelcomePage>
   AnimationController controller;
   Animation<double> animation;
 
+  @override
   initState() {
     super.initState();
     controller = new AnimationController(
@@ -32,7 +37,23 @@ class _WelcomePageState extends State<WelcomePage>
     });
     controller.forward();
 
-    Analytics.setCurrentScreen("start_screen");
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _openMetricDialog(context));
+  }
+
+  void _openMetricDialog(BuildContext context) {
+    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+      if (val == null) {
+        Analytics.setAnalytics(true);
+        GenericAlert.confirmDialog(context, "User Metrics",
+            "We are collecting anonymous user data, to check which views and features are mainly used. If you do not like this, please visit the profile and disable this option.");
+      } else {
+        dynamic settings = json.decode(val);
+        var builder = UserBuilder.fromJson(settings);
+        Analytics.setAnalytics(builder.isMetricsEnabled);
+      }
+      Analytics.setCurrentScreen("start_screen");
+    });
   }
 
   dispose() {
@@ -78,11 +99,19 @@ class _WelcomePageState extends State<WelcomePage>
 
   void _startClick() {
     FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+      //check if user settings are available and not empty
       if (val != null && val.isNotEmpty) {
-        Navigator.of(context).pushReplacementNamed(Routes.TabPages);
-      } else {
-        Navigator.pushReplacementNamed(context, Routes.Login);
+        //encode json string and fill builder
+        dynamic settings = json.decode(val);
+        var builder = UserBuilder.fromJson(settings);
+        //check if user is valid by first and last name not null
+        if (builder.firstName != null && builder.lastName != null) {
+          //if valid user was stored previously redirect to tabs
+          Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+        }
       }
+      //if user settings were not stored, not available or there was no valid user redirect to login
+      Navigator.pushReplacementNamed(context, Routes.Login);
     });
   }
 }

@@ -1,16 +1,15 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/nineAPIConsumer.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/views/maps.dart';
 import 'package:cie_team1/views/schedule.dart';
 import 'package:cie_team1/views/settings.dart';
 import 'package:cie_team1/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/nineAPIConsumer.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
 
 class TabsPage extends StatefulWidget {
   @override
@@ -32,20 +31,16 @@ class TabsPageState extends State<TabsPage> {
     NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
     courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
-    currentUserPresenter = new CurrentUserPresenter(_maybeChangeCallback,
-        Flavor.PROD);
+    currentUserPresenter =
+        new CurrentUserPresenter(_maybeChangeCallback, Flavor.PROD);
     courseListPresenter.addCoursesFromMemory();
     currentUserPresenter.loadUserSettingsFromMemory();
-
-    //turn on firebase if enabled in user settings
-    Analytics.setAnalytics(currentUserPresenter.getCurrentUser().isMetricsEnabled);
-
     this._appTitle = TabItems[_tab].title;
   }
 
   void _maybeChangeCallback(bool didChange) {
     if (didChange == true) {
-      setState(()=>{});
+      setState(() => {});
     }
   }
 
@@ -65,14 +60,14 @@ class TabsPageState extends State<TabsPage> {
         controller: _tabController,
         onPageChanged: _onPageChanged,
         children: <Widget>[
-          new CourseList(courseListPresenter, false,
-              currentUserPresenter, new FocusNode()),
+          new CourseList(courseListPresenter, false, currentUserPresenter,
+              new FocusNode()),
           // Behaves as Courses Page
           new MapPage(),
           new Schedule(courseListPresenter),
           // Behaves as Favorites Page
-          new CourseList(courseListPresenter, true,
-              currentUserPresenter, new FocusNode()),
+          new CourseList(
+              courseListPresenter, true, currentUserPresenter, new FocusNode()),
           new Settings(currentUserPresenter),
         ],
       ),
@@ -107,6 +102,7 @@ class TabsPageState extends State<TabsPage> {
 
 class TabItem {
   const TabItem({this.title, this.icon});
+
   final String title;
   final IconData icon;
 }
