@@ -304,7 +304,7 @@ class CourseDefinitions {
       "14"
     ];
   }
-  static List<String> DEPARTMENTS = [
+  static List<String> departments = [
     "01",
     "02",
     "03",

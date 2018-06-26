@@ -5,9 +5,9 @@ import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
+import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
@@ -18,7 +18,7 @@ class CourseList extends StatefulWidget {
   final CourseListPresenter courseListPresenter;
   final CurrentUserPresenter userPresenter;
   bool shouldFilterByFavorites = false;
-  FocusNode focus;
+  final FocusNode focus;
 
   CourseList(this.courseListPresenter, this.shouldFilterByFavorites,
       this.userPresenter, this.focus);
@@ -52,14 +52,15 @@ class CourseListState extends State<CourseList> {
         this.userPresenter.getCurrentUser().department.isNotEmpty) {
       if (this.userPresenter.getCurrentUser().department.isNotEmpty) {
         String department = this.userPresenter.getCurrentUser().department;
-        this.filter = department.substring(department.length-2, department.length);
+        this.filter =
+            department.substring(department.length - 2, department.length);
       }
     }
   }
 
   initState() {
     super.initState();
-    if(!shouldFilterByFavorites) {
+    if (!shouldFilterByFavorites) {
       Analytics.setCurrentScreen("courses_screen");
     } else {
       Analytics.setCurrentScreen("favorites_screen");
@@ -104,7 +105,7 @@ class CourseListState extends State<CourseList> {
             new Container(
                 padding: pad,
                 child: new DropdownButton<String>(
-                  items: CourseDefinitions.DEPARTMENTS.map((String value) {
+                  items: CourseDefinitions.departments.map((String value) {
                     if (value != null) {
                       return new DropdownMenuItem<String>(
                         value: value,
@@ -189,10 +190,13 @@ class CourseListState extends State<CourseList> {
 
   // Create a raised button on which is used on favorite page to allow users to submit their choices to lottery
   Widget _getRaisedSubmitButton() {
-    bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn != null ?
-      userPresenter.getCurrentUser().isLoggedIn : false;
-    bool isDepartmentSet = userPresenter.getCurrentUser().department.isNotEmpty
-      != null ? userPresenter.getCurrentUser().department.isNotEmpty : false;
+    bool isLoggedIn = userPresenter.getCurrentUser().isLoggedIn != null
+        ? userPresenter.getCurrentUser().isLoggedIn
+        : false;
+    bool isDepartmentSet =
+        userPresenter.getCurrentUser().department.isNotEmpty != null
+            ? userPresenter.getCurrentUser().department.isNotEmpty
+            : false;
 
     //Decide how to show submit button
     String textToShow;
