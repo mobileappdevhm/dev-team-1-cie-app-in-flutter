@@ -20,4 +20,20 @@ void main(){
     expect(list[0].building, building);
     expect(list[0].number, number);
   });
+
+
+  test('2 room get Location',(){
+    String campus = "Lothstrasse";
+    String building = "R";
+    String number = "R 2.091";
+
+    var room = new Map<String, dynamic>();
+    room['number'] = number;
+    room['building'] = building;
+    room['campus'] = campus;
+
+    final Room sut = new Room(room);
+
+    expect(sut.getLocation(),number+", "+campus);
+  });
 }
