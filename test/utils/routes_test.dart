@@ -23,7 +23,8 @@ void main() {
       final Map<String,WidgetBuilder> sut = Routes.getRoutes();
       expect(sut.containsKey(Routes.Welcome),true);
       expect(sut.containsKey(Routes.TabPages),true);
-      expect(sut.containsKey(Routes.Login),true);
+      expect(sut.containsKey(Routes.Login),true)
+      ;
     });
   });
 }
