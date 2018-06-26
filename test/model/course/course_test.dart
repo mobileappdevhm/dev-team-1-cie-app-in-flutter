@@ -17,9 +17,9 @@ void main() {
           .withName("Blaba")
           .withFaculty("7")
           .withLecturesPerWeek([
-            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-                new DayTime(11, 30), "R0.009")
-          ])
+        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+            new DayTime(11, 30), "R0.009")
+      ])
           .withDescription("boring")
           .withHoursPerWeek(2)
           .withEcts(2)
@@ -332,4 +332,19 @@ void main() {
       expect(built.isFavourite, testBool);
     });
   });
+
+  group("Course Definitions", () {
+
+    test('1', () {
+      int counter = 1;
+      for (String sut in CourseDefinitions.getDepartments().toList()) {
+        if (counter < 10)
+          expect(sut, "0" + counter.toString());
+        else
+          expect(sut, counter.toString());
+        counter++;
+      }
+    });
+  });
+
 }

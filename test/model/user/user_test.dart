@@ -106,8 +106,8 @@ void main() {
   //  });
   //});
 
-  group("user from json", () {
-    test('1 user json', () {
+  group("user json", () {
+    test('1 user from json', () {
       var jsonData = new Map<String, dynamic>();
       jsonData['id'] = "user-id";
       jsonData['language'] = "de";
@@ -130,6 +130,21 @@ void main() {
       expect(user.degree, "BA");
       expect(user.isLoggedIn, true);
       expect(user.isMetricsEnabled, true);
+    });
+
+    test('2 user to json', () {
+      var jsonData = User.toJson(new User("user-id", "de", "name", "IT", "BA",
+          true, false, "haha", "firstName", "lastName", "bored", null, null));
+
+      expect(jsonData['id'], "user-id");
+      expect(jsonData['language'], "de");
+      expect(jsonData['name'], "name");
+      expect(jsonData['firstName'], "firstName");
+      expect(jsonData['lastName'], "lastName");
+      expect(jsonData['department'], "IT");
+      expect(jsonData['degree'], "BA");
+      expect(jsonData['isLoggedIn'], 'true');
+      expect(jsonData['isMetricsEnabled'], 'false');
     });
   });
 }
