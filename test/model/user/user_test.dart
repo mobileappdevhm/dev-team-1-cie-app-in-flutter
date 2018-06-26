@@ -133,19 +133,18 @@ void main() {
     });
 
     test('2 user to json', () {
+      var jsonData = User.toJson(new User("user-id", "de", "name", "IT", "BA",
+          true, false, "haha", "firstName", "lastName", "bored", null, null));
 
-
-      var jsonData = User.toJson(new User("user-id", "de", "name", "IT", "BA", true, false, "haha", "firstName", "lastName", "bored", null , null));
-
-      expect(jsonData['id'] , "user-id");
-      expect(jsonData['language'] , "de");
-      expect(jsonData['name'] , "name");
-      expect(jsonData['firstName'] , "firstName");
-      expect(jsonData['lastName'] , "lastName");
-      expect(jsonData['department'] , "IT");
-      expect(jsonData['degree'] , "BA");
+      expect(jsonData['id'], "user-id");
+      expect(jsonData['language'], "de");
+      expect(jsonData['name'], "name");
+      expect(jsonData['firstName'], "firstName");
+      expect(jsonData['lastName'], "lastName");
+      expect(jsonData['department'], "IT");
+      expect(jsonData['degree'], "BA");
       expect(jsonData['isLoggedIn'], 'true');
-      expect(jsonData['isMetricsEnabled'] , 'false');
+      expect(jsonData['isMetricsEnabled'], 'false');
     });
   });
 }
