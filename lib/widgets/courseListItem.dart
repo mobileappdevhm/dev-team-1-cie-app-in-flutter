@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class CourseListItem extends StatelessWidget {
   final int id;
   final CourseListPresenter courseListPresenter;
-  Widget inheritedChild;
+  final Widget inheritedChild;
 
   CourseListItem(this.courseListPresenter, this.id, this.inheritedChild);
 

@@ -1,5 +1,4 @@
 import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/model/user/currentUser_prod.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:test/test.dart';
