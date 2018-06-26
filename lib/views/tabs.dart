@@ -28,22 +28,17 @@ class TabsPageState extends State<TabsPage> {
   void initState() {
     super.initState();
     // TODO: Investigate scenarios where internet is not available/request fails
+    var _unusedCallback = (bool val) {};
+
     NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
-    courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
+    courseListPresenter = new CourseListPresenter(_unusedCallback);
     currentUserPresenter =
-        new CurrentUserPresenter(_maybeChangeCallback, Flavor.PROD);
+        new CurrentUserPresenter(_unusedCallback, Flavor.PROD);
     courseListPresenter.addCoursesFromMemory();
     currentUserPresenter.loadUserSettingsFromMemory();
 
     this._appTitle = TabItems[_tab].title;
-  }
-
-  //TODO could this be done in a better way?
-  void _maybeChangeCallback(bool didChange) {
-    if (didChange == true) {
-      setState(() => {});
-    }
   }
 
   @override

@@ -37,28 +37,13 @@ class _WelcomePageState extends State<WelcomePage>
     });
     controller.forward();
 
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => _openMetricDialog(context));
+    Analytics.setCurrentScreen("start_screen");
   }
 
-  void _openMetricDialog(BuildContext context) {
-    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
-      if (val == null) {
-        Analytics.setAnalytics(true);
-        GenericAlert.confirmDialog(context, "User Metrics",
-            "We are collecting anonymous user data, to check which views and features are mainly used. If you do not like this, please visit the profile and disable this option.");
-      } else {
-        dynamic settings = json.decode(val);
-        var builder = UserBuilder.fromJson(settings);
-        Analytics.setAnalytics(builder.isMetricsEnabled);
-      }
-      Analytics.setCurrentScreen("start_screen");
-    });
-  }
-
+  @override
   dispose() {
-    controller.dispose();
     super.dispose();
+    controller.dispose();
   }
 
   @override

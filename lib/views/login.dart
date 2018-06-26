@@ -29,8 +29,24 @@ class LoginFormState extends State<LoginForm> {
 
   LoginData loginData = new LoginData();
 
+  @override
   initState() {
     super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _openMetricDialog(context));
+  }
+
+  void _openMetricDialog(BuildContext context) {
+    var no = () {
+      Analytics.setAnalytics(false);
+    };
+    var yes = () {
+      Analytics.setAnalytics(true);
+    };
+
+    GenericAlert.confirm(context, no, yes,
+        "We are collecting anonymous user data to check which views and features are mainly used. Please decide if you want to allow this.", "It's ok!", "I don't want this!");
+
     Analytics.setCurrentScreen("login_screen");
   }
 
@@ -109,10 +125,7 @@ class LoginFormState extends State<LoginForm> {
   String validatePassword(String value) {
     _formWasEdited = true;
     if (value.isEmpty) return 'Password is required.';
-    //final RegExp passwordExp = new RegExp(
-    //    r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&=§])[A-Za-z\d$@$!%*?&=§]{8,}");
-    if (value.length < 8) //(!passwordExp.hasMatch(value))
-      return 'Password does not match requirements.';
+    if (value.length < 8) return 'Password does not match requirements.';
     return null;
   }
 
@@ -228,10 +241,10 @@ class LoginFormState extends State<LoginForm> {
 
   @override
   void dispose() {
+    super.dispose();
     // Clean up the controller when the Widget is disposed
     usernameController.dispose();
     passwordController.dispose();
-    super.dispose();
   }
 
   void updateUserSettings(BuildContext context, String firstName,
@@ -249,27 +262,20 @@ class LoginFormState extends State<LoginForm> {
     }
 
     FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
-      bool metricsIsNull = false;
       if (val != null && val.isNotEmpty) {
         dynamic settings = json.decode(val);
         builder = UserBuilder.fromJson(settings);
       } else {
         builder = new UserBuilder();
-        metricsIsNull = true;
       }
 
-      builder
+      User tempUserObj = builder
           .withFirstName(firstName)
           .withLastName(lastName)
           .withDepartment(curriculum)
-          .withIsLoggedIn(isLoggedIn);
-
-      //if metrics was null set it to true, otherwise use current value
-      if (metricsIsNull) {
-        builder.withIsMetricsEnabled(true);
-      }
-
-      User tempUserObj = builder.build();
+          .withIsLoggedIn(isLoggedIn)
+          .withIsMetricsEnabled(Analytics.getAnalytics())
+          .build();
 
       String data = json.encode(User.toJson(tempUserObj));
       FileStore.writeToFile(FileStore.USER_SETTINGS, data).then((f) {
