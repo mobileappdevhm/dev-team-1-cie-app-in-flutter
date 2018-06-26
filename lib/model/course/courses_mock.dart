@@ -34,7 +34,7 @@ class CoursesMock implements Courses {
 
   static String generateMockDepartment(int i) {
     return CourseDefinitions
-        .DEPARTMENTS[i.round() % CourseDefinitions.DEPARTMENTS.length];
+        .departments[i.round() % CourseDefinitions.departments.length];
   }
 
   static String generateMockDescription(int i) {

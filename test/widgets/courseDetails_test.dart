@@ -14,8 +14,11 @@ void main() {
           builder: (BuildContext context, StateSetter setState) {
             return new MaterialApp(
               home: new Material(
-                child: new Center(child: new CourseDetails(
-                  0, new CourseListPresenter(null, Flavor.MOCK),)),
+                child: new Center(
+                    child: new CourseDetails(
+                  0,
+                  new CourseListPresenter(null, Flavor.MOCK),
+                )),
               ),
             );
           },

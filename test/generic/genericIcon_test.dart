@@ -81,7 +81,8 @@ void main() {
     });
 
     testWidgets('rendersGenericSpinner', (WidgetTester tester) async {
-      await tester.pumpWidget(new MaterialApp(home: GenericIcon.buildGenericSpinner()));
+      await tester
+          .pumpWidget(new MaterialApp(home: GenericIcon.buildGenericSpinner()));
 
       expect(find.text('Refreshing'), findsOneWidget);
     });
