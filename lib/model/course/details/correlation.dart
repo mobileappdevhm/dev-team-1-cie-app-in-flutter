@@ -1,4 +1,3 @@
-
 class CorrelationBuilder {
   static List<Correlation> fromJson(List<dynamic> jsonData) {
     if (jsonData == null) return null;

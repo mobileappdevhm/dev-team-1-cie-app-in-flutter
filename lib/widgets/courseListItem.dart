@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class CourseListItem extends StatelessWidget {
   final int id;
   final CourseListPresenter courseListPresenter;
-  Widget inheritedChild;
+  final Widget inheritedChild;
 
   CourseListItem(this.courseListPresenter, this.id, this.inheritedChild);
 
@@ -84,19 +84,23 @@ class CourseListItem extends StatelessWidget {
           ),
         ],
       );
-    }
-    else
+    } else
       //Return empty container to workaround a flutter bug
       //And we could use it to add some padding then layout isn't moving ife something changes
-      return new Padding(padding: new EdgeInsets.fromLTRB(0.0, CiEStyle.getCourseConflictWarningStyle().fontSize + 3.0, 0.0, 0.0));
+      return new Padding(
+          padding: new EdgeInsets.fromLTRB(
+              0.0,
+              CiEStyle.getCourseConflictWarningStyle().fontSize + 3.0,
+              0.0,
+              0.0));
   }
 
   void _toggleDescription(BuildContext context) {
-
     //track click on course
-    Analytics.logEvent("course_click",
-        {"title":courseListPresenter.getTitle(id),
-        "department":courseListPresenter.getFaculty(id)});
+    Analytics.logEvent("course_click", {
+      "title": courseListPresenter.getTitle(id),
+      "department": courseListPresenter.getFaculty(id)
+    });
 
     Navigator.push(
         context,

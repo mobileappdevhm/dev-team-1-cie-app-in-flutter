@@ -3,8 +3,8 @@ import 'package:cie_team1/model/course/details/lecturer.dart';
 import 'package:cie_team1/model/course/details/room.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main(){
-  test('1 date',(){
+void main() {
+  test('1 date', () {
     var map = new Map<String, dynamic>();
     map['begin'] = "20180427T150000Z";
     map['end'] = "20180427T200000Z";

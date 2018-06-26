@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
-
   testWidgets('test123', (WidgetTester tester) async {
     await tester.pumpWidget(new MaterialApp(home: new TabsPage()));
     expect(find.text("Courses"), findsWidgets);
@@ -40,9 +39,9 @@ void main() {
           } else if (counter == 1) {
             expect(widget.data.isNotEmpty, true);
             counter++;
-          } else if(counter >= 2){
+          } else if (counter >= 2) {
             if (WeekdayUtility.getCurrentWeekday() != Weekday.Sun &&
-                WeekdayUtility.getCurrentWeekday() != Weekday.Sat){
+                WeekdayUtility.getCurrentWeekday() != Weekday.Sat) {
               if (counter == 2) {
                 expect(widget.data.isNotEmpty, true);
                 counter++;
@@ -52,7 +51,6 @@ void main() {
               }
             }
           }
-
         }
       }
     });

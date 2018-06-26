@@ -9,24 +9,22 @@ void main() {
   Lecture testLectureOne;
   Course testCourseOne;
 
-  setUp((){
+  setUp(() {
     testLectureOne = new Lecture(Campus.KARLSTRASSE, Weekday.Mon,
-        new DayTime(10, 00), new DayTime(11, 30), "R0.009") ;
+        new DayTime(10, 00), new DayTime(11, 30), "R0.009");
     testCourseOne = new CourseBuilder()
-      .withName("Blaba")
-      .withFaculty("7")
-      .withLecturesPerWeek([
-        testLectureOne
-      ])
-      .withDescription("boring")
-      .withHoursPerWeek(2)
-      .withEcts(2)
-      .withProfessorEmail(StaticVariables.MOCK_EMAIL)
-      .withProfessorName("Max Mustermann")
-      .withIsCoterie(false)
-      .withhasHomeBias(false)
-      .withIsFavorite(false)
-      .build();
+        .withName("Blaba")
+        .withFaculty("7")
+        .withLecturesPerWeek([testLectureOne])
+        .withDescription("boring")
+        .withHoursPerWeek(2)
+        .withEcts(2)
+        .withProfessorEmail(StaticVariables.MOCK_EMAIL)
+        .withProfessorName("Max Mustermann")
+        .withIsCoterie(false)
+        .withhasHomeBias(false)
+        .withIsFavorite(false)
+        .build();
     testLectureOne.course = testCourseOne;
   });
 
@@ -48,21 +46,22 @@ void main() {
       final Iterable<Widget> listOfWidgets = tester.allWidgets;
       int i = 0;
       List<String> expectedTextWidgetData = [
-      'Blaba',
-      'Campus:',
-      'Karl.',
-      'Time:',
-      ' 10:00-11:30',
-      'Day:',
-      'Mon',
-      'Room:',
-      ' R0.009',
-      'Professor:',
-      'Max Mustermann'
+        'Blaba',
+        'Campus:',
+        'Karl.',
+        'Time:',
+        ' 10:00-11:30',
+        'Day:',
+        'Mon',
+        'Room:',
+        ' R0.009',
+        'Professor:',
+        'Max Mustermann'
       ];
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
-          expect(widget.data.contains(expectedTextWidgetData.elementAt(i)), true);
+          expect(
+              widget.data.contains(expectedTextWidgetData.elementAt(i)), true);
           i++;
         }
       }

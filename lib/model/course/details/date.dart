@@ -30,5 +30,4 @@ class Date {
     this.lecturers = LecturerBuilder.fromJson(jsonData['lecturer']);
     this.actions = jsonData['actions'];
   }
-
 }

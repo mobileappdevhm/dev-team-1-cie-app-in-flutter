@@ -1,5 +1,5 @@
-import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/analytics.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';

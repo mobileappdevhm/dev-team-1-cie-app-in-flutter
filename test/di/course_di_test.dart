@@ -5,13 +5,13 @@ import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('1 course_di',(){
+  test('1 course_di', () {
     CourseInjector.configure(Flavor.MOCK);
     var courses = new CourseInjector().courses;
     expect(courses is CoursesMock, true);
   });
 
-  test('2 course_di',(){
+  test('2 course_di', () {
     CourseInjector.configure(Flavor.PROD);
     var courses = new CourseInjector().courses;
     expect(courses is CoursesProd, true);
