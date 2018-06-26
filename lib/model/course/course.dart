@@ -304,6 +304,7 @@ class CourseDefinitions {
       "14"
     ];
   }
+
   static List<String> departments = [
     "01",
     "02",
@@ -459,6 +460,7 @@ class WeekdayUtility {
     // Not reachable.
     return "";
   }
+
   static String getWeekdayAsLongString(Weekday day) {
     switch (day) {
       case Weekday.Mon:

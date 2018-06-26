@@ -126,12 +126,11 @@ class TimeTableItem extends StatelessWidget {
                 ),
                 new Expanded(
                     child: new Text(
-                      lecture.course.professorName,
-                      style: CiEStyle.getTimeTableListVariable(),
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.ellipsis,
-                    )
-                )
+                  lecture.course.professorName,
+                  style: CiEStyle.getTimeTableListVariable(),
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                ))
               ],
             ),
             new Padding(padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0))
