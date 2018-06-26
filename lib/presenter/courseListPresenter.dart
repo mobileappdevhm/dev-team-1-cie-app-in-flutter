@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cie_team1/di/courses_di.dart';
-import 'package:cie_team1/main.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/course/details/date.dart';
@@ -79,7 +78,7 @@ class CourseListPresenter {
               ])
               .withHoursPerWeek(2)
               .withEcts(2)
-          //TODO replace with professor email if available
+              //TODO replace with professor email if available
               .withProfessorEmail(StaticVariables.MOCK_EMAIL)
               .withIsFavorite(false);
           Course c = courseBuilder.build();
@@ -110,12 +109,13 @@ class CourseListPresenter {
       this.onChanged(true);
     });
   }
+
   void commitFavoritedCoursesToMemory() {
     // dynamic so we can easily refactor to support more data in the future
     Map<String, dynamic> toJson = new Map<String, dynamic>();
     for (Course c in _courses.getCourses()) {
       if (c.isFavourite) {
-        toJson.putIfAbsent(c.id, ()=>c.isFavourite);
+        toJson.putIfAbsent(c.id, () => c.isFavourite);
       }
     }
     FileStore.writeToFile(FileStore.FAVORITES, json.encode(toJson));
@@ -138,7 +138,7 @@ class CourseListPresenter {
 
   void toggleFavourite(int id, bool shouldUseMemory) {
     _courses.getCourses()[id].isFavourite =
-    !_courses.getCourses()[id].isFavourite;
+        !_courses.getCourses()[id].isFavourite;
 
     //TODO: make tests async doesn't work right now
     //analytics.logEvent(name: "toggle_favorite",
@@ -150,7 +150,6 @@ class CourseListPresenter {
     if (shouldUseMemory) {
       commitFavoritedCoursesToMemory();
     }
-
   }
 
   void toggleFavouriteWhenChangeView(int id) {
@@ -276,7 +275,11 @@ class CourseListPresenter {
 
   //If lectures of this course conflicts with other favourite lecture return true
   List<Lecture> getConflictingLectures(int id) {
-    return getFavouriteLectures().where((l) => getCourses()[id].lecturesPerWeek.any((c) => _checkTimeConflict(c, l))).toList();
+    return getFavouriteLectures()
+        .where((l) => getCourses()[id]
+            .lecturesPerWeek
+            .any((c) => _checkTimeConflict(c, l)))
+        .toList();
   }
 
   bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
@@ -286,7 +289,7 @@ class CourseListPresenter {
     if (thisFavorite.weekday != otherFavorite.weekday) return false;
     //If running at same time return true
     int timeBetweenLectures =
-    _getTimeBetweenLectures(thisFavorite, otherFavorite);
+        _getTimeBetweenLectures(thisFavorite, otherFavorite);
     if (timeBetweenLectures < 0) return true;
     //If time is not enough to switch campus return true
     if (!_timeIsEnoughForCampusSwitch(
@@ -341,7 +344,7 @@ class CourseListPresenter {
     String campusOne = CampusUtility.getCampusAsLongString(one.campus);
     String campusTwo = CampusUtility.getCampusAsLongString(two.campus);
     String time =
-    _timeRequiredForCampusSwitch(one.campus, two.campus).toString();
+        _timeRequiredForCampusSwitch(one.campus, two.campus).toString();
     return one.course.name +
         " is held in the " +
         campusOne +
@@ -350,7 +353,7 @@ class CourseListPresenter {
         " is held in the " +
         campusTwo +
         " campus.\n\n"
-            "Please consider that the commute between the " +
+        "Please consider that the commute between the " +
         campusOne +
         " and the " +
         campusTwo +
@@ -364,17 +367,17 @@ class CourseListPresenter {
     List<String> reason = new List<String>();
 
     if (getCourses()[id].isFavourite)
-      reason.add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_OTHER_FAVORIT);
+      reason
+          .add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_OTHER_FAVORIT);
     else
       reason.add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_FAVORIT);
 
     //Find courses who conflicts and why there is a conflict
     List<Lecture> conflicts = getConflictingLectures(id);
     if (conflicts != null) {
-      Set<Course> conflictingCourses =
-      conflicts.map((l) => l.course).toSet();
-      conflictingCourses.forEach(
-              (c) => reason.insert(1, "\n" + _getConflictReasonText(getCourses()[id], c)));
+      Set<Course> conflictingCourses = conflicts.map((l) => l.course).toSet();
+      conflictingCourses.forEach((c) =>
+          reason.insert(1, "\n" + _getConflictReasonText(getCourses()[id], c)));
     }
 
     return reason;
@@ -384,8 +387,7 @@ class CourseListPresenter {
   String _getConflictReasonText(Course thisFavorite, Course otherFavorite) {
     String result = otherFavorite.name + ": ";
     //Add commute time conflict text
-    thisFavorite.lecturesPerWeek
-        .forEach((l) => otherFavorite.lecturesPerWeek
+    thisFavorite.lecturesPerWeek.forEach((l) => otherFavorite.lecturesPerWeek
         .forEach((f) => result += _getLectureConflictProblemText(l, f)));
     //timeBetweenLecturesText.forEach((res) => result += res);
 
@@ -405,8 +407,8 @@ class CourseListPresenter {
           campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
         result += "Commute Time Lothstr. to Karlstr. < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL.toString();
-      } else
-      if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.PASING ||
+      } else if (campusOne == Campus.LOTHSTRASSE &&
+              campusTwo == Campus.PASING ||
           campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
         result += "Commute Time Lothstr. to Pasing < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS.toString();

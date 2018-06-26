@@ -1,4 +1,3 @@
-import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 class Analytics {
@@ -29,19 +28,19 @@ class Analytics {
   }
 
   static logSearch(String searchTerm) {
-    if(analytics != null) {
+    if (analytics != null) {
       analytics.logSearch(searchTerm: searchTerm);
     }
   }
 
   static setUserProperty(String name, String value) {
-   if(analytics != null) {
-     analytics.setUserProperty(name: name, value: value);
-   }
+    if (analytics != null) {
+      analytics.setUserProperty(name: name, value: value);
+    }
   }
 
-  static logLogin(){
-    if(analytics != null) {
+  static logLogin() {
+    if (analytics != null) {
       analytics.logLogin();
     }
   }

@@ -1,9 +1,10 @@
+import 'dart:convert';
+
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses_mock.dart';
 import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/utils/fileStore.dart';
-import 'dart:convert';
 
 class CurrentUserProd implements CurrentUser {
   List<Course> prevCourses = [];
