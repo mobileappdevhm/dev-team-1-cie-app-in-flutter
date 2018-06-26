@@ -1,8 +1,8 @@
 import 'package:cie_team1/model/course/details/room.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main(){
-  test('1 room',(){
+void main() {
+  test('1 room', () {
     String campus = "Lothstrasse";
     String building = "R";
     String number = "R 2.091";

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
 // This line imports the extension
 
-
 /*
 Running integration tests
 

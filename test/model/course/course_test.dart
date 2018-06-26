@@ -190,8 +190,14 @@ void main() {
     });
 
     test('24', () {
-      expect(new Lecture(Campus.PASING,Weekday.Mon,DayTime(1, 50),DayTime(2, 50),"1000").sortValue()
-          < new Lecture(Campus.PASING,Weekday.Mon,DayTime(1, 51),DayTime(2, 50),"1000").sortValue(), true);
+      expect(
+          new Lecture(Campus.PASING, Weekday.Mon, DayTime(1, 50),
+                      DayTime(2, 50), "1000")
+                  .sortValue() <
+              new Lecture(Campus.PASING, Weekday.Mon, DayTime(1, 51),
+                      DayTime(2, 50), "1000")
+                  .sortValue(),
+          true);
     });
   });
 

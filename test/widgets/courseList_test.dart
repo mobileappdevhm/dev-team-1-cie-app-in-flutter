@@ -20,8 +20,8 @@ void main() {
       expectedTexts = new List<String>();
       favoritesPageAnomalies = new List<String>();
       for (int i = 1; i < 100; i++) {
-        expectedTexts.add(
-            "Department #" + CoursesMock.generateMockDepartment(i));
+        expectedTexts
+            .add("Department #" + CoursesMock.generateMockDepartment(i));
         expectedTexts.add(CoursesMock.generateMockCourseTitle(i));
         expectedTexts.add("DP " + CoursesMock.generateMockDepartment(i));
         expectedTexts.add("Please log in to use lottery");
@@ -43,9 +43,7 @@ void main() {
             return new MaterialApp(
               home: new Material(
                 child: new Center(
-                    child: new CourseList(
-                        clp, isFavoritesPage, cup, fN)
-                ),
+                    child: new CourseList(clp, isFavoritesPage, cup, fN)),
               ),
             );
           },
@@ -54,10 +52,10 @@ void main() {
       final Iterable<Widget> listOfWidgets = tester.allWidgets;
 
       checkForDuplicateWidgets(listOfWidgets, expectedTexts);
-      checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies,
-          isFavoritesPage);
-      checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies,
-          isFavoritesPage);
+      checkForFavoritesPageAnomalies(
+          listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
+      checkForFavoritesPageAnomalies(
+          listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
     });
 
     testWidgets('basic favorites page', (WidgetTester tester) async {
@@ -69,9 +67,7 @@ void main() {
             return new MaterialApp(
               home: new Material(
                 child: new Center(
-                    child: new CourseList(
-                        clp, isFavoritesPage, cup, fN)
-                ),
+                    child: new CourseList(clp, isFavoritesPage, cup, fN)),
               ),
             );
           },
@@ -80,15 +76,13 @@ void main() {
       final Iterable<Widget> listOfWidgets = tester.allWidgets;
 
       checkForDuplicateWidgets(listOfWidgets, expectedTexts);
-      checkIfTextsCreatedCorrectly(listOfWidgets, expectedTexts,
-          favoritesPageAnomalies);
-      checkForFavoritesPageAnomalies(listOfWidgets, favoritesPageAnomalies,
-          isFavoritesPage);
+      checkIfTextsCreatedCorrectly(
+          listOfWidgets, expectedTexts, favoritesPageAnomalies);
+      checkForFavoritesPageAnomalies(
+          listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
     });
   });
-
 }
-
 
 void checkForFavoritesPageAnomalies(Iterable<Widget> listOfWidgets,
     List<String> anomalies, bool isFavoritesPage) {
@@ -132,9 +126,8 @@ void checkIfTextsCreatedCorrectly(Iterable<Widget> listOfWidgets,
 
 void _voidCallback(bool didChange) {
   if (didChange == true) {
-    setState(()=>{});
+    setState(() => {});
   }
 }
 
-void setState(Map Function() param0) {
-}
+void setState(Map Function() param0) {}

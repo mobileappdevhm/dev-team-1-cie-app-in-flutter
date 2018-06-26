@@ -66,12 +66,12 @@ void main() {
 
   group("lecture", () {
     test('1', () {
-      expect(sut.getLectureTimes(0)!=null, true);
+      expect(sut.getLectureTimes(0) != null, true);
     });
 
     test('2', () {
-      for (int i=0; i<sut.getCourses().length; i++) {
-        expect(sut.getLectureTimes(i)!=null, true);
+      for (int i = 0; i < sut.getCourses().length; i++) {
+        expect(sut.getLectureTimes(i) != null, true);
       }
     });
   });
@@ -84,6 +84,4 @@ void main() {
       expect(localSut.getFavouriteLectures().length, 1);
     });
   });
-
-
 }
