@@ -1,11 +1,12 @@
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/routes.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
-  static Widget showInstructions(Function onPressRefresh) {
+  static Widget showInstructions(Function onPressRefresh, BuildContext context) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
         children: <Widget>[
@@ -100,11 +101,16 @@ class GenericShowInstruction {
                 )
               : new RaisedButton(
                   color: CiEColor.lightGray,
-                  onPressed: () => onPressRefresh(),
-                  child: new Text("Download courses now")),
+                  onPressed: () => _toggleRefresh(onPressRefresh, context),
+                  child: new Text("Download courses now and restart")),
         ],
       ),
     ));
+  }
+
+  static _toggleRefresh (Function onPressRefresh, BuildContext context) {
+    () => onPressRefresh();
+    Navigator.pushReplacementNamed(context, Routes.Welcome);
   }
 
   static Widget _getInstructionWidget(Widget text) {

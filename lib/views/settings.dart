@@ -327,7 +327,7 @@ class _SettingsState extends State<Settings> {
                 body: new Column(
                   children: <Widget>[
                     GenericShowInstruction
-                        .showInstructions(null)
+                        .showInstructions(null, null)
                   ],
                 ),
             )
