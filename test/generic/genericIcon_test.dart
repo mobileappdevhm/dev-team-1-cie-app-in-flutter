@@ -1,6 +1,7 @@
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -73,18 +74,38 @@ void main() {
       expect(activeGenericSearchIcon.icon.fontFamily, GenericIcon.fontFamily);
     });
 
-    //testWidgets('rendersGenericConflictIcon', (WidgetTester tester) async {
-    //  String message = "Content";
-    //  tester.pumpWidget(new MaterialApp(home: GenericIcon.buildGenericConflictIcon(message)));
-    //  expect(find.byType(Container), findsOneWidget);
-    //  expect(find.text('!'), findsOneWidget);
-    //  expect(find.text(message), findsOneWidget);
-    //});
+    testWidgets('rendersGenericConflictIcon', (WidgetTester tester) async {
+      final String message = "Hallo";
+      await tester.pumpWidget(new MaterialApp(home: new MyTestPage()));
+      expect(find.text(message), findsOneWidget);
+    });
 
     testWidgets('rendersGenericSpinner', (WidgetTester tester) async {
-      await tester.pumpWidget(new MaterialApp(home: GenericIcon.buildGenericSpinner()));
+      await tester
+          .pumpWidget(new MaterialApp(home: GenericIcon.buildGenericSpinner()));
 
       expect(find.text('Refreshing'), findsOneWidget);
     });
   });
+}
+
+class MyTestPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: new AppBar(
+        title: new Text(
+        "Test",
+        style: CiEStyle.getAppBarTitleStyle(context),
+    ),
+    elevation: CiEStyle.getAppBarElevation(context),
+    backgroundColor: CiEColor.red,
+    ),
+    body: new Center(
+        child: GenericIcon.buildGenericConflictIcon("Hallo")
+    )
+
+    );}
+
+
 }

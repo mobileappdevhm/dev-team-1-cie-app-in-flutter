@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:cie_team1/generic/genericAlert.dart';
-import 'package:cie_team1/generic/genericShowInstruction.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
+import 'package:cie_team1/generic/genericShowInstruction.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
+import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
@@ -19,7 +19,7 @@ class CourseList extends StatefulWidget {
   final CourseListPresenter courseListPresenter;
   final CurrentUserPresenter userPresenter;
   bool shouldFilterByFavorites = false;
-  FocusNode focus;
+  final FocusNode focus;
 
   CourseList(this.courseListPresenter, this.shouldFilterByFavorites,
       this.userPresenter, this.focus);
@@ -84,7 +84,6 @@ class CourseListState extends State<CourseList> {
   Widget build(BuildContext context) {
     List<Widget> widgets = new List<Widget>();
 
-    //If there is no course data inform the user that he has to refresh course data
     if (courseListPresenter.getCourses().isEmpty) {
       return new Column(
         children: <Widget>[
@@ -114,7 +113,7 @@ class CourseListState extends State<CourseList> {
               new Container(
                   padding: pad,
                   child: new DropdownButton<String>(
-                    items: CourseDefinitions.DEPARTMENTS.map((String value) {
+                    items: CourseDefinitions.departments.map((String value) {
                       if (value != null) {
                         return new DropdownMenuItem<String>(
                           value: value,
@@ -163,16 +162,19 @@ class CourseListState extends State<CourseList> {
       }
 
       //Build the tiles of the course list / favorites list
-      for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
+      for (int i = 0; i < courseListPresenter
+          .getCourses()
+          .length; i++) {
         if (shouldFilterByFavorites == false &&
-                courseListPresenter.getFaculty(i) == filter ||
+            courseListPresenter.getFaculty(i) == filter ||
             (shouldFilterByFavorites == true &&
                 courseListPresenter.getFavourite(i)) ||
             (shouldFilterByFavorites == true &&
                 courseListPresenter.getWillChangeOnViewChange(i))) {
           if (shouldSearch == false ||
               (courseListPresenter.getTitle(i).contains(searchValue))) {
-            widgets.add(
+            widgets
+                .add(
                 new CourseListItem(courseListPresenter, i, favoriteIcon(i)));
             widgets.add(new Divider());
           }

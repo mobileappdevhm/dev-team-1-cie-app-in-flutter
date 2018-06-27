@@ -1,7 +1,7 @@
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/privacyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
@@ -26,7 +26,7 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (counter == 0) {
-            expect(widget.data.isEmpty,false);
+            expect(widget.data.isEmpty, false);
             counter++;
           }
         }
@@ -55,13 +55,13 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (counter == 0) {
-            expect(widget.data.isEmpty,false);
+            expect(widget.data.isEmpty, false);
             counter++;
-          }else if(counter ==1){
-            expect(widget.data,'Contact');
+          } else if (counter == 1) {
+            expect(widget.data, 'Contact');
             counter++;
           } else if (counter == 2) {
-            expect(widget.data,StaticVariables.CHANGE_TO_GERMAN);
+            expect(widget.data, StaticVariables.CHANGE_TO_GERMAN);
             await tester.tap(find.byWidget(widget));
             counter++;
           }

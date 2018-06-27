@@ -4,10 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
-
+  //TODO this is a duplicate of start_test.dart
   group('settingspagewidget', () {
     testWidgets('1 widgetTest for settings', (WidgetTester tester) async {
-// Tells the tester to build a UI based on the widget tree passed to it
+      // Tells the tester to build a UI based on the widget tree passed to it
       await tester.pumpWidget(
         new StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
@@ -19,6 +19,10 @@ void main() {
           },
         ),
       );
+
+      //ERROR: An animation is still running even after the widget tree was disposed.
+      //SOLUTION: Wait till the animation has ended.
+      await tester.pump(new Duration(seconds: 5));
 
       final Iterable<Widget> listOfWidgets = tester.allWidgets;
 

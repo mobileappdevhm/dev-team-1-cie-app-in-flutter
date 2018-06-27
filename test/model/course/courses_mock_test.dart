@@ -14,7 +14,7 @@ void main() {
     for (int i = 1; i <= 100; i++) {
       courses.add("Title of Course " + i.toString());
     }
-    validDepartments = CourseDefinitions.DEPARTMENTS;
+    validDepartments = CourseDefinitions.departments;
   });
 
   test('1 name', () {

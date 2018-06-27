@@ -17,7 +17,7 @@ class UserBuilder {
 
   // Standard Builder Pattern Implementation
   UserBuilder withID(String id) {
-    this.id = id != null ? id: null;
+    this.id = id != null ? id : null;
     return this;
   }
 
@@ -52,7 +52,7 @@ class UserBuilder {
   }
 
   UserBuilder withUsername(String username) {
-    this.username = username != null ? username: null;
+    this.username = username != null ? username : null;
     return this;
   }
 
@@ -83,25 +83,43 @@ class UserBuilder {
 
   factory UserBuilder.fromJson(Map<String, dynamic> jsonData) {
     return new UserBuilder(
-      id: jsonData['id'],
-      language: jsonData['language'],
-      name: jsonData['name'],
-      firstName: jsonData['firstName'],
-      lastName: jsonData['lastName'],
-      department: jsonData['department'],
-      degree: jsonData['degree'],
-      isLoggedIn: jsonData['isLoggedIn'] == 'true' ? true : false,
-      isMetricsEnabled: jsonData['isMetricsEnabled'] == 'true' ? true: false
-    );
+        id: jsonData['id'],
+        language: jsonData['language'],
+        name: jsonData['name'],
+        firstName: jsonData['firstName'],
+        lastName: jsonData['lastName'],
+        department: jsonData['department'],
+        degree: jsonData['degree'],
+        isLoggedIn: jsonData['isLoggedIn'] == 'true' ? true : false,
+        isMetricsEnabled:
+            jsonData['isMetricsEnabled'] == 'true' ? true : false);
   }
 
-  UserBuilder({this.id, this.language, this.name, this.firstName, this.lastName, this.department,
-      this.degree, this.isLoggedIn, this.isMetricsEnabled});
+  UserBuilder(
+      {this.id,
+      this.language,
+      this.name,
+      this.firstName,
+      this.lastName,
+      this.department,
+      this.degree,
+      this.isLoggedIn,
+      this.isMetricsEnabled});
 
   User build() {
-    return new User(this.id, this.language, this.name, this.department,
-        this.degree, this.isLoggedIn, this.isMetricsEnabled, this.username,
-        this.firstName, this.lastName, this.status, this.currentCourses,
+    return new User(
+        this.id,
+        this.language,
+        this.name,
+        this.department,
+        this.degree,
+        this.isLoggedIn,
+        this.isMetricsEnabled,
+        this.username,
+        this.firstName,
+        this.lastName,
+        this.status,
+        this.currentCourses,
         this.prevCourses);
   }
 }
@@ -121,22 +139,32 @@ class User {
   List<Course> currentCourses;
   List<Course> prevCourses;
 
-  User(this.id, this.language, this.name, this.department,
-      this.degree, this.isLoggedIn, this.isMetricsEnabled, this.username, this.firstName, this.lastName,
-      this.status, this.currentCourses, this.prevCourses);
+  User(
+      this.id,
+      this.language,
+      this.name,
+      this.department,
+      this.degree,
+      this.isLoggedIn,
+      this.isMetricsEnabled,
+      this.username,
+      this.firstName,
+      this.lastName,
+      this.status,
+      this.currentCourses,
+      this.prevCourses);
 
   static Map<String, dynamic> toJson(User user) {
     Map<String, String> map = new Map<String, String>();
-    map.putIfAbsent('id', ()=> user.id.toString());
-    map.putIfAbsent('language', ()=> user.language);
-    map.putIfAbsent('name', ()=> user.name);
-    map.putIfAbsent('firstName', ()=> user.firstName);
-    map.putIfAbsent('lastName', ()=> user.lastName);
-    map.putIfAbsent('department', ()=> user.department);
-    map.putIfAbsent('degree', ()=> user.degree);
-    map.putIfAbsent('isLoggedIn', ()=> user.isLoggedIn.toString());
-    map.putIfAbsent('isMetricsEnabled', ()=> user.isMetricsEnabled.toString());
+    map.putIfAbsent('id', () => user.id.toString());
+    map.putIfAbsent('language', () => user.language);
+    map.putIfAbsent('name', () => user.name);
+    map.putIfAbsent('firstName', () => user.firstName);
+    map.putIfAbsent('lastName', () => user.lastName);
+    map.putIfAbsent('department', () => user.department);
+    map.putIfAbsent('degree', () => user.degree);
+    map.putIfAbsent('isLoggedIn', () => user.isLoggedIn.toString());
+    map.putIfAbsent('isMetricsEnabled', () => user.isMetricsEnabled.toString());
     return map;
   }
 }
-
