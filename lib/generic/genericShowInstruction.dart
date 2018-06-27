@@ -110,7 +110,7 @@ class GenericShowInstruction {
 
   static _toggleRefresh (Function onPressRefresh, BuildContext context) {
     () => onPressRefresh();
-    Navigator.pushReplacementNamed(context, Routes.Welcome);
+    Navigator.pushReplacementNamed(context, Routes.TabPages);
   }
 
   static Widget _getInstructionWidget(Widget text) {
