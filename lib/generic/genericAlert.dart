@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class GenericAlert {
   static Future<Null> confirm(
-      BuildContext context, void no(), void yes(), String msg) {
+      BuildContext context, void no(), void yes(), String msg, [String yesText = StaticVariables.ALERT_YES, String noText = StaticVariables.ALERT_NO]) {
     return showDialog<Null>(
         context: context,
         barrierDismissible: false,
@@ -15,14 +15,14 @@ class GenericAlert {
             title: new Text(msg),
             actions: <Widget>[
               new FlatButton(
-                child: const Text(StaticVariables.ALERT_YES),
+                child: new Text(yesText),
                 onPressed: () {
                   Navigator.of(context).pop();
                   yes();
                 },
               ),
               new FlatButton(
-                child: const Text(StaticVariables.ALERT_NO),
+                child: new Text(noText),
                 onPressed: () {
                   Navigator.of(context).pop();
                   no();

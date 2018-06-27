@@ -1,6 +1,5 @@
 import 'package:cie_team1/presenter/courseListPresenter.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
@@ -29,25 +28,17 @@ class TabsPageState extends State<TabsPage> {
   void initState() {
     super.initState();
     // TODO: Investigate scenarios where internet is not available/request fails
+    var _unusedCallback = (bool val) {};
+
     NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
-    courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
+    courseListPresenter = new CourseListPresenter(_unusedCallback);
     currentUserPresenter =
-        new CurrentUserPresenter(_maybeChangeCallback, Flavor.PROD);
+        new CurrentUserPresenter(_unusedCallback, Flavor.PROD);
     courseListPresenter.addCoursesFromMemory();
     currentUserPresenter.loadUserSettingsFromMemory();
 
-    //turn on firebase if enabled in user settings
-    Analytics
-        .setAnalytics(currentUserPresenter.getCurrentUser().isMetricsEnabled);
-
     this._appTitle = TabItems[_tab].title;
-  }
-
-  void _maybeChangeCallback(bool didChange) {
-    if (didChange == true) {
-      setState(() => {});
-    }
   }
 
   @override

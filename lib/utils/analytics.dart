@@ -3,8 +3,8 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 class Analytics {
   static FirebaseAnalytics analytics;
 
-  static FirebaseAnalytics getAnalytics() {
-    return analytics = null;
+  static bool getAnalytics() {
+    return analytics != null;
   }
 
   static setAnalytics(bool isEnabled) {

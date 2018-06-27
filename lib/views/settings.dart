@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/cieColor.dart';
@@ -247,7 +249,17 @@ class _SettingsState extends State<Settings> {
   }
 
   void _logout(BuildContext context) {
-    FileStore.writeToFile(FileStore.USER_SETTINGS, "").then((f) {
+    var builder = new UserBuilder();
+    User tempUserObj = builder
+        .withFirstName(null)
+        .withLastName(null)
+        .withDepartment(null)
+        .withIsLoggedIn(false)
+        .withIsMetricsEnabled(isMetricsEnabled)
+        .withDegree(null)
+        .build();
+    String data = json.encode(User.toJson(tempUserObj));
+    FileStore.writeToFile(FileStore.USER_SETTINGS, data).then((f) {
       Navigator.of(context).pushReplacementNamed(Routes.Login);
     });
   }
@@ -275,7 +287,7 @@ class _SettingsState extends State<Settings> {
             });
           },
         ),
-        isMetricsEnabled == true
+        isMetricsEnabled
             ? new Text(StaticVariables.METRICS_ENABLED,
                 style: CiEStyle.getSettingsEnabledStyle())
             : new Text(StaticVariables.METRICS_DISABLED,

@@ -18,6 +18,10 @@ void main() {
       ),
     );
 
+    //ERROR: An animation is still running even after the widget tree was disposed.
+    //SOLUTION: Wait till the animation has ended.
+    await tester.pump(new Duration(seconds: 5));
+
     final Iterable<Widget> listOfWidgets = tester.allWidgets;
 
     int counter = 0;
