@@ -35,7 +35,7 @@ void main() {
     });
 
     test('2', () {
-      expect(sut.faculty, "7");
+      expect(sut.faculties.contains("7"), true);
     });
     test('3', () {
       expect(sut.lecturesPerWeek[0].weekday, Weekday.Mon);
@@ -238,7 +238,7 @@ void main() {
       expect(built.dates, testDateList);
       expect(built.shortName, testString);
       expect(built.actions, testDynamicList);
-      expect(built.faculty, testString);
+      expect(built.faculties.contains(testString), true);
       expect(built.lecturesPerWeek, testLectureList);
       expect(built.ects, testInt);
       expect(built.professorEmail, testString);
@@ -323,7 +323,7 @@ void main() {
       }
       expect(built.shortName, testString);
       expect(built.actions, testDynamicList);
-      expect(built.faculty, "09");
+      expect(built.faculties.contains("09"), true);
       expect(built.lecturesPerWeek, testLectureList);
       expect(built.ects, testInt);
       expect(built.professorEmail, testString);

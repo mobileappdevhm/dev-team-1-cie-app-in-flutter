@@ -31,7 +31,7 @@ void main() {
     final Iterator<Course> itera = sut.getCourses().iterator;
 
     while (itera.moveNext()) {
-      expect(validDepartments.contains(itera.current.faculty), true);
+      expect(validDepartments.contains(itera.current.faculties), true);
     }
   });
 }
