@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -5,7 +7,7 @@ import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
-  static Widget showInstructions() {
+  static Widget showInstructions(Function onPressRefresh) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
         children: <Widget>[
@@ -22,8 +24,8 @@ class GenericShowInstruction {
               new Expanded(
                   child: new Text(
                 "Unfortunately you have not downloaded any course data "
-                    "yet. Please drag the screen down to load the current course "
-                    "data.",
+                    "yet. At the end of the instruction you can download the courses for the fist time. "
+                    "After finishing the setup you can swipe down on favorite and courses page at any time to refresh.",
                 style: CiEStyle.getInstructionPageTextStyle(),
               ))
             ],
@@ -88,33 +90,15 @@ class GenericShowInstruction {
               )),
             ],
           ),
+          new Padding(padding: new EdgeInsets.only(bottom: 20.0)),
+          onPressRefresh == null ? new Expanded(child: new Text("Plase go to courses page and refresh by swiping down. Initial setup is already done.")) :
+          new RaisedButton(
+            color: CiEColor.lightGray,
+              onPressed: () => onPressRefresh(),
+              child: new Text("Download courses now"))
         ],
       ),
     ));
-  }
-
-  static Widget getDownloadCourseListFirstWidget() {
-    /*return _getInstructionWidget(
-        "Unfortunately, you have not downloaded any course data "
-        "yet. Please drag the screen down to load the current course "
-        "data. If you want to update the course data later, drag the screen "
-        "down again to update.");*/
-    return new Column(
-      children: <Widget>[
-        new Container(
-            color: CiEColor.white,
-            padding: new EdgeInsets.symmetric(vertical: 10.0),
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Text("Pull down to Refresh",
-                    style: CiEStyle.getCourseListRefreshText()),
-                new Icon(Icons.arrow_downward, color: CiEColor.mediumGray)
-              ],
-            )),
-        showInstructions(),
-      ],
-    );
   }
 
   static Widget getAddFavouritesFirstWidget() {

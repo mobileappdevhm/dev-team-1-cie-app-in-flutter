@@ -86,7 +86,11 @@ class CourseListState extends State<CourseList> {
 
     //If there is no course data inform the user that he has to refresh course data
     if (courseListPresenter.getCourses().isEmpty) {
-      return GenericShowInstruction.getDownloadCourseListFirstWidget();
+      return new Column(
+        children: <Widget>[
+          GenericShowInstruction.showInstructions(() => handleRefreshIndicator(context, courseListPresenter)),
+        ],
+      );
     } else {
       if (shouldFilterByFavorites == false) {
         widgets.add(new Container(
