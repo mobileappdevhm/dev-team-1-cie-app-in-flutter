@@ -185,7 +185,7 @@ class CourseListPresenter {
     return _courses.getCourses()[id].available;
   }
 
-  List<String> getFaculty(int id) {
+  Set<String> getFaculties(int id) {
     return _courses.getCourses()[id].faculties;
   }
 

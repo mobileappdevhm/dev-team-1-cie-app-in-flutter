@@ -156,7 +156,7 @@ class CourseListState extends State<CourseList> {
     //Build the tiles of the course list / favorites list
     for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
       if (shouldFilterByFavorites == false &&
-              courseListPresenter.getFaculty(i).contains(filter) ||
+              courseListPresenter.getFaculties(i).contains(filter) ||
           (shouldFilterByFavorites == true &&
               courseListPresenter.getFavourite(i)) ||
           (shouldFilterByFavorites == true &&

@@ -80,8 +80,8 @@ class CurrentUserPresenter {
     return _currentUser.getCurrentUser().prevCourses[id].ects;
   }
 
-  String getFaculty(int id) {
-    return _currentUser.getCurrentUser().prevCourses[id].faculties.toString();
+  Set<String> getFaculties(int id) {
+    return _currentUser.getCurrentUser().prevCourses[id].faculties;
   }
 
   void toggleIsMetricsEnabled() {

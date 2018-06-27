@@ -99,7 +99,7 @@ class CourseListItem extends StatelessWidget {
     //track click on course
     Analytics.logEvent("course_click", {
       "title": courseListPresenter.getTitle(id),
-      "department": courseListPresenter.getFaculty(id)
+      "department": courseListPresenter.getFaculties(id)
     });
 
     Navigator.push(

@@ -15,7 +15,7 @@ class CourseBuilder {
   String shortName;
   List<dynamic> actions;
 
-  List<String> faculties;
+  Set<String> faculties;
   List<Lecture> lecturesPerWeek;
   int hoursPerWeek;
   int ects;
@@ -72,7 +72,7 @@ class CourseBuilder {
 
   CourseBuilder withFaculty(String faculty) {
     if (this.faculties == null) {
-      this.faculties = new List<String>();
+      this.faculties = new Set<String>();
     }
     this.faculties.add(faculty);
     return this;
@@ -142,7 +142,7 @@ class CourseBuilder {
         name: jsonData['name'],
         shortName: jsonData['shortName'],
         actions: jsonData['actions'],
-        faculties: fac.toList(),
+        faculties: fac,
         professorName: buildProfessorName(jsonData));
   }
 
@@ -205,7 +205,7 @@ class Course {
   List<dynamic> actions;
 
   //final String name;
-  final List<String> faculties;
+  final Set<String> faculties;
   final List<Lecture> lecturesPerWeek;
 
   //final String description;
