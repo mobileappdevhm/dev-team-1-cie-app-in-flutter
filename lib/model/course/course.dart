@@ -15,7 +15,7 @@ class CourseBuilder {
   String shortName;
   List<dynamic> actions;
 
-  String faculty;
+  Set<String> faculties;
   List<Lecture> lecturesPerWeek;
   int hoursPerWeek;
   int ects;
@@ -71,7 +71,10 @@ class CourseBuilder {
   }
 
   CourseBuilder withFaculty(String faculty) {
-    this.faculty = faculty;
+    if (this.faculties == null) {
+      this.faculties = new Set<String>();
+    }
+    this.faculties.add(faculty);
     return this;
   }
 
@@ -121,7 +124,14 @@ class CourseBuilder {
   }
 
   factory CourseBuilder.fromJson(Map<String, dynamic> jsonData) {
-    String dep = ((jsonData['correlations'][0]['organiser']));
+    var correlations = jsonData['correlations'];
+    Set<String> fac = new Set<String>();
+    correlations.forEach((dynamic value) {
+      String organiser = value['organiser'];
+      if (organiser != null) {
+        fac.add(organiser.substring(3, organiser.length));
+      }
+    });
     return new CourseBuilder(
         id: jsonData['id'],
         description: buildDescription(jsonData),
@@ -132,7 +142,7 @@ class CourseBuilder {
         name: jsonData['name'],
         shortName: jsonData['shortName'],
         actions: jsonData['actions'],
-        faculty: dep.substring(3, dep.length),
+        faculties: fac,
         professorName: buildProfessorName(jsonData));
   }
 
@@ -146,7 +156,7 @@ class CourseBuilder {
       this.name,
       this.shortName,
       this.actions,
-      this.faculty,
+      this.faculties,
       this.professorName});
 
   Course build() {
@@ -172,7 +182,7 @@ class CourseBuilder {
         this.name,
         this.shortName,
         this.actions,
-        this.faculty,
+        this.faculties,
         this.lecturesPerWeek,
         this.hoursPerWeek,
         this.ects,
@@ -195,7 +205,7 @@ class Course {
   List<dynamic> actions;
 
   //final String name;
-  final String faculty;
+  final Set<String> faculties;
   final List<Lecture> lecturesPerWeek;
 
   //final String description;
@@ -217,7 +227,7 @@ class Course {
       this.shortName,
       this.actions,
       //this.name,
-      this.faculty,
+      this.faculties,
       this.lecturesPerWeek,
       //this.description,
       this.hoursPerWeek,
@@ -287,22 +297,7 @@ class DayTime {
 //Todo: This needs to be replaced with enum style of implementation in future see below
 class CourseDefinitions {
   static List<String> getDepartments() {
-    return [
-      "01",
-      "02",
-      "03",
-      "04",
-      "05",
-      "06",
-      "07",
-      "08",
-      "09",
-      "10",
-      "11",
-      "12",
-      "13",
-      "14"
-    ];
+    return departments;
   }
 
   static List<String> departments = [

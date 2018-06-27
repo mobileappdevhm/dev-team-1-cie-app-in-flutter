@@ -9,7 +9,15 @@ class CiEStyle {
     );
   }
 
-  static TextStyle getCoursesListFacultyStyle() {
+  static TextStyle getCoursesListFacultyStyle(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    if(width < 550.0){
+      return new TextStyle(
+        color: CiEColor.turquoise,
+        fontWeight: FontWeight.bold,
+        fontSize: 12.0,
+      );
+    }
     return new TextStyle(
       color: CiEColor.turquoise,
       fontWeight: FontWeight.bold,
@@ -24,7 +32,14 @@ class CiEStyle {
     );
   }
 
-  static TextStyle getCoursesTitleStyle() {
+  static TextStyle getCoursesTitleStyle(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    if(width < 550.0){
+      return new TextStyle(
+        color: CiEColor.gray,
+        fontSize: 16.0,
+      );
+    }
     return new TextStyle(
       color: CiEColor.gray,
       fontSize: 18.0,
@@ -223,14 +238,28 @@ class CiEStyle {
     );
   }
 
-  static TextStyle getCourseConflictNotificationStyle() {
+  static TextStyle getCourseConflictNotificationStyle(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    if(width < 550.0){
+      return new TextStyle(
+        fontSize: 13.0,
+        color: CiEColor.yellow,
+      );
+    }
     return new TextStyle(
       fontSize: 15.0,
       color: CiEColor.yellow,
     );
   }
 
-  static TextStyle getCourseConflictWarningStyle() {
+  static TextStyle getCourseConflictWarningStyle(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    if(width < 550.0){
+      return new TextStyle(
+        fontSize: 13.0,
+        color: CiEColor.red,
+      );
+    }
     return new TextStyle(
       fontSize: 15.0,
       color: CiEColor.red,
