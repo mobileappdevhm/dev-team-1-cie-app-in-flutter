@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cie_team1/generic/genericShowInstruction.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/analytics.dart';
@@ -232,6 +233,17 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
                 buildUserMetricsWidget(),
+                new Padding(
+                  padding: new EdgeInsets.only(top: 10.0),
+                ),
+                new RaisedButton(
+                  onPressed: () => _toggleIntroduction(context),
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: CiEStyle.getButtonBorderRadius()),
+                  color: CiEColor.red,
+                  child: new Text(StaticVariables.SHOW_INSTRUCTIONS,
+                      style: CiEStyle.getSettingsLogoutStyle()),
+                ),
               ],
             ),
           ),
@@ -294,5 +306,31 @@ class _SettingsState extends State<Settings> {
                 style: CiEStyle.getSettingsDisabledStyle()),
       ],
     );
+  }
+
+  void _toggleIntroduction(BuildContext context) {
+    //track click on introduction
+    Analytics.logEvent("settings_click", {"title": "introcuction"});
+
+    Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new Scaffold(
+                appBar: new AppBar(
+                  title: new Text(
+                    StaticVariables.SHOW_INSTRUCTIONS,
+                    style: CiEStyle.getAppBarTitleStyle(context),
+                  ),
+                  elevation: CiEStyle.getAppBarElevation(context),
+                  backgroundColor: CiEColor.red,
+                ),
+                body: new Column(
+                  children: <Widget>[
+                    GenericShowInstruction
+                        .showInstructions(null, null)
+                  ],
+                ),
+            )
+        ));
   }
 }

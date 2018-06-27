@@ -265,4 +265,19 @@ class CiEStyle {
       color: CiEColor.red,
     );
   }
+
+  static TextStyle getInstructionPageTextStyle() {
+    return new TextStyle(
+      fontSize: 18.0,
+      color: CiEColor.gray,
+    );
+  }
+
+  static TextStyle getInstructionPageHeadingStyle() {
+    return new TextStyle(
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
+      color: CiEColor.gray,
+    );
+  }
 }
