@@ -20,7 +20,7 @@ class CourseListItem extends StatelessWidget {
           courseListPresenter.getAvailability(id)),
       title: new Text(
         courseListPresenter.getTitle(id),
-        style: CiEStyle.getCoursesTitleStyle(),
+        style: CiEStyle.getCoursesTitleStyle(context),
         maxLines: 3,
         overflow: TextOverflow.ellipsis,
       ),
@@ -34,15 +34,15 @@ class CourseListItem extends StatelessWidget {
               new Padding(
                 padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
                 child: new Text(
-                  StaticVariables.FK + " " + courseListPresenter.getFaculty(id),
-                  style: CiEStyle.getCoursesListFacultyStyle(),
+                  courseListPresenter.getFacultiesBeautiful(id),
+                  style: CiEStyle.getCoursesListFacultyStyle(context),
                 ),
               ),
               new Padding(
                 //Calculated padding to align left side
                 padding: new EdgeInsets.fromLTRB(
                     0.0,
-                    (CiEStyle.getCoursesListFacultyStyle().fontSize -
+                    (CiEStyle.getCoursesListFacultyStyle(context).fontSize -
                             CiEStyle.getCoursesListTimeStyle().fontSize) /
                         2.0,
                     0.0,
@@ -54,7 +54,7 @@ class CourseListItem extends StatelessWidget {
               )
             ],
           ),
-          _getConflictWarning(id),
+          _getConflictWarning(id, context),
         ],
       ),
       trailing: inheritedChild,
@@ -62,16 +62,16 @@ class CourseListItem extends StatelessWidget {
     );
   }
 
-  Widget _getConflictWarning(id) {
+  Widget _getConflictWarning(int id, BuildContext context) {
     if (courseListPresenter.checkIfConflictsOtherFavoriteCourse(id)) {
       String textToShow;
       TextStyle textStyleToShow;
       if (courseListPresenter.getCourses()[id].isFavourite) {
         textToShow = StaticVariables.COURSE_CONFLICTS_WITH_OTHER_FAVORIT;
-        textStyleToShow = CiEStyle.getCourseConflictWarningStyle();
+        textStyleToShow = CiEStyle.getCourseConflictWarningStyle(context);
       } else {
         textToShow = StaticVariables.COURSE_CONFLICTS_WITH_FAVORIT;
-        textStyleToShow = CiEStyle.getCourseConflictNotificationStyle();
+        textStyleToShow = CiEStyle.getCourseConflictNotificationStyle(context);
       }
 
       return new Row(
@@ -90,7 +90,7 @@ class CourseListItem extends StatelessWidget {
       return new Padding(
           padding: new EdgeInsets.fromLTRB(
               0.0,
-              CiEStyle.getCourseConflictWarningStyle().fontSize + 3.0,
+              CiEStyle.getCourseConflictWarningStyle(context).fontSize + 3.0,
               0.0,
               0.0));
   }

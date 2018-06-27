@@ -185,12 +185,21 @@ class CourseListPresenter {
     return _courses.getCourses()[id].available;
   }
 
-  String getFaculty(int id) {
-    return _courses.getCourses()[id].faculty.toString();
+  List<String> getFaculty(int id) {
+    return _courses.getCourses()[id].faculties;
   }
 
-  String getFacultyBeautiful(int id) {
-    return "FK " + _courses.getCourses()[id].faculty.toString();
+  String getFacultyBeautiful(String department) {
+    return "FK " + department;
+  }
+
+  String getFacultiesBeautiful(int id) {
+    var ret = "";
+    _courses.getCourses()[id].faculties.forEach( (String department){
+      ret += ", " + getFacultyBeautiful(department);
+    });
+
+    return ret.substring(2);
   }
 
   String getTitle(int id) {
