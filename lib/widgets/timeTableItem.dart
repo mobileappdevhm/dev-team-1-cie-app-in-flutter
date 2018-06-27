@@ -22,7 +22,7 @@ class TimeTableItem extends StatelessWidget {
               new Expanded(
                 child: new Text(
                   lecture.course.name,
-                  style: CiEStyle.getCoursesTitleStyle(),
+                  style: CiEStyle.getCoursesTitleStyle(context),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),

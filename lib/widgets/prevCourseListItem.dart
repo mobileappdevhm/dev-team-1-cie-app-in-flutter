@@ -35,7 +35,7 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
                 new Expanded(
                   child: new Text(
                     "DP " + currentUserPresenter.getFaculty(id),
-                    style: CiEStyle.getCoursesListFacultyStyle(),
+                    style: CiEStyle.getCoursesListFacultyStyle(context),
                   ),
                 ),
                 new Text(

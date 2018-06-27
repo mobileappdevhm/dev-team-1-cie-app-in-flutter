@@ -172,7 +172,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 new Padding(padding: const EdgeInsets.only(top: 5.0)),
                 new Text(
-                  presenter.getFacultyBeautiful(id),
+                  presenter.getFacultiesBeautiful(id),
                   style: CiEStyle.getCourseDescriptionFacultyStyle(),
                 ),
                 new Text(
