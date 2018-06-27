@@ -27,7 +27,7 @@ class _SettingsState extends State<Settings> {
   final CurrentUserPresenter currentUserPresenter;
   int credits = 0;
   int engCredits = 0;
-  bool isMetricsEnabled = true;
+  bool isMetricsEnabled = false;
   bool isLoggedIn = false;
 
   _SettingsState(this.currentUserPresenter);
