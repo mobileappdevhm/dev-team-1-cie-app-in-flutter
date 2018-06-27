@@ -1,5 +1,6 @@
 import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class PrevCourseListItem extends StatefulWidget {
@@ -34,8 +35,9 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
               children: <Widget>[
                 new Expanded(
                   child: new Text(
-                    "DP " + currentUserPresenter.getFaculty(id),
-                    style: CiEStyle.getCoursesListFacultyStyle(),
+                    _getFacultiesBeautiful(
+                        currentUserPresenter.getFaculties(id)),
+                    style: CiEStyle.getCoursesListFacultyStyle(context),
                   ),
                 ),
                 new Text(
@@ -46,5 +48,14 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
             ),
           ],
         ));
+  }
+
+  String _getFacultiesBeautiful(Set<String> departments) {
+    var ret = "";
+    departments.forEach((String department) {
+      ret += ", " + StaticVariables.FK + " " + department;
+    });
+
+    return ret.substring(2);
   }
 }

@@ -41,7 +41,7 @@ class CourseListState extends State<CourseList> {
   final TextEditingController c1 = new TextEditingController();
   final bool shouldFilterByFavorites;
   bool shouldSearch = false;
-  String filter = "09";
+  String filter = "13";
   String searchValue = "";
   bool coursesRegistered = false;
   FocusNode focus;
@@ -87,7 +87,8 @@ class CourseListState extends State<CourseList> {
     if (courseListPresenter.getCourses().isEmpty) {
       return new Column(
         children: <Widget>[
-          GenericShowInstruction.showInstructions(() => handleRefreshIndicator(context, courseListPresenter)),
+          GenericShowInstruction.showInstructions(
+              () => handleRefreshIndicator(context, courseListPresenter)),
         ],
       );
     } else {
@@ -162,19 +163,16 @@ class CourseListState extends State<CourseList> {
       }
 
       //Build the tiles of the course list / favorites list
-      for (int i = 0; i < courseListPresenter
-          .getCourses()
-          .length; i++) {
+      for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
         if (shouldFilterByFavorites == false &&
-            courseListPresenter.getFaculty(i) == filter ||
+                courseListPresenter.getFaculties(i).contains(filter) ||
             (shouldFilterByFavorites == true &&
                 courseListPresenter.getFavourite(i)) ||
             (shouldFilterByFavorites == true &&
                 courseListPresenter.getWillChangeOnViewChange(i))) {
           if (shouldSearch == false ||
               (courseListPresenter.getTitle(i).contains(searchValue))) {
-            widgets
-                .add(
+            widgets.add(
                 new CourseListItem(courseListPresenter, i, favoriteIcon(i)));
             widgets.add(new Divider());
           }
