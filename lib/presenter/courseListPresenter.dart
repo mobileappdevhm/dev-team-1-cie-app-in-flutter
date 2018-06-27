@@ -76,8 +76,8 @@ class CourseListPresenter {
                     new DayTime(end.hour, end.minute),
                     roomNumber)
               ])
-              .withHoursPerWeek(2)
-              .withEcts(2)
+              .withHoursPerWeek(-1)
+              .withEcts(-1)
               //TODO replace with professor email if available
               .withProfessorEmail(StaticVariables.MOCK_EMAIL)
               .withIsFavorite(false);

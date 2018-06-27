@@ -223,7 +223,10 @@ class _CourseDetailsState extends State<CourseDetails> {
                   new Text(StaticVariables.ECTS + ":",
                       style: CiEStyle.getCourseDetailsFooterTextStyle()),
                   new Text(
-                    " " + presenter.getEcts(id),
+                    " " +
+                        (presenter.getEcts(id) == "-1"
+                            ? "N/A"
+                            : presenter.getEcts(id).toString()),
                     style: CiEStyle.getCourseDetailsFooterTextStyleBolt(),
                   )
                 ],
@@ -237,7 +240,11 @@ class _CourseDetailsState extends State<CourseDetails> {
                     StaticVariables.HOURS_PER_WEEK + ":",
                     style: CiEStyle.getCourseDetailsFooterTextStyle(),
                   ),
-                  new Text(" " + presenter.getHoursPerWeek(id),
+                  new Text(
+                      " " +
+                          (presenter.getHoursPerWeek(id) == "-1"
+                              ? "N/A"
+                              : presenter.getHoursPerWeek(id).toString()),
                       style: CiEStyle.getCourseDetailsFooterTextStyleBolt()),
                 ],
               ),
