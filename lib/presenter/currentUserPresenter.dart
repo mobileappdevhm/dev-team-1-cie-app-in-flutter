@@ -62,7 +62,7 @@ class CurrentUserPresenter {
   int getDep3Credits() {
     var sum = 0;
     _currentUser.getCurrentUser().prevCourses.forEach((course) {
-      if (course.faculty == "3") {
+      if (course.faculties.contains("03")) {
         sum = sum + course.ects;
       }
     });
@@ -81,7 +81,7 @@ class CurrentUserPresenter {
   }
 
   String getFaculty(int id) {
-    return _currentUser.getCurrentUser().prevCourses[id].faculty.toString();
+    return _currentUser.getCurrentUser().prevCourses[id].faculties.toString();
   }
 
   void toggleIsMetricsEnabled() {
