@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
@@ -91,25 +89,22 @@ class GenericShowInstruction {
             ],
           ),
           new Padding(padding: new EdgeInsets.only(bottom: 20.0)),
-          onPressRefresh == null ? new Expanded(child: new Text("Plase go to courses page and refresh by swiping down. Initial setup is already done.")) :
-          new RaisedButton(
-            color: CiEColor.lightGray,
-              onPressed: () => onPressRefresh(),
-              child: new Text("Download courses now"))
+          onPressRefresh == null
+              ? new Row(
+                  children: <Widget>[
+                    new Expanded(
+                        child: new Text(
+                            "Plase go to courses page and refresh by swiping down.",
+                            style: CiEStyle.getInstructionPageTextStyle()))
+                  ],
+                )
+              : new RaisedButton(
+                  color: CiEColor.lightGray,
+                  onPressed: () => onPressRefresh(),
+                  child: new Text("Download courses now")),
         ],
       ),
     ));
-  }
-
-  static Widget getAddFavouritesFirstWidget() {
-    return _getInstructionWidget(
-      new Text(
-        "Your timetable is empty so far. It can only be "
-            "displayed once you have added courses to your favorites. Open the Courses tab "
-            "and add courses to your favorites.",
-        style: CiEStyle.getInstructionPageTextStyle(),
-      ),
-    );
   }
 
   static Widget _getInstructionWidget(Widget text) {
