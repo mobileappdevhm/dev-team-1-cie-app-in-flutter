@@ -91,4 +91,6 @@ class StaticVariables {
       "This course is unlikely to be chosen together with another favorite course:";
 
   static const String MOCK_EMAIL = "example@hm.edu";
+
+  static String SHOW_INSTRUCTIONS = "Show App Instructions";
 }
