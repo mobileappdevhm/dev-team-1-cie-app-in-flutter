@@ -63,15 +63,15 @@ void main() {
 
   group("facultycheck", () {
     test('1', () {
-      expect(sut.getFaculty(1), CoursesMock.generateMockDepartment(2));
+      expect(sut.getFaculties(1), CoursesMock.generateMockDepartment(2));
     });
 
     test('2', () {
-      expect(sut.getFaculty(2), CoursesMock.generateMockDepartment(3));
+      expect(sut.getFaculties(2), CoursesMock.generateMockDepartment(3));
     });
 
     test('3', () {
-      expect(sut.getFaculty(3), CoursesMock.generateMockDepartment(4));
+      expect(sut.getFaculties(3), CoursesMock.generateMockDepartment(4));
     });
   });
 
