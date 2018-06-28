@@ -199,6 +199,18 @@ void main() {
                   .sortValue(),
           true);
     });
+
+    test('25', () {
+      expect( CourseAvailabilityUtility.intToCourseAvailability(0), CourseAvailability.AVAILABLE);
+    });
+
+    test('26', () {
+      expect( CourseAvailabilityUtility.intToCourseAvailability(1), CourseAvailability.PENDING);
+    });
+
+    test('27', () {
+      expect( CourseAvailabilityUtility.intToCourseAvailability(2), CourseAvailability.UNAVAILABLE);
+    });
   });
 
   group('courseBuilder test', () {
