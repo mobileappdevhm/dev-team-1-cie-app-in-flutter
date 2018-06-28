@@ -221,7 +221,7 @@ void main() {
       }
     });
 
-    testWidgets('4 widgetTest for settings', (WidgetTester tester) async {
+    testWidgets('4 widgetTest for settings pressing show instruction', (WidgetTester tester) async {
       // Tells the tester to build a UI based on the widget tree passed to it
       ValueChanged<bool> boolean;
       await tester.pumpWidget(
