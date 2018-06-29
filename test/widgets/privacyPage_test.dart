@@ -1,6 +1,7 @@
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/privacyPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 @Timeout(const Duration(seconds: 20))
@@ -58,7 +59,8 @@ void main() {
             expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 1) {
-            expect(widget.data, 'Contact');
+            expect(widget.data, StaticVariables.CONTACT);
+            await tester.tap(find.byWidget(widget));
             counter++;
           } else if (counter == 2) {
             expect(widget.data, StaticVariables.CHANGE_TO_GERMAN);
