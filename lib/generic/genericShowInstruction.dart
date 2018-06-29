@@ -35,7 +35,7 @@ class GenericShowInstruction {
             children: <Widget>[
               new Expanded(
                   child: new Text(
-                StaticVariables.INSTRUCTIONS_FAVORITES,
+                StaticVariables.INSTRUCTIONS_TIP,
                 style: CiEStyle.getInstructionPageTextStyle(),
               )),
               GenericIcon.buildGenericGetHeartIcon(),
@@ -61,7 +61,7 @@ class GenericShowInstruction {
             children: <Widget>[
               new Expanded(
                   child: new Text(
-                StaticVariables.INSTRUCTIONS_CONFLICT,
+                StaticVariables.INSTRUCTIONS_FAVORITES,
                 style: CiEStyle.getInstructionPageTextStyle(),
               )),
               GenericIcon.buildGenericGetClockIcon(),

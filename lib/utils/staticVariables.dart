@@ -95,7 +95,6 @@ class StaticVariables {
   static const String SHOW_INSTRUCTIONS = "Show App Instructions";
 
   static const String INSTRUCTIONS_TITLE = "Instructions";
-
   static const String INSTRUCTIONS_BASIC = "You haven't downloaded any course data " +
       "yet. At the bottom of this page, you can download the courses for the first time. " +
       "After downloading, you may swipe down on the Favorites and Courses page to refresh and update data.";
@@ -105,7 +104,7 @@ class StaticVariables {
   static const String INSTRUCTIONS_TRAFFIC_LIGHT =
       "You will notice that each course on the left side is color coded" +
           "You cannot attend red courses, while you may register for orange or green courses.";
-  static const String INSTRUCTIONS_CONFLICT =
+  static const String INSTRUCTIONS_FAVORITES =
       "If you favorite courses which have a time scheduling conflict, you will see this " +
           "during course selection. Click on the course for more details.";
   static const String INSTRUCTIONS_LOTTERY =
@@ -117,8 +116,7 @@ class StaticVariables {
   static const String INSTRUCTIONS_BUTTON_TEXT =
       "Download available courses and restart now";
   static const String INSTRUCTIONS_PLEASE_GO_TO =
-      "Please visit the Courses tab and refresh by swiping down.";
-
+      "Plase visit the Courses tab and refresh by swiping down.";
   static const String PRIVACY_TEXT_GERMAN = "Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten (nachfolgend kurz “Daten”) innerhalb unseres Onlineangebotes und der mit ihm verbundenen Webseiten, Funktionen und Inhalte sowie externen Onlinepräsenzen, wie z.B. unser Social Media Profile auf (nachfolgend gemeinsam bezeichnet als “Onlineangebot”). Im Hinblick auf die verwendeten Begrifflichkeiten, wie z.B. “Verarbeitung” oder “Verantwortlicher” verweisen wir auf die Definitionen im Art. 4 der Datenschutzgrundverordnung (DSGVO)\n\n" +
       "Arten der verarbeiteten Daten:\n" +
       "- Bestandsdaten (z.B., Namen, Adressen). \n- Kontaktdaten (z.B., E-Mail, Telefonnummern). \n- Inhaltsdaten (z.B., Texteingaben, Fotografien, Videos). \n- Nutzungsdaten (z.B., Interesse an Inhalten, Zugriffszeiten). \n- Meta-/Kommunikationsdaten (z.B., Geräte-Informationen, IP-Adressen)." +
