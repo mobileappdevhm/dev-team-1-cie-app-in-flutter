@@ -94,6 +94,33 @@ class StaticVariables {
 
   static const String SHOW_INSTRUCTIONS = "Show App Instructions";
 
+  static const String INSTRUCTIONS_TITLE = "Instructions";
+  static const String INSTRUCTIONS_BASIC =
+      "Unfortunately you have not downloaded any course data " +
+          "yet. At the end of the instruction you can download the courses for the fist time. " +
+          "After finishing the setup you can swipe down on favorite and courses page at any time to refresh.";
+  static const String INSTRUCTIONS_TIP =
+      "Afterwards you will be able to to select favorite courses.\n" +
+          "Tipp: Use the filter at top of courses page to filter courses. Then press the heart icon.";
+  static const String INSTRUCTIONS_TRAFFIC_LIGHT =
+      "You will notice that each course on the left side is dimpled " +
+          "red, orange or green. Red means you can't attend this course. " +
+          "Orange and green courses can be attended.";
+  static const String INSTRUCTIONS_FAVORITES =
+      "If you add courses to your favorites, which may lead to a time " +
+          "conflict, you can see this directly in the course selection. Click " +
+          "on the course for details.";
+
+  static const String INSTRUCTIONS_LOTTERY =
+      "Now when you have selected your favorites visit Favorite " +
+          "tab and hand in your courses for lottery. And don't foreget to " +
+          "check out your Timetable. By the way you can use the Timetable even if " +
+          "you don't use lottery function.";
+  static const String INSTRUCTIONS_BUTTON_TEXT =
+      "Download courses now and restart";
+  static const String INSTRUCTIONS_PLEASE_GO_TO =
+      "Plase go to courses page and refresh by swiping down.";
+
   static const String PRIVACY_TEXT_GERMAN = "Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten (nachfolgend kurz “Daten”) innerhalb unseres Onlineangebotes und der mit ihm verbundenen Webseiten, Funktionen und Inhalte sowie externen Onlinepräsenzen, wie z.B. unser Social Media Profile auf (nachfolgend gemeinsam bezeichnet als “Onlineangebot”). Im Hinblick auf die verwendeten Begrifflichkeiten, wie z.B. “Verarbeitung” oder “Verantwortlicher” verweisen wir auf die Definitionen im Art. 4 der Datenschutzgrundverordnung (DSGVO)\n\n" +
       "Arten der verarbeiteten Daten:\n" +
       "- Bestandsdaten (z.B., Namen, Adressen). \n- Kontaktdaten (z.B., E-Mail, Telefonnummern). \n- Inhaltsdaten (z.B., Texteingaben, Fotografien, Videos). \n- Nutzungsdaten (z.B., Interesse an Inhalten, Zugriffszeiten). \n- Meta-/Kommunikationsdaten (z.B., Geräte-Informationen, IP-Adressen)." +
@@ -101,9 +128,9 @@ class StaticVariables {
       "Besucher und Nutzer des Onlineangebotes (Nachfolgend bezeichnen wir die betroffenen Personen zusammenfassend auch als “Nutzer”)." +
       "\n\nZweck der Verarbeitung\n" +
       "\n- Zurverfügungstellung des Onlineangebotes, seiner Funktionen und Inhalte."
-          "\n- Beantwortung von Kontaktanfragen und Kommunikation mit Nutzern. "
-          "\n- Sicherheitsmaßnahmen. "
-          "\n- Reichweitenmessung" +
+      "\n- Beantwortung von Kontaktanfragen und Kommunikation mit Nutzern. "
+      "\n- Sicherheitsmaßnahmen. "
+      "\n- Reichweitenmessung" +
       "\n\nVerwendete Begrifflichkeiten\n" +
       "“Personenbezogene Daten” sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person (im Folgenden “betroffene Person”) beziehen; als identifizierbar wird eine natürliche Person angesehen, die direkt oder indirekt, insbesondere mittels Zuordnung zu einer Kennung wie einem Namen, zu einer Kennnummer, zu Standortdaten, zu einer Online-Kennung (z.B. Cookie) oder zu einem oder mehreren besonderen Merkmalen identifiziert werden kann, die Ausdruck der physischen, physiologischen, genetischen, psychischen, wirtschaftlichen, kulturellen oder sozialen Identität dieser natürlichen Person sind." +
       "\n“Verarbeitung” ist jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführte Vorgang oder jede solche Vorgangsreihe im Zusammenhang mit personenbezogenen Daten. Der Begriff reicht weit und umfasst praktisch jeden Umgang mit Daten." +
@@ -164,9 +191,9 @@ class StaticVariables {
       "Visitors and users of the online offer (hereinafter referred to as “Users”)." +
       "\n\nPurpose of processing\n" +
       "\n- Provision of the online offer, its functions and contents."
-          "\n- Response to contact requests and communication with users. "
-          "\n- Safety precautions. "
-          "\n- Range measurement" +
+      "\n- Response to contact requests and communication with users. "
+      "\n- Safety precautions. "
+      "\n- Range measurement" +
       "\n\nTerms usage\n" +
       "“Personal Information” is all information that relates to an identified or identifiable natural person (in what follows “affected individual“) ;identifiable is a natural person who can be identified, directly or indirectly, in particular by association with an identifier such as a name, an identification number, location data, an online identifier (e.g. Cookie) or one or more special features which express the physical, physiological, genetic, psychological, economic, cultural or social identity of that natural person." +
       "\n“Processing” means any operation or series of operations carried out with or without the aid of automated procedures in connection with personal data. The term goes a long way and covers practically every handling of data." +

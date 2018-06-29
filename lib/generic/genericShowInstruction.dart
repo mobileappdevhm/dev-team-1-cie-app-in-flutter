@@ -11,7 +11,7 @@ class GenericShowInstruction {
       child: new Column(
         children: <Widget>[
           new Text(
-            "Instructions",
+            StaticVariables.INSTRUCTIONS_TITLE,
             style: CiEStyle.getInstructionPageHeadingStyle(),
           ),
           new Padding(padding: new EdgeInsets.only(bottom: 10.0)),
@@ -22,9 +22,7 @@ class GenericShowInstruction {
               GenericIcon.buildGenericGetArchiveIcon(),
               new Expanded(
                   child: new Text(
-                "Unfortunately you have not downloaded any course data "
-                    "yet. At the end of the instruction you can download the courses for the fist time. "
-                    "After finishing the setup you can swipe down on favorite and courses page at any time to refresh.",
+                StaticVariables.INSTRUCTIONS_BASIC,
                 style: CiEStyle.getInstructionPageTextStyle(),
               ))
             ],
@@ -36,8 +34,7 @@ class GenericShowInstruction {
             children: <Widget>[
               new Expanded(
                   child: new Text(
-                "Afterwards you will be able to to select favorite courses.\n"
-                    "Tipp: Use the filter at top of courses page to filter courses. Then press the heart icon.",
+                StaticVariables.INSTRUCTIONS_TIP,
                 style: CiEStyle.getInstructionPageTextStyle(),
               )),
               GenericIcon.buildGenericGetHeartIcon(),
@@ -51,9 +48,7 @@ class GenericShowInstruction {
               GenericIcon.buildGenericGetTrafficIcon(),
               new Expanded(
                   child: new Text(
-                "You will notice that each course on the left side is dimpled "
-                    "red, orange or green. Red means you can't attend this course. "
-                    "Orange and green courses can be attended.",
+                StaticVariables.INSTRUCTIONS_TRAFFIC_LIGHT,
                 style: CiEStyle.getInstructionPageTextStyle(),
               )),
             ],
@@ -65,9 +60,7 @@ class GenericShowInstruction {
             children: <Widget>[
               new Expanded(
                   child: new Text(
-                "If you add courses to your favorites, which may lead to a time "
-                    "conflict, you can see this directly in the course selection. Click "
-                    "on the course for details.",
+                StaticVariables.INSTRUCTIONS_FAVORITES,
                 style: CiEStyle.getInstructionPageTextStyle(),
               )),
               GenericIcon.buildGenericGetClockIcon(),
@@ -81,10 +74,7 @@ class GenericShowInstruction {
               GenericIcon.buildGenericGetHappyIcon(),
               new Expanded(
                   child: new Text(
-                "Now when you have selected your favorites visit Favorite "
-                    "tab and hand in your courses for lottery. And don't foreget to "
-                    "check out your Timetable. By the way you can use the Timetable even if "
-                    "you don't use lottery function.",
+                StaticVariables.INSTRUCTIONS_LOTTERY,
                 style: CiEStyle.getInstructionPageTextStyle(),
               )),
             ],
@@ -95,14 +85,14 @@ class GenericShowInstruction {
                   children: <Widget>[
                     new Expanded(
                         child: new Text(
-                            "Plase go to courses page and refresh by swiping down.",
+                            StaticVariables.INSTRUCTIONS_PLEASE_GO_TO,
                             style: CiEStyle.getInstructionPageTextStyle()))
                   ],
                 )
               : new RaisedButton(
                   color: CiEColor.lightGray,
                   onPressed: () => _toggleRefresh(onPressRefresh, context),
-                  child: new Text("Download courses now and restart")),
+                  child: new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT)),
         ],
       ),
     ));
