@@ -88,7 +88,8 @@ class CourseListState extends State<CourseList> {
       return new Column(
         children: <Widget>[
           GenericShowInstruction.showInstructions(
-              () => handleRefreshIndicator(context, courseListPresenter), context),
+              () => handleRefreshIndicator(context, courseListPresenter),
+              context),
         ],
       );
     } else {
@@ -108,21 +109,28 @@ class CourseListState extends State<CourseList> {
         //Select department to filter for
         EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
         String departmentLabel = "Department ";
+        List<DropdownMenuItem<String>> departments =
+            List<DropdownMenuItem<String>>();
+        departments.add(new DropdownMenuItem<String>(
+          value: "",
+          child: new Text("All Departments", overflow: TextOverflow.clip),
+        ));
+        departments.addAll(CourseDefinitions.departments.map((String value) {
+          if (value != null) {
+            return new DropdownMenuItem<String>(
+              value: value,
+              child: new Text(departmentLabel + value,
+                  overflow: TextOverflow.clip),
+            );
+          }
+        }).toList());
         widgets.add(new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Container(
                   padding: pad,
                   child: new DropdownButton<String>(
-                    items: CourseDefinitions.departments.map((String value) {
-                      if (value != null) {
-                        return new DropdownMenuItem<String>(
-                          value: value,
-                          child: new Text(departmentLabel + value,
-                              overflow: TextOverflow.clip),
-                        );
-                      }
-                    }).toList(),
+                    items: departments,
                     onChanged: (String val) {
                       setState(() {
                         this.filter = val;
@@ -164,12 +172,7 @@ class CourseListState extends State<CourseList> {
 
       //Build the tiles of the course list / favorites list
       for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
-        if (shouldFilterByFavorites == false &&
-                courseListPresenter.getFaculties(i).contains(filter) ||
-            (shouldFilterByFavorites == true &&
-                courseListPresenter.getFavourite(i)) ||
-            (shouldFilterByFavorites == true &&
-                courseListPresenter.getWillChangeOnViewChange(i))) {
+        if (_shouldShowCourse(i)) {
           if (shouldSearch == false ||
               (courseListPresenter.getTitle(i).contains(searchValue))) {
             widgets.add(
@@ -189,6 +192,17 @@ class CourseListState extends State<CourseList> {
           child: new ListView(children: widgets),
           onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
           color: CiEColor.mediumGray);
+    }
+  }
+
+  bool _shouldShowCourse(int i) {
+    if (shouldFilterByFavorites == false) {
+      //return true if department is searched
+      return courseListPresenter.getFaculties(i).toString().contains(filter);
+    } else {
+      //return true if course is favorite or is temporary available
+      return courseListPresenter.getFavourite(i) ||
+          courseListPresenter.getWillChangeOnViewChange(i);
     }
   }
 
