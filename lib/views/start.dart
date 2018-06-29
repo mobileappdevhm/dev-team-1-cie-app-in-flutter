@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/model/user/user.dart';
 import 'package:cie_team1/utils/analytics.dart';
 import 'package:cie_team1/utils/cieColor.dart';
@@ -93,6 +92,8 @@ class _WelcomePageState extends State<WelcomePage>
         if (builder.firstName != null && builder.lastName != null) {
           //if valid user was stored previously redirect to tabs
           Navigator.of(context).pushReplacementNamed(Routes.TabPages);
+          //return is dirty but seems to be necessary
+          return;
         }
       }
       //if user settings were not stored, not available or there was no valid user redirect to login
