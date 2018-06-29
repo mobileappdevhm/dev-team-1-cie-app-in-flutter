@@ -44,8 +44,13 @@ class LoginFormState extends State<LoginForm> {
       Analytics.setAnalytics(true);
     };
 
-    GenericAlert.confirm(context, no, yes,
-        "We are collecting anonymous user data to check which views and features are mainly used. Please decide if you want to allow this.", "It's ok!", "I don't want this!");
+    GenericAlert.confirm(
+        context,
+        no,
+        yes,
+        "We are collecting anonymous user data to check which views and features are mainly used. Please decide if you want to allow this.",
+        "It's ok!",
+        "I don't want this!");
 
     Analytics.setCurrentScreen("login_screen");
   }

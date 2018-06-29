@@ -11,7 +11,7 @@ class CiEStyle {
 
   static TextStyle getCoursesListFacultyStyle(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    if(width < 550.0){
+    if (width < 550.0) {
       return new TextStyle(
         color: CiEColor.turquoise,
         fontWeight: FontWeight.bold,
@@ -34,7 +34,7 @@ class CiEStyle {
 
   static TextStyle getCoursesTitleStyle(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    if(width < 550.0){
+    if (width < 550.0) {
       return new TextStyle(
         color: CiEColor.gray,
         fontSize: 16.0,
@@ -240,7 +240,7 @@ class CiEStyle {
 
   static TextStyle getCourseConflictNotificationStyle(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    if(width < 550.0){
+    if (width < 550.0) {
       return new TextStyle(
         fontSize: 13.0,
         color: CiEColor.yellow,
@@ -254,7 +254,7 @@ class CiEStyle {
 
   static TextStyle getCourseConflictWarningStyle(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    if(width < 550.0){
+    if (width < 550.0) {
       return new TextStyle(
         fontSize: 13.0,
         color: CiEColor.red,

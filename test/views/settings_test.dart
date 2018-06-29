@@ -84,7 +84,7 @@ void main() {
             expect(widget.data, StaticVariables.TAKEN_COURSES);
             counter++;
           } else if (counter == 14) {
-            expect(widget.data.isNotEmpty,true); // is Metric button
+            expect(widget.data.isNotEmpty, true); // is Metric button
             counter++;
           } else if (counter == 15) {
             expect(widget.data, StaticVariables.SHOW_INSTRUCTIONS);
@@ -221,7 +221,8 @@ void main() {
       }
     });
 
-    testWidgets('4 widgetTest for settings pressing show instruction', (WidgetTester tester) async {
+    testWidgets('4 widgetTest for settings pressing show instruction',
+        (WidgetTester tester) async {
       // Tells the tester to build a UI based on the widget tree passed to it
       ValueChanged<bool> boolean;
       await tester.pumpWidget(
@@ -308,6 +309,5 @@ void main() {
         }
       }
     });
-
   });
 }

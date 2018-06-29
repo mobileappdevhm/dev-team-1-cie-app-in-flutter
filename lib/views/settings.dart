@@ -316,21 +316,19 @@ class _SettingsState extends State<Settings> {
         context,
         new MaterialPageRoute(
             builder: (context) => new Scaffold(
-                appBar: new AppBar(
-                  title: new Text(
-                    StaticVariables.SHOW_INSTRUCTIONS,
-                    style: CiEStyle.getAppBarTitleStyle(context),
+                  appBar: new AppBar(
+                    title: new Text(
+                      StaticVariables.SHOW_INSTRUCTIONS,
+                      style: CiEStyle.getAppBarTitleStyle(context),
+                    ),
+                    elevation: CiEStyle.getAppBarElevation(context),
+                    backgroundColor: CiEColor.red,
                   ),
-                  elevation: CiEStyle.getAppBarElevation(context),
-                  backgroundColor: CiEColor.red,
-                ),
-                body: new Column(
-                  children: <Widget>[
-                    GenericShowInstruction
-                        .showInstructions(null, null)
-                  ],
-                ),
-            )
-        ));
+                  body: new Column(
+                    children: <Widget>[
+                      GenericShowInstruction.showInstructions(null, null)
+                    ],
+                  ),
+                )));
   }
 }

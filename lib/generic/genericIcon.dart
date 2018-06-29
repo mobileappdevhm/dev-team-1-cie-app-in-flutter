@@ -97,68 +97,61 @@ class GenericIcon {
 
   static Widget buildGenericGetArchiveIcon() {
     return new Container(
-      height: CiEStyle.getCoursesListIconSize()*2,
-      alignment: Alignment.topCenter,
-      padding: new EdgeInsets.only(right: 20.0),
+        height: CiEStyle.getCoursesListIconSize() * 2,
+        alignment: Alignment.topCenter,
+        padding: new EdgeInsets.only(right: 20.0),
         child: new Icon(
           const IconData(0xe149, fontFamily: 'MaterialIcons'),
-          size: CiEStyle.getCoursesListIconSize()*2,
+          size: CiEStyle.getCoursesListIconSize() * 2,
           color: CiEColor.gray,
-        )
-    );
+        ));
   }
 
   static Widget buildGenericGetHeartIcon() {
     return new Container(
-        height: CiEStyle.getCoursesListIconSize()*2,
+        height: CiEStyle.getCoursesListIconSize() * 2,
         alignment: Alignment.topCenter,
         padding: new EdgeInsets.only(left: 20.0),
         child: new Icon(
           const IconData(0xe87e, fontFamily: 'MaterialIcons'),
-          size: CiEStyle.getCoursesListIconSize()*2,
+          size: CiEStyle.getCoursesListIconSize() * 2,
           color: CiEColor.red,
-        )
-    );
+        ));
   }
 
   static Widget buildGenericGetClockIcon() {
     return new Container(
-        height: CiEStyle.getCoursesListIconSize()*2,
+        height: CiEStyle.getCoursesListIconSize() * 2,
         alignment: Alignment.topCenter,
         padding: new EdgeInsets.only(left: 20.0),
         child: new Icon(
           const IconData(0xe01b, fontFamily: 'MaterialIcons'),
-          size: CiEStyle.getCoursesListIconSize()*2,
+          size: CiEStyle.getCoursesListIconSize() * 2,
           color: CiEColor.green,
-        )
-    );
+        ));
   }
 
   static Widget buildGenericGetTrafficIcon() {
     return new Container(
-        height: CiEStyle.getCoursesListIconSize()*2,
+        height: CiEStyle.getCoursesListIconSize() * 2,
         alignment: Alignment.topCenter,
         padding: new EdgeInsets.only(right: 20.0),
         child: new Icon(
           const IconData(0xe565, fontFamily: 'MaterialIcons'),
-          size: CiEStyle.getCoursesListIconSize()*2,
+          size: CiEStyle.getCoursesListIconSize() * 2,
           color: CiEColor.gray,
-        )
-    );
+        ));
   }
 
   static Widget buildGenericGetHappyIcon() {
     return new Container(
-        height: CiEStyle.getCoursesListIconSize()*2,
+        height: CiEStyle.getCoursesListIconSize() * 2,
         alignment: Alignment.topCenter,
         padding: new EdgeInsets.only(right: 20.0),
         child: new Icon(
           const IconData(0xe815, fontFamily: 'MaterialIcons'),
-          size: CiEStyle.getCoursesListIconSize()*2,
+          size: CiEStyle.getCoursesListIconSize() * 2,
           color: CiEColor.green,
-        )
-    );
+        ));
   }
-
-
 }

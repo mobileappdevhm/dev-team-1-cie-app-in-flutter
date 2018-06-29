@@ -12,20 +12,30 @@ void main() {
 
   group("facultycheck", () {
     test('1', () {
-      expect(sut.getFaculties(1).contains(CoursesMock.generateMockDepartment(2)), true);
+      expect(
+          sut.getFaculties(1).contains(CoursesMock.generateMockDepartment(2)),
+          true);
     });
 
     test('2', () {
-      expect(sut.getFaculties(2).contains(CoursesMock.generateMockDepartment(3)), true);
+      expect(
+          sut.getFaculties(2).contains(CoursesMock.generateMockDepartment(3)),
+          true);
     });
 
     test('3', () {
-      expect(sut.getFaculties(3).contains(CoursesMock.generateMockDepartment(4)), true);
+      expect(
+          sut.getFaculties(3).contains(CoursesMock.generateMockDepartment(4)),
+          true);
     });
 
     test('4', () {
       for (int i = 1; i < 99; i++) {
-        expect(sut.getFaculties(i).contains(CoursesMock.generateMockDepartment(i + 1)), true);
+        expect(
+            sut
+                .getFaculties(i)
+                .contains(CoursesMock.generateMockDepartment(i + 1)),
+            true);
       }
     });
   });
