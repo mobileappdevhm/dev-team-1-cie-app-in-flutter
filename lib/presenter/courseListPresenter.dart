@@ -169,16 +169,8 @@ class CourseListPresenter {
     return _coursesToDeleteOnViewChange.contains(id);
   }
 
-  void toggleShowCourseDescription(int id) {
-    //Todo: Implementation needed. See Issue #12
-  }
-
   List<Course> getCourses() {
     return _courses.getCourses();
-  }
-
-  List<Course> getPrevCourses(CurrentUser currentUser) {
-    return currentUser.getCurrentUser().prevCourses;
   }
 
   CourseAvailability getAvailability(int id) {
