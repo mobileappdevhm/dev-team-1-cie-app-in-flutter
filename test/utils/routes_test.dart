@@ -1,7 +1,4 @@
 import 'package:cie_team1/utils/routes.dart';
-import 'package:cie_team1/views/login.dart';
-import 'package:cie_team1/views/start.dart';
-import 'package:cie_team1/views/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:test/test.dart';
 
