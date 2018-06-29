@@ -99,13 +99,13 @@ class StaticVariables {
       "You haven't downloaded any course data " +
           "yet. At the bottom of this page, you can download the courses for the first time. " +
           "After downloading, you may swipe down on the Favorites and Courses page to refresh and update data.";
-  static const String INSTRUCTIONS_TIP =
+  static const String INSTRUCTIONS_FAVORITES =
       "Afterwards you will be able to to select favorite courses.\n" +
           "Tip: Use the filter at top of courses page to filter courses. Then press the heart icon.";
   static const String INSTRUCTIONS_TRAFFIC_LIGHT =
       "You will notice that each course on the left side is color coded" +
           "You cannot attend red courses, while you may register for orange or green courses.";
-  static const String INSTRUCTIONS_FAVORITES =
+  static const String INSTRUCTIONS_CONFLICT =
       "If you favorite courses which have a time scheduling conflict, you will see this " +
           "during course selection. Click on the course for more details.";
   static const String INSTRUCTIONS_LOTTERY =
