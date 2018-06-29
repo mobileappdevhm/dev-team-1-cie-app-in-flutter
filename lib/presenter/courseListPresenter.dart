@@ -4,7 +4,6 @@ import 'package:cie_team1/di/courses_di.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/model/course/courses.dart';
 import 'package:cie_team1/model/course/details/date.dart';
-import 'package:cie_team1/model/user/currentUser.dart';
 import 'package:cie_team1/utils/fileStore.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
@@ -169,16 +168,8 @@ class CourseListPresenter {
     return _coursesToDeleteOnViewChange.contains(id);
   }
 
-  void toggleShowCourseDescription(int id) {
-    //Todo: Implementation needed. See Issue #12
-  }
-
   List<Course> getCourses() {
     return _courses.getCourses();
-  }
-
-  List<Course> getPrevCourses(CurrentUser currentUser) {
-    return currentUser.getCurrentUser().prevCourses;
   }
 
   CourseAvailability getAvailability(int id) {
@@ -195,7 +186,7 @@ class CourseListPresenter {
 
   String getFacultiesBeautiful(int id) {
     var ret = "";
-    _courses.getCourses()[id].faculties.forEach( (String department){
+    _courses.getCourses()[id].faculties.forEach((String department) {
       ret += ", " + getFacultyBeautiful(department);
     });
 

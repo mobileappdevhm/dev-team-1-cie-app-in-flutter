@@ -94,18 +94,13 @@ class MyTestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-        title: new Text(
-        "Test",
-        style: CiEStyle.getAppBarTitleStyle(context),
-    ),
-    elevation: CiEStyle.getAppBarElevation(context),
-    backgroundColor: CiEColor.red,
-    ),
-    body: new Center(
-        child: GenericIcon.buildGenericConflictIcon("Hallo")
-    )
-
-    );}
-
-
+          title: new Text(
+            "Test",
+            style: CiEStyle.getAppBarTitleStyle(context),
+          ),
+          elevation: CiEStyle.getAppBarElevation(context),
+          backgroundColor: CiEColor.red,
+        ),
+        body: new Center(child: GenericIcon.buildGenericConflictIcon("Hallo")));
+  }
 }

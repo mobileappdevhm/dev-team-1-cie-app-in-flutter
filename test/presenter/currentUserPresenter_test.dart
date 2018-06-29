@@ -59,19 +59,44 @@ void main() {
               .currentCourses
               .length);
     });
+
+    test('9', () {
+      var name = new UserInjector().currentUser.getCurrentUser().firstName +
+          " " +
+          new UserInjector().currentUser.getCurrentUser().lastName;
+
+      expect(sut.getCurrentUserName(), name);
+    });
+
+    test('10', () {
+      expect(sut.getCurrentUser().isMetricsEnabled,
+          new UserInjector().currentUser.getCurrentUser().isMetricsEnabled);
+    });
+
+    test('11', () {
+      var metrics = sut.getCurrentUser().isMetricsEnabled;
+      sut.toggleIsMetricsEnabled();
+      expect(sut.getCurrentUser().isMetricsEnabled, !metrics);
+    });
   });
 
   group("facultycheck", () {
     test('1', () {
-      expect(sut.getFaculties(1).contains(CoursesMock.generateMockDepartment(2)), true);
+      expect(
+          sut.getFaculties(1).contains(CoursesMock.generateMockDepartment(2)),
+          true);
     });
 
     test('2', () {
-      expect(sut.getFaculties(2).contains(CoursesMock.generateMockDepartment(3)), true);
+      expect(
+          sut.getFaculties(2).contains(CoursesMock.generateMockDepartment(3)),
+          true);
     });
 
     test('3', () {
-      expect(sut.getFaculties(3).contains(CoursesMock.generateMockDepartment(4)), true);
+      expect(
+          sut.getFaculties(3).contains(CoursesMock.generateMockDepartment(4)),
+          true);
     });
   });
 

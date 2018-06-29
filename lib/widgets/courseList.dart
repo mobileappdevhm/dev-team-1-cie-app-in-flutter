@@ -174,7 +174,10 @@ class CourseListState extends State<CourseList> {
       for (int i = 0; i < courseListPresenter.getCourses().length; i++) {
         if (_shouldShowCourse(i)) {
           if (shouldSearch == false ||
-              (courseListPresenter.getTitle(i).toLowerCase().contains(searchValue.toLowerCase()))) {
+              (courseListPresenter
+                  .getTitle(i)
+                  .toLowerCase()
+                  .contains(searchValue.toLowerCase()))) {
             widgets.add(
                 new CourseListItem(courseListPresenter, i, favoriteIcon(i)));
             widgets.add(new Divider());

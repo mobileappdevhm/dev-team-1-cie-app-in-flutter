@@ -4,9 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 @Timeout(const Duration(seconds: 20))
 void main() {
-  //TODO this is a duplicate of start_test.dart
-  group('settingspagewidget', () {
-    testWidgets('1 widgetTest for settings', (WidgetTester tester) async {
+  group('mainpagewidget', () {
+    testWidgets('1 widgetTest for main', (WidgetTester tester) async {
       // Tells the tester to build a UI based on the widget tree passed to it
       await tester.pumpWidget(
         new StatefulBuilder(
