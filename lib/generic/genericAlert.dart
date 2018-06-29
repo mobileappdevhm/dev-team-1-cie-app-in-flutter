@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 
 class GenericAlert {
   static Future<Null> confirm(
-      BuildContext context, void no(), void yes(), String msg, [String yesText = StaticVariables.ALERT_YES, String noText = StaticVariables.ALERT_NO]) {
+      BuildContext context, void no(), void yes(), String msg,
+      [String yesText = StaticVariables.ALERT_YES,
+      String noText = StaticVariables.ALERT_NO]) {
     return showDialog<Null>(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          new AlertDialog(
+          return new AlertDialog(
             title: new Text(msg),
             actions: <Widget>[
               new FlatButton(
@@ -39,7 +41,7 @@ class GenericAlert {
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          new AlertDialog(
+          return new AlertDialog(
             title: new Text(
               title,
             ),
