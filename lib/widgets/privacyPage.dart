@@ -28,10 +28,10 @@ class _PrivacyPageState extends State<PrivacyPage> {
   @override
   Widget build(BuildContext context) {
     if (changeLanguage) {
-      privacyPolicyText = StaticVariables.PRIVACY_TEXT_ENGLISH;
+      privacyPolicyText = StaticVariables.PRIVACY_TEXT_GERMAN;
       privacyButtonText = StaticVariables.CHANGE_TO_ENGLISH;
     } else {
-      privacyPolicyText = StaticVariables.PRIVACY_TEXT_GERMAN;
+      privacyPolicyText = StaticVariables.PRIVACY_TEXT_ENGLISH;
       privacyButtonText = StaticVariables.CHANGE_TO_GERMAN;
     }
     return new Scaffold(
