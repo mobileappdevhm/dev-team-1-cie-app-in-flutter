@@ -11,7 +11,7 @@ class GenericAlert {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return new AlertDialog(
+          new AlertDialog(
             title: new Text(msg),
             actions: <Widget>[
               new FlatButton(
@@ -39,7 +39,7 @@ class GenericAlert {
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return new AlertDialog(
+          new AlertDialog(
             title: new Text(
               title,
             ),
