@@ -62,6 +62,12 @@ void main() {
       sut.toggleFavourite(1, false);
       expect(sut.getFavourite(1), !testValue);
     });
+
+    test('3', () {
+      final bool testValue = sut.getFavourite(1);
+      sut.toggleFavourite(1, true);
+      expect(sut.getFavourite(1), !testValue);
+    });
   });
 
   group("lecture", () {
@@ -82,6 +88,19 @@ void main() {
       expect(localSut.getFavouriteLectures().length, 0);
       localSut.getCourses().elementAt(0).isFavourite = true;
       expect(localSut.getFavouriteLectures().length, 1);
+    });
+  });
+
+  group("professor", () {
+    test('mail', () {
+      for (int i = 0; i < sut.getCourses().length; i++) {
+        expect(sut.getProfessorEmail(i), CoursesMock.generateMockEmail(i + 1));
+      }
+    });
+    test('name', () {
+      for (int i = 0; i < sut.getCourses().length; i++) {
+        expect(sut.getProfessorName(i), CoursesMock.generateMockName(i + 1));
+      }
     });
   });
 }
