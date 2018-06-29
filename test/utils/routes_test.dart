@@ -1,4 +1,7 @@
 import 'package:cie_team1/utils/routes.dart';
+import 'package:cie_team1/views/login.dart';
+import 'package:cie_team1/views/start.dart';
+import 'package:cie_team1/views/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:test/test.dart';
 
@@ -18,13 +21,35 @@ void main() {
     test('3', () {
       expect(Routes.Login, '/login');
     });
+  });
 
-    test('4', () {
-      final Map<String,WidgetBuilder> sut = Routes.getRoutes();
-      expect(sut.containsKey(Routes.Welcome),true);
-      expect(sut.containsKey(Routes.TabPages),true);
-      expect(sut.containsKey(Routes.Login),true)
-      ;
+  group("Page belongs to route", () {
+    final Map<String, WidgetBuilder> sut = Routes.getRoutes();
+
+    test('contains welcome', () {
+      expect(sut.containsKey(Routes.Welcome), true);
     });
+
+    test('contains tabPages', () {
+      expect(sut.containsKey(Routes.TabPages), true);
+    });
+
+    test('contains login', () {
+      expect(sut.containsKey(Routes.Login), true);
+    });
+
+    /* TODO something like this should be tested as well
+    test('Welcome route is new page', () {
+      expect(sut[Routes.Welcome], (BuildContext context) => new WelcomePage());
+    });
+
+    test('TabPages route is new page', () {
+      expect(sut[Routes.TabPages], (BuildContext context) => new TabsPage());
+    });
+
+    test('Login route is new page', () {
+      expect(sut[Routes.Login], (BuildContext context) => new LoginForm());
+    });
+    */
   });
 }
