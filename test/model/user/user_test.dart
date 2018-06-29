@@ -147,4 +147,27 @@ void main() {
       expect(jsonData['isMetricsEnabled'], 'false');
     });
   });
+
+  group("userBuilder", () {
+    test('1 ', () {
+      UserBuilder sut = new UserBuilder().withLanguage("German");
+
+      expect(sut.language,"German");
+    });
+    test('2 ', () {
+      UserBuilder sut = new UserBuilder().withName("Hans");
+
+      expect(sut.name,"Hans");
+    });
+    test('3 ', () {
+      UserBuilder sut = new UserBuilder().withDegree("Bachelor");
+
+      expect(sut.degree,"Bachelor");
+    });
+    test('4 ', () {
+      UserBuilder sut = new UserBuilder().withIsLoggedIn(true);
+
+      expect(sut.isLoggedIn,true);
+    });
+  });
 }

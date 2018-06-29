@@ -14,11 +14,10 @@ void main() {
             return new MaterialApp(
               home: new Material(
                   child: new Column(
-                    children: <Widget>[
-                      GenericShowInstruction.showInstructions(null, context),
-                    ],
-                  )
-              ),
+                children: <Widget>[
+                  GenericShowInstruction.showInstructions(null, context),
+                ],
+              )),
             );
           },
         ),
@@ -30,11 +29,10 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (counter == 0) {
-            expect(widget.data,StaticVariables.INSTRUCTIONS_TITLE);
+            expect(widget.data, StaticVariables.INSTRUCTIONS_TITLE);
             counter++;
           } else if (counter == 1) {
-            expect(
-                widget.data,StaticVariables.INSTRUCTIONS_BASIC);
+            expect(widget.data, StaticVariables.INSTRUCTIONS_BASIC);
             counter++;
           } else if (counter == 2) {
             expect(widget.data, StaticVariables.INSTRUCTIONS_FAVORITES);

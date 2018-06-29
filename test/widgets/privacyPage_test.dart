@@ -58,7 +58,8 @@ void main() {
             expect(widget.data.isEmpty, false);
             counter++;
           } else if (counter == 1) {
-            expect(widget.data, 'Contact');
+            expect(widget.data, StaticVariables.CONTACT);
+            await tester.tap(find.byWidget(widget));
             counter++;
           } else if (counter == 2) {
             expect(widget.data, StaticVariables.CHANGE_TO_GERMAN);

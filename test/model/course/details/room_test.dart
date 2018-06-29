@@ -20,7 +20,7 @@ void main() {
     expect(list[0].building, building);
     expect(list[0].number, number);
   });
-  
+
   test('2 room get Location', () {
     String campus = "Lothstrasse";
     String building = "R";

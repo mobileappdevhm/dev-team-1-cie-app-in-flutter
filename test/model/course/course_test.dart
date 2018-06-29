@@ -17,9 +17,9 @@ void main() {
           .withName("Blaba")
           .withFaculty("7")
           .withLecturesPerWeek([
-        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-            new DayTime(11, 30), "R0.009")
-      ])
+            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+                new DayTime(11, 30), "R0.009")
+          ])
           .withDescription("boring")
           .withHoursPerWeek(2)
           .withEcts(2)
@@ -201,15 +201,26 @@ void main() {
     });
 
     test('25', () {
-      expect( CourseAvailabilityUtility.intToCourseAvailability(0), CourseAvailability.AVAILABLE);
+      expect(CourseAvailabilityUtility.intToCourseAvailability(0),
+          CourseAvailability.AVAILABLE);
     });
 
     test('26', () {
-      expect( CourseAvailabilityUtility.intToCourseAvailability(1), CourseAvailability.PENDING);
+      expect(CourseAvailabilityUtility.intToCourseAvailability(1),
+          CourseAvailability.PENDING);
     });
 
     test('27', () {
-      expect( CourseAvailabilityUtility.intToCourseAvailability(2), CourseAvailability.UNAVAILABLE);
+      expect(CourseAvailabilityUtility.intToCourseAvailability(2),
+          CourseAvailability.UNAVAILABLE);
+    });
+
+    test('28', () {
+      expect( CourseAvailabilityUtility.intToColoredString(CourseAvailability.PENDING, 5.0).toString(),"Text(\"Pending\", inherit: true, color: Color(0xfff2c94c), size: 5.0)");
+    });
+
+    test('29', () {
+      expect( CourseAvailabilityUtility.intToColoredString(CourseAvailability.UNAVAILABLE, 5.0).toString(),"Text(\"Unavailable\", inherit: true, color: Color(0xffeb5757), size: 5.0)");
     });
   });
 
@@ -346,7 +357,6 @@ void main() {
   });
 
   group("Course Definitions", () {
-
     test('1', () {
       int counter = 1;
       for (String sut in CourseDefinitions.getDepartments().toList()) {
@@ -358,5 +368,4 @@ void main() {
       }
     });
   });
-
 }

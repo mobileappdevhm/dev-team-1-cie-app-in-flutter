@@ -95,11 +95,11 @@ class StaticVariables {
   static const String SHOW_INSTRUCTIONS = "Show App Instructions";
 
   static const String INSTRUCTIONS_TITLE = "Instructions";
-  static const String INSTRUCTIONS_BASIC =
-      "You haven't downloaded any course data " +
-          "yet. At the bottom of this page, you can download the courses for the first time. " +
-          "After downloading, you may swipe down on the Favorites and Courses page to refresh and update data.";
-  static const String INSTRUCTIONS_FAVORITES =
+
+  static const String INSTRUCTIONS_BASIC = "You haven't downloaded any course data " +
+      "yet. At the bottom of this page, you can download the courses for the first time. " +
+      "After downloading, you may swipe down on the Favorites and Courses page to refresh and update data.";
+  static const String INSTRUCTIONS_TIP =
       "Afterwards you will be able to to select favorite courses.\n" +
           "Tip: Use the filter at top of courses page to filter courses. Then press the heart icon.";
   static const String INSTRUCTIONS_TRAFFIC_LIGHT =

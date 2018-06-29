@@ -6,7 +6,8 @@ import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
-  static Widget showInstructions(Function onPressRefresh, BuildContext context) {
+  static Widget showInstructions(
+      Function onPressRefresh, BuildContext context) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
         children: <Widget>[
@@ -98,7 +99,7 @@ class GenericShowInstruction {
     ));
   }
 
-  static _toggleRefresh (Function onPressRefresh, BuildContext context) {
+  static _toggleRefresh(Function onPressRefresh, BuildContext context) {
     () => onPressRefresh();
     Navigator.pushReplacementNamed(context, Routes.TabPages);
   }
