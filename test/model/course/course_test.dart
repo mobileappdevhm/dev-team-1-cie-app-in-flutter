@@ -211,6 +211,14 @@ void main() {
     test('27', () {
       expect( CourseAvailabilityUtility.intToCourseAvailability(2), CourseAvailability.UNAVAILABLE);
     });
+
+    test('28', () {
+      expect( CourseAvailabilityUtility.intToColoredString(CourseAvailability.PENDING, 5.0).toString(),"Text(\"Pending\", inherit: true, color: Color(0xfff2c94c), size: 5.0)");
+    });
+
+    test('29', () {
+      expect( CourseAvailabilityUtility.intToColoredString(CourseAvailability.UNAVAILABLE, 5.0).toString(),"Text(\"Unavailable\", inherit: true, color: Color(0xffeb5757), size: 5.0)");
+    });
   });
 
   group('courseBuilder test', () {
