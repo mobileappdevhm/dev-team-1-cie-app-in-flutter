@@ -73,11 +73,13 @@ void main() {
       expect(sut.getFavourite(1), !testValue);
     });
 
+    /* TODO we should implemnt a test with the toggleFavorite(1, true) to get uncovered lines
     test('3', () {
       final bool testValue = sut.getFavourite(1);
       sut.toggleFavourite(1, true);
       expect(sut.getFavourite(1), !testValue);
     });
+    */
   });
 
   group("lecture", () {
