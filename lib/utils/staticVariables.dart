@@ -96,30 +96,28 @@ class StaticVariables {
 
   static const String INSTRUCTIONS_TITLE = "Instructions";
   static const String INSTRUCTIONS_BASIC =
-      "Unfortunately you have not downloaded any course data " +
-          "yet. At the end of the instruction you can download the courses for the fist time. " +
-          "After finishing the setup you can swipe down on favorite and courses page at any time to refresh.";
-  static const String INSTRUCTIONS_TIP =
-      "Afterwards you will be able to to select favorite courses.\n" +
-          "Tipp: Use the filter at top of courses page to filter courses. Then press the heart icon.";
-  static const String INSTRUCTIONS_TRAFFIC_LIGHT =
-      "You will notice that each course on the left side is dimpled " +
-          "red, orange or green. Red means you can't attend this course. " +
-          "Orange and green courses can be attended.";
+      "You haven't downloaded any course data " +
+          "yet. At the bottom of this page, you can download the courses for the first time. " +
+          "After downloading, you may swipe down on the Favorites and Courses page to refresh and update data.";
   static const String INSTRUCTIONS_FAVORITES =
-      "If you add courses to your favorites, which may lead to a time " +
-          "conflict, you can see this directly in the course selection. Click " +
-          "on the course for details.";
-
+      "Afterwards you will be able to to select favorite courses.\n" +
+          "Tip: Use the filter at top of courses page to filter courses. Then press the heart icon.";
+  static const String INSTRUCTIONS_TRAFFIC_LIGHT =
+      "You will notice that each course on the left side is color coded" +
+          "You cannot attend red courses, while you may register for orange or green courses.";
+  static const String INSTRUCTIONS_CONFLICT =
+      "If you favorite courses which have a time scheduling conflict, you will see this " +
+          "during course selection. Click on the course for more details.";
   static const String INSTRUCTIONS_LOTTERY =
-      "Now when you have selected your favorites visit Favorite " +
-          "tab and hand in your courses for lottery. And don't foreget to " +
-          "check out your Timetable. By the way you can use the Timetable even if " +
-          "you don't use lottery function.";
+      "When you have favorited the courses you want to take, visit the Favorites" +
+          "tab to register these classes. The classes are awarded by lottery, and " +
+          "registration does not guarentee enrollment. Don't forget to check out your " +
+          "Timetable for your course schedule! Registration by lottery is not necessary " +
+          "to use the Timetable.";
   static const String INSTRUCTIONS_BUTTON_TEXT =
-      "Download courses now and restart";
+      "Download available courses and restart now";
   static const String INSTRUCTIONS_PLEASE_GO_TO =
-      "Please go to courses page and refresh by swiping down.";
+      "Please visit the Courses tab and refresh by swiping down.";
 
   static const String PRIVACY_TEXT_GERMAN = "Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten (nachfolgend kurz “Daten”) innerhalb unseres Onlineangebotes und der mit ihm verbundenen Webseiten, Funktionen und Inhalte sowie externen Onlinepräsenzen, wie z.B. unser Social Media Profile auf (nachfolgend gemeinsam bezeichnet als “Onlineangebot”). Im Hinblick auf die verwendeten Begrifflichkeiten, wie z.B. “Verarbeitung” oder “Verantwortlicher” verweisen wir auf die Definitionen im Art. 4 der Datenschutzgrundverordnung (DSGVO)\n\n" +
       "Arten der verarbeiteten Daten:\n" +

@@ -37,13 +37,13 @@ void main() {
                 widget.data,StaticVariables.INSTRUCTIONS_BASIC);
             counter++;
           } else if (counter == 2) {
-            expect(widget.data, StaticVariables.INSTRUCTIONS_TIP);
+            expect(widget.data, StaticVariables.INSTRUCTIONS_FAVORITES);
             counter++;
           } else if (counter == 3) {
             expect(widget.data, StaticVariables.INSTRUCTIONS_TRAFFIC_LIGHT);
             counter++;
           } else if (counter == 4) {
-            expect(widget.data, StaticVariables.INSTRUCTIONS_FAVORITES);
+            expect(widget.data, StaticVariables.INSTRUCTIONS_CONFLICT);
             counter++;
           } else if (counter == 5) {
             expect(widget.data, StaticVariables.INSTRUCTIONS_LOTTERY);
