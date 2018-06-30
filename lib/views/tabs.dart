@@ -28,13 +28,12 @@ class TabsPageState extends State<TabsPage> {
   void initState() {
     super.initState();
     // TODO: Investigate scenarios where internet is not available/request fails
-    var _unusedCallback = (bool val) {};
 
     NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
-    courseListPresenter = new CourseListPresenter(_unusedCallback);
+    courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
     currentUserPresenter =
-        new CurrentUserPresenter(_unusedCallback, Flavor.PROD);
+        new CurrentUserPresenter(_maybeChangeCallback, Flavor.PROD);
     courseListPresenter.addCoursesFromMemory();
     currentUserPresenter.loadUserSettingsFromMemory();
 
@@ -82,6 +81,15 @@ class TabsPageState extends State<TabsPage> {
         }).toList(),
       ),
     );
+  }
+
+  // This method is necessary to allow children to use the ValueChanged flutter
+  // Signature to force new rendering of widgets
+  void _maybeChangeCallback(bool didChange) {
+    if (didChange == true) {
+      // Triggers Widget rebuild on completion of potentially asynchronous tasks
+      setState(()=>{});
+    }
   }
 
   void _onTap(int tab) {

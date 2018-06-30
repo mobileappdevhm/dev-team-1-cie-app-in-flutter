@@ -27,7 +27,6 @@ class _ScheduleState extends State<Schedule> {
   void initState() {
     super.initState();
     setState(() {
-      courseListPresenter;
       Analytics.setCurrentScreen("schedule_screen");
     });
   }
