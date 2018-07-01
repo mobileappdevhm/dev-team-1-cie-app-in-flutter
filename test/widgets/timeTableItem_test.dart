@@ -50,13 +50,11 @@ void main() {
         'Campus:',
         'Karl.',
         'Time:',
-        ' 10:00-11:30',
-        'Day:',
-        'Mon',
-        'Room:',
-        ' R0.009',
+        '10:00-11:30',
         'Professor:',
-        'Max Mustermann'
+        'Max Mustermann',
+        'Room:',
+        'R0.009',
       ];
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
