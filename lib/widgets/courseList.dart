@@ -14,6 +14,7 @@ import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/routes.dart';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
@@ -242,15 +243,15 @@ class CourseListState extends State<CourseList> {
       buttonColor = CiEColor.lightGray;
     } else {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST;
-      buttonColor = CiEColor.lightGray;
+      buttonColor = CiEColor.red;
     }
 
     return new RaisedButton(
       color: buttonColor,
       shape: new RoundedRectangleBorder(
           borderRadius: CiEStyle.getButtonBorderRadius()),
-      onPressed: submissionValid ?
-          ()=>_handleCourseSubmission(userPresenter): null,
+      onPressed: ()=>_contextualCourseSubmission(userPresenter,
+          submissionValid, isLoggedIn),
       child: new Container(
         margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
         child: new Text(textToShow, style: new TextStyle(color: Colors.white)),
@@ -287,6 +288,16 @@ class CourseListState extends State<CourseList> {
     setState(() {
       this.shouldSearch = !shouldSearch;
     });
+  }
+
+  void _contextualCourseSubmission(CurrentUserPresenter user,
+      bool isSubmissionValid, bool isLoggedIn) {
+    if (isSubmissionValid != null && isSubmissionValid) {
+      _handleCourseSubmission(user);
+    }
+    else if (isLoggedIn != null && !isLoggedIn) {
+      Navigator.pushReplacementNamed(context, Routes.Login);
+    }
   }
 
   void _handleCourseSubmission(CurrentUserPresenter user) {
