@@ -90,13 +90,14 @@ class LoginFormState extends State<LoginForm> {
             } else if (jsonData['curriculum'] == null) {
               //no curriculum was set by the user -> user can login but lottery should not be available
               updateUserSettings(context, jsonData['user']['firstName'],
-                  jsonData['user']['lastName'], null);
+                  jsonData['user']['lastName'], jsonData['user']['id'], null);
               Analytics.logLogin();
             } else {
               updateUserSettings(
                   context,
                   jsonData['user']['firstName'],
                   jsonData['user']['lastName'],
+                  jsonData['user']['id'],
                   jsonData['curriculum']['organiser']['name']);
               Analytics.logLogin();
             }
@@ -114,7 +115,7 @@ class LoginFormState extends State<LoginForm> {
   }
 
   void _handleGuestLogin() {
-    updateUserSettings(context, null, null, null);
+    updateUserSettings(context, null, null, null, null);
     Analytics.logEvent("guest_login");
   }
 
@@ -253,7 +254,7 @@ class LoginFormState extends State<LoginForm> {
   }
 
   void updateUserSettings(BuildContext context, String firstName,
-      String lastName, dynamic curriculum) {
+      String lastName, String id, dynamic curriculum) {
     bool isLoggedIn = false;
     UserBuilder builder;
     if (firstName != null && lastName != null) {
@@ -275,6 +276,7 @@ class LoginFormState extends State<LoginForm> {
       }
 
       User tempUserObj = builder
+          .withID(id)
           .withFirstName(firstName)
           .withLastName(lastName)
           .withDepartment(curriculum)

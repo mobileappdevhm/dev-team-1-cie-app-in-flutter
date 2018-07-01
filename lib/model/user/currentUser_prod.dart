@@ -45,6 +45,7 @@ class CurrentUserProd implements CurrentUser {
       if (val != null) {
         Map<String, dynamic> map = json.decode(val);
         User u = new UserBuilder.fromJson(map).build();
+        currentUser.id = u.id;
         currentUser.isLoggedIn = u.isLoggedIn;
         currentUser.firstName = u.firstName;
         currentUser.lastName = u.lastName;
