@@ -95,24 +95,26 @@ class StaticVariables {
   static const String SHOW_INSTRUCTIONS = "Show App Instructions";
 
   static const String INSTRUCTIONS_TITLE = "Instructions";
-  static const String INSTRUCTIONS_BASIC = "You haven't downloaded any course data " +
-      "yet. At the bottom of this page, you can download the courses for the first time. " +
-      "After downloading, you may swipe down on the Favorites and Courses page to refresh and update data.";
+  static const String INSTRUCTIONS_BASIC =
+      "You haven't downloaded any course data yet. At the bottom of this page, "
+      "you can download the courses for the first time. After downloading, you "
+      "may swipe down on the Favorites and Courses page to refresh and update data.";
   static const String INSTRUCTIONS_TIP =
       "Afterwards you will be able to to select favorite courses.\n" +
-          "Tip: Use the filter at top of courses page to filter courses. Then press the heart icon.";
+          "Tip: Use the filter at top of courses page to filter courses. "
+          "Then press the heart icon.";
   static const String INSTRUCTIONS_TRAFFIC_LIGHT =
-      "You will notice that each course on the left side is color coded" +
-          "You cannot attend red courses, while you may register for orange or green courses.";
+      "You will notice that each course on the left side is color coded. You "
+      "cannot attend red courses, while you may register for orange or green courses.";
   static const String INSTRUCTIONS_FAVORITES =
-      "If you favorite courses which have a time scheduling conflict, you will see this " +
-          "during course selection. Click on the course for more details.";
+      "If you favorite courses which have a time scheduling conflict, you will "
+      "see this during course selection. Click on the course for more details.";
   static const String INSTRUCTIONS_LOTTERY =
-      "When you have favorited the courses you want to take, visit the Favorites" +
-          "tab to register these classes. The classes are awarded by lottery, and " +
-          "registration does not guarentee enrollment. Don't forget to check out your " +
-          "Timetable for your course schedule! Registration by lottery is not necessary " +
-          "to use the Timetable.";
+      "When you have favorited the courses you want to take, visit the Favorites"
+      "tab to register these classes. The classes are awarded by lottery, "
+      "and registration does not guarentee enrollment. Don't forget to check"
+      " out your Timetable for your course schedule! Registration by lottery "
+      "is not necessary to use the Timetable.";
   static const String INSTRUCTIONS_BUTTON_TEXT =
       "Download available courses and restart now";
   static const String INSTRUCTIONS_PLEASE_GO_TO =
