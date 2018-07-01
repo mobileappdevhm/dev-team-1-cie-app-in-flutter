@@ -86,17 +86,16 @@ class TimeTableItem extends StatelessWidget {
                   child: new Row(
                     children: <Widget>[
                       new Container(
-                        //Static width to align values
-                        width: WIDTH_FIRST_COLUMN,
-                        child: new Text(
-                          "Day: ",
-                          style: CiEStyle.getTimeTableListMediumGray(),
-                        ),
+                      width: WIDTH_FIRST_COLUMN,
+                        child: new Text("Professor:"),
                       ),
-                      new Text(
-                        WeekdayUtility.getWeekdayAsString(lecture.weekday),
+                      new Expanded(
+                      child: new Text(
+                        lecture.course.professorName,
                         style: CiEStyle.getTimeTableListVariable(),
-                      ),
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.ellipsis,
+                      ))
                     ],
                   ),
                 ),
@@ -120,17 +119,6 @@ class TimeTableItem extends StatelessWidget {
             ),
             new Row(
               children: <Widget>[
-                new Container(
-                  width: WIDTH_FIRST_COLUMN,
-                  child: new Text("Professor:"),
-                ),
-                new Expanded(
-                    child: new Text(
-                  lecture.course.professorName,
-                  style: CiEStyle.getTimeTableListVariable(),
-                  textAlign: TextAlign.start,
-                  overflow: TextOverflow.ellipsis,
-                ))
               ],
             ),
             new Padding(padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0))
