@@ -45,7 +45,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
       ),
       body: new Center(
         child: new Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
           child: new Column(
             children: <Widget>[
               new Expanded(
@@ -62,7 +62,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                     child: new Column(
                       children: <Widget>[
                         new Padding(
-                          padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                          padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: new FlatButton(
                             child: new Row(
                               children: <Widget>[
