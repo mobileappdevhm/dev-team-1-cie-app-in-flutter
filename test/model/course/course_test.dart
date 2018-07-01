@@ -133,6 +133,10 @@ void main() {
       expect(WeekdayUtility.getWeekdayAsString(Weekday.Mon), "Mon");
     });
 
+    test('sun for Long', () {
+      expect(WeekdayUtility.getWeekdayAsLongString(Weekday.Sun), "Sunday");
+    });
+
     test('9', () {
       expect(WeekdayUtility.getWeekdayAsInt(Weekday.Sun), 6);
     });
@@ -221,6 +225,42 @@ void main() {
 
     test('29', () {
       expect( CourseAvailabilityUtility.intToColoredString(CourseAvailability.UNAVAILABLE, 5.0).toString(),"Text(\"Unavailable\", inherit: true, color: Color(0xffeb5757), size: 5.0)");
+    });
+
+    test('30', () {
+      expect( CampusUtility.getStringAsCampus("Loth"),Campus.LOTHSTRASSE);
+    });
+
+    test('31', () {
+      expect( CampusUtility.getStringAsCampus("Pasing"),Campus.PASING);
+    });
+
+    test('32', () {
+      expect( CampusUtility.getStringAsCampus("Karlstrasse"),Campus.KARLSTRASSE);
+    });
+
+    test('33', () {
+      expect( CampusUtility.getCampusAsString(Campus.LOTHSTRASSE),"Loth.");
+    });
+
+    test('34', () {
+      expect( CampusUtility.getCampusAsString(Campus.PASING),"Pasing");
+    });
+
+    test('35', () {
+      expect( CampusUtility.getCampusAsString(Campus.KARLSTRASSE),"Karl.");
+    });
+
+    test('33', () {
+      expect( CampusUtility.getCampusAsLongString(Campus.LOTHSTRASSE),"Lothstrasse");
+    });
+
+    test('34', () {
+      expect( CampusUtility.getCampusAsLongString(Campus.PASING),"Pasing");
+    });
+
+    test('35', () {
+      expect( CampusUtility.getCampusAsLongString(Campus.KARLSTRASSE),"Karlstrasse");
     });
   });
 
