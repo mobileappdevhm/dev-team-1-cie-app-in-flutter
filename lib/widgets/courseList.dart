@@ -327,8 +327,7 @@ class CourseListState extends State<CourseList> {
     GenericAlert
         .confirm(
             context, no, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
-        .then((_) {
-    });
+        .then((_) {});
   }
 
   void updateSearch(String val) {
