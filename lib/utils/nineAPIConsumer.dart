@@ -8,9 +8,12 @@ import 'package:http/http.dart';
 
 class NineAPIEngine {
   static const String _NINE_BASE_URL = 'https://nine.wi.hm.edu/api/v2/';
+  static const String _NINE_TRANSITION_URL = 'https://nine.wi.hm.edu/api2/';
   static const String NINE_COURSE_LIST_URL =
       _NINE_BASE_URL + 'courses/FK%2013/CIE/SoSe%2018';
   static const String NINE_AUTH_URL = _NINE_BASE_URL + 'account/login';
+  static const String NINE_LECTURER_URL =
+      _NINE_TRANSITION_URL + 'Lecturer/GetAllLecture';
 
   static Future<Null> pullCourseJSON(
       BuildContext context, bool inBackground) async {
@@ -23,8 +26,10 @@ class NineAPIEngine {
               return GenericIcon.buildGenericSpinner();
             });
       }
-      final response = await get(NINE_COURSE_LIST_URL);
-      FileStore.writeToFile(FileStore.COURSES, response.body);
+      final coursesResponse = await get(NINE_COURSE_LIST_URL);
+      final lecturerResponse = await get(NINE_LECTURER_URL);
+      FileStore.writeToFile(FileStore.COURSES, coursesResponse.body);
+      FileStore.writeToFile(FileStore.LECTURERS, lecturerResponse.body);
       if (!inBackground) {
         Navigator.pop(context);
       }

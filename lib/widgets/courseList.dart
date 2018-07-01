@@ -68,18 +68,6 @@ class CourseListState extends State<CourseList> {
     }
   }
 
-  handleUpdate() async {
-    //pullCourseJSON also checks for internet connectivity. This method should
-    //begin execution as soon as possible, check later for setState
-    NineAPIEngine.pullCourseJSON(context, false);
-    var isConnected = await NineAPIEngine.isInternetConnected();
-    if (isConnected == true) {
-      setState(() {
-        courseListPresenter.addCoursesFromMemory();
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = new List<Widget>();
@@ -263,6 +251,7 @@ class CourseListState extends State<CourseList> {
   handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
     Future<Null> complete = NineAPIEngine.pullCourseJSON(context, true);
     presenter.addCoursesFromMemory();
+    presenter.updateLecturerInfoFromMemory();
     presenter.onChanged(true);
     return complete;
   }
