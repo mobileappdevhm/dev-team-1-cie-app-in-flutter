@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:convert';
 import 'package:cie_team1/generic/genericIcon.dart';
 import 'package:cie_team1/utils/fileStore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:http/http.dart' as http;
 
 class NineAPIEngine {
   static const String _NINE_BASE_URL = 'https://nine.wi.hm.edu/api/v2/';
@@ -59,7 +56,7 @@ class NineAPIEngine {
       builder: (BuildContext context) {
         return GenericIcon.buildGenericSpinner();
     });
-    http.Response res = await http.post(url, body: jsonMap); // post api call
+    Response res = await post(url, body: jsonMap); // post api call
     Navigator.pop(context);
     return res.statusCode;
   }
