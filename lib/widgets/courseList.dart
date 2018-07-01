@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
@@ -224,35 +225,32 @@ class CourseListState extends State<CourseList> {
         userPresenter.getCurrentUser().department.isNotEmpty != null
             ? userPresenter.getCurrentUser().department.isNotEmpty
             : false;
+    bool submissionValid = !coursesRegistered && isLoggedIn && isDepartmentSet;
 
     //Decide how to show submit button
     String textToShow;
     Color buttonColor;
-    Function function;
-    if (coursesRegistered && isLoggedIn && isDepartmentSet) {
+    if (submissionValid) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
       buttonColor = CiEColor.red;
-      function = _handleCourseSubmission;
-    } else if (!coursesRegistered && isLoggedIn) {
+    } else if (coursesRegistered && isLoggedIn) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
       buttonColor = CiEColor.lightGray;
-      function = null;
     } else if (coursesRegistered && isLoggedIn && !isDepartmentSet) {
       textToShow =
           StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT;
       buttonColor = CiEColor.lightGray;
-      function = null;
     } else {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST;
       buttonColor = CiEColor.lightGray;
-      function = null;
     }
 
     return new RaisedButton(
       color: buttonColor,
       shape: new RoundedRectangleBorder(
           borderRadius: CiEStyle.getButtonBorderRadius()),
-      onPressed: () => function,
+      onPressed: submissionValid ?
+          ()=>_handleCourseSubmission(userPresenter): null,
       child: new Container(
         margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
         child: new Text(textToShow, style: new TextStyle(color: Colors.white)),
@@ -291,10 +289,26 @@ class CourseListState extends State<CourseList> {
     });
   }
 
-  // Build Asynchronously so that we can easily TODO: Send POST Request to Nine
-  void _handleCourseSubmission() {
+  void _handleCourseSubmission(CurrentUserPresenter user) {
     var no = () {};
     var yes = () {
+      Map<String, String> userJson = {
+          "id" : user.getCurrentUser().id,
+          "firstName" : user.getCurrentUser().firstName,
+          "lastName" : user.getCurrentUser().lastName
+      };
+      List<dynamic> selectedCourses = new List<dynamic>();
+      for (Course c in courseListPresenter.getCourses()) {
+        if (c.isFavourite) {
+          selectedCourses.add( {"id" : c.id } );
+        }
+      }
+
+      Map<String, String> postJson = new Map<String, String>();
+      postJson.putIfAbsent("user", ()=>json.encode(userJson));
+      postJson.putIfAbsent("courses", ()=>json.encode(selectedCourses));
+      NineAPIEngine.postJson(context,
+          NineAPIEngine.NINE_COURSE_SUBSCRIPTION_URL, postJson);
       setState(() {
         coursesRegistered = true;
       });
@@ -302,7 +316,8 @@ class CourseListState extends State<CourseList> {
     GenericAlert
         .confirm(
             context, no, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
-        .then((_) {});
+        .then((_) {
+    });
   }
 
   void updateSearch(String val) {
