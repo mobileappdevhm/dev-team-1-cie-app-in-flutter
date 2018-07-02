@@ -203,15 +203,13 @@ class Course {
   String name;
   String shortName;
   List<dynamic> actions;
+  String professorEmail;
 
-  //final String name;
   final Set<String> faculties;
   final List<Lecture> lecturesPerWeek;
 
-  //final String description;
   final int hoursPerWeek;
   final int ects;
-  final String professorEmail;
   final String professorName;
   final CourseAvailability available;
   bool isFavourite;

@@ -111,7 +111,7 @@ class GenericShowInstruction {
           image: new DecorationImage(
             alignment: Alignment.bottomCenter,
             image: new AssetImage(
-                StaticVariables.IMAGE_PATH + "AppLogo_45Transparent.png"),
+                StaticVariables.IMAGE_PATH + "AppLogo_Transparent.png"),
             fit: BoxFit.fitWidth,
           ),
         ),

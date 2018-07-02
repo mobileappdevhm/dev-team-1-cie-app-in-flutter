@@ -95,6 +95,23 @@ class CourseListPresenter {
     });
   }
 
+  void updateLecturerInfoFromMemory() {
+    FileStore.readFileAsString(FileStore.LECTURERS).then((String val) {
+      if (val != null) {
+        final List<dynamic> jsonData = json.decode(val)['lecturers'];
+        for (int i = 0; i < jsonData.length; i++) {
+          for (Course c in _courses.getCourses()) {
+            if (c.professorName.contains(jsonData[i]['lastName'])) {
+              if(jsonData[i]['email'] != null && jsonData[i]['email'] != 'null') {
+                c.professorEmail = jsonData[i]['email'];
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
   void syncFavoritedCoursesFromMemory() {
     FileStore.readFileAsString(FileStore.FAVORITES).then((String favoriteIds) {
       if (favoriteIds != null) {

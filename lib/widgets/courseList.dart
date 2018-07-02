@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cie_team1/generic/genericAlert.dart';
 import 'package:cie_team1/generic/genericIcon.dart';
@@ -13,6 +14,7 @@ import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
 import 'package:cie_team1/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
+import 'package:cie_team1/utils/routes.dart';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
@@ -65,18 +67,6 @@ class CourseListState extends State<CourseList> {
       Analytics.setCurrentScreen("courses_screen");
     } else {
       Analytics.setCurrentScreen("favorites_screen");
-    }
-  }
-
-  handleUpdate() async {
-    //pullCourseJSON also checks for internet connectivity. This method should
-    //begin execution as soon as possible, check later for setState
-    NineAPIEngine.pullCourseJSON(context, false);
-    var isConnected = await NineAPIEngine.isInternetConnected();
-    if (isConnected == true) {
-      setState(() {
-        courseListPresenter.addCoursesFromMemory();
-      });
     }
   }
 
@@ -224,35 +214,32 @@ class CourseListState extends State<CourseList> {
         userPresenter.getCurrentUser().department.isNotEmpty != null
             ? userPresenter.getCurrentUser().department.isNotEmpty
             : false;
+    bool submissionValid = !coursesRegistered && isLoggedIn && isDepartmentSet;
 
     //Decide how to show submit button
     String textToShow;
     Color buttonColor;
-    Function function;
-    if (coursesRegistered && isLoggedIn && isDepartmentSet) {
+    if (submissionValid) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
       buttonColor = CiEColor.red;
-      function = _handleCourseSubmission;
-    } else if (!coursesRegistered && isLoggedIn) {
+    } else if (coursesRegistered && isLoggedIn) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
       buttonColor = CiEColor.lightGray;
-      function = null;
     } else if (coursesRegistered && isLoggedIn && !isDepartmentSet) {
       textToShow =
           StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT;
       buttonColor = CiEColor.lightGray;
-      function = null;
     } else {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST;
-      buttonColor = CiEColor.lightGray;
-      function = null;
+      buttonColor = CiEColor.red;
     }
 
     return new RaisedButton(
       color: buttonColor,
       shape: new RoundedRectangleBorder(
           borderRadius: CiEStyle.getButtonBorderRadius()),
-      onPressed: () => function,
+      onPressed: ()=>_contextualCourseSubmission(userPresenter,
+          submissionValid, isLoggedIn),
       child: new Container(
         margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
         child: new Text(textToShow, style: new TextStyle(color: Colors.white)),
@@ -263,6 +250,7 @@ class CourseListState extends State<CourseList> {
   handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
     Future<Null> complete = NineAPIEngine.pullCourseJSON(context, true);
     presenter.addCoursesFromMemory();
+    presenter.updateLecturerInfoFromMemory();
     presenter.onChanged(true);
     return complete;
   }
@@ -291,10 +279,36 @@ class CourseListState extends State<CourseList> {
     });
   }
 
-  // Build Asynchronously so that we can easily TODO: Send POST Request to Nine
-  void _handleCourseSubmission() {
+  void _contextualCourseSubmission(CurrentUserPresenter user,
+      bool isSubmissionValid, bool isLoggedIn) {
+    if (isSubmissionValid != null && isSubmissionValid) {
+      _handleCourseSubmission(user);
+    }
+    else if (isLoggedIn != null && !isLoggedIn) {
+      Navigator.pushReplacementNamed(context, Routes.Login);
+    }
+  }
+
+  void _handleCourseSubmission(CurrentUserPresenter user) {
     var no = () {};
     var yes = () {
+      Map<String, String> userJson = {
+          "id" : user.getCurrentUser().id,
+          "firstName" : user.getCurrentUser().firstName,
+          "lastName" : user.getCurrentUser().lastName
+      };
+      List<dynamic> selectedCourses = new List<dynamic>();
+      for (Course c in courseListPresenter.getCourses()) {
+        if (c.isFavourite) {
+          selectedCourses.add( {"id" : c.id } );
+        }
+      }
+
+      Map<String, String> postJson = new Map<String, String>();
+      postJson.putIfAbsent("user", ()=>json.encode(userJson));
+      postJson.putIfAbsent("courses", ()=>json.encode(selectedCourses));
+      NineAPIEngine.postJson(context,
+          NineAPIEngine.NINE_COURSE_SUBSCRIPTION_URL, postJson);
       setState(() {
         coursesRegistered = true;
       });

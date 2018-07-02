@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 
 class FileStore {
   static const String COURSES = "_courses";
+  static const String LECTURERS = "_lecturers";
   static const String LOGIN = "_login";
   static const String USER_SETTINGS = "_user";
   static const String FAVORITES = "_favorites";
