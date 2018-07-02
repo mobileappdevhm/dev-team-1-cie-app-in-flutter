@@ -81,7 +81,36 @@ void main() {
       checkForFavoritesPageAnomalies(
           listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
     });
+
+  testWidgets('pressing submit on favorite page', (WidgetTester tester) async {
+    final bool isFavoritesPage = true;
+    // This widget tree builds the widgets found on the Courses Page
+    await tester.pumpWidget(
+      new StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return new MaterialApp(
+            home: new Material(
+              child: new Center(
+                  child: new CourseList(clp, isFavoritesPage, cup, fN)),
+            ),
+          );
+        },
+      ),
+    );
+    final Iterable<Widget> listOfWidgets = tester.allWidgets;
+
+    int counter = 0;
+    for (Widget widget in listOfWidgets) {
+      if (widget is Text) {
+        if (counter == 0) {
+          expect(widget.data,StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST);
+        }
+        counter++;
+      }
+    }
   });
+
+});
 }
 
 void checkForFavoritesPageAnomalies(Iterable<Widget> listOfWidgets,
