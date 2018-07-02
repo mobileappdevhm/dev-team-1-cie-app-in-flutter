@@ -42,7 +42,7 @@ class StaticVariables {
   static const String CIE_CERTIFICATE = 'Courses in English Certificate';
   static const String IE_CERTIFICATE = 'International Engineering Certificate';
   static const String TAKEN_COURSES = 'Course History';
-  static const String PRIVACY_BUTTON = 'Our Privacy Policy';
+  static const String PRIVACY_BUTTON = 'View Privacy Policy';
 
   static const String GUEST_FIRST_NAME = "Guest";
   static const String GUEST_LAST_NAME = "User";
@@ -92,7 +92,7 @@ class StaticVariables {
 
   static const String MOCK_EMAIL = "example@hm.edu";
 
-  static const String SHOW_INSTRUCTIONS = "Show App Instructions";
+  static const String SHOW_INSTRUCTIONS = "View Help Page";
 
   static const String INSTRUCTIONS_TITLE = "Instructions";
   static const String INSTRUCTIONS_BASIC =
