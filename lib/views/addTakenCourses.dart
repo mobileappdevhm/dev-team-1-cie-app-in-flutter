@@ -6,9 +6,9 @@ import 'package:cie_team1/views/takenCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
+import 'package:cie_team1/utils/fileStore.dart';
 import 'dart:convert';
 import 'dart:async';
-import 'package:cie_team1/utils/fileStore.dart';
 
 class AddTakenCourses extends StatefulWidget {
   AddTakenCourses({Key key, this.title}) : super(key: key);
@@ -31,9 +31,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
     super.initState();
     List<String> urls = new List<String>();
     for (String semester in CourseHistory.semesterList) {
-      String getUrl = semester.substring(0, 4) + "%"
-          + semester.substring(4, semester.length);
-      urls.add(NineAPIEngine.NINE_PREV_COURSE_LIST_URL+getUrl);
+      urls.add(NineAPIEngine.NINE_PREV_COURSE_LIST_URL+CourseHistory.getUrl(semester));
     }
     NineAPIEngine.getJsonMulti(context, urls);
     setState(() {
@@ -50,14 +48,9 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
     return courses.contains(id);
   }
 
-  static Future<String> getSingleJson(String data) async {
-    return FileStore.readFileAsString(FileStore.OLD_COURSES
-        +CourseHistory.semesterList.indexOf(data).toString());
-  }
-
   FutureBuilder buildOldCourses() {
     return new FutureBuilder(
-      future: getSingleJson(semesterFilter),
+      future: CourseHistory.getSingleJson(semesterFilter),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           List<dynamic> courseJson = json.decode(snapshot.data);
