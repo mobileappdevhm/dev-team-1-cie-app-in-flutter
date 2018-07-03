@@ -50,10 +50,6 @@ class CurrentUserPresenter {
     return _currentUser.getCurrentUser().currentCourses;
   }
 
-  int getTotalCredits() {
-    return _currentUser.getCurrentUser().ectsTotal;
-  }
-
   int getDep3Credits() {
     var sum = 0;
     _currentUser.getCurrentUser().prevCourses.forEach((course) {
@@ -101,15 +97,6 @@ class CurrentUserPresenter {
           _currentUser.getCurrentUser().isLoggedIn = isLoggedIn;
           this.onChanged(true);
         }
-      }
-    });
-  }
-
-  void updateECTS() {
-    FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((String val) {
-      if (val != null) {
-        List<dynamic> courseHistory = json.decode(val);
-        _currentUser.getCurrentUser().ectsTotal = courseHistory.length;
       }
     });
   }

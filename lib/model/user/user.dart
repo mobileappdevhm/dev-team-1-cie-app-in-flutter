@@ -125,7 +125,6 @@ class UserBuilder {
 }
 
 class User {
-  int ectsTotal = 0;
   String id;
   String language;
   String name;

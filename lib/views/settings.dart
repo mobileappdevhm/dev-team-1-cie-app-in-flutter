@@ -26,8 +26,8 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   final CurrentUserPresenter currentUserPresenter;
-  int credits = 0;
   int engCredits = 0;
+  int credits = 0;
   bool isMetricsEnabled = false;
   bool isLoggedIn = false;
 
@@ -37,8 +37,6 @@ class _SettingsState extends State<Settings> {
   void initState() {
     super.initState();
     currentUserPresenter.loadUserSettingsFromMemory();
-    currentUserPresenter.updateECTS();
-    credits = currentUserPresenter.getTotalCredits();
     engCredits = currentUserPresenter.getDep3Credits();
     setState(() {
       if (currentUserPresenter.getCurrentUser().isMetricsEnabled != null) {
