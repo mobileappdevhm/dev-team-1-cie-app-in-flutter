@@ -25,7 +25,6 @@ void main() {
       );
 
       final Iterable<Widget> listOfWidgets = tester.allWidgets;
-
       int counter = 0;
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
@@ -43,7 +42,7 @@ void main() {
             expect(widget.data, StaticVariables.LOGIN_BUTTON);
             counter++;
           } else if (counter == 3) {
-            expect(widget.data, StaticVariables.PRIVACY_BUTTON);
+            expect(widget.data, StaticVariables.SHOW_INSTRUCTIONS);
             counter++;
           } else if (counter == 4) {
             expect(widget.data, StaticVariables.STATUS + " : ");
@@ -87,7 +86,7 @@ void main() {
             expect(widget.data.isNotEmpty, true); // is Metric button
             counter++;
           } else if (counter == 15) {
-            expect(widget.data, StaticVariables.SHOW_INSTRUCTIONS);
+            expect(widget.data, StaticVariables.PRIVACY_BUTTON);
             counter++;
           }
         }
@@ -130,7 +129,7 @@ void main() {
             expect(widget.data, StaticVariables.LOGIN_BUTTON);
             counter++;
           } else if (counter == 3) {
-            expect(widget.data, StaticVariables.PRIVACY_BUTTON);
+            expect(widget.data, StaticVariables.SHOW_INSTRUCTIONS);
             await tester.tap(find.byWidget(widget));
             counter++;
           }
@@ -175,7 +174,7 @@ void main() {
             expect(widget.data, StaticVariables.LOGIN_BUTTON);
             counter++;
           } else if (counter == 3) {
-            expect(widget.data, StaticVariables.PRIVACY_BUTTON);
+            expect(widget.data, StaticVariables.SHOW_INSTRUCTIONS);
             counter++;
           } else if (counter == 4) {
             expect(widget.data, StaticVariables.STATUS + " : ");
@@ -258,7 +257,7 @@ void main() {
             expect(widget.data, StaticVariables.LOGIN_BUTTON);
             counter++;
           } else if (counter == 3) {
-            expect(widget.data, StaticVariables.PRIVACY_BUTTON);
+            expect(widget.data, StaticVariables.SHOW_INSTRUCTIONS);
             counter++;
           } else if (counter == 4) {
             expect(widget.data, StaticVariables.STATUS + " : ");
@@ -302,7 +301,7 @@ void main() {
             expect(widget.data.isNotEmpty, true); // is Metric button
             counter++;
           } else if (counter == 15) {
-            expect(widget.data, StaticVariables.SHOW_INSTRUCTIONS);
+            expect(widget.data, StaticVariables.PRIVACY_BUTTON);
             await tester.tap(find.byWidget(widget));
             counter++;
           }

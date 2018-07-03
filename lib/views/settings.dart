@@ -110,14 +110,12 @@ class _SettingsState extends State<Settings> {
                           padding: const EdgeInsets.only(top: 5.0),
                         ),
                         new RaisedButton(
-                          onPressed: () => _togglePrivacyPage(context),
+                          onPressed: () => _toggleIntroduction(context),
                           shape: new RoundedRectangleBorder(
                               borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEColor.red,
-                          child: new Text(
-                            StaticVariables.PRIVACY_BUTTON,
-                            style: CiEStyle.getSettingsPrivacyStyle(),
-                          ),
+                          child: new Text(StaticVariables.SHOW_INSTRUCTIONS,
+                              style: CiEStyle.getSettingsLogoutStyle()),
                         ),
                       ],
                     )
@@ -237,12 +235,14 @@ class _SettingsState extends State<Settings> {
                   padding: new EdgeInsets.only(top: 10.0),
                 ),
                 new RaisedButton(
-                  onPressed: () => _toggleIntroduction(context),
+                  onPressed: () => _togglePrivacyPage(context),
                   shape: new RoundedRectangleBorder(
                       borderRadius: CiEStyle.getButtonBorderRadius()),
                   color: CiEColor.red,
-                  child: new Text(StaticVariables.SHOW_INSTRUCTIONS,
-                      style: CiEStyle.getSettingsLogoutStyle()),
+                  child: new Text(
+                    StaticVariables.PRIVACY_BUTTON,
+                    style: CiEStyle.getSettingsPrivacyStyle(),
+                  ),
                 ),
               ],
             ),
@@ -282,29 +282,27 @@ class _SettingsState extends State<Settings> {
   }
 
   Widget buildUserMetricsWidget() {
-    return new Row(
-      children: <Widget>[
-        new Switch(
-          value: isMetricsEnabled,
-          onChanged: (bool v) {
-            setState(() {
-              // Toggle in widget for faster render
-              isMetricsEnabled = !isMetricsEnabled;
-              // Turn Firebase Analytics tracking on
-              Analytics.setAnalytics(isMetricsEnabled);
-              // Toggle in 'cache'
-              currentUserPresenter.toggleIsMetricsEnabled();
-              // Save 'cache' locally
-              currentUserPresenter.saveUserSettings();
-            });
-          },
-        ),
-        isMetricsEnabled
-            ? new Text(StaticVariables.METRICS_ENABLED,
-                style: CiEStyle.getSettingsEnabledStyle())
-            : new Text(StaticVariables.METRICS_DISABLED,
-                style: CiEStyle.getSettingsDisabledStyle()),
-      ],
+    return new ListTile(
+      title: isMetricsEnabled
+          ? new Text(StaticVariables.METRICS_ENABLED,
+          style: CiEStyle.getSettingsEnabledStyle())
+          : new Text(StaticVariables.METRICS_DISABLED,
+          style: CiEStyle.getSettingsDisabledStyle()),
+      trailing: new Switch(
+        value: isMetricsEnabled,
+        onChanged: (bool v) {
+          setState(() {
+            // Toggle in widget for faster render
+            isMetricsEnabled = !isMetricsEnabled;
+            // Turn Firebase Analytics tracking on
+            Analytics.setAnalytics(isMetricsEnabled);
+            // Toggle in 'cache'
+            currentUserPresenter.toggleIsMetricsEnabled();
+            // Save 'cache' locally
+            currentUserPresenter.saveUserSettings();
+          });
+        },
+      ),
     );
   }
 

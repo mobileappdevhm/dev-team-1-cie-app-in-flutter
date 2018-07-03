@@ -48,9 +48,9 @@ class LoginFormState extends State<LoginForm> {
         context,
         no,
         yes,
-        "We are collecting anonymous user data to check which views and features are mainly used. Please decide if you want to allow this.",
-        "It's ok!",
-        "I don't want this!");
+        "Help development of this application by sending anonymous usage statistics for which features are used?",
+        "Allow",
+        "Disable");
 
     Analytics.setCurrentScreen("login_screen");
   }
