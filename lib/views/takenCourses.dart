@@ -2,7 +2,6 @@ import 'package:cie_team1/presenter/currentUserPresenter.dart';
 import 'package:cie_team1/utils/cieColor.dart';
 import 'package:cie_team1/utils/cieStyle.dart';
 import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/widgets/prevCourseList.dart';
 import 'package:cie_team1/views/addTakenCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:cie_team1/utils/fileStore.dart';
@@ -10,25 +9,16 @@ import 'dart:async';
 import 'dart:convert';
 
 class TakenCourses extends StatefulWidget {
-  //TakenCourses({Key key, this.title}) : super(key: key);
-  TakenCourses(this.currentUserPresenter, this.onChanged);
-  final String title;
+  TakenCourses(this.currentUserPresenter);
   final CurrentUserPresenter currentUserPresenter;
-  final ValueChanged<int> onChanged;
 
   @override
-  _TakenCoursesState createState() => new _TakenCoursesState(currentUserPresenter, onChanged);
+  _TakenCoursesState createState() => new _TakenCoursesState(currentUserPresenter);
 }
 
 class _TakenCoursesState extends State<TakenCourses> {
-  /*
-  static CurrentUserPresenter currentUserPresenter =
-      new CurrentUserPresenter(_voidCallback, Flavor.PROD);
-      */
   final CurrentUserPresenter currentUserPresenter;
-  final ValueChanged<int> onChanged;
-  //int credits = currentUserPresenter.getTotalCredits();
-  _TakenCoursesState(this.currentUserPresenter, this.onChanged);
+  _TakenCoursesState(this.currentUserPresenter);
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +51,6 @@ class _TakenCoursesState extends State<TakenCourses> {
         ));
   }
 
-  static void _voidCallback(bool didChange) {}
-
   FutureBuilder buildPreviousCourses() {
     return new FutureBuilder(
         future: CourseHistory.loadCheckedCoursesFromMemory(),
@@ -72,9 +60,6 @@ class _TakenCoursesState extends State<TakenCourses> {
             List<Widget> widgets = new List<Widget>();
             int ectsTotal = historyJson.length*2;
             widgets.add(ectsCount(ectsTotal));
-            this.onChanged(ectsTotal);
-            //this.onChanged(true);
-            print(ectsTotal);
             for(int i=0; i<historyJson.length; i++) {
               widgets.add(
                 new ListTile(

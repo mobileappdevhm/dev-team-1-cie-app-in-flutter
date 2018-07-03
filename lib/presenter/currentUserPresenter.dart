@@ -110,7 +110,6 @@ class CurrentUserPresenter {
       if (val != null) {
         List<dynamic> courseHistory = json.decode(val);
         _currentUser.getCurrentUser().ectsTotal = courseHistory.length;
-        print(courseHistory.length);
       }
     });
   }

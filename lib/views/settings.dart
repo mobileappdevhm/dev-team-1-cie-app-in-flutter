@@ -54,17 +54,6 @@ class _SettingsState extends State<Settings> {
     Analytics.setCurrentScreen("profile_screen");
   }
 
-  void _forceUpdate(int ects) {
-    print(ects);
-    currentUserPresenter.getCurrentUser().ectsTotal = ects;
-    /*
-    if (didChange == true) {
-      // Triggers Widget rebuild on completion of potentially asynchronous tasks
-      setState(()=>{});
-    }
-    */
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -236,7 +225,7 @@ class _SettingsState extends State<Settings> {
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => new TakenCourses(currentUserPresenter, _forceUpdate)));
+                            builder: (context) => new TakenCourses(currentUserPresenter)));
                   },
                   child: new Padding(
                     padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
