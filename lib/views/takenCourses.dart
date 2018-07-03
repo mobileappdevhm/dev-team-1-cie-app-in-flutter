@@ -10,17 +10,25 @@ import 'dart:async';
 import 'dart:convert';
 
 class TakenCourses extends StatefulWidget {
-  TakenCourses({Key key, this.title}) : super(key: key);
+  //TakenCourses({Key key, this.title}) : super(key: key);
+  TakenCourses(this.currentUserPresenter, this.onChanged);
   final String title;
+  final CurrentUserPresenter currentUserPresenter;
+  final ValueChanged<int> onChanged;
 
   @override
-  _TakenCoursesState createState() => new _TakenCoursesState();
+  _TakenCoursesState createState() => new _TakenCoursesState(currentUserPresenter, onChanged);
 }
 
 class _TakenCoursesState extends State<TakenCourses> {
+  /*
   static CurrentUserPresenter currentUserPresenter =
       new CurrentUserPresenter(_voidCallback, Flavor.PROD);
-  int credits = currentUserPresenter.getTotalCredits();
+      */
+  final CurrentUserPresenter currentUserPresenter;
+  final ValueChanged<int> onChanged;
+  //int credits = currentUserPresenter.getTotalCredits();
+  _TakenCoursesState(this.currentUserPresenter, this.onChanged);
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +55,6 @@ class _TakenCoursesState extends State<TakenCourses> {
         body: new Center(
           child: new Column(
             children: <Widget>[
-              new Row(
-                children: <Widget>[
-                  new Padding(
-                    padding: const EdgeInsets.only(
-                        top: 20.0, bottom: 8.0, left: 16.0),
-                    child: new Text(
-                        StaticVariables.TOTAL_OF +
-                            " " +
-                            credits.toString() +
-                            " " +
-                            StaticVariables.ECTS,
-                        style: CiEStyle.getSettingsStyle()),
-                  )
-                ],
-              ),
-              new Divider(),
-              //new Expanded(child: new PrevCourseList(currentUserPresenter)),
               buildPreviousCourses(),
             ],
           ),
@@ -72,22 +63,75 @@ class _TakenCoursesState extends State<TakenCourses> {
 
   static void _voidCallback(bool didChange) {}
 
-  static FutureBuilder buildPreviousCourses() {
+  FutureBuilder buildPreviousCourses() {
     return new FutureBuilder(
         future: CourseHistory.loadCheckedCoursesFromMemory(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            List<Widget> widgets = new List<Widget>();
             List<dynamic> historyJson = json.decode(snapshot.data);
+            List<Widget> widgets = new List<Widget>();
+            int ectsTotal = historyJson.length*2;
+            widgets.add(ectsCount(ectsTotal));
+            this.onChanged(ectsTotal);
+            //this.onChanged(true);
+            print(ectsTotal);
             for(int i=0; i<historyJson.length; i++) {
-              widgets.add(new Text(historyJson[i]['name']));
+              widgets.add(
+                new ListTile(
+                  title: new Text(
+                    historyJson[i]['name'],
+                    style: CiEStyle.getPrevCoursesTitleStyle(),
+                  ),
+                  subtitle: new Column(
+                    children: <Widget>[
+                      new Row(
+                        children: <Widget>[
+                          new Text(
+                            "2"+ " ECTS",
+                            style: CiEStyle.getPrevCoursesCreditsStyle(),
+                          ),
+                          new Padding(padding: new EdgeInsets.only(right: 10.0)),
+                          new Text(
+                            "-",
+                            style: CiEStyle.getPrevCoursesCreditsStyle(),
+                          ),
+                          new Padding(padding: new EdgeInsets.only(right: 10.0)),
+                          new Text(
+                          historyJson[i]['correlations'][0]['organiser'],
+                          style: CiEStyle.getPrevCoursesCreditsStyle(),
+                        ),
+                        ],
+                      ),
+                    ],
+                  ))
+              );
             }
             return new Expanded(child:
                 new ListView(children: widgets),
             );
           }
-          return new Container(height: 0.0);
+          return new Container(
+            child: new Text("No Course History")
+          );
         }
+    );
+  }
+
+  static Widget ectsCount(int credits) {
+    return new Row(
+      children: <Widget>[
+        new Padding(
+          padding: const EdgeInsets.only(
+              top: 20.0, bottom: 8.0, left: 16.0),
+          child: new Text(
+              StaticVariables.TOTAL_OF +
+                  " " +
+                  credits.toString() +
+                  " " +
+                  StaticVariables.ECTS,
+              style: CiEStyle.getSettingsStyle()),
+        )
+      ],
     );
   }
 }
@@ -111,7 +155,7 @@ class CourseHistory {
   static Future<String> loadAllCoursesFromMemory() async {
     List<dynamic> finalJson = new List<dynamic>();
     for (int i=0; i<CourseHistory.semesterList.length; i++) {
-      String sem = await CourseHistory.getSingleJson(CourseHistory.semesterList.elementAt(0));
+      String sem = await CourseHistory.getSingleJson(CourseHistory.semesterList.elementAt(i));
       finalJson.addAll(json.decode(sem));
     }
     return json.encode(finalJson);

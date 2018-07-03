@@ -8,7 +8,7 @@ import 'package:cie_team1/model/course/course.dart';
 import 'package:cie_team1/utils/nineAPIConsumer.dart';
 import 'package:cie_team1/utils/fileStore.dart';
 import 'dart:convert';
-import 'dart:async';
+import 'package:cie_team1/generic/genericIcon.dart';
 
 class AddTakenCourses extends StatefulWidget {
   AddTakenCourses({Key key, this.title}) : super(key: key);
@@ -19,36 +19,54 @@ class AddTakenCourses extends StatefulWidget {
 }
 
 class _AddTakenCoursesState extends State<AddTakenCourses> {
-  static CurrentUserPresenter currentUserPresenter =
-      new CurrentUserPresenter(_voidCallback, Flavor.PROD);
-  int credits = currentUserPresenter.getTotalCredits();
   String semesterFilter = "SoSe2018";
   String departmentFilter = "All Departments";
   List<String> coursesSelected = new List<String>();
+  bool shouldSearch = false;
+  String searchValue = "";
+  final TextEditingController c1 = new TextEditingController();
 
   @override
   initState() {
     super.initState();
     List<String> urls = new List<String>();
-    for (String semester in CourseHistory.semesterList) {
-      urls.add(NineAPIEngine.NINE_PREV_COURSE_LIST_URL+CourseHistory.getUrl(semester));
-    }
-    NineAPIEngine.getJsonMulti(context, urls);
-    setState(() {
-      FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
-        List<dynamic> savedHistory = json.decode(val);
-        for(int i=0; i< savedHistory.length; i++) {
-          coursesSelected.add(savedHistory.elementAt(i));
+      FileStore.readFileAsString(FileStore.OLD_COURSES+"0").then((hasOldCourseData){
+        if (hasOldCourseData!=null) {
+          setState(() {
+            FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
+              if (val != null) {
+                List<dynamic> savedHistory = json.decode(val);
+                for(int i=0; i< savedHistory.length; i++) {
+                  coursesSelected.add(savedHistory.elementAt(i));
+                }
+              }
+            });
+          });
+        }
+        else {
+          for (int i=0; i<CourseHistory.semesterList.length; i++) {
+            urls.add(NineAPIEngine.NINE_PREV_COURSE_LIST_URL +
+                CourseHistory.getUrl(CourseHistory.semesterList.elementAt(i)));
+          }
+          NineAPIEngine.getJsonMulti(context, urls).then((v) {
+            setState(() {
+              FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
+                List<dynamic> savedHistory = json.decode(val);
+                for(int i=0; i< savedHistory.length; i++) {
+                  coursesSelected.add(savedHistory.elementAt(i));
+                }
+              });
+            });
+          });
         }
       });
-    });
   }
 
   static bool getCheckedValue(List<String> courses, String id) {
     return courses.contains(id);
   }
 
-  FutureBuilder buildOldCourses() {
+  FutureBuilder buildOldCourses(String searchValue) {
     return new FutureBuilder(
       future: CourseHistory.getSingleJson(semesterFilter),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -57,7 +75,8 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
           List<Widget> courseWidgets = new List<Widget>();
           for (int i=0; i < courseJson.length; i++) {
             List<dynamic> departments = (courseJson[i]['correlations']);
-            if(departments.toString().contains(departmentFilter) || departmentFilter == "All Departments") {
+            if((departments.toString().contains(departmentFilter) || departmentFilter == "All Departments") &&
+                (!shouldSearch || courseJson[i]['name'].toString().toLowerCase().contains(searchValue.toLowerCase()))) {
               courseWidgets.add(new ListTile(
                 title: new Text(courseJson[i]['name']),
                 trailing: new Checkbox(
@@ -103,7 +122,21 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
           child: new ListView(
             children: <Widget>[
               buildDropdowns(),
-              buildOldCourses(),
+              shouldSearch ? new Container(
+                padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
+                alignment: Alignment.center,
+                child: new TextField(
+                  //focusNode: focus,
+                  controller: c1,
+                  decoration: const InputDecoration(
+                    hintText: "Search by Course Name",
+                    contentPadding: const EdgeInsets.all(10.0),
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: (String val) => updateSearch(val),
+                ),
+              ) : new Container(height: 0.0),
+              buildOldCourses(searchValue),
             ],
           ),
         ));
@@ -153,9 +186,25 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
             new DropdownButton(items: departments, onChanged: changeDepartmentFilter, value:departmentFilter)
           ],
         ),
-        new Icon(Icons.search),
+        new IconButton(
+          color: CiEColor.mediumGray,
+          icon: GenericIcon.buildGenericSearchIcon(shouldSearch),
+          onPressed: toggleSearch),
+
       ],
     );
+  }
+
+  void toggleSearch() {
+    setState(() {
+      shouldSearch = !shouldSearch;
+    });
+  }
+
+  void updateSearch(val) {
+    setState(() {
+      searchValue = val;
+    });
   }
 
   void changeSemesterFilter(String val) {

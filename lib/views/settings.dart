@@ -37,6 +37,7 @@ class _SettingsState extends State<Settings> {
   void initState() {
     super.initState();
     currentUserPresenter.loadUserSettingsFromMemory();
+    currentUserPresenter.updateECTS();
     credits = currentUserPresenter.getTotalCredits();
     engCredits = currentUserPresenter.getDep3Credits();
     setState(() {
@@ -51,6 +52,17 @@ class _SettingsState extends State<Settings> {
     Analytics.setUserProperty(
         "department", currentUserPresenter.getCurrentUserFaculty());
     Analytics.setCurrentScreen("profile_screen");
+  }
+
+  void _forceUpdate(int ects) {
+    print(ects);
+    currentUserPresenter.getCurrentUser().ectsTotal = ects;
+    /*
+    if (didChange == true) {
+      // Triggers Widget rebuild on completion of potentially asynchronous tasks
+      setState(()=>{});
+    }
+    */
   }
 
   @override
@@ -180,18 +192,27 @@ class _SettingsState extends State<Settings> {
                     new Divider(),
                   ],
                 )),
-                new Container(
-                  padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-                  child: new Row(children: <Widget>[
-                    new Expanded(
-                        child: new Text(
-                      StaticVariables.CIE_CERTIFICATE,
-                      style: CiEStyle.getSettingsStyle(),
-                    )),
-                    new Text("$credits /15",
-                        style: CiEStyle.getSettingsStyle()),
-                    // Calculate ECTS/15 but one of the courses need to be from department 13
-                  ]),
+                new FutureBuilder(
+                  future: FileStore.readFileAsString(FileStore.TAKEN_COURSES),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      List<dynamic> takenCourses = json.decode(snapshot.data);
+                      credits = 2*takenCourses.length;
+                    }
+                    return new Container(
+                      padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                      child: new Row(children: <Widget>[
+                        new Expanded(
+                            child: new Text(
+                              StaticVariables.CIE_CERTIFICATE,
+                              style: CiEStyle.getSettingsStyle(),
+                            )),
+                        new Text("$credits /15",
+                            style: CiEStyle.getSettingsStyle()),
+                        // Calculate ECTS/15 but one of the courses need to be from department 13
+                      ]),
+                    );
+                  }
                 ),
                 new LinearProgressIndicator(
                   value: credits / 15,
@@ -215,7 +236,7 @@ class _SettingsState extends State<Settings> {
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => new TakenCourses()));
+                            builder: (context) => new TakenCourses(currentUserPresenter, _forceUpdate)));
                   },
                   child: new Padding(
                     padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
