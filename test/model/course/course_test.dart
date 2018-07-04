@@ -17,9 +17,9 @@ void main() {
           .withName("Blaba")
           .withFaculty("7")
           .withLecturesPerWeek([
-            new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-                new DayTime(11, 30), "R0.009")
-          ])
+        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+            new DayTime(11, 30), "R0.009")
+      ])
           .withDescription("boring")
           .withHoursPerWeek(2)
           .withEcts(2)
@@ -80,6 +80,26 @@ void main() {
 
     test('13 ocure', () {
       expect(sut.occursOnDay(Weekday.Sun), false);
+    });
+
+    test('14 equals', () {
+      final Course sut2 = new CourseBuilder()
+          .withName("Blaba")
+          .withFaculty("7")
+          .withLecturesPerWeek([
+        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
+            new DayTime(11, 30), "R0.009")
+      ])
+          .withDescription("boring")
+          .withHoursPerWeek(2)
+          .withEcts(2)
+          .withProfessorEmail(StaticVariables.MOCK_EMAIL)
+          .withProfessorName("Max Mustermann")
+          .withIsFavorite(false)
+          .withhasHomeBias(false)
+          .withIsCoterie(false)
+          .build();
+      expect(sut.equals(sut2), true);
     });
   });
 
@@ -196,10 +216,10 @@ void main() {
     test('24', () {
       expect(
           new Lecture(Campus.PASING, Weekday.Mon, DayTime(1, 50),
-                      DayTime(2, 50), "1000")
-                  .sortValue() <
+              DayTime(2, 50), "1000")
+              .sortValue() <
               new Lecture(Campus.PASING, Weekday.Mon, DayTime(1, 51),
-                      DayTime(2, 50), "1000")
+                  DayTime(2, 50), "1000")
                   .sortValue(),
           true);
     });
@@ -220,47 +240,54 @@ void main() {
     });
 
     test('28', () {
-      expect( CourseAvailabilityUtility.intToColoredString(CourseAvailability.PENDING, 5.0).toString(),"Text(\"Pending\", inherit: true, color: Color(0xfff2c94c), size: 5.0)");
+      expect(CourseAvailabilityUtility.intToColoredString(
+          CourseAvailability.PENDING, 5.0).toString(),
+          "Text(\"Pending\", inherit: true, color: Color(0xfff2c94c), size: 5.0)");
     });
 
     test('29', () {
-      expect( CourseAvailabilityUtility.intToColoredString(CourseAvailability.UNAVAILABLE, 5.0).toString(),"Text(\"Unavailable\", inherit: true, color: Color(0xffeb5757), size: 5.0)");
+      expect(CourseAvailabilityUtility.intToColoredString(
+          CourseAvailability.UNAVAILABLE, 5.0).toString(),
+          "Text(\"Unavailable\", inherit: true, color: Color(0xffeb5757), size: 5.0)");
     });
 
     test('30', () {
-      expect( CampusUtility.getStringAsCampus("Loth"),Campus.LOTHSTRASSE);
+      expect(CampusUtility.getStringAsCampus("Loth"), Campus.LOTHSTRASSE);
     });
 
     test('31', () {
-      expect( CampusUtility.getStringAsCampus("Pasing"),Campus.PASING);
+      expect(CampusUtility.getStringAsCampus("Pasing"), Campus.PASING);
     });
 
     test('32', () {
-      expect( CampusUtility.getStringAsCampus("Karlstrasse"),Campus.KARLSTRASSE);
+      expect(
+          CampusUtility.getStringAsCampus("Karlstrasse"), Campus.KARLSTRASSE);
     });
 
     test('33', () {
-      expect( CampusUtility.getCampusAsString(Campus.LOTHSTRASSE),"Loth.");
+      expect(CampusUtility.getCampusAsString(Campus.LOTHSTRASSE), "Loth.");
     });
 
     test('34', () {
-      expect( CampusUtility.getCampusAsString(Campus.PASING),"Pasing");
+      expect(CampusUtility.getCampusAsString(Campus.PASING), "Pasing");
     });
 
     test('35', () {
-      expect( CampusUtility.getCampusAsString(Campus.KARLSTRASSE),"Karl.");
+      expect(CampusUtility.getCampusAsString(Campus.KARLSTRASSE), "Karl.");
     });
 
     test('33', () {
-      expect( CampusUtility.getCampusAsLongString(Campus.LOTHSTRASSE),"Lothstrasse");
+      expect(CampusUtility.getCampusAsLongString(Campus.LOTHSTRASSE),
+          "Lothstrasse");
     });
 
     test('34', () {
-      expect( CampusUtility.getCampusAsLongString(Campus.PASING),"Pasing");
+      expect(CampusUtility.getCampusAsLongString(Campus.PASING), "Pasing");
     });
 
     test('35', () {
-      expect( CampusUtility.getCampusAsLongString(Campus.KARLSTRASSE),"Karlstrasse");
+      expect(CampusUtility.getCampusAsLongString(Campus.KARLSTRASSE),
+          "Karlstrasse");
     });
   });
 
