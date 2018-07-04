@@ -78,7 +78,9 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
             if((departments.toString().contains(departmentFilter) || departmentFilter == "All Departments") &&
                 (!shouldSearch || courseJson[i]['name'].toString().toLowerCase().contains(searchValue.toLowerCase()))) {
               courseWidgets.add(new ListTile(
-                title: new Text(courseJson[i]['name']),
+                title: new Text(courseJson[i]['name'],
+                    style: CiEStyle.getPrevCoursesTitleStyle(),
+                ),
                 trailing: new Checkbox(
                   value: getCheckedValue(coursesSelected, courseJson[i]['id']),
                   onChanged: (val) {

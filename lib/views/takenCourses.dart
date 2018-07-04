@@ -62,12 +62,17 @@ class _TakenCoursesState extends State<TakenCourses> {
             widgets.add(ectsCount(ectsTotal));
             for(int i=0; i<historyJson.length; i++) {
               widgets.add(
-                new ListTile(
-                  title: new Text(
+                new Container(
+                  padding:  new EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
+                  child: new Text(
                     historyJson[i]['name'],
-                    style: CiEStyle.getPrevCoursesTitleStyle(),
-                  ),
-                  subtitle: new Column(
+                    style: CiEStyle.getCoursesTitleStyle(context),
+                  ))
+                );
+                widgets.add(
+                  new Container(
+                  padding:  new EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                  child: new Column(
                     children: <Widget>[
                       new Row(
                         children: <Widget>[
@@ -89,7 +94,7 @@ class _TakenCoursesState extends State<TakenCourses> {
                       ),
                     ],
                   ))
-              );
+                );
             }
             return new Expanded(child:
                 new ListView(children: widgets),
@@ -102,21 +107,21 @@ class _TakenCoursesState extends State<TakenCourses> {
     );
   }
 
-  static Widget ectsCount(int credits) {
-    return new Row(
-      children: <Widget>[
-        new Padding(
-          padding: const EdgeInsets.only(
-              top: 20.0, bottom: 8.0, left: 16.0),
-          child: new Text(
-              StaticVariables.TOTAL_OF +
-                  " " +
-                  credits.toString() +
-                  " " +
-                  StaticVariables.ECTS,
-              style: CiEStyle.getSettingsStyle()),
-        )
-      ],
+  Widget ectsCount(int credits) {
+      return new Container(
+        padding: const EdgeInsets.only(
+            top: 20.0, bottom: 0.0, left: 16.0),
+        child: new Text(
+            StaticVariables.TOTAL_OF +
+                " " +
+                credits.toString() +
+                " " +
+                StaticVariables.ECTS,
+            style: CiEStyle.getWarningTextStyle()),
+        decoration: new BoxDecoration(
+        border: new Border(
+            bottom: new BorderSide(color: CiEColor.lightGray, width: 1.0)),
+      ),
     );
   }
 }
@@ -166,5 +171,4 @@ class CourseHistory {
     return FileStore.readFileAsString(FileStore.OLD_COURSES
         +CourseHistory.semesterList.indexOf(data).toString());
   }
-
 }
