@@ -55,7 +55,6 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
 
           }
           NineAPIEngine.getJsonMulti(context, urls).then((v) {
-            print(urls);
             setState(() {
               FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
                 List<dynamic> savedHistory = json.decode(val);
