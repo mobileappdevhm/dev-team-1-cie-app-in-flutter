@@ -4,7 +4,7 @@ class Analytics {
   static FirebaseAnalytics analytics;
 
   static bool getAnalytics() {
-     return analytics != null;
+    return analytics != null;
   }
 
   static setAnalytics(bool isEnabled) {
