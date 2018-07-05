@@ -101,7 +101,8 @@ class _TakenCoursesState extends State<TakenCourses> {
             );
           }
           return new Container(
-            child: new Text("No Course History")
+            padding: new EdgeInsets.all(15.0),
+            child: new Text("No Courses found.", style: CiEStyle.getWarningTextStyle())
           );
         }
     );

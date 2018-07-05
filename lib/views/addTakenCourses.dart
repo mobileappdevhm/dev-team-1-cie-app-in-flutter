@@ -31,7 +31,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
     super.initState();
     List<String> urls = new List<String>();
       FileStore.readFileAsString(FileStore.OLD_COURSES+"0").then((hasOldCourseData){
-        if (hasOldCourseData!=null) {
+        if (hasOldCourseData!=null && hasOldCourseData.length > 3) {
           setState(() {
             FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
               if (val != null) {
@@ -45,10 +45,17 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
         }
         else {
           for (int i=0; i<CourseHistory.semesterList.length; i++) {
-            urls.add(NineAPIEngine.NINE_PREV_COURSE_LIST_URL +
-                CourseHistory.getUrl(CourseHistory.semesterList.elementAt(i)));
+            // TODO: Delete the following conditional code after Nine works again
+            if (CourseHistory.semesterList.elementAt(i) == "SoSe2018") {
+              urls.add(NineAPIEngine.NINE_COURSE_LIST_URL);
+            } else {
+              urls.add(NineAPIEngine.NINE_PREV_COURSE_LIST_URL +
+                  CourseHistory.getUrl(CourseHistory.semesterList.elementAt(i)));
+            }
+
           }
           NineAPIEngine.getJsonMulti(context, urls).then((v) {
+            print(urls);
             setState(() {
               FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
                 List<dynamic> savedHistory = json.decode(val);
