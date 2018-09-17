@@ -1,5 +1,5 @@
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/views/maps.dart';
+import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/views/maps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

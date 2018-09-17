@@ -1,5 +1,5 @@
-import 'package:cie_team1/utils/routes.dart';
-import 'package:cie_team1/views/start.dart';
+import 'package:cie_app/utils/routes.dart';
+import 'package:cie_app/views/start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

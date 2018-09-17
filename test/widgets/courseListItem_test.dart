@@ -1,7 +1,7 @@
-import 'package:cie_team1/generic/genericIcon.dart';
-import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/widgets/courseListItem.dart';
+import 'package:cie_app/generic/genericIcon.dart';
+import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

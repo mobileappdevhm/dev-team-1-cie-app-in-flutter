@@ -1,5 +1,5 @@
-import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/model/course/courses.dart';
+import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/course/courses.dart';
 
 class CoursesProd implements Courses {
   List<Course> courses = [];

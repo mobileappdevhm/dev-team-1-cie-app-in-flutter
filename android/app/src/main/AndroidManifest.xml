@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mobileappdev.hm.edu.cieteam1">
+    package="edu.hm.cie.cieapp">
 
     <!-- The INTERNET permission is required for development. Specifically,
          flutter needs it to communicate with the running application
@@ -15,7 +15,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="CiE HM Team1"
+        android:label="CiE HM"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

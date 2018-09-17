@@ -1,7 +1,7 @@
-import 'package:cie_team1/generic/genericIcon.dart';
-import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
+import 'package:cie_app/generic/genericIcon.dart';
+import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/utils/cieColor.dart';
+import 'package:cie_app/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

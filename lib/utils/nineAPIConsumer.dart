@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:cie_team1/generic/genericIcon.dart';
-import 'package:cie_team1/utils/fileStore.dart';
+import 'package:cie_app/generic/genericIcon.dart';
+import 'package:cie_app/utils/fileStore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';

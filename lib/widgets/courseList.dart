@@ -1,20 +1,20 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cie_team1/generic/genericAlert.dart';
-import 'package:cie_team1/generic/genericIcon.dart';
-import 'package:cie_team1/generic/genericShowInstruction.dart';
-import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/analytics.dart';
-import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/nineAPIConsumer.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/widgets/courseListItem.dart';
+import 'package:cie_app/generic/genericAlert.dart';
+import 'package:cie_app/generic/genericIcon.dart';
+import 'package:cie_app/generic/genericShowInstruction.dart';
+import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/analytics.dart';
+import 'package:cie_app/utils/cieColor.dart';
+import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/nineAPIConsumer.dart';
+import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_team1/utils/routes.dart';
+import 'package:cie_app/utils/routes.dart';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.

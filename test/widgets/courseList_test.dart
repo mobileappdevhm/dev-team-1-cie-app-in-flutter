@@ -1,8 +1,8 @@
-import 'package:cie_team1/model/course/courses_mock.dart';
-import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/widgets/courseList.dart';
+import 'package:cie_app/model/course/courses_mock.dart';
+import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/widgets/courseList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

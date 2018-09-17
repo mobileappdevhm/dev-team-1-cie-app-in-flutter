@@ -1,8 +1,8 @@
-import 'package:cie_team1/generic/genericIcon.dart';
-import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/routes.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_app/generic/genericIcon.dart';
+import 'package:cie_app/utils/cieColor.dart';
+import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/routes.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericShowInstruction {

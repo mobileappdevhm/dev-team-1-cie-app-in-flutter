@@ -1,4 +1,4 @@
-import 'package:cie_team1/utils/routes.dart';
+import 'package:cie_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:test/test.dart';
 

@@ -1,5 +1,5 @@
-import 'package:cie_team1/model/course/courses_mock.dart';
-import 'package:cie_team1/views/takenCourses.dart';
+import 'package:cie_app/model/course/courses_mock.dart';
+import 'package:cie_app/views/takenCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

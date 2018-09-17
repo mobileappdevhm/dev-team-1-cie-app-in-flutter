@@ -1,4 +1,4 @@
-import 'package:cie_team1/views/start.dart';
+import 'package:cie_app/views/start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

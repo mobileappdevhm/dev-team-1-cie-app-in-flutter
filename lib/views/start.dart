@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:cie_team1/model/user/user.dart';
-import 'package:cie_team1/utils/analytics.dart';
-import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/fileStore.dart';
-import 'package:cie_team1/utils/routes.dart';
-import 'package:cie_team1/widgets/CiEAnimation.dart';
+import 'package:cie_app/model/user/user.dart';
+import 'package:cie_app/utils/analytics.dart';
+import 'package:cie_app/utils/cieColor.dart';
+import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/fileStore.dart';
+import 'package:cie_app/utils/routes.dart';
+import 'package:cie_app/widgets/CiEAnimation.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {

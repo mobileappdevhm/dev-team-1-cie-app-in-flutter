@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:cie_team1/di/currentUser_di.dart';
-import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/model/user/currentUser.dart';
-import 'package:cie_team1/model/user/user.dart';
-import 'package:cie_team1/utils/fileStore.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_app/di/currentUser_di.dart';
+import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/user/currentUser.dart';
+import 'package:cie_app/model/user/user.dart';
+import 'package:cie_app/utils/fileStore.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class CurrentUserPresenter {

@@ -1,7 +1,7 @@
-import 'package:cie_team1/model/user/currentUser.dart';
-import 'package:cie_team1/model/user/currentUser_mock.dart';
-import 'package:cie_team1/model/user/currentUser_prod.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_app/model/user/currentUser.dart';
+import 'package:cie_app/model/user/currentUser_mock.dart';
+import 'package:cie_app/model/user/currentUser_prod.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 
 //DI
 class UserInjector {

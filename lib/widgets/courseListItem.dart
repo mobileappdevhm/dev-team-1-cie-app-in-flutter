@@ -1,9 +1,9 @@
-import 'package:cie_team1/generic/genericIcon.dart';
-import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:cie_team1/utils/analytics.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/widgets/courseDetails.dart';
+import 'package:cie_app/generic/genericIcon.dart';
+import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/utils/analytics.dart';
+import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/widgets/courseDetails.dart';
 import 'package:flutter/material.dart';
 
 class CourseListItem extends StatelessWidget {

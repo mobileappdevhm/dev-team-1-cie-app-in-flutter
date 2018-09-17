@@ -1,6 +1,6 @@
-import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/model/user/user.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/user/user.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:test/test.dart';
 
 @Timeout(const Duration(seconds: 10))

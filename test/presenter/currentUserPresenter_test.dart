@@ -1,7 +1,7 @@
-import 'package:cie_team1/di/currentUser_di.dart';
-import 'package:cie_team1/model/course/courses_mock.dart';
-import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_app/di/currentUser_di.dart';
+import 'package:cie_app/model/course/courses_mock.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:test/test.dart';
 
 void main() {
