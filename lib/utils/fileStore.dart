@@ -9,6 +9,8 @@ class FileStore {
   static const String LOGIN = "_login";
   static const String USER_SETTINGS = "_user";
   static const String FAVORITES = "_favorites";
+  static const String OLD_COURSES = "oldcourses";
+  static const String TAKEN_COURSES = "takencourses";
 
   static Future<File> getFile(String resource) async {
     String dir = (await getApplicationDocumentsDirectory()).path;

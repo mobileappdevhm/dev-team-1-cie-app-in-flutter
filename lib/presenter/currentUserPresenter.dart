@@ -50,15 +50,6 @@ class CurrentUserPresenter {
     return _currentUser.getCurrentUser().currentCourses;
   }
 
-  int getTotalCredits() {
-    var sum = 0;
-
-    _currentUser.getCurrentUser().prevCourses.forEach((course) {
-      sum = sum + course.ects;
-    });
-    return sum;
-  }
-
   int getDep3Credits() {
     var sum = 0;
     _currentUser.getCurrentUser().prevCourses.forEach((course) {

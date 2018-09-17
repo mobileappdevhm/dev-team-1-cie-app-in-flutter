@@ -121,7 +121,7 @@ class CiEStyle {
 
   static TextStyle getPrevCoursesCreditsStyle() {
     return new TextStyle(
-        fontSize: 20.0, fontWeight: FontWeight.bold, color: CiEColor.red);
+        fontSize: 11.0, fontWeight: FontWeight.bold, color: CiEColor.red);
   }
 
   static Color getLogoutButtonColor() {
