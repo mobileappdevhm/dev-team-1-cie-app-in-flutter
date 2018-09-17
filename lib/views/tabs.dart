@@ -1,13 +1,13 @@
-import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/nineAPIConsumer.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/views/maps.dart';
-import 'package:cie_team1/views/schedule.dart';
-import 'package:cie_team1/views/settings.dart';
-import 'package:cie_team1/widgets/courseList.dart';
+import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/cieColor.dart';
+import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/nineAPIConsumer.dart';
+import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/views/maps.dart';
+import 'package:cie_app/views/schedule.dart';
+import 'package:cie_app/views/settings.dart';
+import 'package:cie_app/widgets/courseList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,6 @@
-import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/views/schedule.dart';
+import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/views/schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

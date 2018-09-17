@@ -1,4 +1,4 @@
-import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_app/utils/cieColor.dart';
 import 'package:flutter/material.dart';
 
 class GenericBorderContainer {

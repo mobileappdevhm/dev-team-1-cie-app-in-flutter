@@ -1,4 +1,4 @@
-import 'package:cie_team1/generic/genericBorderContainer.dart';
+import 'package:cie_app/generic/genericBorderContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:test/test.dart';
 

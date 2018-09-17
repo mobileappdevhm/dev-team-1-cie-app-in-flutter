@@ -1,6 +1,6 @@
-import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class PrevCourseListItem extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:cie_team1/model/course/details/correlation.dart';
+import 'package:cie_app/model/course/details/correlation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

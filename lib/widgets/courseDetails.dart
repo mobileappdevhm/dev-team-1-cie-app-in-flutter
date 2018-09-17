@@ -1,10 +1,10 @@
-import 'package:cie_team1/generic/genericAlert.dart';
-import 'package:cie_team1/generic/genericIcon.dart';
-import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/presenter/courseListPresenter.dart';
-import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_app/generic/genericAlert.dart';
+import 'package:cie_app/generic/genericIcon.dart';
+import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/utils/cieColor.dart';
+import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_view.dart';
 import 'package:url_launcher/url_launcher.dart';

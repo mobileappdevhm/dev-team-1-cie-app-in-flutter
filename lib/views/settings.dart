@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:cie_team1/generic/genericShowInstruction.dart';
-import 'package:cie_team1/model/user/user.dart';
-import 'package:cie_team1/presenter/currentUserPresenter.dart';
-import 'package:cie_team1/utils/analytics.dart';
-import 'package:cie_team1/utils/cieColor.dart';
-import 'package:cie_team1/utils/cieStyle.dart';
-import 'package:cie_team1/utils/fileStore.dart';
-import 'package:cie_team1/utils/routes.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/views/takenCourses.dart';
-import 'package:cie_team1/widgets/privacyPage.dart';
+import 'package:cie_app/generic/genericShowInstruction.dart';
+import 'package:cie_app/model/user/user.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/analytics.dart';
+import 'package:cie_app/utils/cieColor.dart';
+import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/fileStore.dart';
+import 'package:cie_app/utils/routes.dart';
+import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/views/takenCourses.dart';
+import 'package:cie_app/widgets/privacyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

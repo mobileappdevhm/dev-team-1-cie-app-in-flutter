@@ -1,5 +1,5 @@
-import 'package:cie_team1/generic/genericShowInstruction.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
+import 'package:cie_app/generic/genericShowInstruction.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -1,6 +1,6 @@
-import 'package:cie_team1/model/course/details/correlation.dart';
-import 'package:cie_team1/model/course/details/date.dart';
-import 'package:cie_team1/utils/cieColor.dart';
+import 'package:cie_app/model/course/details/correlation.dart';
+import 'package:cie_app/model/course/details/date.dart';
+import 'package:cie_app/utils/cieColor.dart';
 import 'package:flutter/material.dart';
 
 class CourseBuilder {

@@ -1,4 +1,4 @@
-import 'package:cie_team1/utils/nineAPIConsumer.dart';
+import 'package:cie_app/utils/nineAPIConsumer.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_test/flutter_test.dart';
 

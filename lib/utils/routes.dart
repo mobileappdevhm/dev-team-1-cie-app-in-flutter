@@ -1,6 +1,6 @@
-import 'package:cie_team1/views/login.dart';
-import 'package:cie_team1/views/start.dart';
-import 'package:cie_team1/views/tabs.dart';
+import 'package:cie_app/views/login.dart';
+import 'package:cie_app/views/start.dart';
+import 'package:cie_app/views/tabs.dart';
 import 'package:flutter/widgets.dart';
 
 class Routes {

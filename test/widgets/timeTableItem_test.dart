@@ -1,6 +1,6 @@
-import 'package:cie_team1/model/course/course.dart';
-import 'package:cie_team1/utils/staticVariables.dart';
-import 'package:cie_team1/widgets/timeTableItem.dart';
+import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/widgets/timeTableItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
