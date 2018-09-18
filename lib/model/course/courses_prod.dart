@@ -6,7 +6,6 @@ class CoursesProd implements Courses {
 
   CoursesProd() {
     //Todo: In the next Sprints
-    print("called");
   }
 
   @override

@@ -249,7 +249,6 @@ class CourseListState extends State<CourseList> {
   }
 
   handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
-    print("I was fired!");
     Future<Null> complete = NineAPIEngine.pullCourseJSON(context, true);
     presenter.addCoursesFromMemory();
     presenter.updateLecturerInfoFromMemory();

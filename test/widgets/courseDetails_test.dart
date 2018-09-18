@@ -37,7 +37,6 @@ void main() {
             expect(widget.data, 'FK 02');
             counter++;
           } else if (counter == 2) {
-            print(widget.data);
             expect(widget.data.contains("Tue"), true);
             counter++;
           } else if (counter == 3) {

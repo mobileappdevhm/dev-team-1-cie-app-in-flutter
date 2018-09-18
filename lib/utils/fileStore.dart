@@ -31,7 +31,6 @@ class FileStore {
     String filename = "$dir/" + resource + ".json";
     File f = new File(filename);
     f.writeAsString(data);
-    print(data);
     return f;
   }
 }

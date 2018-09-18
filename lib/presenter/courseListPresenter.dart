@@ -32,18 +32,14 @@ class CourseListPresenter {
   // TODO: -Make the loop contents more relevant and move it somewhere else
   void addCoursesFromMemory() {
     //TODO is called twice - reduce calls
-    print("add courses from memory");
     this.onChanged(true);
     List<Course> courseList = _courses.getCourses();
     bool didUpdate = false;
     FileStore.readFileAsString(FileStore.COURSES).then((String val) {
-      print("val " + val);
       if (val != null) {
         final List<dynamic> jsonData = json.decode(val);
-        print("jsonData " + jsonData.length.toString());
         for (int i = 0; i < jsonData.length; i++) {
           var course = new Course(jsonData[i]);
-          print("updated");
           if (isNewCourseData(courseList, course)) {
             courseList.add(course);
             didUpdate = true;
@@ -54,9 +50,7 @@ class CourseListPresenter {
           this.onChanged(true);
         }
       }
-      print("finished");
       syncFavoritedCoursesFromMemory();
-      print(courseList.length);
     });
   }
 
@@ -104,7 +98,6 @@ class CourseListPresenter {
   }
 
   bool isNewCourseData(List<Course> courseList, Course candidate) {
-    print("isNewCourseData");
     return courseList.firstWhere((c) => c.equals(candidate),
             orElse: () => null) ==
         null;
