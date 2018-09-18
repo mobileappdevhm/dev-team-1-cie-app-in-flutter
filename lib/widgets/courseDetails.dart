@@ -1,6 +1,8 @@
 import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/course/details/campus.dart';
+import 'package:cie_app/model/course/details/courseAvailability.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
@@ -147,8 +149,8 @@ class _CourseDetailsState extends State<CourseDetails> {
     //Take all locations
     presenter
         .getCourses()[id]
-        .lecturesPerWeek
-        .map((l) => CampusUtility.getCampusAsLongString(l.campus))
+        .appointments
+        .map((l) => CampusUtility.getCampusAsLongString(l.getCampus()))
         .toSet()
         .forEach((s) => locations += " " + s);
     //Just for the cast that we don't have location
@@ -172,17 +174,17 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 new Padding(padding: const EdgeInsets.only(top: 5.0)),
                 new Text(
-                  presenter.getFacultiesBeautiful(id),
+                  presenter.getDepartmentShortName(id),
                   style: CiEStyle.getCourseDescriptionFacultyStyle(),
                 ),
                 new Text(
-                  presenter.getLectureTimesBeautiful(id),
+                  presenter.getAppointmentTimesBeautiful(id),
                   style: CiEStyle.getCoursesListTimeStyle(),
                 ),
                 new Text(
                     StaticVariables.PROFESSOR +
                         " " +
-                        presenter.getProfessorName(id),
+                        presenter.getNamesOfLecturers(id),
                     style: CiEStyle.getCoursesListTimeStyle()),
                 new Text(StaticVariables.CAMPUS + locations,
                     style: CiEStyle.getCoursesListTimeStyle()),
@@ -242,9 +244,9 @@ class _CourseDetailsState extends State<CourseDetails> {
                   ),
                   new Text(
                       " " +
-                          (presenter.getHoursPerWeek(id) == "-1"
+                          (presenter.getSWS(id) == "-1"
                               ? "N/A"
-                              : presenter.getHoursPerWeek(id).toString()),
+                              : presenter.getSWS(id).toString()),
                       style: CiEStyle.getCourseDetailsFooterTextStyleBolt()),
                 ],
               ),
@@ -309,12 +311,13 @@ class _CourseDetailsState extends State<CourseDetails> {
   }
 
   _launchContactProfURL(int id) async {
-    if (presenter.getProfessorEmail(id) == StaticVariables.MOCK_EMAIL ||
-        !presenter.getProfessorEmail(id).contains("@")) {
+    var email = presenter.getEmailsOfLecturers(id);
+    if (email == StaticVariables.MOCK_EMAIL ||
+        !email.contains("@")) {
       GenericAlert.confirmDialog(context, StaticVariables.NO_EMAIL_FOUND,
           StaticVariables.NO_EMAIL_FOUND_DESCRIPTION);
     } else {
-      var url = "mailto:" + presenter.getProfessorEmail(id);
+      var url = "mailto:" + email;
       if (await canLaunch(url)) {
         await launch(url);
       } else {

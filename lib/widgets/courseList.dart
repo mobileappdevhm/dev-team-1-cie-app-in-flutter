@@ -5,6 +5,7 @@ import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/generic/genericShowInstruction.dart';
 import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/course/details/department.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/analytics.dart';
@@ -105,7 +106,7 @@ class CourseListState extends State<CourseList> {
           value: "",
           child: new Text("All Departments", overflow: TextOverflow.clip),
         ));
-        departments.addAll(CourseDefinitions.departments.map((String value) {
+        departments.addAll(Department.departments.map((String value) {
           if (value != null) {
             return new DropdownMenuItem<String>(
               value: value,
@@ -191,7 +192,7 @@ class CourseListState extends State<CourseList> {
   bool _shouldShowCourse(int i) {
     if (shouldFilterByFavorites == false) {
       //return true if department is searched
-      return courseListPresenter.getFaculties(i).toString().contains(filter);
+      return courseListPresenter.getDepartmentShortName(i).contains(filter);
     } else {
       //return true if course is favorite or is temporary available
       return courseListPresenter.getFavourite(i) ||
@@ -248,6 +249,7 @@ class CourseListState extends State<CourseList> {
   }
 
   handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
+    print("I was fired!");
     Future<Null> complete = NineAPIEngine.pullCourseJSON(context, true);
     presenter.addCoursesFromMemory();
     presenter.updateLecturerInfoFromMemory();

@@ -1,20 +1,9 @@
 import 'package:cie_app/model/course/details/lecturer.dart';
 import 'package:cie_app/model/course/details/room.dart';
 
-class DateBuilder {
-  static List<Date> fromJson(List<dynamic> jsonData) {
-    if (jsonData == null) return null;
-    var list = new List<Date>();
-    for (int i = 0; i < jsonData.length; i++) {
-      list.add(new Date(jsonData[i]));
-    }
-    return list;
-  }
-}
-
 class Date {
-  String begin;
-  String end;
+  DateTime begin;
+  DateTime end;
   String title;
   bool isCanceled;
   List<Room> rooms;
@@ -22,12 +11,21 @@ class Date {
   List<dynamic> actions;
 
   Date(Map<String, dynamic> jsonData) {
-    this.begin = jsonData['begin'];
-    this.end = jsonData['end'];
+    this.begin = DateTime.parse(jsonData['begin']);
+    this.end = DateTime.parse(jsonData['end']);
     this.title = jsonData['title'];
     this.isCanceled = jsonData['isCanceled'];
-    this.rooms = RoomBuilder.fromJson(jsonData['rooms']);
-    this.lecturers = LecturerBuilder.fromJson(jsonData['lecturer']);
+    this.rooms = Room.fromJson(jsonData['rooms']);
+    this.lecturers = Lecturer.fromJson(jsonData['lecturer']);
     this.actions = jsonData['actions'];
+  }
+
+  static List<Date> fromJson(List<dynamic> jsonData) {
+    if (jsonData == null) return null;
+    var list = new List<Date>();
+    for (int i = 0; i < jsonData.length; i++) {
+      list.add(new Date(jsonData[i]));
+    }
+    return list;
   }
 }

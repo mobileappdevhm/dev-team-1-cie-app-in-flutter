@@ -1,6 +1,8 @@
 import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/course/details/appointment.dart';
+import 'package:cie_app/model/course/details/weekday.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
@@ -50,8 +52,8 @@ class _ScheduleState extends State<Schedule> {
 
   Widget _getTimeTableSpecificDay(Weekday weekday) {
     // Get lectures at day an receive timeTableEntry for day
-    List<Lecture> lectureList =
-        courseListPresenter.getFavouriteLecturesOfWeekday(weekday);
+    List<Appointment> lectureList =
+        courseListPresenter.getFavouriteAppointmentsOfWeekday(weekday);
     return new TimeTableEntry(lectureList, weekday, courseListPresenter);
   }
 }
@@ -60,22 +62,22 @@ class _ScheduleState extends State<Schedule> {
 // with an ExpansionTile.
 
 class TimeTableEntryItem extends StatelessWidget {
-  final Lecture lecture;
+  final Appointment appointment;
 
-  TimeTableEntryItem(this.lecture);
+  TimeTableEntryItem(this.appointment);
 
-  Widget _buildTile(Lecture lecture) {
+  Widget _buildTile(Appointment lecture) {
     return new TimeTableItem(lecture);
   }
 
   @override
   Widget build(BuildContext context) {
-    return _buildTile(lecture);
+    return _buildTile(appointment);
   }
 }
 
 class TimeTableEntry extends StatelessWidget {
-  final List<Lecture> children;
+  final List<Appointment> children;
   final Weekday weekday;
   final CourseListPresenter courseListPresenter;
 
@@ -92,8 +94,8 @@ class TimeTableEntry extends StatelessWidget {
       // If there exists another lecture in the list, determine if there is
       // enough time to commute to the specified campus location
       if (i + 1 < children.length) {
-        Lecture lectureOne = children.elementAt(i);
-        Lecture lectureTwo = children.elementAt(i + 1);
+        Appointment appointmentOne = children.elementAt(i);
+        Appointment appointmentTwo = children.elementAt(i + 1);
         if (courseListPresenter
             .checkIfConflictsOtherFavoriteLecture(children.elementAt(i))) {
           childrenWidgets.add(new FlatButton(
@@ -101,7 +103,7 @@ class TimeTableEntry extends StatelessWidget {
                   context,
                   StaticVariables.TIME_CONFLICT_MESSAGE,
                   courseListPresenter.constructSchedulingConflictText(
-                      lectureOne, lectureTwo)),
+                      appointmentOne, appointmentTwo)),
               child: GenericIcon.buildGenericConflictIcon(
                   StaticVariables.TIME_CONFLICT_MESSAGE)));
         }

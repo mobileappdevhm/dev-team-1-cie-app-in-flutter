@@ -34,7 +34,7 @@ class CourseListItem extends StatelessWidget {
               new Padding(
                 padding: new EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
                 child: new Text(
-                  courseListPresenter.getFacultiesBeautiful(id),
+                  courseListPresenter.getDepartmentShortName(id),
                   style: CiEStyle.getCoursesListFacultyStyle(context),
                 ),
               ),
@@ -48,7 +48,7 @@ class CourseListItem extends StatelessWidget {
                     0.0,
                     0.0),
                 child: new Text(
-                  courseListPresenter.getLectureTimesBeautiful(id),
+                  courseListPresenter.getAppointmentTimesBeautiful(id),
                   style: CiEStyle.getCoursesListTimeStyle(),
                 ),
               )
@@ -99,7 +99,7 @@ class CourseListItem extends StatelessWidget {
     //track click on course
     Analytics.logEvent("course_click", {
       "title": courseListPresenter.getTitle(id),
-      "department": courseListPresenter.getFaculties(id)
+      "department": courseListPresenter.getDepartmentShortName(id)
     });
 
     Navigator.push(

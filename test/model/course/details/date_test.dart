@@ -29,10 +29,10 @@ void main() {
 
     var list = List<Map<String, dynamic>>();
     list.add(map);
-    var dates = DateBuilder.fromJson(list);
+    var dates = Date.fromJson(list);
 
-    expect(dates[0].begin, "20180427T150000Z");
-    expect(dates[0].end, "20180427T200000Z");
+    expect(dates[0].begin, DateTime.parse("20180427T150000Z"));
+    expect(dates[0].end, DateTime.parse("20180427T200000Z"));
     expect(dates[0].title, null);
     expect(dates[0].rooms is List<Room>, true);
     expect(dates[0].lecturers is List<Lecturer>, true);

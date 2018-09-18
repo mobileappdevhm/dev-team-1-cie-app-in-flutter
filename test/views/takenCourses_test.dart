@@ -31,7 +31,7 @@ void main() {
           expect(widget.data, CoursesMock.generateMockCourseTitle(1));
           counter++;
         } else if (counter == 2) {
-          expect(widget.data.substring(0, 2), 'DP');
+          expect(widget.data.substring(0, 2), 'FK');
           counter++;
         } else if (counter == 3) {
           expect(widget.data.isNotEmpty, true);

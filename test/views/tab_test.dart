@@ -1,4 +1,4 @@
-import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/course/details/weekday.dart';
 import 'package:cie_app/views/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

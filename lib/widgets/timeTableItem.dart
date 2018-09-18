@@ -1,4 +1,6 @@
 import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/course/details/appointment.dart';
+import 'package:cie_app/model/course/details/campus.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +9,9 @@ class TimeTableItem extends StatelessWidget {
   static const double WIDTH_SECOND_COLUMN = 45.0;
   static const double WIDTH_THIRD_COLUMN = 95.0;
 
-  final Lecture lecture;
+  final Appointment appointment;
 
-  TimeTableItem(this.lecture);
+  TimeTableItem(this.appointment);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class TimeTableItem extends StatelessWidget {
             children: <Widget>[
               new Expanded(
                 child: new Text(
-                  lecture.course.name,
+                  appointment.parent.name,
                   style: CiEStyle.getCoursesTitleStyle(context),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
@@ -52,7 +54,7 @@ class TimeTableItem extends StatelessWidget {
                         ),
                       ),
                       new Text(
-                        CampusUtility.getCampusAsString(lecture.campus),
+                        CampusUtility.getCampusAsString(appointment.getCampus()),
                         style: CiEStyle.getTimeTableListVariable(),
                       ),
                     ],
@@ -70,9 +72,9 @@ class TimeTableItem extends StatelessWidget {
                   width: WIDTH_THIRD_COLUMN,
                   child: new Text(
                     " " +
-                        lecture.startDayTime.toString() +
+                        appointment.timeBegin.toString() +
                         "-" +
-                        lecture.endDayTime.toString(),
+                        appointment.timeEnd.toString(),
                     style: CiEStyle.getTimeTableListVariable(),
                     textAlign: TextAlign.start,
                   ),
@@ -91,7 +93,7 @@ class TimeTableItem extends StatelessWidget {
                       ),
                       new Expanded(
                       child: new Text(
-                        lecture.course.professorName,
+                        appointment.parent.getNamesOfLecturers(),
                         style: CiEStyle.getTimeTableListVariable(),
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.ellipsis,
@@ -110,7 +112,8 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
                   child: new Text(
-                    " " + lecture.room,
+                    //TODO do not show the first location every time
+                    " " + appointment.parent.locations[0].number,
                     style: CiEStyle.getTimeTableListVariable(),
                     textAlign: TextAlign.start,
                   ),

@@ -1,4 +1,17 @@
-class LecturerBuilder {
+class Lecturer {
+  String title;
+  String firstName;
+  String lastName;
+  String email;
+  List<dynamic> actions;
+
+  Lecturer(Map<String, dynamic> jsonData) {
+    this.title = jsonData['title']!= null ? jsonData['title'] : '';
+    this.firstName = jsonData['firstName'] != null ? jsonData['firstName'] : '';
+    this.lastName = jsonData['lastName'] != null ? jsonData['lastName'] : '';
+    this.actions = LecturerProfile.fromJson(jsonData['actions']);
+  }
+
   static List<Lecturer> fromJson(List<dynamic> jsonData) {
     if (jsonData == null) return null;
     var list = new List<Lecturer>();
@@ -9,16 +22,21 @@ class LecturerBuilder {
   }
 }
 
-class Lecturer {
+class LecturerProfile {
   String title;
-  String firstName;
-  String lastName;
-  List<dynamic> actions;
+  String href;
 
-  Lecturer(Map<String, dynamic> jsonData) {
+  LecturerProfile(Map<String, dynamic> jsonData) {
     this.title = jsonData['title'];
-    this.firstName = jsonData['firstName'];
-    this.lastName = jsonData['lastName'];
-    this.actions = jsonData['actions'];
+    this.href = jsonData['href'];
+  }
+
+  static List<LecturerProfile> fromJson(List<dynamic> jsonData) {
+    if (jsonData == null) return null;
+    var list = new List<LecturerProfile>();
+    for (int i = 0; i < jsonData.length; i++) {
+      list.add(new LecturerProfile(jsonData[i]));
+    }
+    return list;
   }
 }

@@ -100,7 +100,7 @@ class GenericShowInstruction {
   }
 
   static _toggleRefresh(Function onPressRefresh, BuildContext context) {
-    () => onPressRefresh();
+    onPressRefresh();
     Navigator.pushReplacementNamed(context, Routes.TabPages);
   }
 

@@ -9,7 +9,7 @@ class NineAPIEngine {
   static const String _NINE_BASE_URL = 'https://nine.wi.hm.edu/api/v2/';
   static const String _NINE_TRANSITION_URL = 'https://nine.wi.hm.edu/api2/';
   static const String NINE_COURSE_LIST_URL =
-      _NINE_BASE_URL + 'courses/FK%2013/CIE/SoSe%2018';
+      _NINE_BASE_URL + 'apps/cie/courses/WiSe%202018';
   static const String NINE_COURSE_SUBSCRIPTION_URL =
       _NINE_BASE_URL + 'courses/subscribe';
   static const String NINE_AUTH_URL = _NINE_BASE_URL + 'account/login';
@@ -18,6 +18,7 @@ class NineAPIEngine {
 
   static Future<Null> pullCourseJSON(
       BuildContext context, bool inBackground) async {
+    //TODO is called twice - reduce calls
     var isConnected = await isInternetConnected();
     if (isConnected) {
       if (!inBackground) {
