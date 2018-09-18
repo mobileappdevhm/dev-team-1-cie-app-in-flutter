@@ -83,19 +83,19 @@ void main() {
   group("facultycheck", () {
     test('1', () {
       expect(
-          sut.getFaculties(1).contains(CoursesMock.generateMockDepartment(2)),
+          sut.getDepartmentShortName(1).contains(CoursesMock.generateMockDepartment(2).shortName),
           true);
     });
 
     test('2', () {
       expect(
-          sut.getFaculties(2).contains(CoursesMock.generateMockDepartment(3)),
+          sut.getDepartmentShortName(2).contains(CoursesMock.generateMockDepartment(3).shortName),
           true);
     });
 
     test('3', () {
       expect(
-          sut.getFaculties(3).contains(CoursesMock.generateMockDepartment(4)),
+          sut.getDepartmentShortName(3).contains(CoursesMock.generateMockDepartment(4).shortName),
           true);
     });
   });

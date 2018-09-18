@@ -3,7 +3,11 @@ import 'dart:convert';
 import 'package:cie_app/di/courses_di.dart';
 import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/courses.dart';
-import 'package:cie_app/model/course/details/date.dart';
+import 'package:cie_app/model/course/details/appointment.dart';
+import 'package:cie_app/model/course/details/campus.dart';
+import 'package:cie_app/model/course/details/courseAvailability.dart';
+import 'package:cie_app/model/course/details/lecturer.dart';
+import 'package:cie_app/model/course/details/weekday.dart';
 import 'package:cie_app/utils/fileStore.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +31,7 @@ class CourseListPresenter {
   // TODO: -Check if course is already stored before adding here
   // TODO: -Make the loop contents more relevant and move it somewhere else
   void addCoursesFromMemory() {
+    //TODO is called twice - reduce calls
     this.onChanged(true);
     List<Course> courseList = _courses.getCourses();
     bool didUpdate = false;
@@ -34,55 +39,9 @@ class CourseListPresenter {
       if (val != null) {
         final List<dynamic> jsonData = json.decode(val);
         for (int i = 0; i < jsonData.length; i++) {
-          CourseBuilder courseBuilder = new CourseBuilder.fromJson(jsonData[i]);
-          Campus campus;
-          DateTime begin;
-          DateTime end;
-          String roomNumber;
-          Date date;
-          if (courseBuilder.dates.length > 0) {
-            for (int i = 0; i < courseBuilder.dates.length; i++) {
-              if (!courseBuilder.dates[i].isCanceled)
-                date = courseBuilder.dates[i];
-            }
-            if (date != null && date.rooms != null && date.rooms.length > 0) {
-              //real data
-              begin = DateTime.parse(date.begin);
-              end = DateTime.parse(date.end);
-              roomNumber = date.rooms[0].number;
-              campus = CampusUtility.getStringAsCampus(date.rooms[0].campus);
-            } else {
-              //unknown data
-              begin = DateTime.parse(courseBuilder.dates[0].begin);
-              end = DateTime.parse(courseBuilder.dates[0].end);
-              roomNumber = "unknown";
-              campus = Campus.LOTHSTRASSE;
-            }
-          } else {
-            //completely unknown data
-            begin = new DateTime.now();
-            end = new DateTime.now();
-            roomNumber = "unknown";
-            campus = Campus.LOTHSTRASSE;
-          }
-
-          courseBuilder
-              .withLecturesPerWeek([
-                new Lecture(
-                    campus,
-                    WeekdayUtility.intToWeekday((begin.day - 1) % 6),
-                    new DayTime(begin.hour, begin.minute),
-                    new DayTime(end.hour, end.minute),
-                    roomNumber)
-              ])
-              .withHoursPerWeek(-1)
-              .withEcts(-1)
-              //TODO replace with professor email if available
-              .withProfessorEmail(StaticVariables.MOCK_EMAIL)
-              .withIsFavorite(false);
-          Course c = courseBuilder.build();
-          if (isNewCourseData(courseList, c)) {
-            courseList.add(c);
+          var course = new Course(jsonData[i]);
+          if (isNewCourseData(courseList, course)) {
+            courseList.add(course);
             didUpdate = true;
           }
         }
@@ -101,9 +60,10 @@ class CourseListPresenter {
         final List<dynamic> jsonData = json.decode(val)['lecturers'];
         for (int i = 0; i < jsonData.length; i++) {
           for (Course c in _courses.getCourses()) {
-            if (c.professorName.contains(jsonData[i]['lastName'])) {
-              if(jsonData[i]['email'] != null && jsonData[i]['email'] != 'null') {
-                c.professorEmail = jsonData[i]['email'];
+            for (Lecturer l in c.lecturer) {
+              if (l.lastName == jsonData[i]['lastName']) {
+                l.email = jsonData[i]['email'];
+                break; //the next lecturer could not be the same as before
               }
             }
           }
@@ -138,13 +98,9 @@ class CourseListPresenter {
   }
 
   bool isNewCourseData(List<Course> courseList, Course candidate) {
-    for (Course c in courseList) {
-      // compares using the unique id from Nine
-      if (c.equals(candidate)) {
-        return false;
-      }
-    }
-    return true;
+    return courseList.firstWhere((c) => c.equals(candidate),
+            orElse: () => null) ==
+        null;
   }
 
   //Remove the courses outstanding for remove
@@ -190,116 +146,122 @@ class CourseListPresenter {
   }
 
   CourseAvailability getAvailability(int id) {
-    return _courses.getCourses()[id].available;
+    return _courses.getCourses()[id].getAvailability();
   }
 
-  Set<String> getFaculties(int id) {
-    return _courses.getCourses()[id].faculties;
+  String getDepartmentName(int id) {
+    return _courses.getCourses()[id].department.name;
   }
 
-  String getFacultyBeautiful(String department) {
-    return "FK " + department;
-  }
-
-  String getFacultiesBeautiful(int id) {
-    var ret = "";
-    _courses.getCourses()[id].faculties.forEach((String department) {
-      ret += ", " + getFacultyBeautiful(department);
-    });
-
-    return ret.substring(2);
+  String getDepartmentShortName(int id) {
+    return _courses.getCourses()[id].department.shortName;
   }
 
   String getTitle(int id) {
     return _courses.getCourses()[id].name;
   }
 
-  List<Lecture> getLectureTimes(int id) {
-    return _courses.getCourses()[id].lecturesPerWeek;
+  List<Appointment> getLectureTimes(int id) {
+    return _courses.getCourses()[id].appointments;
   }
 
   String getDescription(int id) {
     return _courses.getCourses()[id].description;
   }
 
-  String getHoursPerWeek(int id) {
-    return _courses.getCourses()[id].hoursPerWeek.toString();
+  String getSWS(int id) {
+    return _courses.getCourses()[id].sws.toString();
   }
 
   String getEcts(int id) {
     return _courses.getCourses()[id].ects.toString();
   }
 
-  String getProfessorName(int id) {
-    return _courses.getCourses()[id].professorName;
+  String getNamesOfLecturers(int id) {
+    var names = "";
+    for (var l in _courses.getCourses()[id].lecturer) {
+      if (names != "") {
+        names += ", ";
+      }
+      names += l.firstName + " " + l.lastName;
+    }
+    return names;
   }
 
-  String getProfessorEmail(int id) {
-    return _courses.getCourses()[id].professorEmail;
+  String getEmailsOfLecturers(int id) {
+    var emails = "";
+    for (var l in _courses.getCourses()[id].lecturer) {
+      if (l.email == null || l.email == StaticVariables.MOCK_EMAIL) break;
+      if (emails != "") {
+        emails += ",";
+      }
+      emails += l.email;
+    }
+    return emails;
   }
 
-  String getLectureTimesBeautiful(int id) {
-    List<Lecture> lectures = _courses.getCourses()[id].lecturesPerWeek;
+  String getAppointmentTimesBeautiful(int id) {
+    List<Appointment> appointments = _courses.getCourses()[id].appointments;
     String result = "";
-    for (var i = 0; i < lectures.length; i++) {
-      if (i != 0) result += '\n';
-      result += WeekdayUtility.getWeekdayAsString(lectures[i].weekday) +
+    for (var a in appointments) {
+      if (result != "") result += '\n';
+      result += WeekdayUtility.getWeekdayAsString(a.weekday) +
           ' ' +
-          lectures[i].startDayTime.toString() +
+          a.timeBegin.toString() +
           '-' +
-          lectures[i].endDayTime.toString();
+          a.timeEnd.toString();
     }
     return result;
   }
 
   //Get every lectures of users courses
-  List<Lecture> getFavouriteLectures() {
-    List<Lecture> lectures = [];
+  List<Appointment> getFavouriteAppointments() {
+    List<Appointment> appointments = [];
     //Add all favourite lectures to lectures list
     getCourses()
         .where((c) => c.isFavourite)
-        .forEach((c) => c.lecturesPerWeek.forEach((l) => lectures.add(l)));
-    return _sortLectures(lectures);
+        .forEach((c) => c.appointments.forEach((l) => appointments.add(l)));
+    return _sortAppointments(appointments);
   }
 
   //Sort lectures. Monday first
-  List<Lecture> _sortLectures(List<Lecture> lectures) {
-    lectures.sort((a, b) => a.sortValue() - b.sortValue());
-    return lectures;
+  List<Appointment> _sortAppointments(List<Appointment> appointments) {
+    appointments.sort((a, b) => a.sortValue() - b.sortValue());
+    return appointments;
   }
 
-  List<Lecture> getFavouriteLecturesOfWeekday(Weekday searchedWeekday) {
-    List<Lecture> lectures = [];
+  List<Appointment> getFavouriteAppointmentsOfWeekday(Weekday searchedWeekday) {
+    List<Appointment> appointments = [];
     //Add all lectures to lectures list
-    getCourses().where((c) => c.isFavourite).forEach((c) => c.lecturesPerWeek
+    getCourses().where((c) => c.isFavourite).forEach((c) => c
+        .appointments
         .where((l) => l.weekday == searchedWeekday)
-        .forEach((l) => lectures.add(l)));
-    return _sortLectures(lectures);
+        .forEach((l) => appointments.add(l)));
+    return _sortAppointments(appointments);
   }
 
   //If lectures of this course conflicts with other favourite lecture return true
   bool checkIfConflictsOtherFavoriteCourse(id) {
-    return getCourses()[id].lecturesPerWeek.any((thisFavorite) =>
-        getFavouriteLectures().any((otherFavorite) =>
+    return getCourses()[id].appointments.any((thisFavorite) =>
+        getFavouriteAppointments().any((otherFavorite) =>
             _checkTimeConflict(thisFavorite, otherFavorite)));
   }
 
   //If lectures of this course conflicts with other favourite lecture return true
-  bool checkIfConflictsOtherFavoriteLecture(Lecture lecture) {
-    return getFavouriteLectures()
-        .any((otherFavorite) => _checkTimeConflict(lecture, otherFavorite));
+  bool checkIfConflictsOtherFavoriteLecture(Appointment appointment) {
+    return getFavouriteAppointments()
+        .any((otherFavorite) => _checkTimeConflict(appointment, otherFavorite));
   }
 
   //If lectures of this course conflicts with other favourite lecture return true
-  List<Lecture> getConflictingLectures(int id) {
-    return getFavouriteLectures()
-        .where((l) => getCourses()[id]
-            .lecturesPerWeek
-            .any((c) => _checkTimeConflict(c, l)))
+  List<Appointment> getConflictingLectures(int id) {
+    return getFavouriteAppointments()
+        .where((l) =>
+            getCourses()[id].appointments.any((c) => _checkTimeConflict(c, l)))
         .toList();
   }
 
-  bool _checkTimeConflict(Lecture thisFavorite, Lecture otherFavorite) {
+  bool _checkTimeConflict(Appointment thisFavorite, Appointment otherFavorite) {
     //Cant conflict itself
     if (thisFavorite == otherFavorite) return false;
     //If weekday is not same return false
@@ -310,23 +272,26 @@ class CourseListPresenter {
     if (timeBetweenLectures < 0) return true;
     //If time is not enough to switch campus return true
     if (!_timeIsEnoughForCampusSwitch(
-        thisFavorite.campus, otherFavorite.campus, timeBetweenLectures))
-      return true;
+        //TODO taking only the first is dirty
+        thisFavorite.getCampus(),
+        otherFavorite.getCampus(),
+        timeBetweenLectures)) return true;
     return false;
   }
 
   // < 0 when lectures are running at same time
   // 0 lectures starting right after each other
   // > 0 minutes between lectures are returned
-  int _getTimeBetweenLectures(Lecture thisFavorite, Lecture otherFavorite) {
+  int _getTimeBetweenLectures(
+      Appointment thisFavorite, Appointment otherFavorite) {
     //Idea is to sub end time from start time in both ways.
     //If both vales are neg or pos courses are take place at same time.
     //If one value is positive the other negative the positive value is time between lectures
     //This only works because we can assume that endTime is later than startTime
-    int valueOne = thisFavorite.startDayTime.getAsInt() -
-        otherFavorite.endDayTime.getAsInt();
-    int valueTwo = otherFavorite.startDayTime.getAsInt() -
-        thisFavorite.endDayTime.getAsInt();
+    int valueOne =
+        thisFavorite.timeBegin.getAsInt() - otherFavorite.timeEnd.getAsInt();
+    int valueTwo =
+        otherFavorite.timeBegin.getAsInt() - thisFavorite.timeEnd.getAsInt();
 
     return valueOne > valueTwo ? valueOne : valueTwo;
   }
@@ -357,16 +322,16 @@ class CourseListPresenter {
     }
   }
 
-  String constructSchedulingConflictText(Lecture one, Lecture two) {
-    String campusOne = CampusUtility.getCampusAsLongString(one.campus);
-    String campusTwo = CampusUtility.getCampusAsLongString(two.campus);
-    String time =
-        _timeRequiredForCampusSwitch(one.campus, two.campus).toString();
-    return one.course.name +
+  String constructSchedulingConflictText(Appointment one, Appointment two) {
+    String campusOne = CampusUtility.getCampusAsLongString(one.getCampus());
+    String campusTwo = CampusUtility.getCampusAsLongString(two.getCampus());
+    String time = _timeRequiredForCampusSwitch(one.getCampus(), two.getCampus())
+        .toString();
+    return one.parent.name +
         " is held in the " +
         campusOne +
         " campus, and " +
-        two.course.name +
+        two.parent.name +
         " is held in the " +
         campusTwo +
         " campus.\n\n"
@@ -390,9 +355,9 @@ class CourseListPresenter {
       reason.add(StaticVariables.COURSE_DESCRIPTION_CONFLICTS_WITH_FAVORIT);
 
     //Find courses who conflicts and why there is a conflict
-    List<Lecture> conflicts = getConflictingLectures(id);
+    List<Appointment> conflicts = getConflictingLectures(id);
     if (conflicts != null) {
-      Set<Course> conflictingCourses = conflicts.map((l) => l.course).toSet();
+      Set<Course> conflictingCourses = conflicts.map((l) => l.parent).toSet();
       conflictingCourses.forEach((c) =>
           reason.insert(1, "\n" + _getConflictReasonText(getCourses()[id], c)));
     }
@@ -404,7 +369,7 @@ class CourseListPresenter {
   String _getConflictReasonText(Course thisFavorite, Course otherFavorite) {
     String result = otherFavorite.name + ": ";
     //Add commute time conflict text
-    thisFavorite.lecturesPerWeek.forEach((l) => otherFavorite.lecturesPerWeek
+    thisFavorite.appointments.forEach((l) => otherFavorite.appointments
         .forEach((f) => result += _getLectureConflictProblemText(l, f)));
     //timeBetweenLecturesText.forEach((res) => result += res);
 
@@ -412,14 +377,14 @@ class CourseListPresenter {
   }
 
   //Compare two lectues and return error text if they conflict
-  String _getLectureConflictProblemText(Lecture l, Lecture f) {
+  String _getLectureConflictProblemText(Appointment l, Appointment f) {
     String result = "";
 
     if (_getTimeBetweenLectures(l, f) < 0) {
       result += "Lecture time schedules overlap.";
     } else {
-      Campus campusOne = l.campus;
-      Campus campusTwo = f.campus;
+      Campus campusOne = l.getCampus();
+      Campus campusTwo = f.getCampus();
       if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
           campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
         result += "Commute Time Lothstr. to Karlstr. < " +

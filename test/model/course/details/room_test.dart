@@ -1,3 +1,4 @@
+import 'package:cie_app/model/course/details/campus.dart';
 import 'package:cie_app/model/course/details/room.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -14,9 +15,9 @@ void main() {
     var rooms = new List<Map<String, dynamic>>();
     rooms.add(room);
 
-    var list = RoomBuilder.fromJson(rooms);
+    var list = Room.fromJson(rooms);
 
-    expect(list[0].campus, campus);
+    expect(list[0].campus, CampusUtility.getStringAsCampus(campus));
     expect(list[0].building, building);
     expect(list[0].number, number);
   });

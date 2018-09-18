@@ -35,8 +35,7 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
               children: <Widget>[
                 new Expanded(
                   child: new Text(
-                    _getFacultiesBeautiful(
-                        currentUserPresenter.getFaculties(id)),
+                        currentUserPresenter.getDepartmentShortName(id),
                     style: CiEStyle.getCoursesListFacultyStyle(context),
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/course/details/courseAvailability.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:flutter/material.dart';
