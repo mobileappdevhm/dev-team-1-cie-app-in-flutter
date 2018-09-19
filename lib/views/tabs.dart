@@ -29,7 +29,7 @@ class TabsPageState extends State<TabsPage> {
     super.initState();
     // TODO: Investigate scenarios where internet is not available/request fails
 
-    NineAPIEngine.pullCourseJSON(context, true);
+    //NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
     courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
     currentUserPresenter =

@@ -11,11 +11,12 @@ import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/nineAPIConsumer.dart';
+import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
-import 'package:cie_app/utils/routes.dart';
 
 class CourseList extends StatefulWidget {
   // Stateful because then this class can be used for favourites as well.
@@ -79,7 +80,8 @@ class CourseListState extends State<CourseList> {
       return new Column(
         children: <Widget>[
           GenericShowInstruction.showInstructions(
-              () => handleRefreshIndicator(context, courseListPresenter),
+              () => handleRefreshIndicator(
+                  context, courseListPresenter, true, false),
               context),
         ],
       );
@@ -183,9 +185,10 @@ class CourseListState extends State<CourseList> {
       }
 
       return new RefreshIndicator(
-          child: new ListView(children: widgets),
-          onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
-          color: CiEColor.mediumGray);
+        child: new ListView(children: widgets),
+        onRefresh: () => handleRefreshIndicator(context, courseListPresenter),
+        color: CiEColor.mediumGray,
+      );
     }
   }
 
@@ -239,8 +242,8 @@ class CourseListState extends State<CourseList> {
       color: buttonColor,
       shape: new RoundedRectangleBorder(
           borderRadius: CiEStyle.getButtonBorderRadius()),
-      onPressed: ()=>_contextualCourseSubmission(userPresenter,
-          submissionValid, isLoggedIn),
+      onPressed: () => _contextualCourseSubmission(
+          userPresenter, submissionValid, isLoggedIn),
       child: new Container(
         margin: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 15.0),
         child: new Text(textToShow, style: new TextStyle(color: Colors.white)),
@@ -248,18 +251,20 @@ class CourseListState extends State<CourseList> {
     );
   }
 
-  handleRefreshIndicator(BuildContext context, CourseListPresenter presenter) {
-    Future<Null> complete = NineAPIEngine.pullCourseJSON(context, true);
+  Future<Null> handleRefreshIndicator(BuildContext context, CourseListPresenter presenter,
+      [oldSemesters = false, inBackground = true]) async {
+    print("handleRefreshIndicator, oldSemesters: " + oldSemesters.toString());
+    await DataManager.updateAll(context, oldSemesters, inBackground);
     presenter.addCoursesFromMemory();
     presenter.updateLecturerInfoFromMemory();
     presenter.onChanged(true);
-    return complete;
+    return null; //this is needed for RefreshIndicator to stop
   }
 
   Widget favoriteIcon(int id) {
     return new IconButton(
-      icon: GenericIcon
-          .buildGenericFavoriteIcon(courseListPresenter.getFavourite(id)),
+      icon: GenericIcon.buildGenericFavoriteIcon(
+          courseListPresenter.getFavourite(id)),
       onPressed: () => _toggleFavourite(id),
     );
   }
@@ -280,12 +285,11 @@ class CourseListState extends State<CourseList> {
     });
   }
 
-  void _contextualCourseSubmission(CurrentUserPresenter user,
-      bool isSubmissionValid, bool isLoggedIn) {
+  void _contextualCourseSubmission(
+      CurrentUserPresenter user, bool isSubmissionValid, bool isLoggedIn) {
     if (isSubmissionValid != null && isSubmissionValid) {
       _handleCourseSubmission(user);
-    }
-    else if (isLoggedIn != null && !isLoggedIn) {
+    } else if (isLoggedIn != null && !isLoggedIn) {
       Navigator.pushReplacementNamed(context, Routes.Login);
     }
   }
@@ -294,28 +298,27 @@ class CourseListState extends State<CourseList> {
     var no = () {};
     var yes = () {
       Map<String, String> userJson = {
-          "id" : user.getCurrentUser().id,
-          "firstName" : user.getCurrentUser().firstName,
-          "lastName" : user.getCurrentUser().lastName
+        "id": user.getCurrentUser().id,
+        "firstName": user.getCurrentUser().firstName,
+        "lastName": user.getCurrentUser().lastName
       };
       List<dynamic> selectedCourses = new List<dynamic>();
       for (Course c in courseListPresenter.getCourses()) {
         if (c.isFavourite) {
-          selectedCourses.add( {"id" : c.id } );
+          selectedCourses.add({"id": c.id});
         }
       }
 
       Map<String, String> postJson = new Map<String, String>();
-      postJson.putIfAbsent("user", ()=>json.encode(userJson));
-      postJson.putIfAbsent("courses", ()=>json.encode(selectedCourses));
-      NineAPIEngine.postJson(context,
-          NineAPIEngine.NINE_COURSE_SUBSCRIPTION_URL, postJson);
+      postJson.putIfAbsent("user", () => json.encode(userJson));
+      postJson.putIfAbsent("courses", () => json.encode(selectedCourses));
+      NineAPIEngine.postJson(
+          context, NineAPIEngine.NINE_COURSE_SUBSCRIPTION_URL, postJson);
       setState(() {
         coursesRegistered = true;
       });
     };
-    GenericAlert
-        .confirm(
+    GenericAlert.confirm(
             context, no, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
         .then((_) {});
   }

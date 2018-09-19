@@ -35,7 +35,8 @@ class CourseListPresenter {
     this.onChanged(true);
     List<Course> courseList = _courses.getCourses();
     bool didUpdate = false;
-    FileStore.readFileAsString(FileStore.COURSES).then((String val) {
+    //TODO do not hard code this string
+    FileStore.readFileAsString(FileStore.COURSES + "WiSe2018").then((String val) {
       if (val != null) {
         final List<dynamic> jsonData = json.decode(val);
         for (int i = 0; i < jsonData.length; i++) {

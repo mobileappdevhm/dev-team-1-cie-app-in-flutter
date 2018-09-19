@@ -9,28 +9,42 @@ class FileStore {
   static const String LOGIN = "_login";
   static const String USER_SETTINGS = "_user";
   static const String FAVORITES = "_favorites";
+  static const String TAKEN_COURSES = "_takencourses";
+  static const String SEMESTERS= "_semesters";
 
   static Future<File> getFile(String resource) async {
+    resource = resource.replaceAll(' ', '');
     String dir = (await getApplicationDocumentsDirectory()).path;
     String filename = "$dir/" + resource + ".json";
     return new File(filename);
   }
 
   static Future<String> readFileAsString(String resource) async {
+    resource = resource.replaceAll(' ', '');
     try {
       File file = await getFile(resource);
+      print(file.path);
       String contents = await file.readAsString();
+      print("resource: " + resource + ", contents: " + contents);
       return contents;
-    } on FileSystemException {
+    } catch (e) {
+      print(resource + " => null" + e.toString());
       return null;
     }
   }
 
   static Future<File> writeToFile(String resource, String data) async {
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    String filename = "$dir/" + resource + ".json";
-    File f = new File(filename);
-    f.writeAsString(data);
-    return f;
+    resource = resource.replaceAll(' ', '');
+    try {
+      String dir = (await getApplicationDocumentsDirectory()).path;
+      String filename = "$dir/" + resource + ".json";
+      File f = new File(filename);
+      f.writeAsString(data);
+      print(resource + "data: " + data);
+      return f;
+    } on FileSystemException {
+      print("null");
+      return null;
+    }
   }
 }
