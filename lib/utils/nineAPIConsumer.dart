@@ -38,7 +38,6 @@ class NineAPIEngine {
         });
     for (int i = 0; i < names.length; i++) {
       var semester = names.elementAt(i);
-      print(NINE_CIE_COURSES_BASE_URL + semester);
       Response res =
           await get(NINE_CIE_COURSES_BASE_URL + CourseHistory.getUrl(semester));
       FileStore.writeToFile(FileStore.COURSES + semester, res.body);

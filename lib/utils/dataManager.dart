@@ -73,7 +73,6 @@ class DataManager {
       semesters.add(semester['name']);
     }
     if (oldSemesters) {
-      print("fetching all semesters");
       for (int i = 0; i < semesters.length; i++) {
         var url = NineAPIEngine.NINE_CIE_COURSES_BASE_URL +
             semesters[i].replaceAll(' ', '%20');
@@ -82,14 +81,10 @@ class DataManager {
             FileStore.COURSES + semesters[i], courseData);
       }
     } else {
-      print("fetching only one semester");
       var url = NineAPIEngine.NINE_CIE_COURSES_BASE_URL +
           semesters[0].replaceAll(' ', '%20');
-      print(url);
       var courseData = await NineAPIEngine.getJson(url);
-      print("got the value");
       await FileStore.writeToFile(FileStore.COURSES + semesters[0], courseData);
-      print("finished loading");
     }
 
     var lecturersData =

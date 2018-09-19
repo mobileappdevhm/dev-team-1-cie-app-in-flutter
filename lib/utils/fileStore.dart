@@ -23,12 +23,10 @@ class FileStore {
     resource = resource.replaceAll(' ', '');
     try {
       File file = await getFile(resource);
-      print(file.path);
       String contents = await file.readAsString();
-      print("resource: " + resource + ", contents: " + contents);
       return contents;
     } catch (e) {
-      print(resource + " => null" + e.toString());
+      print(resource + " => null, error: " + e.toString());
       return null;
     }
   }
@@ -40,10 +38,9 @@ class FileStore {
       String filename = "$dir/" + resource + ".json";
       File f = new File(filename);
       f.writeAsString(data);
-      print(resource + "data: " + data);
       return f;
-    } on FileSystemException {
-      print("null");
+    } catch(e) {
+      print(resource + " => null, error: " + e.toString());
       return null;
     }
   }
