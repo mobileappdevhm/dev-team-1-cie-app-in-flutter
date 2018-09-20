@@ -162,10 +162,6 @@ class CourseHistory {
     'WiSe 2017',
   ];
 
-  static String getUrl(String semester) {
-    return semester.replaceAll(' ', '%20');
-  }
-
   static Future<String> getSingleJson(String data) async {
     return FileStore.readFileAsString(FileStore.COURSES + data);
   }

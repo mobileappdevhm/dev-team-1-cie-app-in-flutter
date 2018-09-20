@@ -29,50 +29,6 @@ class NineAPIEngine {
     return null;
   }
 
-  static Future<Null> getJsonMulti(
-      BuildContext context, List<String> names) async {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return GenericIcon.buildGenericSpinner();
-        });
-    for (int i = 0; i < names.length; i++) {
-      var semester = names.elementAt(i);
-      Response res =
-          await get(NINE_CIE_COURSES_BASE_URL + CourseHistory.getUrl(semester));
-      FileStore.writeToFile(FileStore.COURSES + semester, res.body);
-    }
-    Navigator.pop(context);
-    return null;
-  }
-
-  static Future<Null> pullCourseJSON(
-      BuildContext context, bool inBackground) async {
-    //TODO is called twice - reduce calls
-    var isConnected = await isInternetConnected();
-    if (isConnected) {
-      if (!inBackground) {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return GenericIcon.buildGenericSpinner();
-            });
-      }
-      //TODO do not hardcode this string
-      final coursesResponse =
-          await get(NINE_CIE_COURSES_BASE_URL + 'WiSe%202018');
-      final lecturerResponse = await get(NINE_LECTURERS_URL);
-      //TODO do not hardcode this string
-      FileStore.writeToFile(
-          FileStore.COURSES + "WiSe2018", coursesResponse.body);
-      FileStore.writeToFile(FileStore.LECTURERS, lecturerResponse.body);
-      if (!inBackground) {
-        Navigator.pop(context);
-      }
-    }
-    return null;
-  }
-
   static Future<Response> postAuth(
       BuildContext context, String username, String password) async {
     var isConnected = await isInternetConnected();

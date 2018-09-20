@@ -45,7 +45,7 @@ class CourseListState extends State<CourseList> {
   final TextEditingController c1 = new TextEditingController();
   final bool shouldFilterByFavorites;
   bool shouldSearch = false;
-  String filter = "13";
+  String filter = "";
   String searchValue = "";
   bool coursesRegistered = false;
   FocusNode focus;
