@@ -333,7 +333,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   body: new Column(
                     children: <Widget>[
-                      GenericShowInstruction.showInstructions(null, null)
+                      GenericShowInstruction.showInstructions(context, true)
                     ],
                   ),
                 )));
