@@ -110,6 +110,7 @@ class _TakenCoursesState extends State<TakenCourses> {
               child: new ListView(children: widgets),
             );
           }
+          //TODO make text static -> staticVariables
           return new Container(
               padding: new EdgeInsets.all(15.0),
               child: new Text("No Courses found.",
