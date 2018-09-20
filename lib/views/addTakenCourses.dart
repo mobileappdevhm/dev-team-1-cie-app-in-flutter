@@ -4,8 +4,8 @@ import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/model/course/details/department.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/fileStore.dart';
-import 'package:cie_app/utils/nineAPIConsumer.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/takenCourses.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +30,10 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
   @override
   initState() {
     super.initState();
-    var names = new List<String>();
     print("init");
     FileStore.readFileAsString(FileStore.COURSES + semesterFilter)
         .then((hasOldCourseData) {
-          print(semesterFilter + " filter!!!!!!!!!!!!!!!!!!!!");
+      print(semesterFilter + " filter!!!!!!!!!!!!!!!!!!!!");
       var fetchNewData = true;
       if (hasOldCourseData != null && hasOldCourseData.length > 3) {
         fetchNewData = false;
@@ -47,29 +46,15 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
                 for (int i = 0; i < savedHistory.length; i++) {
                   coursesSelected.add(savedHistory.elementAt(i));
                 }
-              } catch (ex) {
-                print("Problem");
+              } catch (e) {
+                print("addTakenCourses, error: " + e.toString());
               }
             }
           });
         });
       }
       if (fetchNewData) {
-        print("fetching new data");
-        for (int i = 0; i < CourseHistory.semesterList.length; i++) {
-          names.add(CourseHistory.semesterList.elementAt(i));
-        }
-        print(names.toString());
-        NineAPIEngine.getJsonMulti(context, names).then((v) {
-          setState(() {
-            FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
-              List<dynamic> savedHistory = json.decode(val);
-              for (int i = 0; i < savedHistory.length; i++) {
-                coursesSelected.add(savedHistory.elementAt(i));
-              }
-            });
-          });
-        });
+        DataManager.updateAll(context, true);
       }
     });
   }

@@ -80,9 +80,7 @@ class CourseListState extends State<CourseList> {
       return new Column(
         children: <Widget>[
           GenericShowInstruction.showInstructions(
-              () => handleRefreshIndicator(
-                  context, courseListPresenter, true, false),
-              context),
+              context, false),
         ],
       );
     } else {

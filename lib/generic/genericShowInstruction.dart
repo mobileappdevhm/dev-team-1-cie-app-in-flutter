@@ -1,13 +1,14 @@
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
   static Widget showInstructions(
-      Function onPressRefresh, BuildContext context) {
+      BuildContext context, bool goToTabs) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
         children: <Widget>[
@@ -81,27 +82,21 @@ class GenericShowInstruction {
             ],
           ),
           new Padding(padding: new EdgeInsets.only(bottom: 20.0)),
-          onPressRefresh == null
-              ? new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        child: new Text(
-                            StaticVariables.INSTRUCTIONS_PLEASE_GO_TO,
-                            style: CiEStyle.getInstructionPageTextStyle()))
-                  ],
-                )
-              : new RaisedButton(
+          new RaisedButton(
                   color: CiEColor.lightGray,
-                  onPressed: () => _toggleRefresh(onPressRefresh, context),
-                  child: new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT)),
+                  onPressed: () => _toggleRefresh(goToTabs, context),
+                  child:
+                  goToTabs ? new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT_REFRESH) : new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT)),
         ],
       ),
     ));
   }
 
-  //TODO remove this function?
-  static _toggleRefresh(Function onPressRefresh, BuildContext context) {
-    onPressRefresh();
+  static _toggleRefresh(bool goToTabs, BuildContext context) {
+    DataManager.updateAll(context, true);
+    if(goToTabs) {
+      Navigator.pushReplacementNamed(context, Routes.TabPages);
+    }
   }
 
   static Widget _getInstructionWidget(Widget text) {

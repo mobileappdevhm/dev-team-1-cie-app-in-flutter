@@ -31,7 +31,6 @@ class CourseListPresenter {
   // TODO: -Check if course is already stored before adding here
   // TODO: -Make the loop contents more relevant and move it somewhere else
   void addCoursesFromMemory() {
-    //TODO is called twice - reduce calls
     this.onChanged(true);
     List<Course> courseList = _courses.getCourses();
     bool didUpdate = false;
