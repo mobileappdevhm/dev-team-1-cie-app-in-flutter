@@ -19,7 +19,7 @@ matrix:
       - flutter test --coverage
     after_success:
       - coveralls-lcov coverage/lcov.info
-      # Joob 1.1
+      # Job 1.1
  - os: linux
    sudo: false
    addons:
