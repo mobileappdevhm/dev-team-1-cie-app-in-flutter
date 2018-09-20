@@ -7,6 +7,7 @@ import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
+  //TODO would be better to just call with function what to do or to call with widget?!
   static Widget showInstructions(BuildContext context, bool goToTabs, [Function onPressRefresh = null]) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
