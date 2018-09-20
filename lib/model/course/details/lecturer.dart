@@ -6,7 +6,7 @@ class Lecturer {
   List<dynamic> actions;
 
   Lecturer(Map<String, dynamic> jsonData) {
-    this.title = jsonData['title']!= null ? jsonData['title'] : '';
+    this.title = jsonData['title'] != null ? jsonData['title'] : '';
     this.firstName = jsonData['firstName'] != null ? jsonData['firstName'] : '';
     this.lastName = jsonData['lastName'] != null ? jsonData['lastName'] : '';
     this.actions = LecturerProfile.fromJson(jsonData['actions']);

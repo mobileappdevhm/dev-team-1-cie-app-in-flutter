@@ -1,6 +1,5 @@
 import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
-import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/details/campus.dart';
 import 'package:cie_app/model/course/details/courseAvailability.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
@@ -197,8 +196,8 @@ class _CourseDetailsState extends State<CourseDetails> {
               padding: new EdgeInsets.only(left: 15.0),
               child: new IconButton(
                 iconSize: CiEStyle.getCoursesListIconSize() + 15.0,
-                icon: GenericIcon
-                    .buildGenericFavoriteIcon(presenter.getFavourite(id)),
+                icon: GenericIcon.buildGenericFavoriteIcon(
+                    presenter.getFavourite(id)),
                 onPressed: () => _toggleFavorite(id),
               ),
             ),
@@ -312,8 +311,7 @@ class _CourseDetailsState extends State<CourseDetails> {
 
   _launchContactProfURL(int id) async {
     var email = presenter.getEmailsOfLecturers(id);
-    if (email == StaticVariables.MOCK_EMAIL ||
-        !email.contains("@")) {
+    if (email == StaticVariables.MOCK_EMAIL || !email.contains("@")) {
       GenericAlert.confirmDialog(context, StaticVariables.NO_EMAIL_FOUND,
           StaticVariables.NO_EMAIL_FOUND_DESCRIPTION);
     } else {

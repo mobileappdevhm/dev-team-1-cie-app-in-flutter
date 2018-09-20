@@ -1,6 +1,5 @@
 import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
-import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/details/appointment.dart';
 import 'package:cie_app/model/course/details/weekday.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';

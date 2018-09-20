@@ -4,7 +4,7 @@ import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/courses_mock.dart';
 import 'package:cie_app/model/user/currentUser.dart';
 import 'package:cie_app/model/user/user.dart';
-import 'package:cie_app/utils/fileStore.dart';
+import 'package:cie_app/utils/dataManager.dart';
 
 class CurrentUserProd implements CurrentUser {
   List<Course> prevCourses = [];
@@ -12,6 +12,7 @@ class CurrentUserProd implements CurrentUser {
   User currentUser;
 
   CurrentUserProd() {
+    //TODO should we do this? CourseProd would be better I guess.
     CoursesMock coursesMock = new CoursesMock();
     List<Course> courses = coursesMock.getCourses();
     prevCourses.add(courses[0]);
@@ -41,7 +42,7 @@ class CurrentUserProd implements CurrentUser {
         .withPrevCourses(prevCourses)
         .build();
 
-    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+    DataManager.getResource(DataManager.LOCAL_USER_SETTINGS).then((String val) {
       if (val != null) {
         Map<String, dynamic> map = json.decode(val);
         User u = new UserBuilder.fromJson(map).build();

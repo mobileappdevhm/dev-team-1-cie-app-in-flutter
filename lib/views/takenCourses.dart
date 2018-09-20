@@ -5,8 +5,6 @@ import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
-import 'package:cie_app/utils/fileStore.dart';
-import 'package:cie_app/utils/nineAPIConsumer.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/addTakenCourses.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +23,7 @@ class _TakenCoursesState extends State<TakenCourses> {
   final CurrentUserPresenter currentUserPresenter;
 
   _TakenCoursesState(this.currentUserPresenter);
+
   var semesterList = new List<String>();
 
   @override
@@ -136,9 +135,10 @@ class _TakenCoursesState extends State<TakenCourses> {
   }
 
   Future _loadSemesters() async {
-    var semesters = await DataManager.getResource(FileStore.SEMESTERS, NineAPIEngine.NINE_CIE_BASE_URL);
+    var semesters = await DataManager.getResource(
+        DataManager.LOCAL_SEMESTERS, DataManager.REMOTE_CIE_BASE);
     var list = await json.decode(semesters);
-    for(int i = 0; i < list.length; i++){
+    for (int i = 0; i < list.length; i++) {
       semesterList.add(list[i]['name']);
     }
     print("finished loading: " + semesterList.length.toString());
@@ -147,20 +147,20 @@ class _TakenCoursesState extends State<TakenCourses> {
 
 class CourseHistory {
   static Future<List<String>> getSemesterList() async {
-      var semesterList = new List<String>();
-      var semesters = await DataManager.getResource(FileStore.SEMESTERS, NineAPIEngine.NINE_CIE_BASE_URL);
-      var list = json.decode(semesters);
-      for(int i = 0; i < list.length; i++){
-        semesterList.add(list[i]['name']);
-      }
-      return semesterList;
+    var semesterList = new List<String>();
+    var semesters = await DataManager.getResource(
+        DataManager.LOCAL_SEMESTERS, DataManager.REMOTE_CIE_BASE);
+    var list = json.decode(semesters);
+    for (int i = 0; i < list.length; i++) {
+      semesterList.add(list[i]['name']);
+    }
+    return semesterList;
   }
 
   static Future<String> loadCheckedCoursesFromMemory() async {
     List<dynamic> res = json
-        .decode(await FileStore.readFileAsString(FileStore.TAKEN_COURSES));
-    List<dynamic> allCourseJson =
-        json.decode(await loadAllCoursesFromMemory());
+        .decode(await DataManager.getResource(DataManager.LOCAL_TAKEN_COURSES));
+    List<dynamic> allCourseJson = json.decode(await loadAllCoursesFromMemory());
     List<dynamic> releventCourseJson = new List<dynamic>();
     for (int i = 0; i < res.length; i++) {
       for (int j = 0; j < allCourseJson.length; j++) {
@@ -177,14 +177,13 @@ class CourseHistory {
     List<dynamic> finalJson = new List<dynamic>();
     var semesterList = await getSemesterList();
     for (int i = 0; i < semesterList.length; i++) {
-      String sem = await CourseHistory.getSingleJson(
-          semesterList.elementAt(i));
+      String sem = await CourseHistory.getSingleJson(semesterList.elementAt(i));
       finalJson.addAll(json.decode(sem));
     }
     return json.encode(finalJson);
   }
 
   static Future<String> getSingleJson(String data) async {
-    return FileStore.readFileAsString(FileStore.COURSES + data);
+    return DataManager.getResource(DataManager.LOCAL_COURSES + data);
   }
 }

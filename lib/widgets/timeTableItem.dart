@@ -1,4 +1,3 @@
-import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/details/appointment.dart';
 import 'package:cie_app/model/course/details/campus.dart';
 import 'package:cie_app/utils/cieStyle.dart';
@@ -54,7 +53,8 @@ class TimeTableItem extends StatelessWidget {
                         ),
                       ),
                       new Text(
-                        CampusUtility.getCampusAsString(appointment.getCampus()),
+                        CampusUtility.getCampusAsString(
+                            appointment.getCampus()),
                         style: CiEStyle.getTimeTableListVariable(),
                       ),
                     ],
@@ -88,11 +88,11 @@ class TimeTableItem extends StatelessWidget {
                   child: new Row(
                     children: <Widget>[
                       new Container(
-                      width: WIDTH_FIRST_COLUMN,
+                        width: WIDTH_FIRST_COLUMN,
                         child: new Text("Professor:"),
                       ),
                       new Expanded(
-                      child: new Text(
+                          child: new Text(
                         appointment.parent.getNamesOfLecturers(),
                         style: CiEStyle.getTimeTableListVariable(),
                         textAlign: TextAlign.start,
@@ -121,8 +121,7 @@ class TimeTableItem extends StatelessWidget {
               ],
             ),
             new Row(
-              children: <Widget>[
-              ],
+              children: <Widget>[],
             ),
             new Padding(padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0))
           ],

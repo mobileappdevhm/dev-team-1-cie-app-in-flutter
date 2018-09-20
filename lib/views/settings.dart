@@ -7,7 +7,7 @@ import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
-import 'package:cie_app/utils/fileStore.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/takenCourses.dart';
@@ -178,27 +178,27 @@ class _SettingsState extends State<Settings> {
                   ],
                 )),
                 new FutureBuilder(
-                    future: FileStore.readFileAsString(FileStore.TAKEN_COURSES),
+                    future: DataManager.getResource(
+                        DataManager.LOCAL_TAKEN_COURSES),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
                         List<dynamic> takenCourses = json.decode(snapshot.data);
-                        credits = 2*takenCourses.length;
+                        credits = 2 * takenCourses.length;
                       }
                       return new Container(
                         padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                         child: new Row(children: <Widget>[
                           new Expanded(
                               child: new Text(
-                                StaticVariables.CIE_CERTIFICATE,
-                                style: CiEStyle.getSettingsStyle(),
-                              )),
+                            StaticVariables.CIE_CERTIFICATE,
+                            style: CiEStyle.getSettingsStyle(),
+                          )),
                           new Text("$credits /15",
                               style: CiEStyle.getSettingsStyle()),
                           // Calculate ECTS/15 but one of the courses need to be from department 13
                         ]),
                       );
-                    }
-                ),
+                    }),
                 new LinearProgressIndicator(
                   value: credits / 15,
                 ),
@@ -221,7 +221,8 @@ class _SettingsState extends State<Settings> {
                     Navigator.push(
                         context,
                         new MaterialPageRoute(
-                            builder: (context) => new TakenCourses(currentUserPresenter)));
+                            builder: (context) =>
+                                new TakenCourses(currentUserPresenter)));
                   },
                   child: new Padding(
                     padding: const EdgeInsets.only(top: 32.0, bottom: 16.0),
@@ -279,7 +280,7 @@ class _SettingsState extends State<Settings> {
         .withDegree(null)
         .build();
     String data = json.encode(User.toJson(tempUserObj));
-    FileStore.writeToFile(FileStore.USER_SETTINGS, data).then((f) {
+    DataManager.writeToFile(DataManager.LOCAL_USER_SETTINGS, data).then((f) {
       Navigator.of(context).pushReplacementNamed(Routes.Login);
     });
   }
@@ -293,9 +294,9 @@ class _SettingsState extends State<Settings> {
     return new ListTile(
       title: isMetricsEnabled
           ? new Text(StaticVariables.METRICS_ENABLED,
-          style: CiEStyle.getSettingsEnabledStyle())
+              style: CiEStyle.getSettingsEnabledStyle())
           : new Text(StaticVariables.METRICS_DISABLED,
-          style: CiEStyle.getSettingsDisabledStyle()),
+              style: CiEStyle.getSettingsDisabledStyle()),
       trailing: new Switch(
         value: isMetricsEnabled,
         onChanged: (bool v) {

@@ -5,7 +5,6 @@ import 'package:cie_app/model/course/details/department.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
-import 'package:cie_app/utils/fileStore.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/takenCourses.dart';
 import 'package:flutter/material.dart';
@@ -40,12 +39,13 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
       setState(() {
         semesterFilter = semesterList.first;
       });
-      FileStore.readFileAsString(FileStore.COURSES + semesterFilter)
+      DataManager.getResource(DataManager.LOCAL_COURSES + semesterFilter)
           .then((hasOldCourseData) {
         if (hasOldCourseData != null && hasOldCourseData.length > 3) {
           fetchNewData = false;
           setState(() {
-            FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
+            DataManager.getResource(DataManager.LOCAL_TAKEN_COURSES)
+                .then((val) {
               if (val != null) {
                 try {
                   List<dynamic> savedHistory = json.decode(val);
@@ -104,7 +104,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
                       } else {
                         coursesSelected.add(courseJson[i]['id']);
                       }
-                      FileStore.writeToFile(FileStore.TAKEN_COURSES,
+                      DataManager.writeToFile(DataManager.LOCAL_TAKEN_COURSES,
                           json.encode(coursesSelected));
                     });
                   },

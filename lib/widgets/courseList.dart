@@ -12,7 +12,6 @@ import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
-import 'package:cie_app/utils/nineAPIConsumer.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/widgets/courseListItem.dart';
@@ -79,8 +78,7 @@ class CourseListState extends State<CourseList> {
     if (courseListPresenter.getCourses().isEmpty) {
       return new Column(
         children: <Widget>[
-          GenericShowInstruction.showInstructions(
-              context, false),
+          GenericShowInstruction.showInstructions(context, false),
         ],
       );
     } else {
@@ -249,7 +247,8 @@ class CourseListState extends State<CourseList> {
     );
   }
 
-  Future<Null> handleRefreshIndicator(BuildContext context, CourseListPresenter presenter,
+  Future<Null> handleRefreshIndicator(
+      BuildContext context, CourseListPresenter presenter,
       [oldSemesters = false, inBackground = true]) async {
     print("handleRefreshIndicator, oldSemesters: " + oldSemesters.toString());
     await DataManager.updateAll(context, oldSemesters, inBackground);
@@ -310,8 +309,7 @@ class CourseListState extends State<CourseList> {
       Map<String, String> postJson = new Map<String, String>();
       postJson.putIfAbsent("user", () => json.encode(userJson));
       postJson.putIfAbsent("courses", () => json.encode(selectedCourses));
-      NineAPIEngine.postJson(
-          context, NineAPIEngine.NINE_COURSE_SUBSCRIPTION_URL, postJson);
+      DataManager.postJson(context, DataManager.REMOTE_SUBSCRIBE, postJson);
       setState(() {
         coursesRegistered = true;
       });

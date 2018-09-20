@@ -2,7 +2,6 @@ import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
-import 'package:cie_app/utils/nineAPIConsumer.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/maps.dart';
 import 'package:cie_app/views/schedule.dart';
@@ -89,7 +88,7 @@ class TabsPageState extends State<TabsPage> {
   void _maybeChangeCallback(bool didChange) {
     if (didChange == true) {
       // Triggers Widget rebuild on completion of potentially asynchronous tasks
-      setState(()=>{});
+      setState(() => {});
     }
   }
 

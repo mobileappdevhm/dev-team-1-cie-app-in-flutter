@@ -4,7 +4,7 @@ import 'package:cie_app/di/currentUser_di.dart';
 import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/user/currentUser.dart';
 import 'package:cie_app/model/user/user.dart';
-import 'package:cie_app/utils/fileStore.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
@@ -91,7 +91,7 @@ class CurrentUserPresenter {
   }
 
   void loadUserSettingsFromMemory() {
-    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+    DataManager.getResource(DataManager.LOCAL_USER_SETTINGS).then((String val) {
       if (val != null) {
         dynamic settings = json.decode(val);
         bool isMetricsEnabled =
@@ -112,6 +112,6 @@ class CurrentUserPresenter {
 
   void saveUserSettings() {
     String data = json.encode(User.toJson(_currentUser.getCurrentUser()));
-    FileStore.writeToFile(FileStore.USER_SETTINGS, data);
+    DataManager.writeToFile(DataManager.LOCAL_USER_SETTINGS, data);
   }
 }

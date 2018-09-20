@@ -7,7 +7,8 @@ class Department {
   Department(Map<String, dynamic> jsonData) {
     this.color = jsonData['color'];
     this.name = jsonData['name'];
-    this.shortName = jsonData['shortName']; //TODO Rename to Department instead of Fakultät
+    this.shortName =
+        jsonData['shortName']; //TODO Rename to Department instead of Fakultät
     this.actions = jsonData['actions']; //TODO Rename to DP instead of FK
   }
 
