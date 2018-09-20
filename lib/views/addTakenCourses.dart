@@ -11,52 +11,61 @@ import 'package:cie_app/views/takenCourses.dart';
 import 'package:flutter/material.dart';
 
 class AddTakenCourses extends StatefulWidget {
-  AddTakenCourses({Key key, this.title}) : super(key: key);
+  AddTakenCourses(this.semesterList, {Key key, this.title}) : super(key: key);
   final String title;
+  final List<String> semesterList;
 
   @override
-  _AddTakenCoursesState createState() => new _AddTakenCoursesState();
+  _AddTakenCoursesState createState() =>
+      new _AddTakenCoursesState(semesterList);
 }
 
 class _AddTakenCoursesState extends State<AddTakenCourses> {
-  //TODO do not hard code this semester
-  String semesterFilter = "WiSe 2018";
-  String departmentFilter = "All Departments";
-  List<String> coursesSelected = new List<String>();
-  bool shouldSearch = false;
-  String searchValue = "";
+  _AddTakenCoursesState(this.semesterList);
+
+  var semesterList = new List<String>();
+  var semesterFilter = "";
+  var departmentFilter = "All Departments";
+  var coursesSelected = new List<String>();
+  var shouldSearch = false;
+  var searchValue = "";
   final TextEditingController c1 = new TextEditingController();
 
   @override
   initState() {
     super.initState();
-    print("init");
-    FileStore.readFileAsString(FileStore.COURSES + semesterFilter)
-        .then((hasOldCourseData) {
-      print(semesterFilter + " filter!!!!!!!!!!!!!!!!!!!!");
-      var fetchNewData = true;
-      if (hasOldCourseData != null && hasOldCourseData.length > 3) {
-        fetchNewData = false;
-        print("yes");
-        setState(() {
-          FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
-            if (val != null) {
-              try {
-                List<dynamic> savedHistory = json.decode(val);
-                for (int i = 0; i < savedHistory.length; i++) {
-                  coursesSelected.add(savedHistory.elementAt(i));
+    var fetchNewData = true;
+    if (semesterList.length > 0) {
+      fetchNewData = false;
+      setState(() {
+        semesterFilter = semesterList.first;
+      });
+      FileStore.readFileAsString(FileStore.COURSES + semesterFilter)
+          .then((hasOldCourseData) {
+        if (hasOldCourseData != null && hasOldCourseData.length > 3) {
+          fetchNewData = false;
+          setState(() {
+            FileStore.readFileAsString(FileStore.TAKEN_COURSES).then((val) {
+              if (val != null) {
+                try {
+                  List<dynamic> savedHistory = json.decode(val);
+                  for (int i = 0; i < savedHistory.length; i++) {
+                    coursesSelected.add(savedHistory.elementAt(i));
+                  }
+                } catch (e) {
+                  print("addTakenCourses, error: " + e.toString());
                 }
-              } catch (e) {
-                print("addTakenCourses, error: " + e.toString());
               }
-            }
+            });
           });
-        });
-      }
-      if (fetchNewData) {
-        DataManager.updateAll(context, true);
-      }
-    });
+        } else {
+          fetchNewData = true;
+        }
+      });
+    }
+    if (fetchNewData) {
+      DataManager.updateAll(context, true);
+    }
   }
 
   static bool getCheckedValue(List<String> courses, String id) {
@@ -168,7 +177,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
       }
     }).toList());
     List<DropdownMenuItem<String>> semesters = List<DropdownMenuItem<String>>();
-    semesters.addAll(CourseHistory.semesterList.map((String value) {
+    semesters.addAll(semesterList.map((String value) {
       if (value != null) {
         return new DropdownMenuItem<String>(
           value: value,

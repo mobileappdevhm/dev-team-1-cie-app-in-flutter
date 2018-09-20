@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cie_app/di/courses_di.dart';
@@ -8,6 +9,7 @@ import 'package:cie_app/model/course/details/campus.dart';
 import 'package:cie_app/model/course/details/courseAvailability.dart';
 import 'package:cie_app/model/course/details/lecturer.dart';
 import 'package:cie_app/model/course/details/weekday.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/fileStore.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
@@ -30,12 +32,12 @@ class CourseListPresenter {
   // TODO: -Rename to be more relevant to update function,
   // TODO: -Check if course is already stored before adding here
   // TODO: -Make the loop contents more relevant and move it somewhere else
-  void addCoursesFromMemory() {
+  Future addCoursesFromMemory() async {
     this.onChanged(true);
     List<Course> courseList = _courses.getCourses();
     bool didUpdate = false;
-    //TODO do not hard code this string
-    FileStore.readFileAsString(FileStore.COURSES + "WiSe2018").then((String val) {
+    var semester = await DataManager.getLatestSemester();
+    FileStore.readFileAsString(FileStore.COURSES + semester).then((String val) {
       if (val != null) {
         final List<dynamic> jsonData = json.decode(val);
         for (int i = 0; i < jsonData.length; i++) {
@@ -233,8 +235,7 @@ class CourseListPresenter {
   List<Appointment> getFavouriteAppointmentsOfWeekday(Weekday searchedWeekday) {
     List<Appointment> appointments = [];
     //Add all lectures to lectures list
-    getCourses().where((c) => c.isFavourite).forEach((c) => c
-        .appointments
+    getCourses().where((c) => c.isFavourite).forEach((c) => c.appointments
         .where((l) => l.weekday == searchedWeekday)
         .forEach((l) => appointments.add(l)));
     return _sortAppointments(appointments);

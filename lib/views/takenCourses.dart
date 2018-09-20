@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/fileStore.dart';
 import 'package:cie_app/utils/nineAPIConsumer.dart';
 import 'package:cie_app/utils/staticVariables.dart';
@@ -24,6 +25,14 @@ class _TakenCoursesState extends State<TakenCourses> {
   final CurrentUserPresenter currentUserPresenter;
 
   _TakenCoursesState(this.currentUserPresenter);
+  var semesterList = new List<String>();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSemesters();
+    print("fired " + semesterList.length.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +43,7 @@ class _TakenCoursesState extends State<TakenCourses> {
             Navigator.push(
                 context,
                 new MaterialPageRoute(
-                    builder: (context) => new AddTakenCourses()));
+                    builder: (context) => new AddTakenCourses(semesterList)));
           },
         ),
         appBar: new AppBar(
@@ -125,14 +134,33 @@ class _TakenCoursesState extends State<TakenCourses> {
       ),
     );
   }
+
+  Future _loadSemesters() async {
+    var semesters = await DataManager.getResource(FileStore.SEMESTERS, NineAPIEngine.NINE_CIE_BASE_URL);
+    var list = await json.decode(semesters);
+    for(int i = 0; i < list.length; i++){
+      semesterList.add(list[i]['name']);
+    }
+    print("finished loading: " + semesterList.length.toString());
+  }
 }
 
 class CourseHistory {
+  static Future<List<String>> getSemesterList() async {
+      var semesterList = new List<String>();
+      var semesters = await DataManager.getResource(FileStore.SEMESTERS, NineAPIEngine.NINE_CIE_BASE_URL);
+      var list = json.decode(semesters);
+      for(int i = 0; i < list.length; i++){
+        semesterList.add(list[i]['name']);
+      }
+      return semesterList;
+  }
+
   static Future<String> loadCheckedCoursesFromMemory() async {
-    List<dynamic> res = await json
+    List<dynamic> res = json
         .decode(await FileStore.readFileAsString(FileStore.TAKEN_COURSES));
     List<dynamic> allCourseJson =
-        await json.decode(await loadAllCoursesFromMemory());
+        json.decode(await loadAllCoursesFromMemory());
     List<dynamic> releventCourseJson = new List<dynamic>();
     for (int i = 0; i < res.length; i++) {
       for (int j = 0; j < allCourseJson.length; j++) {
@@ -147,20 +175,14 @@ class CourseHistory {
 
   static Future<String> loadAllCoursesFromMemory() async {
     List<dynamic> finalJson = new List<dynamic>();
-    for (int i = 0; i < CourseHistory.semesterList.length; i++) {
+    var semesterList = await getSemesterList();
+    for (int i = 0; i < semesterList.length; i++) {
       String sem = await CourseHistory.getSingleJson(
-          CourseHistory.semesterList.elementAt(i));
+          semesterList.elementAt(i));
       finalJson.addAll(json.decode(sem));
     }
     return json.encode(finalJson);
   }
-
-  //TODO replace semester list with results of API to get all semesters
-  static List<String> semesterList = [
-    'WiSe 2018',
-    'SoSe 2018',
-    'WiSe 2017',
-  ];
 
   static Future<String> getSingleJson(String data) async {
     return FileStore.readFileAsString(FileStore.COURSES + data);

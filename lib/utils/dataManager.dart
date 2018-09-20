@@ -12,8 +12,7 @@ class DataManager {
   //after dialog is opend a private method given as attribute will executed
   //after execusion pop is called
 
-  static Future<String> getResource(
-      BuildContext context, String local, String remote) async {
+  static Future<String> getResource(String local, String remote) async {
     var result = await FileStore.readFileAsString(local);
     if (result == null) {
       NineAPIEngine.getJson(remote).then((value) {
@@ -93,6 +92,16 @@ class DataManager {
 
     if (!inBackground) {
       Navigator.pop(context);
+    }
+  }
+
+  static Future<String> getLatestSemester() async {
+    var semesters = await getResource(FileStore.SEMESTERS, NineAPIEngine.NINE_CIE_BASE_URL);
+    try{
+      return json.decode(semesters)[0]['name'];
+    } catch (e){
+      print('dataManager, error: ' + e.toString());
+      return "";
     }
   }
 }
