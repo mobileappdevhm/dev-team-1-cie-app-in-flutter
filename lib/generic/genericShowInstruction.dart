@@ -7,7 +7,7 @@ import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
-  static Widget showInstructions(BuildContext context, bool goToTabs) {
+  static Widget showInstructions(BuildContext context, bool goToTabs, [Function onPressRefresh = null]) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
         children: <Widget>[
@@ -83,7 +83,7 @@ class GenericShowInstruction {
           new Padding(padding: new EdgeInsets.only(bottom: 20.0)),
           new RaisedButton(
               color: CiEColor.lightGray,
-              onPressed: () => _toggleRefresh(goToTabs, context),
+              onPressed: () => _toggleRefresh(goToTabs, context, onPressRefresh),
               child: goToTabs
                   ? new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT_REFRESH)
                   : new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT)),
@@ -92,8 +92,12 @@ class GenericShowInstruction {
     ));
   }
 
-  static _toggleRefresh(bool goToTabs, BuildContext context) {
-    DataManager.updateAll(context, true);
+  static _toggleRefresh(bool goToTabs, BuildContext context, [Function onPressRefresh = null]) {
+    if(onPressRefresh != null){
+      onPressRefresh();
+    } else {
+      DataManager.updateAll(context, true);
+    }
     if (goToTabs) {
       Navigator.pushReplacementNamed(context, Routes.TabPages);
     }

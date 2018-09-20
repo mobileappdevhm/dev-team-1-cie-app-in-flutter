@@ -78,7 +78,12 @@ class CourseListState extends State<CourseList> {
     if (courseListPresenter.getCourses().isEmpty) {
       return new Column(
         children: <Widget>[
-          GenericShowInstruction.showInstructions(context, false),
+          GenericShowInstruction.showInstructions(
+            context,
+            false,
+            () => handleRefreshIndicator(
+                context, courseListPresenter, true, false),
+          ),
         ],
       );
     } else {
