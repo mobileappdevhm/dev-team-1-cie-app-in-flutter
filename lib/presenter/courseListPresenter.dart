@@ -205,10 +205,12 @@ class CourseListPresenter {
   }
 
   String getAppointmentTimesBeautiful(int id) {
-    List<Appointment> appointments = _courses.getCourses()[id].appointments;
-    String result = "";
+    var course = _courses.getCourses()[id];
+    var blocked = course.blocked;
+    List<Appointment> appointments = course.appointments;
+    String result = blocked ? "[Blocked] " : "";
     for (var a in appointments) {
-      if (result != "") result += '\n';
+      if (result.length > 10) result += ', ';
       result += WeekdayUtility.getWeekdayAsString(a.weekday) +
           ' ' +
           a.timeBegin.toString() +

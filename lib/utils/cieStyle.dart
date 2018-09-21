@@ -217,6 +217,13 @@ class CiEStyle {
     );
   }
 
+  static TextStyle getCourseBlockedTextStyle() {
+    return new TextStyle(
+      fontSize: 15.0,
+      color: CiEColor.mediumGray,
+    );
+  }
+
   static TextStyle getCourseDetailsConflictNotificationText() {
     return new TextStyle(
       fontSize: 15.0,

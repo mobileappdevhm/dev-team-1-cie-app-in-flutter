@@ -21,6 +21,7 @@ class Course {
   List<Lecturer> lecturer;
   List<Appointment> appointments;
   List<Date> dates;
+  bool blocked;
   String name;
   String shortName;
   List<dynamic> actions;
@@ -44,6 +45,7 @@ class Course {
     lecturer = Lecturer.fromJson(jsonData['lecturer']);
     appointments = Appointment.fromJson(jsonData['appointments'], this);
     dates = Date.fromJson(jsonData['dates']);
+    blocked = dates.length <= 10 && appointments.length > 1;
     name = jsonData['name'];
     shortName = jsonData['shortName'];
     actions = jsonData['actions'];

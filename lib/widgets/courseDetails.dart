@@ -71,11 +71,11 @@ class _CourseDetailsState extends State<CourseDetails> {
       children: <Widget>[
         new Padding(
             padding: const EdgeInsets.only(
-                left: 0.0, top: 15.0, right: 0.0, bottom: 15.0)),
+                left: 0.0, top: 0.0, right: 0.0, bottom: 15.0)),
         _getSpacing(new EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 30.0)),
         new Container(
           child: new Padding(
-              padding: new EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+              padding: new EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
               child: new Text(StaticVariables.DESCRIPTION,
                   style: CiEStyle.getCourseDetailsHeadingStyle())),
         ),
@@ -114,6 +114,7 @@ class _CourseDetailsState extends State<CourseDetails> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          _blockedCourseInfo(presenter.getCourses()[id].blocked),
           presenter.checkIfConflictsOtherFavoriteCourse(id)
               ? new Padding(
                   padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
@@ -124,7 +125,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       new Text(
                         conflictText[0] != null
                             ? conflictText[0]
-                            : "Ooops something went wront can't find conflicting cours.",
+                            : "Ooops something went wront can't find conflicting course.",
                         style: conflictTextStyle,
                       ),
                       new Text(
@@ -141,6 +142,35 @@ class _CourseDetailsState extends State<CourseDetails> {
         ],
       ),
     );
+  }
+
+  Widget _blockedCourseInfo(bool blocked) {
+    return blocked
+        ? new Container(
+            child: new Column(
+              children: <Widget>[
+                new Padding(
+                    padding: new EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0)),
+                new Row(
+                  children: <Widget>[
+                    Icon(Icons.info, color: CiEColor.yellow),
+                    new Padding(
+                      padding: new EdgeInsets.only(right: 5.0),
+                    ),
+                    new Container(
+                      constraints: new BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width - 60),
+                      child: new Text(
+                          //TODO text to static variables
+                          "This course is blocked, that means that it is maybe not fitting into the regular schedule.",
+                          style: CiEStyle.getCourseBlockedTextStyle()),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        : new Container();
   }
 
   Widget buildTitleRow() {
@@ -180,6 +210,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                   presenter.getAppointmentTimesBeautiful(id),
                   style: CiEStyle.getCoursesListTimeStyle(),
                 ),
+                new Padding(padding: const EdgeInsets.only(top: 5.0)),
                 new Text(
                     StaticVariables.PROFESSOR +
                         " " +
