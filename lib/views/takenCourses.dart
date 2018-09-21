@@ -30,7 +30,7 @@ class _TakenCoursesState extends State<TakenCourses> {
   void initState() {
     super.initState();
     _loadSemesters();
-    print("fired " + semesterList.length.toString());
+    //TODO use userPresenter.prevCourses here
   }
 
   @override
@@ -63,14 +63,22 @@ class _TakenCoursesState extends State<TakenCourses> {
         ));
   }
 
+  int countEcts(List<dynamic> historyJson){
+    var count = 0;
+    for(var course in historyJson){
+      count += course['ects'].round();
+    }
+    return count;
+  }
+
   FutureBuilder buildPreviousCourses() {
     return new FutureBuilder(
-        future: CourseHistory.loadCheckedCoursesFromMemory(),
+        future: DataManager.getResource(DataManager.LOCAL_TAKEN_COURSES),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             List<dynamic> historyJson = json.decode(snapshot.data);
             List<Widget> widgets = new List<Widget>();
-            int ectsTotal = historyJson.length * 2;
+            var ectsTotal = countEcts(historyJson);
             widgets.add(ectsCount(ectsTotal));
             for (int i = 0; i < historyJson.length; i++) {
               widgets.add(new Container(
@@ -86,20 +94,20 @@ class _TakenCoursesState extends State<TakenCourses> {
                       new Row(
                         children: <Widget>[
                           new Text(
-                            "2" + " ECTS",
-                            style: CiEStyle.getPrevCoursesCreditsStyle(),
+                            historyJson[i]['ects'].round().toString() + " ECTS",
+                            style: CiEStyle.getPrevCoursesSubtitleStyle(),
                           ),
                           new Padding(
                               padding: new EdgeInsets.only(right: 10.0)),
                           new Text(
                             "-",
-                            style: CiEStyle.getPrevCoursesCreditsStyle(),
+                            style: CiEStyle.getPrevCoursesSubtitleStyle(),
                           ),
                           new Padding(
                               padding: new EdgeInsets.only(right: 10.0)),
                           new Text(
-                            historyJson[i]['correlations'][0]['organiser'],
-                            style: CiEStyle.getPrevCoursesCreditsStyle(),
+                            historyJson[i]['department']['shortName'],
+                            style: CiEStyle.getPrevCoursesSubtitleStyle(),
                           ),
                         ],
                       ),
@@ -143,48 +151,5 @@ class _TakenCoursesState extends State<TakenCourses> {
       semesterList.add(list[i]['name']);
     }
     print("finished loading: " + semesterList.length.toString());
-  }
-}
-
-class CourseHistory {
-  static Future<List<String>> getSemesterList() async {
-    var semesterList = new List<String>();
-    var semesters = await DataManager.getResource(
-        DataManager.LOCAL_SEMESTERS, DataManager.REMOTE_CIE_BASE);
-    var list = json.decode(semesters);
-    for (int i = 0; i < list.length; i++) {
-      semesterList.add(list[i]['name']);
-    }
-    return semesterList;
-  }
-
-  static Future<String> loadCheckedCoursesFromMemory() async {
-    List<dynamic> res = json
-        .decode(await DataManager.getResource(DataManager.LOCAL_TAKEN_COURSES));
-    List<dynamic> allCourseJson = json.decode(await loadAllCoursesFromMemory());
-    List<dynamic> releventCourseJson = new List<dynamic>();
-    for (int i = 0; i < res.length; i++) {
-      for (int j = 0; j < allCourseJson.length; j++) {
-        if (res[i] == allCourseJson[j]['id']) {
-          releventCourseJson.add(allCourseJson[j]);
-          j = allCourseJson.length;
-        }
-      }
-    }
-    return json.encode(releventCourseJson);
-  }
-
-  static Future<String> loadAllCoursesFromMemory() async {
-    List<dynamic> finalJson = new List<dynamic>();
-    var semesterList = await getSemesterList();
-    for (int i = 0; i < semesterList.length; i++) {
-      String sem = await CourseHistory.getSingleJson(semesterList.elementAt(i));
-      finalJson.addAll(json.decode(sem));
-    }
-    return json.encode(finalJson);
-  }
-
-  static Future<String> getSingleJson(String data) async {
-    return DataManager.getResource(DataManager.LOCAL_COURSES + data);
   }
 }

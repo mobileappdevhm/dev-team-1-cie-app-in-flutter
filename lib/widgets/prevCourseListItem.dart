@@ -41,7 +41,7 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
                 ),
                 new Text(
                   currentUserPresenter.getCredits(id).toString() + " ECTS",
-                  style: CiEStyle.getPrevCoursesCreditsStyle(),
+                  style: CiEStyle.getPrevCoursesSubtitleStyle(),
                 ),
               ],
             ),

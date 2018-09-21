@@ -28,7 +28,7 @@ class PrevCourseListState extends State<PrevCourseList> {
         itemCount: currentUserPresenter.getPrevCourses().length,
       );
     } catch (e) {
-      print("CourseList.dart: " + e.toString());
+      print("courseList.dart, error: " + e.toString());
       return new Text("No Courses found!");
     }
   }

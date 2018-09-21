@@ -1,4 +1,5 @@
 import 'package:cie_app/generic/genericIcon.dart';
+import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
   //TODO would be better to just call with function what to do or to call with widget?!
-  static Widget showInstructions(BuildContext context, bool goToTabs, [Function onPressRefresh = null]) {
+  static Widget showInstructions(BuildContext context, bool refreshData, CourseListPresenter courseListPresenter) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
         children: <Widget>[
@@ -84,8 +85,8 @@ class GenericShowInstruction {
           new Padding(padding: new EdgeInsets.only(bottom: 20.0)),
           new RaisedButton(
               color: CiEColor.lightGray,
-              onPressed: () => _toggleRefresh(goToTabs, context, onPressRefresh),
-              child: goToTabs
+              onPressed: () => _toggleRefresh(context, courseListPresenter),
+              child: refreshData
                   ? new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT_REFRESH)
                   : new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT)),
         ],
@@ -93,15 +94,12 @@ class GenericShowInstruction {
     ));
   }
 
-  static _toggleRefresh(bool goToTabs, BuildContext context, [Function onPressRefresh = null]) {
-    if(onPressRefresh != null){
-      onPressRefresh();
-    } else {
-      DataManager.updateAll(context, true);
-    }
-    if (goToTabs) {
-      Navigator.pushReplacementNamed(context, Routes.TabPages);
-    }
+  static _toggleRefresh(BuildContext context, CourseListPresenter courseListPresenter) async {
+    await DataManager.updateAll(context, true);
+    courseListPresenter.addCoursesFromMemory();
+    courseListPresenter.updateLecturerInfoFromMemory();
+    courseListPresenter.onChanged(true);
+    return null;
   }
 
   static Widget _getInstructionWidget(Widget text) {

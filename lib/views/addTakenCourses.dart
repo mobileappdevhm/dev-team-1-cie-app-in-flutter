@@ -6,7 +6,6 @@ import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/staticVariables.dart';
-import 'package:cie_app/views/takenCourses.dart';
 import 'package:flutter/material.dart';
 
 class AddTakenCourses extends StatefulWidget {
@@ -25,7 +24,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
   var semesterList = new List<String>();
   var semesterFilter = "";
   var departmentFilter = "All Departments";
-  var coursesSelected = new List<String>();
+  var coursesSelected = new List<dynamic>();
   var shouldSearch = false;
   var searchValue = "";
   final TextEditingController c1 = new TextEditingController();
@@ -33,13 +32,17 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
   @override
   initState() {
     super.initState();
+    _initialize();
+  }
+
+  void _initialize() async {
     var fetchNewData = true;
     if (semesterList.length > 0) {
       fetchNewData = false;
       setState(() {
         semesterFilter = semesterList.first;
       });
-      DataManager.getResource(DataManager.LOCAL_COURSES + semesterFilter)
+      await DataManager.getResource(DataManager.LOCAL_COURSES + semesterFilter)
           .then((hasOldCourseData) {
         if (hasOldCourseData != null && hasOldCourseData.length > 3) {
           fetchNewData = false;
@@ -53,7 +56,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
                     coursesSelected.add(savedHistory.elementAt(i));
                   }
                 } catch (e) {
-                  print("addTakenCourses, error: " + e.toString());
+                  print("addTakenCourses.dart, error: " + e.toString());
                 }
               }
             });
@@ -64,17 +67,25 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
       });
     }
     if (fetchNewData) {
-      DataManager.updateAll(context, true);
+      await DataManager.updateAll(context, true);
+      setState(() {
+        searchValue = "";
+      });
+      buildOldCourses(searchValue);
     }
   }
 
-  static bool getCheckedValue(List<String> courses, String id) {
-    return courses.contains(id);
+  static bool getCheckedValue(List<dynamic> courses, String id) {
+    for (var course in courses) {
+      if (course['id'] == id) return true;
+    }
+    return false;
   }
 
   FutureBuilder buildOldCourses(String searchValue) {
     return new FutureBuilder(
-      future: CourseHistory.getSingleJson(semesterFilter),
+      future:
+          DataManager.getResource(DataManager.LOCAL_COURSES + semesterFilter),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           List<dynamic> courseJson = json.decode(snapshot.data);
@@ -93,16 +104,36 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
                   courseJson[i]['name'],
                   style: CiEStyle.getPrevCoursesTitleStyle(),
                 ),
+                subtitle: new Container(
+                  child: new Row(
+                    children: <Widget>[
+                      new Text(
+                        courseJson[i]['ects'].round().toString() + " ECTS",
+                        style: CiEStyle.getPrevCoursesSubtitleStyle(),
+                      ),
+                      new Padding(padding: new EdgeInsets.only(right: 10.0)),
+                      new Text(
+                        "-",
+                        style: CiEStyle.getPrevCoursesSubtitleStyle(),
+                      ),
+                      new Padding(padding: new EdgeInsets.only(right: 10.0)),
+                      new Text(
+                        courseJson[i]['department']['shortName'],
+                        style: CiEStyle.getPrevCoursesSubtitleStyle(),
+                      ),
+                    ],
+                  ),
+                ),
                 trailing: new Checkbox(
                   value: getCheckedValue(coursesSelected, courseJson[i]['id']),
                   onChanged: (val) {
                     setState(() {
                       if (val == false) {
-                        if (coursesSelected.contains(courseJson[i]['id'])) {
-                          coursesSelected.remove(courseJson[i]['id']);
+                        if (coursesSelected.contains(courseJson[i])) {
+                          coursesSelected.remove(courseJson[i]);
                         }
                       } else {
-                        coursesSelected.add(courseJson[i]['id']);
+                        coursesSelected.add(courseJson[i]);
                       }
                       DataManager.writeToFile(DataManager.LOCAL_TAKEN_COURSES,
                           json.encode(coursesSelected));
@@ -157,8 +188,6 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
           ),
         ));
   }
-
-  static void _voidCallback(bool didChange) {}
 
   Widget buildDropdowns() {
     String departmentLabel = "Department ";

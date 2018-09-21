@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:cie_app/generic/genericShowInstruction.dart';
 import 'package:cie_app/model/user/user.dart';
+import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
@@ -17,21 +18,24 @@ import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
   final CurrentUserPresenter currentUserPresenter;
+  final CourseListPresenter courseListPresenter;
 
-  Settings(this.currentUserPresenter);
+  Settings(this.currentUserPresenter, this.courseListPresenter);
 
   @override
-  _SettingsState createState() => new _SettingsState(currentUserPresenter);
+  _SettingsState createState() => new _SettingsState(currentUserPresenter, courseListPresenter);
 }
 
 class _SettingsState extends State<Settings> {
   final CurrentUserPresenter currentUserPresenter;
+  final CourseListPresenter courseListPresenter;
+
   int credits = 0;
   int engCredits = 0;
   bool isMetricsEnabled = false;
   bool isLoggedIn = false;
 
-  _SettingsState(this.currentUserPresenter);
+  _SettingsState(this.currentUserPresenter, this.courseListPresenter);
 
   @override
   void initState() {
@@ -109,7 +113,7 @@ class _SettingsState extends State<Settings> {
                           padding: const EdgeInsets.only(top: 5.0),
                         ),
                         new RaisedButton(
-                          onPressed: () => _toggleIntroduction(context),
+                          onPressed: () => _toggleIntroduction(context, courseListPresenter),
                           shape: new RoundedRectangleBorder(
                               borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEColor.red,
@@ -183,7 +187,7 @@ class _SettingsState extends State<Settings> {
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
                         List<dynamic> takenCourses = json.decode(snapshot.data);
-                        credits = 2 * takenCourses.length;
+                        credits = _countEcts(takenCourses);
                       }
                       return new Container(
                         padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
@@ -195,7 +199,7 @@ class _SettingsState extends State<Settings> {
                           )),
                           new Text("$credits /15",
                               style: CiEStyle.getSettingsStyle()),
-                          // Calculate ECTS/15 but one of the courses need to be from department 13
+                          //TODO Calculate ECTS/15 but one of the courses need to be from department 13
                         ]),
                       );
                     }),
@@ -210,7 +214,7 @@ class _SettingsState extends State<Settings> {
                             style: CiEStyle.getSettingsStyle())),
                     new Text("$engCredits /15",
                         style: CiEStyle.getSettingsStyle()),
-                    // Calculate ECTS of department 3 /15 with at least 2 ects from dep. 13
+                    //TODO Calculate ECTS of department 3 /15 with at least 2 ects from dep. 13
                   ]),
                 ),
                 new LinearProgressIndicator(value: engCredits / 15),
@@ -259,6 +263,16 @@ class _SettingsState extends State<Settings> {
         ),
       ),
     );
+  }
+
+  int _countEcts(List<dynamic> takenCourses){
+    print(takenCourses);
+    var count = 0;
+    for(var course in takenCourses){
+      print(course);
+      count += course['ects'].round();
+    }
+    return count;
   }
 
   Future _onContactInternationalOffice() async {
@@ -315,7 +329,7 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-  void _toggleIntroduction(BuildContext context) {
+  void _toggleIntroduction(BuildContext context, CourseListPresenter courseListPresenter) {
     //track click on introduction
     Analytics.logEvent("settings_click", {"title": "introcuction"});
 
@@ -333,7 +347,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   body: new Column(
                     children: <Widget>[
-                      GenericShowInstruction.showInstructions(context, true)
+                      GenericShowInstruction.showInstructions(context, true, courseListPresenter)
                     ],
                   ),
                 )));

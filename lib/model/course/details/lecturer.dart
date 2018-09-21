@@ -27,8 +27,13 @@ class LecturerProfile {
   String href;
 
   LecturerProfile(Map<String, dynamic> jsonData) {
-    this.title = jsonData['title'];
-    this.href = jsonData['href'];
+    if(jsonData != null) {
+      this.title = jsonData['title'];
+      this.href = jsonData['href'];
+    }
+    //TODO set "profile"
+    //this.title = "Profile";
+    //this.href = "https://hm.edu/suche/suchergebnisse.de.jsp?query=";
   }
 
   static List<LecturerProfile> fromJson(List<dynamic> jsonData) {

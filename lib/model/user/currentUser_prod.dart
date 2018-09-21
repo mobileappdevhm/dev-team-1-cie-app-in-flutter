@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cie_app/model/course/course.dart';
-import 'package:cie_app/model/course/courses_mock.dart';
 import 'package:cie_app/model/user/currentUser.dart';
 import 'package:cie_app/model/user/user.dart';
 import 'package:cie_app/utils/dataManager.dart';
@@ -12,24 +11,8 @@ class CurrentUserProd implements CurrentUser {
   User currentUser;
 
   CurrentUserProd() {
-    //TODO should we do this? CourseProd would be better I guess.
-    CoursesMock coursesMock = new CoursesMock();
-    List<Course> courses = coursesMock.getCourses();
-    prevCourses.add(courses[0]);
-    prevCourses.add(courses[1]);
-    prevCourses.add(courses[2]);
-    prevCourses.add(courses[3]);
-
-    currentCourses.add(courses[4]);
-    currentCourses.add(courses[5]);
-    currentCourses.add(courses[8]);
-    currentCourses.add(courses[9]);
-    currentCourses.add(courses[10]);
-    currentCourses.add(courses[11]);
-    currentCourses.add(courses[12]);
-    currentCourses.add(courses[17]);
-    currentCourses.add(courses[43]);
-
+    //TODO set previous courses
+    //TODO set current courses
     currentUser = new UserBuilder()
         .withID("id-123")
         .withUsername("Guest")

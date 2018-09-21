@@ -146,7 +146,7 @@ class DataManager {
     try {
       return json.decode(semesters)[0]['name'];
     } catch (e) {
-      print('dataManager, error: ' + e.toString());
+      print('dataManager.dart, error: ' + e.toString());
       return "";
     }
   }
