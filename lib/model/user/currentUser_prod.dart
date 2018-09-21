@@ -11,6 +11,8 @@ class CurrentUserProd implements CurrentUser {
   User currentUser;
 
   CurrentUserProd() {
+    //TODO set previous courses
+    //TODO set current courses
     currentUser = new UserBuilder()
         .withID("id-123")
         .withUsername("Guest")

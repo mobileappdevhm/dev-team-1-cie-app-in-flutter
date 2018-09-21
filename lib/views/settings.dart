@@ -187,7 +187,7 @@ class _SettingsState extends State<Settings> {
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
                         List<dynamic> takenCourses = json.decode(snapshot.data);
-                        credits = 2 * takenCourses.length;
+                        credits = _countEcts(takenCourses);
                       }
                       return new Container(
                         padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
@@ -263,6 +263,16 @@ class _SettingsState extends State<Settings> {
         ),
       ),
     );
+  }
+
+  int _countEcts(List<dynamic> takenCourses){
+    print(takenCourses);
+    var count = 0;
+    for(var course in takenCourses){
+      print(course);
+      count += course['ects'].round();
+    }
+    return count;
   }
 
   Future _onContactInternationalOffice() async {

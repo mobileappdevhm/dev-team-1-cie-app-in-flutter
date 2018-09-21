@@ -119,7 +119,7 @@ class CiEStyle {
     );
   }
 
-  static TextStyle getPrevCoursesCreditsStyle() {
+  static TextStyle getPrevCoursesSubtitleStyle() {
     return new TextStyle(
         fontSize: 11.0, fontWeight: FontWeight.bold, color: CiEColor.red);
   }
