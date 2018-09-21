@@ -6,8 +6,7 @@ import 'package:cie_app/model/user/user.dart';
 import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
-import 'package:cie_app/utils/fileStore.dart';
-import 'package:cie_app/utils/nineAPIConsumer.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +74,8 @@ class LoginFormState extends State<LoginForm> {
       final String password = passwordController.text;
 
       try {
-        NineAPIEngine.postAuth(context, username, password).then((response) {
+        DataManager.postJson(context, DataManager.REMOTE_AUTH,
+            {"username": username, "password": password}).then((response) {
           if (response == null) {
             GenericAlert.confirmDialog(context, 'No Internet connection',
                 'It seems, that you have no internet connection. Please check and try again!');
@@ -267,7 +267,7 @@ class LoginFormState extends State<LoginForm> {
       curriculum = StaticVariables.GUEST_DEPARTMENT;
     }
 
-    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+    DataManager.getResource(DataManager.LOCAL_USER_SETTINGS).then((String val) {
       if (val != null && val.isNotEmpty) {
         dynamic settings = json.decode(val);
         builder = UserBuilder.fromJson(settings);
@@ -285,7 +285,7 @@ class LoginFormState extends State<LoginForm> {
           .build();
 
       String data = json.encode(User.toJson(tempUserObj));
-      FileStore.writeToFile(FileStore.USER_SETTINGS, data).then((f) {
+      DataManager.writeToFile(DataManager.LOCAL_USER_SETTINGS, data).then((f) {
         Navigator.of(context).pushReplacementNamed(Routes.TabPages);
       });
     });

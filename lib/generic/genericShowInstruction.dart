@@ -1,13 +1,14 @@
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
-  static Widget showInstructions(
-      Function onPressRefresh, BuildContext context) {
+  //TODO would be better to just call with function what to do or to call with widget?!
+  static Widget showInstructions(BuildContext context, bool goToTabs, [Function onPressRefresh = null]) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
         children: <Widget>[
@@ -81,27 +82,26 @@ class GenericShowInstruction {
             ],
           ),
           new Padding(padding: new EdgeInsets.only(bottom: 20.0)),
-          onPressRefresh == null
-              ? new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        child: new Text(
-                            StaticVariables.INSTRUCTIONS_PLEASE_GO_TO,
-                            style: CiEStyle.getInstructionPageTextStyle()))
-                  ],
-                )
-              : new RaisedButton(
-                  color: CiEColor.lightGray,
-                  onPressed: () => _toggleRefresh(onPressRefresh, context),
-                  child: new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT)),
+          new RaisedButton(
+              color: CiEColor.lightGray,
+              onPressed: () => _toggleRefresh(goToTabs, context, onPressRefresh),
+              child: goToTabs
+                  ? new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT_REFRESH)
+                  : new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT)),
         ],
       ),
     ));
   }
 
-  static _toggleRefresh(Function onPressRefresh, BuildContext context) {
-    onPressRefresh();
-    Navigator.pushReplacementNamed(context, Routes.TabPages);
+  static _toggleRefresh(bool goToTabs, BuildContext context, [Function onPressRefresh = null]) {
+    if(onPressRefresh != null){
+      onPressRefresh();
+    } else {
+      DataManager.updateAll(context, true);
+    }
+    if (goToTabs) {
+      Navigator.pushReplacementNamed(context, Routes.TabPages);
+    }
   }
 
   static Widget _getInstructionWidget(Widget text) {

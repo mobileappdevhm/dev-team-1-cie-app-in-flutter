@@ -52,9 +52,10 @@ class CoursesMock implements Courses {
   static Department generateMockDepartment(int i) {
     return Department(generateMockDepartmentJson(i));
   }
-  static Map<String,dynamic> generateMockDepartmentJson(int i){
+
+  static Map<String, dynamic> generateMockDepartmentJson(int i) {
     var number =
-    Department.departments[i.round() % Department.departments.length];
+        Department.departments[i.round() % Department.departments.length];
     var map = Map<String, dynamic>();
     map['color'] = "#009B71";
     map['name'] = "Fakultät " + number;
@@ -104,7 +105,7 @@ class CoursesMock implements Courses {
     return Date.fromJson(list);
   }
 
-  static List<Map<String,dynamic>> generateMockDates(int i) {
+  static List<Map<String, dynamic>> generateMockDates(int i) {
     var map = new Map<String, dynamic>();
     map['begin'] = "20180427T150000Z";
     map['end'] = "20180427T200000Z";
@@ -124,7 +125,8 @@ class CoursesMock implements Courses {
     var rooms = generateMockRooms(i);
     return Room.fromJson(rooms);
   }
-  static List<Map<String,dynamic>> generateMockRooms(int i) {
+
+  static List<Map<String, dynamic>> generateMockRooms(int i) {
     List<String> numbers = [
       "R0.001",
       "T0.001",
@@ -173,7 +175,8 @@ class CoursesMock implements Courses {
     var list = generateMockAppointments(i);
     return Appointment.fromJson(list, parent);
   }
-  static List<Map<String,dynamic>> generateMockAppointments(int i) {
+
+  static List<Map<String, dynamic>> generateMockAppointments(int i) {
     var appointment = Map<String, dynamic>();
     appointment['dayOfWeekName'] = WeekdayUtility.getWeekdayAsLongString(
         Weekday.values[i % Weekday.values.length]);

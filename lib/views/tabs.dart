@@ -2,7 +2,6 @@ import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
-import 'package:cie_app/utils/nineAPIConsumer.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/maps.dart';
 import 'package:cie_app/views/schedule.dart';
@@ -29,7 +28,7 @@ class TabsPageState extends State<TabsPage> {
     super.initState();
     // TODO: Investigate scenarios where internet is not available/request fails
 
-    NineAPIEngine.pullCourseJSON(context, true);
+    //NineAPIEngine.pullCourseJSON(context, true);
     _tabController = new PageController(initialPage: _tab);
     courseListPresenter = new CourseListPresenter(_maybeChangeCallback);
     currentUserPresenter =
@@ -89,7 +88,7 @@ class TabsPageState extends State<TabsPage> {
   void _maybeChangeCallback(bool didChange) {
     if (didChange == true) {
       // Triggers Widget rebuild on completion of potentially asynchronous tasks
-      setState(()=>{});
+      setState(() => {});
     }
   }
 

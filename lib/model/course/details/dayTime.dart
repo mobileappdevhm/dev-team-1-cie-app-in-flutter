@@ -4,7 +4,7 @@ class DayTime {
 
   DayTime(this.hour, this.minute);
 
-  static DayTime fromString(String timeAsString){
+  static DayTime fromString(String timeAsString) {
     var splitTime = timeAsString.split(':');
     var hours = int.parse(splitTime[0]);
     var minutes = int.parse(splitTime[1]);

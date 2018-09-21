@@ -4,7 +4,7 @@ import 'package:cie_app/model/user/user.dart';
 import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
-import 'package:cie_app/utils/fileStore.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/widgets/CiEAnimation.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +82,7 @@ class _WelcomePageState extends State<WelcomePage>
   }
 
   void _startClick() {
-    FileStore.readFileAsString(FileStore.USER_SETTINGS).then((String val) {
+    DataManager.getResource(DataManager.LOCAL_USER_SETTINGS).then((String val) {
       //check if user settings are available and not empty
       if (val != null && val.isNotEmpty) {
         //encode json string and fill builder

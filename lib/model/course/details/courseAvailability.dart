@@ -1,7 +1,7 @@
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:flutter/material.dart';
 
-enum CourseAvailability { AVAILABLE, PENDING, UNAVAILABLE}
+enum CourseAvailability { AVAILABLE, PENDING, UNAVAILABLE }
 
 class CourseAvailabilityUtility {
   static CourseAvailability fromCategoryName(String colorName) {

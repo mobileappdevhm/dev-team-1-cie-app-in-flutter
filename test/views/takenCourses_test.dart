@@ -1,4 +1,6 @@
 import 'package:cie_app/model/course/courses_mock.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/takenCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,13 +8,15 @@ import 'package:flutter_test/flutter_test.dart';
 @Timeout(const Duration(seconds: 20))
 void main() {
   testWidgets('1 widgetTest', (WidgetTester tester) async {
+    void _voidCallback(bool didChange) {}
+  CurrentUserPresenter ct = new CurrentUserPresenter(_voidCallback, Flavor.MOCK);
     // Tells the tester to build a UI based on the widget tree passed to it
     await tester.pumpWidget(
       new StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
           return new MaterialApp(
             home: new Material(
-              child: new Center(child: new TakenCourses()),
+              child: new Center(child: new TakenCourses(ct)),
             ),
           );
         },
@@ -25,19 +29,10 @@ void main() {
     for (Widget widget in listOfWidgets) {
       if (widget is Text) {
         if (counter == 0) {
-          expect(widget.data, 'Total of 6 ECTS');
-          counter++;
-        } else if (counter == 1) {
-          expect(widget.data, CoursesMock.generateMockCourseTitle(1));
-          counter++;
-        } else if (counter == 2) {
-          expect(widget.data.substring(0, 2), 'FK');
-          counter++;
-        } else if (counter == 3) {
-          expect(widget.data.isNotEmpty, true);
+          expect(widget.data, 'No Courses found.');
           counter++;
         }
-        // can be extended
+        //TODO can be extended
       }
     }
   });

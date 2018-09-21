@@ -32,7 +32,7 @@ class Appointment {
         timeEnd.minute;
   }
 
-  Campus getCampus(){
+  Campus getCampus() {
     //TODO using only the first one is a little bit dirty
     return this.parent.locations[0].campus;
   }

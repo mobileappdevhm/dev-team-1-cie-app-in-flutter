@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cie_app/di/courses_di.dart';
@@ -8,7 +9,7 @@ import 'package:cie_app/model/course/details/campus.dart';
 import 'package:cie_app/model/course/details/courseAvailability.dart';
 import 'package:cie_app/model/course/details/lecturer.dart';
 import 'package:cie_app/model/course/details/weekday.dart';
-import 'package:cie_app/utils/fileStore.dart';
+import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
@@ -30,12 +31,13 @@ class CourseListPresenter {
   // TODO: -Rename to be more relevant to update function,
   // TODO: -Check if course is already stored before adding here
   // TODO: -Make the loop contents more relevant and move it somewhere else
-  void addCoursesFromMemory() {
-    //TODO is called twice - reduce calls
+  Future addCoursesFromMemory() async {
     this.onChanged(true);
     List<Course> courseList = _courses.getCourses();
     bool didUpdate = false;
-    FileStore.readFileAsString(FileStore.COURSES).then((String val) {
+    var semester = await DataManager.getLatestSemester();
+    DataManager.getResource(DataManager.LOCAL_COURSES + semester)
+        .then((String val) {
       if (val != null) {
         final List<dynamic> jsonData = json.decode(val);
         for (int i = 0; i < jsonData.length; i++) {
@@ -54,8 +56,9 @@ class CourseListPresenter {
     });
   }
 
+  //TODO do this everytime lecturers are fetched automatically - maybe in datamanager
   void updateLecturerInfoFromMemory() {
-    FileStore.readFileAsString(FileStore.LECTURERS).then((String val) {
+    DataManager.getResource(DataManager.LOCAL_LECTURERS).then((String val) {
       if (val != null) {
         final List<dynamic> jsonData = json.decode(val)['lecturers'];
         for (int i = 0; i < jsonData.length; i++) {
@@ -73,7 +76,8 @@ class CourseListPresenter {
   }
 
   void syncFavoritedCoursesFromMemory() {
-    FileStore.readFileAsString(FileStore.FAVORITES).then((String favoriteIds) {
+    DataManager.getResource(DataManager.LOCAL_FAVORITES)
+        .then((String favoriteIds) {
       if (favoriteIds != null) {
         dynamic favoritesJson = json.decode(favoriteIds);
         for (Course c in _courses.getCourses()) {
@@ -94,7 +98,7 @@ class CourseListPresenter {
         toJson.putIfAbsent(c.id, () => c.isFavourite);
       }
     }
-    FileStore.writeToFile(FileStore.FAVORITES, json.encode(toJson));
+    DataManager.writeToFile(DataManager.LOCAL_FAVORITES, json.encode(toJson));
   }
 
   bool isNewCourseData(List<Course> courseList, Course candidate) {
@@ -233,8 +237,7 @@ class CourseListPresenter {
   List<Appointment> getFavouriteAppointmentsOfWeekday(Weekday searchedWeekday) {
     List<Appointment> appointments = [];
     //Add all lectures to lectures list
-    getCourses().where((c) => c.isFavourite).forEach((c) => c
-        .appointments
+    getCourses().where((c) => c.isFavourite).forEach((c) => c.appointments
         .where((l) => l.weekday == searchedWeekday)
         .forEach((l) => appointments.add(l)));
     return _sortAppointments(appointments);
