@@ -266,10 +266,8 @@ class _SettingsState extends State<Settings> {
   }
 
   int _countEcts(List<dynamic> takenCourses){
-    print(takenCourses);
     var count = 0;
     for(var course in takenCourses){
-      print(course);
       count += course['ects'].round();
     }
     return count;

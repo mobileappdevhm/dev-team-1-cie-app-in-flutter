@@ -269,6 +269,7 @@ class CourseListPresenter {
   bool _checkTimeConflict(Appointment thisFavorite, Appointment otherFavorite) {
     //Cant conflict itself
     if (thisFavorite == otherFavorite) return false;
+    if(thisFavorite.parent.id == otherFavorite.parent.id) return false;
     //If weekday is not same return false
     if (thisFavorite.weekday != otherFavorite.weekday) return false;
     //If running at same time return true
@@ -277,7 +278,6 @@ class CourseListPresenter {
     if (timeBetweenLectures < 0) return true;
     //If time is not enough to switch campus return true
     if (!_timeIsEnoughForCampusSwitch(
-        //TODO taking only the first is dirty
         thisFavorite.getCampus(),
         otherFavorite.getCampus(),
         timeBetweenLectures)) return true;
