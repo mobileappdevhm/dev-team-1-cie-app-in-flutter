@@ -117,7 +117,7 @@ class StaticVariables {
       "is not necessary to use the Timetable.";
   static const String INSTRUCTIONS_BUTTON_TEXT = "Download data to start";
   static const String INSTRUCTIONS_BUTTON_TEXT_REFRESH =
-      "Refresh data and go to tabs";
+      "Refresh data";
   static const String PRIVACY_TEXT_GERMAN = "Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten (nachfolgend kurz “Daten”) innerhalb unseres Onlineangebotes und der mit ihm verbundenen Webseiten, Funktionen und Inhalte sowie externen Onlinepräsenzen, wie z.B. unser Social Media Profile auf (nachfolgend gemeinsam bezeichnet als “Onlineangebot”). Im Hinblick auf die verwendeten Begrifflichkeiten, wie z.B. “Verarbeitung” oder “Verantwortlicher” verweisen wir auf die Definitionen im Art. 4 der Datenschutzgrundverordnung (DSGVO)\n\n" +
       "Arten der verarbeiteten Daten:\n" +
       "- Bestandsdaten (z.B., Namen, Adressen). \n- Kontaktdaten (z.B., E-Mail, Telefonnummern). \n- Inhaltsdaten (z.B., Texteingaben, Fotografien, Videos). \n- Nutzungsdaten (z.B., Interesse an Inhalten, Zugriffszeiten). \n- Meta-/Kommunikationsdaten (z.B., Geräte-Informationen, IP-Adressen)." +

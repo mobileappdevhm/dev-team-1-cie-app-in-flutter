@@ -81,8 +81,7 @@ class CourseListState extends State<CourseList> {
           GenericShowInstruction.showInstructions(
             context,
             false,
-            () => handleRefreshIndicator(
-                context, courseListPresenter, true, false),
+            courseListPresenter,
           ),
         ],
       );

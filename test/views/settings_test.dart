@@ -1,3 +1,4 @@
+import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/settings.dart';
@@ -17,7 +18,9 @@ void main() {
               home: new Material(
                 child: new Center(
                     child: new Settings(
-                        new CurrentUserPresenter(boolean, Flavor.PROD))),
+                        new CurrentUserPresenter(boolean, Flavor.PROD),
+                        new CourseListPresenter(boolean)
+                    )),
               ),
             );
           },
@@ -103,7 +106,8 @@ void main() {
               home: new Material(
                 child: new Center(
                     child: new Settings(
-                        new CurrentUserPresenter(boolean, Flavor.PROD))),
+                        new CurrentUserPresenter(boolean, Flavor.PROD),
+                    new CourseListPresenter(boolean))),
               ),
             );
           },

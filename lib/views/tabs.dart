@@ -64,7 +64,7 @@ class TabsPageState extends State<TabsPage> {
           // Behaves as Favorites Page
           new CourseList(
               courseListPresenter, true, currentUserPresenter, new FocusNode()),
-          new Settings(currentUserPresenter),
+          new Settings(currentUserPresenter, courseListPresenter),
         ],
       ),
       bottomNavigationBar: new BottomNavigationBar(
