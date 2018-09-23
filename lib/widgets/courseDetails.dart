@@ -1,6 +1,5 @@
 import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
-import 'package:cie_app/model/course/details/campus.dart';
 import 'package:cie_app/model/course/details/courseAvailability.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
@@ -174,14 +173,14 @@ class _CourseDetailsState extends State<CourseDetails> {
   }
 
   Widget buildTitleRow() {
+    var locs = presenter.getCourses()[id].locations;
     String locations = "";
-    //Take all locations
-    presenter
-        .getCourses()[id]
-        .appointments
-        .map((l) => CampusUtility.getCampusAsLongString(l.getCampus()))
-        .toSet()
-        .forEach((s) => locations += " " + s);
+    for(var location in locs){
+      if(locations != ""){
+        locations += ", ";
+      }
+      locations += location.toString();
+    }
     //Just for the cast that we don't have location
     if (locations.trim().isEmpty) locations = " N/A";
 
@@ -216,7 +215,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         " " +
                         presenter.getNamesOfLecturers(id),
                     style: CiEStyle.getCoursesListTimeStyle()),
-                new Text(StaticVariables.CAMPUS + locations,
+                new Text(StaticVariables.CAMPUS + " " + locations,
                     style: CiEStyle.getCoursesListTimeStyle()),
               ],
             ),
@@ -345,8 +344,12 @@ class _CourseDetailsState extends State<CourseDetails> {
     var profile = presenter.getProfileOfLecturer(id);
     print(email);
     if (email == StaticVariables.MOCK_EMAIL || !email.contains("@")) {
-      GenericAlert.confirm(context, () => email = email, () => _openUrl(profile),
-          StaticVariables.NO_EMAIL_FOUND_DESCRIPTION, StaticVariables.ALERT_OK);
+      GenericAlert.confirm(
+          context,
+          () => email = email,
+          () => _openUrl(profile),
+          StaticVariables.NO_EMAIL_FOUND_DESCRIPTION,
+          StaticVariables.ALERT_OK);
     } else {
       var url = "mailto:" + email;
       if (await canLaunch(url)) {
