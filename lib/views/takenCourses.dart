@@ -150,6 +150,5 @@ class _TakenCoursesState extends State<TakenCourses> {
     for (int i = 0; i < list.length; i++) {
       semesterList.add(list[i]['name']);
     }
-    print("finished loading: " + semesterList.length.toString());
   }
 }

@@ -205,10 +205,12 @@ class CourseListPresenter {
   }
 
   String getAppointmentTimesBeautiful(int id) {
-    List<Appointment> appointments = _courses.getCourses()[id].appointments;
-    String result = "";
+    var course = _courses.getCourses()[id];
+    var blocked = course.blocked;
+    List<Appointment> appointments = course.appointments;
+    String result = blocked ? "[Blocked] " : "";
     for (var a in appointments) {
-      if (result != "") result += '\n';
+      if (result.length > 10) result += ', ';
       result += WeekdayUtility.getWeekdayAsString(a.weekday) +
           ' ' +
           a.timeBegin.toString() +
@@ -267,6 +269,7 @@ class CourseListPresenter {
   bool _checkTimeConflict(Appointment thisFavorite, Appointment otherFavorite) {
     //Cant conflict itself
     if (thisFavorite == otherFavorite) return false;
+    if(thisFavorite.parent.id == otherFavorite.parent.id) return false;
     //If weekday is not same return false
     if (thisFavorite.weekday != otherFavorite.weekday) return false;
     //If running at same time return true
@@ -275,7 +278,6 @@ class CourseListPresenter {
     if (timeBetweenLectures < 0) return true;
     //If time is not enough to switch campus return true
     if (!_timeIsEnoughForCampusSwitch(
-        //TODO taking only the first is dirty
         thisFavorite.getCampus(),
         otherFavorite.getCampus(),
         timeBetweenLectures)) return true;
