@@ -3,13 +3,13 @@ class Lecturer {
   String firstName;
   String lastName;
   String email;
-  List<dynamic> actions;
+  String profile;
 
   Lecturer(Map<String, dynamic> jsonData) {
     this.title = jsonData['title'] != null ? jsonData['title'] : '';
     this.firstName = jsonData['firstName'] != null ? jsonData['firstName'] : '';
     this.lastName = jsonData['lastName'] != null ? jsonData['lastName'] : '';
-    this.actions = LecturerProfile.fromJson(jsonData['actions']);
+    this.profile = profileFromJson(jsonData['actions'], lastName);
   }
 
   static List<Lecturer> fromJson(List<dynamic> jsonData) {
@@ -20,28 +20,14 @@ class Lecturer {
     }
     return list;
   }
-}
 
-class LecturerProfile {
-  String title;
-  String href;
-
-  LecturerProfile(Map<String, dynamic> jsonData) {
-    if(jsonData != null) {
-      this.title = jsonData['title'];
-      this.href = jsonData['href'];
+  static String profileFromJson(List<dynamic> actions, String lastName) {
+    if (actions == null) return "";
+    for (var action in actions) {
+      if(action['title'] == "Profile"){
+        return action['href'];
+      }
     }
-    //TODO set "profile"
-    //this.title = "Profile";
-    //this.href = "https://hm.edu/suche/suchergebnisse.de.jsp?query=";
-  }
-
-  static List<LecturerProfile> fromJson(List<dynamic> jsonData) {
-    if (jsonData == null) return null;
-    var list = new List<LecturerProfile>();
-    for (int i = 0; i < jsonData.length; i++) {
-      list.add(new LecturerProfile(jsonData[i]));
-    }
-    return list;
+    return "https://hm.edu/suche/suchergebnisse.de.jsp?query=" + lastName.replaceAll(',', '');
   }
 }

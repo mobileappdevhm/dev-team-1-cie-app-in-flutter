@@ -342,9 +342,11 @@ class _CourseDetailsState extends State<CourseDetails> {
 
   _launchContactProfURL(int id) async {
     var email = presenter.getEmailsOfLecturers(id);
+    var profile = presenter.getProfileOfLecturer(id);
+    print(email);
     if (email == StaticVariables.MOCK_EMAIL || !email.contains("@")) {
-      GenericAlert.confirmDialog(context, StaticVariables.NO_EMAIL_FOUND,
-          StaticVariables.NO_EMAIL_FOUND_DESCRIPTION);
+      GenericAlert.confirm(context, () => email = email, () => _openUrl(profile),
+          StaticVariables.NO_EMAIL_FOUND_DESCRIPTION, StaticVariables.ALERT_OK);
     } else {
       var url = "mailto:" + email;
       if (await canLaunch(url)) {
@@ -352,6 +354,14 @@ class _CourseDetailsState extends State<CourseDetails> {
       } else {
         throw 'Could not launch $url';
       }
+    }
+  }
+
+  _openUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 }

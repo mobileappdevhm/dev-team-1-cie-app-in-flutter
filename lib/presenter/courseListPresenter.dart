@@ -195,6 +195,7 @@ class CourseListPresenter {
   String getEmailsOfLecturers(int id) {
     var emails = "";
     for (var l in _courses.getCourses()[id].lecturer) {
+      print(l.email);
       if (l.email == null || l.email == StaticVariables.MOCK_EMAIL) break;
       if (emails != "") {
         emails += ",";
@@ -202,6 +203,10 @@ class CourseListPresenter {
       emails += l.email;
     }
     return emails;
+  }
+
+  String getProfileOfLecturer(int id){
+    return _courses.getCourses()[id].lecturer[0].profile;
   }
 
   String getAppointmentTimesBeautiful(int id) {
