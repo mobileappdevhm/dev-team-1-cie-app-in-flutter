@@ -14,7 +14,7 @@ class Room {
   }
 
   String getLocation() {
-    return number + ", " + CampusUtility.getCampusAsLongString(campus);
+    return CampusUtility.getCampusAsLongString(campus) + " (" + number + ")";
   }
 
   static List<Room> fromJson(List<dynamic> jsonData) {
@@ -25,4 +25,10 @@ class Room {
     }
     return list;
   }
+
+  @override
+  String toString() {
+    return getLocation();
+  }
+
 }

@@ -34,6 +34,21 @@ void main() {
 
     final Room sut = new Room(room);
 
-    expect(sut.getLocation(), number + ", " + campus);
+    expect(sut.getLocation(), campus + " (" + number + ")");
+  });
+
+  test('3 room toString', () {
+    String campus = "Lothstrasse";
+    String building = "R";
+    String number = "R 2.091";
+
+    var room = new Map<String, dynamic>();
+    room['number'] = number;
+    room['building'] = building;
+    room['campus'] = campus;
+
+    final Room sut = new Room(room);
+
+    expect(sut.toString(), campus + " (" + number + ")");
   });
 }
