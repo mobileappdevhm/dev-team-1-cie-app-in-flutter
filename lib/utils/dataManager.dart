@@ -161,7 +161,9 @@ class DataManager {
             return GenericIcon.buildGenericSpinner();
           });
 
+      print(jsonMap.toString());
       Response res = await post(url, body: jsonMap); // post api call
+      print(res.body.toString());
       Navigator.pop(context);
       return res;
     }
@@ -178,6 +180,7 @@ class DataManager {
     return null;
   }
 
+  //TODO use this function every time a internet connection is used
   static Future<bool> isInternetConnected() async {
     var connectivityResult = await (new Connectivity().checkConnectivity());
     return (connectivityResult == ConnectivityResult.mobile ||

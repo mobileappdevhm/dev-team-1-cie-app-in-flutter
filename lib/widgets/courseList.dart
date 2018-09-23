@@ -223,20 +223,25 @@ class CourseListState extends State<CourseList> {
     //Decide how to show submit button
     String textToShow;
     Color buttonColor;
-    if (submissionValid) {
-      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
-      buttonColor = CiEColor.red;
-    } else if (coursesRegistered && isLoggedIn) {
-      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
-      buttonColor = CiEColor.lightGray;
-    } else if (coursesRegistered && isLoggedIn && !isDepartmentSet) {
-      textToShow =
-          StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT;
-      buttonColor = CiEColor.lightGray;
-    } else {
-      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST;
-      buttonColor = CiEColor.red;
-    }
+
+    textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
+    buttonColor = CiEColor.red;
+    submissionValid = true;
+    //TODO fix this
+    //if (submissionValid) {
+    //  textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
+    //  buttonColor = CiEColor.red;
+    //} else if (coursesRegistered && isLoggedIn) {
+    //  textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
+    //  buttonColor = CiEColor.lightGray;
+    //} else if (coursesRegistered && isLoggedIn && !isDepartmentSet) {
+    //  textToShow =
+    //      StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT;
+    //  buttonColor = CiEColor.lightGray;
+    //} else {
+    //  textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST;
+    //  buttonColor = CiEColor.red;
+    //}
 
     return new RaisedButton(
       color: buttonColor,
@@ -310,11 +315,12 @@ class CourseListState extends State<CourseList> {
       }
 
       Map<String, String> postJson = new Map<String, String>();
-      postJson.putIfAbsent("user", () => json.encode(userJson));
-      postJson.putIfAbsent("courses", () => json.encode(selectedCourses));
+      postJson.addAll({"user": json.encode(userJson)});
+      postJson.addAll({"courses": json.encode(selectedCourses)});
       DataManager.postJson(context, DataManager.REMOTE_SUBSCRIBE, postJson);
       setState(() {
-        coursesRegistered = true;
+        //TODO could be removed!
+        coursesRegistered = false;
       });
     };
     GenericAlert.confirm(
