@@ -1,3 +1,4 @@
+import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/courses_mock.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/utils/staticVariables.dart';
@@ -103,17 +104,30 @@ void main() {
     });
   });
 
-  //TODO bring test back to work
-  //group("professor", () {
-  //  test('mail', () {
-  //    for (int i = 0; i < sut.getCourses().length; i++) {
-  //      expect(sut.getEmailsOfLecturers(i), CoursesMock.generateMockEmail(i + 1));
-  //    }
-  //  });
-  //  test('name', () {
-  //    for (int i = 0; i < sut.getCourses().length; i++) {
-  //      expect(sut.getNamesOfLecturers(i), CoursesMock.generateMockName(i + 1));
-  //    }
-  //  });
-  //});
+  group('class functions', (){
+    test('isNewCourseData 1', (){
+      expect(sut.isNewCourseData(sut.getCourses(), sut.getCourses()[0]), true);
+    });
+    test('isNewCourseData 2', (){
+      Course course = sut.getCourses()[0];
+      course.id = "completely different id";
+      expect(sut.isNewCourseData(sut.getCourses(), course), false);
+    });
+
+    test('isNewCourseData 2', (){
+      expect(sut.getFavourite(0), false);
+      sut.toggleFavouriteWhenChangeView(0);
+      expect(sut.getFavourite(0), true);
+      sut.toggleFavouriteWhenChangeView(0);
+      expect(sut.getFavourite(0), false);
+    });
+
+    test('getProfileOfLecturer', (){
+      expect(sut.getProfileOfLecturer(0), "https://hm.edu");
+    });
+
+    test('getProfileOfLecturer', (){
+      expect(sut.checkIfConflictsOtherFavoriteLecture(sut.getCourses()[0].appointments[0]), false);
+    });
+  });
 }
