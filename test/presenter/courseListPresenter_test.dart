@@ -106,12 +106,12 @@ void main() {
 
   group('class functions', (){
     test('isNewCourseData 1', (){
-      expect(sut.isNewCourseData(sut.getCourses(), sut.getCourses()[0]), true);
+      expect(sut.isNewCourseData(sut.getCourses(), sut.getCourses()[0]), false);
     });
     test('isNewCourseData 2', (){
-      Course course = sut.getCourses()[0];
-      course.id = "completely different id";
-      expect(sut.isNewCourseData(sut.getCourses(), course), false);
+      CourseListPresenter localSut = new CourseListPresenter(null, Flavor.MOCK);
+      localSut.getCourses()[0].id = "completely new id";
+      expect(sut.isNewCourseData(sut.getCourses(), localSut.getCourses()[0]), true);
     });
 
     test('isNewCourseData 2', (){
@@ -126,7 +126,7 @@ void main() {
       expect(sut.getProfileOfLecturer(0), "https://hm.edu");
     });
 
-    test('getProfileOfLecturer', (){
+    test('checkIfConflictsOtherFavoriteLecture', (){
       expect(sut.checkIfConflictsOtherFavoriteLecture(sut.getCourses()[0].appointments[0]), false);
     });
   });
