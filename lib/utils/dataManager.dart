@@ -15,6 +15,8 @@ class DataManager {
   static const String REMOTE_CIE_BASE = _REMOTE_BASE + 'apps/cie/';
   static const String REMOTE_CIE_COURSES_BASE = REMOTE_CIE_BASE + 'courses/';
   static const String REMOTE_SUBSCRIBE = _REMOTE_BASE + 'courses/subscribe';
+  static const String REMOTE_SUBSCRIPTIONS = _REMOTE_BASE + 'courses/subscriptions';
+  static const String REMOTE_UNSUBSCRIBE = _REMOTE_BASE + 'courses/unsubscribe';
   static const String REMOTE_AUTH = _REMOTE_BASE + 'account/login';
   static const String REMOTE_LECTURERS =
       _REMOTE_TRANSITION_BASE + 'Lecturer/GetAllLecture';
@@ -27,6 +29,7 @@ class DataManager {
   static const String LOCAL_FAVORITES = "_favorites";
   static const String LOCAL_TAKEN_COURSES = "_takencourses";
   static const String LOCAL_SEMESTERS = "_semesters";
+  static const String LOCAL_REGISTERED = "_registered";
 
   static Future<File> writeToFile(String resource, String data) async {
     resource = resource.replaceAll(' ', '');
@@ -160,10 +163,10 @@ class DataManager {
           builder: (BuildContext context) {
             return GenericIcon.buildGenericSpinner();
           });
-
       print(jsonMap.toString());
-      Response res = await post(url, body: jsonMap); // post api call
-      print(res.body.toString());
+      Response res = await post(url,
+          headers: {"Content-Type": "application/json"},
+          body: json.encode(jsonMap)); // post api call
       Navigator.pop(context);
       return res;
     }

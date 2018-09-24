@@ -48,6 +48,7 @@ class CourseListState extends State<CourseList> {
   String searchValue = "";
   bool coursesRegistered = false;
   FocusNode focus;
+  var registeredCourses = new List<dynamic>();
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites,
       this.userPresenter, this.focus) {
@@ -68,6 +69,17 @@ class CourseListState extends State<CourseList> {
       Analytics.setCurrentScreen("courses_screen");
     } else {
       Analytics.setCurrentScreen("favorites_screen");
+    }
+    _fetchRegisteredCourses();
+  }
+
+  void _fetchRegisteredCourses() async {
+    var registeredString =
+        await DataManager.getResource(DataManager.LOCAL_REGISTERED);
+    if (registeredString != null) {
+      setState(() {
+        registeredCourses = json.decode(registeredString);
+      });
     }
   }
 
@@ -279,8 +291,13 @@ class CourseListState extends State<CourseList> {
       //Remove course from favourites only after view change
       if (shouldFilterByFavorites)
         courseListPresenter.toggleFavouriteWhenChangeView(id);
-      else
-        courseListPresenter.toggleFavourite(id, true);
+      else {
+        if(registeredCourses.contains(courseListPresenter.getCourses()[id].id)){
+          GenericAlert.confirmDialog(context, "Unfavorite not possible", "Please visit the favorites tab to update your registered courses.");
+        } else {
+          courseListPresenter.toggleFavourite(id, true);
+        }
+      }
     });
   }
 
@@ -301,27 +318,50 @@ class CourseListState extends State<CourseList> {
 
   void _handleCourseSubmission(CurrentUserPresenter user) {
     var no = () {};
-    var yes = () {
-      Map<String, String> userJson = {
-        "id": user.getCurrentUser().id,
-        "firstName": user.getCurrentUser().firstName,
-        "lastName": user.getCurrentUser().lastName
-      };
-      List<dynamic> selectedCourses = new List<dynamic>();
+    var yes = () async {
+      List<dynamic> subscribeCourses = new List<dynamic>();
+      List<dynamic> unsubscribeCourses = new List<dynamic>();
       for (Course c in courseListPresenter.getCourses()) {
-        if (c.isFavourite) {
-          selectedCourses.add({"id": c.id});
+        if (c.isFavourite && !registeredCourses.contains(c.id)) {
+          subscribeCourses.add({"id": c.id});
+        } else if (registeredCourses.contains(c.id) && !c.isFavourite) {
+          unsubscribeCourses.add({"id": c.id});
         }
       }
+      var jsonData = {
+        "user": {
+          "id": user.getCurrentUser().id,
+          "firstName": user.getCurrentUser().firstName,
+          "lastName": user.getCurrentUser().lastName
+        },
+        "courses": []
+      };
+      if (unsubscribeCourses.length > 0) {
+        jsonData["courses"] = unsubscribeCourses;
+        await DataManager.postJson(
+            context, DataManager.REMOTE_SUBSCRIBE, jsonData);
+      }
+      if (subscribeCourses.length > 0) {
+        jsonData["courses"] = subscribeCourses;
+        await DataManager.postJson(
+            context, DataManager.REMOTE_SUBSCRIBE, jsonData);
+      }
 
-      Map<String, String> postJson = new Map<String, String>();
-      postJson.addAll({"user": json.encode(userJson)});
-      postJson.addAll({"courses": json.encode(selectedCourses)});
-      DataManager.postJson(context, DataManager.REMOTE_SUBSCRIBE, postJson);
-      setState(() {
-        //TODO could be removed!
-        coursesRegistered = false;
-      });
+      jsonData["courses"] = [];
+      var response = await DataManager.postJson(
+          context, DataManager.REMOTE_SUBSCRIPTIONS, jsonData);
+      var data = json.decode(response.body);
+      print("subscription: " + data.toString());
+      var idList = new List<String>();
+      for (var entry in data) {
+        idList.add(entry['courseId']);
+      }
+      await DataManager.writeToFile(
+          DataManager.LOCAL_REGISTERED, json.encode(idList));
+      courseListPresenter.syncRegisteredCoursesFromMemory();
+
+      GenericAlert.confirmDialog(context, "Successfully updated courses",
+          "Your registered courses were successfully updated.");
     };
     GenericAlert.confirm(
             context, no, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)

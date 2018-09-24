@@ -88,6 +88,22 @@ class CourseListPresenter {
       }
       this.onChanged(true);
     });
+    syncRegisteredCoursesFromMemory();
+  }
+
+  void syncRegisteredCoursesFromMemory() {
+    DataManager.getResource(DataManager.LOCAL_REGISTERED)
+        .then((String registeredIds) {
+      if (registeredIds != null) {
+        List<dynamic> registeredCourses = json.decode(registeredIds);
+        for (Course c in _courses.getCourses()) {
+          if (registeredCourses.contains(c.id)) {
+            c.isFavourite = true;
+          }
+        }
+      }
+      this.onChanged(true);
+    });
   }
 
   void commitFavoritedCoursesToMemory() {
