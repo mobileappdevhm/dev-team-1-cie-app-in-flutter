@@ -31,7 +31,8 @@ void main() {
       }
     ],
     "lecturer": [
-      {"title": null, "firstName": "test", "lastName": "test", "actions": []}
+      {"title": null, "firstName": "test", "lastName": "test", "actions": []},
+      {"title": null, "firstName": "first", "lastName": "second", "actions": []}
     ],
     "appointments": [
       {
@@ -165,5 +166,21 @@ void main() {
     expect(course.dates[0].title, null);
     expect(course.name, "Digital Technology");
     expect(course.shortName, "DT");
+  });
+
+  group('class functions', () {
+    Course course;
+    setUp((){
+      course = new Course(jsonData);
+    });
+
+    test('getNamesOfLecturers', (){
+      expect(course.getNamesOfLecturers(), 'test test, first second');
+    });
+
+    test('occursOnDay', (){
+      expect(course.occursOnDay(Weekday.Fri), false);
+      expect(course.occursOnDay(Weekday.Mon), true);
+    });
   });
 }
