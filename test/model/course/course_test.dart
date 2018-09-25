@@ -1,438 +1,186 @@
-//TODO bring tests back to work
-//import 'dart:convert';
-//
-//import 'package:cie_app/model/course/course.dart';
-//import 'package:cie_app/model/course/details/date.dart';
-//import 'package:cie_app/model/course/details/lecturer.dart';
-//import 'package:cie_app/model/course/details/room.dart';
-//import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/model/course/course.dart';
+import 'package:cie_app/model/course/details/dayTime.dart';
+import 'package:cie_app/model/course/details/weekday.dart';
 import 'package:test/test.dart';
-//
-//@Timeout(const Duration(seconds: 10))
+
+@Timeout(const Duration(seconds: 10))
 void main() {
-//  group("simplecourseTest", () {
-//    Course sut;
-//    setUp(() {
-//      sut = new CourseBuilder()
-//          .withName("Blaba")
-//          .withFaculty("7")
-//          .withLecturesPerWeek([
-//        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-//            new DayTime(11, 30), "R0.009")
-//      ])
-//          .withDescription("boring")
-//          .withHoursPerWeek(2)
-//          .withEcts(2)
-//          .withProfessorEmail(StaticVariables.MOCK_EMAIL)
-//          .withProfessorName("Max Mustermann")
-//          .withIsFavorite(false)
-//          .withhasHomeBias(false)
-//          .withIsCoterie(false)
-//          .build();
-//    });
-//    test('1', () {
-//      expect(sut.name, "Blaba");
-//    });
-//
-//    test('2', () {
-//      expect(sut.faculties.contains("7"), true);
-//    });
-//    test('3', () {
-//      expect(sut.lecturesPerWeek[0].weekday, Weekday.Mon);
-//      expect(sut.lecturesPerWeek[0].startDayTime.toString(),
-//          new DayTime(10, 00).toString());
-//      expect(sut.lecturesPerWeek[0].endDayTime.toString(),
-//          new DayTime(11, 30).toString());
-//    });
-//    test('4', () {
-//      expect(sut.description, "boring");
-//    });
-//    test('5', () {
-//      expect(sut.hoursPerWeek, 2);
-//    });
-//    test('6', () {
-//      expect(sut.ects, 2);
-//    });
-//
-//    test('7', () {
-//      expect(sut.professorEmail, StaticVariables.MOCK_EMAIL);
-//    });
-//
-//    test('8', () {
-//      expect(sut.professorName, "Max Mustermann");
-//    });
-//
-//    test('9', () {
-//      expect(sut.available, CourseAvailability.AVAILABLE);
-//    });
-//
-//    test('10', () {
-//      expect(sut.isFavourite, false);
-//    });
-//
-//    test('11', () {
-//      expect(sut.available, CourseAvailability.AVAILABLE);
-//    });
-//
-//    test('12 ocure', () {
-//      expect(sut.occursOnDay(Weekday.Mon), true);
-//    });
-//
-//    test('13 ocure', () {
-//      expect(sut.occursOnDay(Weekday.Sun), false);
-//    });
-//
-//    test('14 equals', () {
-//      final Course sut2 = new CourseBuilder()
-//          .withName("Blaba")
-//          .withFaculty("7")
-//          .withLecturesPerWeek([
-//        new Lecture(Campus.KARLSTRASSE, Weekday.Mon, new DayTime(10, 00),
-//            new DayTime(11, 30), "R0.009")
-//      ])
-//          .withDescription("boring")
-//          .withHoursPerWeek(2)
-//          .withEcts(2)
-//          .withProfessorEmail(StaticVariables.MOCK_EMAIL)
-//          .withProfessorName("Max Mustermann")
-//          .withIsFavorite(false)
-//          .withhasHomeBias(false)
-//          .withIsCoterie(false)
-//          .build();
-//      expect(sut.equals(sut2), true);
-//    });
-//  });
-//
-//  group('static stuff', () {
-//    test('available', () {
-//      expect(
-//          CourseAvailabilityUtility
-//              .getFacultyAsInt(CourseAvailability.AVAILABLE),
-//          0);
-//    });
-//
-//    test('available', () {
-//      expect(
-//          CourseAvailabilityUtility.getFacultyAsInt(CourseAvailability.PENDING),
-//          1);
-//    });
-//
-//    test('available', () {
-//      expect(
-//          CourseAvailabilityUtility
-//              .getFacultyAsInt(CourseAvailability.UNAVAILABLE),
-//          2);
-//    });
-//  });
-//
-//  group('weekday utility', () {
-//    test('1', () {
-//      expect(WeekdayUtility.getWeekdayAsString(Weekday.Sun), "Sun");
-//    });
-//
-//    test('2', () {
-//      expect(WeekdayUtility.getWeekdayAsString(Weekday.Sat), "Sat");
-//    });
-//    test('4', () {
-//      expect(WeekdayUtility.getWeekdayAsString(Weekday.Fri), "Fri");
-//    });
-//
-//    test('5', () {
-//      expect(WeekdayUtility.getWeekdayAsString(Weekday.Thu), "Thu");
-//    });
-//
-//    test('6', () {
-//      expect(WeekdayUtility.getWeekdayAsString(Weekday.Wed), "Wed");
-//    });
-//
-//    test('7', () {
-//      expect(WeekdayUtility.getWeekdayAsString(Weekday.Tue), "Tue");
-//    });
-//
-//    test('8', () {
-//      expect(WeekdayUtility.getWeekdayAsString(Weekday.Mon), "Mon");
-//    });
-//
-//    test('sun for Long', () {
-//      expect(WeekdayUtility.getWeekdayAsLongString(Weekday.Sun), "Sunday");
-//    });
-//
-//    test('9', () {
-//      expect(WeekdayUtility.getWeekdayAsInt(Weekday.Sun), 6);
-//    });
-//
-//    test('10', () {
-//      expect(WeekdayUtility.getWeekdayAsInt(Weekday.Sat), 5);
-//    });
-//    test('11', () {
-//      expect(WeekdayUtility.getWeekdayAsInt(Weekday.Fri), 4);
-//    });
-//
-//    test('12', () {
-//      expect(WeekdayUtility.getWeekdayAsInt(Weekday.Thu), 3);
-//    });
-//
-//    test('13', () {
-//      expect(WeekdayUtility.getWeekdayAsInt(Weekday.Wed), 2);
-//    });
-//
-//    test('14', () {
-//      expect(WeekdayUtility.getWeekdayAsInt(Weekday.Tue), 1);
-//    });
-//
-//    test('15', () {
-//      expect(WeekdayUtility.getWeekdayAsInt(Weekday.Mon), 0);
-//    });
-//
-//    test('16', () {
-//      expect(WeekdayUtility.intToWeekday(4), Weekday.Fri);
-//    });
-//
-//    test('17', () {
-//      expect(WeekdayUtility.intToWeekday(5), Weekday.Sat);
-//    });
-//    test('18', () {
-//      expect(WeekdayUtility.intToWeekday(6), Weekday.Sun);
-//    });
-//
-//    test('19', () {
-//      expect(WeekdayUtility.intToWeekday(3), Weekday.Thu);
-//    });
-//
-//    test('20', () {
-//      expect(WeekdayUtility.intToWeekday(2), Weekday.Wed);
-//    });
-//    test('21', () {
-//      expect(WeekdayUtility.intToWeekday(1), Weekday.Tue);
-//    });
-//    test('22', () {
-//      expect(WeekdayUtility.intToWeekday(0), Weekday.Mon);
-//    });
-//
-//    test('23', () {
-//      expect(new DayTime(5, 59).getAsInt(), 359);
-//    });
-//
-//    test('24', () {
-//      expect(
-//          new Lecture(Campus.PASING, Weekday.Mon, DayTime(1, 50),
-//              DayTime(2, 50), "1000")
-//              .sortValue() <
-//              new Lecture(Campus.PASING, Weekday.Mon, DayTime(1, 51),
-//                  DayTime(2, 50), "1000")
-//                  .sortValue(),
-//          true);
-//    });
-//
-//    test('25', () {
-//      expect(CourseAvailabilityUtility.intToCourseAvailability(0),
-//          CourseAvailability.AVAILABLE);
-//    });
-//
-//    test('26', () {
-//      expect(CourseAvailabilityUtility.intToCourseAvailability(1),
-//          CourseAvailability.PENDING);
-//    });
-//
-//    test('27', () {
-//      expect(CourseAvailabilityUtility.intToCourseAvailability(2),
-//          CourseAvailability.UNAVAILABLE);
-//    });
-//
-//    test('28', () {
-//      expect(CourseAvailabilityUtility.intToColoredString(
-//          CourseAvailability.PENDING, 5.0).toString(),
-//          "Text(\"Pending\", inherit: true, color: Color(0xfff2c94c), size: 5.0)");
-//    });
-//
-//    test('29', () {
-//      expect(CourseAvailabilityUtility.intToColoredString(
-//          CourseAvailability.UNAVAILABLE, 5.0).toString(),
-//          "Text(\"Unavailable\", inherit: true, color: Color(0xffeb5757), size: 5.0)");
-//    });
-//
-//    test('30', () {
-//      expect(CampusUtility.getStringAsCampus("Loth"), Campus.LOTHSTRASSE);
-//    });
-//
-//    test('31', () {
-//      expect(CampusUtility.getStringAsCampus("Pasing"), Campus.PASING);
-//    });
-//
-//    test('32', () {
-//      expect(
-//          CampusUtility.getStringAsCampus("Karlstrasse"), Campus.KARLSTRASSE);
-//    });
-//
-//    test('33', () {
-//      expect(CampusUtility.getCampusAsString(Campus.LOTHSTRASSE), "Loth.");
-//    });
-//
-//    test('34', () {
-//      expect(CampusUtility.getCampusAsString(Campus.PASING), "Pasing");
-//    });
-//
-//    test('35', () {
-//      expect(CampusUtility.getCampusAsString(Campus.KARLSTRASSE), "Karl.");
-//    });
-//
-//    test('33', () {
-//      expect(CampusUtility.getCampusAsLongString(Campus.LOTHSTRASSE),
-//          "Lothstrasse");
-//    });
-//
-//    test('34', () {
-//      expect(CampusUtility.getCampusAsLongString(Campus.PASING), "Pasing");
-//    });
-//
-//    test('35', () {
-//      expect(CampusUtility.getCampusAsLongString(Campus.KARLSTRASSE),
-//          "Karlstrasse");
-//    });
-//  });
-//
-//  group('courseBuilder test', () {
-//    test('complete builder test', () {
-//      var testString = "test";
-//      var testBool = true;
-//      var testInt = 1;
-//      var testDynamicList = new List<dynamic>();
-//      var testCorrelationList = new List<Correlation>();
-//      var testDateList = new List<Date>();
-//      var testLectureList = new List<Lecture>();
-//      CourseBuilder builder = new CourseBuilder()
-//          .withName(testString)
-//          .withId(testString)
-//          .withDescription(testString)
-//          .withIsCoterie(testBool)
-//          .withhasHomeBias(testBool)
-//          .withCorrelations(testCorrelationList)
-//          .withdates(testDateList)
-//          .withShortName(testString)
-//          .withActions(testDynamicList)
-//          .withFaculty(testString)
-//          .withLecturesPerWeek(testLectureList)
-//          .withHoursPerWeek(testInt)
-//          .withEcts(testInt)
-//          .withProfessorEmail(testString)
-//          .withProfessorName(testString)
-//          .withIsFavorite(testBool);
-//      Course built = builder.build();
-//      expect(built.name, testString);
-//      expect(built.isFavourite, testBool);
-//      expect(built.id, testString);
-//      expect(built.description, testString);
-//      expect(built.isCoterie, testBool);
-//      expect(built.hasHomeBias, testBool);
-//      expect(built.correlations, testCorrelationList);
-//      expect(built.dates, testDateList);
-//      expect(built.shortName, testString);
-//      expect(built.actions, testDynamicList);
-//      expect(built.faculties.contains(testString), true);
-//      expect(built.lecturesPerWeek, testLectureList);
-//      expect(built.ects, testInt);
-//      expect(built.professorEmail, testString);
-//      expect(built.professorName, testString);
-//      expect(built.available, CourseAvailability.UNAVAILABLE);
-//      expect(built.isFavourite, testBool);
-//    });
-//
-//    test('fromJson test', () {
-//      CourseBuilder builder;
-//      Map<String, dynamic> jsonData = json.decode('''
-//      {"id":"493e7e17-1508-e811-94bf-00155d6e6b0a","description":null,
-//      "isCoterie":false,"hasHomeBias":false,"correlations":[{"organiser":"FK 09"
-//      ,"curriculum":"WIM","actions":[]},{"organiser":"FK 09","curriculum":"MBA"
-//      ,"actions":[]},{"organiser":"FK 13","curriculum":"CIE","actions":[]}],
-//      "dates":[{"begin":"20180427T140000Z","end":"20180427T190000Z","title":null
-//      ,"isCanceled":false,"rooms":[{"number":"R 2.091","building":"R","campus":
-//      "Lothstrasse","actions":[]}],"lecturer":[{"title":null,"firstName":null,
-//      "lastName":"Rothlauf","actions":[]}],"actions":[]},{"begin":
-//      "20180323T150000Z","end":"20180323T200000Z","title":null,"isCanceled":
-//      false,"rooms":[{"number":"R 2.091","building":"R","campus":"Lothstrasse",
-//      "actions":[]}],"lecturer":[{"title":null,"firstName":null,"lastName":
-//      "Rothlauf","actions":[]}],"actions":[]},{"begin":"20180324T080000Z","end":
-//      "20180324T160000Z","title":null,"isCanceled":false,"rooms":[{"number":
-//      "R 2.091","building":"R","campus":"Lothstrasse","actions":[]}],"lecturer":
-//      [{"title":null,"firstName":null,"lastName":"Rothlauf","actions":[]}],
-//      "actions":[]},{"begin":"20180325T070000Z","end":"20180325T150000Z","title"
-//      :null,"isCanceled":false,"rooms":[{"number":"R 2.091","building":"R",
-//      "campus":"Lothstrasse","actions":[]}],"lecturer":[{"title":null,
-//      "firstName":null,"lastName":"Rothlauf","actions":[]}],"actions":[]},
-//      {"begin":"20180428T070000Z","end":"20180428T150000Z","title":null,
-//      "isCanceled":false,"rooms":[{"number":"R 2.091","building":"R","campus":
-//      "Lothstrasse","actions":[]}],"lecturer":[{"title":null,"firstName":null,
-//      "lastName":"Rothlauf","actions":[]}],"actions":[]},{"begin":
-//      "20180429T070000Z","end":"20180429T150000Z","title":null,"isCanceled":
-//      false,"rooms":[{"number":"R 2.091","building":"R","campus":"Lothstrasse",
-//      "actions":[]}],"lecturer":[{"title":null,"firstName":null,"lastName":
-//      "Rothlauf","actions":[]}],"actions":[]}],"name":"Intercultural Management"
-//      ,"shortName":"Intcult Mgt and Ledership","actions":[]}
-//      ''');
-//      try {
-//        builder = new CourseBuilder.fromJson(jsonData);
-//      } catch (e) {
-//        fail("Unable to parse json data");
-//      }
-//      var testString = "test";
-//      var testBool = true;
-//      var testInt = 1;
-//      var testDynamicList = new List<dynamic>();
-//      var testCorrelationList = new List<Correlation>();
-//      var testDateList = new List<Date>();
-//      var testRoomList = new List<Room>();
-//      var testLecturerList = new List<Lecturer>();
-//      var testLectureList = new List<Lecture>();
-//      builder
-//          .withId(testString)
-//          .withDescription(testString)
-//          .withIsCoterie(testBool)
-//          .withhasHomeBias(testBool)
-//          .withCorrelations(testCorrelationList)
-//          .withdates(testDateList)
-//          .withShortName(testString)
-//          .withActions(testDynamicList)
-//          .withLecturesPerWeek(testLectureList)
-//          .withHoursPerWeek(testInt)
-//          .withEcts(testInt)
-//          .withProfessorEmail(testString)
-//          .withProfessorName(testString)
-//          .withIsFavorite(testBool);
-//      Course built = builder.build();
-//      expect(built.name, "Intercultural Management");
-//      expect(built.isFavourite, testBool);
-//      expect(built.id, testString);
-//      expect(built.description, testString);
-//      expect(built.isCoterie, testBool);
-//      expect(built.hasHomeBias, testBool);
-//      expect(built.correlations, testCorrelationList);
-//      expect(built.dates, testDateList);
-//      if (built.dates.length > 0) {
-//        expect(built.dates[0].rooms, testRoomList);
-//        expect(built.dates[0].lecturers, testLecturerList);
-//      }
-//      expect(built.shortName, testString);
-//      expect(built.actions, testDynamicList);
-//      expect(built.faculties.contains("09"), true);
-//      expect(built.lecturesPerWeek, testLectureList);
-//      expect(built.ects, testInt);
-//      expect(built.professorEmail, testString);
-//      expect(built.professorName, testString);
-//      expect(built.available, CourseAvailability.UNAVAILABLE);
-//      expect(built.isFavourite, testBool);
-//    });
-//  });
-//
-//  group("Course Definitions", () {
-//    test('1', () {
-//      int counter = 1;
-//      for (String sut in CourseDefinitions.getDepartments().toList()) {
-//        if (counter < 10)
-//          expect(sut, "0" + counter.toString());
-//        else
-//          expect(sut, counter.toString());
-//        counter++;
-//      }
-//    });
-//  });
+  List<dynamic> jsonDataList = new List<dynamic>();
+  final dynamic jsonData = {
+    "id": "thisisagreatid",
+    "description": "thisisagreatdescription",
+    "isCoterie": false,
+    "hasHomeBias": false,
+    "category": "Green",
+    "department": {
+      "color": "#008E7D",
+      "name": "Fakultät 07",
+      "shortName": "FK 07",
+      "actions": []
+    },
+    "level": "Bachelor",
+    "ects": 2,
+    "sws": 2,
+    "usCredits": 2,
+    "locations": [
+      {
+        "number": "R0.008",
+        "building": "R",
+        "campus": "Lothstraße",
+        "actions": []
+      }
+    ],
+    "lecturer": [
+      {"title": null, "firstName": "test", "lastName": "test", "actions": []},
+      {"title": null, "firstName": "first", "lastName": "second", "actions": []}
+    ],
+    "appointments": [
+      {
+        "dayOfWeekName": "Monday",
+        "timeBegin": "10:00:00",
+        "timeEnd": "13:15:00"
+      }
+    ],
+    "modules": null,
+    "dates": [
+      {
+        "begin": "20181004T080000Z",
+        "end": "20181004T111500Z",
+        "title": null,
+        "isCanceled": false,
+        "rooms": [
+          {
+            "number": "LO 119",
+            "building": "L",
+            "campus": "Pasing",
+            "actions": []
+          }
+        ],
+        "lecturer": [
+          {
+            "title": null,
+            "firstName": null,
+            "lastName": "Brehm, Lars",
+            "actions": []
+          }
+        ],
+        "actions": []
+      }
+    ],
+    "name": "Digital Technology",
+    "shortName": "DT",
+    "actions": []
+  };
+  setUp(() {
+    jsonDataList.add(jsonData);
+  });
+
+  group("simplecourseTest", () {
+    Course sut;
+    setUp(() {
+      sut = new Course(jsonData);
+    });
+    test('id', () {
+      expect(sut.id, "thisisagreatid");
+    });
+    test('description', () {
+      expect(sut.description, "thisisagreatdescription");
+    });
+    test('isCoterie', () {
+      expect(sut.isCoterie, false);
+    });
+    test('hasHomeBias', () {
+      expect(sut.hasHomeBias, false);
+    });
+    test('category', () {
+      expect(sut.category, "Green");
+    });
+    test('department', () {
+      expect(sut.department.shortName.contains("07"), true);
+    });
+    test('level', () {
+      expect(sut.level, "Bachelor");
+    });
+    test('ects', () {
+      expect(sut.ects, 2);
+    });
+    test('SWS', () {
+      expect(sut.sws, 2);
+    });
+    test('usCredits', () {
+      expect(sut.usCredits, 2);
+    });
+    test('locations', () {
+      expect(sut.locations[0].number, "R0.008");
+    });
+    test('lecturer', () {
+      expect(sut.lecturer[0].lastName, "test");
+    });
+    test('appointments', () {
+      expect(sut.appointments[0].weekday, Weekday.Mon);
+      expect(sut.appointments[0].timeBegin.toString(),
+          new DayTime(10, 00).toString());
+      expect(sut.appointments[0].timeEnd.toString(),
+          new DayTime(13, 15).toString());
+    });
+    test('dates', () {
+      expect(sut.dates[0].title, null);
+    });
+    test('name', () {
+      expect(sut.name, "Digital Technology");
+    });
+    test('shortName', () {
+      expect(sut.shortName, "DT");
+    });
+
+    test('13 equals', () {
+      final Course sut2 = new Course(jsonData);
+      expect(sut.equals(sut2), true);
+    });
+  });
+
+  test('fromJson test', () {
+    Course course;
+    try {
+      course = Course.fromJson(jsonDataList)[0];
+    } catch (e) {
+      fail("Unable to parse json data");
+    }
+    expect(course.id, "thisisagreatid");
+    expect(course.description, "thisisagreatdescription");
+    expect(course.isCoterie, false);
+    expect(course.hasHomeBias, false);
+    expect(course.category, "Green");
+    expect(course.department.shortName.contains("07"), true);
+    expect(course.level, "Bachelor");
+    expect(course.ects, 2);
+    expect(course.sws, 2);
+    expect(course.usCredits, 2);
+    expect(course.locations[0].number, "R0.008");
+    expect(course.lecturer[0].lastName, "test");
+    expect(course.appointments[0].weekday, Weekday.Mon);
+    expect(course.appointments[0].timeBegin.toString(),
+        new DayTime(10, 00).toString());
+    expect(course.appointments[0].timeEnd.toString(),
+        new DayTime(13, 15).toString());
+    expect(course.dates[0].title, null);
+    expect(course.name, "Digital Technology");
+    expect(course.shortName, "DT");
+  });
+
+  group('class functions', () {
+    Course course;
+    setUp((){
+      course = new Course(jsonData);
+    });
+
+    test('getNamesOfLecturers', (){
+      expect(course.getNamesOfLecturers(), 'test test, first second');
+    });
+
+    test('occursOnDay', (){
+      expect(course.occursOnDay(Weekday.Fri), false);
+      expect(course.occursOnDay(Weekday.Mon), true);
+    });
+  });
 }
