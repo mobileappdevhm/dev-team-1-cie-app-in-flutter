@@ -11,7 +11,7 @@ class WeekdayUtility {
   static const String SUNDAY = "Sunday";
   static const String MONDAY_SHORT = "Mon";
   static const String TUESDAY_SHORT = "Tue";
-  static const String WEDNESDAY_SHORT = "Wedn";
+  static const String WEDNESDAY_SHORT = "Wed";
   static const String THURSDAY_SHORT = "Thu";
   static const String FRIDAY_SHORT = "Fri";
   static const String SATURDAY_SHORT = "Sat";

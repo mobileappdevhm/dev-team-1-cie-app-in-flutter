@@ -85,6 +85,17 @@ class Course {
     return locs;
   }
 
+  String getAllRooms(){
+    var locs = "";
+    for(var location in locations){
+      if(locs != ""){
+        locs += ", ";
+      }
+      locs += location.number;
+    }
+    return locs;
+  }
+
   CourseAvailability getAvailability() {
     return _available;
   }

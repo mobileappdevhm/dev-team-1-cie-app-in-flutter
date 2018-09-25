@@ -367,36 +367,38 @@ class CourseListPresenter {
     String result = otherFavorite.name + ": ";
     //Add commute time conflict text
     thisFavorite.appointments.forEach((l) => otherFavorite.appointments
-        .forEach((f) => result += _getLectureConflictProblemText(l, f)));
+        .forEach((f) => result = _getLectureConflictProblemText(result, l, f)));
     //timeBetweenLecturesText.forEach((res) => result += res);
 
     return result;
   }
 
   //Compare two lectues and return error text if they conflict
-  String _getLectureConflictProblemText(Appointment l, Appointment f) {
-    String result = "";
+  String _getLectureConflictProblemText(String result, Appointment l, Appointment f) {
+    String localResult = "";
 
     if (_getTimeBetweenLectures(l, f) < 0) {
-      result += "Lecture time schedules overlap.\n";
+      localResult += "Lecture time schedules overlap.\n";
     } else {
       Campus campusOne = l.getCampus();
       Campus campusTwo = f.getCampus();
       if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
           campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
-        result += "Commute Time between Lothstrasse and Karlstrasse < " +
+        localResult += "Commute Time between Lothstrasse and Karlstrasse < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL.toString();
       } else if (campusOne == Campus.LOTHSTRASSE &&
               campusTwo == Campus.PASING ||
           campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
-        result += "Commute Time between Lothstrasse and Pasing < " +
+        localResult += "Commute Time between Lothstrasse and Pasing < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS.toString();
       } else {
-        result += "Commute Time between Pasing and Karlstrstrasse < " +
+        localResult += "Commute Time between Pasing and Karlstrstrasse < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL.toString();
       }
     }
-
+    if(!result.contains(localResult)){
+      result += localResult;
+    }
     return result;
   }
 }

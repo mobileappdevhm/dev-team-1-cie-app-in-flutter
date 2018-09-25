@@ -95,7 +95,7 @@ void main() {
         'Loth.',
         'Time:',
         '10:00-13:15',
-        'Professor:',
+        'Lecturer:',
         'test test',
         'Room:',
         'R0.008',

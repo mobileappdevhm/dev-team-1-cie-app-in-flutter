@@ -90,8 +90,7 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
                   child: new Text(
-                    " " +
-                        appointment.timeBegin.toString() +
+                       appointment.timeBegin.toString() +
                         "-" +
                         appointment.timeEnd.toString(),
                     style: CiEStyle.getTimeTableListVariable(),
@@ -131,7 +130,8 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
                   child: new Text(
-                    appointment.parent.getAllLocations(),
+                    //TODO do not use first value every time
+                    appointment.parent.locations[0].number,
                     style: CiEStyle.getTimeTableListVariable(),
                     textAlign: TextAlign.start,
                   ),
