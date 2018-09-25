@@ -11,6 +11,7 @@ import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/utils/utility.dart';
 import 'package:cie_app/views/takenCourses.dart';
 import 'package:cie_app/widgets/privacyPage.dart';
 import 'package:flutter/material.dart';
@@ -176,7 +177,7 @@ class _SettingsState extends State<Settings> {
                             StaticVariables.CONTACT_OFFICE,
                             style: CiEStyle.getSettingsContactStyle(),
                           ),
-                          onPressed: _onContactInternationalOffice,
+                          onPressed: () => Utility.tryLaunch(StaticVariables.MAILTO_INTERNATIONAL_OFFICE),
                         ),
                       ],
                     ),
@@ -201,7 +202,6 @@ class _SettingsState extends State<Settings> {
                           )),
                           new Text("$credits /15",
                               style: CiEStyle.getSettingsStyle()),
-                          //TODO Calculate ECTS/15 but one of the courses need to be from department 13
                         ]),
                       );
                     }),
@@ -216,7 +216,6 @@ class _SettingsState extends State<Settings> {
                             style: CiEStyle.getSettingsStyle())),
                     new Text("$engCredits /15",
                         style: CiEStyle.getSettingsStyle()),
-                    //TODO Calculate ECTS of department 3 /15 with at least 2 ects from dep. 13
                   ]),
                 ),
                 new LinearProgressIndicator(value: engCredits / 15),
@@ -273,14 +272,6 @@ class _SettingsState extends State<Settings> {
       count += course['ects'].round();
     }
     return count;
-  }
-
-  Future _onContactInternationalOffice() async {
-    if (await canLaunch(StaticVariables.internationalOfficeEmail)) {
-      await launch(StaticVariables.internationalOfficeEmail);
-    } else {
-      throw 'Could not launch $StaticVariables.internationalOfficeEmail';
-    }
   }
 
   void _logout(BuildContext context) {

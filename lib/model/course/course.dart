@@ -74,6 +74,17 @@ class Course {
     return names;
   }
 
+  String getAllLocations(){
+    var locs = "";
+    for(var location in locations){
+      if(locs != ""){
+        locs += ", ";
+      }
+      locs += location.toString();
+    }
+    return locs;
+  }
+
   CourseAvailability getAvailability() {
     return _available;
   }

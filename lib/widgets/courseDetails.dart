@@ -5,9 +5,9 @@ import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/utils/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_view.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CourseDetails extends StatefulWidget {
   CourseDetails(this.id, this.presenter, {Key key, this.title})
@@ -173,14 +173,7 @@ class _CourseDetailsState extends State<CourseDetails> {
   }
 
   Widget buildTitleRow() {
-    var locs = presenter.getCourses()[id].locations;
-    String locations = "";
-    for (var location in locs) {
-      if (locations != "") {
-        locations += ", ";
-      }
-      locations += location.toString();
-    }
+    String locations = presenter.getCourses()[id].getAllLocations();
     //Just for the cast that we don't have location
     if (locations.trim().isEmpty) locations = " N/A";
 
@@ -215,7 +208,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         " " +
                         presenter.getNamesOfLecturers(id),
                     style: CiEStyle.getCoursesListTimeStyle()),
-                new Text(StaticVariables.CAMPUS + " " + locations,
+                new Text(StaticVariables.LOCATION + " " + locations,
                     style: CiEStyle.getCoursesListTimeStyle()),
               ],
             ),
@@ -347,24 +340,12 @@ class _CourseDetailsState extends State<CourseDetails> {
       GenericAlert.confirm(
           context,
           () => email = email,
-          () => _openUrl(profile),
+          () => Utility.tryLaunch(profile),
           StaticVariables.NO_EMAIL_FOUND_DESCRIPTION,
           StaticVariables.ALERT_OK);
     } else {
       var url = "mailto:" + email;
-      if (await canLaunch(url)) {
-        await launch(url);
-      } else {
-        throw 'Could not launch $url';
-      }
-    }
-  }
-
-  _openUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+      Utility.tryLaunch(url);
     }
   }
 }

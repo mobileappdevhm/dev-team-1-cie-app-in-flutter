@@ -93,7 +93,7 @@ class CourseListState extends State<CourseList> {
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text("Pull down to Refresh",
+                new Text(StaticVariables.PULL_DOWN_TO_REFRESH,
                     style: CiEStyle.getCourseListRefreshText()),
                 new Icon(Icons.arrow_downward, color: CiEColor.mediumGray)
               ],
@@ -101,12 +101,13 @@ class CourseListState extends State<CourseList> {
 
         //Select department to filter for
         EdgeInsets pad = const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0);
-        String departmentLabel = "Department ";
+        String departmentLabel = StaticVariables.DEPARTMENT + " ";
         List<DropdownMenuItem<String>> departments =
             List<DropdownMenuItem<String>>();
         departments.add(new DropdownMenuItem<String>(
           value: "",
-          child: new Text("All Departments", overflow: TextOverflow.clip),
+          child: new Text(StaticVariables.ALL_DEPARTMENTS,
+              overflow: TextOverflow.clip),
         ));
         departments.addAll(Department.departments.map((String value) {
           if (value != null) {
@@ -148,7 +149,7 @@ class CourseListState extends State<CourseList> {
               focusNode: focus,
               controller: c1,
               decoration: const InputDecoration(
-                hintText: "Search by Course Name",
+                hintText: StaticVariables.SEARCH_BY_COURSE_NAME,
                 contentPadding: const EdgeInsets.all(10.0),
                 border: OutlineInputBorder(),
               ),

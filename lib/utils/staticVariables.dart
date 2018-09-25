@@ -1,7 +1,17 @@
 enum Flavor { MOCK, PROD }
 
 class StaticVariables {
-  static const internationalOfficeEmail = 'mailto:international-office@hm.edu';
+  static const String MAILTO_INTERNATIONAL_OFFICE = 'mailto:international-office@hm.edu';
+  static const String PULL_DOWN_TO_REFRESH = "Pull down to Refresh";
+  static const String COURSE_INFO_BLOCKED = "Blocked, does maybe not fit into regular schedule.";
+  static const String COURSE_INFO_SHORT_BLOCKED = "[Blocked] ";
+
+  /* Tabs */
+  static const String TAB_COURSES = "Courses";
+  static const String TAB_MAP = "Map";
+  static const String TAB_SCHEDULE = "Schdule";
+  static const String TAB_FAVORITES = "Favorites";
+  static const String TAB_PROFILE = "Profile";
 
   /* Maps Page */
   static const String KARLSTRASSE = 'Karlstrasse Campus';
@@ -34,6 +44,7 @@ class StaticVariables {
       "Please log in to use lottery";
 
   /* Login Page */
+  static const String START_BUTTON_START = "Start";
   static const String COURSES_IN_ENGLISH = "Courses in English";
   static const String LOGIN_LABEL_MAIL = "E-Mail";
   static const String LOGIN_LABEL_PASSWORD = "Password";
@@ -83,6 +94,7 @@ class StaticVariables {
   static const String CHANGE_TO_ENGLISH = 'Translate to English';
   static const String CHANGE_TO_GERMAN = 'Translate to German';
   static const String SEARCH_BY_COURSE_NAME = "Search by Course Name";
+  static const String TAKEN_COURSES_ERROR_NO_COURSE_FOUND = "No Courses found.";
 
   /* Alert Strings */
   static const String ALERT_YES = "COMPLETE";
@@ -106,6 +118,12 @@ class StaticVariables {
       "Please consider that the commute between these two classes may take more than 45 minutes.\n" +
           "You may not arrive to class on time.";
 
+  /* Schedule */
+  static const String SCHEDULE_TODAY = "Today";
+  static const String SCHEDULE_WEEKLY = "Weekly";
+  static const String SCHEDULE_NO_CLASS = "No class";
+  static const String SCHEDULE_NO_CLASS_ON = "No class on";
+
   /* Course Detail Page */
   static const String FK = "DP";
   static const String DESCRIPTION = "Description";
@@ -115,7 +133,11 @@ class StaticVariables {
   static const String NO_DESCRIPTION =
       "<h4>Sorry, there is no description available for this course. Please check again later.</h4>";
   static const String PROFESSOR = "Professor";
-  static const String CAMPUS = "Location";
+  static const String LOCATION = "Location";
+  static const String CAMPUS = "Campus: ";
+  static const String TIME = "Time: ";
+  static const String LECTURER = "Lecturer: ";
+  static const String ROOM = "Room: ";
   static const String COURSE_CONFLICTS_WITH_OTHER_FAVORIT =
       "Conflicts with other Favorite";
   static const String COURSE_CONFLICTS_WITH_FAVORIT =

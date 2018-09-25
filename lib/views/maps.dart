@@ -1,6 +1,7 @@
 import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/utils/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -61,13 +62,7 @@ class _MapPageState extends State<MapPage> {
         'https://www.google.com/maps/search/?api=1&query=${_mapLocation['latitude']},${_mapLocation['longitude']}&query_place_id=${_mapLocation['place_id']}';
     String appleUrl =
         'https://maps.apple.com/?sll=${_mapLocation['latitude']},${_mapLocation['longitude']}';
-    if (await canLaunch(googleUrl)) {
-      await launch(googleUrl);
-    } else if (await canLaunch(appleUrl)) {
-      await launch(appleUrl);
-    } else {
-      throw 'Could not launch url';
-    }
+    Utility.tryLaunch(googleUrl, appleUrl);
   }
 
   Widget buildMapCard(String resource, String campus) {

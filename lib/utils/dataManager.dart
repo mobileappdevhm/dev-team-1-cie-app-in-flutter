@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,8 @@ class DataManager {
   static const String REMOTE_LECTURERS =
       _REMOTE_TRANSITION_BASE + 'Lecturer/GetAllLecture';
   static const String REMOTE_REGISTER = _REMOTE_BASE + 'Account/Register';
-  static const String REMOTE_FORGOT_PASSWORD = _REMOTE_BASE + 'Account/ForgotPassword';
+  static const String REMOTE_FORGOT_PASSWORD =
+      _REMOTE_BASE + 'Account/ForgotPassword';
 
   //Locals
   static const String LOCAL_COURSES = "_courses";
@@ -171,7 +173,6 @@ class DataManager {
     return null;
   }
 
-  //TODO is this function necessary?
   static Future<String> getJson(String url) async {
     var isConnected = await isInternetConnected();
     if (isConnected) {
@@ -181,6 +182,7 @@ class DataManager {
     return null;
   }
 
+  //TODO think about scenarios where internet connection is not available, inform the user about this
   static Future<bool> isInternetConnected() async {
     var connectivityResult = await (new Connectivity().checkConnectivity());
     return (connectivityResult == ConnectivityResult.mobile ||

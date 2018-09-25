@@ -202,7 +202,7 @@ class CourseListPresenter {
     var course = _courses.getCourses()[id];
     var blocked = course.blocked;
     List<Appointment> appointments = course.appointments;
-    String result = blocked ? "[Blocked] " : "";
+    String result = blocked ? StaticVariables.COURSE_INFO_SHORT_BLOCKED : "";
     for (var a in appointments) {
       if (result.length > 10) result += ', ';
       result += WeekdayUtility.getWeekdayAsString(a.weekday) +
@@ -378,21 +378,21 @@ class CourseListPresenter {
     String result = "";
 
     if (_getTimeBetweenLectures(l, f) < 0) {
-      result += "Lecture time schedules overlap.";
+      result += "Lecture time schedules overlap.\n";
     } else {
       Campus campusOne = l.getCampus();
       Campus campusTwo = f.getCampus();
       if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
           campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
-        result += "Commute Time Lothstr. to Karlstr. < " +
+        result += "Commute Time between Lothstrasse and Karlstrasse < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL.toString();
       } else if (campusOne == Campus.LOTHSTRASSE &&
               campusTwo == Campus.PASING ||
           campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
-        result += "Commute Time Lothstr. to Pasing < " +
+        result += "Commute Time between Lothstrasse and Pasing < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS.toString();
       } else {
-        result += "Commute Time Pasing to Karlstr. < " +
+        result += "Commute Time between Pasing and Karlstrstrasse < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL.toString();
       }
     }

@@ -1,6 +1,7 @@
 import 'package:cie_app/model/course/details/appointment.dart';
 import 'package:cie_app/model/course/details/campus.dart';
 import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class TimeTableItem extends StatelessWidget {
@@ -43,7 +44,7 @@ class TimeTableItem extends StatelessWidget {
                     children: <Widget>[
                       new Expanded(
                         child: new Text(
-                          "Blocked, does maybe not fit into regular schedule.",
+                          StaticVariables.COURSE_INFO_BLOCKED,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           textAlign: TextAlign.left,
@@ -66,7 +67,7 @@ class TimeTableItem extends StatelessWidget {
                         //Static width to align values
                         width: WIDTH_FIRST_COLUMN,
                         child: new Text(
-                          "Campus: ",
+                          StaticVariables.CAMPUS,
                           style: CiEStyle.getTimeTableListMediumGray(),
                         ),
                       ),
@@ -81,7 +82,7 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
                   child: new Text(
-                    "Time: ",
+                    StaticVariables.TIME,
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),
@@ -107,7 +108,7 @@ class TimeTableItem extends StatelessWidget {
                     children: <Widget>[
                       new Container(
                         width: WIDTH_FIRST_COLUMN,
-                        child: new Text("Professor:"),
+                        child: new Text(StaticVariables.LECTURER),
                       ),
                       new Expanded(
                           child: new Text(
@@ -122,7 +123,7 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
                   child: new Text(
-                    "Room: ",
+                    StaticVariables.ROOM,
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),
@@ -130,8 +131,7 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
                   child: new Text(
-                    //TODO do not show the first location every time
-                    " " + appointment.parent.locations[0].number,
+                    appointment.parent.getAllLocations(),
                     style: CiEStyle.getTimeTableListVariable(),
                     textAlign: TextAlign.start,
                   ),

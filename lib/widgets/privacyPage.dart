@@ -4,6 +4,7 @@ import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/utils/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -78,7 +79,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                                 ),
                               ],
                             ),
-                            onPressed: () => _onContactInternationalOffice(),
+                            onPressed: () => () => Utility.tryLaunch(StaticVariables.MAILTO_INTERNATIONAL_OFFICE),
                           ),
                         ),
                       ],
@@ -103,14 +104,6 @@ class _PrivacyPageState extends State<PrivacyPage> {
         ),
       ),
     );
-  }
-
-  Future _onContactInternationalOffice() async {
-    if (await canLaunch(StaticVariables.internationalOfficeEmail)) {
-      await launch(StaticVariables.internationalOfficeEmail);
-    } else {
-      throw 'Could not launch $StaticVariables.internationalOfficeEmail';
-    }
   }
 
   void _toggleLanguage() {

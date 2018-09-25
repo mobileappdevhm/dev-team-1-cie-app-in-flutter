@@ -35,10 +35,10 @@ class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = new List<Widget>();
-    children.add(new ScheduleDivider("Today"));
+    children.add(new ScheduleDivider(StaticVariables.SCHEDULE_TODAY));
     children.add(_getTimeTableSpecificDay(WeekdayUtility.getCurrentWeekday()));
 
-    children.add(new ScheduleDivider("Weekly"));
+    children.add(new ScheduleDivider(StaticVariables.SCHEDULE_WEEKLY));
     // monday -> friday
     for (int i = 0; i <= 4; i++) {
       children.add(_getTimeTableSpecificDay(WeekdayUtility.intToWeekday(i)));
@@ -119,14 +119,14 @@ class TimeTableEntry extends StatelessWidget {
                     padding: new EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
                     alignment: Alignment.topLeft,
                     child: new Text(
-                      "No class",
+                      StaticVariables.SCHEDULE_NO_CLASS,
                       textAlign: TextAlign.start,
                     ))
               ]
             : childrenWidgets,
       );
     }
-    return noClassHeader("- No class on " +
+    return noClassHeader("- " + StaticVariables.SCHEDULE_NO_CLASS_ON + " " +
         WeekdayUtility.getWeekdayAsLongString(weekday) +
         " -");
   }

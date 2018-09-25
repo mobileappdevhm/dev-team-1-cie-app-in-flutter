@@ -2,21 +2,36 @@ enum Weekday { Mon, Tue, Wed, Thu, Fri, Sat, Sun }
 
 //This is not beautiful but there are no enums with assigned values since yet
 class WeekdayUtility {
+  static const String MONDAY = "Monday";
+  static const String TUESDAY = "Tuesday";
+  static const String WEDNESDAY = "Wednesday";
+  static const String THURSDAY = "Thursday";
+  static const String FRIDAY = "Friday";
+  static const String SATURDAY = "Saturday";
+  static const String SUNDAY = "Sunday";
+  static const String MONDAY_SHORT = "Mon";
+  static const String TUESDAY_SHORT = "Tue";
+  static const String WEDNESDAY_SHORT = "Wedn";
+  static const String THURSDAY_SHORT = "Thu";
+  static const String FRIDAY_SHORT = "Fri";
+  static const String SATURDAY_SHORT = "Sat";
+  static const String SUNDAY_SHORT = "Sun";
+
   static Weekday fromString(String day) {
     switch (day) {
-      case "Monday":
+      case MONDAY:
         return Weekday.Mon;
-      case "Tuesday":
+      case TUESDAY:
         return Weekday.Tue;
-      case "Wednesday":
+      case WEDNESDAY:
         return Weekday.Wed;
-      case "Thursday":
+      case THURSDAY:
         return Weekday.Thu;
-      case "Friday":
+      case FRIDAY:
         return Weekday.Fri;
-      case "Saturday":
+      case SATURDAY:
         return Weekday.Sat;
-      case "Sunday":
+      case SUNDAY:
         return Weekday.Sun;
       default:
         return Weekday.Mon;
@@ -26,19 +41,19 @@ class WeekdayUtility {
   static String getWeekdayAsString(Weekday day) {
     switch (day) {
       case Weekday.Mon:
-        return "Mon";
+        return MONDAY_SHORT;
       case Weekday.Tue:
-        return "Tue";
+        return TUESDAY_SHORT;
       case Weekday.Wed:
-        return "Wed";
+        return WEDNESDAY_SHORT;
       case Weekday.Thu:
-        return "Thu";
+        return THURSDAY_SHORT;
       case Weekday.Fri:
-        return "Fri";
+        return FRIDAY_SHORT;
       case Weekday.Sat:
-        return "Sat";
+        return SATURDAY_SHORT;
       case Weekday.Sun:
-        return "Sun";
+        return SUNDAY_SHORT;
     }
     // Not reachable.
     return "";
@@ -47,19 +62,19 @@ class WeekdayUtility {
   static String getWeekdayAsLongString(Weekday day) {
     switch (day) {
       case Weekday.Mon:
-        return "Monday";
+        return MONDAY;
       case Weekday.Tue:
-        return "Tuesday";
+        return TUESDAY;
       case Weekday.Wed:
-        return "Wednesday";
+        return WEDNESDAY;
       case Weekday.Thu:
-        return "Thursday";
+        return THURSDAY;
       case Weekday.Fri:
-        return "Friday";
+        return FRIDAY;
       case Weekday.Sat:
-        return "Saturday";
+        return SATURDAY;
       case Weekday.Sun:
-        return "Sunday";
+        return SUNDAY;
     }
     // Not reachable.
     return "";

@@ -9,6 +9,7 @@ import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/utils/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -104,7 +105,6 @@ class LoginFormState extends State<LoginForm> {
           }
         });
       } catch (_) {
-        //TODO do error relevant things down here
         showInSnackBar(StaticVariables.LOGIN_ERROR_UNKNOWN);
       }
       //---------------------------
@@ -133,15 +133,6 @@ class LoginFormState extends State<LoginForm> {
     if (value.isEmpty) return StaticVariables.LOGIN_ERROR_REQUIRED_PASSWORD;
     if (value.length < 8) return StaticVariables.LOGIN_ERROR_INVALID_PASSWORD;
     return null;
-  }
-
-  //TODO maybe reuse this function and therefore put it in a different file
-  _launchUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw ('Could not launch url $url');
-    }
   }
 
   @override
@@ -210,7 +201,7 @@ class LoginFormState extends State<LoginForm> {
                   ),
                   new FlatButton(
                     onPressed: () =>
-                        _launchUrl(DataManager.REMOTE_REGISTER),
+                        Utility.tryLaunch(DataManager.REMOTE_REGISTER),
                     child: new Text(
                       StaticVariables.LOGIN_BUTTON_NO_ACCOUNT,
                       style: new TextStyle(color: CiEColor.red),
@@ -231,7 +222,7 @@ class LoginFormState extends State<LoginForm> {
                     ),
                   ),
                   new FlatButton(
-                    onPressed: () => _launchUrl(
+                    onPressed: () => Utility.tryLaunch(
                         DataManager.REMOTE_FORGOT_PASSWORD),
                     child: new Text(
                       StaticVariables.LOGIN_BUTTON_FORGOT_PASSWORD,
