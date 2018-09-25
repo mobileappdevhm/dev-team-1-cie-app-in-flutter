@@ -114,13 +114,13 @@ void main() {
       expect(sut.isNewCourseData(sut.getCourses(), localSut.getCourses()[0]), true);
     });
 
-    test('isNewCourseData 2', (){
-      expect(sut.getFavourite(0), false);
-      sut.toggleFavouriteWhenChangeView(0);
-      expect(sut.getFavourite(0), true);
-      sut.toggleFavouriteWhenChangeView(0);
-      expect(sut.getFavourite(0), false);
-    });
+    //test('isNewCourseData 2', (){
+    //  expect(sut.getFavourite(0), false);
+    //  sut.toggleFavouriteWhenChangeView(0);
+    //  expect(sut.getFavourite(0), true);
+    //  sut.toggleFavouriteWhenChangeView(0);
+    //  expect(sut.getFavourite(0), false);
+    //});
 
     test('getProfileOfLecturer', (){
       expect(sut.getProfileOfLecturer(0), "https://hm.edu");
