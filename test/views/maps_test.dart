@@ -61,12 +61,6 @@ void main() {
     });
   });
 
-  group('apikey', () {
-    test('apikey', () {
-      expect(new MapPage().apiKey, 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us');
-    });
-  });
-
   testWidgets('1 widgetTest for map', (WidgetTester tester) async {
     // Tells the tester to build a UI based on the widget tree passed to it
     await tester.pumpWidget(

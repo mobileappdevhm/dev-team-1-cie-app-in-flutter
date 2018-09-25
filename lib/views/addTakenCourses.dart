@@ -23,7 +23,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
 
   var semesterList = new List<String>();
   var semesterFilter = "";
-  var departmentFilter = "All Departments";
+  var departmentFilter = StaticVariables.ALL_DEPARTMENTS;
   var coursesSelected = new List<dynamic>();
   var shouldSearch = false;
   var searchValue = "";
@@ -86,7 +86,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
           for (int i = 0; i < courseJson.length; i++) {
             if ((courseJson[i]['department']['name']
                         .contains(departmentFilter) ||
-                    departmentFilter == "All Departments") &&
+                    departmentFilter == StaticVariables.ALL_DEPARTMENTS) &&
                 (!shouldSearch ||
                     courseJson[i]['name']
                         .toString()
@@ -168,7 +168,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
                         //focusNode: focus,
                         controller: c1,
                         decoration: const InputDecoration(
-                          hintText: "Search by Course Name",
+                          hintText: StaticVariables.SEARCH_BY_COURSE_NAME,
                           contentPadding: const EdgeInsets.all(10.0),
                           border: OutlineInputBorder(),
                         ),
@@ -183,12 +183,12 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
   }
 
   Widget buildDropdowns() {
-    String departmentLabel = "Department ";
+    String departmentLabel = StaticVariables.DEPARTMENT + " ";
     List<DropdownMenuItem<String>> departments =
         List<DropdownMenuItem<String>>();
     departments.add(new DropdownMenuItem<String>(
-      value: "All Departments",
-      child: new Text("All Departments", overflow: TextOverflow.clip),
+      value: StaticVariables.ALL_DEPARTMENTS,
+      child: new Text(StaticVariables.ALL_DEPARTMENTS, overflow: TextOverflow.clip),
     ));
     departments.addAll(Department.departments.map((String value) {
       if (value != null) {

@@ -6,6 +6,7 @@ import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/widgets/CiEAnimation.dart';
 import 'package:flutter/material.dart';
 
@@ -56,7 +57,7 @@ class _WelcomePageState extends State<WelcomePage>
             padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
           ),
           new Text(
-            'Courses in English',
+            StaticVariables.COURSES_IN_ENGLISH,
             style: new TextStyle(
                 fontSize: 30.0, color: CiEColor.red, letterSpacing: 2.0),
           ),
@@ -68,7 +69,7 @@ class _WelcomePageState extends State<WelcomePage>
                   borderRadius: CiEStyle.getButtonBorderRadius()),
               onPressed: () => _startClick(),
               child: new Text(
-                "Start",
+                StaticVariables.START_BUTTON_START,
                 style: new TextStyle(color: Colors.white),
               ),
             ),

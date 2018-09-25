@@ -30,5 +30,4 @@ class Room {
   String toString() {
     return getLocation();
   }
-
 }

@@ -63,9 +63,9 @@ class _TakenCoursesState extends State<TakenCourses> {
         ));
   }
 
-  int countEcts(List<dynamic> historyJson){
+  int countEcts(List<dynamic> historyJson) {
     var count = 0;
-    for(var course in historyJson){
+    for (var course in historyJson) {
       count += course['ects'].round();
     }
     return count;
@@ -94,7 +94,7 @@ class _TakenCoursesState extends State<TakenCourses> {
                       new Row(
                         children: <Widget>[
                           new Text(
-                            historyJson[i]['ects'].round().toString() + " ECTS",
+                            historyJson[i]['ects'].round().toString() + " " + StaticVariables.ECTS,
                             style: CiEStyle.getPrevCoursesSubtitleStyle(),
                           ),
                           new Padding(
@@ -118,10 +118,9 @@ class _TakenCoursesState extends State<TakenCourses> {
               child: new ListView(children: widgets),
             );
           }
-          //TODO make text static -> staticVariables
           return new Container(
               padding: new EdgeInsets.all(15.0),
-              child: new Text("No Courses found.",
+              child: new Text(StaticVariables.TAKEN_COURSES_ERROR_NO_COURSE_FOUND,
                   style: CiEStyle.getWarningTextStyle()));
         });
   }
