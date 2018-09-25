@@ -3,7 +3,6 @@ import 'package:test/test.dart';
 
 @Timeout(const Duration(seconds: 10))
 void main() {
-  //TODO bring this tests to work
   //group("static Test", () {
   //  setUp(() {});
   //

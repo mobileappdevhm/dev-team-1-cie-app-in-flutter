@@ -75,13 +75,6 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
     }
   }
 
-  static bool getCheckedValue(List<dynamic> courses, String id) {
-    for (var course in courses) {
-      if (course['id'] == id) return true;
-    }
-    return false;
-  }
-
   FutureBuilder buildOldCourses(String searchValue) {
     return new FutureBuilder(
       future:
@@ -125,7 +118,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
                   ),
                 ),
                 trailing: new Checkbox(
-                  value: getCheckedValue(coursesSelected, courseJson[i]['id']),
+                  value: coursesSelected.where((course) => course.id == courseJson[i]['id']).length == 1,
                   onChanged: (val) {
                     setState(() {
                       if (val == false) {

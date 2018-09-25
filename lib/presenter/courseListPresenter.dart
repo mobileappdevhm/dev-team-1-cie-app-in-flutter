@@ -153,10 +153,6 @@ class CourseListPresenter {
     return _courses.getCourses()[id].getAvailability();
   }
 
-  String getDepartmentName(int id) {
-    return _courses.getCourses()[id].department.name;
-  }
-
   String getDepartmentShortName(int id) {
     return _courses.getCourses()[id].department.shortName;
   }
@@ -182,14 +178,7 @@ class CourseListPresenter {
   }
 
   String getNamesOfLecturers(int id) {
-    var names = "";
-    for (var l in _courses.getCourses()[id].lecturer) {
-      if (names != "") {
-        names += ", ";
-      }
-      names += l.firstName + " " + l.lastName;
-    }
-    return names;
+    return _courses.getCourses()[id].getNamesOfLecturers();
   }
 
   String getEmailsOfLecturers(int id) {
