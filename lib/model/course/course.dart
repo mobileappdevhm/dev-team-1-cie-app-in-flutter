@@ -35,9 +35,12 @@ class Course {
         ? jsonData['description']
             .replaceAll('<o:', '<')
             .replaceAll('</o:', '</') //remove office specific
-    .replaceAllMapped(new RegExp(r'<([^>\s]+)[^>]*>(?:\s*(?:&nbsp;|&thinsp;|&ensp;|&emsp;|&#8201;|&#8194;|&#8195;)\s*)*<\/\1>'), (match){
-      return ''; //remove empty html tags such as <p></p> or some with whitespace <p>&nbsp;</p>
-    })
+            .replaceAllMapped(
+                new RegExp(
+                    r'<([^>\s]+)[^>]*>(?:\s*(?:&nbsp;|&thinsp;|&ensp;|&emsp;|&#8201;|&#8194;|&#8195;)\s*)*<\/\1>'),
+                (match) {
+            return ''; //remove empty html tags such as <p></p> or some with whitespace <p>&nbsp;</p>
+          })
         : "";
     isCoterie = jsonData['isCoterie'];
     hasHomeBias = jsonData['hasHomeBias'];

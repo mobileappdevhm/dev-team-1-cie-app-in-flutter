@@ -38,20 +38,21 @@ class TimeTableItem extends StatelessWidget {
       subtitle: new Container(
         child: new Column(
           children: <Widget>[
-            appointment.parent.blocked ?
-            new Row(
-              children: <Widget>[
-                new Expanded(
-                  child: new Text(
-                    "Blocked, does maybe not fit into regular schedule.",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    textAlign: TextAlign.left,
-                    style: CiEStyle.getCourseBlockedTextStyle(),
-                  ),
-                ),
-              ],
-            ) : new Row(),
+            appointment.parent.blocked
+                ? new Row(
+                    children: <Widget>[
+                      new Expanded(
+                        child: new Text(
+                          "Blocked, does maybe not fit into regular schedule.",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          textAlign: TextAlign.left,
+                          style: CiEStyle.getCourseBlockedTextStyle(),
+                        ),
+                      ),
+                    ],
+                  )
+                : new Row(),
             new Padding(
               padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 2.5),
             ),

@@ -175,8 +175,8 @@ class _CourseDetailsState extends State<CourseDetails> {
   Widget buildTitleRow() {
     var locs = presenter.getCourses()[id].locations;
     String locations = "";
-    for(var location in locs){
-      if(locations != ""){
+    for (var location in locs) {
+      if (locations != "") {
         locations += ", ";
       }
       locations += location.toString();

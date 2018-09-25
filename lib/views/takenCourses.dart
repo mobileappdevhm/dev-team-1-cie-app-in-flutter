@@ -63,9 +63,9 @@ class _TakenCoursesState extends State<TakenCourses> {
         ));
   }
 
-  int countEcts(List<dynamic> historyJson){
+  int countEcts(List<dynamic> historyJson) {
     var count = 0;
-    for(var course in historyJson){
+    for (var course in historyJson) {
       count += course['ects'].round();
     }
     return count;

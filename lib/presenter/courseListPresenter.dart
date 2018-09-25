@@ -205,7 +205,7 @@ class CourseListPresenter {
     return emails;
   }
 
-  String getProfileOfLecturer(int id){
+  String getProfileOfLecturer(int id) {
     return _courses.getCourses()[id].lecturer[0].profile;
   }
 
@@ -274,7 +274,7 @@ class CourseListPresenter {
   bool _checkTimeConflict(Appointment thisFavorite, Appointment otherFavorite) {
     //Cant conflict itself
     if (thisFavorite == otherFavorite) return false;
-    if(thisFavorite.parent.id == otherFavorite.parent.id) return false;
+    if (thisFavorite.parent.id == otherFavorite.parent.id) return false;
     //If weekday is not same return false
     if (thisFavorite.weekday != otherFavorite.weekday) return false;
     //If running at same time return true
@@ -282,10 +282,8 @@ class CourseListPresenter {
         _getTimeBetweenLectures(thisFavorite, otherFavorite);
     if (timeBetweenLectures < 0) return true;
     //If time is not enough to switch campus return true
-    if (!_timeIsEnoughForCampusSwitch(
-        thisFavorite.getCampus(),
-        otherFavorite.getCampus(),
-        timeBetweenLectures)) return true;
+    if (!_timeIsEnoughForCampusSwitch(thisFavorite.getCampus(),
+        otherFavorite.getCampus(), timeBetweenLectures)) return true;
     return false;
   }
 

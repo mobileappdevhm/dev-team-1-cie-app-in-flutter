@@ -23,7 +23,8 @@ class Settings extends StatefulWidget {
   Settings(this.currentUserPresenter, this.courseListPresenter);
 
   @override
-  _SettingsState createState() => new _SettingsState(currentUserPresenter, courseListPresenter);
+  _SettingsState createState() =>
+      new _SettingsState(currentUserPresenter, courseListPresenter);
 }
 
 class _SettingsState extends State<Settings> {
@@ -113,7 +114,8 @@ class _SettingsState extends State<Settings> {
                           padding: const EdgeInsets.only(top: 5.0),
                         ),
                         new RaisedButton(
-                          onPressed: () => _toggleIntroduction(context, courseListPresenter),
+                          onPressed: () =>
+                              _toggleIntroduction(context, courseListPresenter),
                           shape: new RoundedRectangleBorder(
                               borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEColor.red,
@@ -265,9 +267,9 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-  int _countEcts(List<dynamic> takenCourses){
+  int _countEcts(List<dynamic> takenCourses) {
     var count = 0;
-    for(var course in takenCourses){
+    for (var course in takenCourses) {
       count += course['ects'].round();
     }
     return count;
@@ -327,7 +329,8 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-  void _toggleIntroduction(BuildContext context, CourseListPresenter courseListPresenter) {
+  void _toggleIntroduction(
+      BuildContext context, CourseListPresenter courseListPresenter) {
     //track click on introduction
     Analytics.logEvent("settings_click", {"title": "introcuction"});
 
@@ -345,7 +348,8 @@ class _SettingsState extends State<Settings> {
                   ),
                   body: new Column(
                     children: <Widget>[
-                      GenericShowInstruction.showInstructions(context, true, courseListPresenter)
+                      GenericShowInstruction.showInstructions(
+                          context, true, courseListPresenter)
                     ],
                   ),
                 )));
