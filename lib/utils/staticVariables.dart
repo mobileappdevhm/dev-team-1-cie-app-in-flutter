@@ -7,6 +7,7 @@ class StaticVariables {
   static const String KARLSTRASSE = 'Karlstrasse Campus';
   static const String LOTHSTRASSE = 'Lothstrasse Campus';
   static const String PASING = 'Pasing Campus';
+  static const String MAP_CLICK_ON = 'Click on the map to get directions.';
 
   static const int SAME_CAMPUS_COMMUTE_MINS = 0;
   static const int LOTHSTRASSE_PASING_COMMUTE_MINS = 45;
@@ -32,12 +33,40 @@ class StaticVariables {
   static const String FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST =
       "Please log in to use lottery";
 
+  /* Login Page */
+  static const String COURSES_IN_ENGLISH = "Courses in English";
+  static const String LOGIN_LABEL_MAIL = "E-Mail";
+  static const String LOGIN_LABEL_PASSWORD = "Password";
+  static const String LOGIN_BUTTON_NO_ACCOUNT = "Don't have an Account?";
+  static const String LOGIN_BUTTON_GUEST = "Login as Guest";
+  static const String LOGIN_BUTTON_FORGOT_PASSWORD = "Forgot your password?";
+  static const String LOGIN_ERROR_TITLE_INVALID_CREDENTIALS =
+      "Invalid Credentials";
+  static const String LOGIN_ERROR_INVALID_CREDENTIALS =
+      "Please provide valid credentials (email & password) before submitting.";
+  static const String LOGIN_ERROR_REQUIRED_MAIL = "Mail is required.";
+  static const String LOGIN_ERROR_INVALID_MAIL =
+      "Please enter a valid e-mail address.";
+  static const String LOGIN_ERROR_REQUIRED_PASSWORD = "Password is required.";
+  static const String LOGIN_ERROR_INVALID_PASSWORD =
+      "Password does not match requirements.";
+  static const String LOGIN_ERROR_UNKNOWN =
+      "Some errors occured, please try again.";
+  static const String LOGIN_ERROR_TITLE_BAD_RESPONSE = "Bad Response";
+  static const String LOGIN_ERROR_BAD_RESPONSE =
+      "Something went wrong. Please double check your credentials and try again!";
+  static const String LOGIN_ERROR_TITLE_NO_INTERNET_CONNECTION =
+      "No Internet connection";
+  static const String LOGIN_ERROR_NO_INTERNET_CONNECTION =
+      "It seems, that you have no internet connection. Please check and try again!";
+
   /* Settings Page */
   static const String LOGGED_IN_AS = 'Logged in as';
   static const String LOGOUT_BUTTON = 'Log Out';
-  static const String LOGIN_BUTTON = 'Log In';
+  static const String LOGIN_BUTTON = 'LOGIN';
   static const String STATUS = 'Status';
   static const String DEPARTMENT = 'Department';
+  static const String ALL_DEPARTMENTS = 'All Departments';
   static const String CONTACT_OFFICE = 'Contact International Office';
   static const String CIE_CERTIFICATE = 'Courses in English Certificate';
   static const String IE_CERTIFICATE = 'International Engineering Certificate';
@@ -53,6 +82,7 @@ class StaticVariables {
   static const String ECTS = 'ECTS';
   static const String CHANGE_TO_ENGLISH = 'Translate to English';
   static const String CHANGE_TO_GERMAN = 'Translate to German';
+  static const String SEARCH_BY_COURSE_NAME = "Search by Course Name";
 
   /* Alert Strings */
   static const String ALERT_YES = "COMPLETE";
@@ -67,7 +97,11 @@ class StaticVariables {
   static const String METRICS_ENABLED = "User Metrics Enabled";
   static const String METRICS_DISABLED = "User Metrics Disabled";
   static const String ALERT_OK = "OK";
+  static const String ALERT_ALLOW = "Allow";
+  static const String ALERT_DISABLE = "Disable";
   static const String ALERT_UNDERSTAND = "I UNDERSTAND";
+  static const String ALERT_METRICS_MESSAGE =
+      "Support the development of this application by submitting anonymous usage statistics about the features being used.";
   static const String ALERT_TIMECONFLICT_ACKNOWLEDGE =
       "Please consider that the commute between these two classes may take more than 45 minutes.\n" +
           "You may not arrive to class on time.";

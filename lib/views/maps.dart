@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MapPage extends StatefulWidget {
-  final String apiKey = 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us';
-
   MapPage();
 
   @override
@@ -95,7 +93,7 @@ class _MapPageState extends State<MapPage> {
                       style: CiEStyle.getMapsTitleStyle(),
                     ),
                     SizedBox(height: 8.0),
-                    new Text('Click on the map to get directions.',
+                    new Text(StaticVariables.MAP_CLICK_ON,
                         style: CiEStyle.getMapsDescriptionStyle())
                   ],
                 )),

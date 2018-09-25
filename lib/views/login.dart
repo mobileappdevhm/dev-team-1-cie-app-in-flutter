@@ -47,9 +47,9 @@ class LoginFormState extends State<LoginForm> {
         context,
         no,
         yes,
-        "Help development of this application by sending anonymous usage statistics for which features are used?",
-        "Allow",
-        "Disable");
+        StaticVariables.ALERT_METRICS_MESSAGE,
+        StaticVariables.ALERT_ALLOW,
+        StaticVariables.ALERT_DISABLE);
 
     Analytics.setCurrentScreen("login_screen");
   }
@@ -77,16 +77,16 @@ class LoginFormState extends State<LoginForm> {
         DataManager.postJson(context, DataManager.REMOTE_AUTH,
             {"username": username, "password": password}).then((response) {
           if (response == null) {
-            GenericAlert.confirmDialog(context, 'No Internet connection',
-                'It seems, that you have no internet connection. Please check and try again!');
+            GenericAlert.confirmDialog(context, StaticVariables.LOGIN_ERROR_TITLE_NO_INTERNET_CONNECTION,
+                StaticVariables.LOGIN_ERROR_NO_INTERNET_CONNECTION);
           } else if (response.statusCode != 200) {
-            GenericAlert.confirmDialog(context, 'Bad response',
-                'Something went wrong. Please double check your credentials and try again!');
+            GenericAlert.confirmDialog(context, StaticVariables.LOGIN_ERROR_TITLE_BAD_RESPONSE,
+                StaticVariables.LOGIN_ERROR_BAD_RESPONSE);
           } else {
             var jsonData = json.decode(response.body);
             if (jsonData['user'] == null) {
-              GenericAlert.confirmDialog(context, 'Unvalid credentials',
-                  'Please provide valid credentials (email & password) before submitting.');
+              GenericAlert.confirmDialog(context, StaticVariables.LOGIN_ERROR_TITLE_INVALID_CREDENTIALS,
+                  StaticVariables.LOGIN_ERROR_INVALID_CREDENTIALS);
             } else if (jsonData['curriculum'] == null) {
               //no curriculum was set by the user -> user can login but lottery should not be available
               updateUserSettings(context, jsonData['user']['firstName'],
@@ -105,12 +105,12 @@ class LoginFormState extends State<LoginForm> {
         });
       } catch (_) {
         //TODO do error relevant things down here
-        showInSnackBar("Some errors occured, please try again.");
+        showInSnackBar(StaticVariables.LOGIN_ERROR_UNKNOWN);
       }
       //---------------------------
     } else {
-      GenericAlert.confirmDialog(context, 'Unvalid credentials',
-          'Please provide valid credentials (email & password) before submitting.');
+      GenericAlert.confirmDialog(context, StaticVariables.LOGIN_ERROR_TITLE_INVALID_CREDENTIALS,
+          StaticVariables.LOGIN_ERROR_INVALID_CREDENTIALS);
     }
   }
 
@@ -121,20 +121,21 @@ class LoginFormState extends State<LoginForm> {
 
   String validateMail(String value) {
     _formWasEdited = true;
-    if (value.isEmpty) return 'Mail is required.';
+    if (value.isEmpty) return StaticVariables.LOGIN_ERROR_REQUIRED_MAIL;
     final RegExp mailExp = new RegExp(
         r"^((([a-z]|\d|[!#$%&'*+-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$");
-    if (!mailExp.hasMatch(value)) return 'Please enter a valid e-mail address.';
+    if (!mailExp.hasMatch(value)) return StaticVariables.LOGIN_ERROR_INVALID_MAIL;
     return null;
   }
 
   String validatePassword(String value) {
     _formWasEdited = true;
-    if (value.isEmpty) return 'Password is required.';
-    if (value.length < 8) return 'Password does not match requirements.';
+    if (value.isEmpty) return StaticVariables.LOGIN_ERROR_REQUIRED_PASSWORD;
+    if (value.length < 8) return StaticVariables.LOGIN_ERROR_INVALID_PASSWORD;
     return null;
   }
 
+  //TODO maybe reuse this function and therefore put it in a different file
   _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -160,7 +161,7 @@ class LoginFormState extends State<LoginForm> {
                   new Image.asset(StaticVariables.IMAGE_PATH + 'hm_logo.png'),
                   new Padding(padding: const EdgeInsets.only(top: 20.0)),
                   new Text(
-                    "Courses in English",
+                    StaticVariables.COURSES_IN_ENGLISH,
                     style: new TextStyle(
                         fontSize: 20.0,
                         color: CiEColor.red,
@@ -172,7 +173,7 @@ class LoginFormState extends State<LoginForm> {
                     controller: usernameController,
                     decoration: const InputDecoration(
                       border: const OutlineInputBorder(),
-                      labelText: 'E-Mail',
+                      labelText: StaticVariables.LOGIN_LABEL_MAIL,
                     ),
                     keyboardType: TextInputType.emailAddress,
                     onSaved: (String value) {
@@ -186,7 +187,7 @@ class LoginFormState extends State<LoginForm> {
                     key: _passwordFieldKey,
                     decoration: const InputDecoration(
                       border: const OutlineInputBorder(),
-                      labelText: 'Password',
+                      labelText: StaticVariables.LOGIN_LABEL_PASSWORD,
                     ),
                     obscureText: true,
                     onSaved: (String value) {
@@ -202,16 +203,16 @@ class LoginFormState extends State<LoginForm> {
                           borderRadius: CiEStyle.getButtonBorderRadius()),
                       onPressed: _handleSubmitted,
                       child: new Text(
-                        'LOGIN',
+                        StaticVariables.LOGIN_BUTTON,
                         style: new TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
                   new FlatButton(
                     onPressed: () =>
-                        _launchUrl("https://nine.wi.hm.edu/Account/Register"),
+                        _launchUrl(DataManager.REMOTE_REGISTER),
                     child: new Text(
-                      "Don't have an Account?",
+                      StaticVariables.LOGIN_BUTTON_NO_ACCOUNT,
                       style: new TextStyle(color: CiEColor.red),
                       textAlign: TextAlign.center,
                     ),
@@ -224,16 +225,16 @@ class LoginFormState extends State<LoginForm> {
                           borderRadius: CiEStyle.getButtonBorderRadius()),
                       onPressed: _handleGuestLogin,
                       child: new Text(
-                        'Login as Guest',
+                        StaticVariables.LOGIN_BUTTON_GUEST,
                         style: new TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
                   new FlatButton(
                     onPressed: () => _launchUrl(
-                        "https://nine.wi.hm.edu/Account/ForgotPassword"),
+                        DataManager.REMOTE_FORGOT_PASSWORD),
                     child: new Text(
-                      "Forgot your password?",
+                      StaticVariables.LOGIN_BUTTON_FORGOT_PASSWORD,
                       style: new TextStyle(color: CiEColor.red),
                       textAlign: TextAlign.center,
                     ),
