@@ -20,16 +20,53 @@ void main() {
       ),
     );
 
-    var listOfWidgets =
-        tester.allWidgets.where((widget) => widget is Text);
+    var listOfWidgets = tester.allWidgets.where((widget) => widget is Text);
 
-    expect(listOfWidgets.where((widget) => widget is Text && widget.data == "WiSe 2017").toList().length > 0, true, reason: "Text WiSe 2017");
-    expect(listOfWidgets.where((widget) => widget is Text && widget.data == "SoSe 2018").toList().length > 0, true, reason: "Text SoSe 2018");
-    expect(listOfWidgets.where((widget) => widget is Text && widget.data == "WiSe 2018").toList().length > 0, true, reason: "Text WiSe 2018");
+    expect(
+        listOfWidgets
+                .where((widget) => widget is Text && widget.data == "WiSe 2017")
+                .toList()
+                .length >
+            0,
+        true,
+        reason: "Text WiSe 2017");
+    expect(
+        listOfWidgets
+                .where((widget) => widget is Text && widget.data == "SoSe 2018")
+                .toList()
+                .length >
+            0,
+        true,
+        reason: "Text SoSe 2018");
+    expect(
+        listOfWidgets
+                .where((widget) => widget is Text && widget.data == "WiSe 2018")
+                .toList()
+                .length >
+            0,
+        true,
+        reason: "Text WiSe 2018");
 
-    expect(listOfWidgets.where((widget) => widget is Text && widget.data == "All Departments").toList().length > 0, true, reason: "Text All Departments");
+    expect(
+        listOfWidgets
+                .where((widget) =>
+                    widget is Text && widget.data == "All Departments")
+                .toList()
+                .length >
+            0,
+        true,
+        reason: "Text All Departments");
     for (var department in Department.departments) {
-      expect(listOfWidgets.where((widget) => widget is Text && widget.data == "Department " + department).toList().length > 0, true, reason: "Text Department " + department);
+      expect(
+          listOfWidgets
+                  .where((widget) =>
+                      widget is Text &&
+                      widget.data == "Department " + department)
+                  .toList()
+                  .length >
+              0,
+          true,
+          reason: "Text Department " + department);
     }
   });
 }
