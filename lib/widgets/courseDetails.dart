@@ -339,7 +339,6 @@ class _CourseDetailsState extends State<CourseDetails> {
     if (email == StaticVariables.MOCK_EMAIL || !email.contains("@")) {
       GenericAlert.confirm(
           context,
-          () => email = email,
           () => Utility.tryLaunch(profile),
           StaticVariables.NO_EMAIL_FOUND_DESCRIPTION,
           StaticVariables.ALERT_OK);

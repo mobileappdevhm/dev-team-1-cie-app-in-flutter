@@ -1,5 +1,4 @@
 import 'package:cie_app/model/course/course.dart';
-import 'package:cie_app/model/user/currentUser_prod.dart';
 import 'package:cie_app/model/user/user.dart';
 import 'package:test/test.dart';
 

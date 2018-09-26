@@ -19,8 +19,7 @@ void main() {
                 child: new Center(
                     child: new Settings(
                         new CurrentUserPresenter(boolean, Flavor.PROD),
-                        new CourseListPresenter(boolean)
-                    )),
+                        new CourseListPresenter(boolean))),
               ),
             );
           },
@@ -107,7 +106,7 @@ void main() {
                 child: new Center(
                     child: new Settings(
                         new CurrentUserPresenter(boolean, Flavor.PROD),
-                    new CourseListPresenter(boolean))),
+                        new CourseListPresenter(boolean))),
               ),
             );
           },

@@ -76,9 +76,10 @@ class CourseListPresenter {
   }
 
   void syncFavoritedCoursesFromMemory() {
+    syncRegisteredCoursesFromMemory();
     DataManager.getResource(DataManager.LOCAL_FAVORITES)
         .then((String favoriteIds) {
-      if (favoriteIds != null) {
+      if (favoriteIds != null && favoriteIds != "") {
         dynamic favoritesJson = json.decode(favoriteIds);
         for (Course c in _courses.getCourses()) {
           if (favoritesJson[c.id] != null) {
@@ -87,6 +88,22 @@ class CourseListPresenter {
         }
       }
       this.onChanged(true);
+    });
+  }
+
+  void syncRegisteredCoursesFromMemory() {
+    print("sync registered");
+    DataManager.getResource(DataManager.LOCAL_SUBSCRIPTIONS)
+        .then((String registeredIds) {
+      if (registeredIds != null && registeredIds != "") {
+        List<dynamic> registeredCourses = json.decode(registeredIds);
+        for (Course c in _courses.getCourses()) {
+          if (registeredCourses.contains(c.id)) {
+            c.isFavourite = true;
+          }
+        }
+      }
+      commitFavoritedCoursesToMemory();
     });
   }
 
@@ -374,7 +391,8 @@ class CourseListPresenter {
   }
 
   //Compare two lectues and return error text if they conflict
-  String _getLectureConflictProblemText(String result, Appointment l, Appointment f) {
+  String _getLectureConflictProblemText(
+      String result, Appointment l, Appointment f) {
     String localResult = "";
 
     if (_getTimeBetweenLectures(l, f) < 0) {
@@ -396,7 +414,7 @@ class CourseListPresenter {
             StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL.toString();
       }
     }
-    if(!result.contains(localResult)){
+    if (!result.contains(localResult)) {
       result += localResult;
     }
     return result;

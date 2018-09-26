@@ -126,7 +126,9 @@ class TimeTableEntry extends StatelessWidget {
             : childrenWidgets,
       );
     }
-    return noClassHeader("- " + StaticVariables.SCHEDULE_NO_CLASS_ON + " " +
+    return noClassHeader("- " +
+        StaticVariables.SCHEDULE_NO_CLASS_ON +
+        " " +
         WeekdayUtility.getWeekdayAsLongString(weekday) +
         " -");
   }

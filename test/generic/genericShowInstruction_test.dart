@@ -1,16 +1,19 @@
 import 'package:cie_app/generic/genericShowInstruction.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 CourseListPresenter courseListPresenter;
+CurrentUserPresenter currentUserPresenter;
 
 @Timeout(const Duration(seconds: 20))
 void main() {
   group('Introduction', () {
     setUp(() {
       courseListPresenter = new CourseListPresenter(null);
+      currentUserPresenter = new CurrentUserPresenter(null, Flavor.PROD);
     });
 
     testWidgets('1 widgetTest for introduction', (WidgetTester tester) async {
@@ -22,7 +25,8 @@ void main() {
               home: new Material(
                   child: new Column(
                 children: <Widget>[
-                  GenericShowInstruction.showInstructions(context, true, courseListPresenter),
+                  GenericShowInstruction.showInstructions(
+                      context, true, courseListPresenter, currentUserPresenter),
                 ],
               )),
             );
@@ -72,8 +76,8 @@ void main() {
               home: new Material(
                   child: new Column(
                 children: <Widget>[
-                  GenericShowInstruction.showInstructions(
-                      context, false, courseListPresenter),
+                  GenericShowInstruction.showInstructions(context, false,
+                      courseListPresenter, currentUserPresenter),
                 ],
               )),
             );

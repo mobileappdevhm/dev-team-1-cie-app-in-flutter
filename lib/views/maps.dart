@@ -3,7 +3,6 @@ import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/utils/utility.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MapPage extends StatefulWidget {
   MapPage();

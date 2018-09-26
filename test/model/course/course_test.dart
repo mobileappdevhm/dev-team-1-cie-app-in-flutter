@@ -170,15 +170,15 @@ void main() {
 
   group('class functions', () {
     Course course;
-    setUp((){
+    setUp(() {
       course = new Course(jsonData);
     });
 
-    test('getNamesOfLecturers', (){
+    test('getNamesOfLecturers', () {
       expect(course.getNamesOfLecturers(), 'test test, first second');
     });
 
-    test('occursOnDay', (){
+    test('occursOnDay', () {
       expect(course.occursOnDay(Weekday.Fri), false);
       expect(course.occursOnDay(Weekday.Mon), true);
     });

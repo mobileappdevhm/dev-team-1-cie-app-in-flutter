@@ -74,10 +74,10 @@ class Course {
     return names;
   }
 
-  String getAllLocations(){
+  String getAllLocations() {
     var locs = "";
-    for(var location in locations){
-      if(locs != ""){
+    for (var location in locations) {
+      if (locs != "") {
         locs += ", ";
       }
       locs += location.toString();
@@ -85,10 +85,10 @@ class Course {
     return locs;
   }
 
-  String getAllRooms(){
+  String getAllRooms() {
     var locs = "";
-    for(var location in locations){
-      if(locs != ""){
+    for (var location in locations) {
+      if (locs != "") {
         locs += ", ";
       }
       locs += location.number;

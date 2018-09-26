@@ -32,7 +32,10 @@ void main() {
     final Iterator<Course> itera = sut.getCourses().iterator;
 
     while (itera.moveNext()) {
-      expect(validDepartments.contains(itera.current.department.shortName.split(' ')[1]), true);
+      expect(
+          validDepartments
+              .contains(itera.current.department.shortName.split(' ')[1]),
+          true);
     }
   });
 }

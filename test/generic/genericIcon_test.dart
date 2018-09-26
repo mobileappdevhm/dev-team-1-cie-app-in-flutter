@@ -1,5 +1,4 @@
 import 'package:cie_app/generic/genericIcon.dart';
-import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/details/courseAvailability.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
@@ -10,8 +9,8 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group("simpleRenderTest", () {
     test('rendersAvailableIcon', () {
-      final Icon availableIcon = GenericIcon
-          .buildGenericAvailabilityIcon(CourseAvailability.AVAILABLE);
+      final Icon availableIcon = GenericIcon.buildGenericAvailabilityIcon(
+          CourseAvailability.AVAILABLE);
       expect(availableIcon.color, CiEColor.green);
       expect(availableIcon.icon.codePoint, GenericIcon.memStorageAvailable);
       expect(availableIcon.icon.fontFamily, GenericIcon.fontFamily);
@@ -26,8 +25,8 @@ void main() {
     });
 
     test('rendersUnavailableIcon', () {
-      final Icon unavailableIcon = GenericIcon
-          .buildGenericAvailabilityIcon(CourseAvailability.UNAVAILABLE);
+      final Icon unavailableIcon = GenericIcon.buildGenericAvailabilityIcon(
+          CourseAvailability.UNAVAILABLE);
       expect(unavailableIcon.color, CiEColor.red);
       expect(unavailableIcon.icon.codePoint, GenericIcon.memStorageUnavailable);
       expect(unavailableIcon.icon.fontFamily, GenericIcon.fontFamily);

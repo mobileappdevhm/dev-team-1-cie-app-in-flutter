@@ -40,7 +40,9 @@ class PrevCourseListItemState extends State<PrevCourseListItem> {
                   ),
                 ),
                 new Text(
-                  currentUserPresenter.getCredits(id).toString() + " " + StaticVariables.ECTS,
+                  currentUserPresenter.getCredits(id).toString() +
+                      " " +
+                      StaticVariables.ECTS,
                   style: CiEStyle.getPrevCoursesSubtitleStyle(),
                 ),
               ],

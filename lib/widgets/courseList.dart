@@ -14,6 +14,7 @@ import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/utils/utility.dart';
 import 'package:cie_app/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
 
@@ -46,8 +47,8 @@ class CourseListState extends State<CourseList> {
   bool shouldSearch = false;
   String filter = "";
   String searchValue = "";
-  bool coursesRegistered = false;
   FocusNode focus;
+  var registeredCourses = new List<dynamic>();
 
   CourseListState(this.courseListPresenter, this.shouldFilterByFavorites,
       this.userPresenter, this.focus) {
@@ -69,6 +70,17 @@ class CourseListState extends State<CourseList> {
     } else {
       Analytics.setCurrentScreen("favorites_screen");
     }
+    _fetchRegisteredCourses();
+  }
+
+  void _fetchRegisteredCourses() async {
+    var registeredString =
+        await DataManager.getResource(DataManager.LOCAL_SUBSCRIPTIONS);
+    if (registeredString != null) {
+      setState(() {
+        registeredCourses = json.decode(registeredString);
+      });
+    }
   }
 
   @override
@@ -79,10 +91,7 @@ class CourseListState extends State<CourseList> {
       return new Column(
         children: <Widget>[
           GenericShowInstruction.showInstructions(
-            context,
-            false,
-            courseListPresenter,
-          ),
+              context, false, courseListPresenter, userPresenter),
         ],
       );
     } else {
@@ -219,24 +228,22 @@ class CourseListState extends State<CourseList> {
         userPresenter.getCurrentUser().department.isNotEmpty != null
             ? userPresenter.getCurrentUser().department.isNotEmpty
             : false;
-    bool submissionValid = !coursesRegistered && isLoggedIn && isDepartmentSet;
+    bool submissionValid = isLoggedIn && isDepartmentSet;
 
     //Decide how to show submit button
     String textToShow;
     Color buttonColor;
+
     if (submissionValid) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
       buttonColor = CiEColor.red;
-    } else if (coursesRegistered && isLoggedIn) {
-      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
-      buttonColor = CiEColor.lightGray;
-    } else if (coursesRegistered && isLoggedIn && !isDepartmentSet) {
+    } else if (isLoggedIn && !isDepartmentSet) {
       textToShow =
           StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT;
       buttonColor = CiEColor.lightGray;
     } else {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST;
-      buttonColor = CiEColor.red;
+      buttonColor = CiEColor.lightGray;
     }
 
     return new RaisedButton(
@@ -255,7 +262,8 @@ class CourseListState extends State<CourseList> {
   Future<Null> handleRefreshIndicator(
       BuildContext context, CourseListPresenter presenter,
       [oldSemesters = false, inBackground = true]) async {
-    await DataManager.updateAll(context, oldSemesters, inBackground);
+    await DataManager.updateAll(
+        context, userPresenter, oldSemesters, inBackground);
     presenter.addCoursesFromMemory();
     presenter.updateLecturerInfoFromMemory();
     presenter.onChanged(true);
@@ -275,8 +283,15 @@ class CourseListState extends State<CourseList> {
       //Remove course from favourites only after view change
       if (shouldFilterByFavorites)
         courseListPresenter.toggleFavouriteWhenChangeView(id);
-      else
-        courseListPresenter.toggleFavourite(id, true);
+      else {
+        if (registeredCourses
+            .contains(courseListPresenter.getCourses()[id].id)) {
+          GenericAlert.confirmDialog(context, "Unfavorite not possible",
+              "Please visit the favorites tab to update your registered courses.");
+        } else {
+          courseListPresenter.toggleFavourite(id, true);
+        }
+      }
     });
   }
 
@@ -288,38 +303,66 @@ class CourseListState extends State<CourseList> {
 
   void _contextualCourseSubmission(
       CurrentUserPresenter user, bool isSubmissionValid, bool isLoggedIn) {
-    if (isSubmissionValid != null && isSubmissionValid) {
+    if (isSubmissionValid) {
       _handleCourseSubmission(user);
-    } else if (isLoggedIn != null && !isLoggedIn) {
+    } else if (!isLoggedIn) {
       Navigator.pushReplacementNamed(context, Routes.Login);
+    } else if (!isSubmissionValid && isLoggedIn) {
+      GenericAlert.confirm(
+          context,
+          () => Utility.tryLaunch(DataManager.REMOTE_BASE),
+          StaticVariables.PLEASE_SPECIFY_HOME_DEPARTMENT);
     }
   }
 
   void _handleCourseSubmission(CurrentUserPresenter user) {
-    var no = () {};
-    var yes = () {
-      Map<String, String> userJson = {
-        "id": user.getCurrentUser().id,
-        "firstName": user.getCurrentUser().firstName,
-        "lastName": user.getCurrentUser().lastName
-      };
-      List<dynamic> selectedCourses = new List<dynamic>();
+    var yes = () async {
+      List<dynamic> subscribeCourses = new List<dynamic>();
+      List<dynamic> unsubscribeCourses = new List<dynamic>();
       for (Course c in courseListPresenter.getCourses()) {
-        if (c.isFavourite) {
-          selectedCourses.add({"id": c.id});
+        if (c.isFavourite && !registeredCourses.contains(c.id)) {
+          subscribeCourses.add({"id": c.id});
+        } else if (registeredCourses.contains(c.id) && !c.isFavourite) {
+          unsubscribeCourses.add({"id": c.id});
         }
       }
+      var jsonData = {
+        "user": {
+          "id": user.getCurrentUser().id,
+          "firstName": user.getCurrentUser().firstName,
+          "lastName": user.getCurrentUser().lastName
+        },
+        "courses": []
+      };
+      if (unsubscribeCourses.length > 0) {
+        jsonData["courses"] = unsubscribeCourses;
+        await DataManager.postJson(
+            context, DataManager.REMOTE_UNSUBSCRIBE, jsonData);
+      }
+      if (subscribeCourses.length > 0) {
+        jsonData["courses"] = subscribeCourses;
+        await DataManager.postJson(
+            context, DataManager.REMOTE_SUBSCRIBE, jsonData);
+      }
 
-      Map<String, String> postJson = new Map<String, String>();
-      postJson.putIfAbsent("user", () => json.encode(userJson));
-      postJson.putIfAbsent("courses", () => json.encode(selectedCourses));
-      DataManager.postJson(context, DataManager.REMOTE_SUBSCRIBE, postJson);
-      setState(() {
-        coursesRegistered = true;
-      });
+      jsonData["courses"] = [];
+      var response = await DataManager.postJson(
+          context, DataManager.REMOTE_SUBSCRIPTIONS, jsonData);
+      var data = json.decode(response.body);
+      print("subscription: " + data.toString());
+      var idList = new List<String>();
+      for (var entry in data) {
+        idList.add(entry['courseId']);
+      }
+      await DataManager.writeToFile(
+          DataManager.LOCAL_SUBSCRIPTIONS, json.encode(idList));
+      courseListPresenter.syncFavoritedCoursesFromMemory();
+
+      GenericAlert.confirmDialog(context, "Successfully updated courses",
+          "Your registered courses were successfully updated.");
     };
     GenericAlert.confirm(
-            context, no, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
+            context, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
         .then((_) {});
   }
 

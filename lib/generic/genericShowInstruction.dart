@@ -1,5 +1,6 @@
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
@@ -8,8 +9,9 @@ import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
   //TODO would be better to just call with function what to do or to call with widget?!
+
   static Widget showInstructions(BuildContext context, bool refreshData,
-      CourseListPresenter courseListPresenter) {
+      CourseListPresenter courseListPresenter, CurrentUserPresenter user) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
         children: <Widget>[
@@ -85,7 +87,8 @@ class GenericShowInstruction {
           new Padding(padding: new EdgeInsets.only(bottom: 20.0)),
           new RaisedButton(
               color: CiEColor.lightGray,
-              onPressed: () => _toggleRefresh(context, courseListPresenter),
+              onPressed: () =>
+                  _toggleRefresh(context, courseListPresenter, user),
               child: refreshData
                   ? new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT_REFRESH)
                   : new Text(StaticVariables.INSTRUCTIONS_BUTTON_TEXT)),
@@ -95,8 +98,10 @@ class GenericShowInstruction {
   }
 
   static _toggleRefresh(
-      BuildContext context, CourseListPresenter courseListPresenter) async {
-    await DataManager.updateAll(context, true);
+      BuildContext context,
+      CourseListPresenter courseListPresenter,
+      CurrentUserPresenter user) async {
+    await DataManager.updateAll(context, user, true);
     courseListPresenter.addCoursesFromMemory();
     courseListPresenter.updateLecturerInfoFromMemory();
     courseListPresenter.onChanged(true);

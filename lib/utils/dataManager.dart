@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -11,18 +11,26 @@ import 'package:path_provider/path_provider.dart';
 
 class DataManager {
   //Remotes
-  static const String _REMOTE_BASE = 'https://nine.wi.hm.edu/';
-  static const String _REMOTE_API_BASE = _REMOTE_BASE + 'api/v2/';
-  static const String _REMOTE_TRANSITION_BASE = _REMOTE_BASE + 'api2/';
-  static const String REMOTE_CIE_BASE = _REMOTE_API_BASE + 'apps/cie/';
-  static const String REMOTE_CIE_COURSES_BASE = REMOTE_CIE_BASE + 'courses/';
-  static const String REMOTE_SUBSCRIBE = _REMOTE_API_BASE + 'courses/subscribe';
-  static const String REMOTE_AUTH = _REMOTE_API_BASE + 'account/login';
+  static const String REMOTE_BASE = 'https://nine.wi.hm.edu/';
+  //Websites
+  static const String REMOTE_REGISTER = REMOTE_BASE + 'Account/Register';
+  static const String REMOTE_FORGOT_PASSWORD =
+      REMOTE_BASE + 'Account/ForgotPassword';
+  //old API-Urls
+  static const String _REMOTE_TRANSITION_BASE = REMOTE_BASE + 'api2/';
   static const String REMOTE_LECTURERS =
       _REMOTE_TRANSITION_BASE + 'Lecturer/GetAllLecture';
-  static const String REMOTE_REGISTER = _REMOTE_BASE + 'Account/Register';
-  static const String REMOTE_FORGOT_PASSWORD =
-      _REMOTE_BASE + 'Account/ForgotPassword';
+
+  //API-Urls
+  static const String _REMOTE_API_BASE = REMOTE_BASE + 'api/v2/';
+  static const String REMOTE_CIE_BASE = _REMOTE_API_BASE + 'apps/cie/';
+  static const String REMOTE_CIE_COURSES_BASE = REMOTE_CIE_BASE + 'courses/';
+  static const String REMOTE_SUBSCRIBE = REMOTE_BASE + 'courses/subscribe';
+  static const String REMOTE_SUBSCRIPTIONS =
+      _REMOTE_API_BASE + 'courses/subscriptions';
+  static const String REMOTE_UNSUBSCRIBE = _REMOTE_API_BASE + 'courses/unsubscribe';
+  static const String REMOTE_AUTH = _REMOTE_API_BASE + 'account/login';
+
 
   //Locals
   static const String LOCAL_COURSES = "_courses";
@@ -32,6 +40,7 @@ class DataManager {
   static const String LOCAL_FAVORITES = "_favorites";
   static const String LOCAL_TAKEN_COURSES = "_takencourses";
   static const String LOCAL_SEMESTERS = "_semesters";
+  static const String LOCAL_SUBSCRIPTIONS = "_registered";
 
   static Future<File> writeToFile(String resource, String data) async {
     resource = resource.replaceAll(' ', '');
@@ -108,7 +117,7 @@ class DataManager {
     Navigator.pop(context);
   }
 
-  static Future updateAll(BuildContext context,
+  static Future updateAll(BuildContext context, CurrentUserPresenter user,
       [bool oldSemesters = false, bool inBackground = false]) async {
     if (!inBackground) {
       showDialog(
@@ -140,6 +149,33 @@ class DataManager {
     var lecturersData = await getJson(REMOTE_LECTURERS);
     await writeToFile(LOCAL_LECTURERS, lecturersData);
 
+    if (user.getCurrentUser().id != "id-123") {
+      var subscriptionJson = {
+        "user": {
+          "id": user.getCurrentUser().id,
+          "firstName": user.getCurrentUser().firstName,
+          "lastName": user.getCurrentUser().lastName
+        },
+        "courses": []
+      };
+      print(subscriptionJson.toString());
+      var response = await DataManager.postJson(
+          context, DataManager.REMOTE_SUBSCRIPTIONS, subscriptionJson);
+      if (response.body != null && response.body != "") {
+        try {
+          var data = json.decode(response.body);
+          print("subscription: " + data.toString());
+          var idList = new List<String>();
+          for (var entry in data) {
+            idList.add(entry['courseId']);
+          }
+          await DataManager.writeToFile(
+              DataManager.LOCAL_SUBSCRIPTIONS, json.encode(idList));
+        } catch (e) {
+          print("updateAll - " + e.toString());
+        }
+      }
+    }
     if (!inBackground) {
       Navigator.pop(context);
     }
@@ -165,8 +201,10 @@ class DataManager {
           builder: (BuildContext context) {
             return GenericIcon.buildGenericSpinner();
           });
-
-      Response res = await post(url, body: jsonMap); // post api call
+      print(jsonMap.toString());
+      Response res = await post(url,
+          headers: {"Content-Type": "application/json"},
+          body: json.encode(jsonMap)); // post api call
       Navigator.pop(context);
       return res;
     }

@@ -1,15 +1,19 @@
+import 'package:cie_app/utils/dataManager.dart';
+
 enum Flavor { MOCK, PROD }
 
 class StaticVariables {
-  static const String MAILTO_INTERNATIONAL_OFFICE = 'mailto:international-office@hm.edu';
+  static const String MAILTO_INTERNATIONAL_OFFICE =
+      'mailto:international-office@hm.edu';
   static const String PULL_DOWN_TO_REFRESH = "Pull down to Refresh";
-  static const String COURSE_INFO_BLOCKED = "Blocked, does maybe not fit into regular schedule.";
+  static const String COURSE_INFO_BLOCKED =
+      "Blocked, does maybe not fit into regular schedule.";
   static const String COURSE_INFO_SHORT_BLOCKED = "[Blocked] ";
 
   /* Tabs */
   static const String TAB_COURSES = "Courses";
   static const String TAB_MAP = "Map";
-  static const String TAB_SCHEDULE = "Schdule";
+  static const String TAB_SCHEDULE = "Schedule";
   static const String TAB_FAVORITES = "Favorites";
   static const String TAB_PROFILE = "Profile";
 
@@ -35,13 +39,14 @@ class StaticVariables {
   static const String TIME_CONFLICT_MESSAGE = "Possible Scheduling Conflict";
 
   static const String FAVORITES_REGISTRATION_BUTTON =
-      "Register Favorited Courses";
-  static const String FAVORITES_REGISTRATION_BUTTON_INACTIVE =
-      "Courses Already Submitted";
+      "Update course registration";
   static const String FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT =
       "No department specified";
   static const String FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST =
       "Please log in to use lottery";
+
+  static const String TITLE_PLEASE_SET_HOME_DEPARTMENT = "No department specified";
+  static const String PLEASE_SPECIFY_HOME_DEPARTMENT = "Please specify a home department on NINE.";
 
   /* Login Page */
   static const String START_BUTTON_START = "Start";

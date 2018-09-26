@@ -1,4 +1,3 @@
-import 'package:cie_app/utils/analytics.dart';
 import 'package:test/test.dart';
 
 @Timeout(const Duration(seconds: 10))

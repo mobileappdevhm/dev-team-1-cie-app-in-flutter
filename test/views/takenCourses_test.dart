@@ -1,4 +1,3 @@
-import 'package:cie_app/model/course/courses_mock.dart';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/takenCourses.dart';
@@ -9,7 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('1 widgetTest', (WidgetTester tester) async {
     void _voidCallback(bool didChange) {}
-  CurrentUserPresenter ct = new CurrentUserPresenter(_voidCallback, Flavor.MOCK);
+    CurrentUserPresenter ct =
+        new CurrentUserPresenter(_voidCallback, Flavor.MOCK);
     // Tells the tester to build a UI based on the widget tree passed to it
     await tester.pumpWidget(
       new StatefulBuilder(

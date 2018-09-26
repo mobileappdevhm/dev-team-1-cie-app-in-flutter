@@ -1,4 +1,3 @@
-import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/courses_mock.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/utils/staticVariables.dart';
@@ -14,19 +13,25 @@ void main() {
   group("facultycheck", () {
     test('1', () {
       expect(
-          sut.getDepartmentShortName(1).contains(CoursesMock.generateMockDepartment(2).shortName),
+          sut
+              .getDepartmentShortName(1)
+              .contains(CoursesMock.generateMockDepartment(2).shortName),
           true);
     });
 
     test('2', () {
       expect(
-          sut.getDepartmentShortName(2).contains(CoursesMock.generateMockDepartment(3).shortName),
+          sut
+              .getDepartmentShortName(2)
+              .contains(CoursesMock.generateMockDepartment(3).shortName),
           true);
     });
 
     test('3', () {
       expect(
-          sut.getDepartmentShortName(3).contains(CoursesMock.generateMockDepartment(4).shortName),
+          sut
+              .getDepartmentShortName(3)
+              .contains(CoursesMock.generateMockDepartment(4).shortName),
           true);
     });
 
@@ -104,14 +109,15 @@ void main() {
     });
   });
 
-  group('class functions', (){
-    test('isNewCourseData 1', (){
+  group('class functions', () {
+    test('isNewCourseData 1', () {
       expect(sut.isNewCourseData(sut.getCourses(), sut.getCourses()[0]), false);
     });
-    test('isNewCourseData 2', (){
+    test('isNewCourseData 2', () {
       CourseListPresenter localSut = new CourseListPresenter(null, Flavor.MOCK);
       localSut.getCourses()[0].id = "completely new id";
-      expect(sut.isNewCourseData(sut.getCourses(), localSut.getCourses()[0]), true);
+      expect(sut.isNewCourseData(sut.getCourses(), localSut.getCourses()[0]),
+          true);
     });
 
     //test('isNewCourseData 2', (){
@@ -122,12 +128,15 @@ void main() {
     //  expect(sut.getFavourite(0), false);
     //});
 
-    test('getProfileOfLecturer', (){
+    test('getProfileOfLecturer', () {
       expect(sut.getProfileOfLecturer(0), "https://hm.edu");
     });
 
-    test('checkIfConflictsOtherFavoriteLecture', (){
-      expect(sut.checkIfConflictsOtherFavoriteLecture(sut.getCourses()[0].appointments[0]), false);
+    test('checkIfConflictsOtherFavoriteLecture', () {
+      expect(
+          sut.checkIfConflictsOtherFavoriteLecture(
+              sut.getCourses()[0].appointments[0]),
+          false);
     });
   });
 }

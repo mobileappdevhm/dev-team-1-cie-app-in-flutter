@@ -1,4 +1,6 @@
 import 'package:cie_app/model/course/details/department.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/views/addTakenCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,13 +9,16 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('widgetTest', (WidgetTester tester) async {
     List<String> semesters = ["WiSe 2018", "SoSe 2018", "WiSe 2017"];
+    CurrentUserPresenter currentUserPresenter =
+        new CurrentUserPresenter(null, Flavor.PROD);
 
     await tester.pumpWidget(
       new StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
           return new MaterialApp(
             home: new Material(
-              child: new Center(child: new AddTakenCourses(semesters)),
+              child: new Center(
+                  child: new AddTakenCourses(semesters, currentUserPresenter)),
             ),
           );
         },

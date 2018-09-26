@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/model/course/details/department.dart';
+import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
@@ -9,18 +10,21 @@ import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class AddTakenCourses extends StatefulWidget {
-  AddTakenCourses(this.semesterList, {Key key, this.title}) : super(key: key);
+  AddTakenCourses(this.semesterList, this.user, {Key key, this.title})
+      : super(key: key);
   final String title;
+  final CurrentUserPresenter user;
   final List<String> semesterList;
 
   @override
   _AddTakenCoursesState createState() =>
-      new _AddTakenCoursesState(semesterList);
+      new _AddTakenCoursesState(semesterList, user);
 }
 
 class _AddTakenCoursesState extends State<AddTakenCourses> {
-  _AddTakenCoursesState(this.semesterList);
+  _AddTakenCoursesState(this.semesterList, this.user);
 
+  final CurrentUserPresenter user;
   var semesterList = new List<String>();
   var semesterFilter = "";
   var departmentFilter = StaticVariables.ALL_DEPARTMENTS;
@@ -67,7 +71,7 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
       });
     }
     if (fetchNewData) {
-      await DataManager.updateAll(context, true);
+      await DataManager.updateAll(context, user, true);
       setState(() {
         searchValue = "";
       });
@@ -118,7 +122,10 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
                   ),
                 ),
                 trailing: new Checkbox(
-                  value: coursesSelected.where((course) => course.id == courseJson[i]['id']).length == 1,
+                  value: coursesSelected
+                          .where((course) => course.id == courseJson[i]['id'])
+                          .length ==
+                      1,
                   onChanged: (val) {
                     setState(() {
                       if (val == false) {
@@ -188,7 +195,8 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
         List<DropdownMenuItem<String>>();
     departments.add(new DropdownMenuItem<String>(
       value: StaticVariables.ALL_DEPARTMENTS,
-      child: new Text(StaticVariables.ALL_DEPARTMENTS, overflow: TextOverflow.clip),
+      child: new Text(StaticVariables.ALL_DEPARTMENTS,
+          overflow: TextOverflow.clip),
     ));
     departments.addAll(Department.departments.map((String value) {
       if (value != null) {

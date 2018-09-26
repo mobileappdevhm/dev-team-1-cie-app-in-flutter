@@ -42,7 +42,8 @@ class _TakenCoursesState extends State<TakenCourses> {
             Navigator.push(
                 context,
                 new MaterialPageRoute(
-                    builder: (context) => new AddTakenCourses(semesterList)));
+                    builder: (context) => new AddTakenCourses(
+                        semesterList, currentUserPresenter)));
           },
         ),
         appBar: new AppBar(
@@ -94,7 +95,9 @@ class _TakenCoursesState extends State<TakenCourses> {
                       new Row(
                         children: <Widget>[
                           new Text(
-                            historyJson[i]['ects'].round().toString() + " " + StaticVariables.ECTS,
+                            historyJson[i]['ects'].round().toString() +
+                                " " +
+                                StaticVariables.ECTS,
                             style: CiEStyle.getPrevCoursesSubtitleStyle(),
                           ),
                           new Padding(
@@ -120,7 +123,8 @@ class _TakenCoursesState extends State<TakenCourses> {
           }
           return new Container(
               padding: new EdgeInsets.all(15.0),
-              child: new Text(StaticVariables.TAKEN_COURSES_ERROR_NO_COURSE_FOUND,
+              child: new Text(
+                  StaticVariables.TAKEN_COURSES_ERROR_NO_COURSE_FOUND,
                   style: CiEStyle.getWarningTextStyle()));
         });
   }
