@@ -1,3 +1,5 @@
+import 'package:cie_app/utils/dataManager.dart';
+
 enum Flavor { MOCK, PROD }
 
 class StaticVariables {
@@ -11,7 +13,7 @@ class StaticVariables {
   /* Tabs */
   static const String TAB_COURSES = "Courses";
   static const String TAB_MAP = "Map";
-  static const String TAB_SCHEDULE = "Schdule";
+  static const String TAB_SCHEDULE = "Schedule";
   static const String TAB_FAVORITES = "Favorites";
   static const String TAB_PROFILE = "Profile";
 
@@ -42,6 +44,9 @@ class StaticVariables {
       "No department specified";
   static const String FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST =
       "Please log in to use lottery";
+
+  static const String TITLE_PLEASE_SET_HOME_DEPARTMENT = "No department specified";
+  static const String PLEASE_SPECIFY_HOME_DEPARTMENT = "Please specify a home department on NINE.";
 
   /* Login Page */
   static const String START_BUTTON_START = "Start";

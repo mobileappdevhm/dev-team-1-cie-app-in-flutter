@@ -14,6 +14,7 @@ import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
 import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/utils/utility.dart';
 import 'package:cie_app/widgets/courseListItem.dart';
 import 'package:flutter/material.dart';
 
@@ -233,7 +234,6 @@ class CourseListState extends State<CourseList> {
     String textToShow;
     Color buttonColor;
 
-    //TODO fix this
     if (submissionValid) {
       textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
       buttonColor = CiEColor.red;
@@ -303,15 +303,19 @@ class CourseListState extends State<CourseList> {
 
   void _contextualCourseSubmission(
       CurrentUserPresenter user, bool isSubmissionValid, bool isLoggedIn) {
-    if (isSubmissionValid != null && isSubmissionValid) {
+    if (isSubmissionValid) {
       _handleCourseSubmission(user);
-    } else if (isLoggedIn != null && !isLoggedIn) {
+    } else if (!isLoggedIn) {
       Navigator.pushReplacementNamed(context, Routes.Login);
+    } else if (!isSubmissionValid && isLoggedIn) {
+      GenericAlert.confirm(
+          context,
+          () => Utility.tryLaunch(DataManager.REMOTE_BASE),
+          StaticVariables.PLEASE_SPECIFY_HOME_DEPARTMENT);
     }
   }
 
   void _handleCourseSubmission(CurrentUserPresenter user) {
-    var no = () {};
     var yes = () async {
       List<dynamic> subscribeCourses = new List<dynamic>();
       List<dynamic> unsubscribeCourses = new List<dynamic>();
@@ -358,7 +362,7 @@ class CourseListState extends State<CourseList> {
           "Your registered courses were successfully updated.");
     };
     GenericAlert.confirm(
-            context, no, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
+            context, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
         .then((_) {});
   }
 

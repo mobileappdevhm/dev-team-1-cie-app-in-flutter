@@ -5,10 +5,10 @@ import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericAlert {
-  static Future<Null> confirm(
-      BuildContext context, void no(), void yes(), String msg,
+  static Future<Null> confirm(BuildContext context, void yes(), String msg,
       [String yesText = StaticVariables.ALERT_YES,
-      String noText = StaticVariables.ALERT_NO]) {
+      String noText = StaticVariables.ALERT_NO,
+      void no()]) {
     return showDialog<Null>(
         context: context,
         barrierDismissible: false,
@@ -27,7 +27,9 @@ class GenericAlert {
                 child: new Text(noText),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  no();
+                  if (no != null) {
+                    no();
+                  }
                 },
               ),
             ],

@@ -45,11 +45,10 @@ class LoginFormState extends State<LoginForm> {
 
     GenericAlert.confirm(
         context,
-        no,
         yes,
         StaticVariables.ALERT_METRICS_MESSAGE,
         StaticVariables.ALERT_ALLOW,
-        StaticVariables.ALERT_DISABLE);
+        StaticVariables.ALERT_DISABLE, no);
 
     Analytics.setCurrentScreen("login_screen");
   }
