@@ -46,7 +46,6 @@ class CourseListState extends State<CourseList> {
   bool shouldSearch = false;
   String filter = "";
   String searchValue = "";
-  bool coursesRegistered = false;
   FocusNode focus;
   var registeredCourses = new List<dynamic>();
 
@@ -228,30 +227,24 @@ class CourseListState extends State<CourseList> {
         userPresenter.getCurrentUser().department.isNotEmpty != null
             ? userPresenter.getCurrentUser().department.isNotEmpty
             : false;
-    bool submissionValid = !coursesRegistered && isLoggedIn && isDepartmentSet;
+    bool submissionValid = isLoggedIn && isDepartmentSet;
 
     //Decide how to show submit button
     String textToShow;
     Color buttonColor;
 
-    textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
-    buttonColor = CiEColor.red;
-    submissionValid = true;
     //TODO fix this
-    //if (submissionValid) {
-    //  textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
-    //  buttonColor = CiEColor.red;
-    //} else if (coursesRegistered && isLoggedIn) {
-    //  textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE;
-    //  buttonColor = CiEColor.lightGray;
-    //} else if (coursesRegistered && isLoggedIn && !isDepartmentSet) {
-    //  textToShow =
-    //      StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT;
-    //  buttonColor = CiEColor.lightGray;
-    //} else {
-    //  textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST;
-    //  buttonColor = CiEColor.red;
-    //}
+    if (submissionValid) {
+      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON;
+      buttonColor = CiEColor.red;
+    } else if (isLoggedIn && !isDepartmentSet) {
+      textToShow =
+          StaticVariables.FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT;
+      buttonColor = CiEColor.lightGray;
+    } else {
+      textToShow = StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST;
+      buttonColor = CiEColor.lightGray;
+    }
 
     return new RaisedButton(
       color: buttonColor,

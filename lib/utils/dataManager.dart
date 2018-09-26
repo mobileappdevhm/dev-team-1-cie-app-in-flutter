@@ -12,20 +12,25 @@ import 'package:path_provider/path_provider.dart';
 class DataManager {
   //Remotes
   static const String _REMOTE_BASE = 'https://nine.wi.hm.edu/';
-  static const String _REMOTE_API_BASE = _REMOTE_BASE + 'api/v2/';
+  //Websites
+  static const String REMOTE_REGISTER = _REMOTE_BASE + 'Account/Register';
+  static const String REMOTE_FORGOT_PASSWORD =
+      _REMOTE_BASE + 'Account/ForgotPassword';
+  //old API-Urls
   static const String _REMOTE_TRANSITION_BASE = _REMOTE_BASE + 'api2/';
+  static const String REMOTE_LECTURERS =
+      _REMOTE_TRANSITION_BASE + 'Lecturer/GetAllLecture';
+
+  //API-Urls
+  static const String _REMOTE_API_BASE = _REMOTE_BASE + 'api/v2/';
   static const String REMOTE_CIE_BASE = _REMOTE_API_BASE + 'apps/cie/';
   static const String REMOTE_CIE_COURSES_BASE = REMOTE_CIE_BASE + 'courses/';
   static const String REMOTE_SUBSCRIBE = _REMOTE_BASE + 'courses/subscribe';
   static const String REMOTE_SUBSCRIPTIONS =
-      _REMOTE_BASE + 'courses/subscriptions';
-  static const String REMOTE_UNSUBSCRIBE = _REMOTE_BASE + 'courses/unsubscribe';
-  static const String REMOTE_AUTH = _REMOTE_BASE + 'account/login';
-  static const String REMOTE_LECTURERS =
-      _REMOTE_TRANSITION_BASE + 'Lecturer/GetAllLecture';
-  static const String REMOTE_REGISTER = _REMOTE_BASE + 'Account/Register';
-  static const String REMOTE_FORGOT_PASSWORD =
-      _REMOTE_BASE + 'Account/ForgotPassword';
+      _REMOTE_API_BASE + 'courses/subscriptions';
+  static const String REMOTE_UNSUBSCRIBE = _REMOTE_API_BASE + 'courses/unsubscribe';
+  static const String REMOTE_AUTH = _REMOTE_API_BASE + 'account/login';
+
 
   //Locals
   static const String LOCAL_COURSES = "_courses";

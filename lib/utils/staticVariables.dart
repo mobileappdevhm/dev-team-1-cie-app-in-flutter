@@ -37,9 +37,7 @@ class StaticVariables {
   static const String TIME_CONFLICT_MESSAGE = "Possible Scheduling Conflict";
 
   static const String FAVORITES_REGISTRATION_BUTTON =
-      "Register Favorited Courses";
-  static const String FAVORITES_REGISTRATION_BUTTON_INACTIVE =
-      "Courses Already Submitted";
+      "Update course registration";
   static const String FAVORITES_REGISTRATION_BUTTON_INACTIVE_NO_DEPARTMENT =
       "No department specified";
   static const String FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST =
