@@ -170,10 +170,6 @@ class CourseListPresenter {
     return _courses.getCourses()[id].getAvailability();
   }
 
-  String getDepartmentName(int id) {
-    return _courses.getCourses()[id].department.name;
-  }
-
   String getDepartmentShortName(int id) {
     return _courses.getCourses()[id].department.shortName;
   }
@@ -199,14 +195,7 @@ class CourseListPresenter {
   }
 
   String getNamesOfLecturers(int id) {
-    var names = "";
-    for (var l in _courses.getCourses()[id].lecturer) {
-      if (names != "") {
-        names += ", ";
-      }
-      names += l.firstName + " " + l.lastName;
-    }
-    return names;
+    return _courses.getCourses()[id].getNamesOfLecturers();
   }
 
   String getEmailsOfLecturers(int id) {
@@ -222,7 +211,7 @@ class CourseListPresenter {
     return emails;
   }
 
-  String getProfileOfLecturer(int id){
+  String getProfileOfLecturer(int id) {
     return _courses.getCourses()[id].lecturer[0].profile;
   }
 
@@ -230,7 +219,7 @@ class CourseListPresenter {
     var course = _courses.getCourses()[id];
     var blocked = course.blocked;
     List<Appointment> appointments = course.appointments;
-    String result = blocked ? "[Blocked] " : "";
+    String result = blocked ? StaticVariables.COURSE_INFO_SHORT_BLOCKED : "";
     for (var a in appointments) {
       if (result.length > 10) result += ', ';
       result += WeekdayUtility.getWeekdayAsString(a.weekday) +
@@ -291,7 +280,7 @@ class CourseListPresenter {
   bool _checkTimeConflict(Appointment thisFavorite, Appointment otherFavorite) {
     //Cant conflict itself
     if (thisFavorite == otherFavorite) return false;
-    if(thisFavorite.parent.id == otherFavorite.parent.id) return false;
+    if (thisFavorite.parent.id == otherFavorite.parent.id) return false;
     //If weekday is not same return false
     if (thisFavorite.weekday != otherFavorite.weekday) return false;
     //If running at same time return true
@@ -299,10 +288,8 @@ class CourseListPresenter {
         _getTimeBetweenLectures(thisFavorite, otherFavorite);
     if (timeBetweenLectures < 0) return true;
     //If time is not enough to switch campus return true
-    if (!_timeIsEnoughForCampusSwitch(
-        thisFavorite.getCampus(),
-        otherFavorite.getCampus(),
-        timeBetweenLectures)) return true;
+    if (!_timeIsEnoughForCampusSwitch(thisFavorite.getCampus(),
+        otherFavorite.getCampus(), timeBetweenLectures)) return true;
     return false;
   }
 
@@ -397,36 +384,38 @@ class CourseListPresenter {
     String result = otherFavorite.name + ": ";
     //Add commute time conflict text
     thisFavorite.appointments.forEach((l) => otherFavorite.appointments
-        .forEach((f) => result += _getLectureConflictProblemText(l, f)));
+        .forEach((f) => result = _getLectureConflictProblemText(result, l, f)));
     //timeBetweenLecturesText.forEach((res) => result += res);
 
     return result;
   }
 
   //Compare two lectues and return error text if they conflict
-  String _getLectureConflictProblemText(Appointment l, Appointment f) {
-    String result = "";
+  String _getLectureConflictProblemText(String result, Appointment l, Appointment f) {
+    String localResult = "";
 
     if (_getTimeBetweenLectures(l, f) < 0) {
-      result += "Lecture time schedules overlap.";
+      localResult += "Lecture time schedules overlap.\n";
     } else {
       Campus campusOne = l.getCampus();
       Campus campusTwo = f.getCampus();
       if (campusOne == Campus.LOTHSTRASSE && campusTwo == Campus.KARLSTRASSE ||
           campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.KARLSTRASSE) {
-        result += "Commute Time Lothstr. to Karlstr. < " +
+        localResult += "Commute Time between Lothstrasse and Karlstrasse < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_KARL.toString();
       } else if (campusOne == Campus.LOTHSTRASSE &&
               campusTwo == Campus.PASING ||
           campusTwo == Campus.LOTHSTRASSE && campusOne == Campus.PASING) {
-        result += "Commute Time Lothstr. to Pasing < " +
+        localResult += "Commute Time between Lothstrasse and Pasing < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_LOTH_PAS.toString();
       } else {
-        result += "Commute Time Pasing to Karlstr. < " +
+        localResult += "Commute Time between Pasing and Karlstrstrasse < " +
             StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL.toString();
       }
     }
-
+    if(!result.contains(localResult)){
+      result += localResult;
+    }
     return result;
   }
 }

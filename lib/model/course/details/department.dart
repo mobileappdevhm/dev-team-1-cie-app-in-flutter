@@ -8,8 +8,8 @@ class Department {
     this.color = jsonData['color'];
     this.name = jsonData['name'];
     this.shortName =
-        jsonData['shortName']; //TODO Rename to Department instead of Fakultät
-    this.actions = jsonData['actions']; //TODO Rename to DP instead of FK
+        jsonData['shortName'];
+    this.actions = jsonData['actions'];
   }
 
   static List<Department> fromJson(List<dynamic> jsonData) {

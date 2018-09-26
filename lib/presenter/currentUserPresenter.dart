@@ -50,21 +50,20 @@ class CurrentUserPresenter {
     return _currentUser.getCurrentUser().currentCourses;
   }
 
-  int getTotalCredits() {
-    var sum = 0;
-
-    _currentUser.getCurrentUser().prevCourses.forEach((course) {
-      sum = sum + course.ects;
-    });
-    return sum;
-  }
+  //TODO maybe use this method in settings
+  //int getTotalCredits() {
+  //  var sum = 0;
+  //
+  //  _currentUser.getCurrentUser().prevCourses.forEach((course) {
+  //    sum = sum + course.ects;
+  //  });
+  //  return sum;
+  //}
 
   int getDep3Credits() {
     var sum = 0;
-    _currentUser.getCurrentUser().prevCourses.forEach((course) {
-      if (course.department.shortName.contains("03")) {
+    _currentUser.getCurrentUser().prevCourses.where((course) => course.department.shortName.contains("03")).forEach((course) {
         sum = sum + course.ects;
-      }
     });
     return sum;
   }

@@ -1,12 +1,11 @@
 import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/staticVariables.dart';
+import 'package:cie_app/utils/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MapPage extends StatefulWidget {
-  final String apiKey = 'AIzaSyAUIZOyUTUX4WWANlK-70eg8ixCqxWp9us';
-
   MapPage();
 
   @override
@@ -63,13 +62,7 @@ class _MapPageState extends State<MapPage> {
         'https://www.google.com/maps/search/?api=1&query=${_mapLocation['latitude']},${_mapLocation['longitude']}&query_place_id=${_mapLocation['place_id']}';
     String appleUrl =
         'https://maps.apple.com/?sll=${_mapLocation['latitude']},${_mapLocation['longitude']}';
-    if (await canLaunch(googleUrl)) {
-      await launch(googleUrl);
-    } else if (await canLaunch(appleUrl)) {
-      await launch(appleUrl);
-    } else {
-      throw 'Could not launch url';
-    }
+    Utility.tryLaunch(googleUrl, appleUrl);
   }
 
   Widget buildMapCard(String resource, String campus) {
@@ -95,7 +88,7 @@ class _MapPageState extends State<MapPage> {
                       style: CiEStyle.getMapsTitleStyle(),
                     ),
                     SizedBox(height: 8.0),
-                    new Text('Click on the map to get directions.',
+                    new Text(StaticVariables.MAP_CLICK_ON,
                         style: CiEStyle.getMapsDescriptionStyle())
                   ],
                 )),

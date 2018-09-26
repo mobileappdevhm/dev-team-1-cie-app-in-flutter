@@ -17,19 +17,6 @@ class CourseAvailabilityUtility {
     }
   }
 
-  static int getFacultyAsInt(CourseAvailability a) {
-    switch (a) {
-      case CourseAvailability.AVAILABLE:
-        return 0;
-      case CourseAvailability.PENDING:
-        return 1;
-      case CourseAvailability.UNAVAILABLE:
-        return 2;
-      default:
-        return 2;
-    }
-  }
-
   //TODO rename this function to fromInt
   static CourseAvailability intToCourseAvailability(int i) {
     switch (i) {

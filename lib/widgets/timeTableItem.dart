@@ -1,6 +1,7 @@
 import 'package:cie_app/model/course/details/appointment.dart';
 import 'package:cie_app/model/course/details/campus.dart';
 import 'package:cie_app/utils/cieStyle.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class TimeTableItem extends StatelessWidget {
@@ -38,20 +39,21 @@ class TimeTableItem extends StatelessWidget {
       subtitle: new Container(
         child: new Column(
           children: <Widget>[
-            appointment.parent.blocked ?
-            new Row(
-              children: <Widget>[
-                new Expanded(
-                  child: new Text(
-                    "Blocked, does maybe not fit into regular schedule.",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    textAlign: TextAlign.left,
-                    style: CiEStyle.getCourseBlockedTextStyle(),
-                  ),
-                ),
-              ],
-            ) : new Row(),
+            appointment.parent.blocked
+                ? new Row(
+                    children: <Widget>[
+                      new Expanded(
+                        child: new Text(
+                          StaticVariables.COURSE_INFO_BLOCKED,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          textAlign: TextAlign.left,
+                          style: CiEStyle.getCourseBlockedTextStyle(),
+                        ),
+                      ),
+                    ],
+                  )
+                : new Row(),
             new Padding(
               padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 2.5),
             ),
@@ -65,7 +67,7 @@ class TimeTableItem extends StatelessWidget {
                         //Static width to align values
                         width: WIDTH_FIRST_COLUMN,
                         child: new Text(
-                          "Campus: ",
+                          StaticVariables.CAMPUS,
                           style: CiEStyle.getTimeTableListMediumGray(),
                         ),
                       ),
@@ -80,7 +82,7 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
                   child: new Text(
-                    "Time: ",
+                    StaticVariables.TIME,
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),
@@ -88,8 +90,7 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
                   child: new Text(
-                    " " +
-                        appointment.timeBegin.toString() +
+                       appointment.timeBegin.toString() +
                         "-" +
                         appointment.timeEnd.toString(),
                     style: CiEStyle.getTimeTableListVariable(),
@@ -106,7 +107,7 @@ class TimeTableItem extends StatelessWidget {
                     children: <Widget>[
                       new Container(
                         width: WIDTH_FIRST_COLUMN,
-                        child: new Text("Professor:"),
+                        child: new Text(StaticVariables.LECTURER),
                       ),
                       new Expanded(
                           child: new Text(
@@ -121,7 +122,7 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_SECOND_COLUMN,
                   child: new Text(
-                    "Room: ",
+                    StaticVariables.ROOM,
                     style: CiEStyle.getTimeTableListMediumGray(),
                     textAlign: TextAlign.start,
                   ),
@@ -129,8 +130,8 @@ class TimeTableItem extends StatelessWidget {
                 new Container(
                   width: WIDTH_THIRD_COLUMN,
                   child: new Text(
-                    //TODO do not show the first location every time
-                    " " + appointment.parent.locations[0].number,
+                    //TODO do not use first value every time
+                    appointment.parent.locations[0].number,
                     style: CiEStyle.getTimeTableListVariable(),
                     textAlign: TextAlign.start,
                   ),

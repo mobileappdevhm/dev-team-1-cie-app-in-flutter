@@ -1,4 +1,7 @@
 import 'package:cie_app/utils/routes.dart';
+import 'package:cie_app/views/login.dart';
+import 'package:cie_app/views/start.dart';
+import 'package:cie_app/views/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:test/test.dart';
 
@@ -34,19 +37,21 @@ void main() {
     test('contains login', () {
       expect(sut.containsKey(Routes.Login), true);
     });
+  });
 
-    /* TODO something like this should be tested as well
+  group('Routes Map', () {
+    final Map<String, WidgetBuilder> sut = Routes.getRoutes();
+
     test('Welcome route is new page', () {
-      expect(sut[Routes.Welcome], (BuildContext context) => new WelcomePage());
+      expect(sut[Routes.Welcome].toString(), ((BuildContext context) => WelcomePage()).toString());
     });
 
     test('TabPages route is new page', () {
-      expect(sut[Routes.TabPages], (BuildContext context) => new TabsPage());
+      expect(sut[Routes.TabPages].toString(), ((BuildContext context) => new TabsPage()).toString());
     });
 
     test('Login route is new page', () {
-      expect(sut[Routes.Login], (BuildContext context) => new LoginForm());
+      expect(sut[Routes.Login].toString(), ((BuildContext context) => new LoginForm()).toString());
     });
-    */
   });
 }

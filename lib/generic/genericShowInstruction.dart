@@ -4,12 +4,12 @@ import 'package:cie_app/presenter/currentUserPresenter.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
-import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class GenericShowInstruction {
   //TODO would be better to just call with function what to do or to call with widget?!
+
   static Widget showInstructions(BuildContext context, bool refreshData, CourseListPresenter courseListPresenter, CurrentUserPresenter user) {
     return _getInstructionWidget(new SingleChildScrollView(
       child: new Column(
@@ -94,6 +94,7 @@ class GenericShowInstruction {
       ),
     ));
   }
+
 
   static _toggleRefresh(BuildContext context, CourseListPresenter courseListPresenter, CurrentUserPresenter user) async {
     await DataManager.updateAll(context, user, true);

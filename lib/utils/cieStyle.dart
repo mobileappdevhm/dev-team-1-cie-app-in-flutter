@@ -2,13 +2,6 @@ import 'package:cie_app/utils/cieColor.dart';
 import 'package:flutter/material.dart';
 
 class CiEStyle {
-  static TextStyle getTimeTableSectionHeadingStyle() {
-    return new TextStyle(
-      color: CiEColor.gray,
-      fontSize: 18.0,
-    );
-  }
-
   static TextStyle getCoursesListFacultyStyle(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     if (width < 550.0) {
@@ -152,10 +145,6 @@ class CiEStyle {
     );
   }
 
-  static double getCourseDescriptionIconSize() {
-    return 50.0;
-  }
-
   static TextStyle getTimeTableListMediumGray() {
     return new TextStyle(
       color: CiEColor.mediumGray,
@@ -167,14 +156,6 @@ class CiEStyle {
     return new TextStyle(
       color: CiEColor.gray,
       fontSize: 15.0,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  static TextStyle getTimeTableCourseTitle() {
-    return new TextStyle(
-      color: CiEColor.gray,
-      fontSize: 20.0,
       fontWeight: FontWeight.bold,
     );
   }
@@ -218,13 +199,6 @@ class CiEStyle {
   }
 
   static TextStyle getCourseBlockedTextStyle() {
-    return new TextStyle(
-      fontSize: 15.0,
-      color: CiEColor.mediumGray,
-    );
-  }
-
-  static TextStyle getCourseBlockedTextStyle2() {
     return new TextStyle(
       fontSize: 15.0,
       color: CiEColor.mediumGray,

@@ -24,10 +24,11 @@ class Lecturer {
   static String profileFromJson(List<dynamic> actions, String lastName) {
     if (actions == null) return "";
     for (var action in actions) {
-      if(action['title'] == "Profile"){
+      if (action['title'] == "Profile") {
         return action['href'];
       }
     }
-    return "https://hm.edu/suche/suchergebnisse.de.jsp?query=" + lastName.replaceAll(',', '');
+    return "https://hm.edu/suche/suchergebnisse.de.jsp?query=" +
+        lastName.replaceAll(',', '');
   }
 }

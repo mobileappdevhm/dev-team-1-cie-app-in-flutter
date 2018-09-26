@@ -1,4 +1,5 @@
 import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/widgets/prevCourseListItem.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class PrevCourseListState extends State<PrevCourseList> {
       );
     } catch (e) {
       print("courseList.dart, error: " + e.toString());
-      return new Text("No Courses found!");
+      return new Text(StaticVariables.TAKEN_COURSES_ERROR_NO_COURSE_FOUND);
     }
   }
 }

@@ -1,12 +1,7 @@
 import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/courses.dart';
-import 'package:cie_app/model/course/details/appointment.dart';
-import 'package:cie_app/model/course/details/courseAvailability.dart';
-import 'package:cie_app/model/course/details/date.dart';
 import 'package:cie_app/model/course/details/dayTime.dart';
 import 'package:cie_app/model/course/details/department.dart';
-import 'package:cie_app/model/course/details/lecturer.dart';
-import 'package:cie_app/model/course/details/room.dart';
 import 'package:cie_app/model/course/details/weekday.dart';
 
 class CoursesMock implements Courses {
@@ -80,31 +75,6 @@ class CoursesMock implements Courses {
     return i % 4;
   }
 
-  static String generateMockEmail(int i) {
-    return "testEmail" + i.toString() + "@test.de";
-  }
-
-  static String generateMockName(int i) {
-    return "Professor name" + i.toString();
-  }
-
-  static CourseAvailability generateMockAvailability(int i) {
-    return CourseAvailabilityUtility.intToCourseAvailability(i % 3);
-  }
-
-  static int generateMockAvailabilityLevel(int i) {
-    return i % 2;
-  }
-
-  static bool generateMockFavorite(int i) {
-    return false;
-  }
-
-  static List<Date> generateMockDateList(int i) {
-    var list = generateMockDates(i);
-    return Date.fromJson(list);
-  }
-
   static List<Map<String, dynamic>> generateMockDates(int i) {
     var map = new Map<String, dynamic>();
     map['begin'] = "20180427T150000Z";
@@ -119,11 +89,6 @@ class CoursesMock implements Courses {
     var list = List<Map<String, dynamic>>();
     list.add(map);
     return list;
-  }
-
-  static List<Room> generateMockRoomList(int i) {
-    var rooms = generateMockRooms(i);
-    return Room.fromJson(rooms);
   }
 
   static List<Map<String, dynamic>> generateMockRooms(int i) {
@@ -149,11 +114,6 @@ class CoursesMock implements Courses {
     return rooms;
   }
 
-  static List<Lecturer> generateMockLecturerList() {
-    var lecturers = generateMockLecturers();
-    return Lecturer.fromJson(lecturers);
-  }
-
   static List<Map<String, dynamic>> generateMockLecturers() {
     var lecturer = Map<String, dynamic>();
     lecturer['title'] = null;
@@ -169,11 +129,6 @@ class CoursesMock implements Courses {
     var list = new List<Map<String, dynamic>>();
     list.add(lecturer);
     return list;
-  }
-
-  static List<Appointment> generateMockAppointmentList(int i, Course parent) {
-    var list = generateMockAppointments(i);
-    return Appointment.fromJson(list, parent);
   }
 
   static List<Map<String, dynamic>> generateMockAppointments(int i) {

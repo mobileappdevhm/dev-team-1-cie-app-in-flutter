@@ -12,8 +12,8 @@ void main() {
       new CourseListPresenter(null, Flavor.MOCK),
     ))));
 
-    expect(find.text("Today"), findsOneWidget);
-    expect(find.text("Weekly"), findsOneWidget);
+    expect(find.text(StaticVariables.SCHEDULE_TODAY), findsOneWidget);
+    expect(find.text(StaticVariables.SCHEDULE_WEEKLY), findsOneWidget);
   });
 
   testWidgets('2 schedule', (WidgetTester tester) async {
