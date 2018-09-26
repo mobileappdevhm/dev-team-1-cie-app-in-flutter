@@ -75,7 +75,7 @@ class CourseListState extends State<CourseList> {
 
   void _fetchRegisteredCourses() async {
     var registeredString =
-        await DataManager.getResource(DataManager.LOCAL_REGISTERED);
+        await DataManager.getResource(DataManager.LOCAL_SUBSCRIPTIONS);
     if (registeredString != null) {
       setState(() {
         registeredCourses = json.decode(registeredString);
@@ -91,10 +91,7 @@ class CourseListState extends State<CourseList> {
       return new Column(
         children: <Widget>[
           GenericShowInstruction.showInstructions(
-            context,
-            false,
-            courseListPresenter,
-          ),
+              context, false, courseListPresenter, userPresenter),
         ],
       );
     } else {
@@ -271,7 +268,7 @@ class CourseListState extends State<CourseList> {
   Future<Null> handleRefreshIndicator(
       BuildContext context, CourseListPresenter presenter,
       [oldSemesters = false, inBackground = true]) async {
-    await DataManager.updateAll(context, oldSemesters, inBackground);
+    await DataManager.updateAll(context, userPresenter, oldSemesters, inBackground);
     presenter.addCoursesFromMemory();
     presenter.updateLecturerInfoFromMemory();
     presenter.onChanged(true);
@@ -292,8 +289,10 @@ class CourseListState extends State<CourseList> {
       if (shouldFilterByFavorites)
         courseListPresenter.toggleFavouriteWhenChangeView(id);
       else {
-        if(registeredCourses.contains(courseListPresenter.getCourses()[id].id)){
-          GenericAlert.confirmDialog(context, "Unfavorite not possible", "Please visit the favorites tab to update your registered courses.");
+        if (registeredCourses
+            .contains(courseListPresenter.getCourses()[id].id)) {
+          GenericAlert.confirmDialog(context, "Unfavorite not possible",
+              "Please visit the favorites tab to update your registered courses.");
         } else {
           courseListPresenter.toggleFavourite(id, true);
         }
@@ -339,7 +338,7 @@ class CourseListState extends State<CourseList> {
       if (unsubscribeCourses.length > 0) {
         jsonData["courses"] = unsubscribeCourses;
         await DataManager.postJson(
-            context, DataManager.REMOTE_SUBSCRIBE, jsonData);
+            context, DataManager.REMOTE_UNSUBSCRIBE, jsonData);
       }
       if (subscribeCourses.length > 0) {
         jsonData["courses"] = subscribeCourses;
@@ -357,8 +356,8 @@ class CourseListState extends State<CourseList> {
         idList.add(entry['courseId']);
       }
       await DataManager.writeToFile(
-          DataManager.LOCAL_REGISTERED, json.encode(idList));
-      courseListPresenter.syncRegisteredCoursesFromMemory();
+          DataManager.LOCAL_SUBSCRIPTIONS, json.encode(idList));
+      courseListPresenter.syncFavoritedCoursesFromMemory();
 
       GenericAlert.confirmDialog(context, "Successfully updated courses",
           "Your registered courses were successfully updated.");

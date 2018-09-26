@@ -113,7 +113,7 @@ class _SettingsState extends State<Settings> {
                           padding: const EdgeInsets.only(top: 5.0),
                         ),
                         new RaisedButton(
-                          onPressed: () => _toggleIntroduction(context, courseListPresenter),
+                          onPressed: () => _toggleIntroduction(context, courseListPresenter, currentUserPresenter),
                           shape: new RoundedRectangleBorder(
                               borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEColor.red,
@@ -327,7 +327,7 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-  void _toggleIntroduction(BuildContext context, CourseListPresenter courseListPresenter) {
+  void _toggleIntroduction(BuildContext context, CourseListPresenter courseListPresenter, user) {
     //track click on introduction
     Analytics.logEvent("settings_click", {"title": "introcuction"});
 
@@ -345,7 +345,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   body: new Column(
                     children: <Widget>[
-                      GenericShowInstruction.showInstructions(context, true, courseListPresenter)
+                      GenericShowInstruction.showInstructions(context, true, courseListPresenter, user)
                     ],
                   ),
                 )));

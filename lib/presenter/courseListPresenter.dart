@@ -76,9 +76,10 @@ class CourseListPresenter {
   }
 
   void syncFavoritedCoursesFromMemory() {
+    syncRegisteredCoursesFromMemory();
     DataManager.getResource(DataManager.LOCAL_FAVORITES)
         .then((String favoriteIds) {
-      if (favoriteIds != null) {
+      if (favoriteIds != null && favoriteIds != "") {
         dynamic favoritesJson = json.decode(favoriteIds);
         for (Course c in _courses.getCourses()) {
           if (favoritesJson[c.id] != null) {
@@ -88,13 +89,13 @@ class CourseListPresenter {
       }
       this.onChanged(true);
     });
-    syncRegisteredCoursesFromMemory();
   }
 
   void syncRegisteredCoursesFromMemory() {
-    DataManager.getResource(DataManager.LOCAL_REGISTERED)
+    print("sync registered");
+    DataManager.getResource(DataManager.LOCAL_SUBSCRIPTIONS)
         .then((String registeredIds) {
-      if (registeredIds != null) {
+      if (registeredIds != null && registeredIds != "") {
         List<dynamic> registeredCourses = json.decode(registeredIds);
         for (Course c in _courses.getCourses()) {
           if (registeredCourses.contains(c.id)) {
@@ -102,7 +103,7 @@ class CourseListPresenter {
           }
         }
       }
-      this.onChanged(true);
+      commitFavoritedCoursesToMemory();
     });
   }
 

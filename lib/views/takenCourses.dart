@@ -42,7 +42,7 @@ class _TakenCoursesState extends State<TakenCourses> {
             Navigator.push(
                 context,
                 new MaterialPageRoute(
-                    builder: (context) => new AddTakenCourses(semesterList)));
+                    builder: (context) => new AddTakenCourses(semesterList, currentUserPresenter)));
           },
         ),
         appBar: new AppBar(
