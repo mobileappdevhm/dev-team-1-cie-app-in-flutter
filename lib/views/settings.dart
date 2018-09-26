@@ -243,7 +243,8 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                 ),
-                buildUserMetricsWidget(),
+                //TODO Firebase Analytics
+                //buildUserMetricsWidget(),
                 new Padding(
                   padding: new EdgeInsets.only(top: 10.0),
                 ),

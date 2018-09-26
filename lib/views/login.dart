@@ -31,8 +31,10 @@ class LoginFormState extends State<LoginForm> {
   @override
   initState() {
     super.initState();
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => _openMetricDialog(context));
+    //TODO Firebase Analytics
+    //WidgetsBinding.instance
+    //    .addPostFrameCallback((_) => _openMetricDialog(context));
+    Analytics.setAnalytics(false); //will set it to false by default, remove this after implementation
   }
 
   void _openMetricDialog(BuildContext context) {
