@@ -2,12 +2,11 @@ import 'package:cie_app/model/course/details/department.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-
   final dynamic jsonData = {
-  "color": "#008E7D",
-  "name": "Fakultät 07",
-  "shortName": "FK 07",
-  "actions": []
+    "color": "#008E7D",
+    "name": "Fakultät 07",
+    "shortName": "FK 07",
+    "actions": []
   };
 
   test('department list', () {
@@ -31,6 +30,4 @@ void main() {
     expect(department.name, "Fakultät 07");
     expect(department.shortName, "FK 07");
   });
-
-
 }

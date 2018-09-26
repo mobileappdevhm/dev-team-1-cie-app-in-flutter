@@ -20,11 +20,13 @@ void main() {
       expectedTexts = new List<String>();
       favoritesPageAnomalies = new List<String>();
       for (int i = 1; i < 100; i++) {
-        expectedTexts
-            .add("Department #" + CoursesMock.generateMockDepartment(i).shortName);
+        expectedTexts.add(
+            "Department #" + CoursesMock.generateMockDepartment(i).shortName);
         expectedTexts.add(CoursesMock.generateMockCourseTitle(i));
-        expectedTexts.add("DP " + CoursesMock.generateMockDepartment(i).shortName);
-        expectedTexts.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST);
+        expectedTexts
+            .add("DP " + CoursesMock.generateMockDepartment(i).shortName);
+        expectedTexts
+            .add(StaticVariables.FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST);
         //expectedTexts.add("Time: " + CoursesMock.generateMockTime(i));
       }
       favoritesPageAnomalies.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON);
@@ -81,7 +83,7 @@ void main() {
       checkForFavoritesPageAnomalies(
           listOfWidgets, favoritesPageAnomalies, isFavoritesPage);
     });
-});
+  });
 
   group("2 user is logged in", () {
     // Expected widget within created widgets. Generated using our mock's behavior
@@ -96,10 +98,11 @@ void main() {
       expectedTexts = new List<String>();
       favoritesPageAnomalies = new List<String>();
       for (int i = 1; i < 100; i++) {
-        expectedTexts
-            .add("Department #" + CoursesMock.generateMockDepartment(i).shortName.split(' ')[1]);
+        expectedTexts.add("Department #" +
+            CoursesMock.generateMockDepartment(i).shortName.split(' ')[1]);
         expectedTexts.add(CoursesMock.generateMockCourseTitle(i));
-        expectedTexts.add("DP " + CoursesMock.generateMockDepartment(i).shortName.split(' ')[1]);
+        expectedTexts.add("DP " +
+            CoursesMock.generateMockDepartment(i).shortName.split(' ')[1]);
         expectedTexts.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON);
       }
       favoritesPageAnomalies.add(StaticVariables.FAVORITES_REGISTRATION_BUTTON);
@@ -110,7 +113,8 @@ void main() {
       fN = new FocusNode();
     });
 
-    testWidgets('pressing submit on favorite page', (WidgetTester tester) async {
+    testWidgets('pressing submit on favorite page',
+        (WidgetTester tester) async {
       final bool isFavoritesPage = true;
       // This widget tree builds the widgets found on the Courses Page
       await tester.pumpWidget(
@@ -131,13 +135,12 @@ void main() {
       for (Widget widget in listOfWidgets) {
         if (widget is Text) {
           if (counter == 0) {
-            expect(widget.data,StaticVariables.FAVORITES_REGISTRATION_BUTTON);
+            expect(widget.data, StaticVariables.FAVORITES_REGISTRATION_BUTTON);
           }
           counter++;
         }
       }
     });
-
   });
 }
 

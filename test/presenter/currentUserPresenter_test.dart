@@ -83,19 +83,25 @@ void main() {
   group("facultycheck", () {
     test('1', () {
       expect(
-          sut.getDepartmentShortName(1).contains(CoursesMock.generateMockDepartment(2).shortName),
+          sut
+              .getDepartmentShortName(1)
+              .contains(CoursesMock.generateMockDepartment(2).shortName),
           true);
     });
 
     test('2', () {
       expect(
-          sut.getDepartmentShortName(2).contains(CoursesMock.generateMockDepartment(3).shortName),
+          sut
+              .getDepartmentShortName(2)
+              .contains(CoursesMock.generateMockDepartment(3).shortName),
           true);
     });
 
     test('3', () {
       expect(
-          sut.getDepartmentShortName(3).contains(CoursesMock.generateMockDepartment(4).shortName),
+          sut
+              .getDepartmentShortName(3)
+              .contains(CoursesMock.generateMockDepartment(4).shortName),
           true);
     });
   });

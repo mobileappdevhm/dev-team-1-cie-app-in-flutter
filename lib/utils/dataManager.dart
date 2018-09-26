@@ -2,10 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
-import 'package:cie_app/utils/staticVariables.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -216,7 +214,6 @@ class DataManager {
     }
     return null;
   }
-
 
   //TODO think about scenarios where internet connection is not available, inform the user about this
   static Future<bool> isInternetConnected() async {

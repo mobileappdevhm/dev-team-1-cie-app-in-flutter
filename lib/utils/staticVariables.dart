@@ -1,9 +1,11 @@
 enum Flavor { MOCK, PROD }
 
 class StaticVariables {
-  static const String MAILTO_INTERNATIONAL_OFFICE = 'mailto:international-office@hm.edu';
+  static const String MAILTO_INTERNATIONAL_OFFICE =
+      'mailto:international-office@hm.edu';
   static const String PULL_DOWN_TO_REFRESH = "Pull down to Refresh";
-  static const String COURSE_INFO_BLOCKED = "Blocked, does maybe not fit into regular schedule.";
+  static const String COURSE_INFO_BLOCKED =
+      "Blocked, does maybe not fit into regular schedule.";
   static const String COURSE_INFO_SHORT_BLOCKED = "[Blocked] ";
 
   /* Tabs */

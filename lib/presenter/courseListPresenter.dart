@@ -391,7 +391,8 @@ class CourseListPresenter {
   }
 
   //Compare two lectues and return error text if they conflict
-  String _getLectureConflictProblemText(String result, Appointment l, Appointment f) {
+  String _getLectureConflictProblemText(
+      String result, Appointment l, Appointment f) {
     String localResult = "";
 
     if (_getTimeBetweenLectures(l, f) < 0) {
@@ -413,7 +414,7 @@ class CourseListPresenter {
             StaticVariables.CAMPUS_COMMUTE_MIN_PAS_KARL.toString();
       }
     }
-    if(!result.contains(localResult)){
+    if (!result.contains(localResult)) {
       result += localResult;
     }
     return result;

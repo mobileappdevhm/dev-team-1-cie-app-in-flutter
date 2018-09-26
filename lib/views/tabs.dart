@@ -113,9 +113,11 @@ class TabItem {
 }
 
 const List<TabItem> TabItems = const <TabItem>[
-  const TabItem(title: StaticVariables.TAB_COURSES, icon: Icons.import_contacts),
+  const TabItem(
+      title: StaticVariables.TAB_COURSES, icon: Icons.import_contacts),
   const TabItem(title: StaticVariables.TAB_MAP, icon: Icons.map),
   const TabItem(title: StaticVariables.TAB_SCHEDULE, icon: Icons.event_note),
-  const TabItem(title: StaticVariables.TAB_FAVORITES, icon: Icons.favorite_border),
+  const TabItem(
+      title: StaticVariables.TAB_FAVORITES, icon: Icons.favorite_border),
   const TabItem(title: StaticVariables.TAB_PROFILE, icon: Icons.person),
 ];

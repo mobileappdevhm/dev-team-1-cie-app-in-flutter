@@ -9,14 +9,16 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('widgetTest', (WidgetTester tester) async {
     List<String> semesters = ["WiSe 2018", "SoSe 2018", "WiSe 2017"];
-    CurrentUserPresenter currentUserPresenter = new CurrentUserPresenter(null, Flavor.PROD);
+    CurrentUserPresenter currentUserPresenter =
+        new CurrentUserPresenter(null, Flavor.PROD);
 
     await tester.pumpWidget(
       new StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
           return new MaterialApp(
             home: new Material(
-              child: new Center(child: new AddTakenCourses(semesters, currentUserPresenter)),
+              child: new Center(
+                  child: new AddTakenCourses(semesters, currentUserPresenter)),
             ),
           );
         },

@@ -11,7 +11,6 @@ import 'package:cie_app/utils/routes.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/utils/utility.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -78,15 +77,21 @@ class LoginFormState extends State<LoginForm> {
         DataManager.postJson(context, DataManager.REMOTE_AUTH,
             {"username": username, "password": password}).then((response) {
           if (response == null) {
-            GenericAlert.confirmDialog(context, StaticVariables.LOGIN_ERROR_TITLE_NO_INTERNET_CONNECTION,
+            GenericAlert.confirmDialog(
+                context,
+                StaticVariables.LOGIN_ERROR_TITLE_NO_INTERNET_CONNECTION,
                 StaticVariables.LOGIN_ERROR_NO_INTERNET_CONNECTION);
           } else if (response.statusCode != 200) {
-            GenericAlert.confirmDialog(context, StaticVariables.LOGIN_ERROR_TITLE_BAD_RESPONSE,
+            GenericAlert.confirmDialog(
+                context,
+                StaticVariables.LOGIN_ERROR_TITLE_BAD_RESPONSE,
                 StaticVariables.LOGIN_ERROR_BAD_RESPONSE);
           } else {
             var jsonData = json.decode(response.body);
             if (jsonData['user'] == null) {
-              GenericAlert.confirmDialog(context, StaticVariables.LOGIN_ERROR_TITLE_INVALID_CREDENTIALS,
+              GenericAlert.confirmDialog(
+                  context,
+                  StaticVariables.LOGIN_ERROR_TITLE_INVALID_CREDENTIALS,
                   StaticVariables.LOGIN_ERROR_INVALID_CREDENTIALS);
             } else if (jsonData['curriculum'] == null) {
               //no curriculum was set by the user -> user can login but lottery should not be available
@@ -109,7 +114,9 @@ class LoginFormState extends State<LoginForm> {
       }
       //---------------------------
     } else {
-      GenericAlert.confirmDialog(context, StaticVariables.LOGIN_ERROR_TITLE_INVALID_CREDENTIALS,
+      GenericAlert.confirmDialog(
+          context,
+          StaticVariables.LOGIN_ERROR_TITLE_INVALID_CREDENTIALS,
           StaticVariables.LOGIN_ERROR_INVALID_CREDENTIALS);
     }
   }
@@ -124,7 +131,8 @@ class LoginFormState extends State<LoginForm> {
     if (value.isEmpty) return StaticVariables.LOGIN_ERROR_REQUIRED_MAIL;
     final RegExp mailExp = new RegExp(
         r"^((([a-z]|\d|[!#$%&'*+-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$");
-    if (!mailExp.hasMatch(value)) return StaticVariables.LOGIN_ERROR_INVALID_MAIL;
+    if (!mailExp.hasMatch(value))
+      return StaticVariables.LOGIN_ERROR_INVALID_MAIL;
     return null;
   }
 
@@ -222,8 +230,8 @@ class LoginFormState extends State<LoginForm> {
                     ),
                   ),
                   new FlatButton(
-                    onPressed: () => Utility.tryLaunch(
-                        DataManager.REMOTE_FORGOT_PASSWORD),
+                    onPressed: () =>
+                        Utility.tryLaunch(DataManager.REMOTE_FORGOT_PASSWORD),
                     child: new Text(
                       StaticVariables.LOGIN_BUTTON_FORGOT_PASSWORD,
                       style: new TextStyle(color: CiEColor.red),

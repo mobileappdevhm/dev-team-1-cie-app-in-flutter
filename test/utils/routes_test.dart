@@ -43,15 +43,18 @@ void main() {
     final Map<String, WidgetBuilder> sut = Routes.getRoutes();
 
     test('Welcome route is new page', () {
-      expect(sut[Routes.Welcome].toString(), ((BuildContext context) => WelcomePage()).toString());
+      expect(sut[Routes.Welcome].toString(),
+          ((BuildContext context) => WelcomePage()).toString());
     });
 
     test('TabPages route is new page', () {
-      expect(sut[Routes.TabPages].toString(), ((BuildContext context) => new TabsPage()).toString());
+      expect(sut[Routes.TabPages].toString(),
+          ((BuildContext context) => new TabsPage()).toString());
     });
 
     test('Login route is new page', () {
-      expect(sut[Routes.Login].toString(), ((BuildContext context) => new LoginForm()).toString());
+      expect(sut[Routes.Login].toString(),
+          ((BuildContext context) => new LoginForm()).toString());
     });
   });
 }

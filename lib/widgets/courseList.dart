@@ -269,7 +269,8 @@ class CourseListState extends State<CourseList> {
   Future<Null> handleRefreshIndicator(
       BuildContext context, CourseListPresenter presenter,
       [oldSemesters = false, inBackground = true]) async {
-    await DataManager.updateAll(context, userPresenter, oldSemesters, inBackground);
+    await DataManager.updateAll(
+        context, userPresenter, oldSemesters, inBackground);
     presenter.addCoursesFromMemory();
     presenter.updateLecturerInfoFromMemory();
     presenter.onChanged(true);

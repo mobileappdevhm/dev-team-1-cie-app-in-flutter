@@ -25,7 +25,8 @@ void main() {
               home: new Material(
                   child: new Column(
                 children: <Widget>[
-                  GenericShowInstruction.showInstructions(context, true, courseListPresenter, currentUserPresenter),
+                  GenericShowInstruction.showInstructions(
+                      context, true, courseListPresenter, currentUserPresenter),
                 ],
               )),
             );
@@ -75,8 +76,8 @@ void main() {
               home: new Material(
                   child: new Column(
                 children: <Widget>[
-                  GenericShowInstruction.showInstructions(
-                      context, false, courseListPresenter, currentUserPresenter),
+                  GenericShowInstruction.showInstructions(context, false,
+                      courseListPresenter, currentUserPresenter),
                 ],
               )),
             );

@@ -62,8 +62,12 @@ class CurrentUserPresenter {
 
   int getDep3Credits() {
     var sum = 0;
-    _currentUser.getCurrentUser().prevCourses.where((course) => course.department.shortName.contains("03")).forEach((course) {
-        sum = sum + course.ects;
+    _currentUser
+        .getCurrentUser()
+        .prevCourses
+        .where((course) => course.department.shortName.contains("03"))
+        .forEach((course) {
+      sum = sum + course.ects;
     });
     return sum;
   }

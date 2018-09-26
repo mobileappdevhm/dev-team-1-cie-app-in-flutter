@@ -10,7 +10,8 @@ import 'package:cie_app/utils/staticVariables.dart';
 import 'package:flutter/material.dart';
 
 class AddTakenCourses extends StatefulWidget {
-  AddTakenCourses(this.semesterList, this.user, {Key key, this.title}) : super(key: key);
+  AddTakenCourses(this.semesterList, this.user, {Key key, this.title})
+      : super(key: key);
   final String title;
   final CurrentUserPresenter user;
   final List<String> semesterList;
@@ -121,7 +122,10 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
                   ),
                 ),
                 trailing: new Checkbox(
-                  value: coursesSelected.where((course) => course.id == courseJson[i]['id']).length == 1,
+                  value: coursesSelected
+                          .where((course) => course.id == courseJson[i]['id'])
+                          .length ==
+                      1,
                   onChanged: (val) {
                     setState(() {
                       if (val == false) {
@@ -191,7 +195,8 @@ class _AddTakenCoursesState extends State<AddTakenCourses> {
         List<DropdownMenuItem<String>>();
     departments.add(new DropdownMenuItem<String>(
       value: StaticVariables.ALL_DEPARTMENTS,
-      child: new Text(StaticVariables.ALL_DEPARTMENTS, overflow: TextOverflow.clip),
+      child: new Text(StaticVariables.ALL_DEPARTMENTS,
+          overflow: TextOverflow.clip),
     ));
     departments.addAll(Department.departments.map((String value) {
       if (value != null) {

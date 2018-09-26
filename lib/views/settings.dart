@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:cie_app/generic/genericShowInstruction.dart';
@@ -15,7 +14,6 @@ import 'package:cie_app/utils/utility.dart';
 import 'package:cie_app/views/takenCourses.dart';
 import 'package:cie_app/widgets/privacyPage.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
   final CurrentUserPresenter currentUserPresenter;
@@ -115,7 +113,8 @@ class _SettingsState extends State<Settings> {
                           padding: const EdgeInsets.only(top: 5.0),
                         ),
                         new RaisedButton(
-                          onPressed: () => _toggleIntroduction(context, courseListPresenter, currentUserPresenter),
+                          onPressed: () => _toggleIntroduction(context,
+                              courseListPresenter, currentUserPresenter),
                           shape: new RoundedRectangleBorder(
                               borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEColor.red,
@@ -176,7 +175,8 @@ class _SettingsState extends State<Settings> {
                             StaticVariables.CONTACT_OFFICE,
                             style: CiEStyle.getSettingsContactStyle(),
                           ),
-                          onPressed: () => Utility.tryLaunch(StaticVariables.MAILTO_INTERNATIONAL_OFFICE),
+                          onPressed: () => Utility.tryLaunch(
+                              StaticVariables.MAILTO_INTERNATIONAL_OFFICE),
                         ),
                       ],
                     ),
@@ -319,7 +319,8 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-  void _toggleIntroduction(BuildContext context, CourseListPresenter courseListPresenter, user) {
+  void _toggleIntroduction(
+      BuildContext context, CourseListPresenter courseListPresenter, user) {
     //track click on introduction
     Analytics.logEvent("settings_click", {"title": "introcuction"});
 
@@ -337,7 +338,8 @@ class _SettingsState extends State<Settings> {
                   ),
                   body: new Column(
                     children: <Widget>[
-                      GenericShowInstruction.showInstructions(context, true, courseListPresenter, user)
+                      GenericShowInstruction.showInstructions(
+                          context, true, courseListPresenter, user)
                     ],
                   ),
                 )));
