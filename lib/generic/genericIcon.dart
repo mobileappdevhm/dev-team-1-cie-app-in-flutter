@@ -10,6 +10,8 @@ class GenericIcon {
   static const int memStorageUnavailable = 0xe888;
   static const int memStorageActiveFavorite = 0xe87d;
   static const int memStorageInactiveFavorite = 0xe87e;
+  static const int memStorageActiveRegistration = 0xe838;
+  static const int memStorageInactiveRegistration = 0xe83a;
   static const int memStorageactiveSearch = 0xe8b6;
   static const int memStorageInactiveSearch = 0xe14c;
   static const int memStorageContact = 0xe0e1;
@@ -40,7 +42,18 @@ class GenericIcon {
     );
   }
 
-  static Icon buildGenericFavoriteIcon(bool isActive) {
+  static Icon buildGenericFavoriteIcon(bool isActive, bool registered) {
+    if(registered){
+      return new Icon(
+        (isActive
+            ? const IconData(memStorageActiveRegistration,
+            fontFamily: 'MaterialIcons')
+            : const IconData(memStorageInactiveRegistration,
+            fontFamily: 'MaterialIcons')),
+        size: CiEStyle.getCoursesListIconSize() + 15.0,
+        color: CiEColor.red,
+      );
+    }
     return new Icon(
       (isActive
           ? const IconData(memStorageActiveFavorite,

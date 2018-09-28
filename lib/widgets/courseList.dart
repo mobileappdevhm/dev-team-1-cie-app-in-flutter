@@ -273,7 +273,7 @@ class CourseListState extends State<CourseList> {
   Widget favoriteIcon(int id) {
     return new IconButton(
       icon: GenericIcon.buildGenericFavoriteIcon(
-          courseListPresenter.getFavourite(id)),
+          courseListPresenter.getFavourite(id), courseListPresenter.getRegistered(id)),
       onPressed: () => _toggleFavourite(id),
     );
   }

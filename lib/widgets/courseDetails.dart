@@ -221,7 +221,7 @@ class _CourseDetailsState extends State<CourseDetails> {
               child: new IconButton(
                 iconSize: CiEStyle.getCoursesListIconSize() + 15.0,
                 icon: GenericIcon.buildGenericFavoriteIcon(
-                    presenter.getFavourite(id)),
+                    presenter.getFavourite(id), presenter.getRegistered(id)),
                 onPressed: () => _toggleFavorite(id),
               ),
             ),

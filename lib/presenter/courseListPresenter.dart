@@ -100,6 +100,7 @@ class CourseListPresenter {
         for (Course c in _courses.getCourses()) {
           if (registeredCourses.contains(c.id)) {
             c.isFavourite = true;
+            c.isRegistered = true;
           }
         }
       }
@@ -156,6 +157,10 @@ class CourseListPresenter {
 
   bool getFavourite(int id) {
     return _courses.getCourses()[id].isFavourite;
+  }
+
+  bool getRegistered(int id) {
+    return _courses.getCourses()[id].isRegistered;
   }
 
   bool getWillChangeOnViewChange(int id) {
