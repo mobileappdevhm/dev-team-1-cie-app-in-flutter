@@ -10,8 +10,7 @@ class GenericIcon {
   static const int memStorageUnavailable = 0xe888;
   static const int memStorageActiveFavorite = 0xe87d;
   static const int memStorageInactiveFavorite = 0xe87e;
-  static const int memStorageActiveRegistration = 0xe838;
-  static const int memStorageInactiveRegistration = 0xe83a;
+  static const int memStorageActiveRegistration = 0xe5ca;
   static const int memStorageactiveSearch = 0xe8b6;
   static const int memStorageInactiveSearch = 0xe14c;
   static const int memStorageContact = 0xe0e1;
@@ -43,15 +42,15 @@ class GenericIcon {
   }
 
   static Icon buildGenericFavoriteIcon(bool isActive, bool registered) {
-    if(registered){
+    if (registered) {
       return new Icon(
         (isActive
             ? const IconData(memStorageActiveRegistration,
-            fontFamily: 'MaterialIcons')
-            : const IconData(memStorageInactiveRegistration,
-            fontFamily: 'MaterialIcons')),
+                fontFamily: 'MaterialIcons')
+            : const IconData(memStorageInactiveFavorite,
+                fontFamily: 'MaterialIcons')),
         size: CiEStyle.getCoursesListIconSize() + 15.0,
-        color: CiEColor.red,
+        color: (isActive ? CiEColor.green : CiEColor.red),
       );
     }
     return new Icon(
@@ -156,13 +155,13 @@ class GenericIcon {
         ));
   }
 
-  static Widget buildGenericGetHappyIcon() {
+  static Widget buildGenericGetCheckIcon() {
     return new Container(
         height: CiEStyle.getCoursesListIconSize() * 2,
         alignment: Alignment.topCenter,
         padding: new EdgeInsets.only(right: 20.0),
         child: new Icon(
-          const IconData(0xe815, fontFamily: 'MaterialIcons'),
+          const IconData(memStorageActiveRegistration, fontFamily: 'MaterialIcons'),
           size: CiEStyle.getCoursesListIconSize() * 2,
           color: CiEColor.green,
         ));

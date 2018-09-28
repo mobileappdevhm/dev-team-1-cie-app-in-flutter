@@ -25,7 +25,7 @@ class DataManager {
   static const String _REMOTE_API_BASE = REMOTE_BASE + 'api/v2/';
   static const String REMOTE_CIE_BASE = _REMOTE_API_BASE + 'apps/cie/';
   static const String REMOTE_CIE_COURSES_BASE = REMOTE_CIE_BASE + 'courses/';
-  static const String REMOTE_SUBSCRIBE = REMOTE_BASE + 'courses/subscribe';
+  static const String REMOTE_SUBSCRIBE = _REMOTE_API_BASE + 'courses/subscribe';
   static const String REMOTE_SUBSCRIPTIONS =
       _REMOTE_API_BASE + 'courses/subscriptions';
   static const String REMOTE_UNSUBSCRIBE = _REMOTE_API_BASE + 'courses/unsubscribe';

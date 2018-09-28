@@ -284,6 +284,7 @@ class CourseListState extends State<CourseList> {
       if (shouldFilterByFavorites)
         courseListPresenter.toggleFavouriteWhenChangeView(id);
       else {
+        print("This course is already registered: " + courseListPresenter.getCourses()[id].isRegistered.toString());
         if (registeredCourses
             .contains(courseListPresenter.getCourses()[id].id)) {
           GenericAlert.confirmDialog(context, "Unfavorite not possible",
@@ -344,15 +345,16 @@ class CourseListState extends State<CourseList> {
       jsonData["courses"] = subscribeCourses;
       Analytics.logEvent("favorites_click",
           {"title": "unsubscribe", "courses": subscribeCourses});
-      await DataManager.postJson(
+      var data = await DataManager.postJson(
           context, DataManager.REMOTE_SUBSCRIBE, jsonData);
+      print(data.body);
     }
 
     jsonData["courses"] = [];
     var response = await DataManager.postJson(
         context, DataManager.REMOTE_SUBSCRIPTIONS, jsonData);
     var data = json.decode(response.body);
-    print("subscription: " + data.toString());
+    print("subscriptions: " + data.toString());
     var idList = new List<String>();
     for (var entry in data) {
       idList.add(entry['courseId']);
