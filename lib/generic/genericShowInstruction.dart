@@ -1,6 +1,7 @@
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
@@ -101,6 +102,7 @@ class GenericShowInstruction {
       BuildContext context,
       CourseListPresenter courseListPresenter,
       CurrentUserPresenter user) async {
+    Analytics.logEvent("instruction_click", {"title": "updating all data"});
     await DataManager.updateAll(context, user, true);
     courseListPresenter.addCoursesFromMemory();
     courseListPresenter.updateLecturerInfoFromMemory();
