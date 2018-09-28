@@ -80,7 +80,7 @@ class StaticVariables {
   static const String LOGGED_IN_AS = 'Logged in as';
   static const String LOGOUT_BUTTON = 'Log Out';
   static const String LOGIN_BUTTON = 'LOGIN';
-  static const String STATUS = 'Status';
+  static const String LEVEL = 'Level';
   static const String DEPARTMENT = 'Department';
   static const String ALL_DEPARTMENTS = 'All Departments';
   static const String CONTACT_OFFICE = 'Contact International Office';
@@ -92,6 +92,7 @@ class StaticVariables {
   static const String GUEST_FIRST_NAME = "Guest";
   static const String GUEST_LAST_NAME = "User";
   static const String GUEST_DEPARTMENT = "N/A";
+  static const String GUEST_LEVEL = "N/A";
 
   /* Settings/Taken Courses Page */
   static const String TOTAL_OF = 'Total of';

@@ -31,10 +31,8 @@ class LoginFormState extends State<LoginForm> {
   @override
   initState() {
     super.initState();
-    //TODO Firebase Analytics
-    //WidgetsBinding.instance
-    //    .addPostFrameCallback((_) => _openMetricDialog(context));
-    Analytics.setAnalytics(false); //will set it to false by default, remove this after implementation
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _openMetricDialog(context));
   }
 
   void _openMetricDialog(BuildContext context) {
@@ -97,7 +95,7 @@ class LoginFormState extends State<LoginForm> {
             } else if (jsonData['curriculum'] == null) {
               //no curriculum was set by the user -> user can login but lottery should not be available
               updateUserSettings(context, jsonData['user']['firstName'],
-                  jsonData['user']['lastName'], jsonData['user']['id'], null);
+                  jsonData['user']['lastName'], jsonData['user']['id'], null, null);
               Analytics.logLogin();
             } else {
               updateUserSettings(
@@ -105,7 +103,9 @@ class LoginFormState extends State<LoginForm> {
                   jsonData['user']['firstName'],
                   jsonData['user']['lastName'],
                   jsonData['user']['id'],
-                  jsonData['curriculum']['organiser']['name']);
+                  jsonData['curriculum']['organiser']['name'],
+                  jsonData['curriculum']['shortName']
+              );
               Analytics.logLogin();
             }
           }
@@ -123,7 +123,7 @@ class LoginFormState extends State<LoginForm> {
   }
 
   void _handleGuestLogin() {
-    updateUserSettings(context, null, null, null, null);
+    updateUserSettings(context, null, null, null, null, null);
     Analytics.logEvent("guest_login");
   }
 
@@ -255,17 +255,19 @@ class LoginFormState extends State<LoginForm> {
   }
 
   void updateUserSettings(BuildContext context, String firstName,
-      String lastName, String id, dynamic curriculum) {
+      String lastName, String id, String department, String level) {
     bool isLoggedIn = false;
     UserBuilder builder;
     if (firstName != null && lastName != null) {
       isLoggedIn = true;
-      Analytics.setUserProperty("curriculum", curriculum);
+      Analytics.setUserProperty("department", department);
+      Analytics.setUserProperty("level", level);
     } else {
       // Continuing As Guest
       firstName = StaticVariables.GUEST_FIRST_NAME;
       lastName = StaticVariables.GUEST_LAST_NAME;
-      curriculum = StaticVariables.GUEST_DEPARTMENT;
+      department = StaticVariables.GUEST_DEPARTMENT;
+      level = StaticVariables.GUEST_LEVEL;
     }
 
     DataManager.getResource(DataManager.LOCAL_USER_SETTINGS).then((String val) {
@@ -280,10 +282,15 @@ class LoginFormState extends State<LoginForm> {
           .withID(id)
           .withFirstName(firstName)
           .withLastName(lastName)
-          .withDepartment(curriculum)
+          .withDepartment(department)
+          .withLevel(level)
           .withIsLoggedIn(isLoggedIn)
           .withIsMetricsEnabled(Analytics.getAnalytics())
           .build();
+
+      print("user id: " + id);
+      print("user department: " + department);
+      print("user level: " + level);
 
       String data = json.encode(User.toJson(tempUserObj));
       DataManager.writeToFile(DataManager.LOCAL_USER_SETTINGS, data).then((f) {

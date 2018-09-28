@@ -19,7 +19,7 @@ class CurrentUserProd implements CurrentUser {
         .withFirstName("Guest")
         .withLastName("User")
         .withDepartment("N/A")
-        .withStatus("N/A")
+        .withLevel("N/A")
         .withIsMetricsEnabled(true)
         .withCurrentCourses(currentCourses)
         .withPrevCourses(prevCourses)
@@ -34,6 +34,7 @@ class CurrentUserProd implements CurrentUser {
         currentUser.firstName = u.firstName;
         currentUser.lastName = u.lastName;
         currentUser.department = u.department;
+        currentUser.level = u.level;
       }
     });
   }

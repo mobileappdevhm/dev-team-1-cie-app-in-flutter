@@ -2,6 +2,7 @@ import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/model/course/details/courseAvailability.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
+import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/staticVariables.dart';
@@ -335,7 +336,8 @@ class _CourseDetailsState extends State<CourseDetails> {
   _launchContactProfURL(int id) async {
     var email = presenter.getEmailsOfLecturers(id);
     var profile = presenter.getProfileOfLecturer(id);
-    print(email);
+    Analytics.logEvent("courseDetails_click",
+        {"title": "contact lecturer", "email": email, "profile": profile});
     if (email == StaticVariables.MOCK_EMAIL || !email.contains("@")) {
       GenericAlert.confirm(
           context,

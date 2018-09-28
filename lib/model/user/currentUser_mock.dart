@@ -32,7 +32,7 @@ class CurrentUserMock implements CurrentUser {
         .withFirstName("Guest")
         .withLastName("User")
         .withDepartment("N/A")
-        .withStatus("N/A")
+        .withLevel("N/A")
         .withIsMetricsEnabled(true)
         .withCurrentCourses(currentCourses)
         .withPrevCourses(prevCourses)

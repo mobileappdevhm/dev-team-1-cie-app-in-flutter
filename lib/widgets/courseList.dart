@@ -315,55 +315,54 @@ class CourseListState extends State<CourseList> {
     }
   }
 
-  void _handleCourseSubmission(CurrentUserPresenter user) {
-    var yes = () async {
-      List<dynamic> subscribeCourses = new List<dynamic>();
-      List<dynamic> unsubscribeCourses = new List<dynamic>();
-      for (Course c in courseListPresenter.getCourses()) {
-        if (c.isFavourite && !registeredCourses.contains(c.id)) {
-          subscribeCourses.add({"id": c.id});
-        } else if (registeredCourses.contains(c.id) && !c.isFavourite) {
-          unsubscribeCourses.add({"id": c.id});
-        }
+  void _handleCourseSubmission(CurrentUserPresenter user) async {
+    List<dynamic> subscribeCourses = new List<dynamic>();
+    List<dynamic> unsubscribeCourses = new List<dynamic>();
+    for (Course c in courseListPresenter.getCourses()) {
+      if (c.isFavourite && !registeredCourses.contains(c.id)) {
+        subscribeCourses.add({"id": c.id});
+      } else if (registeredCourses.contains(c.id) && !c.isFavourite) {
+        unsubscribeCourses.add({"id": c.id});
       }
-      var jsonData = {
-        "user": {
-          "id": user.getCurrentUser().id,
-          "firstName": user.getCurrentUser().firstName,
-          "lastName": user.getCurrentUser().lastName
-        },
-        "courses": []
-      };
-      if (unsubscribeCourses.length > 0) {
-        jsonData["courses"] = unsubscribeCourses;
-        await DataManager.postJson(
-            context, DataManager.REMOTE_UNSUBSCRIBE, jsonData);
-      }
-      if (subscribeCourses.length > 0) {
-        jsonData["courses"] = subscribeCourses;
-        await DataManager.postJson(
-            context, DataManager.REMOTE_SUBSCRIBE, jsonData);
-      }
-
-      jsonData["courses"] = [];
-      var response = await DataManager.postJson(
-          context, DataManager.REMOTE_SUBSCRIPTIONS, jsonData);
-      var data = json.decode(response.body);
-      print("subscription: " + data.toString());
-      var idList = new List<String>();
-      for (var entry in data) {
-        idList.add(entry['courseId']);
-      }
-      await DataManager.writeToFile(
-          DataManager.LOCAL_SUBSCRIPTIONS, json.encode(idList));
-      courseListPresenter.syncFavoritedCoursesFromMemory();
-
-      GenericAlert.confirmDialog(context, "Successfully updated courses",
-          "Your registered courses were successfully updated.");
+    }
+    var jsonData = {
+      "user": {
+        "id": user.getCurrentUser().id,
+        "firstName": user.getCurrentUser().firstName,
+        "lastName": user.getCurrentUser().lastName
+      },
+      "courses": []
     };
-    GenericAlert.confirm(
-            context, yes, StaticVariables.ALERT_REGISTRATION_SUBMISSION)
-        .then((_) {});
+    if (unsubscribeCourses.length > 0) {
+      jsonData["courses"] = unsubscribeCourses;
+      Analytics.logEvent("favorites_click",
+          {"title": "unsubscribe", "courses": unsubscribeCourses});
+      await DataManager.postJson(
+          context, DataManager.REMOTE_UNSUBSCRIBE, jsonData);
+    }
+    if (subscribeCourses.length > 0) {
+      jsonData["courses"] = subscribeCourses;
+      Analytics.logEvent("favorites_click",
+          {"title": "unsubscribe", "courses": subscribeCourses});
+      await DataManager.postJson(
+          context, DataManager.REMOTE_SUBSCRIBE, jsonData);
+    }
+
+    jsonData["courses"] = [];
+    var response = await DataManager.postJson(
+        context, DataManager.REMOTE_SUBSCRIPTIONS, jsonData);
+    var data = json.decode(response.body);
+    print("subscription: " + data.toString());
+    var idList = new List<String>();
+    for (var entry in data) {
+      idList.add(entry['courseId']);
+    }
+    await DataManager.writeToFile(
+        DataManager.LOCAL_SUBSCRIPTIONS, json.encode(idList));
+    courseListPresenter.syncFavoritedCoursesFromMemory();
+
+    GenericAlert.confirmDialog(context, "Successfully updated courses",
+        "Your registered courses were successfully updated.");
   }
 
   void updateSearch(String val) {

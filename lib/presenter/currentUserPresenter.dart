@@ -26,8 +26,8 @@ class CurrentUserPresenter {
     return _currentUser.getCurrentUser().department;
   }
 
-  String getCurrentUserStatus() {
-    return _currentUser.getCurrentUser().status;
+  String getCurrentUserLevel() {
+    return _currentUser.getCurrentUser().level;
   }
 
   String getFullName() {

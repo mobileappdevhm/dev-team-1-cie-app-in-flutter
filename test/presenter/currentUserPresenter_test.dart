@@ -19,13 +19,13 @@ void main() {
     });
 
     test('2', () {
-      expect(sut.getCurrentUser().status,
-          new UserInjector().currentUser.getCurrentUser().status);
+      expect(sut.getCurrentUser().level,
+          new UserInjector().currentUser.getCurrentUser().level);
     });
 
     test('3', () {
-      expect(sut.getCurrentUserStatus(),
-          new UserInjector().currentUser.getCurrentUser().status);
+      expect(sut.getCurrentUserLevel(),
+          new UserInjector().currentUser.getCurrentUser().level);
     });
 
     test('4', () {
