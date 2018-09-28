@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "80812863095",
-    "firebase_url": "https://cie-app-ae6fc.firebaseio.com",
-    "project_id": "cie-app-ae6fc",
-    "storage_bucket": "cie-app-ae6fc.appspot.com"
+    "project_number": "622244889564",
+    "firebase_url": "https://cie-app-v2.firebaseio.com",
+    "project_id": "cie-app-v2",
+    "storage_bucket": "cie-app-v2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:80812863095:android:c12c099db1271bcc",
+        "mobilesdk_app_id": "1:622244889564:android:932fd0d4d8b64fab",
         "android_client_info": {
           "package_name": "edu.hm.cie.cieapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "80812863095-ui4kbcm9tb9o7mttf04emorv2fd2n95i.apps.googleusercontent.com",
+          "client_id": "622244889564-2v2cr4ooi06v78bh0la0cn7mejr4jslg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCIYnObFrINeySdpLVHm-wSw8dwIGqEIXY"
+          "current_key": "AIzaSyDtEaF7cpESKn0tab9DlQ-YT_mLMLoMQHw"
         }
       ],
       "services": {

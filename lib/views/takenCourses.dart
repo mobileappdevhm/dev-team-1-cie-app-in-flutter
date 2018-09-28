@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cie_app/presenter/currentUserPresenter.dart';
+import 'package:cie_app/utils/analytics.dart';
 import 'package:cie_app/utils/cieColor.dart';
 import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/dataManager.dart';
@@ -29,6 +30,7 @@ class _TakenCoursesState extends State<TakenCourses> {
   @override
   void initState() {
     super.initState();
+    Analytics.setCurrentScreen("takenCourses_screen");
     _loadSemesters();
     //TODO use userPresenter.prevCourses here
   }

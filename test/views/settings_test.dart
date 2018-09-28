@@ -47,17 +47,17 @@ void main() {
             expect(widget.data, StaticVariables.SHOW_INSTRUCTIONS);
             counter++;
           } else if (counter == 4) {
-            expect(widget.data, StaticVariables.STATUS + " : ");
+            expect(widget.data, StaticVariables.LEVEL + ": ");
             counter++;
           } else if (counter == 5) {
             expect(
                 widget.data,
                 " " +
                     new CurrentUserPresenter(boolean, Flavor.PROD)
-                        .getCurrentUserStatus());
+                        .getCurrentUserLevel());
             counter++;
           } else if (counter == 6) {
-            expect(widget.data, StaticVariables.DEPARTMENT + " : ");
+            expect(widget.data, StaticVariables.DEPARTMENT + ": ");
             counter++;
           } else if (counter == 7) {
             expect(

@@ -86,7 +86,7 @@ void main() {
           .withFirstName("Max")
           .withLastName("Mustermann")
           .withDepartment("07")
-          .withStatus("sleeping")
+          .withLevel("sleeping")
           .withCurrentCourses(courses)
           .withPrevCourses(courses)
           .build();
@@ -117,7 +117,7 @@ void main() {
     });
 
     test('6', () {
-      expect(sut.status, 'sleeping');
+      expect(sut.level, 'sleeping');
     });
 
     test('7', () {
@@ -142,7 +142,7 @@ void main() {
       jsonData['firstName'] = "firstName";
       jsonData['lastName'] = "lastName";
       jsonData['department'] = "IT";
-      jsonData['degree'] = "BA";
+      jsonData['level'] = "BA";
       jsonData['isLoggedIn'] = 'true';
       jsonData['isMetricsEnabled'] = 'true';
 
@@ -154,14 +154,14 @@ void main() {
       expect(user.firstName, "firstName");
       expect(user.lastName, "lastName");
       expect(user.department, "IT");
-      expect(user.degree, "BA");
+      expect(user.level, "BA");
       expect(user.isLoggedIn, true);
       expect(user.isMetricsEnabled, true);
     });
 
     test('2 user to json', () {
       var jsonData = User.toJson(new User("user-id", "de", "name", "IT", "BA",
-          true, false, "haha", "firstName", "lastName", "bored", null, null));
+          true, false, "haha", "firstName", "lastName", null, null));
 
       expect(jsonData['id'], "user-id");
       expect(jsonData['language'], "de");
@@ -169,7 +169,7 @@ void main() {
       expect(jsonData['firstName'], "firstName");
       expect(jsonData['lastName'], "lastName");
       expect(jsonData['department'], "IT");
-      expect(jsonData['degree'], "BA");
+      expect(jsonData['level'], "BA");
       expect(jsonData['isLoggedIn'], 'true');
       expect(jsonData['isMetricsEnabled'], 'false');
     });
@@ -187,9 +187,9 @@ void main() {
       expect(sut.name, "Hans");
     });
     test('3 ', () {
-      UserBuilder sut = new UserBuilder().withDegree("Bachelor");
+      UserBuilder sut = new UserBuilder().withLevel("Bachelor");
 
-      expect(sut.degree, "Bachelor");
+      expect(sut.level, "Bachelor");
     });
     test('4 ', () {
       UserBuilder sut = new UserBuilder().withIsLoggedIn(true);

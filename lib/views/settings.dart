@@ -134,13 +134,13 @@ class _SettingsState extends State<Settings> {
                             child: new Row(
                               children: <Widget>[
                                 new Text(
-                                  StaticVariables.STATUS + " : ",
+                                  StaticVariables.LEVEL + ": ",
                                   style: CiEStyle.getSettingsStyle(),
                                 ),
                                 new Text(
                                   " " +
                                       currentUserPresenter
-                                          .getCurrentUserStatus(),
+                                          .getCurrentUserLevel(),
                                   style: CiEStyle.getSettingsInfoStyle(),
                                 )
                               ],
@@ -151,7 +151,7 @@ class _SettingsState extends State<Settings> {
                         new Row(
                           children: <Widget>[
                             new Text(
-                              StaticVariables.DEPARTMENT + " : ",
+                              StaticVariables.DEPARTMENT + ": ",
                               style: CiEStyle.getSettingsStyle(),
                             ),
                             new Text(
@@ -243,8 +243,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                 ),
-                //TODO Firebase Analytics
-                //buildUserMetricsWidget(),
+                buildUserMetricsWidget(),
                 new Padding(
                   padding: new EdgeInsets.only(top: 10.0),
                 ),
@@ -282,7 +281,7 @@ class _SettingsState extends State<Settings> {
         .withDepartment(null)
         .withIsLoggedIn(false)
         .withIsMetricsEnabled(isMetricsEnabled)
-        .withDegree(null)
+        .withLevel(null)
         .build();
     String data = json.encode(User.toJson(tempUserObj));
     DataManager.writeToFile(DataManager.LOCAL_USER_SETTINGS, data).then((f) {

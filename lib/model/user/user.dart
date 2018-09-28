@@ -4,14 +4,13 @@ class UserBuilder {
   String language = "";
   String name = "";
   String department = "";
-  String degree = "";
+  String level = "";
   bool isLoggedIn = false;
   bool isMetricsEnabled = true;
   String id = "";
   String username = "";
   String firstName = "";
   String lastName = "";
-  String status = "";
   List<Course> currentCourses;
   List<Course> prevCourses;
 
@@ -33,11 +32,6 @@ class UserBuilder {
 
   UserBuilder withDepartment(String department) {
     this.department = department != null ? department : "";
-    return this;
-  }
-
-  UserBuilder withDegree(String degree) {
-    this.degree = degree != null ? degree : null;
     return this;
   }
 
@@ -66,8 +60,8 @@ class UserBuilder {
     return this;
   }
 
-  UserBuilder withStatus(String status) {
-    this.status = status != null ? status : null;
+  UserBuilder withLevel(String level) {
+    this.level = level != null ? level : null;
     return this;
   }
 
@@ -89,7 +83,7 @@ class UserBuilder {
         firstName: jsonData['firstName'],
         lastName: jsonData['lastName'],
         department: jsonData['department'],
-        degree: jsonData['degree'],
+        level: jsonData['level'],
         isLoggedIn: jsonData['isLoggedIn'] == 'true' ? true : false,
         isMetricsEnabled:
             jsonData['isMetricsEnabled'] == 'true' ? true : false);
@@ -102,7 +96,7 @@ class UserBuilder {
       this.firstName,
       this.lastName,
       this.department,
-      this.degree,
+      this.level,
       this.isLoggedIn,
       this.isMetricsEnabled});
 
@@ -112,13 +106,12 @@ class UserBuilder {
         this.language,
         this.name,
         this.department,
-        this.degree,
+        this.level,
         this.isLoggedIn,
         this.isMetricsEnabled,
         this.username,
         this.firstName,
         this.lastName,
-        this.status,
         this.currentCourses,
         this.prevCourses);
   }
@@ -129,13 +122,12 @@ class User {
   String language;
   String name;
   String department;
-  String degree;
+  String level;
   bool isLoggedIn;
   bool isMetricsEnabled;
   String username;
   String firstName;
   String lastName;
-  String status;
   List<Course> currentCourses;
   List<Course> prevCourses;
 
@@ -144,13 +136,12 @@ class User {
       this.language,
       this.name,
       this.department,
-      this.degree,
+      this.level,
       this.isLoggedIn,
       this.isMetricsEnabled,
       this.username,
       this.firstName,
       this.lastName,
-      this.status,
       this.currentCourses,
       this.prevCourses);
 
@@ -162,7 +153,7 @@ class User {
     map.putIfAbsent('firstName', () => user.firstName);
     map.putIfAbsent('lastName', () => user.lastName);
     map.putIfAbsent('department', () => user.department);
-    map.putIfAbsent('degree', () => user.degree);
+    map.putIfAbsent('level', () => user.level);
     map.putIfAbsent('isLoggedIn', () => user.isLoggedIn.toString());
     map.putIfAbsent('isMetricsEnabled', () => user.isMetricsEnabled.toString());
     return map;
