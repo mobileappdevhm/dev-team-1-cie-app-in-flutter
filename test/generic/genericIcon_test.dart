@@ -34,7 +34,7 @@ void main() {
 
     test('rendersActiveFavoriteIcon', () {
       final Icon activeFavoriteIcon =
-          GenericIcon.buildGenericFavoriteIcon(true);
+          GenericIcon.buildGenericFavoriteIcon(true, false);
       expect(activeFavoriteIcon.color, CiEColor.red);
       expect(activeFavoriteIcon.icon.codePoint,
           GenericIcon.memStorageActiveFavorite);
@@ -43,7 +43,7 @@ void main() {
 
     test('rendersInactiveFavoriteIcon', () {
       final Icon inactiveFavoriteIcon =
-          GenericIcon.buildGenericFavoriteIcon(false);
+          GenericIcon.buildGenericFavoriteIcon(false, false);
       expect(inactiveFavoriteIcon.color, CiEColor.red);
       expect(inactiveFavoriteIcon.icon.codePoint,
           GenericIcon.memStorageInactiveFavorite);

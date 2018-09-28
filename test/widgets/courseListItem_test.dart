@@ -18,7 +18,7 @@ void main() {
           id,
           new IconButton(
             icon: GenericIcon.buildGenericFavoriteIcon(
-                courseListPresenter.getFavourite(id)),
+                courseListPresenter.getFavourite(id), false),
             onPressed: null,
           ));
 
@@ -35,7 +35,7 @@ void main() {
           id,
           new IconButton(
             icon: GenericIcon.buildGenericFavoriteIcon(
-                courseListPresenter.getFavourite(id)),
+                courseListPresenter.getFavourite(id), false),
             onPressed: null,
           ));
 
