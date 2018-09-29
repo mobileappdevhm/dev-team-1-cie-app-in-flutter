@@ -126,6 +126,10 @@ class CourseListPresenter {
 
   //Remove the courses outstanding for remove
   void deactivate() {
+    var courses = _courses.getCourses();
+    for(var course in _coursesToDeleteOnViewChange){
+      courses[course].isRegistered = false;
+    }
     _coursesToDeleteOnViewChange.clear();
   }
 
@@ -164,6 +168,15 @@ class CourseListPresenter {
 
   bool getWillChangeOnViewChange(int id) {
     return _coursesToDeleteOnViewChange.contains(id);
+  }
+
+  List<dynamic> getUnsubscribeCourses(){
+    var list = new List<dynamic>();
+    var courses = _courses.getCourses();
+    for(var courseIndex in _coursesToDeleteOnViewChange){
+      list.add({"id": courses[courseIndex].id});
+    }
+    return list;
   }
 
   List<Course> getCourses() {
