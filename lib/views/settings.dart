@@ -278,7 +278,7 @@ class _SettingsState extends State<Settings> {
     courseListPresenter.commitFavoritedCoursesToMemory();
     if (isLoggedIn) {
       var courses = courseListPresenter.getCourses();
-      var course = courses.firstWhere( (c) => c.isFavourite && !c.isRegistered);
+      var course = courses.firstWhere( (c) => c.isFavourite && !c.isRegistered,orElse: () => null);
       if(course != null && course.isFavourite && !course.isRegistered) {
         GenericAlert.confirm(context, () => _logout(context),
             "If you logout now, your favorited and unregistered courses could be lost. Logout?");
