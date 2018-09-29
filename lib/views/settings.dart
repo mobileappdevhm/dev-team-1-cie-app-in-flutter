@@ -302,9 +302,7 @@ class _SettingsState extends State<Settings> {
         .withLevel(null)
         .build();
     String data = json.encode(User.toJson(tempUserObj));
-    DataManager.getResource(DataManager.LOCAL_FAVORITES).then((value) {
-      print("favorites: " + value);
-    });
+
     DataManager.writeToFile(DataManager.LOCAL_SUBSCRIPTIONS, "");
     DataManager.writeToFile(DataManager.LOCAL_USER_SETTINGS, data).then((f) {
       Navigator.of(context).pushReplacementNamed(Routes.Login);
