@@ -291,7 +291,6 @@ class _SettingsState extends State<Settings> {
   }
 
   void _logout(BuildContext context) {
-    print("logout");
     var builder = new UserBuilder();
     User tempUserObj = builder
         .withFirstName(null)

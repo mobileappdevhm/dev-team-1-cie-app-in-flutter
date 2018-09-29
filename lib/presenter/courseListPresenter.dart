@@ -92,7 +92,6 @@ class CourseListPresenter {
   }
 
   void syncRegisteredCoursesFromMemory() {
-    print("sync registered");
     DataManager.getResource(DataManager.LOCAL_SUBSCRIPTIONS)
         .then((String registeredIds) {
       if (registeredIds != null && registeredIds != "") {
@@ -206,7 +205,6 @@ class CourseListPresenter {
   String getEmailsOfLecturers(int id) {
     var emails = "";
     for (var l in _courses.getCourses()[id].lecturer) {
-      print(l.email);
       if (l.email == null || l.email == StaticVariables.MOCK_EMAIL) break;
       if (emails != "") {
         emails += ",";

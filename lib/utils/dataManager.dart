@@ -158,13 +158,11 @@ class DataManager {
         },
         "courses": []
       };
-      print(subscriptionJson.toString());
       var response = await DataManager.postJson(
           context, DataManager.REMOTE_SUBSCRIPTIONS, subscriptionJson);
       if (response.body != null && response.body != "") {
         try {
           var data = json.decode(response.body);
-          print("subscription: " + data.toString());
           var idList = new List<String>();
           for (var entry in data) {
             idList.add(entry['courseId']);
@@ -201,7 +199,6 @@ class DataManager {
           builder: (BuildContext context) {
             return GenericIcon.buildGenericSpinner();
           });
-      print(jsonMap.toString());
       Response res = await post(url,
           headers: {"Content-Type": "application/json"},
           body: json.encode(jsonMap)); // post api call

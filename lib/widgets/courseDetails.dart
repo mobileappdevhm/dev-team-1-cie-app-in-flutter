@@ -60,7 +60,6 @@ class _CourseDetailsState extends State<CourseDetails> {
 
   void _toggleFavorite(int id) {
     setState(() {
-      print("This course is already registered: " + presenter.getCourses()[id].isRegistered.toString());
       if (presenter.getCourses()[id].isRegistered) {
         GenericAlert.confirmDialog(context, "Unfavorite not possible",
             "Please visit the favorites tab to update your registered courses.");
