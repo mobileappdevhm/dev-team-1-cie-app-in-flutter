@@ -28,6 +28,7 @@ class Course {
 
   CourseAvailability _available;
   bool isFavourite;
+  bool isRegistered;
 
   Course(Map<String, dynamic> jsonData) {
     id = jsonData['id'];
@@ -61,6 +62,7 @@ class Course {
 
     _available = CourseAvailabilityUtility.fromCategoryName(category);
     isFavourite = false;
+    isRegistered = false;
   }
 
   String getNamesOfLecturers() {

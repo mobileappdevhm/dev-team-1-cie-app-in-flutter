@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericIcon.dart';
 import 'package:cie_app/generic/genericShowInstruction.dart';
-import 'package:cie_app/model/course/course.dart';
 import 'package:cie_app/model/course/details/department.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
 import 'package:cie_app/presenter/currentUserPresenter.dart';
@@ -76,7 +75,7 @@ class CourseListState extends State<CourseList> {
   void _fetchRegisteredCourses() async {
     var registeredString =
         await DataManager.getResource(DataManager.LOCAL_SUBSCRIPTIONS);
-    if (registeredString != null) {
+    if (registeredString != null && registeredString.isNotEmpty) {
       setState(() {
         registeredCourses = json.decode(registeredString);
       });
@@ -273,7 +272,8 @@ class CourseListState extends State<CourseList> {
   Widget favoriteIcon(int id) {
     return new IconButton(
       icon: GenericIcon.buildGenericFavoriteIcon(
-          courseListPresenter.getFavourite(id)),
+          courseListPresenter.getFavourite(id),
+          courseListPresenter.getRegistered(id)),
       onPressed: () => _toggleFavourite(id),
     );
   }
@@ -316,15 +316,14 @@ class CourseListState extends State<CourseList> {
   }
 
   void _handleCourseSubmission(CurrentUserPresenter user) async {
-    List<dynamic> subscribeCourses = new List<dynamic>();
-    List<dynamic> unsubscribeCourses = new List<dynamic>();
-    for (Course c in courseListPresenter.getCourses()) {
-      if (c.isFavourite && !registeredCourses.contains(c.id)) {
-        subscribeCourses.add({"id": c.id});
-      } else if (registeredCourses.contains(c.id) && !c.isFavourite) {
-        unsubscribeCourses.add({"id": c.id});
-      }
-    }
+    List<dynamic> unsubscribeCourses =
+        courseListPresenter.getUnsubscribeCourses();
+    List<dynamic> subscribeCourses = courseListPresenter
+        .getCourses()
+        .where((course) => course.isFavourite && !course.isRegistered)
+        .map((course) => {"id": course.id})
+        .toList();
+
     var jsonData = {
       "user": {
         "id": user.getCurrentUser().id,
@@ -344,7 +343,7 @@ class CourseListState extends State<CourseList> {
       jsonData["courses"] = subscribeCourses;
       Analytics.logEvent("favorites_click",
           {"title": "unsubscribe", "courses": subscribeCourses});
-      await DataManager.postJson(
+      var data = await DataManager.postJson(
           context, DataManager.REMOTE_SUBSCRIBE, jsonData);
     }
 
@@ -352,13 +351,13 @@ class CourseListState extends State<CourseList> {
     var response = await DataManager.postJson(
         context, DataManager.REMOTE_SUBSCRIPTIONS, jsonData);
     var data = json.decode(response.body);
-    print("subscription: " + data.toString());
     var idList = new List<String>();
     for (var entry in data) {
       idList.add(entry['courseId']);
     }
     await DataManager.writeToFile(
         DataManager.LOCAL_SUBSCRIPTIONS, json.encode(idList));
+    courseListPresenter.deactivate();
     courseListPresenter.syncFavoritedCoursesFromMemory();
 
     GenericAlert.confirmDialog(context, "Successfully updated courses",

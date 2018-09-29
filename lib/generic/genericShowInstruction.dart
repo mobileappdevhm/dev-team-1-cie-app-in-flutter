@@ -77,7 +77,7 @@ class GenericShowInstruction {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              GenericIcon.buildGenericGetHappyIcon(),
+              GenericIcon.buildGenericGetCheckIcon(),
               new Expanded(
                   child: new Text(
                 StaticVariables.INSTRUCTIONS_LOTTERY,

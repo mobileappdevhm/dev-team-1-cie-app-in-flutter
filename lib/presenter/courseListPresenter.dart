@@ -92,7 +92,6 @@ class CourseListPresenter {
   }
 
   void syncRegisteredCoursesFromMemory() {
-    print("sync registered");
     DataManager.getResource(DataManager.LOCAL_SUBSCRIPTIONS)
         .then((String registeredIds) {
       if (registeredIds != null && registeredIds != "") {
@@ -100,6 +99,7 @@ class CourseListPresenter {
         for (Course c in _courses.getCourses()) {
           if (registeredCourses.contains(c.id)) {
             c.isFavourite = true;
+            c.isRegistered = true;
           }
         }
       }
@@ -126,6 +126,10 @@ class CourseListPresenter {
 
   //Remove the courses outstanding for remove
   void deactivate() {
+    var courses = _courses.getCourses();
+    for(var course in _coursesToDeleteOnViewChange){
+      courses[course].isRegistered = false;
+    }
     _coursesToDeleteOnViewChange.clear();
   }
 
@@ -158,8 +162,21 @@ class CourseListPresenter {
     return _courses.getCourses()[id].isFavourite;
   }
 
+  bool getRegistered(int id) {
+    return _courses.getCourses()[id].isRegistered;
+  }
+
   bool getWillChangeOnViewChange(int id) {
     return _coursesToDeleteOnViewChange.contains(id);
+  }
+
+  List<dynamic> getUnsubscribeCourses(){
+    var list = new List<dynamic>();
+    var courses = _courses.getCourses();
+    for(var courseIndex in _coursesToDeleteOnViewChange){
+      list.add({"id": courses[courseIndex].id});
+    }
+    return list;
   }
 
   List<Course> getCourses() {
@@ -201,7 +218,6 @@ class CourseListPresenter {
   String getEmailsOfLecturers(int id) {
     var emails = "";
     for (var l in _courses.getCourses()[id].lecturer) {
-      print(l.email);
       if (l.email == null || l.email == StaticVariables.MOCK_EMAIL) break;
       if (emails != "") {
         emails += ",";

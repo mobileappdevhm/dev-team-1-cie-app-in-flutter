@@ -25,7 +25,7 @@ class DataManager {
   static const String _REMOTE_API_BASE = REMOTE_BASE + 'api/v2/';
   static const String REMOTE_CIE_BASE = _REMOTE_API_BASE + 'apps/cie/';
   static const String REMOTE_CIE_COURSES_BASE = REMOTE_CIE_BASE + 'courses/';
-  static const String REMOTE_SUBSCRIBE = REMOTE_BASE + 'courses/subscribe';
+  static const String REMOTE_SUBSCRIBE = _REMOTE_API_BASE + 'courses/subscribe';
   static const String REMOTE_SUBSCRIPTIONS =
       _REMOTE_API_BASE + 'courses/subscriptions';
   static const String REMOTE_UNSUBSCRIBE = _REMOTE_API_BASE + 'courses/unsubscribe';
@@ -158,13 +158,11 @@ class DataManager {
         },
         "courses": []
       };
-      print(subscriptionJson.toString());
       var response = await DataManager.postJson(
           context, DataManager.REMOTE_SUBSCRIPTIONS, subscriptionJson);
       if (response.body != null && response.body != "") {
         try {
           var data = json.decode(response.body);
-          print("subscription: " + data.toString());
           var idList = new List<String>();
           for (var entry in data) {
             idList.add(entry['courseId']);
@@ -201,7 +199,6 @@ class DataManager {
           builder: (BuildContext context) {
             return GenericIcon.buildGenericSpinner();
           });
-      print(jsonMap.toString());
       Response res = await post(url,
           headers: {"Content-Type": "application/json"},
           body: json.encode(jsonMap)); // post api call

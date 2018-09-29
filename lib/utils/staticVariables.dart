@@ -1,5 +1,3 @@
-import 'package:cie_app/utils/dataManager.dart';
-
 enum Flavor { MOCK, PROD }
 
 class StaticVariables {
@@ -45,8 +43,10 @@ class StaticVariables {
   static const String FAVORITES_REGISTRATION_BUTTON_LOGIN_FIRST =
       "Please log in to use lottery";
 
-  static const String TITLE_PLEASE_SET_HOME_DEPARTMENT = "No department specified";
-  static const String PLEASE_SPECIFY_HOME_DEPARTMENT = "Please specify a home department on NINE.";
+  static const String TITLE_PLEASE_SET_HOME_DEPARTMENT =
+      "No department specified";
+  static const String PLEASE_SPECIFY_HOME_DEPARTMENT =
+      "Please specify a home department on NINE.";
 
   /* Login Page */
   static const String START_BUTTON_START = "Start";
@@ -173,11 +173,11 @@ class StaticVariables {
       "If you favorite courses which have a time scheduling conflict, you will "
       "see this during course selection. Click on the course for more details.";
   static const String INSTRUCTIONS_LOTTERY =
-      "When you have favorited the courses you want to take, visit the Favorites"
-      "tab to register these classes. The classes are awarded by lottery, "
-      "and registration does not guarentee enrollment. Don't forget to check"
-      " out your Timetable for your course schedule! Registration by lottery "
-      "is not necessary to use the Timetable.";
+      "When you have favorited the courses you want to take, visit the favorites "
+      "tab to register these classes. Registered courses are marked with a green check. "
+      "The classes are awarded by lottery and registration does not guarentee enrollment. "
+      "If you like to remove an favorited course, just uncheck it and hit the update button.\n"
+      "NOTE: Registration by lottery is not necessary to use the Timetable.";
   static const String INSTRUCTIONS_BUTTON_TEXT = "Download data to start";
   static const String INSTRUCTIONS_BUTTON_TEXT_REFRESH = "Refresh data";
   static const String PRIVACY_TEXT_GERMAN = "Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten (nachfolgend kurz “Daten”) innerhalb unseres Onlineangebotes und der mit ihm verbundenen Webseiten, Funktionen und Inhalte sowie externen Onlinepräsenzen, wie z.B. unser Social Media Profile auf (nachfolgend gemeinsam bezeichnet als “Onlineangebot”). Im Hinblick auf die verwendeten Begrifflichkeiten, wie z.B. “Verarbeitung” oder “Verantwortlicher” verweisen wir auf die Definitionen im Art. 4 der Datenschutzgrundverordnung (DSGVO)\n\n" +

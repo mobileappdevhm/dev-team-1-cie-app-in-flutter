@@ -288,11 +288,8 @@ class LoginFormState extends State<LoginForm> {
           .withIsMetricsEnabled(Analytics.getAnalytics())
           .build();
 
-      print("user id: " + id);
-      print("user department: " + department);
-      print("user level: " + level);
-
       String data = json.encode(User.toJson(tempUserObj));
+
       DataManager.writeToFile(DataManager.LOCAL_USER_SETTINGS, data).then((f) {
         Navigator.of(context).pushReplacementNamed(Routes.TabPages);
       });

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cie_app/generic/genericAlert.dart';
 import 'package:cie_app/generic/genericShowInstruction.dart';
 import 'package:cie_app/model/user/user.dart';
 import 'package:cie_app/presenter/courseListPresenter.dart';
@@ -99,7 +100,7 @@ class _SettingsState extends State<Settings> {
                               ],
                             )),
                         new RaisedButton(
-                          onPressed: () => _logout(context),
+                          onPressed: () => _preLogout(context),
                           shape: new RoundedRectangleBorder(
                               borderRadius: CiEStyle.getButtonBorderRadius()),
                           color: CiEColor.red,
@@ -273,6 +274,22 @@ class _SettingsState extends State<Settings> {
     return count;
   }
 
+  void _preLogout(BuildContext context) {
+    courseListPresenter.commitFavoritedCoursesToMemory();
+    if (isLoggedIn) {
+      var courses = courseListPresenter.getCourses();
+      var course = courses.firstWhere( (c) => c.isFavourite && !c.isRegistered,orElse: () => null);
+      if(course != null && course.isFavourite && !course.isRegistered) {
+        GenericAlert.confirm(context, () => _logout(context),
+            "If you logout now, your favorited and unregistered courses could be lost. Logout?");
+      } else {
+        _logout(context);
+      }
+    } else {
+      _logout(context);
+    }
+  }
+
   void _logout(BuildContext context) {
     var builder = new UserBuilder();
     User tempUserObj = builder
@@ -284,6 +301,8 @@ class _SettingsState extends State<Settings> {
         .withLevel(null)
         .build();
     String data = json.encode(User.toJson(tempUserObj));
+
+    DataManager.writeToFile(DataManager.LOCAL_SUBSCRIPTIONS, "");
     DataManager.writeToFile(DataManager.LOCAL_USER_SETTINGS, data).then((f) {
       Navigator.of(context).pushReplacementNamed(Routes.Login);
     });

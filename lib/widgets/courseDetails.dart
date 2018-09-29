@@ -60,7 +60,14 @@ class _CourseDetailsState extends State<CourseDetails> {
 
   void _toggleFavorite(int id) {
     setState(() {
-      presenter.toggleFavourite(id, true);
+      if (presenter.getCourses()[id].isRegistered) {
+        GenericAlert.confirmDialog(context, "Unfavorite not possible",
+            "Please visit the favorites tab to update your registered courses.");
+      } else {
+        presenter.toggleFavourite(id, true);
+      }
+
+
     });
   }
 
@@ -221,7 +228,7 @@ class _CourseDetailsState extends State<CourseDetails> {
               child: new IconButton(
                 iconSize: CiEStyle.getCoursesListIconSize() + 15.0,
                 icon: GenericIcon.buildGenericFavoriteIcon(
-                    presenter.getFavourite(id)),
+                    presenter.getFavourite(id), presenter.getRegistered(id)),
                 onPressed: () => _toggleFavorite(id),
               ),
             ),
