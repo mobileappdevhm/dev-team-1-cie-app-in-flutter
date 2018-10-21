@@ -23,7 +23,7 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
 
-  http: 0.12.0
+  http: ^0.11.3+17
   cached_network_image: ^0.4.2
 
 flutter:
