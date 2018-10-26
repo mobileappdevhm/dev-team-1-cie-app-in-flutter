@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         dividerColor: Colors.transparent,
         primarySwatch: Colors.red,
       ),
+      debugShowCheckedModeBanner: false,
       home: new WelcomePage(),
       routes: Routes.getRoutes(),
     );
