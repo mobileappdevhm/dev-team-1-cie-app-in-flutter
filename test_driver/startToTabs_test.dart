@@ -1,11 +1,11 @@
 // Imports the Flutter Driver API
-//import 'package:flutter_driver/flutter_driver.dart';
+import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
 // there is an instruction for starting this test in startToTabs.dart
 
 void main() {
-  /*group('pressing startbutton test', () {
+  group('pressing startbutton test', () {
     FlutterDriver driver;
 
     setUpAll(() async {
@@ -44,5 +44,5 @@ void main() {
       // The following line saves the raw timeline data as JSON.
       summary.writeTimelineToFile('startToLogin_performance', pretty: true);
     });
-  });*/
+  });
 }

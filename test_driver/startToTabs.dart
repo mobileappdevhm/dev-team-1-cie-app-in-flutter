@@ -1,6 +1,6 @@
 import 'package:cie_app/main.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_driver/driver_extension.dart';
+import 'package:flutter_driver/driver_extension.dart';
 // This line imports the extension
 
 /*
@@ -21,7 +21,7 @@ You might be wondering how the command finds the correct test file. The flutter 
 
 void main() {
   // This line enables the extension
-  //enableFlutterDriverExtension();
+  enableFlutterDriverExtension();
 
-  //runApp(new MyApp());
+  runApp(new MyApp());
 }

@@ -32,7 +32,7 @@ matrix:
           - libstdc++6
           - fonts-droid
     before_script:
-      - git clone https://github.com/flutter/flutter.git
+      - git clone https://github.com/flutter/flutter.git -b beta
       - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
       - flutter doctor
     script:
@@ -70,7 +70,7 @@ matrix:
       - unzip -qq gradle-4.6-bin.zip
       - export GRADLE_HOME=$PWD/gradle-4.6
       - export PATH=$GRADLE_HOME/bin:$PATH
-      - git clone https://github.com/flutter/flutter.git
+      - git clone https://github.com/flutter/flutter.git -b beta
       - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
       - flutter doctor
     script:
@@ -87,7 +87,7 @@ matrix:
       - pod repo update
       - pip install six
       - gem update cocoapods
-      - git clone https://github.com/flutter/flutter.git
+      - git clone https://github.com/flutter/flutter.git -b beta
       - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
       - flutter doctor
     script:
