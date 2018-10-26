@@ -1,7 +1,7 @@
 name: cie_app
 description: A new Flutter app to handle with courses in english of HM.
 
-version: 1.5.3+701
+version: 1.5.3+702
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -23,7 +23,7 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
 
-  http: ^0.11.3+17
+  http: ^0.12.0
   cached_network_image: ^0.4.2
 
 flutter:
