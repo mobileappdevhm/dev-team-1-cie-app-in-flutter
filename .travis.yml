@@ -32,49 +32,50 @@ matrix:
           - libstdc++6
           - fonts-droid
     before_script:
-      - git clone https://github.com/flutter/flutter.git
+      - git clone https://github.com/flutter/flutter.git -b beta
       - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
       - flutter doctor
     script:
       - flutter test
 # Job 2 - build APK
-  - os: linux
-    language: android
-    licenses:
-    - android-sdk-preview-license-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
-    android:
-      components:
-      - tools
-      - platform-tools
-      - build-tools-27.0.3
-      - android-26
-      - sys-img-armeabi-v7a-google_apis-26
-      - extra-android-m2repository
-      - extra-google-m2repository
-      - extra-google-android-support
-    jdk: oraclejdk8
-    sudo: true
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - libstdc++6
-        - fonts-droid
-    before_install:
-      - yes | sdkmanager "platforms;android-27"
-    before_script:
-      - wget http://services.gradle.org/distributions/gradle-4.6-bin.zip
-      - unzip -qq gradle-4.6-bin.zip
-      - export GRADLE_HOME=$PWD/gradle-4.6
-      - export PATH=$GRADLE_HOME/bin:$PATH
-      - git clone https://github.com/flutter/flutter.git
-      - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
-      - flutter doctor
-    script:
-      - flutter -v build apk
+  #- os: linux
+  #  language: android
+  #  licenses:
+  #  - android-sdk-preview-license-.+
+  #  - android-sdk-license-.+
+  #  - google-gdk-license-.+
+  #  android:
+  #    components:
+  #    - tools
+  #    - platform-tools
+  #    - build-tools-27.0.3
+  #    - android-27
+  #    - sys-img-armeabi-v7a-google_apis-27
+  #    - extra-android-m2repository
+  #    - extra-google-m2repository
+  #    - extra-google-android-support
+  #    - sys-img-armeabi-v7a-android-27
+  #  jdk: oraclejdk8
+  #  sudo: true
+  #  addons:
+  #    apt:
+  #      sources:
+  #      - ubuntu-toolchain-r-test
+  #      packages:
+  #      - libstdc++6
+  #      - fonts-droid
+  #  before_install:
+  #    - yes | sdkmanager "platforms;android-27"
+  #  before_script:
+  #    #- wget http://services.gradle.org/distributions/gradle-4.10.2-bin.zip
+  #    #- unzip -qq gradle-4.10.2-bin.zip
+  #    #- export GRADLE_HOME=$PWD/gradle-4.10.2
+  #    #- export PATH=$GRADLE_HOME/bin:$PATH
+  #    - git clone https://github.com/flutter/flutter.git -b beta
+  #    - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
+  #    - flutter doctor
+  #  script:
+  #    - flutter -v build apk
 # Job 3 - build IPAs (iOS)
   - os: osx
     language: generic
@@ -87,7 +88,7 @@ matrix:
       - pod repo update
       - pip install six
       - gem update cocoapods
-      - git clone https://github.com/flutter/flutter.git
+      - git clone https://github.com/flutter/flutter.git -b beta
       - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
       - flutter doctor
     script:
