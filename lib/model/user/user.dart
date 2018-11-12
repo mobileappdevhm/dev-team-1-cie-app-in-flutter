@@ -61,7 +61,7 @@ class UserBuilder {
   }
 
   UserBuilder withLevel(String level) {
-    this.level = level != null ? level : null;
+    this.level = level != null ? level : "";
     return this;
   }
 

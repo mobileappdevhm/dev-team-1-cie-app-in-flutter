@@ -54,8 +54,9 @@ class CourseListState extends State<CourseList> {
     if (this.userPresenter.getCurrentUser().isLoggedIn != null &&
         this.userPresenter.getCurrentUser().isLoggedIn &&
         this.userPresenter.getCurrentUser().department.isNotEmpty) {
-      if (this.userPresenter.getCurrentUser().department.isNotEmpty) {
-        String department = this.userPresenter.getCurrentUser().department;
+      var dep = this.userPresenter.getCurrentUser().department;
+      if (dep.isNotEmpty && dep != StaticVariables.GUEST_DEPARTMENT) {
+        String department = dep;
         this.filter =
             department.substring(department.length - 2, department.length);
       }
