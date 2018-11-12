@@ -262,6 +262,8 @@ class LoginFormState extends State<LoginForm> {
       isLoggedIn = true;
       Analytics.setUserProperty("department", department);
       Analytics.setUserProperty("level", level);
+      level = level == null ? StaticVariables.GUEST_LEVEL : level;
+      department = department == null ? StaticVariables.GUEST_DEPARTMENT : department;
     } else {
       // Continuing As Guest
       firstName = StaticVariables.GUEST_FIRST_NAME;
