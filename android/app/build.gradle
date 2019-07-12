@@ -36,9 +36,9 @@ android {
     }
 
     defaultConfig {
-        applicationId "edu.hm.cie.cieapp"
+        applicationId "edu.hm.cieapp"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

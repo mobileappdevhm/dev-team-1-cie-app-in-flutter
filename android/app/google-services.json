@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:622244889564:android:932fd0d4d8b64fab",
         "android_client_info": {
-          "package_name": "edu.hm.cie.cieapp"
+          "package_name": "edu.hm.cieapp"
         }
       },
       "oauth_client": [

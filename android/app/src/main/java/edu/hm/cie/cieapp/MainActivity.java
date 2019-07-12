@@ -1,4 +1,4 @@
-package edu.hm.cie.cieapp;
+package edu.hm.cieapp;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

@@ -456,7 +456,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.hm.cie.cieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.hm.cieApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -481,7 +481,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.hm.cie.cieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.hm.cieApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
