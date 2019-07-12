@@ -8,7 +8,7 @@ import 'package:cie_app/utils/cieStyle.dart';
 import 'package:cie_app/utils/staticVariables.dart';
 import 'package:cie_app/utils/utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html_view/flutter_html_view.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class CourseDetails extends StatefulWidget {
   CourseDetails(this.id, this.presenter, {Key key, this.title})
@@ -143,8 +143,8 @@ class _CourseDetailsState extends State<CourseDetails> {
                   ))
               : new Container(),
           buildDescriptionHeadingRow(),
-          new HtmlView(
-            data: textToShow,
+          new Html(
+             data: textToShow,
           ),
         ],
       ),

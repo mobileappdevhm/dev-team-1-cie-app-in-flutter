@@ -133,10 +133,13 @@ class DataManager {
     var jsonData = json.decode(semestersData);
     for (var semester in jsonData) {
       semesters.add(semester['name']);
+      print(semester['name']);
     }
+
     if (oldSemesters) {
       for (int i = 0; i < semesters.length; i++) {
         var url = REMOTE_CIE_COURSES_BASE + semesters[i].replaceAll(' ', '%20');
+        print(url);
         var courseData = await getJson(url);
         await writeToFile(LOCAL_COURSES + semesters[i], courseData);
       }
@@ -183,6 +186,7 @@ class DataManager {
     var semesters =
         await getResource(DataManager.LOCAL_SEMESTERS, REMOTE_CIE_BASE);
     try {
+      //current semester -- change 0 to 1 for previous semester
       return json.decode(semesters)[0]['name'];
     } catch (e) {
       print('dataManager.dart, error: ' + e.toString());

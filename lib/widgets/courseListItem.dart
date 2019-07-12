@@ -48,9 +48,10 @@ class CourseListItem extends StatelessWidget {
                     0.0,
                     0.0),
                 //multiline fix taken from: https://stackoverflow.com/questions/50450891/how-do-i-make-a-text-widget-wrap-long-text-into-multiple-lines
+                //TODO fix static constant 200 for container width
                 child: new Container(
                   constraints: new BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width - 193),
+                      maxWidth: MediaQuery.of(context).size.width-200),
                   child: new Text(
                     courseListPresenter.getAppointmentTimesBeautiful(id),
                     style: CiEStyle.getCoursesListTimeStyle(),
